@@ -30,6 +30,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/variants").setViewName("variants");
         registry.addViewController("/publications").setViewName("publications");
         registry.addViewController("/studies").setViewName("studies");
+        // These pages must be removed. TODO
+        registry.addViewController("/publication-fake").setViewName("study-disambig");
+        registry.addViewController("/study-fake").setViewName("study-page-fake");
 
         // dynamically generated docs pages
         registry.addViewController("/docs").setViewName("docs");
