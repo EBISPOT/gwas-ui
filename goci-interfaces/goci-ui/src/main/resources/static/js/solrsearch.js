@@ -219,31 +219,44 @@ function processData(data) {
 
     if (documents.length != 0) {
         $(".results-container .table-toggle").hide();
-        var table = $('#result-table-body').empty();
+        var divResult = $('#resultQuery').empty();
         for (var j = 0; j < documents.length; j++) {
             var group = documents[j];
             
+
             console.log(group.groupValue);
             for (var k = 0; k < group.doclist.docs.length; k++) {
                 try {
                     var doc = group.doclist.docs[k];
                     console.log(doc);
+                    var table = $('<table class="gwas2table">');
+                    var tbody = table.append('<tbody />').children('tbody');
                     var row = $("<tr>");
                     if (doc.resourcename == "study") {
-                        row.append($("<td>").html('<span class="gwas-icon-GWAS_Study_2017"></span>'));
+                        row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img  src="/gwas-ui/icons/GWAS_study_2017.png" width="48" height="48">'));
                     }
                     if (doc.resourcename == "publication") {
-                        row.append($("<td>").html('<span class="gwas-icon-GWAS_Publication_2017"></span>'));
+                        row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img src="/gwas-ui/icons/GWAS_Publication_2017.png" width="48" height="48">'));
                     }
                     if (doc.resourcename == "efo") {
-                        row.append($("<td>").html('<span class="gwas-icon-GWAS_Trait_2017"></span>'));
+                        row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img  src="/gwas-ui/icons/GWAS_trait_2017.png" width="48" height="48">'));
                     }
                     if (doc.resourcename == "variant") {
-                        row.append($("<td>").html('<span class="gwas-icon-GWAS_Variant_2017"></span>'));
+                        row.append($("<td align=\"center\" style='width: 12%'>").html('<img src="/gwas-ui/icons/GWAS_variant_2017.png" width="48" height="48">'));
                     }
-                    row.append($("<td>").html("ICON"+doc.resourcename));
-                    row.append($("<td>").html(doc.details));
-                    table.append(row);
+                    
+                    row.append($("<td style=\"width: 88%\">").html("<h2>"+doc.details+"</h2>"));
+                    //row.append($("<td>").html(doc.details));
+                    tbody.append(row);
+                    var rowDescription = $("<tr>");
+                    rowDescription.append($("<td style=\"width: 12%\">").html(""));
+                    // you can change this with this.field_you_decide
+                    //rowDescription.append($("<td style=\"width: 88%\">").html("<h5>"+doc.change_this_value+"</h5>"));
+                    rowDescription.append($("<td style=\"width: 88%\">").html("<h5>static/js/solrsearch.js</h5>"));
+                    console.log(rowDescription)
+                    tbody.append(rowDescription);
+                    divResult.append(table);
+                    divResult.append("<br>");
                 }
                 catch (ex) {
                     console.log("Failure to process document " + ex);

@@ -394,6 +394,14 @@ a > .toplevel-view {
     border-radius:100%;
 }
 
+.gwas2table {
+    width: 100%;
+    table-layout: fixed;
+    border-radius:8px;
+    border:1px solid #cde2f5;
+    background:#fff;
+}
+
 @-webkit-keyframes rotation {
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(359deg);}

@@ -292,46 +292,30 @@
                                       <!--data-toggle="tooltip"-->
                                       <!--data-original-title="Go to detail page." ></span>-->
                             </h2>
-                            <a href="api/search/downloads?q=*" id="results-download">Download association results
-                                <span class="glyphicon glyphicon-download-alt"> </span>
-                            </a>
+
                         </div>
 
 
-                        <div id="study-summaries" class="results-container">
-                            <div class="row" style="margin-top: 0">
-                                <span class="col-md-6" style="padding-left: 0"><h3><i>Studies</i></h3></span>
-                                <span class="col-md-6"><button type="button"
-                                                               id="expand-table"
-                                                               class="btn btn-default btn-sm pull-right table-collapsed"
-                                                               onclick="">Expand all studies
-                                </button></span>
+                        <!--div class="container">
+                         <div class="row equal">
+                            <div class="" style="background-color: yellow">
+                                <img id="news_image" style="vertical-align:middle" src="/gwas-ui/icons/GWAS_study_2017.png" width="32" height="32"/>
                             </div>
-                            <div id = "study_spinner" class="spinner" style="display:none"></div>
-                            <table id="result-table" class="table table-striped-study">
-                                <thead id="study-table-header">
-                                <tr>
-                                    <th style="width: 12%" id="logo">LAYOUT2
-                                        <span class="glyphicon glyphicon-question-sign context-help"
-                                              data-toggle="tooltip"
-                                              data-original-title="Icon"></span>
-                                        <span class="glyphicon glyphicon-sort clickable sorting unsorted"> </span>
-                                    </th>
-                                    <th style="width: 12%" id="author_s">LAYOUT3
-                                        <span class="glyphicon glyphicon-question-sign context-help"
-                                              data-toggle="tooltip"
-                                              data-original-title=" First author of publication"></span>
-                                        <span class="glyphicon glyphicon-sort clickable sorting unsorted"> </span>
-                                    </th>
-                                </tr>
+                            <div class="" style="background-color: red;display: flex;flex-direction:  column;flex-grow: 1;justify-content: baseline;"><div><div style="
+    margin: 0;
+" class="h2 m-0">some content is here</div></div>
+                                <div class="" style="background-color: green;flex-grow: 1;">
+                                    some more content
+                                </div>
+                            </div>
+                        </div></div-->
 
-                                </thead>
-                                <tbody id="result-table-body">
-                                </tbody>
-                            </table>
+                    <div class="container" id="resultQuery">
+                     <br/>
 
-                        </div>
-                        </div>
+                    </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -365,6 +349,7 @@
 <!--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.5.0/bootstrap-table.min.js"></script>-->
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../static/js/ie10-viewport-bug-workaround.js" th:src="@{js/ie10-viewport-bug-workaround.js}"></script>
+
 
 <!-- GOCI JavaScript
 ================================================== -->
