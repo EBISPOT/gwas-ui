@@ -222,9 +222,9 @@ function processData(data) {
         var divResult = $('#resultQuery').empty();
         for (var j = 0; j < documents.length; j++) {
             var group = documents[j];
-            
 
-            console.log(group.groupValue);
+            console.log("** Group value: ", group.groupValue);
+
             for (var k = 0; k < group.doclist.docs.length; k++) {
                 try {
                     var doc = group.doclist.docs[k];
@@ -236,23 +236,25 @@ function processData(data) {
                         row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img  src="/gwas-ui/icons/GWAS_study_2017.png" width="48" height="48">'));
                     }
                     if (doc.resourcename == "publication") {
-                        row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img src="/gwas-ui/icons/GWAS_Publication_2017.png" width="48" height="48">'));
+                        row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img src="/gwas-ui/icons/GWAS_publication_2017.png" width="48" height="48">'));
                     }
-                    if (doc.resourcename == "efo") {
+                    if (doc.resourcename == "trait") {
                         row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img  src="/gwas-ui/icons/GWAS_trait_2017.png" width="48" height="48">'));
                     }
                     if (doc.resourcename == "variant") {
                         row.append($("<td align=\"center\" style='width: 12%'>").html('<img src="/gwas-ui/icons/GWAS_variant_2017.png" width="48" height="48">'));
                     }
-                    
-                    row.append($("<td style=\"width: 88%\">").html("<h2>"+doc.details+"</h2>"));
+
+                    row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
+
                     //row.append($("<td>").html(doc.details));
                     tbody.append(row);
                     var rowDescription = $("<tr>");
                     rowDescription.append($("<td style=\"width: 12%\">").html(""));
                     // you can change this with this.field_you_decide
                     //rowDescription.append($("<td style=\"width: 88%\">").html("<h5>"+doc.change_this_value+"</h5>"));
-                    rowDescription.append($("<td style=\"width: 88%\">").html("<h5>static/js/solrsearch.js</h5>"));
+                    // rowDescription.append($("<td style=\"width: 88%\">").html("<h5>static/js/solrsearch.js</h5>"));
+                    rowDescription.append($("<td style=\"width: 88%\">").html("<h4>"+doc.description+"</h4>"));
                     console.log(rowDescription)
                     tbody.append(rowDescription);
                     divResult.append(table);
