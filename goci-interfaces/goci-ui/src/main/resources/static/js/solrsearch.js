@@ -233,19 +233,29 @@ function processData(data) {
                     var tbody = table.append('<tbody />').children('tbody');
                     var row = $("<tr>");
                     if (doc.resourcename == "study") {
+                        var studyLabsUrl = "https://www.ebi.ac.uk/gwas/labs/studies/"+doc.accessionId
+
                         row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img  src="/gwas-ui/icons/GWAS_study_2017.png" width="48" height="48">'));
+                        row.append($("<td style=\"width: 88%\">").html("<h3><a href="+studyLabsUrl+">"+doc.title+"</a></h3>"));
                     }
                     if (doc.resourcename == "publication") {
+                        var pubLabsUrl = "https://www.ebi.ac.uk/gwas/labs/publications/"+doc.pmid
+
                         row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img src="/gwas-ui/icons/GWAS_publication_2017.png" width="48" height="48">'));
+                        row.append($("<td style=\"width: 88%\">").html("<h3><a href="+pubLabsUrl+">"+doc.title+"</a></h3>"));
                     }
                     if (doc.resourcename == "trait") {
+                        var efoLabsUrl = "https://www.ebi.ac.uk/gwas/labs/efotraits/"+doc.shortForm
+
                         row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img  src="/gwas-ui/icons/GWAS_trait_2017.png" width="48" height="48">'));
+                        row.append($("<td style=\"width: 88%\">").html("<h3><a href="+efoLabsUrl+">"+doc.title+"</a></h3>"));
                     }
                     if (doc.resourcename == "variant") {
                         row.append($("<td align=\"center\" style='width: 12%'>").html('<img src="/gwas-ui/icons/GWAS_variant_2017.png" width="48" height="48">'));
+                        row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
                     }
 
-                    row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
+                    // row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
 
                     //row.append($("<td>").html(doc.details));
                     tbody.append(row);
