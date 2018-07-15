@@ -98,161 +98,164 @@
                         </div>
                         <div class="panel-body">
                             <div id="facets">
-                                <b>Show results for</b>
+                                <b>Show results for: </b>
+                                    <span id="result-header"></span>
 
                                 <div class="list-group">
                                     <!--add an "active" class annotation to each a tag when it's selected-->
                                     <a href="#study" class="list-group-item" id="study-facet">
                                         <span class="badge">0</span>Studies
                                     </a>
-                                    <a href="#study" class="list-group-item" id="Publication-facet">Publication
-                                        <span class="badge">0</span>Studies
+                                    <a href="#publication" class="list-group-item" id="publication-facet">
+                                        <span class="badge">0</span>Publications
                                     </a>
-                                    <a href="#association" class="list-group-item" id="association-facet">
-                                        <span class="badge">0</span>Associations
+                                    <a href="#association" class="list-group-item" id="variant-facet">
+                                        <span class="badge">0</span>Variants
                                     </a>
-                                    <a href="#efotrait" class="list-group-item" id="efotrait-facet">
+                                    <a href="#efotrait" class="list-group-item" id="trait-facet">
                                         <span class="badge">0</span>Catalog traits
                                     </a>
                                 </div>
                             </div>
-                            <div>
-                                <form id="filter-form" novalidate="novalidate">
-                                    <div id="filters">
-                                        <b>Filter results by</b>
 
-                                        <div class="list-group">
-                                            <div class="list-group-item filter-element ">
-                                            <span class="filter-label">p-value
-                                                <span class="glyphicon glyphicon-question-sign context-help"
-                                                      data-toggle="tooltip"
-                                                      data-original-title="p-value for SNP-disease/trait association"></span>
-                                            </span>
-                                                <span class="pval-label">&le;</span>
-                                                <input class="p-value" type="text" id="pval-mant" placeholder="5"/>
-                                                <span class="pval-label">x 10</span>
-                                                <input class="p-value" type="text" id="pval-exp" placeholder="-8"/>
-                                            </div>
+                            <!--<div>-->
+                                <!--<form id="filter-form" novalidate="novalidate">-->
+                                    <!--<div id="filters">-->
+                                        <!--<b>Filter results by</b>-->
 
-                                            <div class="list-group-item filter-element ">
-                                            <span class="filter-label">Odds ratio
-                                                <span class="glyphicon glyphicon-question-sign context-help"
-                                                      data-toggle="tooltip"
-                                                      data-original-title="Odds ratio associated with SNP-disease/trait association"></span>
-                                            </span>
-                                                <input class="filter-value" type="text" id="or-min" name="or-min" placeholder="from"/>
-                                                <input class="filter-value" type="text" id="or-max" name="or-max" placeholder="to"/>
-                                            </div>
+                                        <!--<div class="list-group">-->
+                                            <!--<div class="list-group-item filter-element ">-->
+                                            <!--<span class="filter-label">p-value-->
+                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
+                                                      <!--data-toggle="tooltip"-->
+                                                      <!--data-original-title="p-value for SNP-disease/trait association"></span>-->
+                                            <!--</span>-->
+                                                <!--<span class="pval-label">&le;</span>-->
+                                                <!--<input class="p-value" type="text" id="pval-mant" placeholder="5"/>-->
+                                                <!--<span class="pval-label">x 10</span>-->
+                                                <!--<input class="p-value" type="text" id="pval-exp" placeholder="-8"/>-->
+                                            <!--</div>-->
 
-                                            <div class="list-group-item filter-element ">
-                                            <span class="filter-label">Beta coefficient
-                                                <span class="glyphicon glyphicon-question-sign context-help"
-                                                      data-toggle="tooltip"
-                                                      data-original-title="Beta coefficient associated with SNP-disease/trait association"></span>
-                                            </span>
-                                                <input class="filter-value"
-                                                       type="text"
-                                                       id="beta-min"
-                                                       name="beta-min"
-                                                       placeholder="from"/>
-                                                <input class="filter-value" type="text" id="beta-max" name="beta-max" placeholder="to"/>
-                                            </div>
+                                            <!--<div class="list-group-item filter-element ">-->
+                                            <!--<span class="filter-label">Odds ratio-->
+                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
+                                                      <!--data-toggle="tooltip"-->
+                                                      <!--data-original-title="Odds ratio associated with SNP-disease/trait association"></span>-->
+                                            <!--</span>-->
+                                                <!--<input class="filter-value" type="text" id="or-min" name="or-min" placeholder="from"/>-->
+                                                <!--<input class="filter-value" type="text" id="or-max" name="or-max" placeholder="to"/>-->
+                                            <!--</div>-->
 
-                                            <div class="list-group-item filter-element ">
-                                            <span class="filter-label">Study date
-                                                <span class="glyphicon glyphicon-question-sign context-help"
-                                                      data-toggle="tooltip"
-                                                      data-original-title="Publication date (YYYY-MM-DD)"></span>
-                                            </span>
-                                                <input class="filter-value"
-                                                       data-provide="datepicker"
-                                                       data-date-format="yyyy-mm"
-                                                       id="date-min"
-                                                       name="date-min"
-                                                       placeholder="from"/>
-                                                <input class="filter-value"
-                                                       data-provide="datepicker"
-                                                       data-date-format="yyyy-mm"
-                                                       id="date-max"
-                                                       name="date-max"
-                                                       placeholder="to"/>
-                                            </div>
+                                            <!--<div class="list-group-item filter-element ">-->
+                                            <!--<span class="filter-label">Beta coefficient-->
+                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
+                                                      <!--data-toggle="tooltip"-->
+                                                      <!--data-original-title="Beta coefficient associated with SNP-disease/trait association"></span>-->
+                                            <!--</span>-->
+                                                <!--<input class="filter-value"-->
+                                                       <!--type="text"-->
+                                                       <!--id="beta-min"-->
+                                                       <!--name="beta-min"-->
+                                                       <!--placeholder="from"/>-->
+                                                <!--<input class="filter-value" type="text" id="beta-max" name="beta-max" placeholder="to"/>-->
+                                            <!--</div>-->
 
-                                            <div class="list-group-item filter-element ">
-                                            <span class="filter-label">Genomic range
-                                                <span class="glyphicon glyphicon-question-sign context-help"
-                                                      data-toggle="tooltip"
-                                                      data-original-title="Genomic range containing variants of interest"></span>
-                                            </span>
-                                                <input class="chrom-value"
-                                                       type="text"
-                                                       id="chrom"
-                                                       name="chrom"
-                                                       placeholder="chromosone"/>
-                                                <span class="chrom-label">:</span>
-                                                <input class="bp-value"
-                                                       type="text"
-                                                       id="bp-min"
-                                                       name="bp-min"
-                                                       placeholder="from"/>
-                                                <span class="chrom-label">-</span>
+                                            <!--<div class="list-group-item filter-element ">-->
+                                            <!--<span class="filter-label">Study date-->
+                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
+                                                      <!--data-toggle="tooltip"-->
+                                                      <!--data-original-title="Publication date (YYYY-MM-DD)"></span>-->
+                                            <!--</span>-->
+                                                <!--<input class="filter-value"-->
+                                                       <!--data-provide="datepicker"-->
+                                                       <!--data-date-format="yyyy-mm"-->
+                                                       <!--id="date-min"-->
+                                                       <!--name="date-min"-->
+                                                       <!--placeholder="from"/>-->
+                                                <!--<input class="filter-value"-->
+                                                       <!--data-provide="datepicker"-->
+                                                       <!--data-date-format="yyyy-mm"-->
+                                                       <!--id="date-max"-->
+                                                       <!--name="date-max"-->
+                                                       <!--placeholder="to"/>-->
+                                            <!--</div>-->
 
-                                                <input class="bp-value" type="text" id="bp-max" name="bp-max" placeholder="to"/>
-                                            </div>
+                                            <!--<div class="list-group-item filter-element ">-->
+                                            <!--<span class="filter-label">Genomic range-->
+                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
+                                                      <!--data-toggle="tooltip"-->
+                                                      <!--data-original-title="Genomic range containing variants of interest"></span>-->
+                                            <!--</span>-->
+                                                <!--<input class="chrom-value"-->
+                                                       <!--type="text"-->
+                                                       <!--id="chrom"-->
+                                                       <!--name="chrom"-->
+                                                       <!--placeholder="chromosone"/>-->
+                                                <!--<span class="chrom-label">:</span>-->
+                                                <!--<input class="bp-value"-->
+                                                       <!--type="text"-->
+                                                       <!--id="bp-min"-->
+                                                       <!--name="bp-min"-->
+                                                       <!--placeholder="from"/>-->
+                                                <!--<span class="chrom-label">-</span>-->
 
-                                            <div class="list-group-item filter-element ">
-                                            <span class="filter-label">Catalog Trait
-                                                <span class="glyphicon glyphicon-question-sign context-help"
-                                                      data-toggle="tooltip"
-                                                      data-original-title="List of related disease/trait descriptions (total number of studies for this trait)"></span>
-                                            </span>
+                                                <!--<input class="bp-value" type="text" id="bp-max" name="bp-max" placeholder="to"/>-->
+                                            <!--</div>-->
 
-                                                <div class="filter-values">
-                                                    <div class="btn-group" id="trait-dropdown">
-                                                    <button type="button"
-                                                            class="btn btn-default dropdown-toggle multiSelect"
-                                                            aria-expanded="false">
-                                                        Reported trait
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                        <ul class="dropdown-menu scrollable-menu" role="menu">
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="list-group-item filter-element ">
-                                            <span class="filter-label">Genotyping technology
-                                                <span class="glyphicon glyphicon-question-sign context-help"
-                                                      data-toggle="tooltip"
-                                                      data-original-title="List of genotyping technologies"></span>
-                                            </span>
+                                            <!--<div class="list-group-item filter-element ">-->
+                                            <!--<span class="filter-label">Catalog Trait-->
+                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
+                                                      <!--data-toggle="tooltip"-->
+                                                      <!--data-original-title="List of related disease/trait descriptions (total number of studies for this trait)"></span>-->
+                                            <!--</span>-->
 
-                                                <div class="filter-values">
-                                                    <div class="btn-group" id="genotyping-dropdown">
-                                                        <button type="button"
-                                                                class="btn btn-default dropdown-toggle multiSelect"
-                                                                aria-expanded="false">
-                                                            Genotyping technology&nbsp;&nbsp;&nbsp;
-                                                            <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu scrollable-menu" role="menu">
-                                                         </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                <!--<div class="filter-values">-->
+                                                    <!--<div class="btn-group" id="trait-dropdown">-->
+                                                    <!--<button type="button"-->
+                                                            <!--class="btn btn-default dropdown-toggle multiSelect"-->
+                                                            <!--aria-expanded="false">-->
+                                                        <!--Reported trait-->
+                                                        <!--<span class="caret"></span>-->
+                                                    <!--</button>-->
+                                                        <!--<ul class="dropdown-menu scrollable-menu" role="menu">-->
+                                                        <!--</ul>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="list-group-item filter-element ">-->
+                                            <!--<span class="filter-label">Genotyping technology-->
+                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
+                                                      <!--data-toggle="tooltip"-->
+                                                      <!--data-original-title="List of genotyping technologies"></span>-->
+                                            <!--</span>-->
 
-                                    <div>
-                                    <button type="button"
-                                            class="btn btn-default pull-right"
-                                            id="clear-filter">Clear all filters</button>
-                                    <button type="submit"
-                                            class="btn btn-default pull-right"
-                                            style="margin-right: 15px;">Apply filters</button>
-                                    </div>
-                                </form>
-                            </div>
+                                                <!--<div class="filter-values">-->
+                                                    <!--<div class="btn-group" id="genotyping-dropdown">-->
+                                                        <!--<button type="button"-->
+                                                                <!--class="btn btn-default dropdown-toggle multiSelect"-->
+                                                                <!--aria-expanded="false">-->
+                                                            <!--Genotyping technology&nbsp;&nbsp;&nbsp;-->
+                                                            <!--<span class="caret"></span>-->
+                                                        <!--</button>-->
+                                                        <!--<ul class="dropdown-menu scrollable-menu" role="menu">-->
+                                                         <!--</ul>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+                                    <!--<div>-->
+                                    <!--<button type="button"-->
+                                            <!--class="btn btn-default pull-right"-->
+                                            <!--id="clear-filter">Clear all filters</button>-->
+                                    <!--<button type="submit"-->
+                                            <!--class="btn btn-default pull-right"-->
+                                            <!--style="margin-right: 15px;">Apply filters</button>-->
+                                    <!--</div>-->
+                                <!--</form>-->
+                            <!--</div>-->
+
                             <div id="catalog-stats" style="display: none" class="row">
                                 <h4>Catalog stats</h4>
                                 <ul>
@@ -268,6 +271,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-9" id="results-area">
                     <div id="loadingResults" class="col-md-offset-4" style="display: none">
                         <button class="btn btn-lg">

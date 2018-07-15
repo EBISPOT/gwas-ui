@@ -2,7 +2,8 @@
  * Created by dwelter on 28/01/15.
  */
 
-var resources = ['study', 'association', 'diseasetrait'];
+// var resources = ['study', 'association', 'diseasetrait'];
+var resources = ['study', 'variant', 'trait', 'publication'];
 
 function applyFacet() {
     var searchTerm = $("#search-box").val();

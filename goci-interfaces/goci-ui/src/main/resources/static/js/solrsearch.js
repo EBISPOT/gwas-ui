@@ -118,7 +118,7 @@ function buildBreadcrumbs() {
         else if (facet == "association") {
             last.text("Associations");
         }
-        else if (facet == "diseasetrait") {
+        else if (facet == "trait") {
             last.text("Catalog traits");
         }
 
@@ -181,7 +181,11 @@ function processData(data) {
 
     setDownloadLink(data.responseHeader.params);
     console.log("Solr search returned " + documents.length + " documents");
-    //updateCountBadges(data.facet_counts.facet_fields.resourcename);
+
+    searchTermParam = data.responseHeader.params.q
+    formattedSearchTerm = searchTermParam.replace(/['"]+/g, '').split(":");
+
+    updateCountBadges(data.facet_counts.facet_fields.resourcename, formattedSearchTerm[1]);
 
     if(data.responseHeader.params.sort != null && data.responseHeader.params.sort.indexOf('pValue') != -1 && data.responseHeader.params.sort.indexOf('asc') != -1){
         $('#pValue').find('span.unsorted').removeClass('glyphicon-sort').addClass('glyphicon-arrow-up').removeClass('unsorted').addClass('sorted asc');
@@ -223,7 +227,6 @@ function processData(data) {
         for (var j = 0; j < documents.length; j++) {
             var group = documents[j];
 
-            console.log("** Group value: ", group.groupValue);
 
             for (var k = 0; k < group.doclist.docs.length; k++) {
                 try {
@@ -320,8 +323,14 @@ function setState(state) {
 }
 
 
-function updateCountBadges(countArray) {
+function updateCountBadges(countArray, searchTerm) {
     console.log("Updating facet counts for " + (countArray.length / 2) + " badges");
+
+    // Add search term to facet box
+    var searchTermForHeader = $('#' + 'result-header');
+    searchTermForHeader.append(searchTerm);
+
+
     for (var i = 0; i < countArray.length; i = i + 2) {
         var resource = countArray[i];
         var count = countArray[i + 1];
