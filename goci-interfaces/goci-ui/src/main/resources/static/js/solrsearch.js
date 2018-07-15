@@ -254,6 +254,10 @@ function processData(data) {
                         row.append($("<td align=\"center\" style='width: 12%'>").html('<img src="/gwas-ui/icons/GWAS_variant_2017.png" width="48" height="48">'));
                         row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
                     }
+                    if (doc.resourcename == "gene") {
+                        row.append($("<td align=\"center\" style='width: 12%'>").html('<img src="/gwas-ui/icons/dna13.png" width="48" height="48">'));
+                        row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
+                    }
 
                     // row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
 
