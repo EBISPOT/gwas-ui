@@ -213,51 +213,94 @@ function addResults(data, expand, id) {
     }
     else {
         var documents = data.response.docs;
-        console.log("Got a bunch of docs" + documents.length);
+        console.log("Got a bunch of docs: " + documents.length);
 
         setDownloadLink(data.responseHeader.params);
 
-        if (data.responseHeader.params.fq == "resourcename:study" ||
-                $.inArray("resourcename:study", data.responseHeader.params.fq) != -1) {
-            console.log("Processing studies");
-            var studyTable = $('#study-table-body').empty();
+        // if (data.responseHeader.params.fq == "resourcename:study" ||
+        //         $.inArray("resourcename:study", data.responseHeader.params.fq) != -1) {
+        //     console.log("Processing data for: "+data.responseHeader.params.fq);
+            // var studyTable = $('#study-table-body').empty(); //only removes the first table, each result is now a table
             $('#study-summaries').removeClass('more-results');
 
+            var divResult = $('#resultQuery').empty();
+
             for (var j = 0; j < documents.length; j++) {
                 try {
                     var doc = documents[j];
-                    processStudy(doc, studyTable);
+
+                    var table = $('<table class="gwas2table" id="study-table">');
+                    var tbody = table.append('<tbody />').children('tbody');
+                    var row = $("<tr>");
+                    if (doc.resourcename == "study") {
+                        var studyLabsUrl = "https://www.ebi.ac.uk/gwas/labs/studies/"+doc.accessionId
+
+                        row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img  src="/gwas-ui/icons/GWAS_study_2017.png" width="48" height="48">'));
+                        row.append($("<td style=\"width: 88%\">").html("<h3><a href="+studyLabsUrl+">"+doc.title+"</a></h3>"));
+                    }
+                    if (doc.resourcename == "publication") {
+                        var pubLabsUrl = "https://www.ebi.ac.uk/gwas/labs/publications/"+doc.pmid
+
+                        row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img src="/gwas-ui/icons/GWAS_publication_2017.png" width="48" height="48">'));
+                        row.append($("<td style=\"width: 88%\">").html("<h3><a href="+pubLabsUrl+">"+doc.title+"</a></h3>"));
+                    }
+                    if (doc.resourcename == "trait") {
+                        var efoLabsUrl = "https://www.ebi.ac.uk/gwas/labs/efotraits/"+doc.shortForm
+
+                        row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img  src="/gwas-ui/icons/GWAS_trait_2017.png" width="48" height="48">'));
+                        row.append($("<td style=\"width: 88%\">").html("<h3><a href="+efoLabsUrl+">"+doc.title+"</a></h3>"));
+                    }
+                    if (doc.resourcename == "variant") {
+                        row.append($("<td align=\"center\" style='width: 12%'>").html('<img src="/gwas-ui/icons/GWAS_variant_2017.png" width="48" height="48">'));
+                        row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
+                    }
+                    if (doc.resourcename == "gene") {
+                        row.append($("<td align=\"center\" style='width: 12%'>").html('<img src="/gwas-ui/icons/dna13.png" width="48" height="48">'));
+                        row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
+                    }
+
+                    tbody.append(row);
+                    var rowDescription = $("<tr>");
+                    rowDescription.append($("<td style=\"width: 12%\">").html(""));
+                    rowDescription.append($("<td style=\"width: 88%\">").html("<h4>"+doc.description+"</h4>"));
+                    // console.log(rowDescription)
+                    tbody.append(rowDescription);
+                    divResult.append(table);
+                    divResult.append("<br>");
+
+
                 }
                 catch (ex) {
                     console.log("Failure to process document " + ex);
                 }
             }
-        }
+        // }
 
-        else if (data.responseHeader.params.fq == "resourcename:association" ||
-                $.inArray("resourcename:association", data.responseHeader.params.fq) != -1) {
-            console.log("Processing associations");
-            var associationTable = $('#association-table-body').empty();
-            $('#association-summaries').removeClass('more-results');
-
-            for (var j = 0; j < documents.length; j++) {
-                try {
-                    var doc = documents[j];
-                    processAssociation(doc, associationTable);
-                }
-                catch (ex) {
-                    console.log("Failure to process document " + ex);
-                }
-            }
-        }
-
-        if (expand) {
-            $('.study-toggle').empty().text("Show fewer results");
-            $('#study-table-body').find('.hidden-study-row').collapse('show');
-            $('#study-table-body').find('span.tgb').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-            $('#expand-table').removeClass('table-collapsed').addClass('table-expanded');
-            $('#expand-table').empty().text("Collapse all studies");
-        }
+        // TODO: Check if still needed with change to document types, we no longer have "association"
+        // else if (data.responseHeader.params.fq == "resourcename:association" ||
+        //         $.inArray("resourcename:association", data.responseHeader.params.fq) != -1) {
+        //     console.log("Processing associations");
+        //     var associationTable = $('#association-table-body').empty();
+        //     $('#association-summaries').removeClass('more-results');
+        //
+        //     for (var j = 0; j < documents.length; j++) {
+        //         try {
+        //             var doc = documents[j];
+        //             processAssociation(doc, associationTable);
+        //         }
+        //         catch (ex) {
+        //             console.log("Failure to process document " + ex);
+        //         }
+        //     }
+        // }
+        //
+        // if (expand) {
+        //     $('.study-toggle').empty().text("Show fewer results");
+        //     $('#study-table-body').find('.hidden-study-row').collapse('show');
+        //     $('#study-table-body').find('span.tgb').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        //     $('#expand-table').removeClass('table-collapsed').addClass('table-expanded');
+        //     $('#expand-table').empty().text("Collapse all studies");
+        // }
     }
 }
 

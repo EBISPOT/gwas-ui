@@ -115,8 +115,11 @@ function buildBreadcrumbs() {
         if (facet == "study") {
             last.text("Studies");
         }
-        else if (facet == "association") {
-            last.text("Associations");
+        else if (facet == "variant") {
+            last.text("Variants");
+        }
+        else if (facet == "publication") {
+            last.text("Publications");
         }
         else if (facet == "trait") {
             last.text("Catalog traits");
@@ -231,8 +234,8 @@ function processData(data) {
             for (var k = 0; k < group.doclist.docs.length; k++) {
                 try {
                     var doc = group.doclist.docs[k];
-                    console.log(doc);
-                    var table = $('<table class="gwas2table">');
+                    // console.log(doc);
+                    var table = $('<table class="gwas2table" id="study-table">');
                     var tbody = table.append('<tbody />').children('tbody');
                     var row = $("<tr>");
                     if (doc.resourcename == "study") {
@@ -272,7 +275,7 @@ function processData(data) {
                     //rowDescription.append($("<td style=\"width: 88%\">").html("<h5>"+doc.change_this_value+"</h5>"));
                     // rowDescription.append($("<td style=\"width: 88%\">").html("<h5>static/js/solrsearch.js</h5>"));
                     rowDescription.append($("<td style=\"width: 88%\">").html("<h4>"+doc.description+"</h4>"));
-                    console.log(rowDescription)
+                    // console.log(rowDescription)
                     tbody.append(rowDescription);
                     divResult.append(table);
                     divResult.append("<br>");
