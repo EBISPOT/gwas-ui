@@ -61,17 +61,15 @@ public class SolrSearchController {
         return log;
     }
 
+
     @RequestMapping(value = "api/search", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin
     public void doSolrSearch(
             @RequestParam("q") String query,
             @RequestParam(value = "jsonp", required = false, defaultValue = "false") boolean useJsonp,
             @RequestParam(value = "callback", required = false) String callbackFunction,
-            @RequestParam(value = "max", required = false, defaultValue = "10") int maxResults,
+            @RequestParam(value = "max", required = false, defaultValue = "1000") int maxResults,
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-            @RequestParam(value = "group", required = false, defaultValue = "false") boolean useGroups,
-            @RequestParam(value = "group.by", required = false) String groupBy,
-            @RequestParam(value = "group.limit", required = false, defaultValue = "10") int groupLimit,
             HttpServletResponse response) throws IOException {
         StringBuilder solrSearchBuilder = buildBaseSearchRequest();
 
@@ -79,18 +77,15 @@ public class SolrSearchController {
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
         }
-        if (useGroups) {
-            addGrouping(solrSearchBuilder, groupBy, groupLimit);
-        }
         else {
             addRowsAndPage(solrSearchBuilder, maxResults, page);
         }
-        //addDefaultSort(solrSearchBuilder);
         addQuery(solrSearchBuilder, query);
 
         // dispatch search
         dispatchSearch(solrSearchBuilder.toString(), response.getOutputStream());
     }
+
 
     @RequestMapping(value = "/api/select", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
     public void select(

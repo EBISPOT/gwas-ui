@@ -150,7 +150,7 @@ function solrSearch(queryTerm) {
         var searchTerm = 'text:"'.concat(queryTerm).concat('"');
     }
     setState(SearchState.LOADING);
-    $.getJSON('api/search', {'q': searchTerm, 'group': 'true', 'group.by': 'resourcename', 'group.limit': 1000})
+    $.getJSON('api/search', {'q': searchTerm})
             .done(function(data) {
                 console.log(data);
                 processData(data);
@@ -180,7 +180,7 @@ function getMostRecentStudies() {
 }
 
 function processData(data) {
-    var documents = data.grouped.resourcename.groups;
+    var documents = data.response.docs;
 
     setDownloadLink(data.responseHeader.params);
     console.log("Solr search returned " + documents.length + " documents");
@@ -227,14 +227,11 @@ function processData(data) {
     if (documents.length != 0) {
         $(".results-container .table-toggle").hide();
         var divResult = $('#resultQuery').empty();
+
         for (var j = 0; j < documents.length; j++) {
-            var group = documents[j];
+            var doc = documents[j];
 
-
-            for (var k = 0; k < group.doclist.docs.length; k++) {
                 try {
-                    var doc = group.doclist.docs[k];
-                    // console.log(doc);
                     var table = $('<table class="gwas2table" id="study-table">');
                     var tbody = table.append('<tbody />').children('tbody');
                     var row = $("<tr>");
@@ -265,17 +262,11 @@ function processData(data) {
                         row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
                     }
 
-                    // row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
 
-                    //row.append($("<td>").html(doc.details));
                     tbody.append(row);
                     var rowDescription = $("<tr>");
                     rowDescription.append($("<td style=\"width: 12%\">").html(""));
-                    // you can change this with this.field_you_decide
-                    //rowDescription.append($("<td style=\"width: 88%\">").html("<h5>"+doc.change_this_value+"</h5>"));
-                    // rowDescription.append($("<td style=\"width: 88%\">").html("<h5>static/js/solrsearch.js</h5>"));
                     rowDescription.append($("<td style=\"width: 88%\">").html("<h4>"+doc.description+"</h4>"));
-                    // console.log(rowDescription)
                     tbody.append(rowDescription);
                     divResult.append(table);
                     divResult.append("<br>");
@@ -283,7 +274,6 @@ function processData(data) {
                 catch (ex) {
                     console.log("Failure to process document " + ex);
                 }
-            }
         }
 
         setState(SearchState.RESULTS);
