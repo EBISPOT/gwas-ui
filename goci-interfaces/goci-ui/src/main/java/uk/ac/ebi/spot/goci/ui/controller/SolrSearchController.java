@@ -107,8 +107,8 @@ public class SolrSearchController {
         }
         addRowsAndPage(solrSearchBuilder, maxResults, page);
         addSelectFields(solrSearchBuilder, query);
-        addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "efoTrait");
-
+        //addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "efoTrait");
+        addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "trait");
 
         if (fieldList == null) {
             fieldList = new HashSet<>();
@@ -119,12 +119,8 @@ public class SolrSearchController {
             fieldList.add("label");
             fieldList.add("traitUri");
             fieldList.add("id");
-            //            fieldList.add("type");
             fieldList.add("shortForm");
             fieldList.add("parent");
-
-            //            fieldList.add("ontology_name");
-            //            fieldList.add("ontology_prefix");
         }
 
         addReturnFields(solrSearchBuilder, fieldList);
