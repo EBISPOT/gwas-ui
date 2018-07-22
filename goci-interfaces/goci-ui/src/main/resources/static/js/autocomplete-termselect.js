@@ -4,7 +4,7 @@
 $(document).ready(function() {
 
     $("input[data-widget='select']").each(function() {
-        
+
         //var ontology =   $(this).data("gwasontology") ? $(this).data("gwasontology") : '';
         // Please use contextPath for ajax call!
         $(this).devbridgeAutocomplete({
@@ -26,8 +26,8 @@ $(document).ready(function() {
                                               return {
                                                   suggestions: $.map(response.response.docs, function(dataItem) {
                                                       var id = dataItem.id;
+                                                      var label = dataItem.mappedTrait;
 
-                                                      var label = dataItem.label[0];
                                                       var synonym = "";
                                                       var cantHighlight = true;
                                                       if (response.highlighting[id].label_autosuggest != undefined) {
@@ -51,8 +51,8 @@ $(document).ready(function() {
                                                       }
 
                                                       return {
-                                                          value: dataItem.label[0],
-                                                          data: {iri: dataItem.traitUri, label: label, synonym: synonym}
+                                                          value: dataItem.mappedTrait,
+                                                          data: {iri: dataItem.mappedUri, label: label, synonym: synonym}
                                                       };
                                                   })
                                               };

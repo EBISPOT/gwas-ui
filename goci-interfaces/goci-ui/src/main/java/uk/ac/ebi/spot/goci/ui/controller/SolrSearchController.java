@@ -107,7 +107,6 @@ public class SolrSearchController {
         }
         addRowsAndPage(solrSearchBuilder, maxResults, page);
         addSelectFields(solrSearchBuilder, query);
-        //addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "efoTrait");
         addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "trait");
 
         if (fieldList == null) {
@@ -116,21 +115,22 @@ public class SolrSearchController {
 
         //this is the FL parameter
         if (fieldList.isEmpty()) {
-            fieldList.add("label");
-            fieldList.add("traitUri");
+            fieldList.add("mappedTrait");
+            fieldList.add("mappedUri");
             fieldList.add("id");
             fieldList.add("shortForm");
             fieldList.add("parent");
         }
+
 
         addReturnFields(solrSearchBuilder, fieldList);
 
         Collection<String> highlights = new HashSet<>();
 
         highlights.add("label_autosuggest");
-        highlights.add("label");
+        highlights.add("mappedTrait");
         highlights.add("synonym_autosuggest");
-        highlights.add("synonym");
+        highlights.add("synonyms");
 
         addHighlights(solrSearchBuilder, highlights);
 
@@ -176,8 +176,8 @@ public class SolrSearchController {
         }
         addRowsAndPage(solrSearchBuilder, maxResults, page);
         addFilterQuery(solrSearchBuilder,
-                       searchConfiguration.getDefaultFacet(),
-                       "SingleNucleotidePolymorphism");
+                searchConfiguration.getDefaultFacet(),
+                "SingleNucleotidePolymorphism");
         addQuery(solrSearchBuilder, query);
 
         // dispatch search
@@ -517,18 +517,18 @@ public class SolrSearchController {
     @RequestMapping(value = "api/search/latest", produces = MediaType.APPLICATION_JSON_VALUE)
     public void doLatestSolrSearch(@RequestParam("q") String query,
                                    @RequestParam(value = "jsonp",
-                                                 required = false,
-                                                 defaultValue = "false") boolean useJsonp,
+                                           required = false,
+                                           defaultValue = "false") boolean useJsonp,
                                    @RequestParam(value = "callback", required = false) String callbackFunction,
                                    @RequestParam(value = "max", required = false, defaultValue = "10") int maxResults,
                                    @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                    @RequestParam(value = "group",
-                                                 required = false,
-                                                 defaultValue = "false") boolean useGroups,
+                                           required = false,
+                                           defaultValue = "false") boolean useGroups,
                                    @RequestParam(value = "group.by", required = false) String groupBy,
                                    @RequestParam(value = "group.limit",
-                                                 required = false,
-                                                 defaultValue = "10") int groupLimit,
+                                           required = false,
+                                           defaultValue = "10") int groupLimit,
                                    @RequestParam(value = "dateFilter", required = false) String dateRange,
                                    @RequestParam(value = "sort", required = false) String sort,
                                    HttpServletResponse response) throws IOException {
@@ -697,8 +697,8 @@ public class SolrSearchController {
 
     private void addSelectFields(StringBuilder solrSearchBuilder, String query) {
         solrSearchBuilder.append("&defType=edismax" +
-                                         "&qf=label%20synonym%20label_autosuggest_ws%20label_autosuggest_e%20label_autosuggest%20synonym_autosuggest_ws%20synonym_autosuggest_e%20synonym_autosuggest%20shortform_autosuggest" +
-                                         "&bq=label_s%3A%22" + query + "%22%5E2%20synonym_s%3A%22" + query + "%22");
+                "&qf=label%20synonym%20label_autosuggest_ws%20label_autosuggest_e%20label_autosuggest%20synonym_autosuggest_ws%20synonym_autosuggest_e%20synonym_autosuggest%20shortform_autosuggest" +
+                "&bq=label_s%3A%22" + query + "%22%5E2%20synonym_s%3A%22" + query + "%22");
 
 
     }
@@ -747,7 +747,7 @@ public class SolrSearchController {
     private void addJsonpCallback(StringBuilder solrSearchBuilder, String callbackFunction) {
         if (callbackFunction == null) {
             throw new IllegalParameterCombinationException("If jsonp = true, you must specify a callback function " +
-                                                                   "name with callback parameter");
+                    "name with callback parameter");
         }
         else {
             solrSearchBuilder.append("&json.wrf=").append(callbackFunction);
