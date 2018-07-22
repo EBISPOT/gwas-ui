@@ -30,6 +30,9 @@ function processStudy(study, table) {
 
 
     var pubdate = study.publicationDate.substring(0, 10);
+    var pubmedIdLink = '<a href="'+contextPath+'publications/'+study.pubmedId+'" title="Go to the publication page">'+study.pubmedId+'&nbsp;<span class="gwas-icon-GWAS_Publication_2017"></span></a>';
+    
+    var accessionLink = '<a href="'+contextPath+'studies/'+study.accessionId+'" title="Go to the study page">'+study.accessionId+'&nbsp;<span class="gwas-icon-GWAS_Study_2017"></span></a>';
     var pubmed = study.pubmedId;
     // To change
     //row.append($("<td>").html(authorsearch.concat(' (PMID: ').concat(study.pubmedId).concat(') &nbsp;&nbsp;').concat(
@@ -340,9 +343,8 @@ function processAssociation(association, table) {
 
     if (association.rsId != null && association.strongestAllele != null) {
         if ((association.rsId[0].indexOf(';') == -1) && (association.rsId[0].indexOf(' x ') == -1)) {
-            var rsidsearch = "<span><a href='search?query=".concat(association.rsId[0]).concat("'>").concat(association.strongestAllele[0]).concat(
-                "</a></span>");
-            var dbsnp = "<span><a href='http://www.ensembl.org/Homo_sapiens/Variation/Summary?v=".concat(association.rsId[0]).concat(
+            var rsidsearch = '<span><a href=\"'+contextPath+'variants/'+association.rsId[0]+'\" title=\"Go to the variant page\"><span class=\"gwas-icon-GWAS_Variant_2017\"></span>&nbsp;'+association.rsId[0]+'</a></span>';
+            var dbsnp = "<span><a href='https://www.ensembl.org/Homo_sapiens/Variation/Summary?v=".concat(association.rsId[0]).concat(
                 "'  target='_blank'>").concat(
                 "<img alt='externalLink' class='link-icon' src='icons/external1.png' th:src='@{icons/external1.png}'/></a></span>");
             row.append($("<td>").html(rsidsearch.concat('&nbsp;&nbsp;').concat(dbsnp)));
@@ -514,7 +516,7 @@ function processAssociation(association, table) {
                     locationsearch = chromName.concat(':').concat(locationsearch);
                 }
 
-                var ensembl = "<span><a href='http://www.ensembl.org/Homo_sapiens/Location/View?r=".concat(locationsearch).concat(
+                var ensembl = "<span><a href='https://www.ensembl.org/Homo_sapiens/Location/View?r=".concat(locationsearch).concat(
                     "'  target='_blank'>").concat(
                     "<img alt='externalLink' class='link-icon' src='icons/external1.png' th:src='@{icons/external1.png}'/></a></span>");
 
@@ -564,7 +566,7 @@ function processAssociation(association, table) {
 
                     var repgenesearch = "<span><a href='search?query=".concat(gene).concat("'>").concat(gene).concat(
                         "</a></span>");
-                    var ensembl = "<span><a href='http://www.ensembl.org/Homo_sapiens/Gene/Summary?g=".concat(geneId).concat(
+                    var ensembl = "<span><a href='https://www.ensembl.org/Homo_sapiens/Gene/Summary?g=".concat(geneId).concat(
                         "'  target='_blank'>").concat(
                         "<img alt='externalLink' class='link-icon' src='icons/external1.png' th:src='@{icons/external1.png}'/></a></span>");
 
@@ -593,7 +595,7 @@ function processAssociation(association, table) {
 
                     var repgenesearch = "<span><a href='search?query=".concat(gene).concat("'>").concat(gene).concat(
                         "</a></span>");
-                    var ensembl = "<span><a href='http://www.ensembl.org/Homo_sapiens/Gene/Summary?g=".concat(geneId).concat(
+                    var ensembl = "<span><a href='https://www.ensembl.org/Homo_sapiens/Gene/Summary?g=".concat(geneId).concat(
                         "'  target='_blank'>").concat(
                         "<img alt='externalLink' class='link-icon' src='icons/external1.png' th:src='@{icons/external1.png}'/></a></span>");
 
@@ -656,7 +658,7 @@ function processAssociation(association, table) {
 
                             var mapgenesearch = "<span><a href='search?query=".concat(gene).concat("'>").concat(gene).concat(
                                 "</a></span>");
-                            var ensembl = "<span><a href='http://www.ensembl.org/Homo_sapiens/Gene/Summary?g=".concat(geneId).concat(
+                            var ensembl = "<span><a href='https://www.ensembl.org/Homo_sapiens/Gene/Summary?g=".concat(geneId).concat(
                                 "'  target='_blank'>").concat(
                                 "<img alt='externalLink' class='link-icon' src='icons/external1.png' th:src='@{icons/external1.png}'/></a></span>");
 
@@ -744,8 +746,8 @@ function processAssociation(association, table) {
 
     row.append($("<td>").html(searchlink.concat('&nbsp;&nbsp;').concat(viewPapers)));
 
-    var accessionId = association.accessionId;
-    row.append($("<td>").html(accessionId));
+    var accessionLink = '<a href="'+contextPath+'studies/'+association.accessionId+'" title="Go to the study page"><span class="gwas-icon-GWAS_Study_2017"></span>&nbsp;'+association.accessionId+'</a>';
+    row.append($("<td>").html(accessionLink));
 
     table.append(row);
 }

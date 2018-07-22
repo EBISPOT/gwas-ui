@@ -34,6 +34,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -148,7 +149,7 @@ public class SolrSearchController {
             @RequestParam(value = "max", required = false, defaultValue = "10") int maxResults,
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildAlternativeSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -192,7 +193,7 @@ public class SolrSearchController {
             @RequestParam(value = "max", required = false, defaultValue = "10") int maxResults,
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildAlternativeSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -269,6 +270,7 @@ public class SolrSearchController {
         dispatchSearch(solrSearchBuilder.toString(), response.getOutputStream());
     }
 
+    // Use the Solr SLIM
     private StringBuilder buildBaseSearchRequest() {
         // build base request
         StringBuilder solrSearchBuilder = new StringBuilder();
@@ -277,6 +279,17 @@ public class SolrSearchController {
                 .append("wt=json");
         return solrSearchBuilder;
     }
+
+    // Use the Solr FAT.
+    private StringBuilder buildAlternativeSearchRequest() {
+        // build base request
+        StringBuilder solrSearchBuilder = new StringBuilder();
+        solrSearchBuilder.append(searchConfiguration.getGwasSearchServerAlternative().toString())
+                .append("/select?")
+                .append("wt=json");
+        return solrSearchBuilder;
+    }
+
 
     @RequestMapping(value = "api/search/filter", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin
@@ -743,6 +756,16 @@ public class SolrSearchController {
         solrSearchBuilder.append(hlfs);
     }
 
+    private void addHighlights(StringBuilder solrSearchBuilder, Collection<String> highlights, Integer hlSnippets) {
+        solrSearchBuilder.append("&hl=true")
+                .append("&hl.simple.pre=%3Cb%3E")
+                .append("&hl.simple.post=%3C%2Fb%3E")
+                .append("&hl.snippets="+hlSnippets.toString())
+                .append("&hl.fl=");
+
+        solrSearchBuilder.append(String.join(",", highlights));
+    }
+
 
     private void addJsonpCallback(StringBuilder solrSearchBuilder, String callbackFunction) {
         if (callbackFunction == null) {
@@ -890,6 +913,66 @@ public class SolrSearchController {
             EntityUtils.consume(entity);
         }
     }
+
+    // Renamed the method. It is a generic and useful method.
+    // Todo: change the name of the method. doEfoSorlSearch.
+    // Use SOLR FAT! SOLR FAT!
+    @RequestMapping(value = "api/search/advancefilter", produces = MediaType.APPLICATION_JSON_VALUE,method = {RequestMethod.GET,RequestMethod.POST})
+    public void doEfoSolrSearch(
+            @RequestParam("q") String query,
+            @RequestParam(value = "jsonp", required = false, defaultValue = "false") boolean useJsonp,
+            @RequestParam(value = "callback", required = false) String callbackFunction,
+            @RequestParam(value = "max", required = false, defaultValue = "10000") int maxResults,
+            @RequestParam(value = "fq", required = false, defaultValue = "") String fq,
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "group.limit", required = false, defaultValue = "100") int groupLimit,
+            @RequestParam(value = "group.field", required = false, defaultValue = "resourcename") String groupField,
+            @RequestParam(value = "facet.field", required = false, defaultValue = "resourcename") String facetField,
+            @RequestParam(value = "hl.fl", required = false, defaultValue = "shortForm,efoLink") String hlFl,
+            @RequestParam(value = "hl.snippets", required = false, defaultValue = "1") int hlSnippets,
+            @RequestParam(value = "fl", required = false, defaultValue = "") String fl,
+            @RequestParam(value = "raw", required = false, defaultValue = "") String raw,
+            HttpServletResponse response) throws IOException {
+        StringBuilder solrSearchBuilder = buildAlternativeSearchRequest();
+
+        if (useJsonp) {
+            addJsonpCallback(solrSearchBuilder, callbackFunction);
+        }
+
+        if(!fq.isEmpty()){
+            addFilterQuery(solrSearchBuilder,searchConfiguration.getDefaultFacet(),fq.split(":")[1]);
+        }
+        addRowsAndPage(solrSearchBuilder, maxResults, page);
+        //        addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "efotrait");
+        addQuery(solrSearchBuilder, query);
+        addGrouping(solrSearchBuilder, groupField, groupLimit);
+        addFacet(solrSearchBuilder, facetField);
+
+        Collection<String> highlights = new HashSet<String>(Arrays.asList(hlFl.split(",")));
+
+        addHighlights(solrSearchBuilder,highlights,hlSnippets);
+
+
+        if (fl != "") {
+//            HashSet<String> fieldList  = new HashSet<>();
+//            fieldList.add("a");
+//            Arrays.asList(fl.split(","));
+//            HashSet<String> fieldList = new HashSet<String>(Arrays.asList(fl.split(",")));
+//            addReturnFields(solrSearchBuilder,fieldList);
+            solrSearchBuilder.append("&fl=").append(URLEncoder.encode(fl, "UTF-8"));
+        }
+
+        if (raw != "") {
+            solrSearchBuilder.append("&").append(URLEncoder.encode(raw, "UTF-8"));
+        }
+
+        //xintodo commend out when live
+//        System.out.print(solrSearchBuilder.toString() + "\n");
+        // dispatch search
+        dispatchSearch(solrSearchBuilder.toString(), response.getOutputStream());
+    }
+
+
 
     @ExceptionHandler
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)

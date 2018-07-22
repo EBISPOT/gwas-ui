@@ -67,8 +67,9 @@ Data is available on our FTP server link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/
 
 Study level and association data are provided in the standard GWAS Catalog download format. (gwas_catalog_v1.0.1-studies_r2017-10-09_Sequencing_pilot, gwas_catalog_v1.0.1-associations_r2017-10-09_Sequencing_pilot).
 
-Additional study level data fields, specific to sequencing associations are provided as additional columns in gwas_catalog_v1.0.1-studies_r2017-10-09_Sequencing_pilot.  
+Additional study level data fields, specific to sequencing associations are provided as additional columns in gwas_catalog_v1.0.1-studies_r2017-10-09_Sequencing_pilot. ?
 These additional fields are: Genotyping technology (discovery/initial), Sequencing platform, Array platform, Sequencing coverage, Number of variants analysed, Genome build, Analysis level, For multiple variants - number of variants per test, Statistical tests used to generate reported p-values, Statistical test used for extracted p-values, Why this test was chosen for extraction, Types of variant included in analysis, P-value threshold stated by author.
-Single variant/multi-variant analysis is indicated after the author name.  The absence of either indicates that entry is currently eligible and published in the standard GWAS Catalog.
+Single variant/multi-variant analysis is indicated after the author name. ?The absence of either indicates that entry is currently eligible and published in the standard GWAS Catalog.
 
 Additional association level data is provided in the P-VALUE (TEXT) field of gwas_catalog_v1.0.1-associations_r2017-10-09_Sequencing_pilot, where 'TEST'=statistical test and 'NUM_VAR'=number of variants analysed.
+

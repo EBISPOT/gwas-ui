@@ -19,11 +19,22 @@ import java.net.URL;
 public class SearchConfiguration {
     @NotNull @Value("${search.server}")
     private URL server;
+
+    //GWAS Search Interface v.2: using Solr Fat
+    @NotNull @Value("${search.server.alternative}")
+    private URL alternativeServerSource;
+
     @Value("${search.defaultFacet}")
     private String defaultFacet;
 
+
+
     public URL getGwasSearchServer() {
         return server;
+    }
+
+    public URL getGwasSearchServerAlternative() {
+        return alternativeServerSource;
     }
 
     public String getDefaultFacet() {

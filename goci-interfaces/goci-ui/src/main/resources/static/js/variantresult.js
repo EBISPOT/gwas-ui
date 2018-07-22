@@ -9,8 +9,8 @@ var SearchState = {
 };
 
 var EPMC = "http://www.europepmc.org/abstract/MED/";
-var OLS  = "http://www.ebi.ac.uk/ols/search?q=";
-var ENSVAR = "http://www.ensembl.org/Homo_sapiens/Variation/";
+var OLS  = "https://www.ebi.ac.uk/ols/search?q=";
+var ENSVAR = "https://www.ensembl.org/Homo_sapiens/Variation/";
 var DBSNP  = "http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?rs=";
 var UCSC   = "https://genome.ucsc.edu/cgi-bin/hgTracks?hgFind.matches=";
 var ENS_SHARE_LINK = 'Variant_specific_location_link/97NKbgkp09vPRy1xXwnqG1x6KGgQ8s7S';
@@ -19,9 +19,7 @@ var CONTEXT_RANGE = 500;
 var list_min = 5;
 
 $(document).ready(function() {
-    // if(window.location.pathname.indexOf("beta") != -1){
-    //     $('#beta-icon').show();
-    // }
+
     var searchTerm = $('#query').text();
     console.log("Loading search module!");
     console.log("rsID: "+searchTerm);
@@ -35,7 +33,7 @@ $(document).ready(function() {
 function getVariantData(rsId) {
     console.log("Solr research request received for " + rsId);
     setState(SearchState.LOADING);
-    $.getJSON('/gwas/api/search/association',
+    $.getJSON('../api/search/association',
               {
                   'q': "rsId:"+rsId,
                   'max': 1000
@@ -68,10 +66,35 @@ function processVariantData(data,rsId) {
         //downloads link
         setDownloadLink(rsId);
     }
+    $('[data-toggle="tooltip"]').tooltip();
 }
 
+// CM Patch: To remove ASAP. Solr index issue.
+function getSolrProperty(data, property) {
+    var property_value = '';
+    var index = 0;
+    var valid_index = 0;
+    var data_size = data.length;
+
+    if (data_size > 0) {
+        while (index < data_size) {
+            if (data[index].hasOwnProperty(property)) {
+                valid_index = index;
+                //property_value = data[index][property];
+                index = data_size + 1;
+            }
+            else { index = index + 1; }
+        }
+    }
+
+    return valid_index;
+
+}
+
+
 function getVariantInfo(data,rsId) {
-    var data_sample = data[0];
+    var valid_index = getSolrProperty(data,'context');
+    var data_sample = data[valid_index];
     var location = data_sample.chromLocation[0];
     var region = data_sample.region[0];
     var func = data_sample.context[0];
@@ -82,21 +105,25 @@ function getVariantInfo(data,rsId) {
     var traits_reported_url = [];
     $.each(data, function (index, doc) {
         // Mapped genes
-        $.each(doc.entrezMappedGenes, function (index, gene) {
-            if (jQuery.inArray(gene, genes_mapped) == -1) {
-                genes_mapped.push(gene);
-                genes_mapped_url.push(setQueryUrl(gene));
-            }
-        });
+        if (doc.hasOwnProperty('entrezMappedGenes')) {
+            $.each(doc.entrezMappedGenes, function(index, gene) {
+                if (jQuery.inArray(gene, genes_mapped) == -1) {
+                    genes_mapped.push(gene);
+                    genes_mapped_url.push(setQueryUrl(gene));
+                }
+            });
+        }
 
         // Reported traits
         var traits = [];
-        $.each(doc.traitName, function(index, trait) {
-            if (jQuery.inArray(trait, traits_reported) == -1) {
-                traits_reported.push(trait);
-                traits_reported_url.push(setQueryUrl(trait));
-            }
-        });
+        if (doc.hasOwnProperty('entrezMappedGenes')) {
+            $.each(doc.traitName, function(index, trait) {
+                if (jQuery.inArray(trait, traits_reported) == -1) {
+                    traits_reported.push(trait);
+                    traits_reported_url.push(setQueryUrl(trait));
+                }
+            });
+        }
     });
     genes_mapped_url.sort();
     traits_reported_url.sort();
@@ -424,7 +451,8 @@ function getSummary(data) {
 
 // Create external link buttons
 function getLinkButtons (data,rsId) {
-    var data_sample = data[0];
+    var valid_index = getSolrProperty(data,'chromosomeName');
+    var data_sample = data[valid_index];
     var chr = data_sample.chromosomeName[0];
     var pos = data_sample.chromosomePosition[0];
     var pos_start = pos - CONTEXT_RANGE;
@@ -433,7 +461,7 @@ function getLinkButtons (data,rsId) {
     }
     var pos_end = pos + CONTEXT_RANGE;
     var location = chr+':'+pos_start+'-'+pos_end;
-    var ens_g_context = 'http://www.ensembl.org/Homo_sapiens/Location/View?db=core;r='+location+';v='+rsId+';share_config='+ENS_SHARE_LINK;
+    var ens_g_context = 'https://www.ensembl.org/Homo_sapiens/Location/View?db=core;r='+location+';v='+rsId+';mr='+chr+':'+pos+';share_config='+ENS_SHARE_LINK;
 
     // Summary panel
     $("#ensembl_button").attr('onclick',     "window.open('"+ENSVAR+"Explore?v="+rsId+"',    '_blank')");
@@ -580,7 +608,7 @@ function toggle_and_scroll (id) {
 }
 
 function getVariantInfoFromEnsembl(rsId) {
-    $.getJSON('http://rest.ensembl.org/variation/human/'+rsId+'?content-type=application/json')
+    $.getJSON('https://rest.ensembl.org/variation/human/'+rsId+'?content-type=application/json')
             .done(function(data) {
                 console.log(data);
                 processVariantInfoFromEnsembl(rsId,data);
@@ -611,7 +639,7 @@ function processVariantInfoFromEnsembl(rsId, data) {
 
         if (var_id != rsId) {
             var var_link = setExternalLink(DBSNP+var_id,var_id);
-            $("#merged-variant-label").html("Merged into");
+            $("#merged-variant-label").show();
             $("#merged-variant").html(var_link);
         }
     }
@@ -646,7 +674,7 @@ function setState(state) {
 }
 
 function setDownloadLink(rsId) {
-    var baseUrl = '../../api/search/downloads?';
+    var baseUrl = '../api/search/downloads?';
     var q = "q=".concat(rsId);
 
     var facet = '&facet=association';
