@@ -110,6 +110,7 @@ public class SolrSearchController {
         addSelectFields(solrSearchBuilder, query);
         addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "trait");
 
+
         if (fieldList == null) {
             fieldList = new HashSet<>();
         }
