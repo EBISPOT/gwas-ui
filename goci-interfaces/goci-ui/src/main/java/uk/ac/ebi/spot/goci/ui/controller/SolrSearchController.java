@@ -108,8 +108,7 @@ public class SolrSearchController {
         }
         addRowsAndPage(solrSearchBuilder, maxResults, page);
         addSelectFields(solrSearchBuilder, query);
-        //addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "efoTrait");
-        addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "trait");
+        //addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "efoTrait");        addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "trait");
 
         if (fieldList == null) {
             fieldList = new HashSet<>();
@@ -117,8 +116,8 @@ public class SolrSearchController {
 
         //this is the FL parameter
         if (fieldList.isEmpty()) {
-            fieldList.add("label");
-            fieldList.add("traitUri");
+            fieldList.add("mappedTrait");
+            fieldList.add("mappedUri");
             fieldList.add("id");
             fieldList.add("shortForm");
             fieldList.add("parent");
@@ -129,9 +128,9 @@ public class SolrSearchController {
         Collection<String> highlights = new HashSet<>();
 
         highlights.add("label_autosuggest");
-        highlights.add("label");
+        highlights.add("mappedTrait");
         highlights.add("synonym_autosuggest");
-        highlights.add("synonym");
+        highlights.add("synonyms");
 
         addHighlights(solrSearchBuilder, highlights);
 
