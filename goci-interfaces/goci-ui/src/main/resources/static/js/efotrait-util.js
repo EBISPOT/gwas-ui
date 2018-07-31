@@ -1435,7 +1435,7 @@ function displayEfotraitAssociations(data, cleanBeforeInsert) {
                                                    sortable: true
                                                },{
                                                    field: 'mappedTraits',
-                                                   title: 'Mapped trait',
+                                                   title: 'Mapped EFO trait',
                                                    sortable: true
                                                },{
                                                    field: 'study',
