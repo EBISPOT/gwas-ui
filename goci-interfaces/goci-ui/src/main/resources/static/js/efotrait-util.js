@@ -157,6 +157,15 @@ $('#oxo-link').click(() => {
 });
 
 /**
+ * Linkout to Open Targets page for the main EFO term
+ */
+$('#ot-link').click(() => {
+    window.open("https://www.targetvalidation.org/disease/" + getMainEFO() , '_blank');
+});
+
+
+
+/**
  * Checkbox to toggle always include all descendants.
  * When uncheck, the newly added efo term will be added to the cart without any descendants.
  * The users can latter add the descendant by clicking the checkbox in front of the cart item.

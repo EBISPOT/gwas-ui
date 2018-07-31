@@ -104,9 +104,9 @@
                         Here only shows cross-reference term with a <a href="https://www.ebi.ac.uk/spot/oxo/">distance</a> of 1 (direct cross reference).</li>
                 </ul>
                 <ul>
-                    <li>Buttons of links to other relevent resources.</li>
+                    <li>Buttons of links to other relevant resources.</li>
                     <ul>
-                        <li>A highlighted study is selected for this triat. The study information is by default hidden and you can toggle it by clicking <a class="btn btn-default" type="button">Highlighted Study</a>.
+                        <li>A highlighted study is selected for this trait. The study information is by default hidden and you can toggle it by clicking <a class="btn btn-default" type="button">Highlighted Study</a>.
                             The highlighted study is choosen base on the initial sample size of the study. Currently the one has the largest
                             initial sample size annotated to the mainEFO trait is selected as the highlighted study.</li>
                     </ul>
@@ -241,11 +241,14 @@
                               style="margin-left:2px;font-size:smaller"></span>
                     </h3>
                 </div>
+
                 <!--trait summary-->
                 <div class="clearfix" id="summary-panel-loading">
                     <div class="panel-body col-xs-10">
-                        <!--label-->
-                        <div class="clearfix col-xs-4">
+
+                        <!--EFO Label -->
+                        <div class="clearfix col-xs-8">
+                        <!--<div class="clearfix col-xs-4">-->
                             <dl class="dl-horizontal">
                                 <dt>Label</dt>
                                 <dd id="efotrait-label">-</dd>
@@ -255,8 +258,10 @@
                             <!--</div>-->
                             <!--<div class="col-xs-8 col-md-7 col-xs-7 col-xs-7" id="efotrait-label">-</div>-->
                         </div>
-                        <!--id-->
-                        <div class="clearfix col-xs-4">
+
+                        <!-- EFO ID-->
+                        <div class="clearfix col-xs-8">
+                        <!--<div class="clearfix col-xs-4">-->
                             <dl class="dl-horizontal">
                                 <dt>Trait EFO id</dt>
                                 <dd id="efotrait-id">-</dd>
@@ -266,8 +271,10 @@
                             <!--</div>-->
                             <!--<div class="col-xs-8 col-md-7 col-xs-7 col-xs-7" id="efotrait-id">-</div>-->
                         </div>
-                        <!--synonym-->
-                        <div class="clearfix col-xs-4">
+
+                        <!-- EFO Synonyms -->
+                        <div class="clearfix col-xs-8">
+                        <!--<div class="clearfix col-xs-4">-->
                             <dl class="dl-horizontal">
                                 <dt>Synonym(s)</dt>
                                 <dd id="efotrait-synonym">-</dd>
@@ -277,7 +284,8 @@
                             <!--</div>-->
                             <!--<div class="col-xs-8 col-md-7 col-xs-7 col-xs-7" id="efotrait-synonym">-</div>-->
                         </div>
-                        <!--description-->
+
+                        <!-- EFO Description -->
                         <div class="clearfix col-xs-8">
                             <dl class="dl-horizontal">
                                 <dt>Description</dt>
@@ -288,14 +296,15 @@
                             <!--</div>-->
                             <!--<div class="col-xs-8 col-md-7 col-xs-7 col-xs-7" id="efotrait-description">-</div>-->
                         </div>
-                        <!--oxo-->
-                        <div class="clearfix col-xs-4">
+
+                        <!-- EFO Term Mappings -->
+                        <div class="clearfix col-xs-8">
                             <dl class="dl-horizontal">
-                                <dt>Xrefs
-                                    <span class="glyphicon glyphicon-question-sign"
-                                          data-toggle="tooltip"
-                                          title="Ontology mappings or cross-references in other ontoloies."
-                                          style="margin-left:2px;font-size:smaller"></span>
+                                <dt>Related terms
+                                    <!--<span class="glyphicon glyphicon-question-sign"-->
+                                          <!--data-toggle="tooltip"-->
+                                          <!--title="Ontology mappings or cross-references in other ontologies."-->
+                                          <!--style="margin-left:2px;font-size:smaller"></span>-->
                                 </dt>
                                 <dd>
                                     <div id="btn-oxo-expand">
@@ -325,20 +334,20 @@
                     </div>
 
                     <div class="panel-body col-xs-2" id="panel-links">
-                        <div>
-                            <a class="btn btn-default"
-                               type="button"
-                               data-toggle="collapse"
-                               data-target="#highlight-study-panel-loading"
-                               aria-expanded="false"
-                               aria-controls="collapseExample">
-                                Highlighted Study
-                                <span class="glyphicon glyphicon-question-sign"
-                                      data-toggle="tooltip"
-                                      title="GWAS Catalog study with largest initial sample size for specific EFO trait."
-                                      style="margin-left:2px;font-size:smaller"></span>
-                            </a>
-                        </div>
+                        <!--<div>-->
+                            <!--<a class="btn btn-default"-->
+                               <!--type="button"-->
+                               <!--data-toggle="collapse"-->
+                               <!--data-target="#highlight-study-panel-loading"-->
+                               <!--aria-expanded="false"-->
+                               <!--aria-controls="collapseExample">-->
+                                <!--Highlighted Study-->
+                                <!--<span class="glyphicon glyphicon-question-sign"-->
+                                      <!--data-toggle="tooltip"-->
+                                      <!--title="GWAS Catalog study with largest initial sample size for specific EFO trait."-->
+                                      <!--style="margin-left:2px;font-size:smaller"></span>-->
+                            <!--</a>-->
+                        <!--</div>-->
 
                         <div>
                             <a type="button" class="btn btn-default" id='ols-link'>Trait in OLS
@@ -352,13 +361,42 @@
                             </a>
                         </div>
 
+                        <div>
+                            <a type="button" class="btn btn-default" id="ot-link"> Trait in Open Targets
+                                <span class="glyphicon glyphicon-new-window external-link"></span>
+                            </a>
+                        </div>
 
+                    </div>
+
+                    <div class="panel-body col-xs-12"></div>
+
+                    <!-- Add Highlighted Study button here -->
+                    <div class="panel-body col-xs-2" id="panel-links-DUPLICATE">
+                        <div>
+                            <a class="btn btn-default"
+                               type="button"
+                               data-toggle="collapse"
+                               data-target="#highlight-study-panel-loading"
+                               aria-expanded="false"
+                               aria-controls="collapseExample"
+                               style="white-space: normal;text-shadow:none">
+                                Highlighted Study
+                                <span class="glyphicon glyphicon-question-sign"
+                                      data-toggle="tooltip"
+                                      title="GWAS Catalog study with largest initial sample size for specific EFO trait."
+                                      style="margin-left:2px;font-size:smaller"></span>
+                            </a>
+                        </div>
                     </div>
 
                 </div>
 
-                <!--highlighted study-->
+
+
+                <!-- Highlighted Study -->
                 <div class="clearfix collapse" id="highlight-study-panel-loading">
+                    <div class="clearfix"><hr /></div>
                     <div  class="panel-body col-xs-12">
                         <!--title-->
                         <div class="clearfix col-xs-4">
@@ -393,10 +431,11 @@
                 </div>
 
                 <!--first reported-->
-                <div id="efotrait-summary">
-                    <span class="glyphicon glyphicon-info-sign" id="efotrait-summary-icon"></span>
-                    <span id="efotrait-summary-content"></span>
-                </div>
+                <!-- TW - removed in new spec -->
+                <!--<div id="efotrait-summary">-->
+                    <!--<span class="glyphicon glyphicon-info-sign" id="efotrait-summary-icon"></span>-->
+                    <!--<span id="efotrait-summary-content"></span>-->
+                <!--</div>-->
             </div>
         </div>
 
