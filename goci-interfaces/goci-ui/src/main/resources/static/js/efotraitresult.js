@@ -108,26 +108,27 @@ var CONTEXT_RANGE = 500;
 
 
 // TW - this data is removed in the new spec
-// function getSummary(data) {
-//     var first_report  = getFirstReportYear(data);
-//     var count_studies = countStudies(data);
-//
-//     if (count_studies == 0) {
-//         count_studies = '';
-//     }
-//     else if (count_studies == 1) {
-//         count_studies = '<b>1</b> study reports this efotrait';
-//     }
-//     else if (count_studies > 1) {
-//         count_studies = '<a class="inpage-link" onclick="toggle_and_scroll('+"'"+'#study_panel'+"'"+')"><b>'+count_studies+'</b> studies report this efotrait</a>';
-//     }
-//
-//     if (first_report != '' && count_studies != '') {
-//         first_report += ', ';
-//     }
-//     $("#efotrait-summary-content").html(first_report+count_studies);
-//     return first_report+count_studies;
-// }
+// NOTE: this returns something that is used in LocusZoom
+function getSummary(data) {
+    var first_report  = getFirstReportYear(data);
+    var count_studies = countStudies(data);
+
+    if (count_studies == 0) {
+        count_studies = '';
+    }
+    else if (count_studies == 1) {
+        count_studies = '<b>1</b> study reports this efotrait';
+    }
+    else if (count_studies > 1) {
+        count_studies = '<a class="inpage-link" onclick="toggle_and_scroll('+"'"+'#study_panel'+"'"+')"><b>'+count_studies+'</b> studies report this efotrait</a>';
+    }
+
+    if (first_report != '' && count_studies != '') {
+        first_report += ', ';
+    }
+    $("#efotrait-summary-content").html(first_report+count_studies);
+    return first_report+count_studies;
+}
 
 // Create external link buttons
 function getLinkButtons (data,rsId) {
