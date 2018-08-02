@@ -567,6 +567,22 @@ updatePage = function(initLoad=false) {
         })
     }
 
+
+    // TODO: Add call to Fat Solr to get Reported traits
+    //******************************
+    // update reported traits panel
+    //******************************
+    if (initLoad){
+        //display reported trait information when data is ready
+        // displayEFOLabel();
+        OLS.getEFOInfo(mainEFO).then(displayEfoTraitInfo).catch((err) => {
+            console.warning(`Error getting Reported traits. ${err}`);
+    }).then(() => {
+            hideLoadingOverLay('#summary-panel-loading')
+    })
+    }
+
+
     //******************************
     // add ols graph for related term
     //******************************
