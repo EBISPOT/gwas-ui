@@ -510,8 +510,6 @@ prepareAncestryFilter = function(allAncestries){
  * @param {Boolean} initLoad - if true, the efoinfo/highlighted study will be update
  */
 updatePage = function(initLoad=false) {
-    console.log("** updatePage called");
-
     //start spinner. The spinner will be stoped whenever the data is ready, thus closed by the coresponding data loading function.
     if(initLoad){
         showLoadingOverLay('#summary-panel-loading');
@@ -898,7 +896,6 @@ function processSolrData(data, initLoad=false) {
 }
 
 
-
 /**
  * Get trait data from Solr Slim
  * @param mainEFO
@@ -906,33 +903,16 @@ function processSolrData(data, initLoad=false) {
  */
 function getTraitDataSolrSlim(mainEFO) {
     var searchQuery = mainEFO;
-    console.log("** searchQuery-SolrSlim: "+searchQuery);
-    // TW - Get data from Solr Slim
-    // return Promise.all().then(() => {
-
-    // return promisePost(global_color_url_batch, efoids).then(JSON.parse).then(function(response){
-    //     return hashFromArrays(efoids,response);
-    // });
-    // return promisePost(window.location.pathname.split('/efotraits/')[0] + '/api/search/advancefilter',
-    return promisePost(global_solr_slim_url,
+    return promisePost(contextPath+'api/search',
         {
             'q': searchQuery,
-            // 'max': 99999,
-            // 'group.limit': 99999,
+            'max': 1,
             'resourcename': 'trait',
             'shortForm': searchQuery,
             'wt':'json',
             'dataType': 'jsonp',
-            'jsonp': 'json.wrf',
-            // 'group.field': 'resourcename',
-            // 'facet.field': 'resourcename',
-            // 'hl.fl': 'shortForm,efoLink',
-            // 'hl.snippets': 100,
-            // 'fl': global_fl == undefined ? '*' : global_fl,
-            // 'raw': global_raw == undefined ? '' : global_raw,
         }, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
-        processSolrSlimData(data, initLoad=false);
-        console.log("** Solr Slim query done for " + searchQuery);
+        processSolrSlimData(data);
         return data;
     }).catch(function (err) {
         console.error('Error when searching Solr Slim for: ' + searchQuery + '. ' + err);
@@ -941,15 +921,13 @@ function getTraitDataSolrSlim(mainEFO) {
 }
 
 
-
-function processSolrSlimData(data, initLoad) {
-    console.log("** Solr Slim data info: "+data.response);
-
-    // var reportedTraits = "";
+function processSolrSlimData(data) {
+    var reportedTraits = "";
     $.each(data.response.docs, (index, data) => {
-        var reportedTraits = data.reportedTrait_s;
-        $('#reported-traits').html(reportedTraits);
+        reportedTraits = data.reportedTrait_s;
     });
+
+    $('#reported-traits').html(reportedTraits);
 }
 
 
