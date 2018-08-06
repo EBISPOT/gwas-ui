@@ -149,9 +149,12 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         var publicationDate = asso.publicationDate;
         var pubDate = publicationDate.split("-");
         var pubmedId = asso.pubmedId;
-        var study = setQueryUrl(author, author + " - " + pubDate[0]);
-        study += '<div><small>'+setExternalLink(EPMC_URL+pubmedId,'PMID:'+pubmedId)+'</small></div>';
+        //var study = setQueryUrl(author, author + " - " + pubDate[0]);
+        //study += '<div><small>'+setExternalLink(EPMC_URL+pubmedId,'PMID:'+pubmedId)+'</small></div>';
+        var study='<a href="'+contextPath+'studies/'+asso.accessionId+'"><span class="gwas-icon-GWAS_Study_2017"></span>&nbsp;'+asso.accessionId+'</a>';
         tmp['study'] = study;
+        var publication ='<a href="'+contextPath+'publications/'+asso.pubmedId+'"><span class="gwas-icon-GWAS_Publication_2017"></span>&nbsp;'+asso.pubmedId+'</a>';
+        tmp['publication'] = publication;
         
         var studyId = asso.studyId;
         
@@ -165,15 +168,17 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         exportDataType: 'all',
         columns: [{
             field: 'riskAllele',
-            title: 'Risk allele',
+            title: 'Variant and risk allele',
             sortable: true
-        }, {
+        },
+            {
+                field: 'pValue',
+                title: 'P-value',
+                sortable: true
+            },
+            {
             field: 'riskAlleleFreq',
             title: 'RAF',
-            sortable: true
-        }, {
-            field: 'pValue',
-            title: 'p-value',
             sortable: true
         },{
             field: 'orValue',
@@ -189,7 +194,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             sortable: true
         },{
             field: 'mappedGenes',
-            title: 'Mapped gene(s)',
+            title: 'Mapped gene',
             sortable: true
         },{
             field: 'reportedTraits',
@@ -197,13 +202,19 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             sortable: true
         },{
             field: 'mappedTraits',
-            title: 'Mapped trait',
+            title: 'Mapped EFO trait(s)',
             sortable: true
         },{
             field: 'study',
-            title: 'Study',
+            title: 'Study accession',
             sortable: true
-        }],
+        },
+            {
+                field: 'publication',
+                title: 'Publication',
+                sortable: true,
+                visible: false
+            }],
         data: data_json,
         
     });
