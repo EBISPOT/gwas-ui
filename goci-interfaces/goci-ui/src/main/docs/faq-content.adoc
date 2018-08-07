@@ -173,7 +173,7 @@
 
 1. <<faq-I1,How do I find out which publications have full summary statistics available?>>
 
-2. <<faq-I2,I am an author and would like to deposit my summary statistics in the GWAS Catalog, how to I go about this?>>
+2. <<faq-I2,I am an author and would like to deposit my summary statistics in the GWAS Catalog, how to I go about this?>>  
 
 
 
@@ -234,7 +234,7 @@ Each separate study in the GWAS Catalog has an accession id beginning with “GC
 ==== [[faq-A13]]13. Why are only certain targeted or exome array studies available in the GWAS Catalog?
 
 
-We are working on expanding the scope of the GWAS Catalog to include large-scale targeted/non-genome-wide arrays, including the Metabochip, Immunochip and Exome array. Feedback from our users has indicated a high demand for studies of this type to be included in the Catalog. This is currently in a pilot phase where prioritisation of targeted and exome array studies for inclusion in the Catalog is by 1) relevance of the trait analysed 2) user request.
+We are working on expanding the scope of the GWAS Catalog to include large-scale targeted/non-genome-wide arrays, including the Metabochip, Immunochip and Exome array. Feedback from our users has indicated a high demand for studies of this type to be included in the Catalog. This is currently in a pilot phase where prioritisation of targeted and exome array studies for inclusion in the Catalog is by 1) relevance of the trait analysed 2) user request. 
 Targeted array studies included in the Catalog are indicated in the search interface using  a small “target” icon, close to the number of associations curated from that specific study.
 
 ==== [[faq-A14]]14. How do I identify targeted and exome array studies in the download?
@@ -251,7 +251,7 @@ Type your query, e.g. “breast cancer”, into the search box and hit return or
 
 ==== [[faq-B2]]2. What can I type into the search bar?
 
-You can type any text you wish into the search bar. This will then return any exact string matches within a number of data fields in the Catalog, including title, author, journal, reported trait, mapped (ontology) trait, mapped trait's synonyms, mapped trait's parents, sample descriptions, genes and SNPs.
+You can type any text you wish into the search bar. This will then return any exact string matches within a number of data fields in the Catalog, including title, author, journal, reported trait, mapped (ontology) trait, mapped trait's synonyms, mapped trait's parents, sample descriptions, genes and SNPs. 
 
 ==== [[faq-B3]]3. Can I limit my search to a specific type of field such as author?
 
@@ -287,9 +287,9 @@ The search algorithm searches across a number of fields including study titles, 
 
 ==== [[faq-B9]]3. How are multiple or compound traits represented in the Catalog?
 
-Where a study includes cases and controls all sharing a background trait, this is indicated by the use of the word “in” in the reported trait. For example, if drug responders with bipolar disorder were compared to drug non-responders with bipolar disorder, the reported trait would be "drug response in bipolar disorder”.
+Where a study includes cases and controls all sharing a background trait, this is indicated by the use of the word “in” in the reported trait. For example, if drug responders with bipolar disorder were compared to drug non-responders with bipolar disorder, the reported trait would be "drug response in bipolar disorder”. 
 
-Where a study has combined groups of individuals with different traits in the same analysis, this is indicated by the use of the word “or” in the reported trait. For example, if individuals with bipolar disorder and individuals with schizophrenia were compared to controls in the same analysis, the reported trait would be "bipolar disorder or schizophrenia”.
+Where a study has combined groups of individuals with different traits in the same analysis, this is indicated by the use of the word “or” in the reported trait. For example, if individuals with bipolar disorder and individuals with schizophrenia were compared to controls in the same analysis, the reported trait would be "bipolar disorder or schizophrenia”. 
 
 Where a study includes individuals each having multiple traits, this is indicated by the word “and” in the reported trait. For example, if individuals diagnosed with bipolar disorder who show binge-eating behaviour were compared to controls, the reported trait would be “bipolar disorder and binge eating”.
 
@@ -517,8 +517,8 @@ link:http://www.ebi.ac.uk/gwas/labs/rest/docs/api[Full technical documentation] 
 ==== [[faq-I1]]1. How do I find out which publications have full summary statistics available?
 Studies with full summary statistics are indicated by an icon in the “Association count” column of the studies table. You can also view a full list of studies with summary statistics files link:https://www.ebi.ac.uk/gwas/downloads/summary-statistics[here] together with links to other summary statistics resources.
 
-==== [[faq-I2]]2. I am an author and would like to deposit my summary statistics in the GWAS Catalog, how to I go about this?
-We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also encourage authors to submit their data directly. If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our ftp server.  We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us. Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods[eligibility criteria], and the summary statistics files must reflect the published results, not a sub-set. For example if your study is a genome-wide meta-analysis, we can only include summary statistics for the meta-analysis, not a component thereof.
+==== [[faq-I2]]2. I am an author and would like to deposit my summary statistics in the GWAS Catalog, how to I go about this?  
+We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also encourage authors to submit their data directly. If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our ftp server.  We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us. Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods[eligibility criteria], and the summary statistics files must reflect the published results, not a sub-set. For example if your study is a genome-wide meta-analysis, we can only include summary statistics for the meta-analysis, not a component thereof. 
 
 '''
 
