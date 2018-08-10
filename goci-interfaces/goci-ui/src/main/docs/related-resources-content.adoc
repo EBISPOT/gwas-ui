@@ -18,7 +18,8 @@ A 2013 http://www.genome.gov/27554296[webinar] hosted by the NHGRI Division of G
 
 10th Anniversary (2018) http://www.ensembl.info/2018/06/28/ten-years-of-the-gwas-catalog-past-present-and-future/[blog post] highlighting the links between the GWAS Catalog and Ensembl.
 
-
+A http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new-gwas-catalog/[Blog post] describing the collaboration between the GWAS Catalog and Open Targets http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new-gwas-catalog/
+ 
 === Publications
 
 ==== GWAS Catalog publications
