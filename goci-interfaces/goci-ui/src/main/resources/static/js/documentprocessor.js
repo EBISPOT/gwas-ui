@@ -30,9 +30,9 @@ function processStudy(study, table) {
 
 
     var pubdate = study.publicationDate.substring(0, 10);
-    var pubmedIdLink = '<a href="'+contextPath+'publications/'+study.pubmedId+'" title="Go to the publication page">'+study.pubmedId+'&nbsp;<span class="gwas-icon-GWAS_Publication_2017"></span></a>';
+    var pubmedIdLink = '<a href="'+gwasProperties.contextPath+'publications/'+study.pubmedId+'" title="Go to the publication page">'+study.pubmedId+'&nbsp;<span class="gwas-icon-GWAS_Publication_2017"></span></a>';
     
-    var accessionLink = '<a href="'+contextPath+'studies/'+study.accessionId+'" title="Go to the study page">'+study.accessionId+'&nbsp;<span class="gwas-icon-GWAS_Study_2017"></span></a>';
+    var accessionLink = '<a href="'+gwasProperties.contextPath+'studies/'+study.accessionId+'" title="Go to the study page">'+study.accessionId+'&nbsp;<span class="gwas-icon-GWAS_Study_2017"></span></a>';
     var pubmed = study.pubmedId;
     // To change
     //row.append($("<td>").html(authorsearch.concat(' (PMID: ').concat(study.pubmedId).concat(') &nbsp;&nbsp;').concat(
@@ -343,7 +343,7 @@ function processAssociation(association, table) {
 
     if (association.rsId != null && association.strongestAllele != null) {
         if ((association.rsId[0].indexOf(';') == -1) && (association.rsId[0].indexOf(' x ') == -1)) {
-            var rsidsearch = '<span><a href=\"'+contextPath+'variants/'+association.rsId[0]+'\" title=\"Go to the variant page\"><span class=\"gwas-icon-GWAS_Variant_2017\"></span>&nbsp;'+association.rsId[0]+'</a></span>';
+            var rsidsearch = '<span><a href=\"'+gwasProperties.contextPath+'variants/'+association.rsId[0]+'\" title=\"Go to the variant page\"><span class=\"gwas-icon-GWAS_Variant_2017\"></span>&nbsp;'+association.rsId[0]+'</a></span>';
             var dbsnp = "<span><a href='https://www.ensembl.org/Homo_sapiens/Variation/Summary?v=".concat(association.rsId[0]).concat(
                 "'  target='_blank'>").concat(
                 "<img alt='externalLink' class='link-icon' src='icons/external1.png' th:src='@{icons/external1.png}'/></a></span>");
@@ -746,7 +746,7 @@ function processAssociation(association, table) {
 
     row.append($("<td>").html(searchlink.concat('&nbsp;&nbsp;').concat(viewPapers)));
 
-    var accessionLink = '<a href="'+contextPath+'studies/'+association.accessionId+'" title="Go to the study page"><span class="gwas-icon-GWAS_Study_2017"></span>&nbsp;'+association.accessionId+'</a>';
+    var accessionLink = '<a href="'+gwasProperties.contextPath+'studies/'+association.accessionId+'" title="Go to the study page"><span class="gwas-icon-GWAS_Study_2017"></span>&nbsp;'+association.accessionId+'</a>';
     row.append($("<td>").html(accessionLink));
 
     table.append(row);
