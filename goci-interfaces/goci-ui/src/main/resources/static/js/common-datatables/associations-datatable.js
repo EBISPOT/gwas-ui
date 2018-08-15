@@ -112,7 +112,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         var mappedGenes = asso.entrezMappedGenes;
         if (mappedGenes) {
             $.each(mappedGenes, function(index, gene) {
-                genes.push(setQueryUrl(gene));
+                genes.push(gene);
             });
             tmp['mappedGenes'] = genes.join(', ');
         } else {
@@ -125,7 +125,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         var reportedTraits = asso.traitName;
         if (reportedTraits) {
             $.each(reportedTraits, function(index, trait) {
-                traits.push(setQueryUrl(trait));
+                traits.push(trait);
             });
             tmp['reportedTraits'] = traits.join(', ');
         } else {
@@ -146,14 +146,15 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         
         // Study
         var author = asso.author_s;
+        tmp['author'] = author;
         var publicationDate = asso.publicationDate;
         var pubDate = publicationDate.split("-");
         var pubmedId = asso.pubmedId;
         //var study = setQueryUrl(author, author + " - " + pubDate[0]);
-        //study += '<div><small>'+setExternalLink(EPMC_URL+pubmedId,'PMID:'+pubmedId)+'</small></div>';
-        var study='<a href="'+contextPath+'studies/'+asso.accessionId+'"><span class="gwas-icon-GWAS_Study_2017"></span>&nbsp;'+asso.accessionId+'</a>';
+        //study += '<div><small>'+setExternalLink(gwasProperties.EPMC_URL+pubmedId,'PMID:'+pubmedId)+'</small></div>';
+        var study='<a href="'+gwasProperties.contextPath+'studies/'+asso.accessionId+'">'+asso.accessionId+'</a>';
         tmp['study'] = study;
-        var publication ='<a href="'+contextPath+'publications/'+asso.pubmedId+'"><span class="gwas-icon-GWAS_Publication_2017"></span>&nbsp;'+asso.pubmedId+'</a>';
+        var publication ='<a href="'+gwasProperties.contextPath+'publications/'+asso.pubmedId+'">'+asso.pubmedId+'</a>';
         tmp['publication'] = publication;
         
         var studyId = asso.studyId;
@@ -211,7 +212,13 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         },
             {
                 field: 'publication',
-                title: 'Publication',
+                title: 'PubMed ID',
+                sortable: true,
+                visible: false
+            },
+            {
+                field: 'author',
+                title: 'First Author',
                 sortable: true,
                 visible: false
             }],
