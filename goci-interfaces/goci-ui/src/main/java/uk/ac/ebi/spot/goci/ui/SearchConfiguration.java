@@ -17,12 +17,13 @@ import java.net.URL;
  */
 @Component
 public class SearchConfiguration {
+    // GWAS Solr FAT
     @NotNull @Value("${search.server}")
-    private URL slimServerSource;
-
-    //GWAS Search Interface v.2: using Solr Fat
-    @NotNull @Value("${search.server.slim}")
     private URL fatServerSource;
+
+    //GWAS Search Interface v.2: using Solr Slim
+    @NotNull @Value("${search.server.slim}")
+    private URL slimServerSource;
 
     @Value("${search.defaultFacet}")
     private String defaultFacet;
