@@ -20,7 +20,7 @@ function displayDatatableSummaryStats(data, cleanBeforeInsert=true) {
         var tmp={};
     var summary_stats_id = summary_stats.accessionId;
         summary_stats_ids.push(summary_stats_id);
-        tmp['accessionId'] = '<a href="'+contextPath+'studies/'+summary_stats_id+'">'+summary_stats_id+'</a>';
+        tmp['accessionId'] = '<a href="'+gwasProperties.contextPath+'studies/'+summary_stats_id+'">'+summary_stats_id+'</a>';
         tmp['author'] = summary_stats.author_s;
         tmp['pubmedId'] = summary_stats.pubmedId;
         tmp['title'] = summary_stats.title;
@@ -32,7 +32,7 @@ function displayDatatableSummaryStats(data, cleanBeforeInsert=true) {
     // Reported trait
     tmp['reported_trait'] = summary_stats.traitName_s;
     //Mapped EFO trait. Check if in the future might be more than 1
-    tmp['efo'] = '<a href="'+contextPath+'efotraits/'+summary_stats.shortForm[0]+'">'+summary_stats.shortForm[0]+'</a>';
+    tmp['efo'] = '<a href="'+gwasProperties.contextPath+'efotraits/'+summary_stats.shortForm[0]+'">'+summary_stats.shortForm[0]+'</a>';
     // Number Associations
     var nr_association = 0;
     if ('association_rsId' in summary_stats) {

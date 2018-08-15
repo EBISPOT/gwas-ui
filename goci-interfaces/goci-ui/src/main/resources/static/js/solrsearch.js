@@ -11,7 +11,7 @@ $(document).ready(function() {
     console.log("solr search loaded and ready");
     
 
-    $.getJSON(contextPath+'api/search/stats')
+    $.getJSON(gwasProperties.contextPath+'api/search/stats')
             .done(function(data) {
                 setStats(data);
             });
@@ -23,9 +23,11 @@ $(document).ready(function() {
         });
     }
     
-    if ($('#query').text() != '') {
-        loadResults();
+    // Search for everything.
+    if ($('#query').text() == '') {
+        $('#query').text('*');
     }
+    loadResults();
 });
 
 function loadResults() {
@@ -100,9 +102,6 @@ function buildBreadcrumbs() {
     breadcrumbs.append('<li><a href="search">Search</a></li>');
     var searchTerm = $('#query').text();
 
-    if (searchTerm == '*') {
-        searchTerm = '';
-    }
     if (!window.location.hash) {
         console.log("Final breadcrumb is for '" + searchTerm + "'");
         breadcrumbs.append('<li class="active">' + searchTerm + '</li>');
@@ -235,27 +234,52 @@ function processData(data) {
                     var table = $('<table class="gwas2table" id="study-table">');
                     var tbody = table.append('<tbody />').children('tbody');
                     var row = $("<tr>");
+                    var linkFullPValue = '';
+                    var genotypingIcon = '';
                     
                     if (doc.resourcename == "study") {
-                        var studyLabsUrl = contextPath+"studies/"+doc.accessionId
+                        var studyLabsUrl = gwasProperties.contextPath+"studies/"+doc.accessionId;
 
                         row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img  src="/gwas-ui/icons/GWAS_study_2017.png" width="48" height="48">'));
                         row.append($("<td style=\"width: 88%\">").html("<h3><a href="+studyLabsUrl+">"+doc.title+"</a></h3>"));
                     }
                     if (doc.resourcename == "publication") {
-                        var pubLabsUrl =contextPath+"publications/"+doc.pmid
+                        var fullpvalset = doc.fullPvalueSet;
+                        if(fullpvalset == 1) {
+                            
+                            var a = (doc.authorAscii_s).replace(/\s/g,"");
+                            //var dir = a.concat("_").concat(doc.pmid).concat("_").concat(doc.accessionId);
+        
+                            var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
+                                .concat("' target='_blank'</a>");
+    
+                            linkFullPValue = ftplink.concat("<span class='glyphicon glyphicon-signal clickable context-help'" +
+                                " data-toggle='tooltip'" +
+                                "data-original-title='Click for summary statistics'></span></a>");
+        
+                        }
+                        
+                        if ((doc.genotypingTechnologies.indexOf("Targeted genotyping array") > -1) ||
+                            (doc.genotypingTechnologies.indexOf("Exome genotyping array") > -1) ) {
+                            genotypingIcon="<a href='#'><span class='glyphicon targeted-icon-GWAS_target_icon clickable context-help'" +
+                                " data-toggle='tooltip'" +
+                                "data-original-title='Targeted or exome array study'></span></a>";
+                        }
+    
+    
+                        var pubLabsUrl= gwasProperties.contextPath+"publications/"+doc.pmid;
 
                         row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img src="/gwas-ui/icons/GWAS_publication_2017.png" width="48" height="48">'));
                         row.append($("<td style=\"width: 88%\">").html("<h3><a href="+pubLabsUrl+">"+doc.title+"</a></h3>"));
                     }
                     if (doc.resourcename == "trait") {
-                        var efoLabsUrl = contextPath+"efotraits/"+doc.shortForm
+                        var efoLabsUrl = gwasProperties.contextPath+"efotraits/"+doc.shortForm
 
                         row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img  src="/gwas-ui/icons/GWAS_trait_2017.png" width="48" height="48">'));
                         row.append($("<td style=\"width: 88%\">").html("<h3><a href="+efoLabsUrl+">"+doc.title+"</a></h3>"));
                     }
                     if (doc.resourcename == "variant") {
-                        var variantsLabsUrl = contextPath+"variants/"+doc.rsID
+                        var variantsLabsUrl = gwasProperties.contextPath+"variants/"+doc.rsID
 
                         row.append($("<td align=\"center\" style='width: 12%'>").html('<img src="/gwas-ui/icons/GWAS_variant_2017.png" width="48" height="48">'));
                         row.append($("<td style=\"width: 88%\">").html("<h3><a href="+variantsLabsUrl+">"+doc.title+"</a></h3>"));
@@ -269,7 +293,17 @@ function processData(data) {
                     tbody.append(row);
                     var rowDescription = $("<tr>");
                     rowDescription.append($("<td style=\"width: 12%\">").html(""));
-                    rowDescription.append($("<td style=\"width: 88%\">").html("<h4>"+doc.description+"</h4>"));
+                    var description = doc.description;
+                    if (linkFullPValue != "") {
+                        description = description+"&nbsp;"+linkFullPValue;
+                    }
+                    if (genotypingIcon != "") {
+                        description = description + "&nbsp;"+genotypingIcon;
+                    }
+                    
+                    description = "<h4>"+description+"</h4>";
+                    
+                    rowDescription.append($("<td style=\"width: 88%\">").html(description));
                     tbody.append(rowDescription);
                     divResult.append(table);
                     divResult.append("<br>");
@@ -495,3 +529,5 @@ function addLoadingDiv(divId) {
     ctrl.addClass('loading');
     ctrl.append(loadingDiv);
 }
+
+

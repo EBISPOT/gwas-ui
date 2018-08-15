@@ -67,7 +67,7 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
     
         // AccessionID
         //tmp['study'] = '<a href="'+contextPath+'studies/'+study.accessionId+'"><span class="gwas-icon-GWAS_Study_2017"></span>&nbsp;'+study.accessionId+'</a>';
-        tmp['study'] = '<a href="'+contextPath+'studies/'+study.accessionId+'">'+study.accessionId+'</a>'+genotypingIcon;
+        tmp['study'] = '<a href="'+gwasProperties.contextPath+'studies/'+study.accessionId+'">'+study.accessionId+'</a>'+genotypingIcon;
         
         // Journal
         tmp['Journal'] = study.publication;
@@ -80,7 +80,7 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
         
         //Mapped EFO trait. Check if in the future might be more than 1
         if ('shortForm' in study) {
-            tmp['efo'] = '<a href="' + contextPath + 'efotraits/' + study.shortForm[0] + '">' + study.shortForm[0] + '</a>';
+            tmp['efo'] = '<a href="' + gwasProperties.contextPath + 'efotraits/' + study.shortForm[0] + '">' + study.shortForm[0] + '</a>';
         } else {
             tmp['efo'] = 'N/A';
         }

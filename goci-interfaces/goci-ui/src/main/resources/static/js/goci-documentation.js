@@ -55,7 +55,7 @@ var loadDocumentation = function(pagename, content) {
         //console.log(data);
         content.html(data);
 
-        $.getJSON(contextPath+'api/search/stats')
+        $.getJSON(gwasProperties.contextPath+'api/search/stats')
                 .done(function(stats) {
                           setBuilds(stats);
                       });

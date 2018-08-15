@@ -42,7 +42,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         }
         // This is now linking to the variant page instead of the search page
         // riskAllele = setQueryUrl(riskAllele,riskAlleleLabel);
-        riskAllele = setExternalLinkText( contextPath + '/variants/' + riskAllele_rsid,riskAlleleLabel);
+        riskAllele = setExternalLinkText( gwasProperties.contextPath + '/variants/' + riskAllele_rsid,riskAlleleLabel);
         
         tmp['riskAllele'] = riskAllele;
         

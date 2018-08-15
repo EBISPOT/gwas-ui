@@ -1,13 +1,11 @@
 /** DRY. From Xin original code. We must refactor all these 'action'result.js in a common way! */
 
-var EPMC_URL = "http://www.europepmc.org/abstract/MED/";
-var NCBI_URL = "https://www.ncbi.nlm.nih.gov/pubmed/?term=";
 var global_fl;
 var global_raw;
 
 global_fl = 'pubmedId,title,author_s,orcid_s,publication,publicationDate,catalogPublishDate,authorsList,' +
     'initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,' +
-    'ancestryLinks,' +
+    'ancestryLinks,' + 'fullPvalueSet,' + 'genotypingTechnologies,' + 'authorAscii_s,' +
     'association_rsId,' + //size per study
     'traitName,mappedLabel,mappedUri,traitUri,shortForm,' +
     'label,' + 'efoLink,parent,id,resourcename,';
@@ -94,7 +92,7 @@ function getDataSolr(main, initLoad=false) {
     var searchQuery = main;
     
     console.log("Solr research request received for " + searchQuery);
-    return promisePost( window.location.pathname.split('/publications/')[0] + '/api/search/advancefilter',
+    return promisePost( gwasProperties.contextPath + '/api/search/advancefilter',
         {
             'q': searchQuery,
             'max': 99999,
@@ -144,6 +142,7 @@ function processSolrData(data, initLoad=false) {
     data_facet = data.facet_counts.facet_fields.resourcename;
     data_highlighting = data.highlighting;
     
+    //TODO not repeat yourself!!!!
     $.each(data.grouped.resourcename.groups, (index, group) => {
         switch (group.groupValue) {
     case "efotrait":
@@ -211,8 +210,8 @@ function displaySummaryPublication(data,clearBeforeInsert) {
         //console.log(publication.authorsList);
         $("#publication-authors-list").html(displayAuthorsListAsList(publication.authorsList));
     }
-    $("#pubmedid_button").attr('onclick',     "window.open('"+NCBI_URL+publication.pubmedId+"',    '_blank')");
-    $("#europepmc_button").attr('onclick',     "window.open('"+EPMC_URL+publication.pubmedId+"',    '_blank')");
+    $("#pubmedid_button").attr('onclick',     "window.open('"+gwasProperties.NCBI_URL+publication.pubmedId+"',    '_blank')");
+    $("#europepmc_button").attr('onclick',     "window.open('"+gwasProperties.EPMC_URL+publication.pubmedId+"',    '_blank')");
     
     hideLoadingOverLay('#summary-panel-loading');
     

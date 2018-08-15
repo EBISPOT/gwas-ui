@@ -8,26 +8,19 @@
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
         var contextPath = /*[[@{/}]]*/'';
-        console.log(contextPath);
+        var host = window.location.host;
 
-        function imageExists(url, callback) {
-            var img = new Image();
-            img.onload = function() { callback(true); };
-            img.onerror = function() { callback(false); };
-            img.src = url;
-        }
-
-        // Check beta-icon
-        var imageUrl = contextPath+'icons/beta-icon.png';
-        imageExists(imageUrl, function(exists) {
-            console.log('RESULT: url=' + imageUrl + ', exists=' + exists);
-            console.log(typeof(exists));
-            if (exists) {
-                var element = document.getElementById('beta-icon');
-                element.style.display = 'inline';
+        var gwasProperties = {
+            contextPath: /*[[@{/}]]*/'',
+            host: host,
+            EPMC_URL: "http://www.europepmc.org/abstract/MED/",
+            NCBI_URL : "https://www.ncbi.nlm.nih.gov/pubmed/?term=",
+            ORCID_URL : "https://orcid.org/",
+            OLS: {
+                global_color_url_batch : 'https://wwwdev.ebi.ac.uk/gwas/labs/rest/api/parentMappings'
             }
-        });
-        /*]]>*/
+        };
+        console.log(gwasProperties);
     </script>
 
 </div>

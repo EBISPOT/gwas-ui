@@ -81,9 +81,9 @@
 
         <div class="container-fluid" id="lower_container">
             <div class="row welcome-container col-md-9" id="welcome-container">
-                <h4><a href="search/most-recent">View the most recent studies in the Catalog</a> or <a
-                        href="search/traits">browse the full list of available traits</a></h4>
-                <!--<h4><a href="search/traits">Browse the full list of available traits</a></h4>-->
+                <!--h4><a href="search/most-recent">View the most recent studies in the Catalog</a> or <a
+                        href="search/traits">browse the full list of available traits</a></h4-->
+
             </div>
 
             <div class="row search-results-container" id="search-results-container" style="display: none">
@@ -117,144 +117,6 @@
                                     </a>
                                 </div>
                             </div>
-
-                            <!--<div>-->
-                                <!--<form id="filter-form" novalidate="novalidate">-->
-                                    <!--<div id="filters">-->
-                                        <!--<b>Filter results by</b>-->
-
-                                        <!--<div class="list-group">-->
-                                            <!--<div class="list-group-item filter-element ">-->
-                                            <!--<span class="filter-label">p-value-->
-                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
-                                                      <!--data-toggle="tooltip"-->
-                                                      <!--data-original-title="p-value for SNP-disease/trait association"></span>-->
-                                            <!--</span>-->
-                                                <!--<span class="pval-label">&le;</span>-->
-                                                <!--<input class="p-value" type="text" id="pval-mant" placeholder="5"/>-->
-                                                <!--<span class="pval-label">x 10</span>-->
-                                                <!--<input class="p-value" type="text" id="pval-exp" placeholder="-8"/>-->
-                                            <!--</div>-->
-
-                                            <!--<div class="list-group-item filter-element ">-->
-                                            <!--<span class="filter-label">Odds ratio-->
-                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
-                                                      <!--data-toggle="tooltip"-->
-                                                      <!--data-original-title="Odds ratio associated with SNP-disease/trait association"></span>-->
-                                            <!--</span>-->
-                                                <!--<input class="filter-value" type="text" id="or-min" name="or-min" placeholder="from"/>-->
-                                                <!--<input class="filter-value" type="text" id="or-max" name="or-max" placeholder="to"/>-->
-                                            <!--</div>-->
-
-                                            <!--<div class="list-group-item filter-element ">-->
-                                            <!--<span class="filter-label">Beta coefficient-->
-                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
-                                                      <!--data-toggle="tooltip"-->
-                                                      <!--data-original-title="Beta coefficient associated with SNP-disease/trait association"></span>-->
-                                            <!--</span>-->
-                                                <!--<input class="filter-value"-->
-                                                       <!--type="text"-->
-                                                       <!--id="beta-min"-->
-                                                       <!--name="beta-min"-->
-                                                       <!--placeholder="from"/>-->
-                                                <!--<input class="filter-value" type="text" id="beta-max" name="beta-max" placeholder="to"/>-->
-                                            <!--</div>-->
-
-                                            <!--<div class="list-group-item filter-element ">-->
-                                            <!--<span class="filter-label">Study date-->
-                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
-                                                      <!--data-toggle="tooltip"-->
-                                                      <!--data-original-title="Publication date (YYYY-MM-DD)"></span>-->
-                                            <!--</span>-->
-                                                <!--<input class="filter-value"-->
-                                                       <!--data-provide="datepicker"-->
-                                                       <!--data-date-format="yyyy-mm"-->
-                                                       <!--id="date-min"-->
-                                                       <!--name="date-min"-->
-                                                       <!--placeholder="from"/>-->
-                                                <!--<input class="filter-value"-->
-                                                       <!--data-provide="datepicker"-->
-                                                       <!--data-date-format="yyyy-mm"-->
-                                                       <!--id="date-max"-->
-                                                       <!--name="date-max"-->
-                                                       <!--placeholder="to"/>-->
-                                            <!--</div>-->
-
-                                            <!--<div class="list-group-item filter-element ">-->
-                                            <!--<span class="filter-label">Genomic range-->
-                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
-                                                      <!--data-toggle="tooltip"-->
-                                                      <!--data-original-title="Genomic range containing variants of interest"></span>-->
-                                            <!--</span>-->
-                                                <!--<input class="chrom-value"-->
-                                                       <!--type="text"-->
-                                                       <!--id="chrom"-->
-                                                       <!--name="chrom"-->
-                                                       <!--placeholder="chromosone"/>-->
-                                                <!--<span class="chrom-label">:</span>-->
-                                                <!--<input class="bp-value"-->
-                                                       <!--type="text"-->
-                                                       <!--id="bp-min"-->
-                                                       <!--name="bp-min"-->
-                                                       <!--placeholder="from"/>-->
-                                                <!--<span class="chrom-label">-</span>-->
-
-                                                <!--<input class="bp-value" type="text" id="bp-max" name="bp-max" placeholder="to"/>-->
-                                            <!--</div>-->
-
-                                            <!--<div class="list-group-item filter-element ">-->
-                                            <!--<span class="filter-label">Catalog Trait-->
-                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
-                                                      <!--data-toggle="tooltip"-->
-                                                      <!--data-original-title="List of related disease/trait descriptions (total number of studies for this trait)"></span>-->
-                                            <!--</span>-->
-
-                                                <!--<div class="filter-values">-->
-                                                    <!--<div class="btn-group" id="trait-dropdown">-->
-                                                    <!--<button type="button"-->
-                                                            <!--class="btn btn-default dropdown-toggle multiSelect"-->
-                                                            <!--aria-expanded="false">-->
-                                                        <!--Reported trait-->
-                                                        <!--<span class="caret"></span>-->
-                                                    <!--</button>-->
-                                                        <!--<ul class="dropdown-menu scrollable-menu" role="menu">-->
-                                                        <!--</ul>-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                            <!--<div class="list-group-item filter-element ">-->
-                                            <!--<span class="filter-label">Genotyping technology-->
-                                                <!--<span class="glyphicon glyphicon-question-sign context-help"-->
-                                                      <!--data-toggle="tooltip"-->
-                                                      <!--data-original-title="List of genotyping technologies"></span>-->
-                                            <!--</span>-->
-
-                                                <!--<div class="filter-values">-->
-                                                    <!--<div class="btn-group" id="genotyping-dropdown">-->
-                                                        <!--<button type="button"-->
-                                                                <!--class="btn btn-default dropdown-toggle multiSelect"-->
-                                                                <!--aria-expanded="false">-->
-                                                            <!--Genotyping technology&nbsp;&nbsp;&nbsp;-->
-                                                            <!--<span class="caret"></span>-->
-                                                        <!--</button>-->
-                                                        <!--<ul class="dropdown-menu scrollable-menu" role="menu">-->
-                                                         <!--</ul>-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-
-                                    <!--<div>-->
-                                    <!--<button type="button"-->
-                                            <!--class="btn btn-default pull-right"-->
-                                            <!--id="clear-filter">Clear all filters</button>-->
-                                    <!--<button type="submit"-->
-                                            <!--class="btn btn-default pull-right"-->
-                                            <!--style="margin-right: 15px;">Apply filters</button>-->
-                                    <!--</div>-->
-                                <!--</form>-->
-                            <!--</div>-->
 
                             <div id="catalog-stats" style="display: none" class="row">
                                 <h4>Catalog stats</h4>
@@ -291,30 +153,12 @@
                         <div id="results-header">
                             <h2>Search results for
                                 <em><span id="search-term" th:text="*{query}">query term</span></em>
-                                <!--<em><a id="search-term" th:text="*{query}">query term</a></em>-->
-                                <!--<span id="search-term-popup" class="glyphicon glyphicon-question-sign context-help"-->
-                                      <!--data-toggle="tooltip"-->
-                                      <!--data-original-title="Go to detail page." ></span>-->
                             </h2>
 
                         </div>
 
 
-                        <!--div class="container">
-                         <div class="row equal">
-                            <div class="" style="background-color: yellow">
-                                <img id="news_image" style="vertical-align:middle" src="/gwas-ui/icons/GWAS_study_2017.png" width="32" height="32"/>
-                            </div>
-                            <div class="" style="background-color: red;display: flex;flex-direction:  column;flex-grow: 1;justify-content: baseline;"><div><div style="
-    margin: 0;
-" class="h2 m-0">some content is here</div></div>
-                                <div class="" style="background-color: green;flex-grow: 1;">
-                                    some more content
-                                </div>
-                            </div>
-                        </div></div-->
-
-                    <div class="container" id="resultQuery">
+                    <div class="container-fluid" id="resultQuery">
                      <br/>
 
                     </div>

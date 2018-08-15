@@ -8,7 +8,7 @@ $(document).ready(function() {
         //var ontology =   $(this).data("gwasontology") ? $(this).data("gwasontology") : '';
         // Please use contextPath for ajax call!
         $(this).devbridgeAutocomplete({
-                                          serviceUrl: contextPath + 'api/select',
+                                          serviceUrl: gwasProperties.contextPath + 'api/select',
                                           minChars: 3,
                                           // maxHeight: 500,
                                           // limit: 100,
