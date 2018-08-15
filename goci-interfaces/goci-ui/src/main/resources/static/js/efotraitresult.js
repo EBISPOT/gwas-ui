@@ -208,6 +208,30 @@ function displayArrayAsList(data_array) {
     return data_text;
 }
 
+
+
+// Display the input array as a Paragraph
+function displayArrayAsParagraph(data_array) {
+    var data_text = '';
+
+    if (data_array) {
+        if (data_array.length == 1) {
+            data_text = data_array[0];
+        }
+        else if (data_array.length > 1) {
+            var paragraph = $('<p/>');
+            paragraph.css('padding-left', '0px');
+            $.each(data_array, function(index, value) {
+                paragraph.append(value+"<br style='content: \" \"; display: block; margin: 5px;'/>");
+            });
+            data_text = paragraph;
+        }
+    }
+    return data_text;
+}
+
+
+
 // Generate an internal link to the GWAS search page
 function setQueryUrl(query, label) {
     if (!label) {

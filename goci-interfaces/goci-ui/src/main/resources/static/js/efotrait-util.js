@@ -393,7 +393,7 @@ generateSelectedItemCheckBox = function(efoid,tagID){
 
     if (isDescendantRequired(efoid)){
         cb.attr('checked','checked');
-        console.log("** isDescReq TRUE: "+efoid);
+        // console.log("** isDescReq TRUE: "+efoid);
     }
 
     cb.change(function(){
@@ -404,7 +404,7 @@ generateSelectedItemCheckBox = function(efoid,tagID){
             addDataToTag(global_efo_info_tag_id, {[id]:true}, 'whichDescendant')
         }else{
             var tmp = getDataFromTag(global_efo_info_tag_id,'whichDescendant');
-            console.log("** TMP: "+tmp);
+            // console.log("** TMP: "+tmp);
             delete tmp[id];
         }
         updatePage()
@@ -924,10 +924,12 @@ function getTraitDataSolrSlim(mainEFO) {
 function processSolrSlimData(data) {
     var reportedTraits = "";
     $.each(data.response.docs, (index, data) => {
-        reportedTraits = data.reportedTrait_s;
+        reportedTraits = data.reportedTrait;
     });
 
-    $('#reported-traits').html(reportedTraits);
+    $("#reported-traits").html(longContentList("gwas_reported_traits_div",
+        reportedTraits,
+        'reported traits'));
 }
 
 
@@ -1239,14 +1241,15 @@ displayOXO = function(){
             if(xrefs_mesh.length > 0){
                 var xref_mesh = xrefs_mesh[0];
                 container.html(`<!--<b> ${xref_mesh} </b> and <b>${totalMapping}</b>  more ontology Xrefs--> `);
-                container.html(`${xref_mesh} ...`);
+                // container.html(`${xref_mesh} ...`);
+                container.html(`<span style="padding-right: 8px;"> <b> ${totalMapping} </b> mappings </span>`);
             }else{
-                container.html(`<b> ${totalMapping} </b> ontology Xrefs`);
+                container.html(`<span style="padding-right: 8px;"> <b> ${totalMapping} </b> mappings </span>`);
             }
             container.append(showHideDiv('oxo-graph'));
 
         }else{
-            container.html(`no ontology Xrefs found.`);
+            container.html(`No ontology mappings found.`);
         }
 
         $('#button-oxo-graph').click(() => {
@@ -1266,7 +1269,9 @@ displayEfoTraitInfo = function(efoinfo) {
     var synonym = efoinfo.synonyms;
     var efotrait_label = efoinfo.label;
     addDataToTag(global_efo_info_tag_id, efoinfo, 'mainEFOInfo');
-    $("#efotrait-description").html(displayArrayAsList(efoinfo.description));
+    // $("#efotrait-description").html(displayArrayAsList(efoinfo.description)); // Display as bulleted list
+    $("#efotrait-description").html(displayArrayAsParagraph(efoinfo.description));  // TW
+
     $("#efotrait-id").html(setExternalLink(efotrait_link, efotrait_id));
     $("#efotrait-label").html(efotrait_label);
     // $("#efotrait-label").html(createPopover(efotrait_label,
