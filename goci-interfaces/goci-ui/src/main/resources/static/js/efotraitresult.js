@@ -211,20 +211,46 @@ function displayArrayAsList(data_array) {
 
 
 // Display the input array as a Paragraph
-function displayArrayAsParagraph(data_array) {
+function displayArrayAsParagraph(content_id, data_array) {
     var data_text = '';
 
     if (data_array) {
         if (data_array.length == 1) {
             data_text = data_array[0];
         }
+        // else if (data_array.length > 1) {
+        //     var paragraph = $('<p/>');
+        //     paragraph.css('padding-left', '0px');
+        //     $.each(data_array, function(index, value) {
+        //         paragraph.append(value+"<br style='content: \" \"; display: block; margin: 5px;'/>");
+        //     });
+        //     data_text = paragraph;
+        // }
         else if (data_array.length > 1) {
             var paragraph = $('<p/>');
             paragraph.css('padding-left', '0px');
-            $.each(data_array, function(index, value) {
+
+            var content_text = $('<span></span>');
+            content_text.css('padding-right', '8px');
+            content_text.html(data_array[0]);
+
+            var content_div  = $('<div></div>');
+            content_div.attr('id', content_id);
+            content_div.addClass('collapse');
+
+            $.each(data_array.slice(1), function(index, value) {
                 paragraph.append(value+"<br style='content: \" \"; display: block; margin: 5px;'/>");
             });
-            data_text = paragraph;
+            // data_text = paragraph;
+            content_div.append(paragraph);
+
+            var container = $('<div></div>');
+            container.append(content_text);
+            container.append(showHideDiv(content_id));
+            container.append(content_div);
+
+            return container;
+
         }
     }
     return data_text;

@@ -1270,7 +1270,8 @@ displayEfoTraitInfo = function(efoinfo) {
     var efotrait_label = efoinfo.label;
     addDataToTag(global_efo_info_tag_id, efoinfo, 'mainEFOInfo');
     // $("#efotrait-description").html(displayArrayAsList(efoinfo.description)); // Display as bulleted list
-    $("#efotrait-description").html(displayArrayAsParagraph(efoinfo.description));  // TW
+    $("#efotrait-description").html(displayArrayAsParagraph(
+        'gwas_efotrait_description_div', efoinfo.description));  // TW
 
     $("#efotrait-id").html(setExternalLink(efotrait_link, efotrait_id));
     $("#efotrait-label").html(efotrait_label);
