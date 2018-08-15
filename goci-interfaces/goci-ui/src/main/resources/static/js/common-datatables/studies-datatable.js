@@ -15,50 +15,57 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
     }
     
     var data_json = []
-    $.each(data, (index, asso) => {
+    $.each(data, (index, study) => {
         var tmp={};
-    var study_id = asso.id;
+    var study_id = study.id;
     if (jQuery.inArray(study_id, study_ids) == -1) {
         study_ids.push(study_id);
         // Author
-        var author = asso.author_s;
-        var publicationDate = asso.publicationDate;
+        var author = study.author_s;
+        var publicationDate = study.publicationDate;
         var pubDate = publicationDate.split("-");
-        var pubmedId = asso.pubmedId;
+        var pubmedId = study.pubmedId;
         var study_author = setQueryUrl(author, author);
         study_author += '<div><small>'+setExternalLink(EPMC_URL+pubmedId,'PMID:'+pubmedId)+'</small></div>';
         
         tmp['Author'] = study_author;
         var nr_association = 0;
-        if ('association_rsId' in asso) {
-             var arraysize= asso.association_rsId;
+        if ('association_rsId' in study) {
+             var arraysize= study.association_rsId;
              nr_association = arraysize.length;
         }
         
         // Publication date
-        var p_date = asso.publicationDate;
+        var p_date = study.publicationDate;
         var publi = p_date.split('T')[0];
         tmp['publi'] = publi;
     
         // AccessionID
-        tmp['study'] = '<a href="'+contextPath+'studies/'+asso.accessionId+'"><span class="gwas-icon-GWAS_Study_2017"></span>&nbsp;'+asso.accessionId+'</a>';
+        tmp['study'] = '<a href="'+contextPath+'studies/'+study.accessionId+'"><span class="gwas-icon-GWAS_Study_2017"></span>&nbsp;'+study.accessionId+'</a>';
     
     
         // Journal
-        tmp['Journal'] = asso.publication;
+        tmp['Journal'] = study.publication;
         
         // Title
-        tmp['Title'] = asso.title;
+        tmp['Title'] = study.title;
+        
+        // Reported trait
+        tmp['reported_trait'] = study.traitName_s;
+        
+        //Mapped EFO trait. Check if in the future might be more than 1
+        tmp['efo'] = '<a href="'+contextPath+'efotraits/'+study.shortForm[0]+'"><span class="gwas-icon-GWAS_Trait_2017"></span>&nbsp;'+study.shortForm[0]+'</a>';
+        
         
         // Number Associations
         tmp['nr_associations'] = nr_association.toString();
         
         // Initial sample desc
         var initial_sample_text = '-';
-        if (asso.initialSampleDescription) {
+        if (study.initialSampleDescription) {
             
-            initial_sample_text = displayArrayAsList(asso.initialSampleDescription.split(', '));
-            if(asso.initialSampleDescription.split(', ').length>1)
+            initial_sample_text = displayArrayAsList(study.initialSampleDescription.split(', '));
+            if(study.initialSampleDescription.split(', ').length>1)
                 initial_sample_text = initial_sample_text.html()
         }
         tmp['initial_sample_text'] = initial_sample_text;
@@ -66,9 +73,9 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
         
         // Replicate sample desc
         var replicate_sample_text = '-';
-        if (asso.replicateSampleDescription) {
-            replicate_sample_text = displayArrayAsList(asso.replicateSampleDescription.split(', '));
-            if(asso.replicateSampleDescription.split(', ').length>1)
+        if (study.replicateSampleDescription) {
+            replicate_sample_text = displayArrayAsList(study.replicateSampleDescription.split(', '));
+            if(study.replicateSampleDescription.split(', ').length>1)
                 replicate_sample_text = replicate_sample_text.html()
         }
         tmp['replicate_sample_text'] = replicate_sample_text;
@@ -76,9 +83,9 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
         
         // ancestralGroups
         var ancestral_groups_text = '-';
-        if (asso.ancestralGroups) {
-            ancestral_groups_text = displayArrayAsList(asso.ancestralGroups);
-            if(asso.ancestralGroups.length>1)
+        if (study.ancestralGroups) {
+            ancestral_groups_text = displayArrayAsList(study.ancestralGroups);
+            if(study.ancestralGroups.length>1)
                 ancestral_groups_text = ancestral_groups_text.html()
         }
         tmp['ancestral_groups_text'] = ancestral_groups_text;
@@ -97,16 +104,16 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
         exportDataType: 'all',
         columns: [{
             field: 'study',
-            title: 'Study',
+            title: 'Study accession',
             sortable: true
             },
             {
             field: 'Author',
-            title: 'Author',
+            title: 'Publication',
             sortable: true
         }, {
             field: 'publi',
-            title: 'Publication Date',
+            title: 'Publication date',
             sortable: true
         }, {
             field: 'Journal',
@@ -117,21 +124,35 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
             title: 'Title',
             sortable: true,
             width:"1000", //This works when the table is not nested into other tag, for example, in a simple Div
-        },{
+        },
+            {
+                field: 'reported_trait',
+                title: 'Reported trait',
+                sortable: true
+            },
+            {
+                field: 'efo',
+                title: 'Mapped EFO trait',
+                sortable: true
+            },
+            {
             field: 'initial_sample_text',
-            title: 'Initial sample description',
-            sortable: true
+            title: 'Discovery sample description',
+            sortable: true,
+            visible: false
         },{
             field: 'replicate_sample_text',
             title: 'Replication sample description',
-            sortable: true
+            sortable: true,
+            visible: false
         },{
             field: 'ancestral_groups_text',
-            title: 'Ancestral groups',
-            sortable: true
+            title: 'Discovery sample number and ancestry',
+            sortable: true,
+            visible: false
         },{
             field: 'nr_associations',
-            title: 'Number Associations',
+            title: 'Association count',
             sortable: true
         }
         ],

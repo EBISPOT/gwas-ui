@@ -54,17 +54,6 @@
                 <img alt="externalLink" style="width: 1em; height: auto;" src="../static/icons/publication.png" th:src="@{/icons/GWAS_publication_2017.png}"/><span th:text="${pubmedId}" style="padding-left:15px"></span>
             </h2>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-            <!-- search box goes here -->
-            <div class="input-group" style="width: 250px; float: right;">
-                <input type="text" class="form-control" placeholder="Search the catalog" id="search-box"/>
-                <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" id="search-button">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -101,16 +90,14 @@
                         <div class="panel-body col-lg-5 col-md-5 col-sm-5 col-xs-5">
                             <div class="clearfix">
                                 <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                    <span>PubmedId</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="PubmedId"></span>
+                                    <span class="item-left-bold">PubMed ID</span>
                                 </div>
                                 <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="publication-pubmedid">-</div>
 
                             </div>
                             <div class="clearfix">
                                 <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                    <span>Author</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="First Author"></span>
+                                    <span class="item-left-bold">First author</span>
                                 </div>
                                 <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="publication-author">-</div>
 
@@ -121,15 +108,14 @@
                         <div class="panel-body col-lg-5 col-md-4 col-sm-4 col-xs-4">
                             <div class="clearfix">
                                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
-                                    <span>Journal</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Journal"></span>
+                                    <span class="item-left-bold">Journal</span>
                                 </div>
                                 <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="publication-journal">-</div>
                             </div>
                             <div class="clearfix">
                                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
-                                    <span>Date Publication</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Date Publication"></span>
+                                    <span>Publication date</span>
+                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="YYYY-MM-DD"></span>
                                 </div>
                                 <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="publication-datepublication">-</div>
                             </div>
@@ -139,8 +125,9 @@
                             <div style="margin-bottom: 0.6em">
                                 <button type="button" class="btn btn-default btn-sm" id="pubmedid_button">View in <b>PubMed</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
                             </div>
-
-
+                            <div style="margin-bottom: 0.6em">
+                                <button type="button" class="btn btn-default btn-sm" id="europepmc_button">View in <b>Europe PMC</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
+                            </div>
                         </div>
                     </div>
 
@@ -148,15 +135,13 @@
                         <div class="panel-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="clearfix">
                                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
-                                    <span>Title</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Title"></span>
+                                    <span class="item-left-bold">Title</span>
                                 </div>
                                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" id="publication-title">-</div>
                             </div>
                             <div class="clearfix">
                                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
-                                    <span>Authors:</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Authors"></span>
+                                    <span class="item-left-bold">Authors:</span>
                                 </div>
                                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" id="publication-authors-list">-</div>
 
@@ -164,13 +149,6 @@
                         </div>
                     </div>
 
-
-
-
-                    <div id="bottom-summary">
-                        <span class="glyphicon glyphicon-info-sign" style="padding-right:2px"></span>
-                        <span id="publication-summary-content"></span>
-                    </div>
                 </div>
             </div>
         <!-- List the available tables -->
@@ -235,7 +213,7 @@
     <script src="../static/js/goci-ui.js" th:src="@{../js/goci-ui.js}"></script>
     <script src="../static/js/helpers/promise-helper.js" th:src="@{../js/helpers/promise-helper.js}"></script>
     <script src="../static/js/helpers/utils-helper.js" th:src="@{../js/helpers/utils-helper.js}"></script>
-    <!--script src="../static/js/helpers/orcid-helper.js" th:src="@{../js/helpers/orcid-helper.js}"></script-->
+    <script src="../static/js/helpers/orcid-helper.js" th:src="@{../js/helpers/orcid-helper.js}"></script>
     <script src="../static/js/common-datatables/associations-datatable.js" th:src="@{../js/common-datatables/associations-datatable.js}"></script>
     <script src="../static/js/common-datatables/studies-datatable.js" th:src="@{../js/common-datatables/studies-datatable.js}"></script>
 

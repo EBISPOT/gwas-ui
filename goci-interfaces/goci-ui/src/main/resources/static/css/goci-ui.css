@@ -377,6 +377,15 @@ a > .toplevel-view {
     margin-bottom: 1em;
     padding-left: 0px;
 }
+
+.item-left-bold {
+    font-weight: bold;
+    margin-bottom: 1em;
+    padding-left: 0px;
+    font-size: 14px !important;
+    margin-left: 0px !important;
+}
+
 .item-left span:last-child {
     margin-left: 2px;
     font-size: smaller;

@@ -55,17 +55,6 @@
                 <img alt="externalLink" style="width: 1em; height: auto;" src="../static/icons/GWAS_study_2017.png" th:src="@{/icons/GWAS_study_2017.png}"/><span th:text="${accessionId}" style="padding-left:15px"></span>
             </h2>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-            <!-- search box goes here -->
-            <div class="input-group" style="width: 250px; float: right;">
-                <input type="text" class="form-control" placeholder="Search the catalog" id="search-box"/>
-                <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" id="search-button">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -103,8 +92,37 @@
                             <div class="clearfix">
 
                                 <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                    <span>PubmedId</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="PubmedId"></span>
+                                    <span class="item-left-bold">Reported trait</span>
+                                </div>
+                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-reported-trait">-</div>
+                            </div>
+                            <div class="clearfix">
+
+                                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                    <span class="item-left-bold">                            Genotyping technology</span>
+                                </div>
+                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-genotyping-tech">-</div>
+                            </div>
+                            <div class="clearfix">
+
+                                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                    <span class="item-left-bold">Discovery sample description</span>
+                                </div>
+                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-sample-description">-</div>
+
+                            </div>
+                            <div class="clearfix">
+
+                                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                    <span class="item-left-bold">Discovery ancestry (country of recruitment)</span>
+                                </div>
+                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-ancestry">-</div>
+
+                            </div>
+                            <div class="clearfix">
+
+                                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                    <span class="item-left-bold">PubMed ID</span>
                                 </div>
                                 <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-pubmedid">-</div>
 
@@ -112,8 +130,7 @@
                             <div class="clearfix">
 
                                 <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                    <span>Author</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="First Author"></span>
+                                    <span class="item-left-bold">First author</span>
                                 </div>
                                 <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-author">-</div>
 
@@ -124,15 +141,38 @@
                         <div class="panel-body col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="clearfix">
                                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
-                                    <span>Journal</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Journal"></span>
+                                    <span class="item-left-bold">Mapped EFO trait(s)</span>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-efo">-</div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
+                                    <span class="item-left-bold">Genotyping platform</span>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-genotyping-platform">-</div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
+                                    <span class="item-left-bold">Replication sample description</span>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-sample-replication">-</div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
+                                    <span class="item-left-bold">Replication ancestry (country of recruitment)</span>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-ancestry-replication">-</div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
+                                    <span class="item-left-bold">Journal</span>
                                 </div>
                                 <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-journal">-</div>
                             </div>
                             <div class="clearfix">
                                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
-                                    <span>Date Publication</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Date Publication"></span>
+                                    <span>Publication date</span>
+                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="YYYY-MM-DD"></span>
                                 </div>
                                 <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-datepublication">-</div>
                             </div>
@@ -142,26 +182,8 @@
                             <div style="margin-bottom: 0.6em">
                                 <button type="button" class="btn btn-default btn-sm" id="pubmedid_button">View in <b>PubMed</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
                             </div>
-
                             <div style="margin-bottom: 0.6em">
-                                <div class="pane-content">
-
-                                    <div class="thor_div_showIf_notSigned">
-                                        <p style="margin: 12px 0;display:none;" class="thor_div_showIf_datasetAlreadyClaimedList">Following ORCiD users have already claimed this entry : <br/></p>
-                                        <p style="margin: 12px 0;">You can <a href="#" class="thor_a_generate_signinLink">sign-in
-                                            to
-                                            ORCID</a> to claim this entry</p>
-                                        <p style="margin: 12px 0;"><input type="checkbox" class="thor_checkbox_rememberMe_cookie" /> Remember me on this computer</p>
-                                    </div>
-
-                                    <div class="thor_div_showIf_signedIn" style="display:none">
-                                        <p style="margin: 12px 0;">You have signed in as <label class="thor_label_show_userName"></label></p>
-                                        <p style="margin: 12px 0px;" class="thor_div_showIf_datasetNotClaimed">You can <a href="#" class="thor_a_generate_claimLink">claim <span th:text="${accessionId}"></span> into your ORCiD</a></p>
-                                        <p style="margin: 12px 0;display:none;" class="thor_div_showIf_datasetAlreadyClaimed">You have claimed <span th:text="${accessionId}"></span> into your ORCiD</p>
-                                        <p style="margin: 12px 0;display:none;" class="thor_div_showIf_datasetAlreadyClaimedList">You have claimed <span th:text="${accessionId}"></span> into your ORCiD</p>
-                                        <p style="margin: 12px 0;"><a href="javascript:void(0);" class="thor_a_generate_logoutLink"><i>logout</i></a></p>
-                                    </div>
-                                </div>
+                                <button type="button" class="btn btn-default btn-sm" id="europepmc_button">View in <b>Europe PMC</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
                             </div>
 
                         </div>
@@ -171,15 +193,13 @@
                         <div class="panel-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="clearfix">
                                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
-                                    <span>Title</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Title"></span>
+                                    <span class="item-left-bold">Title</span>
                                 </div>
                                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" id="study-title">-</div>
                             </div>
                             <div class="clearfix">
                                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
-                                    <span>Authors:</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Authors"></span>
+                                    <span class="item-left-bold">Authors:</span>
                                 </div>
                                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" id="study-authors-list">-</div>
 
@@ -187,13 +207,6 @@
                         </div>
                     </div>
 
-
-
-
-                    <div id="bottom-summary">
-                        <span class="glyphicon glyphicon-info-sign" style="padding-right:2px"></span>
-                        <span id="study-summary-content"></span>
-                    </div>
                 </div>
             </div>
         <!-- List the available tables -->
@@ -254,7 +267,6 @@
     <script src="../static/js/helpers/utils-helper.js" th:src="@{../js/helpers/utils-helper.js}"></script>
     <script src="../static/js/helpers/orcid-helper.js" th:src="@{../js/helpers/orcid-helper.js}"></script>
     <script src="../static/js/common-datatables/associations-datatable.js" th:src="@{../js/common-datatables/associations-datatable.js}"></script>
-    <script src="../static/js/gwas-orcid-claiming.js" th:src="@{../js/gwas-orcid-claiming.js}"></script>
 
     <!-- this file must be the last. onload action -->
     <script src="../static/js/studyresult.js" th:src="@{../js/studyresult.js}"></script>
