@@ -72,7 +72,7 @@ public class SolrSearchController {
             @RequestParam(value = "max", required = false, defaultValue = "1000") int maxResults,
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         addFacet(solrSearchBuilder, searchConfiguration.getDefaultFacet());
         if (useJsonp) {
@@ -101,7 +101,7 @@ public class SolrSearchController {
     ) throws IOException {
 
 //        query = query.replace(" ", "%20");
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -150,7 +150,7 @@ public class SolrSearchController {
             @RequestParam(value = "max", required = false, defaultValue = "10") int maxResults,
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildAlternativeSearchRequest();
+        StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -171,7 +171,7 @@ public class SolrSearchController {
             @RequestParam(value = "max", required = false, defaultValue = "10") int maxResults,
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -194,7 +194,7 @@ public class SolrSearchController {
             @RequestParam(value = "max", required = false, defaultValue = "10") int maxResults,
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildAlternativeSearchRequest();
+        StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -216,7 +216,7 @@ public class SolrSearchController {
             @RequestParam(value = "max", required = false, defaultValue = "10") int maxResults,
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -241,7 +241,7 @@ public class SolrSearchController {
             @RequestParam(value = "traitfilter[]", required = false) String[] traits,
             @RequestParam(value = "dateFilter", required = false) String dateRange,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -272,20 +272,20 @@ public class SolrSearchController {
     }
 
     // Use the Solr SLIM
-    private StringBuilder buildBaseSearchRequest() {
+    private StringBuilder buildSlimSearchRequest() {
         // build base request
         StringBuilder solrSearchBuilder = new StringBuilder();
-        solrSearchBuilder.append(searchConfiguration.getGwasSearchServer().toString())
+        solrSearchBuilder.append(searchConfiguration.getGwasSearchSlimServer().toString())
                 .append("/select?")
                 .append("wt=json");
         return solrSearchBuilder;
     }
 
     // Use the Solr FAT.
-    private StringBuilder buildAlternativeSearchRequest() {
+    private StringBuilder buildFatSearchRequest() {
         // build base request
         StringBuilder solrSearchBuilder = new StringBuilder();
-        solrSearchBuilder.append(searchConfiguration.getGwasSearchServerAlternative().toString())
+        solrSearchBuilder.append(searchConfiguration.getGwasSearchFatServer().toString())
                 .append("/select?")
                 .append("wt=json");
         return solrSearchBuilder;
@@ -312,7 +312,7 @@ public class SolrSearchController {
             @RequestParam(value = "genotypingfilter[]", required = false) String[] genotypingTechnologies,
             @RequestParam(value = "dateaddedfilter", required = false) String addedDateRange,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         addFacet(solrSearchBuilder, searchConfiguration.getDefaultFacet());
         if (useJsonp) {
@@ -391,7 +391,7 @@ public class SolrSearchController {
             @RequestParam(value = "group.limit", required = false, defaultValue = "10") int groupLimit,
             @RequestParam(value = "traitfilter[]", required = false) String[] traits,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         addFacet(solrSearchBuilder, searchConfiguration.getDefaultFacet());
         if (useJsonp) {
@@ -426,7 +426,7 @@ public class SolrSearchController {
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             @RequestParam(value = "sort", required = false) String sort,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -465,7 +465,7 @@ public class SolrSearchController {
             @RequestParam(value = "genotypingfilter[]", required = false) String[] genotypingTechnologies,
             @RequestParam(value = "sort", required = false) String sort,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         addFacet(solrSearchBuilder, searchConfiguration.getDefaultFacet());
         addFilterQuery(solrSearchBuilder, "resourcename", facet);
@@ -547,7 +547,7 @@ public class SolrSearchController {
                                    @RequestParam(value = "sort", required = false) String sort,
                                    HttpServletResponse response) throws IOException {
 
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
         }
@@ -583,7 +583,7 @@ public class SolrSearchController {
             @RequestParam(value = "facet.sort", required = false, defaultValue = "count") String sort,
             @RequestParam(value = "facet.limit", required = false, defaultValue = "1000") int limit,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -617,7 +617,7 @@ public class SolrSearchController {
             @RequestParam(value = "genotypingfilter[]", required = false) String[] genotypingTechnologies,
             @RequestParam(value = "sort", required = false) String sort,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -934,7 +934,7 @@ public class SolrSearchController {
             @RequestParam(value = "fl", required = false, defaultValue = "") String fl,
             @RequestParam(value = "raw", required = false, defaultValue = "") String raw,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildAlternativeSearchRequest();
+        StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -1007,7 +1007,7 @@ public class SolrSearchController {
             @RequestParam(value = "ancestry", defaultValue = "false") boolean ancestry,
             HttpServletResponse response) throws IOException {
 
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         int maxResults = 1000000;
         int page = 1;
@@ -1164,7 +1164,7 @@ public class SolrSearchController {
             @RequestParam(value = "sort", required = false) String sort,
             HttpServletResponse response) throws IOException {
 
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
@@ -1196,7 +1196,7 @@ public class SolrSearchController {
             @RequestParam(value = "sort", required = false) String sort,
             HttpServletResponse response) throws IOException {
 
-        StringBuilder solrSearchBuilder = buildBaseSearchRequest();
+        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
