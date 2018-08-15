@@ -8248,10 +8248,11 @@ LocusZoom.Panel.prototype.initialize = function(){
     }.bind(this));
 
     // Create the legend object as defined by panel layout and child data layer layouts
-    this.legend = null;
-    if (this.layout.legend){
-        this.legend = new LocusZoom.Legend(this);
-    }
+    // Remove legend - GWAS project request
+    // this.legend = null;
+    // if (this.layout.legend){
+    //     this.legend = new LocusZoom.Legend(this);
+    // }
 
     // Establish panel background drag interaction mousedown event handler (on the panel background)
     if (this.layout.interaction.drag_background_to_pan){

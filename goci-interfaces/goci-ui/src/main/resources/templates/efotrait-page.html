@@ -104,9 +104,9 @@
                         Here only shows cross-reference term with a <a href="https://www.ebi.ac.uk/spot/oxo/">distance</a> of 1 (direct cross reference).</li>
                 </ul>
                 <ul>
-                    <li>Buttons of links to other relevent resources.</li>
+                    <li>Buttons of links to other relevant resources.</li>
                     <ul>
-                        <li>A highlighted study is selected for this triat. The study information is by default hidden and you can toggle it by clicking <a class="btn btn-default" type="button">Highlighted Study</a>.
+                        <li>A highlighted study is selected for this trait. The study information is by default hidden and you can toggle it by clicking <a class="btn btn-default" type="button">Highlighted Study</a>.
                             The highlighted study is choosen base on the initial sample size of the study. Currently the one has the largest
                             initial sample size annotated to the mainEFO trait is selected as the highlighted study.</li>
                     </ul>
@@ -223,12 +223,8 @@
     </ol>
 
 
-
-
-
     <!--disable when search is invalid-->
     <div class="container-fluid" id="lower_container">
-
         <!-- Summary panel -->
         <div class="row" style="margin-top:10px">
             <div id="summary-info" class="panel panel-default" style="padding-left:0px">
@@ -238,108 +234,88 @@
                         <span class="glyphicon glyphicon-question-sign"
                               data-toggle="tooltip"
                               title="Trait summary information displayed relates to specific EFO trait searched for."
-                              style="margin-left:2px;font-size:smaller"></span>
+                              style="margin-left:2px;font-size:smaller">
+                        </span>
                     </h3>
                 </div>
-                <!--trait summary-->
+
+                <!-- Trait Summary -->
                 <div class="clearfix" id="summary-panel-loading">
-                    <div class="panel-body col-xs-10">
-                        <!--label-->
-                        <div class="clearfix col-xs-4">
-                            <dl class="dl-horizontal">
-                                <dt>Label</dt>
-                                <dd id="efotrait-label">-</dd>
-                            </dl>
-                            <!--<div class="col-xs-4 col-md-5 col-xs-5 col-xs-5"-->
-                            <!--style="font-weight: bold; margin-bottom: 1em;padding-left:0px">Label-->
-                            <!--</div>-->
-                            <!--<div class="col-xs-8 col-md-7 col-xs-7 col-xs-7" id="efotrait-label">-</div>-->
+                    <div class="panel-body col-lg-6 col-md-6 col-sm-6 col-xs-6" id="efo-details">
+
+                        <!-- EFO Label -->
+                        <div class="clearfix">
+                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                <span>Label</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Label"></span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="efotrait-label">-</div>
                         </div>
-                        <!--id-->
-                        <div class="clearfix col-xs-4">
-                            <dl class="dl-horizontal">
-                                <dt>Trait EFO id</dt>
-                                <dd id="efotrait-id">-</dd>
-                            </dl>
-                            <!--<div class="col-xs-4 col-md-5 col-xs-5 col-xs-5"-->
-                            <!--style="font-weight: bold; margin-bottom: 1em;padding-left:0px">Trait EFO id-->
-                            <!--</div>-->
-                            <!--<div class="col-xs-8 col-md-7 col-xs-7 col-xs-7" id="efotrait-id">-</div>-->
+
+                        <!-- EFO ID -->
+                        <div class="clearfix">
+                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                <span>Trait EFO ID</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="EFO Identifier"></span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="efotrait-id">-</div>
                         </div>
-                        <!--synonym-->
-                        <div class="clearfix col-xs-4">
-                            <dl class="dl-horizontal">
-                                <dt>Synonym(s)</dt>
-                                <dd id="efotrait-synonym">-</dd>
-                            </dl>
-                            <!--<div class="col-xs-4 col-md-5 col-xs-5 col-xs-5"-->
-                            <!--style="font-weight: bold; margin-bottom: 1em;padding-left:0px">Synonym(s)-->
-                            <!--</div>-->
-                            <!--<div class="col-xs-8 col-md-7 col-xs-7 col-xs-7" id="efotrait-synonym">-</div>-->
+
+                        <!-- EFO Synonyms -->
+                        <div class="clearfix">
+                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                <span>Synonyms</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Synonyms"></span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="efotrait-synonym">-</div>
                         </div>
-                        <!--description-->
-                        <div class="clearfix col-xs-8">
-                            <dl class="dl-horizontal">
-                                <dt>Description</dt>
-                                <dd id="efotrait-description">-</dd>
-                            </dl>
-                            <!--<div class="col-xs-4 col-md-5 col-xs-5 col-xs-5"-->
-                            <!--style="font-weight: bold; margin-bottom: 1em;padding-left:0px">Description-->
-                            <!--</div>-->
-                            <!--<div class="col-xs-8 col-md-7 col-xs-7 col-xs-7" id="efotrait-description">-</div>-->
-                        </div>
-                        <!--oxo-->
-                        <div class="clearfix col-xs-4">
-                            <dl class="dl-horizontal">
-                                <dt>Xrefs
-                                    <span class="glyphicon glyphicon-question-sign"
-                                          data-toggle="tooltip"
-                                          title="Ontology mappings or cross-references in other ontoloies."
-                                          style="margin-left:2px;font-size:smaller"></span>
-                                </dt>
-                                <dd>
-                                    <div id="btn-oxo-expand">
-                                        <!--<a class="btn btn-default" id="btn-toggle-oxo"-->
-                                        <!--type="button"-->
-                                        <!--data-toggle="collapse"-->
-                                        <!--data-target="#oxo-graph"-->
-                                        <!--aria-expanded="false">-->
-                                        <!--+-->
-                                        <!--</a>-->
-                                    </div>
-                                    <!--oxo graph-->
-                                    <!--<div class="clearfix collapse col-xs-2 col-md-2 col-xs-2 col-xs-2" id="oxo-graph">-->
-                                    <div class="clearfix collapse" id="oxo-graph">
-                                        <div  class="panel-body">
-                                            <div id="oxo-div" >
-                                                <div id="oxo-list"></div>
-                                                <div>
-                                                    <div id="oxo-vis"></div>
-                                                </div>
-                                            </div>
+
+
+                        <!-- EFO Description ORIGINAL Location -->
+                        <!--<div class="clearfix">-->
+                        <!--<div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">-->
+                        <!--<span>Description</span>-->
+                        <!--<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Term description"></span>-->
+                        <!--</div>-->
+                        <!--<div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" style="margin-bottom: 1em;" id="efotrait-description">-</div>-->
+                        <!--</div>-->
+
+                        <!-- EFO Term Mappings -->
+                        <div class="clearfix">
+                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                <span>Mapped terms</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                      title="Ontology mappings or cross-references in other ontologies.">
+                                </span>
+                            </div>
+
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7">
+                                <div id="btn-oxo-expand">
+                                    <!--<a class="btn btn-default" id="btn-toggle-oxo"-->
+                                    <!--type="button"-->
+                                    <!--data-toggle="collapse"-->
+                                    <!--data-target="#oxo-graph"-->
+                                    <!--aria-expanded="false">-->
+                                    <!--+-->
+                                    <!--</a>-->
+                                </div>
+                                <!--oxo graph-->
+                                <!--<div class="clearfix collapse col-xs-2 col-md-2 col-xs-2 col-xs-2" id="oxo-graph">-->
+                                <div class="clearfix collapse" id="oxo-graph">
+                                    <div  class="panel-body">
+                                        <div id="oxo-div" >
+                                            <div id="oxo-list"></div>
+                                            <!--<div>-->
+                                            <!--<div id="oxo-vis"></div>-->
+                                            <!--</div>-->
                                         </div>
                                     </div>
-                                </dd>
-                            </dl>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="panel-body col-xs-2" id="panel-links">
-                        <div>
-                            <a class="btn btn-default"
-                               type="button"
-                               data-toggle="collapse"
-                               data-target="#highlight-study-panel-loading"
-                               aria-expanded="false"
-                               aria-controls="collapseExample">
-                                Highlighted Study
-                                <span class="glyphicon glyphicon-question-sign"
-                                      data-toggle="tooltip"
-                                      title="GWAS Catalog study with largest initial sample size for specific EFO trait."
-                                      style="margin-left:2px;font-size:smaller"></span>
-                            </a>
-                        </div>
-
+                    <div class="panel-body col-lg-6 col-md-6 col-sm-6 col-xs-6" id="panel-links">
                         <div>
                             <a type="button" class="btn btn-default" id='ols-link'>Trait in OLS
                                 <span class="glyphicon glyphicon-new-window external-link"></span>
@@ -352,13 +328,62 @@
                             </a>
                         </div>
 
-
+                        <div>
+                            <a type="button" class="btn btn-default" id="ot-link"> Trait in Open Targets
+                                <span class="glyphicon glyphicon-new-window external-link"></span>
+                            </a>
+                        </div>
                     </div>
 
+                    <!-- TEST Description -->
+                    <div class="clearfix">
+                        <div class="panel-body col-xs-12">
+                            <div class="col-lg-2 item-left">
+                                <span>Description</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Term Description"></span>
+                            </div>
+                            <div class="col-lg-9" style="text-align: justify;" id="efotrait-description">-</div>
+                        </div>
+                    </div>
+
+                    <!-- Reported Traits mapped to this EFO term -->
+                    <div class="clearfix">
+                        <div class="panel-body col-xs-12">
+                            <div class="col-lg-2 item-left">
+                                <span>Reported Traits</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Reported Traits"></span>
+                            </div>
+                            <div class="col-lg-9" style="text-align: justify;" id="reported-traits">-</div>
+                        </div>
+                    </div>
+
+
+                    <div class="panel-body col-lg-12"></div>
+
+                    <!-- Highlighted Study button here -->
+                    <div class="panel-body col-xs-2" id="panel-links-DUPLICATE">
+                        <div>
+                            <a class="btn btn-default"
+                               type="button"
+                               data-toggle="collapse"
+                               data-target="#highlight-study-panel-loading"
+                               aria-expanded="false"
+                               aria-controls="collapseExample"
+                               style="white-space: normal;text-shadow:none">
+                                Highlighted Study
+                                <span class="glyphicon glyphicon-question-sign"
+                                      data-toggle="tooltip"
+                                      title="GWAS Catalog study with largest initial sample size for specific EFO trait."
+                                      style="margin-left:2px;font-size:smaller"></span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
-                <!--highlighted study-->
+
+                <!-- Highlighted Study Details -->
                 <div class="clearfix collapse" id="highlight-study-panel-loading">
+                    <div class="clearfix"><hr /></div>
                     <div  class="panel-body col-xs-12">
                         <!--title-->
                         <div class="clearfix col-xs-4">
@@ -389,233 +414,198 @@
                             </dl>
                         </div>
                     </div>
-
                 </div>
 
                 <!--first reported-->
-                <div id="efotrait-summary">
-                    <span class="glyphicon glyphicon-info-sign" id="efotrait-summary-icon"></span>
-                    <span id="efotrait-summary-content"></span>
-                </div>
+                <!-- TW - removed in new spec -->
+                <!--<div id="efotrait-summary">-->
+                <!--<span class="glyphicon glyphicon-info-sign" id="efotrait-summary-icon"></span>-->
+                <!--<span id="efotrait-summary-content"></span>-->
+                <!--</div>-->
             </div>
         </div>
 
         <div class="row search-results-container" id="search-results-container">
             <!--filter side box-->
-            <div class="col-xs-5 tight-to-side" id="filter-bar">
-                <div class="panel panel-default">
-                    <div id="expand_float_panel" class="panel-heading background-color-primary-accent">
-                        <h3 class="panel-title">Expand search
-                            <span class="glyphicon glyphicon-question-sign"
-                                  data-toggle="tooltip"
-                                  title="Specify additional EFO traits to expand search. The plot, association and study tables will be dynamically updated to reflect the traits selected here."
-                                  style="margin-left:2px;font-size:smaller"></span>
-                        </h3>
-                        <span class="pull-right clickable"
-                              onclick="toggleSidebarFlex('#expand_float_panel span.clickable',5,1)">
-                                    <i class="glyphicon glyphicon-chevron-up"></i>
-                                </span>
-                    </div>
+            <!--<div class="col-xs-5 tight-to-side" id="filter-bar">-->
+            <!--<div class="panel panel-default">-->
+            <!--<div id="expand_float_panel" class="panel-heading background-color-primary-accent">-->
+            <!--<h3 class="panel-title">Expand search-->
+            <!--<span class="glyphicon glyphicon-question-sign"-->
+            <!--data-toggle="tooltip"-->
+            <!--title="Specify additional EFO traits to expand search. The plot, association and study tables will be dynamically updated to reflect the traits selected here."-->
+            <!--style="margin-left:2px;font-size:smaller"></span>-->
+            <!--</h3>-->
+            <!--<span class="pull-right clickable"-->
+            <!--onclick="toggleSidebarFlex('#expand_float_panel span.clickable',5,1)">-->
+            <!--<i class="glyphicon glyphicon-chevron-up"></i>-->
+            <!--</span>-->
+            <!--</div>-->
 
 
-                    <div class="panel-body">
-                        <!--current select-->
-                        <div class="row" style="margin-top: 10px">
-                            <div class="col-xs-12">
-                                <!--selected header-->
-                                <div class="col-xs-6">
-                                    <h4 style="float:left;padding-left:0px">Current selected traits:</h4>
-                                </div>
-                                <!--action buttons-->
-                                <div class="col-xs-6">
-                                    <div class="col-xs-1.5" style="float:right;margin-bottom: 5px">
-                                        <input type="text"
-                                               id="sharable_link"
-                                               class="col-xs-6"
-                                               th:readonly="readonly"></input>
-                                        <div>
-                                            <button id="sharable_link_btn"
-                                                    type="button"
-                                                    class="btn btn-default"
-                                                    data-clipboard-target="#sharable_link"
-                                                    title="copy shareable link to clipboard">
-                                          <span class="glyphicon glyphicon-share"
-                                                aria-hidden="true"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-1.5" style="float:right">
+            <!--<div class="panel-body">-->
+            <!--current select-->
+            <!--<div class="row" style="margin-top: 10px">-->
+            <!--<div class="col-xs-12">-->
+            <!--selected header-->
+            <!--<div class="col-xs-6">-->
+            <!--<h4 style="float:left;padding-left:0px">Current selected traits:</h4>-->
+            <!--</div>-->
+            <!--action buttons-->
+            <!--<div class="col-xs-6">-->
+            <!--<div class="col-xs-1.5" style="float:right;margin-bottom: 5px">-->
+            <!--<input type="text"-->
+            <!--id="sharable_link"-->
+            <!--class="col-xs-6"-->
+            <!--th:readonly="readonly"></input>-->
+            <!--<div>-->
+            <!--<button id="sharable_link_btn"-->
+            <!--type="button"-->
+            <!--class="btn btn-default"-->
+            <!--data-clipboard-target="#sharable_link"-->
+            <!--title="copy shareable link to clipboard">-->
+            <!--<span class="glyphicon glyphicon-share"-->
+            <!--aria-hidden="true"></span>-->
+            <!--</button>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-xs-1.5" style="float:right">-->
 
-                                        <button id="btn-cart-action-download"
-                                                type="button"
-                                                class="btn btn-default cart-action-btn"
-                                                title="Download all trait(s) in list.">
-                                            <span class="glyphicon glyphicon glyphicon-download"
-                                                  aria-hidden="true"></span>
-                                        </button>
-                                    </div>
-                                    <div class="col-xs-1.5" style="float:right">
-                                        <button id="btn-query-include-related-terms"
-                                                type="button"
-                                                class="btn btn-default cart-action-btn"
-                                                title="Add related trait(s) to list.">
-                                            <span class="glyphicon glyphicon-plus"
-                                                  aria-hidden="true"></span>
-                                        </button>
-                                    </div>
-                                    <div class="col-xs-1.5" style="float:right">
-                                        <button id="btn-cart-toggle-check-cbs"
-                                                type="button"
-                                                class="btn btn-default cart-action-btn"
-                                                title="Check/Uncheck all traits in list.">
-                                            <span class="glyphicon glyphicon-check"
-                                                  aria-hidden="true"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+            <!--<button id="btn-cart-action-download"-->
+            <!--type="button"-->
+            <!--class="btn btn-default cart-action-btn"-->
+            <!--title="Download all trait(s) in list.">-->
+            <!--<span class="glyphicon glyphicon glyphicon-download"-->
+            <!--aria-hidden="true"></span>-->
+            <!--</button>-->
+            <!--</div>-->
+            <!--<div class="col-xs-1.5" style="float:right">-->
+            <!--<button id="btn-query-include-related-terms"-->
+            <!--type="button"-->
+            <!--class="btn btn-default cart-action-btn"-->
+            <!--title="Add related trait(s) to list.">-->
+            <!--<span class="glyphicon glyphicon-plus"-->
+            <!--aria-hidden="true"></span>-->
+            <!--</button>-->
+            <!--</div>-->
+            <!--<div class="col-xs-1.5" style="float:right">-->
+            <!--<button id="btn-cart-toggle-check-cbs"-->
+            <!--type="button"-->
+            <!--class="btn btn-default cart-action-btn"-->
+            <!--title="Check/Uncheck all traits in list.">-->
+            <!--<span class="glyphicon glyphicon-check"-->
+            <!--aria-hidden="true"></span>-->
+            <!--</button>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
 
-                            <div class="list-group col-xs-12" id="cart-loading">
-                                <div id="cart"></div>
-                            </div>
+            <!--<div class="list-group col-xs-12" id="cart-loading">-->
+            <!--<div id="cart"></div>-->
+            <!--</div>-->
 
-                            <div class="col-xs-12" style="float:left">
-                                <!--<input id="cb-query-include-descendants" type="checkbox" checked="checked"/>-->
-                                <input id="cb-query-include-descendants" type="checkbox" checked=""/>
-                                <label for="cb-query-include-descendants">  Always include trait subtypes</label>
-                                <!--<input id="cb-query-include-descendants" type="checkbox" checked=""/>Descendants-->
-                            </div>
+            <!--<div class="col-xs-12" style="float:left">-->
+            <!--<input id="cb-query-include-descendants" type="checkbox" checked=""/>-->
+            <!--<label for="cb-query-include-descendants">  Always include trait subtypes</label>-->
+            <!--</div>-->
 
-                            <div class="col-xs-12" style="float:left">
-                                <!--<input id="cb-query-include-descendants" type="checkbox" checked="checked"/>-->
-                                <input id="cb-remove-nonunique-association" type="checkbox"/>
-                                <label for="cb-remove-nonunique-association">  Remove associations with non-selected EFOs</label>
-                                <!--<input id="cb-query-include-descendants" type="checkbox" checked=""/>Descendants-->
-                            </div>
+            <!--<div class="col-xs-12" style="float:left">-->
+            <!--<input id="cb-remove-nonunique-association" type="checkbox"/>-->
+            <!--<label for="cb-remove-nonunique-association">  Remove associations with non-selected EFOs</label>-->
+            <!--</div>-->
+            <!--</div>-->
 
+            <!-- TW Start to remove content here -->
+            <!--<div class="container row col-xs-12">-->
+            <!--<div class="col-xs-12">-->
+            <!--<h4>Advance functions for adding additional traits:-->
+            <!--<span class="glyphicon glyphicon-question-sign"-->
+            <!--data-toggle="tooltip"-->
+            <!--title="Additional EFO traits can be searched for or browsed in the EFO hierarchy and network. Traits can then be added to the list of selected traits above."-->
+            <!--style="margin-left:2px;font-size:smaller"></span>-->
+            <!--</h4>-->
+            <!--</div>-->
 
-                        </div>
+            <!--<ul class="nav nav-tabs">-->
+            <!--<li><a data-toggle="pill" href="#ols-search-div">EFO Search</a></li>-->
+            <!--<li><a data-toggle="pill" href="#ols-tree-div">EFO Hierarchy</a></li>-->
+            <!--<li><a data-toggle="pill" href="#ols-graph-div">EFO Network</a></li>-->
 
-                        <!--<div class="row">-->
-                        <!--trying bootstrap nav tab-->
-                        <div class="container row col-xs-12">
-                            <!--<ul class="nav nav-tabs">-->
-                            <!--<li class="active"><a data-toggle="tab" href="#ols-search-div">Search for additional terms</a></li>-->
-                            <!--<li><a data-toggle="tab" href="#ols-tree-div">Related in EFO hierarchy</a></li>-->
-                            <!--<li><a data-toggle="tab" href="#ols-graph-div">Additional related terms eg. measurements and biomarkers</a></li>-->
-                            <!--</ul>-->
-                            <div class="col-xs-12">
-                                <h4>Advance functions for adding additional traits:
-                                    <span class="glyphicon glyphicon-question-sign"
-                                          data-toggle="tooltip"
-                                          title="Additional EFO traits can be searched for or browsed in the EFO hierarchy and network. Traits can then be added to the list of selected traits above."
-                                          style="margin-left:2px;font-size:smaller"></span>
-                                </h4>
-                            </div>
-                            <ul class="nav nav-tabs">
-                                <li><a data-toggle="pill" href="#ols-search-div">EFO Search</a></li>
-                                <li><a data-toggle="pill" href="#ols-tree-div">EFO Hierarchy</a></li>
-                                <li><a data-toggle="pill" href="#ols-graph-div">EFO Network</a></li>
-
-                            </ul>
+            <!--</ul>-->
 
 
-                            <div class="tab-content">
-                                <!--tree-->
-                                <div id="ols-tree-div" class="tab-pane fade">
-                                    <h4>Related traits in EFO hierarchy:</h4>
-                                    <div id="term-tree"></div>
-                                </div>
-                                <!--ols-graph-->
-                                <div id="ols-graph-div" class="tab-pane fade">
-                                    <div id="expension">
-                                        <h4>Additional related traits eg. measurements and biomarkers:</h4>
-                                        <div>
-                                            <div id="ontology_vis"></div>
-                                        </div>
-                                    </div>
+            <!--<div class="tab-content">-->
+            <!--&lt;!&ndash;tree&ndash;&gt;-->
+            <!--<div id="ols-tree-div" class="tab-pane fade">-->
+            <!--<h4>Related traits in EFO hierarchy:</h4>-->
+            <!--<div id="term-tree"></div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;ols-graph&ndash;&gt;-->
+            <!--<div id="ols-graph-div" class="tab-pane fade">-->
+            <!--<div id="expension">-->
+            <!--<h4>Additional related traits eg. measurements and biomarkers:</h4>-->
+            <!--<div>-->
+            <!--<div id="ontology_vis"></div>-->
+            <!--</div>-->
+            <!--</div>-->
 
-                                </div>
+            <!--</div>-->
 
-                                <div id="ols-search-div" class="tab-pane fade">
-                                    <h4>Search for additional trait:</h4>
-                                    <div class="left">
-                                        <label>
-                                            <input style="font-weight: normal"
-                                                   size="35"
-                                                   type="text"
-                                                   name="q"
-                                                   data-olswidget="select"
-                                                   data-olsontology="efo"
-                                                   data-selectpath="https://www.ebi.ac.uk/ols/"
-                                                   olstype=""
-                                                   id="local-searchbox"
-                                                   placeholder="Enter the term you are looking for"
-                                                   class="ac_input">
-                                            </input>
-                                        </label>
-                                    </div>
-                                </div>
+            <!--<div id="ols-search-div" class="tab-pane fade">-->
+            <!--<h4>Search for additional trait:</h4>-->
+            <!--<div class="left">-->
+            <!--<label>-->
+            <!--<input style="font-weight: normal"-->
+            <!--size="35"-->
+            <!--type="text"-->
+            <!--name="q"-->
+            <!--data-olswidget="select"-->
+            <!--data-olsontology="efo"-->
+            <!--data-selectpath="https://www.ebi.ac.uk/ols/"-->
+            <!--olstype=""-->
+            <!--id="local-searchbox"-->
+            <!--placeholder="Enter the term you are looking for"-->
+            <!--class="ac_input">-->
+            <!--</input>-->
+            <!--</label>-->
+            <!--</div>-->
+            <!--</div>-->
 
-                                <!--&lt;!&ndash;oxo&ndash;&gt;-->
-                                <!--<div id="oxo-div" class="tab-pane fade" >-->
-                                <!--<h4>oxo:</h4>-->
-                                <!--<div>-->
-                                <!--<div id="oxo-vis" style="height:500px; width:500px; border:1px solid black;overflow: auto;"></div>-->
-                                <!--</div>-->
-                                <!--</div>-->
-
-                            </div>
-                        </div>
-                        <!--</div>-->
-
-                        <!--div class="container row col-xs-12 ">
-                            <a class="btn btn-default"
-                               type="button"
-                               data-toggle="collapse"
-                               data-target="#beta-functions"
-                               aria-expanded="false"
-                               aria-controls="collapseExample">
-                                beta functions
-                                <span class="glyphicon glyphicon-question-sign"
-                                      data-toggle="tooltip"
-                                      title="show beta functions"
-                                      style="margin-left:2px;font-size:smaller"></span>
-                            </a>
-                        </div-->
-
-                        <div id="beta-functions" class="container row col-xs-12 collapse" style="margin-top: 10px">
-                            <div id="filters">
-                                <h5>HighLight By ancestry</h5>
-                                <div class="col-xs-1.5" style="float:left">
-                                    <div id="btn-ancestry-dropdown" class="button-group">
-                                        <button type="button"
-                                                class="btn btn-default btn-sm dropdown-toggle"
-                                                data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <span
-                                                class="caret"></span></button>
-                                        <ul id="ancestry-dropdown-menu" class="dropdown-menu"></ul>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <!--<div>-->
-                            <!--<button type="button"-->
-                            <!--class="btn btn-default pull-right"-->
-                            <!--id="clear-filter">Clear all filters</button>-->
-                            <!--<button type="submit"-->
-                            <!--class="btn btn-default pull-right"-->
-                            <!--style="margin-right: 15px;">Apply filters</button>-->
-                            <!--</div>-->
-                        </div>
+            <!--&lt;!&ndash;oxo&ndash;&gt;-->
+            <!--<div id="oxo-div" class="tab-pane fade" >-->
+            <!--<h4>oxo:</h4>-->
+            <!--<div>-->
+            <!--<div id="oxo-vis" style="height:500px; width:500px; border:1px solid black;overflow: auto;"></div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
 
 
+            <!-- TW Remove -->
+            <!--<div id="beta-functions" class="container row col-xs-12 collapse" style="margin-top: 10px">-->
+            <!--<div id="filters">-->
+            <!--<h5>HighLight By ancestry</h5>-->
+            <!--<div class="col-xs-1.5" style="float:left">-->
+            <!--<div id="btn-ancestry-dropdown" class="button-group">-->
+            <!--<button type="button"-->
+            <!--class="btn btn-default btn-sm dropdown-toggle"-->
+            <!--data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <span-->
+            <!--class="caret"></span>-->
+            <!--</button>-->
+            <!--<ul id="ancestry-dropdown-menu" class="dropdown-menu"></ul>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
 
-                    </div>
-                </div>
-            </div>
+            <!--</div>-->
+
+            <!--</div>-->
+            <!--</div>-->
+
             <!--plot, tables-->
-            <div class="col-xs-7" id="results-area">
+            <div class="col-8" id="results-area">
                 <!-- List the available tables -->
                 <div class="row" style="margin-top:0px">
                     <div id="table-list" class="panel clearfix" style="padding-left:0px;box-shadow:none">
@@ -647,7 +637,7 @@
                         <div class="panel-heading background-color-primary-accent">
                             <h3 class="panel-title">
                                 <span class="locus_label">Plot of Catalog associations for selected trait(s)</span>
-                                <span class="glyphicon glyphicon-stats manhattan-plot-badge"></span>
+                                <!--<span class="glyphicon glyphicon-stats manhattan-plot-badge"></span>-->
                                 <span class="glyphicon glyphicon-question-sign"
                                       data-toggle="tooltip"
                                       title="Plot includes all traits selected in the expanded search."
@@ -669,7 +659,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 

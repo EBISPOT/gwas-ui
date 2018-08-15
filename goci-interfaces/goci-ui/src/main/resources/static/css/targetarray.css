@@ -9,7 +9,7 @@
   font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="targeted-icon-"], [class*=" targeted-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'TargetArray' !important;
   speak: none;
@@ -24,12 +24,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-GWAS_target_icon:before {
+.targeted-icon-GWAS_target_icon:before {
   content: "\e900";
 }
-.icon-target-tick:before {
+.targeted-icon-target-tick:before {
   content: "\e925";
 }
-.icon-target-original:before {
+.targeted-icon-target-original:before {
   content: "\e924";
 }

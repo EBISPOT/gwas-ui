@@ -55,7 +55,7 @@ $(document).ready(function() {
 
     // Bug change column with id=associationID
     if($("#homepageStats").length){
-        $.getJSON(contextPath+'api/search/stats')
+        $.getJSON(gwasProperties.contextPath+'api/search/stats')
                 .done(function(stats) {
                           setStats(stats);
                       });

@@ -73,59 +73,34 @@
             </ul>
         </div>
 
-
         <div class="container-fluid col-md-9 col-md-offset-2" id="lower_container">
+            <div class="row">
+                <h2 style="color: black">GWAS Catalog summary statistics</h2>
+                <p>From 2017 the GWAS Catalog started hosting summary statistics files in addition to curated associations. Additional information can be found on our methods page.
+                </p><p>
+                We urge authors of GWAS publications included in the Catalog to contact us if summary statistics are available (<a href="https://www.ebi.ac.uk/gwas/docs/faq#faq-I2">FAQ-I2</a>). We can then make these available through the Catalog.
+            </p><p>
+                    We are currently developing a database of GWAS summary statistics. The REST API for the summary statistics database is now available at www.ebi.ac.uk/gwas/summary-statistics/api.
+            </p><p>
+                These data are made available through <a href="https://www.ebi.ac.uk/about/terms-of-use" target="_blank">EMBL-EBI’s standard terms of use</a>.
+                </p>
 
+
+            </div>
+            
             <h3>List of studies with summary statistics</h3>
-
             <div class="row">
                 <div id="loadingStudies" class="col-md-offset-4" style="display: none">
-                        <button class="btn btn-lg">
+                    <button class="btn btn-lg">
                             <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"
                                   style="margin-right: 1em;"></span>Loading...
-                        </button>
+                    </button>
 
                 </div>
-
-                <div id="pvalueSetDisplay" >
-                    <table id="study-table" class="table table-striped">
-                        <thead id="pvalue-sets-table-header">
-                        <tr>
-                            <th style="width: 10%" id="author_s">Author
-                                <span class="glyphicon glyphicon-question-sign context-help" data-toggle="tooltip" data-original-title="First author, along with link to publication in Europe PubMed Central."></span>
-                                <span class="glyphicon glyphicon-sort clickable sorting unsorted"> </span>
-                            </th>
-                            <th style="width: 10%" id="publicationDate">Date
-                                <span class="glyphicon glyphicon-question-sign context-help" data-toggle="tooltip" data-original-title="Publication date (YYYY-MM-DD)"></span>
-                                <span class="glyphicon glyphicon-sort clickable sorting unsorted"> </span>
-                            </th>
-                            <th style="width: 10%" id="publication">Journal
-                                <span class="glyphicon glyphicon-question-sign context-help" data-toggle="tooltip" data-original-title="Abbreviated journal name"></span>
-                                <span class="glyphicon glyphicon-sort clickable sorting unsorted"> </span>
-                            </th>
-                            <th style="width: 30%" id="title">Title
-                                <span class="glyphicon glyphicon-question-sign context-help" data-toggle="tooltip" data-original-title="Title of paper"></span>
-                                                              <!--<span class="glyphicon glyphicon-sort clickable sorting unsorted"> </span>-->
-                            </th>
-                            <th style="width: 20%" id="traitName_s">Reported trait
-                                <span class="glyphicon glyphicon-question-sign context-help" data-toggle="tooltip" data-original-title="Description of disease/trait analysed in the study"></span>
-                                <span class="glyphicon glyphicon-sort clickable sorting unsorted"> </span>
-                            </th>
-                            <th style="width: 8%" id="associationCount">Association count
-                                <span class="glyphicon glyphicon-question-sign context-help" data-toggle="tooltip" data-original-title="Number of SNP-disease/trait associations included in the Catalog"></span>
-                                <span class="glyphicon glyphicon-sort clickable sorting unsorted"> </span>
-                            </th>
-                            <th style="width: 15%" id="link">
-                                Summary statistics link
-                            </th>
-                        </tr>
-
-                        </thead>
-                        <tbody id="pvalue-sets-table-body">
-
-                        </tbody>
-                    </table>
-                </div>
+            </div>
+            <div class="row">
+                <!-- Summary Stats table -->
+                <div th:include="fragments/summary-stats-datatable :: summary_stats_datatable"></div>
             </div>
 
 
@@ -179,8 +154,18 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-<script src="../static/js/bootstrap.min.js" th:src="@{../js/bootstrap.min.js}"></script>
+
 <script src="../static/js/bootstrap-datepicker.js" th:src="@{../js/bootstrap-datepicker.js}"></script>
+<script src="../static/js/bootstrap.min.js" th:src="@{../js/bootstrap.min.js}"></script>
+
+
+<script src="../static/js/bootstrap.min.js" th:src="@{../js/bootstrap.min.js}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css"
+      th:href="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css}"
+      rel="stylesheet"/>
+
 
 <!-- Latest compiled and minified JavaScript -->
 <!--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.5.0/bootstrap-table.min.js"></script>-->
@@ -190,10 +175,25 @@
 <!-- GOCI JavaScript
 ================================================== -->
 <script src="../static/js/goci-ui.js" th:src="@{../js/goci-ui.js}"></script>
-<script src="../static/js/fullpvalueset.js" th:src="@{../js/fullpvalueset.js}"></script>
+<script src="../static/js/helpers/utils-helper.js" th:src="@{../js/helpers/utils-helper.js}"></script>
 <script src="../static/js/solrsort.js" th:src="@{../js/solrsort.js}"></script>
 <script src="../static/js/autocomplete-termselect.js" th:src="@{../js/autocomplete-termselect.js}"></script>
 <script src="../static/js/jquery.autocomplete.js" th:src="@{../js/jquery.autocomplete.js}"></script>
+<script src="../static/js/common-datatables/summary-stats-datatable.js" th:src="@{../js/common-datatables/summary-stats-datatable.js}"></script>
+
+<!-- this file must be the last. onload action -->
+<script src="../static/js/fullpvalueset.js" th:src="@{../js/fullpvalueset.js}"></script>
+<!-- loading overlay
+================================================== -->
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
+
+<!--bootstrap-table-flat-json-->
+<script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/flat-json/bootstrap-table-flat-json.js"></script>
+<script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
+<script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/export/bootstrap-table-export.js"></script>
+<script src="https://cdn.rawgit.com/wenzhixin/09e218c884f4f380b68a/raw/5d258d2f78225a4ac1a72d54a34cc7976d630df1/jquery.base64.js"></script>
+<script src="https://cdn.rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js"></script>
+
 
 <!-- Google analytics
 ================================================== -->

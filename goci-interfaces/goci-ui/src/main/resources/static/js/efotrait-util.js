@@ -26,7 +26,7 @@ var global_epmc_api = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search';
 var global_oxo_api = 'https://www.ebi.ac.uk/spot/oxo/api/';
 
 var global_solr_url = 'http://localhost:8983/solr/gwas/select';
-// var global_solr_url = 'http://ves-oy-7f.ebi.ac.uk:8983/solr/gwas/select'; //Not working  cross origin problem
+var global_solr_slim_url = 'http://localhost:8983/solr/gwas_slim/select';
 
 /**
  * This is to optimize solr query, only keep the fields/resources we need
@@ -155,6 +155,15 @@ $('#ols-link').click(() => {
 $('#oxo-link').click(() => {
     window.open("https://www.ebi.ac.uk/spot/oxo/terms/" + getMainEFO() , '_blank');
 });
+
+/**
+ * Linkout to Open Targets page for the main EFO term
+ */
+$('#ot-link').click(() => {
+    window.open("https://www.targetvalidation.org/disease/" + getMainEFO() , '_blank');
+});
+
+
 
 /**
  * Checkbox to toggle always include all descendants.
@@ -383,7 +392,8 @@ generateSelectedItemCheckBox = function(efoid,tagID){
                }).appendTo(container);
 
     if (isDescendantRequired(efoid)){
-        cb.attr('checked','checked')
+        cb.attr('checked','checked');
+        // console.log("** isDescReq TRUE: "+efoid);
     }
 
     cb.change(function(){
@@ -394,6 +404,7 @@ generateSelectedItemCheckBox = function(efoid,tagID){
             addDataToTag(global_efo_info_tag_id, {[id]:true}, 'whichDescendant')
         }else{
             var tmp = getDataFromTag(global_efo_info_tag_id,'whichDescendant');
+            // console.log("** TMP: "+tmp);
             delete tmp[id];
         }
         updatePage()
@@ -499,7 +510,6 @@ prepareAncestryFilter = function(allAncestries){
  * @param {Boolean} initLoad - if true, the efoinfo/highlighted study will be update
  */
 updatePage = function(initLoad=false) {
-
     //start spinner. The spinner will be stoped whenever the data is ready, thus closed by the coresponding data loading function.
     if(initLoad){
         showLoadingOverLay('#summary-panel-loading');
@@ -556,12 +566,13 @@ updatePage = function(initLoad=false) {
         })
     }
 
+
     //******************************
     // add ols graph for related term
     //******************************
     if (initLoad) {
         //addRelatedTermCheckBox();
-        initOLS_GraphWiget(mainEFO);
+        // initOLS_GraphWiget(mainEFO);
         initOLS_TreeWiget(mainEFO)
         initOLS_AutocompleteWiget();
     }
@@ -592,6 +603,12 @@ updatePage = function(initLoad=false) {
     }).catch(function(err) {
         console.warning(`Error when trying to find all descendants with error messgae. ${err}`);
     })
+
+
+    //**************************************
+    // Get Reported traits from Solr Slim
+    //**************************************
+    getTraitDataSolrSlim(mainEFO);
 
 
     //******************************
@@ -657,7 +674,7 @@ updatePage = function(initLoad=false) {
  * @returns {Promise}
  */
 function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false) {
-    // initLoad will be pass to processEfotraitData, controlling whether to upload the triat information(initload)
+    // initLoad will be pass to processEfotraitData, controlling whether to upload the trait information(initload)
     // or just reload the tables(adding another efo term)
 
     var searchQuery = mainEFO;
@@ -728,7 +745,7 @@ function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false
         //     console.log("Solr research done for " + searchQuery);
         //     return data;
         // }).catch(function(err) {
-        //     console.error('Error when seaching solr for' + searchQuery + '. ' + err);
+        //     console.error('Error when searching solr for' + searchQuery + '. ' + err);
         //     throw(err);
         // })
         return promisePost( window.location.pathname.split('/efotraits/')[0] + '/api/search/advancefilter',
@@ -748,12 +765,10 @@ function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false
             console.log("Solr research done for " + searchQuery);
             return data;
         }).catch(function(err) {
-            console.error('Error when seaching solr for' + searchQuery + '. ' + err);
+            console.error('Error when searching solr for' + searchQuery + '. ' + err);
             throw(err);
         })
-
     })
-
 }
 
 /**
@@ -803,7 +818,7 @@ function processSolrData(data, initLoad=false) {
 
 
     remove.then(()=>{
-        //If no solr return,greate a fake empyt array so tables/plot are empty
+        //If no solr return, generate a fake empty array so tables/plot are empty
         if(!isInCatalog) {
             data_association.docs = []
             data_study.docs = []
@@ -882,6 +897,46 @@ function processSolrData(data, initLoad=false) {
 
 
 /**
+ * Get trait data from Solr Slim
+ * @param mainEFO
+ * @returns {boolean}
+ */
+function getTraitDataSolrSlim(mainEFO) {
+    var searchQuery = mainEFO;
+    return promisePost(contextPath+'api/search',
+        {
+            'q': searchQuery,
+            'max': 1,
+            'resourcename': 'trait',
+            'shortForm': searchQuery,
+            'wt':'json',
+            'dataType': 'jsonp',
+        }, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
+        processSolrSlimData(data);
+        return data;
+    }).catch(function (err) {
+        console.error('Error when searching Solr Slim for: ' + searchQuery + '. ' + err);
+        throw(err);
+    })
+}
+
+
+function processSolrSlimData(data) {
+    var reportedTraits = "";
+    $.each(data.response.docs, (index, data) => {
+        reportedTraits = data.reportedTrait;
+    });
+
+    $("#reported-traits").html(longContentList("gwas_reported_traits_div",
+        reportedTraits,
+        'reported traits'));
+}
+
+
+
+
+
+/**
  * remove associations that annotated to efos which are currently not in the cart
  */
 removeAssociationWithNonSelectedEFO = function() {
@@ -944,115 +999,115 @@ addRelatedTermCheckBox = () => {
  * The network shows the mainEFO with all the realted EFOs.
  * @param {String} mainEFO
  */
-initOLS_GraphWiget = function(mainEFO) {
-    var mainEFOLink = OLS.getOLSLinkAPI(mainEFO).then((termFullLink) => {
-        return termFullLink + '/graph';
-    })
-
-    var mainEFOIri = OLS.getIriByShortForm(mainEFO)
-
-    var tmpnetworkOptions = {
-        webservice: {
-//            URL: "http://www.ebi.ac.uk/ols/api/ontologies/cmpo/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_33839/graph",
-            OLSschema: false
-        },
-        displayOptions: {showButtonBox: true, showInfoWindow: false, showLegend: true},
-        callbacks: {
-            onSelectNode: function(params) {
-                console.debug(params);
-            },
-            onDoubleClick: function(params) {
-                console.debug(params);
-                var node = params.nodes[0];
-                var efoid = node.split('/').slice(-1)[0];
-                addEFO({[efoid]:node});
-            },
-            onSelectEdge: function(params) {
-                console.debug(params);
-            },
-            onClick: function(params) {
-                console.debug(params);
-            }
-        }
-    }
-    var visoptions = {
-        physics: {
-            forceAtlas2Based: {
-                gravitationalConstant: -50,
-                centralGravity: 0.01,
-                springConstant: 0.08,
-                springLength: 100,
-                damping: 0.4,
-                avoidOverlap: 0
-            },
-        },
-        layout: {
-            hierarchical: false
-        },
-        nodes: {
-            borderWidth: 4,
-            shape: 'ellipse'
-        },
-        edges: {
-            arrows: {middle: {enabled: true}},
-            dashes: true,
-        },
-    }
-
-    var term = "Can be whatever at the moment - if you chose OLSschema false"
-    var app = require("ols-graphview");
-    var instance = new app();
-
-    var reasonForRelatedEFO = {};
-    //prepare the network, insert terms of interests
-    mainEFOLink.then(function(mainLink) {
-        tmpnetworkOptions['webservice']['URL'] = mainLink;
-        instance.visstart("ontology_vis", term, tmpnetworkOptions, visoptions);
-
-        OLS.getRelatedTerms(getMainEFO()).then((terms) => {
-            //find out why this term is 'related', from its logical_description
-            Object.keys(terms).forEach((relatedTerm) => {
-                var d = terms[relatedTerm];
-                reasonForRelatedEFO[d.obo_id] = d.logical_description;
-            })
-
-            return Object.keys(terms).map(OLS.getOLSLinkAPI).reduce((sequence, termOLSLinkPromise) => {
-                return sequence.then(() => {
-                    return termOLSLinkPromise;
-                }).then(function(termOLSLink) {
-                    //for each related term, add it to the graph
-                    instance.fetchNewGraphData(termOLSLink + '/graph');
-                })
-            }, Promise.resolve())
-        })
-    }).then(() => {
-        var x = instance.getGraphDataset()
-        var net=instance.getNetwork()
-        console.debug(net)
-
-        //change mainEFO node shape to hightlight related terms
-        mainEFOIri.then((iri) => {
-            //Thi is to make sure the setting apply AFTER the nodes are loaded.
-            net.once("stabilized", (params) => {
-                //http://visjs.org/docs/data/dataset.html
-                var defaultAttribute = x["nodes"].get(iri)
-                defaultAttribute.color.border = 'blue';
-                x["nodes"].update(defaultAttribute);
-
-                //add why to the title of node
-                $.each(reasonForRelatedEFO, (efoid, reason) => {
-                    OLS.getIriByShortForm(efoid).then( (iri) => {
-                        x["nodes"].update({id: iri, title: reason});
-                    })
-                })
-            })
-        })
-    }).catch((err) => {
-        console.error('Error when plotting related terms.' + err);
-        throw(err);
-    })
-
-}
+// TW - Removed to remove JS error message, not all data used/available
+// initOLS_GraphWiget = function(mainEFO) {
+//     var mainEFOLink = OLS.getOLSLinkAPI(mainEFO).then((termFullLink) => {
+//         return termFullLink + '/graph';
+//     })
+//
+//     var mainEFOIri = OLS.getIriByShortForm(mainEFO)
+//
+//     var tmpnetworkOptions = {
+//         webservice: {
+// //            URL: "http://www.ebi.ac.uk/ols/api/ontologies/cmpo/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_33839/graph",
+//             OLSschema: false
+//         },
+//         displayOptions: {showButtonBox: true, showInfoWindow: false, showLegend: true},
+//         callbacks: {
+//             onSelectNode: function(params) {
+//                 console.debug(params);
+//             },
+//             onDoubleClick: function(params) {
+//                 console.debug(params);
+//                 var node = params.nodes[0];
+//                 var efoid = node.split('/').slice(-1)[0];
+//                 addEFO({[efoid]:node});
+//             },
+//             onSelectEdge: function(params) {
+//                 console.debug(params);
+//             },
+//             onClick: function(params) {
+//                 console.debug(params);
+//             }
+//         }
+//     }
+//     var visoptions = {
+//         physics: {
+//             forceAtlas2Based: {
+//                 gravitationalConstant: -50,
+//                 centralGravity: 0.01,
+//                 springConstant: 0.08,
+//                 springLength: 100,
+//                 damping: 0.4,
+//                 avoidOverlap: 0
+//             },
+//         },
+//         layout: {
+//             hierarchical: false
+//         },
+//         nodes: {
+//             borderWidth: 4,
+//             shape: 'ellipse'
+//         },
+//         edges: {
+//             arrows: {middle: {enabled: true}},
+//             dashes: true,
+//         },
+//     }
+//
+//     var term = "Can be whatever at the moment - if you chose OLSschema false"
+//     var app = require("ols-graphview");
+//     var instance = new app();
+//
+//     var reasonForRelatedEFO = {};
+//     //prepare the network, insert terms of interests
+//     mainEFOLink.then(function(mainLink) {
+//         tmpnetworkOptions['webservice']['URL'] = mainLink;
+//         instance.visstart("ontology_vis", term, tmpnetworkOptions, visoptions);
+//
+//         OLS.getRelatedTerms(getMainEFO()).then((terms) => {
+//             //find out why this term is 'related', from its logical_description
+//             Object.keys(terms).forEach((relatedTerm) => {
+//                 var d = terms[relatedTerm];
+//                 reasonForRelatedEFO[d.obo_id] = d.logical_description;
+//             })
+//
+//             return Object.keys(terms).map(OLS.getOLSLinkAPI).reduce((sequence, termOLSLinkPromise) => {
+//                 return sequence.then(() => {
+//                     return termOLSLinkPromise;
+//                 }).then(function(termOLSLink) {
+//                     //for each related term, add it to the graph
+//                     instance.fetchNewGraphData(termOLSLink + '/graph');
+//                 })
+//             }, Promise.resolve())
+//         })
+//     }).then(() => {
+//         var x = instance.getGraphDataset()
+//         var net=instance.getNetwork()
+//         console.debug(net)
+//
+//         //change mainEFO node shape to hightlight related terms
+//         mainEFOIri.then((iri) => {
+//             //Thi is to make sure the setting apply AFTER the nodes are loaded.
+//             net.once("stabilized", (params) => {
+//                 //http://visjs.org/docs/data/dataset.html
+//                 var defaultAttribute = x["nodes"].get(iri)
+//                 defaultAttribute.color.border = 'blue';
+//                 x["nodes"].update(defaultAttribute);
+//
+//                 //add why to the title of node
+//                 $.each(reasonForRelatedEFO, (efoid, reason) => {
+//                     OLS.getIriByShortForm(efoid).then( (iri) => {
+//                         x["nodes"].update({id: iri, title: reason});
+//                     })
+//                 })
+//             })
+//         })
+//     }).catch((err) => {
+//         console.error('Error when plotting related terms.' + err);
+//         throw(err);
+//     })
+// }
 
 
 /**
@@ -1186,14 +1241,15 @@ displayOXO = function(){
             if(xrefs_mesh.length > 0){
                 var xref_mesh = xrefs_mesh[0];
                 container.html(`<!--<b> ${xref_mesh} </b> and <b>${totalMapping}</b>  more ontology Xrefs--> `);
-                container.html(`${xref_mesh} ...`);
+                // container.html(`${xref_mesh} ...`);
+                container.html(`<span style="padding-right: 8px;"> <b> ${totalMapping} </b> mappings </span>`);
             }else{
-                container.html(`<b> ${totalMapping} </b> ontology Xrefs`);
+                container.html(`<span style="padding-right: 8px;"> <b> ${totalMapping} </b> mappings </span>`);
             }
             container.append(showHideDiv('oxo-graph'));
 
         }else{
-            container.html(`no ontology Xrefs found.`);
+            container.html(`No ontology mappings found.`);
         }
 
         $('#button-oxo-graph').click(() => {
@@ -1213,7 +1269,10 @@ displayEfoTraitInfo = function(efoinfo) {
     var synonym = efoinfo.synonyms;
     var efotrait_label = efoinfo.label;
     addDataToTag(global_efo_info_tag_id, efoinfo, 'mainEFOInfo');
-    $("#efotrait-description").html(displayArrayAsList(efoinfo.description));
+    // $("#efotrait-description").html(displayArrayAsList(efoinfo.description)); // Display as bulleted list
+    $("#efotrait-description").html(displayArrayAsParagraph(
+        'gwas_efotrait_description_div', efoinfo.description));  // TW
+
     $("#efotrait-id").html(setExternalLink(efotrait_link, efotrait_id));
     $("#efotrait-label").html(efotrait_label);
     // $("#efotrait-label").html(createPopover(efotrait_label,
@@ -1230,6 +1289,7 @@ displayEfoTraitInfo = function(efoinfo) {
         }
     }
 }
+
 
 /**
  * display association table
@@ -1426,7 +1486,7 @@ function displayEfotraitAssociations(data, cleanBeforeInsert) {
                                                    sortable: true
                                                },{
                                                    field: 'mappedTraits',
-                                                   title: 'Mapped trait',
+                                                   title: 'Mapped EFO trait',
                                                    sortable: true
                                                },{
                                                    field: 'study',
@@ -1832,7 +1892,11 @@ function displayEfotraitStudies_deprecated(solr_study, cleanBeforeInsert=true) {
 
 /**
  * OLS FUNCTIONS
- * @type {{getOntologyInfo: OLS.getOntologyInfo, getPrefix2OntologyId: OLS.getPrefix2OntologyId, getOntologyIdByPrefix: OLS.getOntologyIdByPrefix, getIriByShortForm: OLS.getIriByShortForm, getOntologyByShortForm: OLS.getOntologyByShortForm, searchOLS: OLS.searchOLS, getRelatedTerms: OLS.getRelatedTerms, getEFOInfo: OLS.getEFOInfo, getOLSLinkAPI: OLS.getOLSLinkAPI, getOLSLink: OLS.getOLSLink, getHierarchicalDescendants: OLS.getHierarchicalDescendants}}
+ * @type {{getOntologyInfo: OLS.getOntologyInfo, getPrefix2OntologyId: OLS.getPrefix2OntologyId,
+ * getOntologyIdByPrefix: OLS.getOntologyIdByPrefix, getIriByShortForm: OLS.getIriByShortForm,
+ * getOntologyByShortForm: OLS.getOntologyByShortForm, searchOLS: OLS.searchOLS, getRelatedTerms: OLS.getRelatedTerms,
+ * getEFOInfo: OLS.getEFOInfo, getOLSLinkAPI: OLS.getOLSLinkAPI, getOLSLink: OLS.getOLSLink,
+ * getHierarchicalDescendants: OLS.getHierarchicalDescendants}}
  */
 var OLS = {
     /**
@@ -2863,7 +2927,7 @@ var studySorting = {
         var sampleSize = {};
 
         var isInitial = function(ancestryLinkString){
-            console.log(ancestryLinkString);
+            // console.log(ancestryLinkString);
             return ancestryLinkString.match(/^initial/) != null
         }
         var InitialSampleSize = function(ancestryLinkString){

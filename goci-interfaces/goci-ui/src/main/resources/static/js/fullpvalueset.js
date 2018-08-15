@@ -1,7 +1,10 @@
 /**
  * Created by dwelter on 20/10/16.
  */
-
+/**
+ * Other global setting
+ */
+var pageRowLimit = 5;
 $(document).ready(function() {
 
     if (window.location.pathname.indexOf('/downloads/summary-statistics') != -1 && $('#pvalue-sets-table-body').children().length == 0) {
@@ -33,7 +36,8 @@ function loadStudiesList() {
                 'fl': 'author,publicationDate,pubmedId,publication,title,traitName,associationCount,author_s,accessionId',
             })
             .done(function(data) {
-                displayStudies(data);
+                displayDatatableSummaryStats(data);
+                $('#loadingStudies').hide();
             });
 }
 

@@ -25,10 +25,35 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
         var publicationDate = study.publicationDate;
         var pubDate = publicationDate.split("-");
         var pubmedId = study.pubmedId;
-        var study_author = setQueryUrl(author, author);
-        study_author += '<div><small>'+setExternalLink(EPMC_URL+pubmedId,'PMID:'+pubmedId)+'</small></div>';
+        //var study_author = setQueryUrl(author, author);
+        //study_author += '<div><small>'+setExternalLink(gwasProperties.EPMC_URL+pubmedId,'PMID:'+pubmedId)+'</small></div>';
+    
+        var genotypingIcon ="";
+        if ((study.genotypingTechnologies.indexOf("Targeted genotyping array") > -1) ||
+            (study.genotypingTechnologies.indexOf("Exome genotyping array") > -1) ) {
+            genotypingIcon="<a href='#'><span class='glyphicon targeted-icon-GWAS_target_icon clickable context-help'" +
+                " data-toggle='tooltip'" +
+                "data-original-title='Targeted or exome array study'></span></a>";
+        }
         
-        tmp['Author'] = study_author;
+        var linkFullPValue = "";
+        var fullpvalset = study.fullPvalueSet;
+        if(fullpvalset == 1) {
+        
+            var a = (study.authorAscii_s).replace(/\s/g,"");
+            var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
+        
+            var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
+                .concat(dir).concat("' target='_blank'</a>");
+        
+            linkFullPValue = ftplink.concat("<span class='glyphicon glyphicon-signal clickable context-help'" +
+                " data-toggle='tooltip'" +
+                "data-original-title='Click for summary statistics'></span></a>");
+        
+        }
+        
+        
+        tmp['Author'] = study.author_s;
         var nr_association = 0;
         if ('association_rsId' in study) {
              var arraysize= study.association_rsId;
@@ -41,9 +66,9 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
         tmp['publi'] = publi;
     
         // AccessionID
-        tmp['study'] = '<a href="'+contextPath+'studies/'+study.accessionId+'"><span class="gwas-icon-GWAS_Study_2017"></span>&nbsp;'+study.accessionId+'</a>';
-    
-    
+        //tmp['study'] = '<a href="'+contextPath+'studies/'+study.accessionId+'"><span class="gwas-icon-GWAS_Study_2017"></span>&nbsp;'+study.accessionId+'</a>';
+        tmp['study'] = '<a href="'+gwasProperties.contextPath+'studies/'+study.accessionId+'">'+study.accessionId+'</a>'+genotypingIcon;
+        
         // Journal
         tmp['Journal'] = study.publication;
         
@@ -54,11 +79,15 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
         tmp['reported_trait'] = study.traitName_s;
         
         //Mapped EFO trait. Check if in the future might be more than 1
-        tmp['efo'] = '<a href="'+contextPath+'efotraits/'+study.shortForm[0]+'"><span class="gwas-icon-GWAS_Trait_2017"></span>&nbsp;'+study.shortForm[0]+'</a>';
+        if ('shortForm' in study) {
+            tmp['efo'] = '<a href="' + gwasProperties.contextPath + 'efotraits/' + study.shortForm[0] + '">' + study.shortForm[0] + '</a>';
+        } else {
+            tmp['efo'] = 'N/A';
+        }
         
         
         // Number Associations
-        tmp['nr_associations'] = nr_association.toString();
+        tmp['nr_associations'] = nr_association.toString()+linkFullPValue;
         
         // Initial sample desc
         var initial_sample_text = '-';
@@ -109,7 +138,7 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
             },
             {
             field: 'Author',
-            title: 'Publication',
+            title: 'First author',
             sortable: true
         }, {
             field: 'publi',

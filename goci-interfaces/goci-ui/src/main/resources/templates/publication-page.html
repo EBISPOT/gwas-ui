@@ -25,6 +25,7 @@
     <link href="../static/css/sticky-footer-navbar.css" th:href="@{../css/sticky-footer-navbar.css}" rel="stylesheet"/>
     <link href="../static/css/beta-news.css" th:href="@{../css/beta-news.css}" rel="stylesheet"/>
     <link href="../static/css/gwas-icons" th:href="@{../css/gwas-icons.css}" rel="stylesheet"/>
+    <link href="../static/css/targetarray.css" th:href="@{../css/targetarray.css}" rel="stylesheet" />
 
     <!-- Additional styling on top of bootstrap -->
     <link rel="stylesheet" href="../static/css/goci-ui.css" th:href="@{../css/goci-ui.css}"/>
@@ -169,7 +170,7 @@
                 <div th:include="fragments/study-datatable :: studies_datatable"></div>
             </div>
 
-        <div class="row search-results-container" >
+            <div class="row search-results-container" >
             <!-- Associations table -->
             <div th:include="fragments/association-datatable :: associations_datatable"></div>
         </div>
@@ -214,9 +215,12 @@
     <script src="../static/js/helpers/promise-helper.js" th:src="@{../js/helpers/promise-helper.js}"></script>
     <script src="../static/js/helpers/utils-helper.js" th:src="@{../js/helpers/utils-helper.js}"></script>
     <script src="../static/js/helpers/orcid-helper.js" th:src="@{../js/helpers/orcid-helper.js}"></script>
+    <script src="../static/js/helpers/summary-stats-api.js" th:src="@{../js/helpers/summary-stats-api.js}"></script>
+
     <script src="../static/js/common-datatables/associations-datatable.js" th:src="@{../js/common-datatables/associations-datatable.js}"></script>
     <script src="../static/js/common-datatables/studies-datatable.js" th:src="@{../js/common-datatables/studies-datatable.js}"></script>
 
+    <!-- this file must be the last. onload action -->
     <script src="../static/js/publicationresult.js" th:src="@{../js/publicationresult.js}"></script>
 
 

@@ -15,8 +15,48 @@ var DBSNP  = "http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?rs=";
 var UCSC   = "https://genome.ucsc.edu/cgi-bin/hgTracks?hgFind.matches=";
 var ENS_SHARE_LINK = 'Variant_specific_location_link/97NKbgkp09vPRy1xXwnqG1x6KGgQ8s7S';
 var CONTEXT_RANGE = 500;
-
+var global_raw = 'fq:resourcename:association or resourcename:study'
 var list_min = 5;
+var pageRowLimit=5;
+
+/**
+ * Make solr query.
+ * @param {String} mainEFO
+ * @param {[]String} additionalEFO
+ * @param {[]String} descendants
+ * @param {Boolean} initLoad
+ * @returns {Promise}
+ */
+function getDataSolr(main, initLoad=false) {
+    
+    var searchQuery = main;
+    
+    console.log("Solr research request received for " + searchQuery);
+    return promisePost( gwasProperties.contextPath + '/api/search/advancefilter',
+        {
+            'q': searchQuery,
+            'max': 99999,
+            'group.limit': 99999,
+            'group.field': 'resourcename',
+            'facet.field': 'resourcename',
+            'hl.fl': 'shortForm,efoLink',
+            'hl.snippets': 100,
+            'fl' : '*',
+            // 'fq' : global_fq == undefined ? '*:*':global_fq,
+            'raw' : global_raw == undefined ? '' : global_raw,
+        },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
+        //processSolrData(data, initLoad);
+        processVariantData(data,searchQuery);
+        console.log("Solr research done for " + searchQuery);
+        return data;
+    }).catch(function(err) {
+        console.error('Error when seaching solr for' + searchQuery + '. ' + err);
+        throw(err);
+    })
+    
+}
+
+
 
 $(document).ready(function() {
 
@@ -33,7 +73,7 @@ $(document).ready(function() {
 function getVariantData(rsId) {
     console.log("Solr research request received for " + rsId);
     setState(SearchState.LOADING);
-    $.getJSON('../api/search/association',
+    /*$.getJSON('../api/search/association',
               {
                   'q': "rsId:"+rsId,
                   'max': 1000
@@ -42,27 +82,44 @@ function getVariantData(rsId) {
                   console.log(data.response);
                   processVariantData(data.response,rsId);
               });
+    */
+    var solrPromise = getDataSolr(rsId, false);
     console.log("Solr research done for " + rsId);
 }
 
 // Parse the Solr results and display the data on the HTML page
 function processVariantData(data,rsId) {
     // Check if Solr returns some results
-    if (data.docs.length == 0) {
+    if (data.grouped.resourcename.groups.length == 0) {
         $('#lower_container').html("<h2>The variant <em>"+rsId+"</em> cannot be found in the GWAS Catalog database</h2>");
     }
     else {
+    //TODO not repeat yourself!!!!
+        $.each(data.grouped.resourcename.groups, (index, group) => {
+            switch (group.groupValue) {
+        case "efotrait":
+            data_efo = group.doclist;
+            break;
+        case "study":
+            data_study = group.doclist;
+            break;
+        case "association":
+            data_association = group.doclist;
+            break;
+            //not sure we need this!
+        case "diseasetrait":
+            data_diseasetrait = group.doclist;
+            break;
+        default:
+        }
+    });
         // Variant summary panel
-        getVariantInfo(data.docs);
+        getVariantInfo(data_association.docs);
         // External links panel
-        getLinkButtons(data.docs,rsId);
-        // Associations table
-        getVariantAssociations(data.docs);
-        // Studies table
-        getVariantStudies(data.docs);
-        // Traits table
-        getVariantTraits(data.docs);
+        getLinkButtons(data_association.docs,rsId);
 
+        displayDatatableAssociations(data_association.docs);
+        displayDatatableStudies(data_study.docs);
         //downloads link
         setDownloadLink(rsId);
     }
@@ -143,290 +200,6 @@ function getVariantInfo(data,rsId) {
     $("#variant-summary-content").html(getSummary(data));
 }
 
-
-function getVariantAssociations(data) {
-    var asso_count = data.length;
-
-    $(".association_count").html(asso_count);
-
-    if (asso_count == 1) {
-        $(".association_label").html("Association");
-    }
-
-    $.each(data, function(index,asso) {
-
-        var row = $('<tr/>');
-
-        // Risk allele
-        var riskAllele = asso.strongestAllele[0];
-        var riskAlleleLabel = riskAllele;
-        if (riskAlleleLabel.match(/\w+-.+/)) {
-            riskAlleleLabel = riskAllele.split('-').join('-<b>')+'</b>';
-        }
-        riskAllele = setQueryUrl(riskAllele,riskAlleleLabel);
-        row.append(newCell(riskAllele));
-
-        // Risk allele frequency
-        var riskAlleleFreq = asso.riskFrequency;
-        row.append(newCell(riskAlleleFreq));
-
-        // p-value
-        var pValue = asso.pValueMantissa;
-        if (pValue) {
-            var pValueExp = " x 10<sup>" + asso.pValueExponent + "</sup>";
-            pValue += pValueExp;
-            if (asso.qualifier) {
-                if (asso.qualifier[0].match(/\w/)) {
-                    pValue += " " + asso.qualifier.join(',');
-                }
-            }
-            row.append(newCell(pValue));
-        } else {
-            row.append(newCell('-'));
-        }
-
-        // OR
-        var orValue = asso.orPerCopyNum;
-        if (orValue) {
-            if (asso.orDescription) {
-                orValue += " " + asso.orDescription;
-            }
-            row.append(newCell(orValue));
-        } else {
-            row.append(newCell('-'));
-        }
-
-        // Beta
-        var beta = asso.betaNum;
-        if (beta) {
-            if (asso.betaUnit) {
-                beta += " " + asso.betaUnit;
-            }
-            if (asso.betaDirection) {
-                beta += " " + asso.betaDirection;
-            }
-            row.append(newCell(beta));
-        } else {
-            row.append(newCell('-'));
-        }
-
-        // CI
-        var ci = (asso.range) ? asso.range : '-';
-        row.append(newCell(ci));
-        // Reported genes
-        var genes = [];
-        var reportedGenes = asso.reportedGene;
-        if (reportedGenes) {
-            $.each(reportedGenes, function(index, gene) {
-                genes.push(setQueryUrl(gene));
-            });
-            row.append(newCell(genes.join(', ')));
-        } else {
-            row.append(newCell('-'));
-        }
-
-        // Reported traits
-        var traits = [];
-        var reportedTraits = asso.traitName;
-        if (reportedTraits) {
-            $.each(reportedTraits, function(index, trait) {
-                traits.push(setQueryUrl(trait));
-            });
-            row.append(newCell(traits.join(', ')));
-        } else {
-            row.append(newCell('-'));
-        }
-
-        // Mapped traits
-        var mappedTraits = asso.mappedLabel;
-        if (mappedTraits) {
-            row.append(newCell(mappedTraits.join(', ')));
-        } else {
-            row.append(newCell('-'));
-        }
-
-        // Study
-        var author = asso.author_s;
-        var publicationDate = asso.publicationDate;
-        var pubDate = publicationDate.split("-");
-        var pubmedId = asso.pubmedId;
-        var study = setQueryUrl(author, author + " - " + pubDate[0]);
-        study += '<div><small>'+setExternalLink(EPMC+pubmedId,'PMID:'+pubmedId)+'</small></div>';
-        row.append(newCell(study));
-
-        var studyId = asso.studyId;
-
-        // Populate the table
-        $("#association-table-body").append(row);
-    });
-}
-
-
-function getVariantStudies(data) {
-    var study_ids = [];
-    $.each(data, function(index, asso) {
-        var study_id = asso.studyId;
-        if (jQuery.inArray(study_id, study_ids) == -1) {
-
-            var row = $('<tr/>');
-
-            study_ids.push(study_id);
-
-            // Author
-            var author = asso.author_s;
-            var publicationDate = asso.publicationDate;
-            var pubDate = publicationDate.split("-");
-            var pubmedId = asso.pubmedId;
-            var study_author = setQueryUrl(author, author);
-            study_author += '<div><small>'+setExternalLink(EPMC+pubmedId,'PMID:'+pubmedId)+'</small></div>';
-            row.append(newCell(study_author));
-
-            // Publication date
-            var p_date = asso.publicationDate;
-            var publi = p_date.split('T')[0];
-            row.append(newCell(publi));
-
-            // Journal
-            row.append(newCell(asso.publication));
-
-            // Title
-            row.append(newCell(asso.title));
-
-            // Initial sample desc
-            var initial_sample_text = '-';
-            if (asso.initialSampleDescription) {
-                initial_sample_text = displayArrayAsList(asso.initialSampleDescription.split(', '));
-            }
-            row.append(newCell(initial_sample_text));
-
-            // Replicate sample desc
-            var replicate_sample_text = '-';
-            if (asso.replicateSampleDescription) {
-                replicate_sample_text = displayArrayAsList(asso.replicateSampleDescription.split(', '));
-            }
-            row.append(newCell(replicate_sample_text));
-
-            // ancestralGroups
-            var ancestral_groups_text = '-';
-            if (asso.ancestralGroups) {
-                ancestral_groups_text = displayArrayAsList(asso.ancestralGroups);
-            }
-            row.append(newCell(ancestral_groups_text));
-
-            // Populate the table
-            $("#study-table-body").append(row);
-        }
-    });
-    // Study count //
-    $(".study_count").html(study_ids.length);
-
-    if (study_ids.length == 1) {
-        $(".study_label").html("Study");
-    }
-}
-
-
-function getVariantTraits(data) {
-
-    // Fetch data //
-    var traits = [];
-    var mappedtraits = {};
-    var mappedtraitsUri = {};
-    var synonymtraits = {};
-    var studytraits = {};
-    $.each(data, function(index, asso) {
-        // Trait
-        var trait = asso.traitName_s;
-        if (jQuery.inArray(trait, traits) == -1) {
-            traits.push(trait);
-        }
-
-        // Mapped trait(s)
-        mappedtraits[trait] = asso.mappedLabel;
-        mappedtraitsUri[trait] = asso.mappedUri;
-
-        // Synonym trait(s)
-        synonymtraits[trait] = asso.synonym;
-
-        // Study trait(s)
-        var author = asso.author_s;
-        var publicationDate = asso.publicationDate.split("-");
-        var study  = setQueryUrl(author, author + " - " + publicationDate[0]);
-            study += setExternalLinkIcon(EPMC + asso.pubmedId);
-        if (jQuery.inArray(study, studytraits[trait]) == -1) {
-            if (!studytraits[trait]) {
-                studytraits[trait] = [];
-            }
-            studytraits[trait].push(study);
-        }
-    });
-
-    // Display/print data //
-    $(".diseasetrait_count").html(traits.length);
-
-    if (traits.length == 1) {
-        $(".diseasetrait_label").html("Trait");
-    }
-
-    traits.sort();
-    $.each(traits, function(index,trait) {
-
-        var row = $('<tr/>');
-
-        // Trait
-        row.append(newCell(setQueryUrl(trait)));
-
-        // Mapped trait(s)
-        var mappedtrait_html = newCell('-');
-        if (mappedtraits[trait]) {
-            var mappedtrait = [];
-            $.each(mappedtraits[trait], function(index, mtrait) {
-                var mapped_html = setQueryUrl(mtrait);
-                mapped_html += setExternalLinkIcon(mappedtraitsUri[trait][index]);
-                mappedtrait.push(mapped_html);
-            });
-            mappedtrait.sort();
-            if (mappedtrait.length <= list_min) {
-                mappedtrait_html = newCell(mappedtrait.join(',<br />'));
-            }
-            else {
-                mappedtrait_html = newCell(longContentList("mapped_traits_div_" + index, mappedtrait, 'mapped traits'));
-            }
-        }
-        row.append(mappedtrait_html);
-
-        // Synonym trait(s)
-        var synonym_html = newCell('-');
-        if (synonymtraits[trait]) {
-            var synonymtrait = [];
-            $.each(synonymtraits[trait], function(i, syntrait) {
-                synonymtrait.push(setQueryUrl(syntrait));
-            });
-            synonymtrait.sort();
-            if (synonymtrait.length <= list_min) {
-                synonym_html = newCell(synonymtrait.join(',<br />'));
-            }
-            else {
-                synonym_html = newCell(longContentList("syn_traits_div_" + index, synonymtrait, 'synonym traits'));
-            }
-        }
-        row.append(synonym_html);
-
-        // Study trait(s)
-        var studytrait_html = newCell('-');
-        if (studytraits[trait]) {
-            if (studytraits[trait].length <= list_min) {
-                studytrait_html = newCell(studytraits[trait].join(',<br />'));
-            }
-            else {
-                studytrait_html = newCell(longContentList("study_traits_div_" + index, studytraits[trait], 'study traits'));
-            }
-        }
-        row.append(studytrait_html);
-
-        $("#diseasetrait-table-body").append(row);
-    });
-}
 
 // Generate the summary sentence, at the bottom of the summary panel
 function getSummary(data) {
