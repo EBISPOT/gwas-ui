@@ -904,7 +904,6 @@ function processSolrData(data, initLoad=false) {
         } else {
             $("#plot").html('<span>No Associations for this EFO Trait</span>');
             hideLoadingOverLay("#locus-plot-row-loading");
-            console.log ("no association available");
         }
     })
 
