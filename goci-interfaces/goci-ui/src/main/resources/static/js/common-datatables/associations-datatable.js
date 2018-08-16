@@ -13,23 +13,32 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         cleanBeforeInsert = true;
     }
     
-    var asso_count = data.length;
+    var asso_count = 0;
+    
+    if (data != undefined) {
+        asso_count = data.length
+    }
+    ;
     
     $(".association_count").html(asso_count);
     
-    if (asso_count == 1) {
+    if (asso_count < 2) {
         $(".association_label").html("Association");
     }
     
-    if(cleanBeforeInsert){
+    if (cleanBeforeInsert) {
         $('#association-table').bootstrapTable('removeAll');
     }
     
-    var data_json = []
-    $.each(data, function(index,asso) {
+    var data_json = [];
+    if (data != undefined) {
+        $.each(data, function (index, asso) {
         
         //if association does not have rsid, skip
-        if(asso.strongestAllele == undefined){return true};
+        if (asso.strongestAllele == undefined) {
+            return true
+        }
+        ;
         
         var tmp = {};
         // Risk allele
@@ -37,12 +46,12 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         var riskAlleleLabel = riskAllele;
         var riskAllele_rsid = riskAllele;
         if (riskAlleleLabel.match(/\w+-.+/)) {
-            riskAlleleLabel = riskAllele.split('-').join('-<b>')+'</b>';
+            riskAlleleLabel = riskAllele.split('-').join('-<b>') + '</b>';
             riskAllele_rsid = riskAllele.split('-')[0];
         }
         // This is now linking to the variant page instead of the search page
         // riskAllele = setQueryUrl(riskAllele,riskAlleleLabel);
-        riskAllele = setExternalLinkText( gwasProperties.contextPath + '/variants/' + riskAllele_rsid,riskAlleleLabel);
+        riskAllele = setExternalLinkText(gwasProperties.contextPath + '/variants/' + riskAllele_rsid, riskAlleleLabel);
         
         tmp['riskAllele'] = riskAllele;
         
@@ -98,7 +107,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         var genes = [];
         var reportedGenes = asso.reportedGene;
         if (reportedGenes) {
-            $.each(reportedGenes, function(index, gene) {
+            $.each(reportedGenes, function (index, gene) {
                 genes.push(setQueryUrl(gene));
             });
             tmp['reportedGenes'] = genes.join(', ');
@@ -111,7 +120,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         var genes = [];
         var mappedGenes = asso.entrezMappedGenes;
         if (mappedGenes) {
-            $.each(mappedGenes, function(index, gene) {
+            $.each(mappedGenes, function (index, gene) {
                 genes.push(gene);
             });
             tmp['mappedGenes'] = genes.join(', ');
@@ -124,7 +133,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         var traits = [];
         var reportedTraits = asso.traitName;
         if (reportedTraits) {
-            $.each(reportedTraits, function(index, trait) {
+            $.each(reportedTraits, function (index, trait) {
                 traits.push(trait);
             });
             tmp['reportedTraits'] = traits.join(', ');
@@ -135,9 +144,9 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         // Mapped traits
         var mappedTraits = asso.mappedLabel;
         if (mappedTraits) {
-            $.each(mappedTraits, function(index, trait) {
-                var link = window.location.pathname.split('/study/')[0]+'/efotraits/' + asso.mappedUri[index].split('/').slice(-1)[0]
-                mappedTraits[index] = setExternalLinkText(link,trait)
+            $.each(mappedTraits, function (index, trait) {
+                var link = window.location.pathname.split('/study/')[0] + '/efotraits/' + asso.mappedUri[index].split('/').slice(-1)[0]
+                mappedTraits[index] = setExternalLinkText(link, trait)
             });
             tmp['mappedTraits'] = mappedTraits.join(', ');
         } else {
@@ -152,9 +161,9 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         var pubmedId = asso.pubmedId;
         //var study = setQueryUrl(author, author + " - " + pubDate[0]);
         //study += '<div><small>'+setExternalLink(gwasProperties.EPMC_URL+pubmedId,'PMID:'+pubmedId)+'</small></div>';
-        var study='<a href="'+gwasProperties.contextPath+'studies/'+asso.accessionId+'">'+asso.accessionId+'</a>';
+        var study = '<a href="' + gwasProperties.contextPath + 'studies/' + asso.accessionId + '">' + asso.accessionId + '</a>';
         tmp['study'] = study;
-        var publication ='<a href="'+gwasProperties.contextPath+'publications/'+asso.pubmedId+'">'+asso.pubmedId+'</a>';
+        var publication = '<a href="' + gwasProperties.contextPath + 'publications/' + asso.pubmedId + '">' + asso.pubmedId + '</a>';
         tmp['publication'] = publication;
         
         var studyId = asso.studyId;
@@ -164,7 +173,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         
         
     });
-    
+    }
     $('#association-table').bootstrapTable({
         exportDataType: 'all',
         columns: [{
