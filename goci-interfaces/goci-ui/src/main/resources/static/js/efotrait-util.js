@@ -36,7 +36,7 @@ var global_raw;
 
 global_fl = 'pubmedId,title,author_s,publication,publicationDate,catalogPublishDate,' +
         'initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,' +
-        'ancestryLinks,' +
+        'ancestryLinks,' + 'fullPvalueSet,' + 'genotypingTechnologies,' + 'authorAscii_s,' +
         'traitName,mappedLabel,mappedUri,traitUri,shortForm,' +
         'label,' + 'efoLink,parent,id,resourcename,';
 global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,snpInteraction,multiSnpHaplotype,rsId,strongestAllele,context,region,entrezMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,chromosomePosition,chromLocation,positionLinks,author_s,publication,publicationDate,catalogPublishDate,publicationLink,accessionId,initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,numberOfIndividuals,traitName_s,mappedLabel,mappedUri,traitUri,shortForm,labelda,synonym,efoLink,id,resourcename'
@@ -825,9 +825,8 @@ function processSolrData(data, initLoad=false) {
         }
 
         //update association/study table
-        displayEfotraitAssociations(data_association.docs);
-        displayEfotraitStudies(data_study.docs);
-
+        displayDatatableAssociations(data_association.docs);
+        displayDatatableStudies(data_study.docs);
 
         //work out highlight study
         var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
@@ -837,60 +836,75 @@ function processSolrData(data, initLoad=false) {
             getSummary(findStudiesForEFO(getMainEFO()));
         }
 
-
-        //we add preferEFO for each association, generate the association data for popup of data points in the locus plot.
-        var allUniqueEFO = {}
-        data_association.docs.forEach((d, i) => {
-            d.preferedEFO = findHighlightEFOForAssociation(d.id,data_highlighting)[0];
-            d.numberEFO = findAllEFOsforAssociation(d.id,data_association).length;
+        // GOCI_CM_TW_Integration_Plot_no_association
+        if ('docs' in data_association) {
+            //we add preferEFO for each association, generate the association data for popup of data points in the locus plot.
+            var allUniqueEFO = {}
+            data_association.docs.forEach((d, i) => {
+                d.preferedEFO = findHighlightEFOForAssociation(d.id, data_highlighting)[0];
+            d.numberEFO = findAllEFOsforAssociation(d.id, data_association).length;
             allUniqueEFO[d.preferedEFO] = 1;
             //add any string data that will be use in the locus plot popover
             d.popoverHTML = buildLocusPlotPopoverHTML(d);
         })
-
-        //get all ancestries of all associations
-        var allAncestries = {};
-        data_association.docs.map((d) => {
-            if(d.ancestralGroups!= undefined){
-                d.ancestralGroups.map((a)=>{
-                    if(allAncestries[a] == undefined) allAncestries[a] = [];
-                    allAncestries[a].push(d.id);
-                })
+    
+            //get all ancestries of all associations
+            var allAncestries = {};
+            data_association.docs.map((d) => {
+                if(d.ancestralGroups != undefined
+        )
+            {
+                d.ancestralGroups.map((a) => {
+                    if(allAncestries[a] == undefined
+            )
+                allAncestries[a] = [];
+                allAncestries[a].push(d.id);
+            })
             }
         })
-
-        prepareAncestryFilter(allAncestries);
-
-
-        //wwwdev.ebi.ac.uk/gwas/labs/rest/api/parentMapping/EFO_0000400
-        //Load colour for unique efo
-        var allColorLoaded = []
-        Object.keys(allUniqueEFO).forEach((efo) => {
-            allColorLoaded.push(getColourForEFO(efo).then((response) => {
+    
+            prepareAncestryFilter(allAncestries);
+    
+    
+            //wwwdev.ebi.ac.uk/gwas/labs/rest/api/parentMapping/EFO_0000400
+            //Load colour for unique efo
+            var allColorLoaded = []
+            Object.keys(allUniqueEFO).forEach((efo) => {
+                allColorLoaded.push(getColourForEFO(efo).then((response) => {
                 allUniqueEFO[efo] = response;
-                return response;
-            }));
+            return response;
+        }))
+            ;
         })
-
-        //When all colour are received, replot
-        Promise.all(allColorLoaded).then(() => {
-                                             //assign colour to associations for plot
-                                             console.debug(`Finish loading color from ${global_color_url}`);
-                                             console.debug(allUniqueEFO);
-                                             data_association.docs.forEach(function(d, i) {
-                                                 d.preferedColor = allUniqueEFO[d.preferedEFO].colour;
-                                                 d.preferedParentUri = allUniqueEFO[d.preferedEFO].parentUri;
-                                                 d.preferedParentLabel = allUniqueEFO[d.preferedEFO].parent;
-                                                 d.category = allUniqueEFO[d.preferedEFO].parent;
-                                             })
-                                         }
-        ).catch((err) => {
-            console.warn(`Error loading colour for Locus zoom plot from ${global_color_url}. ${err}. Using default colour.`)
+    
+            //When all colour are received, replot
+            Promise.all(allColorLoaded).then(() => {
+                //assign colour to associations for plot
+                console.debug(`Finish loading color from ${global_color_url}`);
+            console.debug(allUniqueEFO);
+            data_association.docs.forEach(function (d, i) {
+                d.preferedColor = allUniqueEFO[d.preferedEFO].colour;
+                d.preferedParentUri = allUniqueEFO[d.preferedEFO].parentUri;
+                d.preferedParentLabel = allUniqueEFO[d.preferedEFO].parent;
+                d.category = allUniqueEFO[d.preferedEFO].parent;
+            })
+        }
+        ).
+            catch((err) => {
+                console.warn(`Error loading colour for Locus zoom plot from ${global_color_url}. ${err}. Using default colour.`)
             //xintodo create a default colour to plot, if the colour query fail
-        }).then(() =>{
-            //replot
-            reloadLocusZoom('#plot', data_association);
-        });
+        }).
+            then(() => {
+                //replot
+                reloadLocusZoom('#plot', data_association
+        )
+            ;
+        })
+            ;
+        } else {
+            $("#plot").html('<span>No Associations for this EFO Trait</span>');
+            hideLoadingOverLay("#locus-plot-row-loading");
+        }
     })
 
 }
@@ -1290,340 +1304,6 @@ displayEfoTraitInfo = function(efoinfo) {
     }
 }
 
-
-/**
- * display association table
- * @param {Object} data - association solr docs
- * @param {Boolean} cleanBeforeInsert
- */
-function displayEfotraitAssociations(data, cleanBeforeInsert) {
-    //by default, we clean the table before inserting data
-    if (cleanBeforeInsert === undefined) {
-        cleanBeforeInsert = true;
-    }
-
-    var asso_count = data.length;
-
-    $(".association_count").html(asso_count);
-
-    if (asso_count == 1) {
-        $(".association_label").html("Association");
-    }
-
-    if(cleanBeforeInsert){
-        $('#association-table').bootstrapTable('removeAll');
-    }
-
-    var data_json = []
-    $.each(data, function(index,asso) {
-
-        //if association does not have rsid, skip
-        if(asso.strongestAllele == undefined){return true};
-
-        var tmp = {};
-        // Risk allele
-        var riskAllele = asso.strongestAllele[0];
-        var riskAlleleLabel = riskAllele;
-        var riskAllele_rsid = riskAllele;
-        if (riskAlleleLabel.match(/\w+-.+/)) {
-            riskAlleleLabel = riskAllele.split('-').join('-<b>')+'</b>';
-            riskAllele_rsid = riskAllele.split('-')[0];
-        }
-        // This is now linking to the variant page instead of the search page
-        // riskAllele = setQueryUrl(riskAllele,riskAlleleLabel);
-        riskAllele = setExternalLinkText( window.location.pathname.split('/efotraits/')[0] + '/variants/' + riskAllele_rsid,riskAlleleLabel);
-
-        tmp['riskAllele'] = riskAllele;
-
-        // Risk allele frequency
-        tmp['riskAlleleFreq'] = asso.riskFrequency;
-
-        // p-value
-        var pValue = asso.pValueMantissa;
-        if (pValue) {
-            var pValueExp = " x 10<sup>" + asso.pValueExponent + "</sup>";
-            pValue += pValueExp;
-            if (asso.qualifier) {
-                if (asso.qualifier[0].match(/\w/)) {
-                    pValue += " " + asso.qualifier.join(',');
-                }
-            }
-            tmp['pValue'] = pValue;
-        } else {
-            tmp['pValue'] = '-';
-        }
-
-        // OR
-        var orValue = asso.orPerCopyNum;
-        if (orValue) {
-            if (asso.orDescription) {
-                orValue += " " + asso.orDescription;
-            }
-            tmp['orValue'] = orValue;
-        } else {
-            tmp['orValue'] = '-';
-        }
-
-        // Beta
-        var beta = asso.betaNum;
-        if (beta) {
-            if (asso.betaUnit) {
-                beta += " " + asso.betaUnit;
-            }
-            if (asso.betaDirection) {
-                beta += " " + asso.betaDirection;
-            }
-            tmp['beta'] = beta;
-        } else {
-            tmp['beta'] = '-';
-        }
-
-        // CI
-        var ci = (asso.range) ? asso.range : '-';
-        tmp['beta'] = ci;
-
-
-        // Reported genes
-        var genes = [];
-        var reportedGenes = asso.reportedGene;
-        if (reportedGenes) {
-            $.each(reportedGenes, function(index, gene) {
-                genes.push(setQueryUrl(gene));
-            });
-            tmp['reportedGenes'] = genes.join(', ');
-        } else {
-            tmp['reportedGenes'] = '-';
-
-        }
-
-        // Mapped genes
-        var genes = [];
-        var mappedGenes = asso.entrezMappedGenes;
-        if (mappedGenes) {
-            $.each(mappedGenes, function(index, gene) {
-                genes.push(setQueryUrl(gene));
-            });
-            tmp['mappedGenes'] = genes.join(', ');
-        } else {
-            tmp['mappedGenes'] = '-';
-
-        }
-
-        // Reported traits
-        var traits = [];
-        var reportedTraits = asso.traitName;
-        if (reportedTraits) {
-            $.each(reportedTraits, function(index, trait) {
-                traits.push(setQueryUrl(trait));
-            });
-            tmp['reportedTraits'] = traits.join(', ');
-        } else {
-            tmp['reportedTraits'] = '-';
-        }
-
-        // Mapped traits
-        var mappedTraits = asso.mappedLabel;
-        if (mappedTraits) {
-            $.each(mappedTraits, function(index, trait) {
-                var link = window.location.pathname.split('/efotraits/')[0]+'/efotraits/' + asso.mappedUri[index].split('/').slice(-1)[0]
-                mappedTraits[index] = setExternalLinkText(link,trait)
-            });
-            tmp['mappedTraits'] = mappedTraits.join(', ');
-        } else {
-            tmp['mappedTraits'] = '-';
-        }
-
-        // Study
-        var author = asso.author_s;
-        var publicationDate = asso.publicationDate;
-        var pubDate = publicationDate.split("-");
-        var pubmedId = asso.pubmedId;
-        var study = setQueryUrl(author, author + " - " + pubDate[0]);
-        study += '<div><small>'+setExternalLink(EPMC_URL+pubmedId,'PMID:'+pubmedId)+'</small></div>';
-        tmp['study'] = study;
-
-        var studyId = asso.studyId;
-
-        // Populate the table
-        data_json.push(tmp)
-
-
-    });
-
-    $('#association-table').bootstrapTable({
-                                               exportDataType: 'all',
-                                               columns: [{
-                                                   field: 'riskAllele',
-                                                   title: 'Risk allele',
-                                                   sortable: true
-                                               }, {
-                                                   field: 'riskAlleleFreq',
-                                                   title: 'RAF',
-                                                   sortable: true
-                                               }, {
-                                                   field: 'pValue',
-                                                   title: 'p-value',
-                                                   sortable: true
-                                               },{
-                                                   field: 'orValue',
-                                                   title: 'OR',
-                                                   sortable: true
-                                               },{
-                                                   field: 'beta',
-                                                   title: 'Beta',
-                                                   sortable: true
-                                               },{
-                                                   field: 'price',
-                                                   title: 'CI',
-                                                   sortable: true
-                                               },{
-                                                   field: 'mappedGenes',
-                                                   title: 'Mapped gene(s)',
-                                                   sortable: true
-                                               },{
-                                                   field: 'reportedTraits',
-                                                   title: 'Reported trait',
-                                                   sortable: true
-                                               },{
-                                                   field: 'mappedTraits',
-                                                   title: 'Mapped EFO trait',
-                                                   sortable: true
-                                               },{
-                                                   field: 'study',
-                                                   title: 'Study',
-                                                   sortable: true
-                                               }],
-                                               data: data_json,
-
-                                           });
-
-    $('#association-table').bootstrapTable('load',data_json)
-    if(data_json.length>5){
-        $('#association-table').bootstrapTable('refreshOptions',{pagination: true,pageSize: pageRowLimit,pageList: [5,10,25,50,100,'All']})
-    }
-    hideLoadingOverLay('#association-table-loading')
-}
-
-/**
- * display study table
- * @param {Object} data - study solr docs
- * @param {Boolean} cleanBeforeInsert
- */
-function displayEfotraitStudies(data, cleanBeforeInsert=true) {
-    //by default, we clean the table before inserting data
-    var study_ids = [];
-    if(cleanBeforeInsert){
-        $('#study-table').bootstrapTable('removeAll');
-    }
-
-    var data_json = []
-    $.each(data, (index, asso) => {
-        var tmp={};
-        var study_id = asso.id;
-        if (jQuery.inArray(study_id, study_ids) == -1) {
-            study_ids.push(study_id);
-            // Author
-            var author = asso.author_s;
-            var publicationDate = asso.publicationDate;
-            var pubDate = publicationDate.split("-");
-            var pubmedId = asso.pubmedId;
-            var study_author = setQueryUrl(author, author);
-            study_author += '<div><small>'+setExternalLink(EPMC_URL+pubmedId,'PMID:'+pubmedId)+'</small></div>';
-            tmp['Author'] = study_author;
-
-            // Publication date
-            var p_date = asso.publicationDate;
-            var publi = p_date.split('T')[0];
-            tmp['publi'] = publi;
-
-
-            // Journal
-            tmp['Journal'] = asso.publication;
-
-            // Title
-            tmp['Title'] = asso.title;
-
-            // Initial sample desc
-            var initial_sample_text = '-';
-            if (asso.initialSampleDescription) {
-
-                initial_sample_text = displayArrayAsList(asso.initialSampleDescription.split(', '));
-                if(asso.initialSampleDescription.split(', ').length>1)
-                    initial_sample_text = initial_sample_text.html()
-            }
-            tmp['initial_sample_text'] = initial_sample_text;
-
-
-            // Replicate sample desc
-            var replicate_sample_text = '-';
-            if (asso.replicateSampleDescription) {
-                replicate_sample_text = displayArrayAsList(asso.replicateSampleDescription.split(', '));
-                if(asso.replicateSampleDescription.split(', ').length>1)
-                    replicate_sample_text = replicate_sample_text.html()
-            }
-            tmp['replicate_sample_text'] = replicate_sample_text;
-
-
-            // ancestralGroups
-            var ancestral_groups_text = '-';
-            if (asso.ancestralGroups) {
-                ancestral_groups_text = displayArrayAsList(asso.ancestralGroups);
-                if(asso.ancestralGroups.length>1)
-                    ancestral_groups_text = ancestral_groups_text.html()
-            }
-            tmp['ancestral_groups_text'] = ancestral_groups_text;
-
-            data_json.push(tmp)
-        }
-    });
-    // Study count //
-    $(".study_count").html(study_ids.length);
-
-    if (study_ids.length == 1) {
-        $(".study_label").html("Study");
-    }
-
-    $('#study-table').bootstrapTable({
-                                         exportDataType: 'all',
-                                         columns: [{
-                                             field: 'Author',
-                                             title: 'Author',
-                                             sortable: true
-                                         }, {
-                                             field: 'publi',
-                                             title: 'Publication Date',
-                                             sortable: true
-                                         }, {
-                                             field: 'Journal',
-                                             title: 'Journal',
-                                             sortable: true
-                                         },{
-                                             field: 'Title',
-                                             title: 'Title',
-                                             sortable: true,
-                                             width:"1000", //This works when the table is not nested into other tag, for example, in a simple Div
-                                         },{
-                                             field: 'initial_sample_text',
-                                             title: 'Initial sample description',
-                                             sortable: true
-                                         },{
-                                             field: 'replicate_sample_text',
-                                             title: 'Replication sample description',
-                                             sortable: true
-                                         },{
-                                             field: 'ancestral_groups_text',
-                                             title: 'Ancestral groups',
-                                             sortable: true
-                                         }],
-                                         data: data_json,
-
-                                     });
-    $('#study-table').bootstrapTable('load',data_json)
-    if(data_json.length>5){
-        $('#study-table').bootstrapTable('refreshOptions',{pagination: true,pageSize: pageRowLimit,pageList: [5,10,25,50,100,'All']})
-    }
-    hideLoadingOverLay('#study-table-loading')
-}
 
 
 /**
@@ -2795,12 +2475,13 @@ findAssociationForEFOs = function(efoids){
             });
         }
     })
-
-    $.each(data_association.docs, function(index, value) {
-        if ($.inArray(value.id, Object.keys(associations)) != -1) {
-            associations[value.id] = value;
-        }
-    })
+    if ('docs' in data_association) {
+        $.each(data_association.docs, function (index, value) {
+            if ($.inArray(value.id, Object.keys(associations)) != -1) {
+                associations[value.id] = value;
+            }
+        })
+    }
     return associations;
 }
 
