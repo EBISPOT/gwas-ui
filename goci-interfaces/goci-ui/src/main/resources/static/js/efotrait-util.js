@@ -917,7 +917,7 @@ function processSolrData(data, initLoad=false) {
  */
 function getTraitDataSolrSlim(mainEFO) {
     var searchQuery = mainEFO;
-    return promisePost(contextPath+'api/search',
+    return promisePost(gwasProperties.contextPath+'api/search',
         {
             'q': searchQuery,
             'max': 1,
