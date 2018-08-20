@@ -159,6 +159,8 @@ function loadAdditionalResults(facet, expand) {
 
     if (queryTerm == '*') {
         var searchTerm = 'text:'.concat(queryTerm);
+        var boost_field = ' OR title:"'.concat(queryTerm).concat('"');
+        var searchPhrase = searchTerm.concat(boost_field)
     }
     else if(queryTerm.indexOf(':') != -1 && queryTerm.indexOf('-') != -1){
         var elements = queryTerm.split(':');
@@ -169,18 +171,22 @@ function loadAdditionalResults(facet, expand) {
         var bp1 = elements[1].split('-')[0].trim();
         var bp2 = elements[1].split('-')[1].trim();
 
-        var searchTerm = 'chromosomeName:'.concat(chrom).concat(' AND chromosomePosition:[').concat(bp1).concat(' TO ').concat(bp2).concat(']');
+        var searchPhrase = 'chromosomeName:'.concat(chrom).concat(' AND chromosomePosition:[').concat(bp1).concat(' TO ').concat(bp2).concat(']');
 
     }
     else {
         var searchTerm = 'text:"'.concat(queryTerm).concat('"');
+        // Search using title field also in query
+        var boost_field = ' OR title:"'.concat(queryTerm).concat('"');
+        var searchPhrase = searchTerm.concat(boost_field);
     }
     // spinner
     $("#"+facet+"_spinner").show();
     $("#"+facet+"-table").hide();
     $.getJSON('api/search/moreresults',
               {
-                  'q': searchTerm,
+                  // 'q': searchTerm,
+                  'q': searchPhrase,
                   'max': 1000,
                   'facet': facet,
                   'pvalfilter': pval,
