@@ -45,22 +45,14 @@
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron background-color-primary-accent" style="margin: 0%; padding-bottom: 30px;">
-    <div class="container clearfix">
-        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+    <div class="container-fluid clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h2 style="margin:0px">
-                <img alt="externalLink" style="width: 1em; height: auto;" src="../static/icons/GWAS_variant_2017.png" th:src="@{/icons/GWAS_variant_2017.png}"/><span th:text="${rsId}" style="padding-left:15px"></span>
+                <img style="width: 1em; height: auto;" src="../static/icons/GWAS_variant_2017.png" th:src="@{/icons/GWAS_variant_2017.png}"/>
+                <span style="padding-left:5px">Variant: </span>
+                <span th:text="${rsId}" style="padding-left:5px"></span>
+
             </h2>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-            <!-- search box goes here -->
-            <div class="input-group" style="width: 250px; float: right;">
-                <input type="text" class="form-control" placeholder="Search the catalog" id="search-box"/>
-                <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" id="search-button">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-            </div>
         </div>
     </div>
 </div>
@@ -110,7 +102,7 @@
                         </div>
                         <div class="clearfix">
                             <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                <span>Functional class</span>
+                                <span>Most severe consequence</span>
                                 <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Most severe consequence of the variant on the overlapping transcript(s)"></span>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="variant-class">-</div>
@@ -124,8 +116,8 @@
                         </div>
                         <div class="clearfix">
                             <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                <span>GWAS Catalog traits</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Description of disease/trait analysed in the study"></span>
+                                <span>Reported trait(s)</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Description of the diseases/traits associated with this variant"></span>
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="variant-traits">-</div>
                         </div>
@@ -136,21 +128,21 @@
                         <div class="clearfix">
                             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
                                 <span>Alleles</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Variant alleles: 'reference allele' / 'alternative(s) allele(s)'"></span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Reference allele / alternative allele(s)"></span>
                             </div>
                             <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="variant-alleles">-</div>
                         </div>
                         <div class="clearfix">
                             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
                                 <span>Minor allele</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Minor Allele: the second most frequent allele in the 1000 Genomes - Phase 3 combined population"></span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="The second most frequent allele in the 1000 Genomes - Phase 3 combined population"></span>
                             </div>
                             <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="minor-allele">-</div>
                         </div>
                         <div class="clearfix">
                             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
                                 <span>MAF</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Minor Allele Frequency: frenquency of the second most frequent allele in the 1000 Genomes - Phase 3 combined population"></span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Minor allele frequency in the 1000 Genomes - Phase 3 combined population"></span>
                             </div>
                             <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="minor-allele-freq">-</div>
                         </div>
@@ -226,9 +218,6 @@
                         <span id="ld_panel_label">Linkage disequilibrium (LD)</span><span class="glyphicon glyphicon-stats" style="color:#398A96;margin-left:10px"></span>
                     </h3>
                     <span class="pull-right">
-                        <button type="button" class="btn btn-default btn-xs" id="ens_ld_button">
-                            <span><span th:text="${rsId}"></span> LD information in Ensembl<span class="glyphicon glyphicon-new-window external-link-smaller"></span></span>
-                        </button>
                         <span class="clickable" style="margin-left:25px" onclick="toggleSidebar('#ld_panel span.clickable')">
                             <span class="glyphicon glyphicon-chevron-up"></span>
                         </span>
@@ -296,14 +285,12 @@
 
     <script src="../static/js/variantresult.js" th:src="@{../js/variantresult.js}"></script>
 
-
     <!--bootstrap-table-flat-json-->
     <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/flat-json/bootstrap-table-flat-json.js"></script>
     <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
     <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/export/bootstrap-table-export.js"></script>
     <script src="https://cdn.rawgit.com/wenzhixin/09e218c884f4f380b68a/raw/5d258d2f78225a4ac1a72d54a34cc7976d630df1/jquery.base64.js"></script>
     <script src="https://cdn.rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js"></script>
-
     <!-- Google analytics
     ================================================== -->
     <script>
@@ -327,6 +314,8 @@
     <!-- icons http://fortawesome.github.io/Font-Awesome/examples/ -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css"/>
 
+    <!--this come last to make sure trait page specific style is not overwritten by othe css.-->
+    <link rel="stylesheet" href="../static/css/goci-efotrait-page.css" th:href="@{../css/goci-efotrait-page.css}"/>
 
     <script type="text/javascript">
         try {
