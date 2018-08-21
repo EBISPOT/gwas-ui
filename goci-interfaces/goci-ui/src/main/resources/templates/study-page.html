@@ -48,10 +48,12 @@
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron background-color-primary-accent" style="margin: 0%; padding-bottom: 30px;">
-    <div class="container clearfix">
-        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+    <div class="container-fluid clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h2 style="margin:0px">
-                <img alt="externalLink" style="width: 1em; height: auto;" src="../static/icons/GWAS_study_2017.png" th:src="@{/icons/GWAS_study_2017.png}"/><span th:text="${accessionId}" style="padding-left:15px"></span>
+                <img alt="externalLink" style="width: 1em; height: auto;" src="../static/icons/GWAS_study_2017.png" th:src="@{/icons/GWAS_study_2017.png}"/>
+                <span style="padding-left:5px">Study: </span>
+                <span th:text="${accessionId}" style="padding-left:5px"></span>
             </h2>
         </div>
     </div>
