@@ -55,7 +55,7 @@
                      style="width: 1em; height: auto;"
                      src="../static/icons/GWAS_trait_2017.png"
                      th:src="@{/icons/GWAS_trait_2017.png}"/>
-                <span style="padding-left:5px">EFO: </span>
+                <span style="padding-left:5px">EFO Trait: </span>
                 <span id="top-panel-trait-label" th:text="${result.query}" style="padding-left:5px"></span>
             </h2>
         </div>
@@ -204,10 +204,10 @@
             </li>
 
             <li>
-                <h3>Association table:</h3> All association found in the GWAS Catalog for the selected triat(s). The table is searchable, sortable, customizable, and can be download in different format.
+                <h3>Association table:</h3> All association found in the GWAS Catalog for the selected trait(s). The table is searchable, sortable, customizable, and can be download in different format.
             </li>
             <li>
-                <h3>Studies table:</h3> All studies found in the GWAS Catalog for the selected triat(s). The table is searchable, sortable, customizable, and can be download in different format.
+                <h3>Studies table:</h3> All studies found in the GWAS Catalog for the selected trait(s). The table is searchable, sortable, customizable, and can be download in different format.
             </li>
         </ul>
     </div>
@@ -243,56 +243,46 @@
 
                 <!-- Trait Summary -->
                 <div class="clearfix" id="summary-panel-loading">
-                    <div class="panel-body col-lg-6 col-md-6 col-sm-6 col-xs-6" id="efo-details">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top: 15px; padding-left: 15px; padding-right: 15px;" id="efo-details">
 
                         <!-- EFO Label -->
                         <div class="clearfix">
-                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                <span>Label</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Label"></span>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
+                                <span>EFO Trait label</span>
+                                <!--<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Label"></span>-->
                             </div>
-                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="efotrait-label">-</div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-label">-</div>
                         </div>
 
                         <!-- EFO ID -->
                         <div class="clearfix">
-                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
                                 <span>Trait EFO ID</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="EFO Identifier"></span>
+                                <!--<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="EFO Identifier"></span>-->
                             </div>
-                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="efotrait-id">-</div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-id">-</div>
                         </div>
 
                         <!-- EFO Synonyms -->
                         <div class="clearfix">
-                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
                                 <span>Synonyms</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Synonyms"></span>
+                                <!--<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Synonyms"></span>-->
                             </div>
-                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="efotrait-synonym">-</div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-synonym">-</div>
                         </div>
-
-
-                        <!-- EFO Description ORIGINAL Location -->
-                        <!--<div class="clearfix">-->
-                        <!--<div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">-->
-                        <!--<span>Description</span>-->
-                        <!--<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Term description"></span>-->
-                        <!--</div>-->
-                        <!--<div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" style="margin-bottom: 1em;" id="efotrait-description">-</div>-->
-                        <!--</div>-->
 
                         <!-- EFO Term Mappings -->
                         <div class="clearfix">
-                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
                                 <span>Mapped terms</span>
                                 <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
                                       title="Ontology mappings or cross-references in other ontologies.">
                                 </span>
                             </div>
 
-                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7">
-                                <div id="btn-oxo-expand">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                <div id="btn-oxo-expand">-
                                     <!--<a class="btn btn-default" id="btn-toggle-oxo"-->
                                     <!--type="button"-->
                                     <!--data-toggle="collapse"-->
@@ -306,7 +296,7 @@
                                 <div class="clearfix collapse" id="oxo-graph">
                                     <div  class="panel-body">
                                         <div id="oxo-div" >
-                                            <div id="oxo-list"></div>
+                                            <div id="oxo-list">-</div>
                                             <!--<div>-->
                                             <!--<div id="oxo-vis"></div>-->
                                             <!--</div>-->
@@ -317,40 +307,41 @@
                         </div>
                     </div>
 
-                    <div class="panel-body col-lg-6 col-md-6 col-sm-6 col-xs-6" id="panel-links">
-                        <div>
-                            <a type="button" class="btn btn-default" id='ols-link'>Trait in OLS
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top: 15px; padding-left: 15px; padding-right: 15px;">
+                        <div class="btn-group-vertical pull-right" id="panel-links">
+                        <div style="margin-bottom: 0.6em">
+                            <a type="button" class="btn btn-default" id='ols-link'>Trait in <b>OLS</b>
                                 <span class="glyphicon glyphicon-new-window external-link"></span>
                             </a>
                         </div>
 
-                        <div>
-                            <a type="button" class="btn btn-default" id='oxo-link'>Trait in OXO
+                        <div style="margin-bottom: 0.6em">
+                            <a type="button" class="btn btn-default" id='oxo-link'>Trait in <b>OXO</b>
                                 <span class="glyphicon glyphicon-new-window external-link"></span>
                             </a>
                         </div>
 
-                        <div>
-                            <a type="button" class="btn btn-default" id="ot-link"> Trait in Open Targets
+                        <div style="margin-bottom: 0.6em">
+                            <a type="button" class="btn btn-default" id="ot-link"> Trait in <b>Open Targets</b>
                                 <span class="glyphicon glyphicon-new-window external-link"></span>
                             </a>
+                        </div>
                         </div>
                     </div>
 
-                    <!-- TEST Description -->
-                    <div class="clearfix">
-                        <div class="panel-body col-xs-12">
-                            <div class="col-lg-2 item-left">
+                    <!-- Description -->
+                    <div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 item-left-bold">
                                 <span>Description</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Term Description"></span>
                             </div>
-                            <div class="col-lg-9" style="text-align: justify;" id="efotrait-description">-</div>
+                            <div class="col-lg-10" style="text-align: justify;" id="efotrait-description">-</div>
                         </div>
                     </div>
 
                     <!-- Reported Traits mapped to this EFO term -->
-                    <div class="clearfix">
-                        <div class="panel-body col-xs-12">
+                    <div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="col-lg-2 item-left">
                                 <span>Reported Traits</span>
                                 <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Reported Traits"></span>
@@ -360,10 +351,8 @@
                     </div>
 
 
-                    <div class="panel-body col-lg-12"></div>
-
                     <!-- Highlighted Study button here -->
-                    <div class="panel-body col-xs-2" id="panel-links-DUPLICATE">
+                    <div class="panel-body col-xs-2">
                         <div>
                             <a class="btn btn-default"
                                type="button"
@@ -638,12 +627,12 @@
                     <div id="locus_panel" class="panel panel-default">
                         <div class="panel-heading background-color-primary-accent">
                             <h3 class="panel-title">
-                                <span class="locus_label">Plot of Catalog associations for selected trait(s)</span>
+                                <span class="locus_label">Plot of Catalog associations for selected trait</span>
                                 <!--<span class="glyphicon glyphicon-stats manhattan-plot-badge"></span>-->
-                                <span class="glyphicon glyphicon-question-sign"
-                                      data-toggle="tooltip"
-                                      title="Plot includes all traits selected in the expanded search."
-                                      style="margin-left:2px;font-size:smaller"></span>
+                                <!--<span class="glyphicon glyphicon-question-sign"-->
+                                      <!--data-toggle="tooltip"-->
+                                      <!--title="Plot includes all traits selected in the expanded search."-->
+                                      <!--style="margin-left:2px;font-size:smaller"></span>-->
                             </h3>
                             <span class="pull-right">
                         <span class="clickable"
