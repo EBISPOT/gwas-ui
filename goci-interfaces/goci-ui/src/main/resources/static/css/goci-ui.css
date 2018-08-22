@@ -429,6 +429,53 @@ a > .toplevel-view {
     /*display: block;*/
 }
 
+.border-search-box {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    table-layout: fixed;
+    border:1px solid #cde2f5;
+    background:#fff;
+    margin: 10px auto;
+    background: white;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+    -moz-box-shadow:    0px 0px 8px rgba(0,0,0,0.3);
+    box-shadow:         0px 0px 8px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 90;
+}
+
+.border-search-box-trait {
+    -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+    -moz-box-shadow:    0px 0px 8px rgba(0,0,0,0.3);
+    box-shadow:         0px 0px 8px rgba(0,0,0,0.3);
+}
+
+.letter-circle {
+    background-color: yellowgreen;
+    padding: 3px;
+    color: white;
+    /*font-size: larger;*/
+    border-radius: 7px;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.letter-circle-variant {
+    background-color: darkmagenta;
+}
+
+.letter-circle-trait {
+    background-color: #ffac1b;
+}
+
+.letter-circle:hover .tooltiptext {
+    visibility: visible;
+}
 
 @-webkit-keyframes rotation {
     from {-webkit-transform: rotate(0deg);}
