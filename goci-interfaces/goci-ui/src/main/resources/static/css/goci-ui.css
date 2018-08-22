@@ -421,6 +421,15 @@ a > .toplevel-view {
     background:#fff;
 }
 
+.morecontent span {
+    display: none;
+}
+
+.morelink {
+    /*display: block;*/
+}
+
+
 @-webkit-keyframes rotation {
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(359deg);}

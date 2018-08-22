@@ -196,7 +196,10 @@ function displaySummaryStudy(data, clearBeforeInsert) {
     $("#study-datepublication").html(study.publicationDate.split('T')[0]);
     if ('authorsList' in study) {
         console.log(study.authorsList);
-        $("#study-authors-list").html(displayAuthorsListAsList(study.authorsList));
+        // require toggle-resize.js
+        var reduce_text= displayAuthorsListAsList(study.authorsList);
+        reduce_text = addShowMoreLink(reduce_text, 50, "...");
+        $("#study-authors-list").html(reduce_text);
     }
     $("#study-reported-trait").html(study.traitName);
     $("#study-efo").html(study.efoLink);
