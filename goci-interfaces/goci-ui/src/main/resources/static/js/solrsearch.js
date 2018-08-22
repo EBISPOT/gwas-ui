@@ -132,7 +132,7 @@ function solrSearch(queryTerm) {
     console.log("Solr research request received for " + queryTerm);
     if (queryTerm == '*') {
         var searchTerm = 'text:'.concat(queryTerm);
-        var boost_field = ' OR title:"'.concat(queryTerm).concat('"');
+        var boost_field = ' OR title:"'.concat(queryTerm).concat('"')+' OR synonyms:"'.concat(queryTerm).concat('"');
         var searchPhrase = searchTerm.concat(boost_field)
     }
     else if(queryTerm.indexOf(':') != -1 && queryTerm.indexOf('-') != -1){
@@ -149,7 +149,7 @@ function solrSearch(queryTerm) {
     else {
         var searchTerm = 'text:"'.concat(queryTerm).concat('"');
         // Search using title field also in query
-        var boost_field = ' OR title:"'.concat(queryTerm).concat('"');
+        var boost_field = ' OR title:"'.concat(queryTerm).concat('"')+' OR synonyms:"'.concat(queryTerm).concat('"');
         var searchPhrase = searchTerm.concat(boost_field);
     }
     setState(SearchState.LOADING);
