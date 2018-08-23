@@ -21,6 +21,7 @@ function getSummaryStatsInfo(study_accession) {
         throw(err);
     })
     
+    return "";
 }
 
 

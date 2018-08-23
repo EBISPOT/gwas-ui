@@ -223,7 +223,12 @@ function displaySummaryStudy(data, clearBeforeInsert) {
         $("#study-summary-stats").html("Available "+linkFullPValue);
        
         var summaryStatData = getSummaryStatsInfo(study.accessionId);
-        console.log("Integration with Summary Stats API");
+        if (summaryStatData !="") {
+            $("#study-summary-stats").html("Available "+linkFullPValue+" Summary Stats found");
+            console.log("Integration with Summary Stats API");
+            console.log(summaryStatData);
+        }
+        
     }
     
     $("#pubmedid_button").attr('onclick', "window.open('" + gwasProperties.NCBI_URL + study.pubmedId + "',    '_blank')");
