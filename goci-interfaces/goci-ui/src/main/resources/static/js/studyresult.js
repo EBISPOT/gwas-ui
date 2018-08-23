@@ -220,13 +220,14 @@ function displaySummaryStudy(data, clearBeforeInsert) {
         linkFullPValue = ftplink.concat("<span class='glyphicon glyphicon-signal clickable context-help'" +
             " data-toggle='tooltip'" +
             "data-original-title='Click for summary statistics'></span></a>");
-        $("#study-summary-stats").html("Available "+linkFullPValue);
+
        
         var summaryStatData = getSummaryStatsInfo(study.accessionId);
         if (summaryStatData !="") {
-            $("#study-summary-stats").html("Available "+linkFullPValue+" Summary Stats found");
-            console.log("Integration with Summary Stats API");
-            console.log(summaryStatData);
+            $("#study-summary-stats").html("Download "+linkFullPValue+" --> Summary Stats API found");
+        }
+        else {
+            $("#study-summary-stats").html("Download "+linkFullPValue);
         }
         
     }
