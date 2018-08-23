@@ -13,7 +13,7 @@ $(document).ready(function() {
     console.log("Documentation should be loaded from " + url + "...");
     
     // load the page content
-    $.get(url, loadDocumentation(pagename, content)).fail(console.log("Failed to get content from " + url));
+    $.get(url, loadDocumentation(page, content)).fail(console.log("Failed to get content from " + url));
 });
 
 var loadDocumentation = function(pagename, content) {
