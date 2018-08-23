@@ -30,9 +30,18 @@ function displayDatatableSummaryStats(data, cleanBeforeInsert=true) {
     var publi = p_date.split('T')[0];
     tmp['publication_date'] = publi;
     // Reported trait
+    console.log(summary_stats);
+    console.log(summary_stats.pubmedId);
+    console.log(summary_stats.traitName_s);
     tmp['reported_trait'] = summary_stats.traitName_s;
+    
     //Mapped EFO trait. Check if in the future might be more than 1
-    tmp['efo'] = '<a href="'+gwasProperties.contextPath+'efotraits/'+summary_stats.shortForm[0]+'">'+summary_stats.shortForm[0]+'</a>';
+    if ('shortForm' in summary_stats) {
+       tmp['efo'] = '<a href="'+gwasProperties.contextPath+'efotraits/'+summary_stats.shortForm[0]+'">'+summary_stats.shortForm[0]+'</a>';
+    }
+    else {
+        tmp['efo'] = 'N/A';
+    }
     // Number Associations
     var nr_association = 0;
     if ('association_rsId' in summary_stats) {
