@@ -2,6 +2,17 @@
 
 == API
 
+=== API documentation
+
+Documentation for developers on how to use the GWAS Catlaog REST API can be found here www.ebi.ac.uk/gwas/labs/rest/docs/api
+
+=== API Endpoints
+
+A list of endpoints can be found here https://www.ebi.ac.uk/gwas/labs/rest/api
+
+=== API usage examples
+
+Sample scripts for users and developers for common use cases for the GWAS Catlaog REST API can be found here https://www.ebi.ac.uk/gwas/labs/rest/docs/sample-scripts
 
 
 == Summary statistics API
