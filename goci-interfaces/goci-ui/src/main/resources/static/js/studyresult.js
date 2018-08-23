@@ -223,6 +223,7 @@ function displaySummaryStudy(data, clearBeforeInsert) {
         $("#study-summary-stats").html("Available "+linkFullPValue);
        
         var summaryStatData = getSummaryStatsInfo(study.accessionId);
+        console.log("Integration with Summary Stats API");
     }
     
     $("#pubmedid_button").attr('onclick', "window.open('" + gwasProperties.NCBI_URL + study.pubmedId + "',    '_blank')");
