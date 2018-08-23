@@ -16,9 +16,10 @@ A 2017 link:http://www.ebi.ac.uk/training/online/course/nhgri-ebi-gwas-catalog-c
 
 A 2013 http://www.genome.gov/27554296[webinar] hosted by the NHGRI Division of Genomic Medicine, to highlight the utility and impact of the GWAS Catalog.
 
-10th Anniversary (2018) http://www.ensembl.info/2018/06/28/ten-years-of-the-gwas-catalog-past-present-and-future/[blog post] highlighting the links between the GWAS Catalog and Ensembl.
+A 10th Anniversary (2018) http://www.ensembl.info/2018/06/28/ten-years-of-the-gwas-catalog-past-present-and-future/[blog post] highlighting the links between the GWAS Catalog and Ensembl.
 
-
+A http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new-gwas-catalog/[blog post] describing the collaboration between the GWAS Catalog and Open Targets.
+ 
 === Publications
 
 ==== GWAS Catalog publications

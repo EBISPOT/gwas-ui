@@ -7,7 +7,7 @@ Within the Catalog, all link:methods[eligible] GWA studies are identified by lit
 Since 2010, delivery and development of the Catalog has been a collaborative project between the EMBL-EBI and NHGRI. The Catalog website and infrastructure is now hosted by EMBL-EBI. A team of curators, all of whom are experienced molecular biologists, curate the data, and provide user support. The curation team is supported by dedicated software developers, and is lead by Fiona Cunningham, Paul Flicek & Helen Parkinson, and Lucia Hindorff at the NHGRI. We work closely with the https://www.ebi.ac.uk/about/people/helen-parkinson[SPOT] and http://www.ensembl.org/info/about/index.html[Ensembl] teams at the EBI, and receive input from an independent Scientific Advisory Board.
 For more details about the Catalog curation process and data extraction procedures, please refer to the link:methods[Methods page].
 
-== Contact
+== Contact 
 
 === Contacting the GWAS Catalog team
 

@@ -50,6 +50,22 @@ Individual SNP-trait associations identified in eligible studies are included in
 * We are working on expanding the scope of the GWAS Catalog to include studies using large-scale targeted/non-genome-wide arrays, including the Metabochip, Immunochip and Exome arrays. This is currently in a pilot phase where prioritisation of targeted and exome array studies for inclusion in the Catalog is by 1) relevance of the trait analysed 2) user request. 
 * Targeted array studies included in the Catalog are indicated in the search interface using  a small “target” icon, close to the number of associations curated from that specific study.
 
+==== Summary statistics
+
+From 2017 the GWAS Catalog started hosting summary statistics files in addition to curated associations. Summary statistics are acquired from a number of different sources:
+
+* Included in a curated paper as a supplementary file
+* Identified via link or reference in a curated paper
+* Identified via a consortium or author website
+* Submitted to the GWAS Catalog by an author
+
+Summary statistics must meet a number of criteria to be eligible for inclusion in the Catalog:
+
+* Must include >100,000 SNPs
+* Must reproduce the initial GWAS extracted in the Catalog, i.e. same samples (not a sub-set, e.g. one cohort of a meta-analysis), and on the same trait
+* Must be freely available, i.e. not only by request to author or password-protected
+* Must not require agreement to any specific terms and conditions, unless this has been agreed in advance by the author/consortium
+
 === Data extraction
 
 GWAS Catalog data are manually extracted from the literature (either the main text or supporting information) by expert scientists.
