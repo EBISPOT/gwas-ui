@@ -1,3 +1,9 @@
 = API documentation
 
-== API subtitle 1
+== API
+
+
+
+== Summary statistics API
+
+The REST API for the summary statistics database is now available at www.ebi.ac.uk/gwas/docs/api/summary-statistics.
