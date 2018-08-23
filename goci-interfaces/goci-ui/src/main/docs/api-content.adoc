@@ -1,6 +1,4 @@
-= API documentation
-
-== API
+= API
 
 === API documentation
 
