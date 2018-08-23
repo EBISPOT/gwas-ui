@@ -52,7 +52,7 @@
 <div class="container-fluid">
     <ol class="breadcrumb background-color-complementary-accent">
         <li><a href="home">Home</a></li>
-        <li class="active">Documentation</li>
+        <li class="active">Methods</li>
     </ol>
 </div>
 
@@ -60,11 +60,11 @@
 
 
     <div class="row">
-        <a href="docs/faq" th:href="@{docs/faq}">
+        <a href="docs/methods/criteria" th:href="@{docs/methods/criteria}">
             <div class="col-md-4 toplevel-view">
-                <h2 class="flaticon-information9 color-primary-bold">FAQs</h2>
+                <h2 class="flaticon-information9 color-primary-bold">Inclusion criteria</h2>
 
-                <p>Check here for answers to common questions about the GWAS Catalog</p>
+                <p>TO DO </p>
             </div>
         </a>
         <a href="docs/methods" th:href="@{docs/methods}">
@@ -81,28 +81,7 @@
                 <p>A list of resources related to the GWAS Catalog, including training materials and workshop slides.</p>
             </div>
         </a>
-        <a href="docs/ontology" th:href="@{docs/ontology}">
-            <div class="col-md-4 toplevel-view">
-                <h2 class="flaticon-owl3 color-primary-bold">Ontology</h2>
 
-                <p>Details of the ontology representation of GWAS Catalog traits.</p>
-            </div>
-        </a>
-        <a href="docs/abreviations" th:href="@{docs/abbreviations}">
-            <div class="col-md-4 toplevel-view">
-                <h2 class="flaticon-list18 color-primary-bold">Abbreviations</h2>
-
-                <p>Full description of abbreviations used in the Catalog.</p>
-            </div>
-        </a>
-
-        <a href="docs/related-resources" th:href="@{docs/api}">
-            <div class="col-md-4 toplevel-view">
-                <h2 class="flaticon-source2 color-primary-bold">API</h2>
-
-                <p>A guide to how to access catalog data programmatically.</p>
-            </div>
-        </a>
     </div>
 
     <hr/>
@@ -135,10 +114,10 @@
     (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function() {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
         a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
+            m = s.getElementsByTagName(o)[0];
         a.async = 1;
         a.src = g;
         m.parentNode.insertBefore(a, m)

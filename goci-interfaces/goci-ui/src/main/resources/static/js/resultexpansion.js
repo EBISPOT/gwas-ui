@@ -223,15 +223,11 @@ function addResults(data, expand, id) {
 
         setDownloadLink(data.responseHeader.params);
 
-        // if (data.responseHeader.params.fq == "resourcename:study" ||
-        //         $.inArray("resourcename:study", data.responseHeader.params.fq) != -1) {
-        //     console.log("Processing data for: "+data.responseHeader.params.fq);
-            // var studyTable = $('#study-table-body').empty(); //only removes the first table, each result is now a table
-            $('#study-summaries').removeClass('more-results');
+        $('#study-summaries').removeClass('more-results');
 
-            var divResult = $('#resultQuery').empty();
+        var divResult = $('#resultQuery').empty();
 
-            for (var j = 0; j < documents.length; j++) {
+        for (var j = 0; j < documents.length; j++) {
                 try {
                     var doc = documents[j];
 
@@ -279,34 +275,9 @@ function addResults(data, expand, id) {
                 catch (ex) {
                     console.log("Failure to process document " + ex);
                 }
-            }
-        // }
+        }
 
-        // TODO: Check if still needed with change to document types, we no longer have "association"
-        // else if (data.responseHeader.params.fq == "resourcename:association" ||
-        //         $.inArray("resourcename:association", data.responseHeader.params.fq) != -1) {
-        //     console.log("Processing associations");
-        //     var associationTable = $('#association-table-body').empty();
-        //     $('#association-summaries').removeClass('more-results');
-        //
-        //     for (var j = 0; j < documents.length; j++) {
-        //         try {
-        //             var doc = documents[j];
-        //             processAssociation(doc, associationTable);
-        //         }
-        //         catch (ex) {
-        //             console.log("Failure to process document " + ex);
-        //         }
-        //     }
-        // }
-        //
-        // if (expand) {
-        //     $('.study-toggle').empty().text("Show fewer results");
-        //     $('#study-table-body').find('.hidden-study-row').collapse('show');
-        //     $('#study-table-body').find('span.tgb').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-        //     $('#expand-table').removeClass('table-collapsed').addClass('table-expanded');
-        //     $('#expand-table').empty().text("Collapse all studies");
-        // }
+
     }
 }
 

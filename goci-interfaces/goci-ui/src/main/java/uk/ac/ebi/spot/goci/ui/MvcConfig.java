@@ -23,7 +23,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/downloads").setViewName("downloads");
         registry.addViewController("/search/traits").setViewName("traitlist");
         registry.addViewController("/downloads/summary-statistics").setViewName("summary-statistics");
-        registry.addRedirectViewController("/search/most-recent", "/search?query=*&filter=recent");
+        //registry.addRedirectViewController("/search/most-recent", "/search?query=*&filter=recent");
         registry.addViewController("/snp").setViewName("snp-page");
         registry.addViewController("/ancestry").setViewName("ancestry");
         registry.addViewController("/anniversary").setViewName("anniversary");
@@ -31,21 +31,30 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/publications").setViewName("publications");
         registry.addViewController("/studies").setViewName("studies");
         // These pages must be removed. TODO
-        registry.addViewController("/publication-fake").setViewName("study-disambig");
-        registry.addViewController("/study-fake").setViewName("study-page-fake");
-        registry.addViewController("/empty").setViewName("empty");
+        //registry.addViewController("/publication-fake").setViewName("study-disambig");
+        //registry.addViewController("/study-fake").setViewName("study-page-fake");
+        //registry.addViewController("/empty").setViewName("empty");
         // dynamically generated docs pages
         registry.addViewController("/docs").setViewName("docs");
         registry.addViewController("/docs/about").setViewName("docs-template");
         registry.addViewController("/docs/file-downloads").setViewName("docs-template");
         registry.addViewController("/docs/diagram-downloads").setViewName("docs-template");
         registry.addViewController("/docs/faq").setViewName("docs-template");
-        registry.addViewController("/docs/methods").setViewName("docs-template");
+        // Create a static page or check if you can add just the code
+        //registry.addViewController("/docs/methods").setViewName("docs-template");
+        registry.addViewController("/docs/methods").setViewName("methods");
+        registry.addViewController("/docs/methods/criteria").setViewName("docs-template");
+        registry.addViewController("/docs/methods/curation").setViewName("docs-template");
+        registry.addViewController("/docs/methods/summary-statistics").setViewName("docs-template");
+
         registry.addViewController("/docs/ontology").setViewName("docs-template");
         registry.addViewController("/docs/abbreviations").setViewName("docs-template");
         registry.addViewController("/docs/fileheaders").setViewName("docs-template");
         registry.addViewController("/docs/related-resources").setViewName("docs-template");
-        registry.addViewController("/docs/programmatic-access").setViewName("docs-template");
+        // Redirect old programmatic-access to api
+        registry.addRedirectViewController("/docs/programmatic-access", "/docs/api");
+        registry.addViewController("/docs/api").setViewName("docs-template");
+        registry.addViewController("/docs/api/summary-statistics").setViewName("docs-template");
         registry.addViewController("/docs/known-issues").setViewName("docs-template");
         registry.addViewController("/docs/mappingfileheaders").setViewName("docs-template");
         registry.addViewController("/docs/ancestry").setViewName("docs-template");

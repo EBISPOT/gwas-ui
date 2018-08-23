@@ -477,6 +477,14 @@ a > .toplevel-view {
     visibility: visible;
 }
 
+.descriptionSearch {
+    padding-right: 15px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #333;
+}
+
 @-webkit-keyframes rotation {
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(359deg);}
