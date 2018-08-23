@@ -41,8 +41,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/docs/diagram-downloads").setViewName("docs-template");
         registry.addViewController("/docs/faq").setViewName("docs-template");
         // Create a static page or check if you can add just the code
-        registry.addViewController("/docs/methods").setViewName("docs-template");
-        //registry.addViewController("/docs/methods").setViewName("methods");
+        registry.addViewController("/docs/methods").setViewName("methods");
         registry.addViewController("/docs/methods/criteria").setViewName("docs-template");
         registry.addViewController("/docs/methods/curation").setViewName("docs-template");
         registry.addViewController("/docs/methods/summary-statistics").setViewName("docs-template");
