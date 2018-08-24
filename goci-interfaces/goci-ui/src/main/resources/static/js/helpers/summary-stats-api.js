@@ -9,19 +9,20 @@
  * @param {Boolean} initLoad
  * @returns {Promise}
  */
-function getSummaryStatsInfo(study_accession) {
+function getSummaryStatsInfo(study_accession, div) {
     console.log("Query Summary Stats REST API by study accession id " + study_accession);
     return promiseGet('/gwas/summary-statistics/api/studies/'+study_accession,
         {},'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         //processVariantData(data,searchQuery);
         console.log("Summary stats result for " + study_accession);
+        var nexContent = div.html();
+        nexContent = nexContent+ "&nbsp;&nsbp; Found REST API summary stats";
+        div.html(nexContent);
         return data;
     }).catch(function(err) {
         console.error('Error when seaching Summary Stats data for' + study_accession + '. ' + err);
         throw(err);
     })
-    
-    return "";
 }
 
 

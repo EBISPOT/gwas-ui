@@ -215,20 +215,16 @@ function displaySummaryStudy(data, clearBeforeInsert) {
         var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
         
         var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
-            .concat(dir).concat("' target='_blank'</a>");
+            .concat(dir).concat("' target='_blank'>");
         
-        linkFullPValue = ftplink.concat("<span class='glyphicon glyphicon-signal clickable context-help'" +
+        linkFullPValue = ftplink.concat("Download<span class='glyphicon glyphicon-signal clickable context-help'" +
             " data-toggle='tooltip'" +
             "data-original-title='Click for summary statistics'></span></a>");
-
+    
+        $("#study-summary-stats").html(linkFullPValue);
+        var summaryStatData = getSummaryStatsInfo(study.accessionId,$("#study-summary-stats"));
        
-        var summaryStatData = getSummaryStatsInfo(study.accessionId);
-        if (summaryStatData !="") {
-            $("#study-summary-stats").html("Download "+linkFullPValue+" --> Summary Stats API found");
-        }
-        else {
-            $("#study-summary-stats").html("Download "+linkFullPValue);
-        }
+        
         
     }
     
