@@ -11,7 +11,7 @@
           content="The NHGRI-EBI GWAS Catalog: a curated collection of all published genome-wide association studies, produced by a collaboration between EMBL-EBI and NHGRI"/>
     <meta name="keywords" content="GWAS Catalog, GWAS, NHGRI, EBI, EMBL-EBI, SPOT"/>
     <meta name="author" content="Tony Burdett, Emma Hastings, Dani Welter, SPOT, EMBL-EBI, NHGRI"/>
-    <link rel="icon" href="../static/images/favicon.ico" th:href="@{images/favicon.ico}"/>
+    <link rel="icon" th:href="@{/images/favicon.ico}"/>
 
     <title>GWAS Catalog</title>
 
@@ -51,7 +51,7 @@
 
 <div class="container-fluid">
     <ol class="breadcrumb background-color-complementary-accent">
-        <li><a href="home">Home</a></li>
+        <li><a th:href="@{/home}">Home</a></li>
         <li class="active">Methods</li>
     </ol>
 </div>
@@ -60,21 +60,21 @@
 
 
     <div class="row">
-        <a href="/docs/methods/criteria" th:href="@{/docs/methods/criteria}">
+        <a th:href="@{/docs/methods/criteria}">
             <div class="col-md-4 toplevel-view">
                 <h2 class="flaticon-notes10 color-primary-bold">Inclusion criteria</h2>
 
                 <p>Eligibility criteria for inclusion of studies and associations in the Catalog</p>
             </div>
         </a>
-        <a href="/docs/methods/curation" th:href="@{/docs/methods/curation}">
+        <a th:href="@{/docs/methods/curation}">
             <div class="col-md-4 toplevel-view">
                 <h2 class="flaticon-user22 color-primary-bold">Curation</h2>
 
                 <p>A description of the methods used to extract and annotate GWAS Catalog data, along with a brief description of each data type.</p>
             </div>
         </a>
-        <a href="/docs/methods/summary-statistics" th:href="@{/docs/related-resources}">
+        <a th:href="@{/docs/related-resources}">
             <div class="col-md-4 toplevel-view">
                 <h2 class="flaticon-statistics color-primary-bold">Summary statistics</h2>
 
