@@ -32,7 +32,7 @@ function getDataSolr(main, initLoad=false) {
     var searchQuery = main;
     
     console.log("Solr research request received for " + searchQuery);
-    return promisePost( gwasProperties.contextPath + '/api/search/advancefilter',
+    return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
             'q': searchQuery,
             'max': 99999,
