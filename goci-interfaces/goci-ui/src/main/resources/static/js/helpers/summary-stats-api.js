@@ -22,6 +22,6 @@ function getSummaryStatsInfo(study_accession, div) {
         return data;
     }).catch(function(err) {
         console.error('Error when seaching Summary Stats data for' + study_accession + '. ' + err);
-        throw(err);
+        //throw(err);
     })
 }

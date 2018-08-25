@@ -17,18 +17,18 @@
     <!-- Bootstrap core CSS -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
-    <link href="../static/css/bootstrap-table.css" th:href="@{css/bootstrap-table.css}" rel="stylesheet"/>
-    <link href="../static/css/bootstrap-theme.css" th:href="@{css/bootstrap-theme.min.css}" rel="stylesheet"/>
+    <link   th:href="@{/css/bootstrap-table.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
-    <link href="../static/css/jumbotron.css" th:href="@{css/jumbotron.css}" rel="stylesheet"/>
-    <link href="../static/css/sticky-footer-navbar.css" th:href="@{css/sticky-footer-navbar.css}" rel="stylesheet"/>
+    <link  th:href="@{/css/jumbotron.css}" rel="stylesheet"/>
+    <link  th:href="@{/css/sticky-footer-navbar.css}" rel="stylesheet"/>
 
     <!-- Additional styling on top of bootstrap -->
-    <link rel="stylesheet" href="../static/css/goci-ui.css" th:href="@{css/goci-ui.css}"/>
-    <link rel="stylesheet" href="../static/css/icons/flaticon.css" th:href="@{css/icons/flaticon.css}"/>
-    <link rel="stylesheet" href="../static/css/goci-color-palette-1.css" th:href="@{css/goci-color-palette-1.css}"/>
-    <link rel="stylesheet" href="../static/css/science-and-medicine/flaticon.css" th:href="@{css/science-and-medicine/flaticon.css}"/>
+    <link rel="stylesheet" th:href="@{/css/goci-ui.css}"/>
+    <link rel="stylesheet"  th:href="@{/css/icons/flaticon.css}"/>
+    <link rel="stylesheet"  th:href="@{/css/goci-color-palette-1.css}"/>
+    <link rel="stylesheet" href="../static/css/science-and-medicine/flaticon.css" th:href="@{/css/science-and-medicine/flaticon.css}"/>
 
 
 
@@ -55,29 +55,27 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html" th:href="@{home}">GWAS Catalog</a>
+            <a class="navbar-brand" href="index.html" th:href="@{/home}">GWAS Catalog</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="index.html" th:href="@{home}">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="search.html" th:href="@{search}">Search</a></li>
+                <li><a href="index.html" th:href="@{/home}">Home <span class="sr-only">(current)</span></a></li>
+                <li><a th:href="@{/search}">Search</a></li>
                 <li><a href="http://www.ebi.ac.uk/fgpt/gwas">Diagram</a></li>
-                <li class="hidden-sm"><a href="docs/downloads" th:href="@{docs/downloads}">Download</a></li>
-                <li><a href="docs" th:href="@{docs}">Help</a></li>
-                <li class="hidden-sm"><a href="docs/about" th:href="@{docs/about}">About</a></li>
+                <li class="hidden-sm"><a th:href="@{/docs/downloads}">Download</a></li>
+                <li><a th:href="@{/docs}">Help</a></li>
+                <li class="hidden-sm"><a th:href="@{/docs/about}">About</a></li>
 
                 <li>
                     <a class="icon" id="ebi-logo" href="http://www.ebi.ac.uk">
                         <img alt="EBI logo"
-                             src="../static/icons/EMBL_EBI_Logo_white.png"
-                             th:src="@{icons/EMBL_EBI_Logo_white.png}"/>
+                             th:src="@{/icons/EMBL_EBI_Logo_white.png}"/>
                     </a>
                 </li>
                 <li>
                     <a class="icon" id="nhgri-logo" href="http://www.genome.gov">
                         <img alt="GWAS logo"
-                             src="../static/icons/NHGRI_NIH%20logo%20all%20verions-02-scaled.png"
-                             th:src="@{icons/NHGRI_NIH%20logo%20all%20verions-02-scaled.png}"/>
+                             th:src="@{/icons/NHGRI_NIH%20logo%20all%20verions-02-scaled.png}"/>
                     </a>
                 </li>
             </ul>
@@ -108,7 +106,7 @@
     </div>
     <div class="container">
 
-        <h2><img alt="externalLink" style="width: 1em; height: auto;" src="../static/icons/GWAS_study_2017.png" th:src="@{icons/GWAS_study_2017.png}"/>&nbsp;Publication: Jeff JM (PMID:23534349)</h2>
+        <h2><img alt="externalLink" style="width: 1em; height: auto;" th:src="@{/icons/GWAS_study_2017.png}"/>&nbsp;Publication: Jeff JM (PMID:23534349)</h2>
 
     </div>
 </div>
@@ -236,13 +234,13 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-    <script src="../static/js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
+    <script  th:src="@{/js/bootstrap.min.js}"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../static/js/ie10-viewport-bug-workaround.js" th:src="@{js/ie10-viewport-bug-workaround.js}"></script>
+    <script  th:src="@{/js/ie10-viewport-bug-workaround.js}"></script>
 
     <!-- GOCI JavaScript
     ================================================== -->
-    <script src="../static/js/goci-ui.js" th:src="@{js/goci-ui.js}"></script>
+    <script  th:src="@{/js/goci-ui.js}"></script>
 
     <!-- Google analytics
     ================================================== -->
