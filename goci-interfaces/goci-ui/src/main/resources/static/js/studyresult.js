@@ -202,7 +202,9 @@ function displaySummaryStudy(data, clearBeforeInsert) {
         $("#study-authors-list").html(reduce_text);
     }
     $("#study-reported-trait").html(study.traitName);
-    $("#study-efo").html(study.efoLink);
+    var efoList=setEfoLink(study);
+    $("#study-efo").html(efoList);
+    
     var genotyping=getGenotypingTech(study);
     $("#study-genotyping-tech").html(genotyping);
     $("#study-genotyping-platform").html(study.platform);
@@ -268,6 +270,30 @@ function getGenotypingTech(study) {
             "data-original-title='Targeted or exome array study'></span></a>";
     }
     return genotypingTechnologiesList;
+}
+
+
+function setEfoLink(study) {
+    var efo_text="-";
+    if ('efoLink' in study) {
+        if (study.efoLink != null) {
+            var efoterms = study.efoLink;
+            efo_text="";
+            if (efoterms.length > 0) {
+                for (var j = 0; j < efoterms.length; j++) {
+                    //console.log(efoterms[j]);
+                    if (efoterms[j].indexOf(name) != -1) {
+                        var efoLink = efoterms[j];
+                        var link = "<a href='".concat(efoLink.split("|")[2]).concat("' target='_blank'>").concat(efoLink.split("|")[0]).concat("</a>");
+                        efo_text = efo_text+link+", ";
+                        
+                    }
+                }
+                efo_text = efo_text.slice(0, -2);
+            }
+         }
+    }
+    return efo_text;
 }
 
 function setAncentrySection(study) {
