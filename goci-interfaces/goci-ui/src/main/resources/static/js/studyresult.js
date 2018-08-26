@@ -102,12 +102,17 @@ function getDataSolr(main, initLoad = false) {
         // 'fq' : global_fq == undefined ? '*:*':global_fq,
         'raw': global_raw == undefined ? '' : global_raw,
     }, 'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
-        processSolrData(data, initLoad);
-    
-        displayDatatableAssociations(data_association.docs);
-        displaySummaryStudy(data_study.docs);
-        console.log("Solr research done for " + searchQuery);
-        return data;
+        // Check if Solr returns some results
+        if (data.grouped.resourcename.groups.length == 0) {
+            $('#lower_container').html("<h2>The study accession <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
+        }
+        else {
+           processSolrData(data, initLoad);
+           displayDatatableAssociations(data_association.docs);
+           displaySummaryStudy(data_study.docs);
+           console.log("Solr research done for " + searchQuery);
+           return data;
+        }
     }).catch(function(err) {
         console.error('Error when seaching solr for' + searchQuery + '. ' + err);
         throw (err);

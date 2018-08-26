@@ -8,12 +8,10 @@
  * @param {Object} data - summary_stats solr docs
  * @param {Boolean} cleanBeforeInsert
  */
-function displayDatatableSummaryStats(data, cleanBeforeInsert=true) {
+function displayDatatableSummaryStats(data) {
     //by default, we clean the table before inserting data
     var summary_stats_ids = [];
-    if(cleanBeforeInsert){
-        $('#summary-stats-table').bootstrapTable('removeAll');
-    }
+    $('#summary-stats-table').bootstrapTable('removeAll');
     
     var data_json = []
     $.each(data.response.docs, (index, summary_stats) => {
@@ -119,9 +117,9 @@ function displayDatatableSummaryStats(data, cleanBeforeInsert=true) {
         
     });
     
-    $('#summary-stats-table').bootstrapTable('load',data_json)
+    $('#summary-stats-table').bootstrapTable('load',data_json);
     if(data_json.length>5){
-        $('#summary-stats-table').bootstrapTable('refreshOptions',{pagination: true,pageSize: pageRowLimit, pageList: [5,10,25,50,100,'All']})
+        $('#summary-stats-table').bootstrapTable('refreshOptions',{showRefresh: true,pagination:true,pageSize: pageRowLimit, pageList: [5,10,25,50,100,'All']})
     }
-    //hideLoadingOverLay('#summary-stats-table-loading');
+    hideLoadingOverLay('#summary-stats-table-loading');
 }
