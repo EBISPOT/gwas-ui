@@ -1007,7 +1007,7 @@ public class SolrSearchController {
             @RequestParam(value = "ancestry", defaultValue = "false") boolean ancestry,
             HttpServletResponse response) throws IOException {
 
-        StringBuilder solrSearchBuilder = buildSlimSearchRequest();
+        StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
         int maxResults = 1000000;
         int page = 1;

@@ -206,6 +206,10 @@
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#study_panel')">
                     <span class="study_label">Studies</span><span class="study_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
+
+                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" id="download_data">
+                    <span>Download association data</span><span class="glyphicon glyphicon-download-alt" style="color:#398A96;margin-left:10px"></span>
+                </button>
             </div>
         </div>
 
@@ -277,6 +281,16 @@
     <!-- GOCI JavaScript
     ================================================== -->
     <script th:src="@{/js/goci-ui.js}"></script>
+
+
+
+    <!--bootstrap-table-flat-json-->
+    <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/flat-json/bootstrap-table-flat-json.js"></script>
+    <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
+    <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/export/bootstrap-table-export.js"></script>
+    <script src="https://cdn.rawgit.com/wenzhixin/09e218c884f4f380b68a/raw/5d258d2f78225a4ac1a72d54a34cc7976d630df1/jquery.base64.js"></script>
+    <script src="https://cdn.rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js"></script>
+
     <script th:src="@{/js/helpers/promise-helper.js}"></script>
     <script th:src="@{/js/helpers/utils-helper.js}"></script>
     <script th:src="@{/js/helpers/orcid-helper.js}"></script>
@@ -285,12 +299,6 @@
 
     <script th:src="@{/js/variantresult.js}"></script>
 
-    <!--bootstrap-table-flat-json-->
-    <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/flat-json/bootstrap-table-flat-json.js"></script>
-    <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
-    <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/export/bootstrap-table-export.js"></script>
-    <script src="https://cdn.rawgit.com/wenzhixin/09e218c884f4f380b68a/raw/5d258d2f78225a4ac1a72d54a34cc7976d630df1/jquery.base64.js"></script>
-    <script src="https://cdn.rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js"></script>
     <!-- Google analytics
     ================================================== -->
     <script>
