@@ -3,12 +3,17 @@ $(document).ready(function() {
 
     // read the window location to set the breadcrumb
     var path = window.location.pathname;
-    var pagename = path.substr(path.lastIndexOf('/') + 1);
+    /*var pagename = path.substr(path.lastIndexOf('/') + 1);
     var url = "content/".concat(pagename).concat("-content.html");
     console.log("Documentation should be loaded from " + url + "...");
-
+   */
+    index = path.indexOf('/docs/');
+    page = path.substr(index+6);
+    url= contextPath+"docs/content/"+page+"-content.html";
+    console.log("Documentation should be loaded from " + url + "...");
+    
     // load the page content
-    $.get(url, loadDocumentation(pagename, content)).fail(console.log("Failed to get content from " + url));
+    $.get(url, loadDocumentation(page, content)).fail(console.log("Failed to get content from " + url));
 });
 
 var loadDocumentation = function(pagename, content) {

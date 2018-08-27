@@ -22,6 +22,6 @@ Summary statistics must meet a number of criteria to be eligible for inclusion i
 
 == Summary statistics harmonisation
 
-== Summary statistics database 
+== Summary statistics database
 
 We are currently developing a database of GWAS summary statistics. The REST API for the summary statistics database is now available at www.ebi.ac.uk/gwas/docs/api/summary-statistics.

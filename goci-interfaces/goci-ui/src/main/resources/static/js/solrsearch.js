@@ -278,7 +278,7 @@ function processData(data) {
                 if (doc.resourcename == "trait") {
                     var efoLabsUrl = gwasProperties.contextPath+"efotraits/"+doc.shortForm
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-                    row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-trait'>&nbsp;T&nbsp;</span><a href="+efoLabsUrl+">"+doc.title+"</a></h3>"));
+                    row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-trait'>&nbsp;T&nbsp;</span><a href="+efoLabsUrl+">"+doc.title+"</a>&nbsp;&nbsp;<span class='badge letter-circle-trait'>"+doc.shortForm+"</span></h3>"));
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                 }
                 if (doc.resourcename == "variant") {

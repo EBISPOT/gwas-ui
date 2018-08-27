@@ -102,12 +102,17 @@ function getDataSolr(main, initLoad = false) {
         // 'fq' : global_fq == undefined ? '*:*':global_fq,
         'raw': global_raw == undefined ? '' : global_raw,
     }, 'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
-        processSolrData(data, initLoad);
-    
-        displayDatatableAssociations(data_association.docs);
-        displaySummaryStudy(data_study.docs);
-        console.log("Solr research done for " + searchQuery);
-        return data;
+        // Check if Solr returns some results
+        if (data.grouped.resourcename.groups.length == 0) {
+            $('#lower_container').html("<h2>The study accession <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
+        }
+        else {
+           processSolrData(data, initLoad);
+           displayDatatableAssociations(data_association.docs);
+           displaySummaryStudy(data_study.docs);
+           console.log("Solr research done for " + searchQuery);
+           return data;
+        }
     }).catch(function(err) {
         console.error('Error when seaching solr for' + searchQuery + '. ' + err);
         throw (err);
@@ -202,7 +207,9 @@ function displaySummaryStudy(data, clearBeforeInsert) {
         $("#study-authors-list").html(reduce_text);
     }
     $("#study-reported-trait").html(study.traitName);
-    $("#study-efo").html(study.efoLink);
+    var efoList=setEfoLink(study);
+    $("#study-efo").html(efoList);
+    
     var genotyping=getGenotypingTech(study);
     $("#study-genotyping-tech").html(genotyping);
     $("#study-genotyping-platform").html(study.platform);
@@ -215,14 +222,17 @@ function displaySummaryStudy(data, clearBeforeInsert) {
         var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
         
         var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
-            .concat(dir).concat("' target='_blank'</a>");
+            .concat(dir).concat("' target='_blank'>");
         
-        linkFullPValue = ftplink.concat("<span class='glyphicon glyphicon-signal clickable context-help'" +
+        linkFullPValue = ftplink.concat("Download<span class='glyphicon glyphicon-signal clickable context-help'" +
             " data-toggle='tooltip'" +
             "data-original-title='Click for summary statistics'></span></a>");
-        $("#study-summary-stats").html("Available "+linkFullPValue);
+    
+        $("#study-summary-stats").html(linkFullPValue);
+        var summaryStatData = getSummaryStatsInfo(study.accessionId,$("#study-summary-stats"));
        
-        var summaryStatData = getSummaryStatsInfo(study.accessionId);
+        
+        
     }
     
     $("#pubmedid_button").attr('onclick', "window.open('" + gwasProperties.NCBI_URL + study.pubmedId + "',    '_blank')");
@@ -265,6 +275,30 @@ function getGenotypingTech(study) {
             "data-original-title='Targeted or exome array study'></span></a>";
     }
     return genotypingTechnologiesList;
+}
+
+
+function setEfoLink(study) {
+    var efo_text="-";
+    if ('efoLink' in study) {
+        if (study.efoLink != null) {
+            var efoterms = study.efoLink;
+            efo_text="";
+            if (efoterms.length > 0) {
+                for (var j = 0; j < efoterms.length; j++) {
+                    //console.log(efoterms[j]);
+                    if (efoterms[j].indexOf(name) != -1) {
+                        var efoLink = efoterms[j];
+                        var link = "<a href='".concat(efoLink.split("|")[2]).concat("' target='_blank'>").concat(efoLink.split("|")[0]).concat("</a>");
+                        efo_text = efo_text+link+", ";
+                        
+                    }
+                }
+                efo_text = efo_text.slice(0, -2);
+            }
+         }
+    }
+    return efo_text;
 }
 
 function setAncentrySection(study) {

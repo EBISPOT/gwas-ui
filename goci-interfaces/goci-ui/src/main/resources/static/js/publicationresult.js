@@ -92,7 +92,7 @@ function getDataSolr(main, initLoad=false) {
     var searchQuery = main;
     
     console.log("Solr research request received for " + searchQuery);
-    return promisePost( gwasProperties.contextPath + '/api/search/advancefilter',
+    return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
             'q': searchQuery,
             'max': 99999,
@@ -105,7 +105,13 @@ function getDataSolr(main, initLoad=false) {
             // 'fq' : global_fq == undefined ? '*:*':global_fq,
             'raw' : global_raw == undefined ? '' : global_raw,
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
-        processSolrData(data, initLoad);
+        // Check if Solr returns some results
+        if (data.grouped.resourcename.groups.length == 0) {
+            $('#lower_container').html("<h2>The PubmedId <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
+        }
+        else {
+            processSolrData(data, initLoad);
+        }
         console.log("Solr research done for " + searchQuery);
         return data;
     }).catch(function(err) {
