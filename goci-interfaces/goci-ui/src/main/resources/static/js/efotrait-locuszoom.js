@@ -525,7 +525,7 @@ reloadLocusZoom = function(plot_id, data_association, highlight_associations=und
                     d.chr = 24;
                 }
                 d.bp = parseInt(d.chromLocation[0].split(":")[1]);
-                d.pval = Math.pow(10, d.pValueExponent);
+                d.pval = Math.pow(10, d.pValueExponent) * d.pValueMantissa;
                 // d.phewas_string = d.rsId[0];
                 d.x = transferLocation(d.chr, d.bp);
                 return d;
