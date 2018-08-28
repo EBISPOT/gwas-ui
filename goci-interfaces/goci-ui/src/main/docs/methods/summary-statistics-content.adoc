@@ -20,8 +20,146 @@ Summary statistics must meet a number of criteria to be eligible for inclusion i
 * Must be freely available, i.e. not only by request to author or password-protected
 * Must not require agreement to any specific terms and conditions, unless this has been agreed in advance by the author/consortium
 
-== Summary statistics harmonisation
 
-== Summary statistics database
+# Summary statistics harmonisation
 
-We are currently developing a database of GWAS summary statistics. The REST API for the summary statistics database is now available at www.ebi.ac.uk/gwas/docs/api/summary-statistics.
+There is no standard for summary statistics files, which is why we are providing formatted and harmonised summary 
+statistic files to enable users to access data with ease.
+
+### Formatted summary statistics data
+
+Summary statistics files are formatted by a scientific curator using a semi-automated process. Data are not manipulated but the headers convertered to a consistent format seen across all formatted summary statistics files.
+
+- Headers will be coereced to the 'common format'.
+- Rows will never be removed.
+- Columns may be split, merged, deleted or moved.
+- Values will be unaltered.
+
+Formatted file headings (not all may be present in file):
+
+    'snp' = variant ID
+    'pval' = p-value
+    'chr' = chromosome
+    'bp' = base pair location
+    'or' = odds ratio
+    'ci_lower' = lower 95% confidence interval
+    'ci_upper' = upper 95% confidence interval
+    'beta' = beta
+    'se' = standard error
+    'effect_allele' = effect allele
+    'other_allele' = other allele
+    'eaf' = effect allele frequency
+
+Note that the headers in the formatted file are not limited to the above headers, nor are they required to have all of them.
+
+##### Access to formatted summary statistics data
+Formatted data is available on the GWAS Catalog [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/). Where the formatted files are available, they are nested within the harmonised directory in the study directory.
+
+
+### Harmonised summary statistics data
+
+Formatted files are harmonised using an automated pipeline, which is detailed below. By 'harmonised' we mean that all genomic position data will be reported against the same and latest genome build. Missing chromosome, base pair location and variant ID data that can be inferred, will be.
+
+The harmonisation process is the following:
+
+  Formatting
+   1) Rename headers
+   2) Set blank values to 'NA' 
+   3) Chromosome values X, Y and MT are mapped to 23, 24 and 25, respectively. 
+  
+  Mapping variant IDs to locations
+   3) Update base pair location value by mapping variant ID using latest Ensembl release
+      OR
+      if above not possible, liftover base pair location to latest genome build 
+      OR
+      if above not possible, remove variant from file.
+  
+  Harmonisation (repo: https://github.com/opentargets/sumstat_harmoniser)
+   4) Using chromosome, base pair location and the effect and other alleles, check the orientation of all non-palindromic variants against Ensembl VCF references to detemine consensus:
+      --> forward
+      --> reverse
+      --> mixed
+      If the consensus is 'forward' or 'reverse', the following harmonisation steps are performed on the palindromic variants, with the assumption that they are orientated according to the consensus, otherwise palindromic variants are not harmonised.
+   5) Using chromosome, base pair location and the effect and other alleles, query each variant against the Ensembl VCF reference to harmonise as appropriate by either:
+      --> keeping record as is because:
+          - it is already harmonised
+          - it cannot be harmonised
+      --> orientating to reference strand:
+          - reverse complement the effect and other alleles
+      --> flipping the effect and other alleles
+          - because the effect and other alleles are flipped in the reference
+          - this also means the beta, odds ratio, 95% CI and effect allele 
+            frequency are inverted
+      --> a combination of the orientating and flipping the alleles.
+      The result of the harmonisation is the addition of a set of new fields for each record (see below). A harmonisation code is assigned to each record indicating the harmonisation process that was performed (note that currently any processes involving 'Infer strand' are not being used).
+  
+  Filtering and QC
+    6) Variant ID is set to variant IDs found by step (5).
+    7) Records without a valid value for variant ID, chromosome, base pair
+       location and p-value are removed. 
+
+##### Table of harmonisation codes
+
+ Code|Description of harmonisation process                          
+ ----|--------------------------------------------------------------------------------------------
+ 1   |Palindromic; Infer strand; Forward strand; Alleles correct
+ 2   |Palindromic; Infer strand; Forward strand; Flipped alleles
+ 3   |Palindromic; Infer strand; Reverse strand; Alleles correct
+ 4   |Palindromic; Infer strand; Reverse strand; Flipped alleles
+ 5   |Palindromic; Assume forward strand; Alleles correct
+ 6   |Palindromic; Assume forward strand; Flipped alleles
+ 7   |Palindromic; Assume reverse strand; Alleles correct
+ 8   |Palindromic; Assume reverse strand; Flipped alleles
+ 9   |Palindromic; Drop palindromic; Not harmonised
+ 10  |Forward strand; Alleles correct
+ 11  |Forward strand; Flipped alleles
+ 12  |Reverse strand; Alleles correct
+ 13  |Reverse strand; Flipped alleles
+ 14  |Required fields are not known; Not harmonised
+ 15  |No matching variants in reference VCF; Not harmonised
+ 16  |Multiple matching variants in reference VCF; Not harmonised
+ 17  |Palindromic; Infer strand; EAF or reference VCF AF not known; Not harmonised
+ 18  |Palindromic; Infer strand; EAF < specified minor allele frequency threshold; Not harmonised
+
+- Headers will be coerced to the 'harmonised format'.
+- Addition harmonised data columns will be added.
+- Rows may be removed.
+- Variant ID, chromosome and base pair location may change (likely).
+
+
+Harmonised file headings (not all may be present in file):
+
+    'variant_id' = variant ID
+    'p-value' = p-value
+    'chromosome' = chromosome
+    'base_pair_location' = base pair location
+    'odds_ratio' = odds ratio
+    'ci_lower' = lower 95% confidence interval
+    'ci_upper' = upper 95% confidence interval
+    'beta' = beta
+    'standard_error' = standard error
+    'effect_allele' = effect allele
+    'other_allele' = other allele
+    'effect_allele_frequency' = effect allele frequency
+    'hm_variant_id' = harmonised variant ID
+    'hm_odds_ratio' = harmonised odds ratio
+    'hm_ci_lower' = harmonised lower 95% confidence interval
+    'hm_ci_upper' =  harmonised lower 95% confidence interval
+    'hm_beta' = harmonised beta
+    'hm_effect_allele' = harmonised effect allele
+    'hm_other_allele' = harmonised other allele
+    'hm_effect_allele_frequency' = harmonised effect allele frequency
+    'hm_code = harmonisation code (to lookup in 'Harmonisation Code Table')
+
+##### Access harmonised summary statistics data
+There are two ways to access harmonised summary statistics data:
+1) via the Summary Statistics API (see below)
+2) at the GWAS Catalog [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/). Where the harmonised files are available, they are nested within the harmonised directory in the study directory.
+
+
+# Summary statistics database
+
+We are currently developing a database of GWAS summary statistics. The REST API for the summary statistics database is now available at www.ebi.ac.uk/gwas/summary-statistics/api/. 
+For full documentation on the REST API, please see www.ebi.ac.uk/gwas/summary-statistics/docs/.
+
+The harmonised data accessed by the REST API are nearly identical to harmonised data on the [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/), except that float values may be rounded to make them compatable with the database.
