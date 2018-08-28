@@ -21,12 +21,12 @@ Summary statistics must meet a number of criteria to be eligible for inclusion i
 * Must not require agreement to any specific terms and conditions, unless this has been agreed in advance by the author/consortium
 
 
-# Summary statistics harmonisation
+= Summary statistics harmonisation
 
 There is no standard for summary statistics files, which is why we are providing formatted and harmonised summary 
 statistic files to enable users to access data with ease.
 
-### Formatted summary statistics data
+=== Formatted summary statistics data
 
 Summary statistics files are formatted by a scientific curator using a semi-automated process. Data are not manipulated but the headers convertered to a consistent format seen across all formatted summary statistics files.
 
@@ -52,11 +52,11 @@ Formatted file headings (not all may be present in file):
 
 Note that the headers in the formatted file are not limited to the above headers, nor are they required to have all of them.
 
-##### Access to formatted summary statistics data
+===== Access to formatted summary statistics data
 Formatted data is available on the GWAS Catalog [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/). Where the formatted files are available, they are nested within the harmonised directory in the study directory.
 
 
-### Harmonised summary statistics data
+=== Harmonised summary statistics data
 
 Formatted files are harmonised using an automated pipeline, which is detailed below. By 'harmonised' we mean that all genomic position data will be reported against the same and latest genome build. Missing chromosome, base pair location and variant ID data that can be inferred, will be.
 
@@ -98,28 +98,67 @@ The harmonisation process is the following:
     7) Records without a valid value for variant ID, chromosome, base pair
        location and p-value are removed. 
 
-##### Table of harmonisation codes
+===== Table of harmonisation codes
 
- Code|Description of harmonisation process                          
- ----|--------------------------------------------------------------------------------------------
- 1   |Palindromic; Infer strand; Forward strand; Alleles correct
- 2   |Palindromic; Infer strand; Forward strand; Flipped alleles
- 3   |Palindromic; Infer strand; Reverse strand; Alleles correct
- 4   |Palindromic; Infer strand; Reverse strand; Flipped alleles
- 5   |Palindromic; Assume forward strand; Alleles correct
- 6   |Palindromic; Assume forward strand; Flipped alleles
- 7   |Palindromic; Assume reverse strand; Alleles correct
- 8   |Palindromic; Assume reverse strand; Flipped alleles
- 9   |Palindromic; Drop palindromic; Not harmonised
- 10  |Forward strand; Alleles correct
- 11  |Forward strand; Flipped alleles
- 12  |Reverse strand; Alleles correct
- 13  |Reverse strand; Flipped alleles
- 14  |Required fields are not known; Not harmonised
- 15  |No matching variants in reference VCF; Not harmonised
- 16  |Multiple matching variants in reference VCF; Not harmonised
- 17  |Palindromic; Infer strand; EAF or reference VCF AF not known; Not harmonised
- 18  |Palindromic; Infer strand; EAF < specified minor allele frequency threshold; Not harmonised
+[%header, cols=2*]
+|===
+|Code
+|Description of harmonisation process                          
+
+|1
+|Palindromic; Infer strand; Forward strand; Alleles correct
+ 
+|2
+|Palindromic; Infer strand; Forward strand; Flipped alleles
+
+|3
+|Palindromic; Infer strand; Reverse strand; Alleles correct
+
+|4
+|Palindromic; Infer strand; Reverse strand; Flipped alleles
+
+|5
+|Palindromic; Assume forward strand; Alleles correct
+
+|6
+|Palindromic; Assume forward strand; Flipped alleles
+
+|7
+|Palindromic; Assume reverse strand; Alleles correct
+
+|8
+|Palindromic; Assume reverse strand; Flipped alleles
+
+|9
+|Palindromic; Drop palindromic; Not harmonised
+
+|10
+|Forward strand; Alleles correct
+
+|11
+|Forward strand; Flipped alleles
+
+|12
+|Reverse strand; Alleles correct
+
+|13
+|Reverse strand; Flipped alleles
+
+|14
+|Required fields are not known; Not harmonised
+
+|15
+|No matching variants in reference VCF; Not harmonised
+
+|16
+|Multiple matching variants in reference VCF; Not harmonised
+
+|17
+|Palindromic; Infer strand; EAF or reference VCF AF not known; Not harmonised
+
+|18
+|Palindromic; Infer strand; EAF < specified minor allele frequency threshold; Not harmonised
+|===
 
 - Headers will be coerced to the 'harmonised format'.
 - Addition harmonised data columns will be added.
@@ -151,15 +190,15 @@ Harmonised file headings (not all may be present in file):
     'hm_effect_allele_frequency' = harmonised effect allele frequency
     'hm_code = harmonisation code (to lookup in 'Harmonisation Code Table')
 
-##### Access harmonised summary statistics data
+===== Access harmonised summary statistics data
 There are two ways to access harmonised summary statistics data:
 1) via the Summary Statistics API (see below)
-2) at the GWAS Catalog [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/). Where the harmonised files are available, they are nested within the harmonised directory in the study directory.
+2) at the GWAS Catalog ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP]. Where the harmonised files are available, they are nested within the harmonised directory in the study directory.
 
 
-# Summary statistics database
+= Summary statistics database
 
 We are currently developing a database of GWAS summary statistics. The REST API for the summary statistics database is now available at www.ebi.ac.uk/gwas/summary-statistics/api/. 
 For full documentation on the REST API, please see www.ebi.ac.uk/gwas/summary-statistics/docs/.
 
-The harmonised data accessed by the REST API are nearly identical to harmonised data on the [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/), except that float values may be rounded to make them compatable with the database.
+The harmonised data accessed by the REST API are nearly identical to harmonised data on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP], except that float values may be rounded to make them compatable with the database.
