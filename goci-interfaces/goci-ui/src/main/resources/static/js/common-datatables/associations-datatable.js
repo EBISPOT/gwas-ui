@@ -2,6 +2,8 @@
  *  Datatable action to rendering association panel.
  * */
 
+
+
 /**
  * display association table
  * @param {Object} data - association solr docs
@@ -60,12 +62,13 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         
         // p-value
         var pValue = asso.pValueMantissa;
+        tmp['pValueAnnotation']="";
         if (pValue) {
             var pValueExp = " x 10<sup>" + asso.pValueExponent + "</sup>";
             pValue += pValueExp;
             if (asso.qualifier) {
                 if (asso.qualifier[0].match(/\w/)) {
-                    pValue += " " + asso.qualifier.join(',');
+                    tmp['pValueAnnotation'] = " " + asso.qualifier.join(',');
                 }
             }
             tmp['pValue'] = pValue;
@@ -184,6 +187,12 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             {
                 field: 'pValue',
                 title: 'P-value',
+                sortable: true,
+                sorter : "pValueSorter"
+            },
+            {
+                field: 'pValueAnnotation',
+                title: 'P-value annotation',
                 sortable: true
             },
             {
@@ -242,3 +251,28 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
     hideLoadingOverLay('#association-table-loading')
 }
 
+// This function returns matissa and exponent [mantissa, exponent]
+function splitPValue(pValue) {
+    try {
+        var index = pValue.indexOf("</sup>");
+        pValue = pValue.substr(0, index);
+        composedValue =pValue.split(" x 10<sup>");
+    }
+    catch (ext) {
+        return [0,0];
+    }
+    return composedValue;
+}
+
+// compare two value a and b.
+// Split text into mantissa, exponent.
+// Compare exponent and after the mantissa. If a and b are equal no order
+function pValueSorter(a, b) {
+    var value1 = splitPValue(a);
+    var value2 = splitPValue(b);
+    if (value1[1] > value2[1]) return 1;
+    if (value1[1] < value2[1]) return -1;
+    if (value1[0] > value2[0]) return 1;
+    if (value1[0] < value2[0]) return -1;
+    return 0;
+}
