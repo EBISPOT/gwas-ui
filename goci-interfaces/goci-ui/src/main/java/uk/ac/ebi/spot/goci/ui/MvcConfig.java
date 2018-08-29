@@ -40,18 +40,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/docs/file-downloads").setViewName("docs-template");
         registry.addViewController("/docs/diagram-downloads").setViewName("docs-template");
         registry.addViewController("/docs/faq").setViewName("docs-template");
-        // Methods page
+        // Create a static page or check if you can add just the code
         registry.addViewController("/docs/methods").setViewName("methods");
-
-        // Trick
-        registry.addRedirectViewController("/docs/methods/criteria", "/docs/methods-criteria");
-        registry.addViewController("/docs/methods-criteria").setViewName("docs-template");
-        // Trick
-        registry.addRedirectViewController("/docs/methods/curation", "/docs/methods-curation");
-        registry.addViewController("/docs/methods-curation").setViewName("docs-template");
-        // Trick
-        registry.addRedirectViewController("/docs/methods/summary-statistics", "/docs/methods-summary-statistics");
-        registry.addViewController("/docs/methods-summary-statistics").setViewName("docs-template");
+        registry.addViewController("/docs/methods/criteria").setViewName("docs-template");
+        registry.addViewController("/docs/methods/curation").setViewName("docs-template");
+        registry.addViewController("/docs/methods/summary-statistics").setViewName("docs-template");
 
         registry.addViewController("/docs/ontology").setViewName("docs-template");
         registry.addViewController("/docs/abbreviations").setViewName("docs-template");

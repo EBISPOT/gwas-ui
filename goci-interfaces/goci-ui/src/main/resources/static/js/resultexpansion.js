@@ -230,47 +230,89 @@ function addResults(data, expand, id) {
         for (var j = 0; j < documents.length; j++) {
                 try {
                     var doc = documents[j];
-
-                    var table = $('<table class="gwas2table" id="study-table">');
+    
+                    var table = $('<table class="border-search-box">');
                     var tbody = table.append('<tbody />').children('tbody');
                     var row = $("<tr>");
-                    if (doc.resourcename == "study") {
-                        var studyLabsUrl = gwasProperties.contextPath+"studies/"+doc.accessionId
-
-                        row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img  src="/gwas-ui/icons/GWAS_study_2017.png" width="48" height="48">'));
-                        row.append($("<td style=\"width: 88%\">").html("<h3><a href="+studyLabsUrl+">"+doc.title+"</a></h3>"));
-                    }
+                    var linkFullPValue = '';
+                    var genotypingIcon = '';
+    
+    
                     if (doc.resourcename == "publication") {
-                        var pubLabsUrl = gwasProperties.contextPath+"publications/"+doc.pmid
-
-                        row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img src="/gwas-ui/icons/GWAS_publication_2017.png" width="48" height="48">'));
-                        row.append($("<td style=\"width: 88%\">").html("<h3><a href="+pubLabsUrl+">"+doc.title+"</a></h3>"));
+                        var fullpvalset = doc.fullPvalueSet;
+                        if(fullpvalset == 1) {
+            
+                            var a = (doc.authorAscii_s).replace(/\s/g,"");
+                            //var dir = a.concat("_").concat(doc.pmid).concat("_").concat(doc.accessionId);
+            
+                            var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
+                                .concat("' target='_blank'</a>");
+            
+                            linkFullPValue = ftplink.concat("<span class='glyphicon glyphicon-signal clickable context-help'" +
+                                " data-toggle='tooltip'" +
+                                "data-original-title='Click for summary statistics'></span></a>");
+            
+                        }
+        
+                        if ((doc.genotypingTechnologies.indexOf("Targeted genotyping array") > -1) ||
+                            (doc.genotypingTechnologies.indexOf("Exome genotyping array") > -1) ) {
+                            genotypingIcon="<a href='#'><span class='glyphicon targeted-icon-GWAS_target_icon clickable context-help'" +
+                                " data-toggle='tooltip'" +
+                                "data-original-title='Targeted or exome array study'></span></a>";
+                        }
+        
+        
+                        var pubLabsUrl= gwasProperties.contextPath+"publications/"+doc.pmid;
+                        row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+                        row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle'>&nbsp;P&nbsp;</span><a href="+pubLabsUrl+">"+doc.title+"</a></h3>"));
+                        row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                     }
                     if (doc.resourcename == "trait") {
                         var efoLabsUrl = gwasProperties.contextPath+"efotraits/"+doc.shortForm
-
-                        row.append($("<td align=\"center\" style=\"width: 12%\">").html('<img  src="/gwas-ui/icons/GWAS_trait_2017.png" width="48" height="48">'));
-                        row.append($("<td style=\"width: 88%\">").html("<h3><a href="+efoLabsUrl+">"+doc.title+"</a></h3>"));
+                        row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+                        row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-trait'>&nbsp;T&nbsp;</span><a href="+efoLabsUrl+">"+doc.title+"</a>&nbsp;&nbsp;<span class='badge letter-circle-trait'>"+doc.shortForm+"</span></h3>"));
+                        row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                     }
                     if (doc.resourcename == "variant") {
-                        row.append($("<td align=\"center\" style='width: 12%'>").html('<img src="/gwas-ui/icons/GWAS_variant_2017.png" width="48" height="48">'));
-                        row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
+                        var variantsLabsUrl = gwasProperties.contextPath+"variants/"+doc.rsID
+                        row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+                        row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-variant'>&nbsp;V&nbsp;</span><a href="+variantsLabsUrl+">"+doc.title+"</a></h3>"));
+                        row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                     }
-                    if (doc.resourcename == "gene") {
-                        row.append($("<td align=\"center\" style='width: 12%'>").html('<img src="/gwas-ui/icons/dna13.png" width="48" height="48">'));
-                        row.append($("<td style=\"width: 88%\">").html("<h3>"+doc.title+"</h3>"));
-                    }
-
+    
+    
                     tbody.append(row);
+                    // Function to parse the description
                     var rowDescription = $("<tr>");
-                    rowDescription.append($("<td style=\"width: 12%\">").html(""));
-                    rowDescription.append($("<td style=\"width: 88%\">").html("<h4>"+doc.description+"</h4>"));
-                    // console.log(rowDescription)
+                    var descriptionTruncated = doc.description;
+                    descriptionTruncated=addShowMoreLink(descriptionTruncated, 200,"...");
+                    descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
+    
+    
+                    var description_stats = "";
+                    if ('associationCount' in doc) {
+                        description_stats = description_stats.concat("<br><p>Associations ").concat('<span class="badge background-color-primary-bold ">').concat(doc.associationCount).concat('</span>&nbsp;');
+        
+                    }
+    
+                    if ('studyCount' in doc) {
+                        description_stats = description_stats.concat("Studies ").concat('<span class="badge background-color-primary-bold ">').concat(doc.studyCount).concat('</span>');
+                    }
+    
+                    descriptionTruncated = descriptionTruncated+description_stats;
+                    if (linkFullPValue != "") {
+                        descriptionTruncated = descriptionTruncated+"&nbsp;"+linkFullPValue;
+                    }
+                    if (genotypingIcon != "") {
+                        descriptionTruncated = descriptionTruncated + "&nbsp;"+genotypingIcon;
+                    }
+    
+                    descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
+    
+                    rowDescription.append($("<td style=\"width: 88%\">").html(descriptionTruncated));
                     tbody.append(rowDescription);
                     divResult.append(table);
                     divResult.append("<br>");
-
-
                 }
                 catch (ex) {
                     console.log("Failure to process document " + ex);
