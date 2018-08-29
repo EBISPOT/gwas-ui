@@ -145,8 +145,8 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         var mappedTraits = asso.mappedLabel;
         if (mappedTraits) {
             $.each(mappedTraits, function (index, trait) {
-                var link = window.location.pathname.split('/study/')[0] + '/efotraits/' + asso.mappedUri[index].split('/').slice(-1)[0]
-                mappedTraits[index] = setExternalLinkText(link, trait)
+                var link = gwasProperties.contextPath + 'efotraits/' + asso.mappedUri[index].split('/').slice(-1)[0]
+                mappedTraits[index] = setExternalLinkText(link, trait);
             });
             tmp['mappedTraits'] = mappedTraits.join(', ');
         } else {
@@ -212,7 +212,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             sortable: true
         },{
             field: 'mappedTraits',
-            title: 'Mapped EFO trait(s)',
+            title: 'Trait(s)',
             sortable: true
         },{
             field: 'study',

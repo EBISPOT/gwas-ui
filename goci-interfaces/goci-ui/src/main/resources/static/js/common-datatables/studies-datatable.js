@@ -78,13 +78,16 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
         // Reported trait
         tmp['reported_trait'] = study.traitName_s;
         
-        //Mapped EFO trait. Check if in the future might be more than 1
-        if ('shortForm' in study) {
-            tmp['efo'] = '<a href="' + gwasProperties.contextPath + 'efotraits/' + study.shortForm[0] + '">' + study.shortForm[0] + '</a>';
+        var mappedTraits = study.mappedLabel;
+        if (mappedTraits) {
+            $.each(mappedTraits, function (index, trait) {
+                var link = gwasProperties.contextPath + 'efotraits/' + study.mappedUri[index].split('/').slice(-1)[0];
+                mappedTraits[index] = setExternalLinkText(link, trait);
+            });
+            tmp['mappedTraits'] = mappedTraits.join(', ');
         } else {
-            tmp['efo'] = 'N/A';
+            tmp['mappedTraits'] = '-';
         }
-        
         
         // Number Associations
         tmp['nr_associations'] = nr_association.toString()+linkFullPValue;
@@ -160,8 +163,8 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
                 sortable: true
             },
             {
-                field: 'efo',
-                title: 'Mapped EFO trait',
+                field: 'mappedTraits',
+                title: 'Trait(s)',
                 sortable: true
             },
             {
