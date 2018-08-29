@@ -27,18 +27,17 @@ function displayDatatableSummaryStats(data) {
     var p_date = summary_stats.publicationDate;
     var publi = p_date.split('T')[0];
     tmp['publication_date'] = publi;
-    // Reported trait
-    console.log(summary_stats);
-    console.log(summary_stats.pubmedId);
-    console.log(summary_stats.traitName_s);
     tmp['reported_trait'] = summary_stats.traitName_s;
     
-    //Mapped EFO trait. Check if in the future might be more than 1
-    if ('shortForm' in summary_stats) {
-       tmp['efo'] = '<a href="'+gwasProperties.contextPath+'efotraits/'+summary_stats.shortForm[0]+'">'+summary_stats.shortForm[0]+'</a>';
-    }
-    else {
-        tmp['efo'] = 'N/A';
+    var mappedTraits = summary_stats.mappedLabel;
+    if (mappedTraits) {
+        $.each(mappedTraits, function (index, trait) {
+            var link = gwasProperties.contextPath + 'efotraits/' + summary_stats.mappedUri[index].split('/').slice(-1)[0];
+            mappedTraits[index] = setExternalLinkText(link, trait);
+        });
+        tmp['mappedTraits'] = mappedTraits.join(', ');
+    } else {
+        tmp['mappedTraits'] = '-';
     }
     // Number Associations
     var nr_association = 0;
@@ -93,8 +92,8 @@ function displayDatatableSummaryStats(data) {
                 width:"120", //This works when the table is not nested into other tag, for example, in a simple Div
             },
             {
-                field: 'efo',
-                title: 'Mapped EFO trait',
+                field: 'mappedTraits',
+                title: 'Trait(s)',
                 sortable: true
             },
             {

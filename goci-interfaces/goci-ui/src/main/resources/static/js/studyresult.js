@@ -207,8 +207,8 @@ function displaySummaryStudy(data, clearBeforeInsert) {
         $("#study-authors-list").html(reduce_text);
     }
     $("#study-reported-trait").html(study.traitName);
-    var efoList=setEfoLink(study);
-    $("#study-efo").html(efoList);
+    var traitsList=setTraitsLink(study);
+    $("#study-traits").html(traitsList);
     
     var genotyping=getGenotypingTech(study);
     $("#study-genotyping-tech").html(genotyping);
@@ -278,27 +278,19 @@ function getGenotypingTech(study) {
 }
 
 
-function setEfoLink(study) {
-    var efo_text="-";
-    if ('efoLink' in study) {
-        if (study.efoLink != null) {
-            var efoterms = study.efoLink;
-            efo_text="";
-            if (efoterms.length > 0) {
-                for (var j = 0; j < efoterms.length; j++) {
-                    //console.log(efoterms[j]);
-                    if (efoterms[j].indexOf(name) != -1) {
-                        var efoLink = efoterms[j];
-                        var link = "<a href='".concat(efoLink.split("|")[2]).concat("' target='_blank'>").concat(efoLink.split("|")[0]).concat("</a>");
-                        efo_text = efo_text+link+", ";
-                        
-                    }
-                }
-                efo_text = efo_text.slice(0, -2);
-            }
-         }
+function setTraitsLink(study) {
+    var mappedTraits="";
+    var mappedTraits = study.mappedLabel;
+    if (mappedTraits) {
+        $.each(mappedTraits, function (index, trait) {
+            var link = gwasProperties.contextPath + 'efotraits/' + study.mappedUri[index].split('/').slice(-1)[0];
+            mappedTraits[index] = setExternalLinkText(link, trait);
+        });
+        mappedTraits = mappedTraits.join(', ');
+    } else {
+        mappedTraits = '-';
     }
-    return efo_text;
+    return mappedTraits;
 }
 
 function setAncentrySection(study) {
