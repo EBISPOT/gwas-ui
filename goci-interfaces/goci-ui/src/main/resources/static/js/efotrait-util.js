@@ -2668,7 +2668,7 @@ buildLocusPlotPopoverHTML = function(association){
     var text = $('<div/>');
 
     var rsid = association.rsId==undefined? '' : association.rsId[0];
-    text.append(_addNameValuePairHTML('Variant and risk allele ', rsid+', '+association.strongestAllele));
+    text.append(_addNameValuePairHTML('Variant and risk allele', association.strongestAllele));
     text.append(_addNameValuePairHTML('Location',association.chromLocation));
     text.append(_addNameValuePairHTML('P-value',association.pValueMantissa+' x 10'+"<sup>"+association.pValueExponent+"</sup>"));
     text.append(_addNameValuePairHTML('Mapped gene(s)',association.entrezMappedGenes));
