@@ -270,9 +270,9 @@ function splitPValue(pValue) {
 function pValueSorter(a, b) {
     var value1 = splitPValue(a);
     var value2 = splitPValue(b);
-    if (value1[1] > value2[1]) return 1;
-    if (value1[1] < value2[1]) return -1;
-    if (value1[0] > value2[0]) return 1;
-    if (value1[0] < value2[0]) return -1;
+    if (parseInt(value1[1]) > parseInt(value2[1])) return 1;
+    if (parseInt(value1[1]) < parseInt(value2[1])) return -1;
+    if (parseInt(value1[0]) > parseInt(value2[0])) return 1;
+    if (parseInt(value1[0]) < parseInt(value2[0])) return -1;
     return 0;
 }
