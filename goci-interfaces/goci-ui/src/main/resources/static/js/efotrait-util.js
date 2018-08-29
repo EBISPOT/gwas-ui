@@ -1203,7 +1203,8 @@ displayHighlightedStudy = function(highlightedStudy) {
                                                  setExternalLink(EPMC_URL + highlightedStudy.pubmedId,
                                                                  'PMID:' + highlightedStudy.pubmedId) +
                                                  ')');
-    $('#efotrait-highlighted-study-catalogPublishDate').html(new Date(highlightedStudy.catalogPublishDate).toLocaleDateString());
+    $('#efotrait-highlighted-study-catalogPublishDate').html(highlightedStudy.publicationDate.split('T')[0]);
+
     // $('#efotrait-highlighted-st udy-initialSampleDescription').html(highlightedStudy.initialSampleDescription);
     // $('#efotrait-highlighted-study-replicateSampleDescription').html(highlightedStudy.replicateSampleDescription);
     // $("#efotrait-highlighted-study-all").html(longContent("efotrait-highlighted-study-all_div",
