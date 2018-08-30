@@ -303,7 +303,7 @@ function setQueryUrl(query, label) {
     if (!label) {
         label = query;
     }
-    return '<a href="/gwas/search?query='+query+'">'+label+'</a>';
+    return '<a href="'+gwasProperties.contextPath+'search?query='+query+'">'+label+'</a>';
 }
 
 // Update the display of the variant functional class
