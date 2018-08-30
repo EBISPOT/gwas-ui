@@ -203,7 +203,7 @@ function displaySummaryStudy(data, clearBeforeInsert) {
         console.log(study.authorsList);
         // require toggle-resize.js
         var reduce_text= displayAuthorsListAsList(study.authorsList);
-        reduce_text = addShowMoreLink(reduce_text, 50, "...");
+        reduce_text = addShowMoreLink(reduce_text, 500, "...");
         $("#study-authors-list").html(reduce_text);
     }
     $("#study-reported-trait").html(study.traitName);

@@ -213,9 +213,12 @@ function displaySummaryPublication(data,clearBeforeInsert) {
     $("#publication-journal").html(publication.publication);
     $("#publication-datepublication").html(publication.publicationDate.split('T')[0]);
     if ('authorsList' in publication) {
-        //console.log(publication.authorsList);
-        $("#publication-authors-list").html(displayAuthorsListAsList(publication.authorsList));
+        // require toggle-resize.js
+        var reduce_text= displayAuthorsListAsList(publication.authorsList);
+        reduce_text = addShowMoreLink(reduce_text, 500, "...");
+        $("#publication-authors-list").html(reduce_text);
     }
+
     $("#pubmedid_button").attr('onclick',     "window.open('"+gwasProperties.NCBI_URL+publication.pubmedId+"',    '_blank')");
     $("#europepmc_button").attr('onclick',     "window.open('"+gwasProperties.EPMC_URL+publication.pubmedId+"',    '_blank')");
     
