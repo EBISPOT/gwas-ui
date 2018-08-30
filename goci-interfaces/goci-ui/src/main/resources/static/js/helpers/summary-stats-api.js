@@ -15,9 +15,8 @@ function getSummaryStatsInfo(study_accession, div) {
         {},'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         console.log("Summary stats result for " + study_accession);
         var nextContent = div.html();
-        nextContent = nextContent+ "&nbsp;&nbsp;<a href='";
-        nextContent = nextContent + gwasProperties.SUMMARY_STATS_URL+"/studies/"+study_accession+"' target='_blank'>";
-        nextContent = nextContent + "Summary Stats REST API available here</a>";
+        nextContent = nextContent+ "&nbsp;&nbsp;<a href='http://www.ebi.ac.uk/gwas/summary-statistics/docs' target='_blank'>";
+        nextContent = nextContent + "Summary Statistics API</a>";
         div.html(nextContent);
         return data;
     }).catch(function(err) {
