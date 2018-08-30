@@ -48,7 +48,6 @@
     <div class="container-fluid clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h2 style="margin:0px">
-                <img style="width: 1em; height: auto;" th:src="@{/icons/GWAS_variant_2017.png}"/>
                 <span style="padding-left:5px">Variant: </span>
                 <span th:text="${rsId}" style="padding-left:5px"></span>
 
@@ -186,10 +185,6 @@
                         </div>
                     </div>
                 </div>
-                <div id="bottom-summary">
-                    <span class="glyphicon glyphicon-info-sign" style="padding-right:2px"></span>
-                    <span id="variant-summary-content"></span>
-                </div>
             </div>
         </div>
 
@@ -210,6 +205,18 @@
                     <span>Download association data</span><span class="glyphicon glyphicon-download-alt" style="color:#398A96;margin-left:10px"></span>
                 </button>
             </div>
+        </div>
+
+
+        <!-- List the available tables -->
+
+        <div class="row search-results-container" >
+            <div th:include="fragments/study-datatable :: studies_datatable"></div>
+        </div>
+
+        <div class="row search-results-container" >
+            <!-- Associations table -->
+            <div th:include="fragments/association-datatable :: associations_datatable"></div>
         </div>
 
 
@@ -235,14 +242,14 @@
 
         <!-- List the available tables -->
 
-        <div class="row search-results-container" >
-            <div th:include="fragments/study-datatable :: studies_datatable"></div>
-        </div>
+        <!--<div class="row search-results-container" >-->
+            <!--<div th:include="fragments/study-datatable :: studies_datatable"></div>-->
+        <!--</div>-->
 
-        <div class="row search-results-container" >
-            <!-- Associations table -->
-            <div th:include="fragments/association-datatable :: associations_datatable"></div>
-        </div>
+        <!--<div class="row search-results-container" >-->
+            <!--&lt;!&ndash; Associations table &ndash;&gt;-->
+            <!--<div th:include="fragments/association-datatable :: associations_datatable"></div>-->
+        <!--</div>-->
 
     </div>
 
