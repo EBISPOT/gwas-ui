@@ -314,7 +314,7 @@ function variationClassLabel(label) {
 
 // Generate an external link (text + icon)
 function setExternalLink(url,label) {
-    return '<a href="'+url+'" target="_blank">'+label+'<span class="glyphicon glyphicon-new-window external-link-smaller"></span></a>';
+    return '<a href="'+url+'" target="_blank">'+label+'</a>';
 
 }
 
