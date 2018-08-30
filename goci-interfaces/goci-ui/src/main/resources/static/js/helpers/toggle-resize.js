@@ -1,4 +1,6 @@
 // It might change soon.
+// For the authors list: it might contain a tag eg. href or img and the visible_txt will wrong.
+// This procedure truncate to the last &nsbp;
 function addShowMoreLink(content, showCharParam, ellipsestext) {
     var moretext = "Show more >";
     
@@ -6,6 +8,11 @@ function addShowMoreLink(content, showCharParam, ellipsestext) {
     if(content.length > showCharParam) {
         
         var visible_text = content.substr(0, showCharParam);
+        var lastSpace = visible_text.lastIndexOf("\&nbsp;");
+        if (lastSpace > -1) {
+            showCharParam = lastSpace;
+            visible_text = content.substr(0, showCharParam);
+        }
         var extra_text = content.substr(showCharParam, content.length - showCharParam);
        
 
