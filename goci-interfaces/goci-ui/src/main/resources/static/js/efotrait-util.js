@@ -678,7 +678,9 @@ function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false
     // or just reload the tables(adding another efo term)
 
     var searchQuery = mainEFO;
-
+    
+    //downloads link : utils-helper.js
+    setDownloadLink(mainEFO);
 
     if (additionalEFO.length > 0) {
         var p1 = filterAvailableEFOs(additionalEFO).then((additionalEFO_filtered) => {
@@ -748,7 +750,7 @@ function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false
         //     console.error('Error when searching solr for' + searchQuery + '. ' + err);
         //     throw(err);
         // })
-        return promisePost( window.location.pathname.split('/efotraits/')[0] + '/api/search/advancefilter',
+        return promisePost( gwasProperties.contextPath+'api/search/advancefilter',
                           {
                               'q': searchQuery,
                               'max': 99999,
