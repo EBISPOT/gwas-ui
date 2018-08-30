@@ -120,7 +120,7 @@ function processVariantData(data,rsId) {
 
         displayDatatableAssociations(data_association.docs);
         displayDatatableStudies(data_study.docs);
-        //downloads link
+        //downloads link : utils-helper.js
         setDownloadLink(rsId);
     }
     $('[data-toggle="tooltip"]').tooltip();
@@ -446,17 +446,3 @@ function setState(state) {
     }
 }
 
-function setDownloadLink(rsId) {
-    var baseUrl = gwasProperties.contextPath+'api/search/downloads?';
-    var q = "q=".concat(rsId);
-
-    var facet = '&facet=association';
-    var efo = '&efo=true';
-    var params = '&pvalfilter=&orfilter=&betafilter=&datefilter=&genomicfilter=&genotypingfilter[]=&traitfilter[]=&dateaddedfilter=';
-
-
-    var url = "window.open('".concat(baseUrl).concat(q).concat(params).concat(facet).concat(efo).concat("',    '_blank')");
-
-    $("#download_data").attr('onclick', url);
-
-}

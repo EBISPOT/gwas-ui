@@ -111,6 +111,8 @@ function getDataSolr(main, initLoad=false) {
         }
         else {
             processSolrData(data, initLoad);
+            //downloads link : utils-helper.js
+            setDownloadLink(searchQuery);
         }
         console.log("Solr research done for " + searchQuery);
         return data;
@@ -178,6 +180,7 @@ function processSolrData(data, initLoad=false) {
         data_study.docs = []
     }
     
+
     //update association/study table
     displayDatatableAssociations(data_association.docs);
     displayDatatableStudies(data_study.docs);

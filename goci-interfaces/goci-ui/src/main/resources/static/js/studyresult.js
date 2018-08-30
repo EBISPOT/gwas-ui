@@ -108,6 +108,8 @@ function getDataSolr(main, initLoad = false) {
         }
         else {
            processSolrData(data, initLoad);
+           //downloads link : utils-helper.js
+           setDownloadLink(searchQuery);
            displayDatatableAssociations(data_association.docs);
            displaySummaryStudy(data_study.docs);
            console.log("Solr research done for " + searchQuery);
@@ -196,7 +198,7 @@ function displaySummaryStudy(data, clearBeforeInsert) {
     $("#study-author").html(first_author);
     $("#study-title").html(study.title);
     $("#study-journal").html(study.publication);
-    var pubmedIdLink = '<a href="'+gwasProperties.contextPath+'publications/'+study.pubmedId+'"><span class="gwas-icon-GWAS_Publication_2017"></span>&nbsp;'+study.pubmedId+'</a>';
+    var pubmedIdLink = '<a href="'+gwasProperties.contextPath+'publications/'+study.pubmedId+'">'+study.pubmedId+'</a>';
     $("#study-pubmedid").html(pubmedIdLink);
     $("#study-datepublication").html(study.publicationDate.split('T')[0]);
     if ('authorsList' in study) {
@@ -468,3 +470,6 @@ function setAncentrySection(study) {
         $("#study-sample-replication").html(study.replicateSampleDescription);
     }
 }
+
+
+
