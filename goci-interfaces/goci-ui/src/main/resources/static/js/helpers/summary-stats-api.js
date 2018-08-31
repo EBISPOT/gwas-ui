@@ -15,7 +15,7 @@ function getSummaryStatsInfo(study_accession, div) {
         {},'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         //console.log("Summary stats result for " + study_accession);
         var nextContent = div.html();
-        nextContent = nextContent+ "&nbsp;,&nbsp;<a href='http://www.ebi.ac.uk/gwas/summary-statistics/docs' target='_blank'>";
+        nextContent = nextContent+ "&nbsp;&nbsp;or&nbsp;&nbsp;<a href='http://www.ebi.ac.uk/gwas/summary-statistics/docs' target='_blank'>";
         nextContent = nextContent + "API access</a>";
         div.html(nextContent);
         return data;
