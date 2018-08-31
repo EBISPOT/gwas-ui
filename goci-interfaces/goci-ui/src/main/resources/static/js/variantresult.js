@@ -166,7 +166,9 @@ function getVariantInfo(data,rsId) {
             $.each(doc.entrezMappedGenes, function(index, gene) {
                 if (jQuery.inArray(gene, genes_mapped) == -1) {
                     genes_mapped.push(gene);
-                    genes_mapped_url.push(setQueryUrl(gene));
+                    // remove link
+                    // genes_mapped_url.push(setQueryUrl(gene));
+                    genes_mapped_url.push(gene);
                 }
             });
         }
@@ -177,7 +179,9 @@ function getVariantInfo(data,rsId) {
             $.each(doc.traitName, function(index, trait) {
                 if (jQuery.inArray(trait, traits_reported) == -1) {
                     traits_reported.push(trait);
-                    traits_reported_url.push(setQueryUrl(trait));
+                    // remove link
+                    // traits_reported_url.push(setQueryUrl(trait));
+                    traits_reported_url.push(trait);
                 }
             });
         }
