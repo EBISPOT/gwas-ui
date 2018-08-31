@@ -226,9 +226,7 @@ function displaySummaryStudy(data, clearBeforeInsert) {
         var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
             .concat(dir).concat("' target='_blank'>");
         
-        linkFullPValue = ftplink.concat("FTP Download<span class='glyphicon glyphicon-signal clickable context-help'" +
-            " data-toggle='tooltip'" +
-            "data-original-title='Click for summary statistics'></span></a> &nbsp;");
+        linkFullPValue = ftplink.concat("FTP Download<span class='glyphicon glyphicon-signal clickable context-help'></span></a>&nbsp;");
     
         $("#study-summary-stats").html(linkFullPValue);
         var summaryStatData = getSummaryStatsInfo(study.accessionId,$("#study-summary-stats"));
