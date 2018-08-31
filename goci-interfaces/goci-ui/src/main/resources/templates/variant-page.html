@@ -62,7 +62,7 @@
 
     <ol class="breadcrumb background-color-complementary-accent">
         <li><a href="index.html" th:href="@{/home}">GWAS</a></li>
-        <li><a href="variants.html" th:href="@{/variants}">Variants</a></li>
+        <li>Variants</li>
         <li class="active" th:text="${rsId}"></li>
     </ol>
 
@@ -192,14 +192,14 @@
         <div class="row" style="margin-top:0px">
             <div id="table-list" class="panel clearfix" style="padding-left:0px;box-shadow:none">
                 <span style="margin-right:10px;font-weight:bold">Available data:</span>
-                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#ld_panel')">
-                    <span>Linkage disequilibrium (LD)</span><span class="glyphicon glyphicon-stats" style="color:#398A96;margin-left:10px"></span>
-                </button>
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#association_panel')">
                     <span class="association_label">Associations</span><span class="association_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#study_panel')">
                     <span class="study_label">Studies</span><span class="study_count badge" style="background-color: #398A96;margin-left:10px"></span>
+                </button>
+                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#ld_panel')">
+                    <span>Linkage disequilibrium (LD)</span>
                 </button>
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" id="download_data">
                     <span>Download association data</span><span class="glyphicon glyphicon-download-alt" style="color:#398A96;margin-left:10px"></span>
@@ -209,15 +209,15 @@
 
 
         <!-- List the available tables -->
+        <div class="row search-results-container" >
+            <!-- Associations table -->
+            <div th:include="fragments/association-datatable :: associations_datatable"></div>
+        </div>
 
         <div class="row search-results-container" >
             <div th:include="fragments/study-datatable :: studies_datatable"></div>
         </div>
 
-        <div class="row search-results-container" >
-            <!-- Associations table -->
-            <div th:include="fragments/association-datatable :: associations_datatable"></div>
-        </div>
 
 
         <!-- Linkage disequilibrium -->
@@ -225,7 +225,7 @@
             <div id="ld_panel" class="panel panel-default">
                 <div class="panel-heading background-color-primary-accent">
                     <h3 class="panel-title">
-                        <span id="ld_panel_label">Linkage disequilibrium (LD)</span><span class="glyphicon glyphicon-stats" style="color:#398A96;margin-left:10px"></span>
+                        <span id="ld_panel_label">Linkage disequilibrium (LD)</span>
                     </h3>
                     <span class="pull-right">
                         <span class="clickable" style="margin-left:25px" onclick="toggleSidebar('#ld_panel span.clickable')">
