@@ -388,6 +388,7 @@ function updateCountBadges(countArray, searchTerm) {
             var summary = $('#' + resource + '-summaries');
             summary.removeClass("no-results");
             summary.show();
+            $('#' + resource + '-facet').show();
         }
 
         if (count == 0) {
@@ -395,6 +396,7 @@ function updateCountBadges(countArray, searchTerm) {
             var summary = $('#' + resource + '-summaries');
             summary.addClass("no-results");
             summary.hide();
+            $('#' + resource + '-facet').hide();
         }
     }
 }
