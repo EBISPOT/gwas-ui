@@ -486,6 +486,16 @@
                     </div>
                 </div>
 
+
+                <div class="row search-results-container" >
+                    <!-- Associations table -->
+                    <div th:include="fragments/association-datatable :: associations_datatable"></div>
+
+                    <!-- Studies table -->
+                    <div th:include="fragments/study-datatable :: studies_datatable"></div>
+                </div>
+
+
                 <!-- locus plot -->
                 <div class="row" style="margin-top:20px" id="locus-plot-row-loading">
                     <div id="locus_panel" class="panel panel-default">
@@ -517,18 +527,18 @@
             </div>
         </div>
 
-        <div class="row search-results-container" >
-            <!-- Associations table -->
-            <div th:include="fragments/association-datatable :: associations_datatable"></div>
+        <!--<div class="row search-results-container" >-->
+            <!--&lt;!&ndash; Associations table &ndash;&gt;-->
+            <!--<div th:include="fragments/association-datatable :: associations_datatable"></div>-->
 
 
 
 
-            <!-- Studies table -->
-            <div th:include="fragments/study-datatable :: studies_datatable"></div>
+            <!--&lt;!&ndash; Studies table &ndash;&gt;-->
+            <!--<div th:include="fragments/study-datatable :: studies_datatable"></div>-->
 
 
-        </div>
+        <!--</div>-->
 
 
 
