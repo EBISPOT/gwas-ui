@@ -53,7 +53,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         }
         // This is now linking to the variant page instead of the search page
         // riskAllele = setQueryUrl(riskAllele,riskAlleleLabel);
-        riskAllele = setExternalLinkText(gwasProperties.contextPath + '/variants/' + riskAllele_rsid, riskAlleleLabel);
+        riskAllele = setInternalLinkText(gwasProperties.contextPath + 'variants/' + riskAllele_rsid, riskAlleleLabel);
         
         tmp['riskAllele'] = riskAllele;
         
@@ -149,7 +149,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         if (mappedTraits) {
             $.each(mappedTraits, function (index, trait) {
                 var link = gwasProperties.contextPath + 'efotraits/' + asso.mappedUri[index].split('/').slice(-1)[0]
-                mappedTraits[index] = setExternalLinkText(link, trait);
+                mappedTraits[index] = setInternalLinkText(link, trait);
             });
             tmp['mappedTraits'] = mappedTraits.join(', ');
         } else {
