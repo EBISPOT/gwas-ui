@@ -80,88 +80,89 @@
     </div>
 
 
-        <div class="container-fluid" id="lower_container">
+    <div class="container-fluid" id="lower_container">
 
-            <!-- Summary panel -->
-            <div class="row" style="margin-top:10px">
-                <div id="summary-info" class="panel panel-default"  style="padding-left:0px">
-                    <div class="panel-heading background-color-primary-accent">
-                        <h3 class="panel-title">Publication information</h3>
-                    </div>
-                    <div class="clearfix" id="summary-panel-loading">
-                        <div class="panel-body col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                            <div class="clearfix">
-                                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                    <span class="item-left-bold">PubMed ID</span>
-                                </div>
-                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="publication-pubmedid">-</div>
-
-                            </div>
-                            <div class="clearfix">
-                                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                    <span class="item-left-bold">First author</span>
-                                </div>
-                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="publication-author">-</div>
-
-                            </div>
-                        </div>
-
-                        <!--  data -->
-                        <div class="panel-body col-lg-5 col-md-4 col-sm-4 col-xs-4">
-                            <div class="clearfix">
-                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
-                                    <span class="item-left-bold">Journal</span>
-                                </div>
-                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="publication-journal">-</div>
-                            </div>
-                            <div class="clearfix">
-                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
-                                    <span>Publication date</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="YYYY-MM-DD"></span>
-                                </div>
-                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="publication-datepublication">-</div>
-                            </div>
-                        </div>
-
-                        <div id="panel-links" class="panel-body col-lg-2 col-md-3 col-sm-3 col-xs-3">
-                            <div style="margin-bottom: 0.6em">
-                                <button type="button" class="btn btn-default btn-sm" id="pubmedid_button">View in <b>PubMed</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
-                            </div>
-                            <div style="margin-bottom: 0.6em">
-                                <button type="button" class="btn btn-default btn-sm" id="europepmc_button">View in <b>Europe PMC</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="clearfix" id="authorsList-panel-loading">
-                        <div class="panel-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="clearfix">
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
-                                    <span class="item-left-bold">Title</span>
-                                </div>
-                                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" id="publication-title">-</div>
-                            </div>
-                            <div class="clearfix">
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
-                                    <span class="item-left-bold">Authors:</span>
-                                </div>
-                                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" id="publication-authors-list">-</div>
-
-                            </div>
-                        </div>
-                    </div>
-
+        <!-- Summary panel -->
+        <div class="row" style="margin-top:10px">
+            <div id="summary-info" class="panel panel-default"  style="padding-left:0px">
+                <div class="panel-heading background-color-primary-accent">
+                    <h3 class="panel-title">Publication information</h3>
                 </div>
+                <div class="clearfix" id="summary-panel-loading">
+                    <div class="panel-body col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                        <div class="clearfix">
+                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                <span class="item-left-bold">PubMed ID</span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="publication-pubmedid">-</div>
+
+                        </div>
+                        <div class="clearfix">
+                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                <span class="item-left-bold">First author</span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="publication-author">-</div>
+
+                        </div>
+                    </div>
+
+                    <!--  data -->
+                    <div class="panel-body col-lg-5 col-md-4 col-sm-4 col-xs-4">
+                        <div class="clearfix">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
+                                <span class="item-left-bold">Journal</span>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="publication-journal">-</div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
+                                <span>Publication date</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="YYYY-MM-DD"></span>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="publication-datepublication">-</div>
+                        </div>
+                    </div>
+
+                    <div id="panel-links" class="panel-body col-lg-2 col-md-3 col-sm-3 col-xs-3">
+                        <div style="margin-bottom: 0.6em">
+                            <button type="button" class="btn btn-default btn-sm" id="pubmedid_button">View in <b>PubMed</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
+                        </div>
+                        <div style="margin-bottom: 0.6em">
+                            <button type="button" class="btn btn-default btn-sm" id="europepmc_button">View in <b>Europe PMC</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix" id="authorsList-panel-loading">
+                    <div class="panel-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="clearfix">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
+                                <span class="item-left-bold">Title</span>
+                            </div>
+                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" id="publication-title">-</div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
+                                <span class="item-left-bold">Authors:</span>
+                            </div>
+                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" id="publication-authors-list">-</div>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
+        </div>
+
         <!-- List the available tables -->
         <div class="row" style="margin-top:0px">
             <div id="table-list" class="panel clearfix" style="padding-left:0px;box-shadow:none">
                 <span style="margin-right:10px;font-weight:bold">Available data:</span>
-                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#study_panel')">
-                    <span class="study_label">Studies</span><span class="study_count badge" style="background-color: #398A96;margin-left:10px"></span>
-                </button>
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#association_panel')">
                     <span class="association_label">Associations</span><span class="association_count badge" style="background-color: #398A96;margin-left:10px"></span>
+                </button>
+                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#study_panel')">
+                    <span class="study_label">Studies</span><span class="study_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" id="download_data">
                     <span>Download association data</span><span class="glyphicon glyphicon-download-alt" style="color:#398A96;margin-left:10px"></span>
@@ -169,14 +170,16 @@
             </div>
         </div>
 
-            <div class="row search-results-container" >
-                <div th:include="fragments/study-datatable :: studies_datatable"></div>
-            </div>
 
-            <div class="row search-results-container" >
+        <div class="row search-results-container" >
             <!-- Associations table -->
             <div th:include="fragments/association-datatable :: associations_datatable"></div>
         </div>
+        <div class="row search-results-container" >
+            <!-- Studies table -->
+            <div th:include="fragments/study-datatable :: studies_datatable"></div>
+        </div>
+
     </div>
 
 
@@ -250,8 +253,8 @@
     ================================================== -->
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
         ga('create', 'UA-60195133-1', 'auto');
