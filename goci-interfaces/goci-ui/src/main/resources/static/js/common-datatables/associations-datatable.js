@@ -43,20 +43,28 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         ;
         
         var tmp = {};
+
         // Risk allele
         var riskAllele = asso.strongestAllele[0];
-        var riskAlleleLabel = riskAllele;
-        var riskAllele_rsid = riskAllele;
-        if (riskAlleleLabel.match(/\w+-.+/)) {
-            riskAlleleLabel = riskAllele.split('-').join('-<b>') + '</b>';
-            riskAllele_rsid = riskAllele.split('-')[0];
+        // there may be more than one riskAllele value
+        var riskAlleles = riskAllele.split(";");
+
+        var items = [];
+        for (var i = 0; i < riskAlleles.length; i++) {
+            var riskAlleleLabel = riskAlleles[i];
+            var riskAllele_rsid = riskAlleles[i];
+
+            if (riskAlleleLabel.match(/\w+-.+/)) {
+                riskAlleleLabel = riskAlleles[i].trim().split('-').join('-<b>') + '</b>';
+                riskAllele_rsid = riskAlleles[i].trim().split('-')[0];
+            }
+            riskAllele = setInternalLinkText(gwasProperties.contextPath + 'variants/' + riskAllele_rsid, riskAlleleLabel);
+            items.push(riskAllele);
         }
-        // This is now linking to the variant page instead of the search page
-        // riskAllele = setQueryUrl(riskAllele,riskAlleleLabel);
-        riskAllele = setExternalLinkText(gwasProperties.contextPath + '/variants/' + riskAllele_rsid, riskAlleleLabel);
-        
-        tmp['riskAllele'] = riskAllele;
-        
+
+        tmp['riskAllele'] = items.join(', ');
+
+
         // Risk allele frequency
         tmp['riskAlleleFreq'] = asso.riskFrequency;
         
@@ -149,7 +157,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         if (mappedTraits) {
             $.each(mappedTraits, function (index, trait) {
                 var link = gwasProperties.contextPath + 'efotraits/' + asso.mappedUri[index].split('/').slice(-1)[0]
-                mappedTraits[index] = setExternalLinkText(link, trait);
+                mappedTraits[index] = setInternalLinkText(link, trait);
             });
             tmp['mappedTraits'] = mappedTraits.join(', ');
         } else {

@@ -56,6 +56,11 @@ function setExternalLink(url,label) {
     
 }
 
+// Generate an internal link (text only)
+function setInternalLinkText(url,label) {
+    return '<a href="'+url+'">'+label+'</a>';
+}
+
 // Generate an external link (text only)
 function setExternalLinkText(url,label) {
     return '<a href="'+url+'" target="_blank">'+label+'</a>';
