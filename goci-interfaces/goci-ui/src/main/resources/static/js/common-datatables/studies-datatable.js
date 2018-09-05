@@ -114,13 +114,34 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
         
         
         // ancestralGroups
-        var ancestral_groups_text = '-';
-        if (study.ancestralGroups) {
-            ancestral_groups_text = displayArrayAsList(study.ancestralGroups);
-            if(study.ancestralGroups.length>1)
-                ancestral_groups_text = ancestral_groups_text.html()
+        // var ancestral_groups_text = '-';
+        // if (study.ancestralGroups) {
+        //     ancestral_groups_text = displayArrayAsList(study.ancestralGroups);
+        //     if(study.ancestralGroups.length>1)
+        //         ancestral_groups_text = ancestral_groups_text.html()
+        //
+        // }
+        // tmp['ancestral_groups_text'] = ancestral_groups_text;
+
+
+        // ancestryLinks
+        var initial_ancestral_links_text = '-';
+        var replicate_ancestral_links_text = '-';
+
+        if (study.ancestryLinks) {
+            var ancestry_and_sample_number_data = displayAncestryLinksAsList(study.ancestryLinks);
+
+            initial_ancestral_links_text = ancestry_and_sample_number_data.initial_data_text;
+            replicate_ancestral_links_text = ancestry_and_sample_number_data.replicate_data_text;
+
+            if (study.ancestryLinks.length > 1) {
+                initial_ancestral_links_text = initial_ancestral_links_text.html();
+                replicate_ancestral_links_text = replicate_ancestral_links_text.html();
+            }
         }
-        tmp['ancestral_groups_text'] = ancestral_groups_text;
+        tmp['initial_ancestral_links_text'] = initial_ancestral_links_text;
+        tmp['replicate_ancestral_links_text'] = replicate_ancestral_links_text;
+
         
         data_json.push(tmp)
     }
@@ -131,15 +152,14 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
     if (study_ids.length == 1) {
         $(".study_label").html("Study");
     }
-    
+
     $('#study-table').bootstrapTable({
         exportDataType: 'all',
         columns: [{
             field: 'study',
             title: 'Study accession',
             sortable: true
-            },
-            {
+        }, {
             field: 'Author',
             title: 'First author',
             sortable: true
@@ -151,46 +171,48 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
             field: 'Journal',
             title: 'Journal',
             sortable: true
-        },{
+        }, {
             field: 'Title',
             title: 'Title',
             sortable: true,
-            width:"1000", //This works when the table is not nested into other tag, for example, in a simple Div
-        },
-            {
-                field: 'reported_trait',
-                title: 'Reported trait',
-                sortable: true
-            },
-            {
-                field: 'mappedTraits',
-                title: 'Trait(s)',
-                sortable: true
-            },
-            {
+            width: "1000", //This works when the table is not nested into other tag, for example, in a simple Div
+        }, {
+            field: 'reported_trait',
+            title: 'Reported trait',
+            sortable: true
+        }, {
+            field: 'mappedTraits',
+            title: 'Trait(s)',
+            sortable: true
+        }, {
             field: 'initial_sample_text',
             title: 'Discovery sample description',
             sortable: true,
             visible: false
-        },{
+        }, {
             field: 'replicate_sample_text',
             title: 'Replication sample description',
             sortable: true,
             visible: false
-        },{
-            field: 'ancestral_groups_text',
+        }, {
+            field: 'initial_ancestral_links_text',
             title: 'Discovery sample number and ancestry',
             sortable: true,
             visible: false
-        },{
+        }, {
+            field: 'replicate_ancestral_links_text',
+            title: 'Replication sample number and ancestry',
+            sortable: true,
+            visible: false
+
+        }, {
             field: 'nr_associations',
             title: 'Association count',
             sortable: true
-        }
-        ],
+        }],
         data: data_json,
-        
     });
+
     $('#study-table').bootstrapTable('load',data_json)
     if(data_json.length>5){
         $('#study-table').bootstrapTable('refreshOptions',{pagination: true,pageSize: pageRowLimit,pageList: [5,10,25,50,100,'All']})
