@@ -92,6 +92,58 @@ function displayArrayAsList(data_array) {
 }
 
 
+// Display the Ancestry array as a HTML list
+function displayAncestryLinksAsList(data_array) {
+    var initial_data_text = '';
+    var replicate_data_text = '';
+
+    if (data_array) {
+        if (data_array.length == 1) {
+            var initial;
+            var replicate;
+
+            if (data_array[0].startsWith('initial')) {
+                initial = data_array[0].split('|');
+                initial = initial[3] + ', ' + initial[4];
+            }
+            else {
+                replicate = data_array[0].split('|');
+                replicate = replicate[3] + ', ' + replicate[4];
+            }
+            initial_data_text = initial;
+            replicate_data_text = replicate;
+        }
+        else if (data_array.length > 1) {
+            var initial_list = $('<ul/>');
+            initial_list.css('padding-left', '0px');
+
+            var replicate_list = $('<ul/>');
+            replicate_list.css('padding-left', '0px');
+
+            for (var i = 0; i < data_array.length; i++) {
+                var initial;
+                var replicate;
+                if (data_array[i].startsWith('initial')) {
+                    // Example data: initial|NR|U.S.|Hispanic or Latin American|6499|NA
+                    initial = data_array[i].split('|');
+                    initial = initial[3] + ', ' + initial[4];
+                    initial_list.append(newItem(initial))
+                }
+                else {
+                    replicate = data_array[i].split('|');
+                    replicate = replicate[3] + ', ' + replicate[4];
+                    replicate_list.append(newItem(replicate))
+                }
+            }
+            initial_data_text = initial_list;
+            replicate_data_text = replicate_list;
+        }
+    }
+    // return [initial_data_text, replicate_data_text];
+    return {initial_data_text: initial_data_text, replicate_data_text: replicate_data_text};
+}
+
+
 // Display the input array as a HTML list
 function displayAuthorsListAsList(data_array) {
     var data_text = '';
