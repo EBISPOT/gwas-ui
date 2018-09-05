@@ -104,11 +104,11 @@ function displayAncestryLinksAsList(data_array) {
 
             if (data_array[0].startsWith('initial')) {
                 initial = data_array[0].split('|');
-                initial = initial[3] + ', ' + initial[4];
+                initial = initial[4]+' '+initial[3];
             }
             else {
                 replicate = data_array[0].split('|');
-                replicate = replicate[3] + ', ' + replicate[4];
+                replicate = replicate[4]+' '+replicate[3];
             }
             initial_data_text = initial;
             replicate_data_text = replicate;
@@ -126,12 +126,12 @@ function displayAncestryLinksAsList(data_array) {
                 if (data_array[i].startsWith('initial')) {
                     // Example data: initial|NR|U.S.|Hispanic or Latin American|6499|NA
                     initial = data_array[i].split('|');
-                    initial = initial[3] + ', ' + initial[4];
+                    initial = initial[4]+' '+initial[3];
                     initial_list.append(newItem(initial))
                 }
                 else {
                     replicate = data_array[i].split('|');
-                    replicate = replicate[3] + ', ' + replicate[4];
+                    replicate = replicate[4]+' '+replicate[3];
                     replicate_list.append(newItem(replicate))
                 }
             }
