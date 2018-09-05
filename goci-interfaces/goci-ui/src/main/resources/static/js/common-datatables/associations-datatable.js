@@ -111,7 +111,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         
         // CI
         var ci = (asso.range) ? asso.range : '-';
-        tmp['beta'] = ci;
+        tmp['ci'] = ci;
         
         
         // Reported genes
@@ -216,7 +216,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             title: 'Beta',
             sortable: true
         },{
-            field: 'price',
+            field: 'ci',
             title: 'CI',
             sortable: true
         },{
