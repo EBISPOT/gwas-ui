@@ -49,9 +49,9 @@ function displayDatatableSummaryStats(data) {
     tmp['nr_associations'] = nr_association.toString();
     var a = (summary_stats.authorAscii_s).replace(/\s/g,"");
     var dir = a.concat("_").concat(summary_stats.pubmedId).concat("_").concat(summary_stats.accessionId);
-    
+
     var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
-        .concat(dir).concat(" target='_blank'</a>");
+        .concat(dir+"'").concat(" target='_blank'</a>");
     
     var linkFullPValue = ftplink.concat("Click for summary statistics");
     tmp['link']=linkFullPValue;
