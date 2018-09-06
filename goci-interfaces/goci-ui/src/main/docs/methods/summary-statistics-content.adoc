@@ -2,14 +2,17 @@
 
 == Summary statistics acquisition
 
-From 2017 the GWAS Catalog started hosting summary statistics files in addition to curated associations. Summary statistics are acquired from a number of different sources:
+From 2017 the GWAS Catalog started hosting summary statistics files (aggregate p-values and association data for every variant analysed in a study) in addition to curated associations. Summary statistics are acquired from a number of different sources:
 
 * Included in a curated paper as a supplementary file
 * Identified via link or reference in a curated paper
 * Identified via a consortium or author website
-* Submitted to the GWAS Catalog by an author
+* Submitted to the GWAS Catalog by an author  
 
-We urge authors of GWAS publications included in the Catalog to contact us if summary statistics are available. If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our ftp server. We can then make these available through the Catalog. We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us. Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our eligibility criteria.
+We urge authors of GWAS publications included in the Catalog to contact us if summary statistics are available. 
+If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our ftp server. We can then make these available through the Catalog. 
+We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us.
+Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our eligibility criteria (see below).
 
 == Summary statistics eligibility
 
@@ -28,14 +31,14 @@ statistic files to enable users to access data with ease.
 
 === Formatted summary statistics data
 
-Summary statistics files are formatted by a scientific curator using a semi-automated process. Data are not manipulated but the headers convertered to a consistent format seen across all formatted summary statistics files.
+Summary statistics files are formatted by a scientific curator using a semi-automated process. Data are not manipulated but the headers convertered to a consistent format across all summary statistics files.
 
-- Headers will be coereced to the 'common format'.
+- Headers will be transformed to the 'common format'.
 - Rows will never be removed.
 - Columns may be split, merged, deleted or moved.
 - Values will be unaltered.
 
-Formatted file headings (not all may be present in file):
+Formatted file headings
 
     'snp' = variant ID
     'pval' = p-value
@@ -52,8 +55,7 @@ Formatted file headings (not all may be present in file):
 
 Note that the headers in the formatted file are not limited to the above headers, nor are they required to have all of them.
 
-===== Access to formatted summary statistics data
-Formatted data is available on the GWAS Catalog [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/). Where the formatted files are available, they are nested within the harmonised directory in the study directory.
+Formatted data is accessible on the GWAS Catalog dedicated summarys statistics page [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/). Where the formatted files are available, they are nested within the harmonised directory in the study directory.
 
 
 === Harmonised summary statistics data
@@ -94,7 +96,7 @@ The harmonisation process is the following:
 .. Variant ID is set to variant IDs found by step (5).
 .. Records without a valid value for variant ID, chromosome, base pair location and p-value are removed. 
 
-===== Table of harmonisation codes
+==== Table of harmonisation codes
 
 [%header, cols=2*]
 |===
@@ -186,16 +188,15 @@ Harmonised file headings (not all may be present in file):
     'hm_effect_allele_frequency' = harmonised effect allele frequency
     'hm_code = harmonisation code (to lookup in 'Harmonisation Code Table')
 
-===== Access harmonised summary statistics data
 There are two ways to access harmonised summary statistics data:
 
 . via the Summary Statistics API (see below)
-. at the GWAS Catalog ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP]. Where the harmonised files are available, they are nested within the harmonised directory in the study directory.
+. through the GWAS Catalog ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP]. Where the harmonised files are available, they are nested within the harmonised directory in the study directory.
 
 
 = Summary statistics database
 
-We are currently developing a database of GWAS summary statistics. The REST API for the summary statistics database is now available at www.ebi.ac.uk/gwas/summary-statistics/api/. 
+We are currently releasing a database of GWAS summary statistics. The REST API for the summary statistics database is now available at www.ebi.ac.uk/gwas/summary-statistics/api/. 
 For full documentation on the REST API, please see www.ebi.ac.uk/gwas/summary-statistics/docs/.
 
 The harmonised data accessed by the REST API are nearly identical to harmonised data on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP], except that float values may be rounded to make them compatable with the database.
