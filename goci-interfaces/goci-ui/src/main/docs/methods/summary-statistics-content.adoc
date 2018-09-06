@@ -2,7 +2,7 @@
 
 == Summary statistics acquisition
 
-From 2017 the GWAS Catalog started hosting summary statistics files (aggregate p-values and association data for every variant analysed in a study) in addition to curated associations. Summary statistics are acquired from a number of different sources:
+From 2017 the GWAS Catalog started hosting full summary statistics files (aggregate p-values and association data for every variant analysed in a study) in addition to curated associations. Summary statistics are acquired from a number of different sources:
 
 * Included in a curated paper as a supplementary file
 * Identified via link or reference in a curated paper
@@ -16,7 +16,7 @@ Note that for summary statistics to be made available through the GWAS Catalog, 
 
 == Summary statistics eligibility
 
-Summary statistics must meet a number of criteria to be eligible for inclusion in the Catalog:
+Summary statistics must meet a number of criteria to be eligible for inclusion in the GWAS Catalog:
 
 * Must include >100,000 SNPs
 * Must reproduce the initial GWAS extracted in the Catalog, i.e. same samples (not a sub-set, e.g. one cohort of a meta-analysis), and on the same trait
@@ -26,8 +26,8 @@ Summary statistics must meet a number of criteria to be eligible for inclusion i
 
 = Summary statistics harmonisation
 
-There is no standard for summary statistics files, which is why we are providing formatted and harmonised summary 
-statistic files to enable users to access data with ease.
+There is no standard for publicly available summary statistics files. To enable users to access data with ease, we are providing formatted and harmonised summary statistics files.
+
 
 === Formatted summary statistics data
 
@@ -55,7 +55,7 @@ Formatted file headings
 
 Note that the headers in the formatted file are not limited to the above headers, nor are they required to have all of them.
 
-Formatted data is accessible on the GWAS Catalog dedicated summarys statistics page [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/). Where the formatted files are available, they are nested within the harmonised directory in the study directory.
+Formatted data is accessible on the GWAS Catalog dedicated summary statistics page [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/). Where the formatted files are available, they are nested within the harmonised directory in the study directory.
 
 
 === Harmonised summary statistics data
