@@ -371,8 +371,8 @@ function updateCountBadges(countArray, searchTerm) {
     console.log("Updating facet counts for " + (countArray.length / 2) + " badges");
 
     // Add search term to facet box
-    var searchTermForHeader = $('#' + 'result-header');
-    searchTermForHeader.append(searchTerm);
+    // var searchTermForHeader = $('#' + 'result-header');
+    // searchTermForHeader.append(searchTerm);
 
 
     for (var i = 0; i < countArray.length; i = i + 2) {
