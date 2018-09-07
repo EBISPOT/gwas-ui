@@ -51,7 +51,7 @@ function displayDatatableSummaryStats(data) {
     var dir = a.concat("_").concat(summary_stats.pubmedId).concat("_").concat(summary_stats.accessionId);
 
     var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
-        .concat(dir+"'").concat(" target='_blank'</a>");
+        .concat(dir).concat("' target='_blank'>");
     
     var linkFullPValue = ftplink.concat("Click for summary statistics");
     tmp['link']=linkFullPValue;
@@ -108,7 +108,7 @@ function displayDatatableSummaryStats(data) {
             },
             {
                 field: 'link',
-                title: 'Summary statistics link',
+                title: 'Data access',
                 sortable: true
             }
         ],
