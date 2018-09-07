@@ -108,7 +108,7 @@ function displayDatatableSummaryStats(data) {
             },
             {
                 field: 'link',
-                title: 'Summary statistics link',
+                title: 'Data access',
                 sortable: true
             }
         ],
