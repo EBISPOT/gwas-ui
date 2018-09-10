@@ -1,5 +1,16 @@
 = Summary statistics
 
+
+== Summary statistics eligibility
+
+Summary statistics must meet a number of criteria to be eligible for inclusion in the GWAS Catalog:
+
+* Must include >100,000 SNPs
+* Must reproduce the initial GWAS extracted in the Catalog, i.e. same samples (not a sub-set, e.g. one cohort of a meta-analysis), and on the same trait
+* Must be freely available, i.e. not only by request to author or password-protected
+* Must not require agreement to any specific terms and conditions, unless this has been agreed in advance by the author/consortium
+
+
 == Summary statistics acquisition
 
 From 2017 the GWAS Catalog started hosting full summary statistics files (aggregate p-values and association data for every variant analysed in a study) in addition to curated associations. Summary statistics are acquired from a number of different sources:
@@ -14,15 +25,6 @@ We urge authors of GWAS publications included in the Catalog to contact us if su
 If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our ftp server. We can then make these available through the Catalog. 
 We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us.
 Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our eligibility criteria (see below).
-
-== Summary statistics eligibility
-
-Summary statistics must meet a number of criteria to be eligible for inclusion in the GWAS Catalog:
-
-* Must include >100,000 SNPs
-* Must reproduce the initial GWAS extracted in the Catalog, i.e. same samples (not a sub-set, e.g. one cohort of a meta-analysis), and on the same trait
-* Must be freely available, i.e. not only by request to author or password-protected
-* Must not require agreement to any specific terms and conditions, unless this has been agreed in advance by the author/consortium
 
 
 = Summary statistics harmonisation
