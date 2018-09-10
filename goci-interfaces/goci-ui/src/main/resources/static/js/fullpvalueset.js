@@ -37,6 +37,7 @@ function loadStudiesList() {
             })
             .done(function(data) {
                 displayDatatableSummaryStats(data);
+                checkSummaryStatsDatabase(data);
                 $('#loadingStudies').hide();
             });
 }
