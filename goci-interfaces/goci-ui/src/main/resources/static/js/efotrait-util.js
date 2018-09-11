@@ -1202,10 +1202,7 @@ displayEFOLabel = function(){
  */
 displayHighlightedStudy = function(highlightedStudy) {
     $('#efotrait-highlighted-study-title').html(highlightedStudy.title);
-    $('#efotrait-highlighted-study-author').html(highlightedStudy.author_s + ' (' +
-                                                 setExternalLink(EPMC_URL + highlightedStudy.pubmedId,
-                                                                 'PMID:' + highlightedStudy.pubmedId) +
-                                                 ')');
+    $('#efotrait-highlighted-study-author').html(highlightedStudy.author_s +' (PMID:'+highlightedStudy.pubmedId+')');
     $('#efotrait-highlighted-study-catalogPublishDate').html(highlightedStudy.publicationDate.split('T')[0]);
 
     // $('#efotrait-highlighted-st udy-initialSampleDescription').html(highlightedStudy.initialSampleDescription);
@@ -1291,7 +1288,7 @@ displayEfoTraitInfo = function(efoinfo) {
     $("#efotrait-description").html(displayArrayAsParagraph(
         'gwas_efotrait_description_div', efoinfo.description));  // TW
 
-    $("#efotrait-id").html(setExternalLink(efotrait_link, efotrait_id));
+    $("#efotrait-id").html(efotrait_id);
     $("#efotrait-label").html(efotrait_label);
     // $("#efotrait-label").html(createPopover(efotrait_label,
     //                                         'description',
