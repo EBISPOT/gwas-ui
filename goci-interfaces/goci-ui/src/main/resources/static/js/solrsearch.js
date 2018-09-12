@@ -293,7 +293,6 @@ function processData(data) {
                 // Function to parse the description
                 var rowDescription = $("<tr>");
                 var descriptionTruncated = doc.description;
-                console.log("** Desc-Truncated: "+descriptionTruncated);
 
                 // Add custom formatting for Variant description
                 if (doc.resourcename == "variant") {
