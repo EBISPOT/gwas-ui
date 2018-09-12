@@ -21,7 +21,6 @@ Summary statistics are acquired from a number of different sources:
 * Identified via link or reference in a curated paper
 * Identified via a consortium or author website
 * Submitted to the GWAS Catalog by an author
-* Requested to authors by email (only in specific cases)
 
 We urge authors of GWAS publications included in the Catalog to contact us if summary statistics are available. 
 If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our ftp server. We can then make these available through the Catalog. 
