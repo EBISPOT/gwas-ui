@@ -285,6 +285,18 @@ function addResults(data, expand, id) {
                     // Function to parse the description
                     var rowDescription = $("<tr>");
                     var descriptionTruncated = doc.description;
+
+                    // Add custom formatting for Variant description
+                    if (doc.resourcename == "variant") {
+                        var descriptionElements = descriptionTruncated.split("|");
+                        var variantDescription = "<b>Location: </b>"+descriptionElements[0] +
+                            "; <b>Cytogenetic region:</b>" + descriptionElements[1] +
+                            "; <b>Most severe consequence: </b>" + descriptionElements[2] +
+                            "; <b>Mapped gene(s): </b>" + descriptionElements[3];
+                        console.log("** VarDesc: "+variantDescription);
+                        descriptionTruncated = variantDescription;
+                    }
+
                     descriptionTruncated=addShowMoreLink(descriptionTruncated, 200,"...");
                     descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
     
@@ -296,7 +308,7 @@ function addResults(data, expand, id) {
                     }
     
                     if ('studyCount' in doc) {
-                        description_stats = description_stats.concat("Studies ").concat('<span class="badge background-color-primary-bold ">').concat(doc.studyCount).concat('</span>');
+                        description_stats = description_stats.concat("&nbsp;&nbsp;Studies ").concat('<span class="badge background-color-primary-bold ">').concat(doc.studyCount).concat('</span>');
                     }
     
                     descriptionTruncated = descriptionTruncated+description_stats;
