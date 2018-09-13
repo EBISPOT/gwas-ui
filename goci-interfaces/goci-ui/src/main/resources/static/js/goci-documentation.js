@@ -9,7 +9,7 @@ $(document).ready(function() {
    */
     index = path.indexOf('/docs/');
     page = path.substr(index+6);
-    url= contextPath+"docs/content/"+page+"-content.html";
+    url= gwasProperties.contextPath+"docs/content/"+page+"-content.html";
     console.log("Documentation should be loaded from " + url + "...");
     
     // load the page content
