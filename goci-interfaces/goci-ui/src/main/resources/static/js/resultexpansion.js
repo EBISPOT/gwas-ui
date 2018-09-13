@@ -245,20 +245,17 @@ function addResults(data, expand, id) {
                             var a = (doc.authorAscii_s).replace(/\s/g,"");
                             //var dir = a.concat("_").concat(doc.pmid).concat("_").concat(doc.accessionId);
             
-                            var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
-                                .concat("' target='_blank'</a>");
-            
-                            linkFullPValue = ftplink.concat("<span class='glyphicon glyphicon-signal clickable context-help'" +
+                            linkFullPValue = "<span class='glyphicon glyphicon-signal context-help'" +
                                 " data-toggle='tooltip'" +
-                                "data-original-title='Click for summary statistics'></span></a>");
+                                "data-original-title='Full summary statistics available'></span>");
             
                         }
         
                         if ((doc.genotypingTechnologies.indexOf("Targeted genotyping array") > -1) ||
                             (doc.genotypingTechnologies.indexOf("Exome genotyping array") > -1) ) {
-                            genotypingIcon="<a href='#'><span class='glyphicon targeted-icon-GWAS_target_icon clickable context-help'" +
+                            genotypingIcon="<span class='glyphicon targeted-icon-GWAS_target_icon context-help'" +
                                 " data-toggle='tooltip'" +
-                                "data-original-title='Targeted or exome array study'></span></a>";
+                                "data-original-title='Targeted or exome array study'></span>";
                         }
         
         
