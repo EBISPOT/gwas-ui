@@ -31,24 +31,18 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
         var genotypingIcon ="";
         if ((study.genotypingTechnologies.indexOf("Targeted genotyping array") > -1) ||
             (study.genotypingTechnologies.indexOf("Exome genotyping array") > -1) ) {
-            genotypingIcon="<a href='#'><span class='glyphicon targeted-icon-GWAS_target_icon clickable context-help'" +
+            genotypingIcon="<span class='glyphicon targeted-icon-GWAS_target_icon context-help'" +
                 " data-toggle='tooltip'" +
-                "data-original-title='Targeted or exome array study'></span></a>";
+                "data-original-title='Targeted or exome array study'></span>";
         }
         
         var linkFullPValue = "";
         var fullpvalset = study.fullPvalueSet;
         if(fullpvalset == 1) {
         
-            var a = (study.authorAscii_s).replace(/\s/g,"");
-            var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
-        
-            var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
-                .concat(dir).concat("' target='_blank'</a>");
-        
-            linkFullPValue = ftplink.concat("<span class='glyphicon glyphicon-signal clickable context-help'" +
+            linkFullPValue = "<span class='glyphicon glyphicon-signal clickable context-help'" +
                 " data-toggle='tooltip'" +
-                "data-original-title='Click for summary statistics'></span></a>");
+                "data-original-title='Click for summary statistics'></span>";
         
         }
         
