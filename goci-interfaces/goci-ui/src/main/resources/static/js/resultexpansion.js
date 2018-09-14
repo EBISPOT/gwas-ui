@@ -242,12 +242,12 @@ function addResults(data, expand, id) {
                         var fullpvalset = doc.fullPvalueSet;
                         if(fullpvalset == 1) {
             
-                            var a = (doc.authorAscii_s).replace(/\s/g,"");
+                            // var a = (doc.authorAscii_s).replace(/\s/g,"");
                             //var dir = a.concat("_").concat(doc.pmid).concat("_").concat(doc.accessionId);
             
                             linkFullPValue = "<span class='glyphicon glyphicon-signal context-help'" +
                                 " data-toggle='tooltip'" +
-                                "data-original-title='Full summary statistics available'></span>");
+                                "data-original-title='Full summary statistics available'></span>";
             
                         }
         
@@ -290,7 +290,6 @@ function addResults(data, expand, id) {
                             "; <b>Cytogenetic region:</b>" + descriptionElements[1] +
                             "; <b>Most severe consequence: </b>" + descriptionElements[2] +
                             "; <b>Mapped gene(s): </b>" + descriptionElements[3];
-                        console.log("** VarDesc: "+variantDescription);
                         descriptionTruncated = variantDescription;
                     }
 
