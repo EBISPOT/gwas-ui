@@ -298,7 +298,6 @@ function processData(data) {
                         "; <b>Cytogenetic region:</b>" + descriptionElements[1] +
                         "; <b>Most severe consequence: </b>" + descriptionElements[2] +
                         "; <b>Mapped gene(s): </b>" + descriptionElements[3];
-                    console.log("** VarDesc: "+variantDescription);
                     descriptionTruncated = variantDescription;
                 }
 
