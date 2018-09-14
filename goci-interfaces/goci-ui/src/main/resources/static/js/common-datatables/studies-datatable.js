@@ -7,7 +7,7 @@
  * @param {Object} data - study solr docs
  * @param {Boolean} cleanBeforeInsert
  */
-function displayDatatableStudies(data, cleanBeforeInsert=true) {
+function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
     //by default, we clean the table before inserting data
     var study_ids = [];
     if(cleanBeforeInsert){
@@ -147,29 +147,43 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
         $(".study_label").html("Study");
     }
 
+    // Display different default columns on different pages
+    var defaultVisible = true;
+    var defaultNotVisible = false;
+
+    if (PAGE_TYPE == 'publication') {
+        defaultVisible = false;
+        defaultNotVisible = true;
+    }
+
+
     $('#study-table').bootstrapTable({
         exportDataType: 'all',
         columns: [{
+            field: 'Author',
+            title: 'First author',
+            sortable: true,
+            visible: defaultVisible
+        }, {
             field: 'study',
             title: 'Study accession',
             sortable: true
         }, {
-            field: 'Author',
-            title: 'First author',
-            sortable: true
-        }, {
             field: 'publi',
             title: 'Publication date',
-            sortable: true
+            sortable: true,
+            visible: defaultVisible
         }, {
             field: 'Journal',
             title: 'Journal',
-            sortable: true
+            sortable: true,
+            visible: defaultVisible
         }, {
             field: 'Title',
             title: 'Title',
             sortable: true,
             width: "1000", //This works when the table is not nested into other tag, for example, in a simple Div
+            visible: defaultVisible
         }, {
             field: 'reported_trait',
             title: 'Reported trait',
@@ -182,22 +196,22 @@ function displayDatatableStudies(data, cleanBeforeInsert=true) {
             field: 'initial_sample_text',
             title: 'Discovery sample description',
             sortable: true,
-            visible: false
+            visible: defaultVisible
         }, {
             field: 'replicate_sample_text',
             title: 'Replication sample description',
             sortable: true,
-            visible: false
+            visible: defaultVisible
         }, {
             field: 'initial_ancestral_links_text',
             title: 'Discovery sample number and ancestry',
             sortable: true,
-            visible: false
+            visible: defaultNotVisible
         }, {
             field: 'replicate_ancestral_links_text',
             title: 'Replication sample number and ancestry',
             sortable: true,
-            visible: false
+            visible: defaultNotVisible
 
         }, {
             field: 'nr_associations',

@@ -180,10 +180,11 @@ function processSolrData(data, initLoad=false) {
         data_study.docs = []
     }
     
+    var PAGE_TYPE = "publication";
 
     //update association/study table
     displayDatatableAssociations(data_association.docs);
-    displayDatatableStudies(data_study.docs);
+    displayDatatableStudies(data_study.docs, PAGE_TYPE);
     displaySummaryPublication(data_study.docs);
     
     //work out highlight study
