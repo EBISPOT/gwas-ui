@@ -31,7 +31,7 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
         var genotypingIcon ="";
         if ((study.genotypingTechnologies.indexOf("Targeted genotyping array") > -1) ||
             (study.genotypingTechnologies.indexOf("Exome genotyping array") > -1) ) {
-            genotypingIcon="<span class='glyphicon targeted-icon-GWAS_target_icon context-help'" +
+            genotypingIcon="<span style='font-size: 12px' class='glyphicon targeted-icon-GWAS_target_icon context-help'" +
                 " data-toggle='tooltip'" +
                 "data-original-title='Targeted or exome array study'></span>";
         }
@@ -40,7 +40,7 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
         var fullpvalset = study.fullPvalueSet;
         if(fullpvalset == 1) {
         
-            linkFullPValue = "<span class='glyphicon glyphicon-signal clickable context-help'" +
+            linkFullPValue = "<span style='font-size: 12px' class='glyphicon glyphicon-signal clickable context-help'" +
                 " data-toggle='tooltip'" +
                 "data-original-title='Click for summary statistics'></span>";
         
