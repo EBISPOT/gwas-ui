@@ -256,6 +256,8 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
     if(data_json.length>5){
         $('#association-table').bootstrapTable('refreshOptions',{pagination: true,pageSize: pageRowLimit,pageList: [5,10,25,50,100,'All']})
     }
+    // Add custom tooltip text for button
+    $('.keep-open').attr('title','Add/Remove Columns');
     hideLoadingOverLay('#association-table-loading')
 }
 
