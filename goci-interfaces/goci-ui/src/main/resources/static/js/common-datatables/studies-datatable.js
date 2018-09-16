@@ -159,64 +159,76 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
 
     $('#study-table').bootstrapTable({
         exportDataType: 'all',
+        filterControl: true,
         columns: [{
             field: 'Author',
             title: 'First author',
             sortable: true,
-            visible: defaultVisible
+            visible: defaultVisible,
+            filterControl: 'input'
         }, {
             field: 'study',
             title: 'Study accession',
-            sortable: true
+            sortable: true,
+            filterControl: 'input'
         }, {
             field: 'publi',
             title: 'Publication date',
             sortable: true,
-            visible: defaultVisible
+            visible: defaultVisible,
+            filterControl: 'input'
         }, {
             field: 'Journal',
             title: 'Journal',
             sortable: true,
-            visible: defaultVisible
+            visible: defaultVisible,
+            filterControl: 'input'
         }, {
             field: 'Title',
             title: 'Title',
             sortable: true,
             width: "1000", //This works when the table is not nested into other tag, for example, in a simple Div
-            visible: defaultVisible
+            visible: defaultVisible,
+            filterControl: 'input'
         }, {
             field: 'reported_trait',
             title: 'Reported trait',
-            sortable: true
+            sortable: true,
+            filterControl: 'input'
         }, {
             field: 'mappedTraits',
             title: 'Trait(s)',
-            sortable: true
+            sortable: true,
+            filterControl: 'input'
         }, {
             field: 'initial_sample_text',
             title: 'Discovery sample description',
             sortable: true,
-            visible: defaultVisible
+            visible: defaultVisible,
+            filterControl: 'input'
         }, {
             field: 'replicate_sample_text',
             title: 'Replication sample description',
             sortable: true,
-            visible: defaultVisible
+            visible: defaultVisible,
+            filterControl: 'input'
         }, {
             field: 'initial_ancestral_links_text',
             title: 'Discovery sample number and ancestry',
             sortable: true,
-            visible: defaultNotVisible
+            visible: defaultNotVisible,
+            filterControl: 'input'
         }, {
             field: 'replicate_ancestral_links_text',
             title: 'Replication sample number and ancestry',
             sortable: true,
-            visible: defaultNotVisible
-
+            visible: defaultNotVisible,
+            filterControl: 'input'
         }, {
             field: 'nr_associations',
             title: 'Association count',
-            sortable: true
+            sortable: true,
+            filterControl: 'input'
         }],
         data: data_json,
     });
