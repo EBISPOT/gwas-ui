@@ -187,69 +187,83 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
     }
     $('#association-table').bootstrapTable({
         exportDataType: 'all',
+        filterControl: true,
         columns: [{
             field: 'riskAllele',
             title: 'Variant and risk allele',
-            sortable: true
+            sortable: true,
+            filterControl: 'input'
         },
             {
                 field: 'pValue',
                 title: 'P-value',
                 sortable: true,
-                sorter : "pValueSorter"
+                sorter: "pValueSorter",
+                filterControl: 'input'
             },
             {
                 field: 'pValueAnnotation',
                 title: 'P-value annotation',
-                sortable: true
+                sortable: true,
+                filterControl: 'input'
             },
             {
-            field: 'riskAlleleFreq',
-            title: 'RAF',
-            sortable: true
-        },{
-            field: 'orValue',
-            title: 'OR',
-            sortable: true
-        },{
-            field: 'beta',
-            title: 'Beta',
-            sortable: true
-        },{
-            field: 'ci',
-            title: 'CI',
-            sortable: true
-        },{
-            field: 'mappedGenes',
-            title: 'Mapped gene',
-            sortable: true
-        },{
-            field: 'reportedTraits',
-            title: 'Reported trait',
-            sortable: true
-        },{
-            field: 'mappedTraits',
-            title: 'Trait(s)',
-            sortable: true
-        },{
-            field: 'study',
-            title: 'Study accession',
-            sortable: true
-        },
+                field: 'riskAlleleFreq',
+                title: 'RAF',
+                sortable: true,
+                filterControl: 'input'
+            }, {
+                field: 'orValue',
+                title: 'OR',
+                sortable: true,
+                filterControl: 'input'
+            }, {
+                field: 'beta',
+                title: 'Beta',
+                sortable: true,
+                filterControl: 'input'
+            }, {
+                field: 'ci',
+                title: 'CI',
+                sortable: true,
+                filterControl: 'input'
+            }, {
+                field: 'mappedGenes',
+                title: 'Mapped gene',
+                sortable: true,
+                filterControl: 'input'
+            }, {
+                field: 'reportedTraits',
+                title: 'Reported trait',
+                sortable: true,
+                filterControl: 'input'
+            }, {
+                field: 'mappedTraits',
+                title: 'Trait(s)',
+                sortable: true,
+                filterControl: 'input'
+            }, {
+                field: 'study',
+                title: 'Study accession',
+                sortable: true,
+                filterControl: 'input'
+            },
             {
                 field: 'publication',
                 title: 'PubMed ID',
                 sortable: true,
-                visible: false
+                visible: false,
+                filterControl: 'input'
             },
             {
                 field: 'author',
                 title: 'First Author',
                 sortable: true,
-                visible: false
+                visible: false,
+                filterControl: 'input'
             }],
         data: data_json,
-        
+
     });
     
     $('#association-table').bootstrapTable('load',data_json)
