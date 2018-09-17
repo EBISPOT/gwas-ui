@@ -249,19 +249,14 @@ function processData(data) {
                 if (doc.resourcename == "publication") {
                     var fullpvalset = doc.fullPvalueSet;
                     if(fullpvalset == 1) {
-                
-                        var a = (doc.authorAscii_s).replace(/\s/g,"");
-                        //var dir = a.concat("_").concat(doc.pmid).concat("_").concat(doc.accessionId);
-                
                         linkFullPValue = "<span class='glyphicon glyphicon-signal context-help'" +
                             " data-toggle='tooltip'" +
                             "data-original-title='Full summary statistics available'></span>";
-                
                     }
             
                     if ((doc.genotypingTechnologies.indexOf("Targeted genotyping array") > -1) ||
                         (doc.genotypingTechnologies.indexOf("Exome genotyping array") > -1) ) {
-                        genotypingIcon="<span class='glyphicon targeted-icon-GWAS_target_icon context-help'" +
+                        genotypingIcon="<span class='glyphicon targeted-icon-GWAS_target_icon context-help' style='font-size: 30px'" +
                             " data-toggle='tooltip'" +
                             "data-original-title='Targeted or exome array study'></span>";
                     }
@@ -269,7 +264,34 @@ function processData(data) {
             
                     var pubLabsUrl= gwasProperties.contextPath+"publications/"+doc.pmid;
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-                    row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle'>&nbsp;P&nbsp;</span><a href="+pubLabsUrl+">"+doc.title+"</a></h3>"));
+                    row.append($("<td style=\"width: 84%\">").html("<h3><span class='letter-circle'>&nbsp;P&nbsp;</span><a href="+pubLabsUrl+">"+doc.title+"</a></h3>"));
+
+                    // Display Summary stat and Genotyping icons
+                    if (genotypingIcon != "" && linkFullPValue != "") {
+                        row.append($("<td style=\"width: 10%\">").html("<h3><span style='font-size: 20px; margin-top:10px; margin-bottom: 20px;' " +
+                            "class='glyphicon targeted-icon-GWAS_target_icon' " +
+                            "data-toggle='tooltip' data-original-title='Targeted or exome array study'></span>" +
+                            "&nbsp;&nbsp;<span style='font-size: 20px; margin-top:10px; margin-bottom: 20px;'" +
+                            "class='glyphicon glyphicon-signal' " +
+                            "data-toggle='tooltip' data-original-title='Targeted or exome array study'></span></h3>"));
+                    }
+
+                    if (genotypingIcon != "" && linkFullPValue == "") {
+                        row.append($("<td style=\"width: 10%\">").html("<h3><span style='font-size: 20px; margin-top:10px; margin-bottom: 20px;' " +
+                            "class='glyphicon targeted-icon-GWAS_target_icon' " +
+                            "data-toggle='tooltip' data-original-title='Targeted or exome array study'></span></h3>"));
+                    }
+
+                    if (genotypingIcon == "" && linkFullPValue != "") {
+                        row.append($("<td style=\"width: 10%\">").html("<h3><span style='font-size: 20px; margin-top:10px; margin-bottom: 20px;' " +
+                            "class='glyphicon glyphicon-signal' " +
+                            "data-toggle='tooltip' data-original-title='Targeted or exome array study'></span></h3>"));
+                    }
+                    if (genotypingIcon == "" && linkFullPValue == "") {
+                        // append h3 to have same CSS style
+                        row.append($("<td style=\"width: 10%\">").html("<h3></h3>"));
+                    }
+
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                 }
                 if (doc.resourcename == "trait") {
@@ -315,12 +337,6 @@ function processData(data) {
                 }
         
                 descriptionTruncated = descriptionTruncated+description_stats;
-                if (linkFullPValue != "") {
-                    descriptionTruncated = descriptionTruncated+"&nbsp;"+linkFullPValue;
-                }
-                if (genotypingIcon != "") {
-                    descriptionTruncated = descriptionTruncated + "&nbsp;"+genotypingIcon;
-                }
         
                 descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
         
