@@ -76,7 +76,7 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
         if (mappedTraits) {
             $.each(mappedTraits, function (index, trait) {
                 var link = gwasProperties.contextPath + 'efotraits/' + study.mappedUri[index].split('/').slice(-1)[0];
-                mappedTraits[index] = setExternalLinkText(link, trait);
+                mappedTraits[index] = setInternalLinkText(link, trait);
             });
             tmp['mappedTraits'] = mappedTraits.join(', ');
         } else {
