@@ -199,7 +199,7 @@ function getVariantInfo(data,rsId) {
 
     $("#variant-location").html(location);
     $("#variant-region").html(region);
-    $("#variant-class").html(setExternalLink(OLS+func,variationClassLabel(func)));
+    $("#variant-class").html(variationClassLabel(func));
     $("#variant-mapped-genes").html(genes_mapped_url.join(', '));
     $("#variant-summary-content").html(getSummary(data));
 }
