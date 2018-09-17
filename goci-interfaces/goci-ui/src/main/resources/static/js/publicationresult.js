@@ -222,6 +222,10 @@ function displaySummaryPublication(data,clearBeforeInsert) {
         reduce_text = addShowMoreLink(reduce_text, 500, "...");
         $("#publication-authors-list").html(reduce_text);
     }
+    // Display Summary stats icon if any study in publication has fullPvalueSet: true
+    var fullpvalset=checkFullPValueStatus(data);
+    $("#study-summary-stats").html(fullpvalset);
+
 
     $("#pubmedid_button").attr('onclick',     "window.open('"+gwasProperties.NCBI_URL+publication.pubmedId+"',    '_blank')");
     $("#europepmc_button").attr('onclick',     "window.open('"+gwasProperties.EPMC_URL+publication.pubmedId+"',    '_blank')");
@@ -231,3 +235,14 @@ function displaySummaryPublication(data,clearBeforeInsert) {
 }
 
 
+function checkFullPValueStatus(data) {
+    var summaryStatsIcon = "<span>-</span>";
+    for (var i=0; i < data.length; i++) {
+        if (data[i].fullPvalueSet == true) {
+            summaryStatsIcon = "<a href='#study_panel'><span style='font-size: 20px;' " +
+                "class='glyphicon glyphicon-signal clickable'></span></a>";
+            return summaryStatsIcon;
+        }
+    }
+    return summaryStatsIcon;
+}
