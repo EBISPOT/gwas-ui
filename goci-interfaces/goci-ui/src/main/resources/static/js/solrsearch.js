@@ -273,7 +273,7 @@ function processData(data) {
                             "data-toggle='tooltip' data-original-title='Targeted or exome array study'></span>" +
                             "&nbsp;&nbsp;<span style='font-size: 20px; margin-top:10px; margin-bottom: 20px;'" +
                             "class='glyphicon glyphicon-signal' " +
-                            "data-toggle='tooltip' data-original-title='Targeted or exome array study'></span></h3>"));
+                            "data-toggle='tooltip' data-original-title='Full summary statistics available'></span></h3>"));
                     }
 
                     if (genotypingIcon != "" && linkFullPValue == "") {
@@ -285,7 +285,7 @@ function processData(data) {
                     if (genotypingIcon == "" && linkFullPValue != "") {
                         row.append($("<td style=\"width: 10%\">").html("<h3><span style='font-size: 20px; margin-top:10px; margin-bottom: 20px;' " +
                             "class='glyphicon glyphicon-signal' " +
-                            "data-toggle='tooltip' data-original-title='Targeted or exome array study'></span></h3>"));
+                            "data-toggle='tooltip' data-original-title='Full summary statistics available'></span></h3>"));
                     }
                     if (genotypingIcon == "" && linkFullPValue == "") {
                         // append h3 to have same CSS style
