@@ -121,7 +121,7 @@ function buildBreadcrumbs() {
             last.text("Publications");
         }
         else if (facet == "trait") {
-            last.text("Catalog traits");
+            last.text("Traits");
         }
 
         breadcrumbs.append(last);
