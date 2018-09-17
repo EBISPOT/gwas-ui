@@ -231,7 +231,9 @@ function displaySummaryStudy(data, clearBeforeInsert) {
         var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
             .concat(dir).concat("' target='_blank'>");
         
-        linkFullPValue = ftplink.concat("FTP download<span class='glyphicon glyphicon-signal clickable context-help'></span></a>&nbsp;");
+        linkFullPValue = ftplink.concat("FTP Download<span class='glyphicon glyphicon-signal clickable context-help'" +
+            " data-toggle='tooltip'" +
+            "data-original-title='Click for summary statistics' style='font-size: 12px'></span></a>");
     
         $("#study-summary-stats").html(linkFullPValue);
         var summaryStatData = getSummaryStatsInfo(study.accessionId,$("#study-summary-stats"));
@@ -277,7 +279,7 @@ function getGenotypingTech(study) {
     if (hasTargetArrayIcon) {
         genotypingIcon = "<a href='#'><span class='glyphicon icon-GWAS_target_icon clickable context-help'" +
             " data-toggle='tooltip'" +
-            "data-original-title='Targeted or exome array study'></span></a>";
+            "data-original-title='Targeted or exome array study' style='font-size: 12px'></span></a>";
     }
     return genotypingTechnologiesList;
 }
