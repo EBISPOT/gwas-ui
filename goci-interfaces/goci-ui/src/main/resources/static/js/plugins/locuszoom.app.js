@@ -5660,21 +5660,22 @@ LocusZoom.Dashboard.Component.Button = function(parent) {
 };
 
 // Title component - show a generic title
-LocusZoom.Dashboard.Components.add("title", function(layout){
-    LocusZoom.Dashboard.Component.apply(this, arguments);
-    this.show = function(){
-        this.div_selector = this.parent.selector.append("div")
-            .attr("class", "lz-dashboard-title lz-dashboard-" + this.layout.position);
-        this.title_selector = this.div_selector.append("h3");
-        return this.update();
-    };
-    this.update = function(){
-        var title = layout.title.toString();
-        if (this.layout.subtitle){ title += " <small>" + this.layout.subtitle + "</small>"; }
-        this.title_selector.html(title);
-        return this;
-    };
-});
+// REMOVE TITLE
+// LocusZoom.Dashboard.Components.add("title", function(layout){
+//     LocusZoom.Dashboard.Component.apply(this, arguments);
+//     this.show = function(){
+//         this.div_selector = this.parent.selector.append("div")
+//             .attr("class", "lz-dashboard-title lz-dashboard-" + this.layout.position);
+//         this.title_selector = this.div_selector.append("h3");
+//         return this.update();
+//     };
+//     this.update = function(){
+//         var title = layout.title.toString();
+//         if (this.layout.subtitle){ title += " <small>" + this.layout.subtitle + "</small>"; }
+//         this.title_selector.html(title);
+//         return this;
+//     };
+// });
 
 // Dimensions component - show current dimensions of the plot
 LocusZoom.Dashboard.Components.add("dimensions", function(layout){

@@ -1209,6 +1209,8 @@ displayHighlightedStudy = function(highlightedStudy) {
     $('#efotrait-highlighted-study-title').html(highlightedStudy.title);
     $('#efotrait-highlighted-study-author').html(highlightedStudy.author_s +' (PMID:'+highlightedStudy.pubmedId+')');
     $('#efotrait-highlighted-study-catalogPublishDate').html(highlightedStudy.publicationDate.split('T')[0]);
+    var link = gwasProperties.contextPath + 'studies/' + highlightedStudy.accessionId;
+    $('#efotrait-highlighted-study-accessionId').html(setInternalLinkText(link, highlightedStudy.accessionId));
 
     // $('#efotrait-highlighted-st udy-initialSampleDescription').html(highlightedStudy.initialSampleDescription);
     // $('#efotrait-highlighted-study-replicateSampleDescription').html(highlightedStudy.replicateSampleDescription);
