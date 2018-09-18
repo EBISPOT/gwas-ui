@@ -23,6 +23,7 @@
             <table id="association-table" class="table table-striped borderless "
                    data-flat="true"
                    data-show-export="true"
+                   data-export-types="['csv']"
                    data-search="true"
                    data-show-columns="true"
                    data-show-multi-sort="true"
@@ -33,13 +34,7 @@
     </div>
 </div>
 
-<script>
-    window.icons = {
-        columns: 'glyphicon glyphicon-list-alt',
-        sort: 'glyphicon glyphicon-sort',
-        export: 'glyphicon glyphicon-export icon-share'
-    };
-</script>
+<script th:src="@{/js/common-datatables/datatable-icons.js}"></script>
 
 </body>
 </html>
