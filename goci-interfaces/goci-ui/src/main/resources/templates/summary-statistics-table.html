@@ -69,57 +69,82 @@
             </ul>
         </div>
 
-        <div class="container">
-            <!--div class="row">
-                <h2 style="color: black">GWAS Summary Statistics</h2>
-                <p>
-                    There are thousands of genome-wide association studies and each study yields association data for hundreds of thousands of variants across the human genome.
-                    Manual curation of each GWAS publication by a dedicated team of scientists ensures that the Catalog contains the most significant findings (p-value &lt; 10-5).
-                </p>
-
-                <p>
-                    Studies are often accompanied with summary statistics providing the association data for all the variants analysed across the genome in a given study. Although most of these associations will be insignificant or ‘noise’, there will also be some highly significant associations. We aim to provide the tools to access these data and we encourage authors of GWAS publications to submit <a th:href="@{/docs/methods/summary-statistics}">their summary statistics to us</a> so that we can develop this into a powerful resource.
-                </p>
-
-                <p>
-                    Our first step to making summary statistics data accessible was by hosting the flat files on our FTP site for those studies that provided them. The main challenges for this type of data acquisition are that it is difficult to search and filter, the volume of data is prohibitively large and the data are not harmonised (see below). To address these challenges, we have now developed a dedicated summary statistics database, providing users with searchable, filterable, harmonised data via a <a href="https://www.ebi.ac.uk/gwas/summary-statistics/docs/" target="_blank">REST API.</a>For non-programmatic access, data are available on the <a th:href="@{/downloads/summary-statistics}">FTP site</a>.
-                </p>
-
-                <p>
-                    To make these data available in a consistent, searchable format, we had to define a summary statistics standard because there is no standard in place. Standardisation resolves the issues of files from different research groups containing different fields and headers to one another, there is no consensus on what should be included, what should be omitted and what data format to use. An additional challenge to users of these data is that the variants are reported against different genome builds, so the location of the same variant can be different between studies. Even if the genome build was the same, the same variant may be reported against the other strand from one study to the next. Furthermore, what is taken to be the effect allele one the study may the ancestral allele in others. To mitigate these inconsistencies all of the summary statistics data is harmonised {link}. For information on <a th:href="@{/docs/methods/summary-statistics}">the harmonisation see</a>.
-                </p>
-
-            </div-->
+        <div class="container-fluid col-md-12" id="lower_container">
             <div class="row">
-                <a th:href="@{/docs/methods/summary-statistics}">
-                    <div class="col-md-4 toplevel-view">
-                        <h2 class="flaticon-information9 color-primary-bold">Documentation</h2>
+                <h2 style="color: black">GWAS Catalog summary statistics</h2>
+                <p>
+                    From 2017 the GWAS Catalog started hosting summary statistics files in addition to curated associations.
+                </p>
 
-                        <p>Summary statistics documentation.</p>
-                    </div>
-                </a>
-                <a href="https://www.ebi.ac.uk/gwas/summary-statistics/docs/" target="_blank">
-                    <div class="col-md-4 toplevel-view">
-                        <h2 class="flaticon-source2 color-primary-bold">API</h2>
+                <p>
+                    We urge authors of GWAS publications included in the Catalog to contact us if summary statistics
+                    are available (<a href="https://www.ebi.ac.uk/gwas/docs/faq#faq-I2">FAQ-I2</a>).
+                    We can then make these available through the Catalog.
+                </p>
 
-                        <p>A guide to how to access summary statistics data programmatically.</p>
-                    </div>
-                </a>
-                <a th:href="@{/downloads/summary-statistics}">
-                    <div class="col-md-4 toplevel-view">
-                        <h2 class="flaticon-statistics color-primary-bold">Available studies</h2>
+                <p>
+                    A database of GWAS summary statistics with a REST API is now available. For information
+                    on summary statistics and the REST API please read the documentation {link/to/summary-stats/docs}.
+                </p>
 
-                        <p>A list of all studies for which summary statistics are available in the Catalog.</p>
-                    </div>
-                </a>
+                <p>
+                    These data are made available through <a href="https://www.ebi.ac.uk/about/terms-of-use" target="_blank">EMBL-EBI’s standard terms of use</a>.
+                </p>
+
 
             </div>
-            <hr/>
+
+            <h3>List of studies with summary statistics</h3>
+            <div class="row">
+                <div id="loadingStudies" class="col-md-offset-4" style="display: none">
+                    <button class="btn btn-lg">
+                            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"
+                                  style="margin-right: 1em;"></span>Loading...
+                    </button>
+
+                </div>
+            </div>
+            <div class="row">
+                <!-- Summary Stats table -->
+                <div th:include="fragments/summary-stats-datatable :: summary_stats_datatable"></div>
+            </div>
+
+
+            <h3>Additional sources of summary statistics</h3>
+
+            <div class="row">
+
+                <div id="otherSumStatsDisplay" style="display: none">
+                    <table id="sumStats-table" class="table table-striped">
+                        <thead id="sum-stats-table-header">
+                        <tr>
+                            <th style="width: 25%" id="author_s">Consortium
+                                <!--<span class="glyphicon glyphicon-question-sign context-help" data-toggle="tooltip" data-original-title="The consortium that generated the data"></span>-->
+                                <!--<span class="glyphicon glyphicon-sort clickable sorting unsorted"> </span>-->
+                            </th>
+                            <th style="width: 25%" id="publicationDate">Full consortium name
+                                <!--<span class="glyphicon glyphicon-question-sign context-help" data-toggle="tooltip" data-original-title="Full name of the consortium"></span>-->
+                                <!--<span class="glyphicon glyphicon-sort clickable sorting unsorted"> </span>-->
+                            </th>
+                            <th style="width: 50%" id="link">
+                                Summary statistics link
+                            </th>
+                        </tr>
+
+                        </thead>
+                        <tbody id="sum-stats-table-body">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <p>We urge authors of GWAS publications included in the Catalog to contact us if summary statistics are available. We can then make these available through the Catalog.</p>
         </div>
 
     </div>
 
-
+    <hr/>
 
 </div>
 <!-- /container -->
