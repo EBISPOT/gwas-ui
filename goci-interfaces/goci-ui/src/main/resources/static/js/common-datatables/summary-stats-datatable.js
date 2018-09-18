@@ -120,6 +120,8 @@ function displayDatatableSummaryStats(data) {
     if(data_json.length>5){
         $('#summary-stats-table').bootstrapTable('refreshOptions',{showRefresh: true,pagination:true,pageSize: pageRowLimit, pageList: [5,10,25,50,100,'All']})
     }
+    // Add custom tooltip text for button
+    $('.keep-open').attr('title','Add/Remove Columns');
     hideLoadingOverLay('#summary-stats-table-loading');
 }
 
