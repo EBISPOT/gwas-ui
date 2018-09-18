@@ -317,9 +317,9 @@ function processData(data) {
                 if (doc.resourcename == "variant") {
                     var descriptionElements = descriptionTruncated.split("|");
                     var variantDescription = "<b>Location: </b>"+descriptionElements[0] +
-                        "; <b>Cytogenetic region:</b>" + descriptionElements[1] +
+                        "; <b>Cytogenetic region: </b>" + descriptionElements[1] +
                         "; <b>Most severe consequence: </b>" + descriptionElements[2] +
-                        "; <b>Mapped gene(s): </b>" + descriptionElements[3];
+                        "; <b>Mapped gene(s): </b>" + descriptionElements[3].split(",").join(", ");
                     descriptionTruncated = variantDescription;
                 }
 
