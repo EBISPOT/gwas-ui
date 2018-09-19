@@ -22,7 +22,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/diagram").setViewName("diagram");
         registry.addViewController("/downloads").setViewName("downloads");
         registry.addViewController("/search/traits").setViewName("traitlist");
-        registry.addViewController("/downloads/summary-statistics").setViewName("summary-statistics");
+        registry.addViewController("/summary-statistics").setViewName("summary-statistics");
+        registry.addViewController("/downloads/summary-statistics").setViewName("summary-statistics-table");
         //registry.addRedirectViewController("/search/most-recent", "/search?query=*&filter=recent");
         registry.addViewController("/snp").setViewName("snp-page");
         registry.addViewController("/ancestry").setViewName("ancestry");
