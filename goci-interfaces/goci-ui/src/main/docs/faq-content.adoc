@@ -171,9 +171,16 @@
 
 === I. Summary Statistics
 
-1. <<faq-I1,How do I find out which publications have full summary statistics available?>>
+1. <<faq-I1,What are summary statistics?>>
 
-2. <<faq-I2,I am an author and would like to deposit my summary statistics in the GWAS Catalog, how to I go about this?>>  
+2. <<faq-I2,How do I find out which publications have full summary statistics available?>>
+
+3. <<faq-I3,I am an author and would like to deposit my summary statistics in the GWAS Catalog, how to I go about this?>>
+
+4. <<faq-I4,How do I access summary statistics?>>
+
+5. <<faq-I5,What are harmonised summary statistics?>>
+
 
 
 
@@ -514,11 +521,20 @@ link:http://www.ebi.ac.uk/gwas/labs/rest/docs/api[Full technical documentation] 
 
 === I. Summary Statistics
 
-==== [[faq-I1]]1. How do I find out which publications have full summary statistics available?
+==== [[faq-I1]]1. What are summary statistics?
+There are thousands of genome-wide association studies and each study yields association data for hundreds of thousands of variants across the human genome. Manual curation of each GWAS publication by a dedicated team of scientists ensures that the Catalog contains the most significant findings (p-value <10^-5^). Studies are often accompanied with summary statistics providing the association data for all the variants analysed across the genome in a given study.
+
+==== [[faq-I2]]2. How do I find out which publications have full summary statistics available?
 Studies with full summary statistics are indicated by an icon in the “Association count” column of the studies table. You can also view a full list of studies with summary statistics files link:https://www.ebi.ac.uk/gwas/downloads/summary-statistics[here] together with links to other summary statistics resources.
 
-==== [[faq-I2]]2. I am an author and would like to deposit my summary statistics in the GWAS Catalog, how to I go about this?  
-We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also encourage authors to submit their data directly. If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our ftp server.  We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us. Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods[eligibility criteria], and the summary statistics files must reflect the published results, not a sub-set. For example if your study is a genome-wide meta-analysis, we can only include summary statistics for the meta-analysis, not a component thereof. 
+==== [[faq-I3]]3. I am an author and would like to deposit my summary statistics in the GWAS Catalog, how to I go about this?
+We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also encourage authors to submit their data directly. If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our ftp server.  We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us. Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods[eligibility criteria], and the summary statistics files must reflect the published results, not a sub-set. For example if your study is a genome-wide meta-analysis, we can only include summary statistics for the meta-analysis, not a component thereof.
+
+=== [[faw-I4]]4. How do I access summary statistics?
+There are two methods. We have developed a dedicated summary statistics database, enabling users with searchable, filterable, harmonised data via  the summary statistics link:http://www.ebi.ac.uk/gwas/summary-statistics/docs/[REST API]. Alternatively, non-programmatic access to the original, standardised and harmonised data is available on the link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site].
+
+=== [[faq-I5]]5. What are standardised/harmonised summary statistics?
+Please refer to the documentation link:https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here].
 
 '''
 
