@@ -1,7 +1,7 @@
 = Summary statistics
 
-From 2017 the GWAS Catalog started hosting full summary statistics files (aggregate p-values and association data for every variant analysed in a study) in addition to curated associations. 
-
+From 2017 the GWAS Catalog started hosting full summary statistics files (aggregate p-values and association data for every variant analysed in a study) in addition to curated associations.
+For summary statistics FAQ, please see link:www.ebi.ac.uk/gwas/docs/faq[here].
 
 == Summary statistics eligibility
 
@@ -22,22 +22,28 @@ Summary statistics are acquired from a number of different sources:
 * Identified via a consortium or author website
 * Submitted to the GWAS Catalog by an author
 
-We urge authors of GWAS publications included in the Catalog to contact us if summary statistics are available. 
-If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our ftp server. We can then make these available through the Catalog. 
+We urge authors of GWAS publications included in the Catalog to contact us if summary statistics are available.
+If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our ftp server. We can then make these available through the Catalog.
 We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us.
 Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our eligibility criteria (see below).
 
+== Summary statistics database
 
-== Summary statistics harmonisation
+We have developed a database of GWAS summary statistics. The REST API for the summary statistics database is now available at www.ebi.ac.uk/gwas/summary-statistics/api/.
+For full documentation on the REST API, please see link:www.ebi.ac.uk/gwas/summary-statistics/docs/[here].
 
-There is no standard for publicly available summary statistics files. To enable users to access data with ease, we are providing formatted and harmonised summary statistics files.
+The harmonised data accessible by the REST API are also available on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site]. The FTP site hosts the original files and, when they are processed, a subdirectory called 'harmonised' containing a README file, a standard formatted version of the original file (see below) and a harmonised version of the file (also below).
+
+== Summary statistics standards and harmonisation
+
+There is no standard for publicly available summary statistics files. To enable users to access data with ease, we are providing standard format and harmonised summary statistics files.
 
 
-=== Formatted summary statistics data
+=== Standardised format summary statistics data
 
 Summary statistics files are formatted by a scientific curator using a semi-automated process. Data are not manipulated but the headers convertered to a consistent format across all summary statistics files.
 
-- Headers will be transformed to the 'common format'.
+- Headers will be transformed to the 'standard format'.
 - Rows will never be removed.
 - Columns may be split, merged, deleted or moved.
 - Values will be unaltered.
@@ -59,26 +65,26 @@ Formatted file headings
 
 Note that the headers in the formatted file are not limited to the above headers, nor are they required to have all of them.
 
-Formatted data is accessible on the GWAS Catalog dedicated summary statistics page [FTP](ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/). Where the formatted files are available, they are nested within the harmonised directory in the study directory.
+Formatted data is accessible on the GWAS Catalog dedicated summary statistics link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site]. Where the formatted files are available, they are nested within the 'harmonised' directory in the study directory.
 
 
 === Harmonised summary statistics data
 
-Formatted files are harmonised using an automated pipeline, which is detailed below. By 'harmonised' we mean that all genomic position data will be reported against the same and latest genome build. Missing chromosome, base pair location and variant ID data that can be inferred, will be.
+Formatted files are harmonised using an automated link:https://github.com/EBISPOT/sum-stats-formatter/tree/master/harmonisation[pipeline], which is detailed below. By 'harmonised' we mean that all genomic position data will be reported against the same and latest genome build. Missing chromosome, base pair location and variant ID data that can be inferred, will be. Furthermore, where possible, alleles are also orientated to the forward strand.
 
 The harmonisation process is the following:
 
 . Formatting
 .. Rename headers
-.. Set blank values to 'NA' 
-.. Chromosome values X, Y and MT are mapped to 23, 24 and 25, respectively. 
-  
+.. Set blank values to 'NA'
+.. Chromosome values X, Y and MT are mapped to 23, 24 and 25, respectively.
+
 . Mapping variant IDs to locations
 .. Update base pair location value by mapping variant ID using latest Ensembl release, or
 .. if above not possible, liftover base pair location to latest genome build, or
 .. if above not possible, remove variant from file.
-  
-. Harmonisation (repo: https://github.com/opentargets/sumstat_harmoniser)
+
+. Orientation (link:https://github.com/opentargets/sumstat_harmoniser[OpenTargets project])
 .. Using chromosome, base pair location and the effect and other alleles, check the orientation of all non-palindromic variants against Ensembl VCF references to detemine consensus:
 * forward
 * reverse
@@ -95,21 +101,21 @@ The harmonisation process is the following:
 ** this also means the beta, odds ratio, 95% CI and effect allele frequency are inverted
 * a combination of the orientating and flipping the alleles.
 .. The result of the harmonisation is the addition of a set of new fields for each record (see below). A harmonisation code is assigned to each record indicating the harmonisation process that was performed (note that currently any processes involving 'Infer strand' are not being used).
-  
+
 . Filtering and QC
 .. Variant ID is set to variant IDs found by step (5).
-.. Records without a valid value for variant ID, chromosome, base pair location and p-value are removed. 
+.. Records without a valid value for variant ID, chromosome, base pair location and p-value are removed.
 
 ==== Table of harmonisation codes
 
-[%header, cols=2*]
+[%header, cols="1*>,10"]
 |===
 |Code
-|Description of harmonisation process                          
+|Description of harmonisation process
 
 |1
 |Palindromic; Infer strand; Forward strand; Alleles correct
- 
+
 |2
 |Palindromic; Infer strand; Forward strand; Flipped alleles
 
@@ -192,15 +198,6 @@ Harmonised file headings (not all may be present in file):
     'hm_effect_allele_frequency' = harmonised effect allele frequency
     'hm_code = harmonisation code (to lookup in 'Harmonisation Code Table')
 
-There are two ways to access harmonised summary statistics data:
+Headings prefixed with 'hm_' are the output from the orientation (step 3) in the harmonisation process (see above). With the exception of 'hm_code', these will take the value of 'NA' where it was not possible to orientate the allele. In this situation, the data are still harmonised according to definition given above, but the orientation was not possible.
 
-. via the Summary Statistics API (see below)
-. through the GWAS Catalog ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP]. Where the harmonised files are available, they are nested within the harmonised directory in the study directory.
-
-
-== Summary statistics database
-
-We are currently releasing a database of GWAS summary statistics. The REST API for the summary statistics database is now available at www.ebi.ac.uk/gwas/summary-statistics/api/. 
-For full documentation on the REST API, please see www.ebi.ac.uk/gwas/summary-statistics/docs/.
-
-The harmonised data accessed by the REST API are nearly identical to harmonised data on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP], except that float values may be rounded to make them compatable with the database.
+There may be differences between the data available on the FTP site compared to the database where number rounding has taken place.
