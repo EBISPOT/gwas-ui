@@ -5660,22 +5660,21 @@ LocusZoom.Dashboard.Component.Button = function(parent) {
 };
 
 // Title component - show a generic title
-// REMOVE TITLE
-// LocusZoom.Dashboard.Components.add("title", function(layout){
-//     LocusZoom.Dashboard.Component.apply(this, arguments);
-//     this.show = function(){
-//         this.div_selector = this.parent.selector.append("div")
-//             .attr("class", "lz-dashboard-title lz-dashboard-" + this.layout.position);
-//         this.title_selector = this.div_selector.append("h3");
-//         return this.update();
-//     };
-//     this.update = function(){
-//         var title = layout.title.toString();
-//         if (this.layout.subtitle){ title += " <small>" + this.layout.subtitle + "</small>"; }
-//         this.title_selector.html(title);
-//         return this;
-//     };
-// });
+LocusZoom.Dashboard.Components.add("title", function(layout){
+    LocusZoom.Dashboard.Component.apply(this, arguments);
+    this.show = function(){
+        this.div_selector = this.parent.selector.append("div")
+            .attr("class", "lz-dashboard-title lz-dashboard-" + this.layout.position);
+        this.title_selector = this.div_selector.append("h5");
+        return this.update();
+    };
+    this.update = function(){
+        var title = layout.title.toString();
+        if (this.layout.subtitle){ title += " <small>" + this.layout.subtitle + "</small>"; }
+        this.title_selector.html(title);
+        return this;
+    };
+});
 
 // Dimensions component - show current dimensions of the plot
 LocusZoom.Dashboard.Components.add("dimensions", function(layout){
@@ -6091,26 +6090,26 @@ LocusZoom.Dashboard.Components.add("resize_to_data", function(layout){
 });
 
 // Toggle legend
-// LocusZoom.Dashboard.Components.add("toggle_legend", function(layout){
-//     LocusZoom.Dashboard.Component.apply(this, arguments);
-//     this.update = function(){
-//         var text = this.parent_panel.legend.layout.hidden ? "Show Legend" : "Hide Legend";
-//         if (this.button){
-//             this.button.setText(text).show();
-//             this.parent.position();
-//             return this;
-//         }
-//         this.button = new LocusZoom.Dashboard.Component.Button(this)
-//             .setColor(layout.color)
-//             .setTitle("Show or hide the legend for this panel")
-//             .setOnclick(function(){
-//                 this.parent_panel.legend.layout.hidden = !this.parent_panel.legend.layout.hidden;
-//                 this.parent_panel.legend.render();
-//                 this.update();
-//             }.bind(this));
-//         return this.update();
-//     };
-// });
+LocusZoom.Dashboard.Components.add("toggle_legend", function(layout){
+    LocusZoom.Dashboard.Component.apply(this, arguments);
+    this.update = function(){
+        var text = this.parent_panel.legend.layout.hidden ? "Show Legend" : "Hide Legend";
+        if (this.button){
+            this.button.setText(text).show();
+            this.parent.position();
+            return this;
+        }
+        this.button = new LocusZoom.Dashboard.Component.Button(this)
+            .setColor(layout.color)
+            .setTitle("Show or hide the legend for this panel")
+            .setOnclick(function(){
+                this.parent_panel.legend.layout.hidden = !this.parent_panel.legend.layout.hidden;
+                this.parent_panel.legend.render();
+                this.update();
+            }.bind(this));
+        return this.update();
+    };
+});
 
 // Data Layers - menu for manipulating data layers in a panel
 LocusZoom.Dashboard.Components.add("data_layers", function(layout){
@@ -8249,11 +8248,11 @@ LocusZoom.Panel.prototype.initialize = function(){
     }.bind(this));
 
     // Create the legend object as defined by panel layout and child data layer layouts
-    // Remove legend - GWAS project request
-    // this.legend = null;
-    // if (this.layout.legend){
-    //     this.legend = new LocusZoom.Legend(this);
-    // }
+    // Display legend - GWAS project request
+    this.legend = null;
+    if (this.layout.legend){
+        this.legend = new LocusZoom.Legend(this);
+    }
 
     // Establish panel background drag interaction mousedown event handler (on the panel background)
     if (this.layout.interaction.drag_background_to_pan){

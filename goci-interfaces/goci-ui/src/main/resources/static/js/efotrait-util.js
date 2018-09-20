@@ -233,7 +233,7 @@ $(document).ready(() => {
 
     var checked = $('#checked').text();
     if (checked != '') {
-        if(checked == "true"){
+        if(checked != "true"){
 
             $('#cb-query-include-descendants').attr('checked','checked')
         }else{
@@ -244,9 +244,9 @@ $(document).ready(() => {
         searchTerm = searchTerm + ',' + included;
     }
 
-    console.log("Loading search module!");
+    // console.log("Loading search module!");
     if (searchTerm != '') {
-        console.log("Start search for the efotrait " + searchTerm);
+        // console.log("Start search for the efotrait " + searchTerm);
         var elements = {};
         searchTerm.split(',').forEach((term) => {
                                           elements[term] = term;
@@ -335,47 +335,49 @@ addToCart = function(tagID, efoid, additionalLabel) {
         var container = $(tagID);
         generateSelectedItemCheckBox(efoid,tagID);
 
+
+        // TW - Comment out all below
         //cart item
-        var item = $('<a />', {
-            class: 'list-group-item highlightable cart-item col-xs-11',
-            title: 'Click to highlight'
-        }).appendTo(container);
+        // var item = $('<a />', {
+        //     class: 'list-group-item highlightable cart-item col-xs-11',
+        //     title: 'Click to highlight'
+        // }).appendTo(container);
 
         //colour badge for category
-        $('<span />', { class: 'badge cart-item-category-badge', text: colourLabelInit, title:colourLabel})
-                .css({'background-color' :colour})
-                .appendTo(item);
+        // $('<span />', { class: 'badge cart-item-category-badge', text: colourLabelInit, title:colourLabel})
+        //         .css({'background-color' :colour})
+        //         .appendTo(item);
 
         //Add a 'x' to item than can be remove from cart, this will be all terms except the mainEFO
-        if (!isMain) {
-            var span = $('<span />', {id: 'selected_btn_' + efoid, class: 'badge', text: '  X  '}).appendTo(item);
-            span.on("click", function(e) {
-                removeEFO(efoid);
-            });
-        }
+        // if (!isMain) {
+        //     var span = $('<span />', {id: 'selected_btn_' + efoid, class: 'badge', text: '  X  '}).appendTo(item);
+        //     span.on("click", function(e) {
+        //         removeEFO(efoid);
+        //     });
+        // }
 
         // This will add badge at the end of each cart item, showing the number of association/study linked.
         // This will be init probably before the association/study data is available, thus generating badges with
         // '-' as value at the beginning. The badge will be update when the data is available.
-        $('<span />', { id: 'selected_btn_' + efoid + '_nos' ,class: 'badge cart-item-number-badge', text: '-' , title:'Number of study'}).appendTo(item);
-        $('<span />', { id: 'selected_btn_' + efoid + '_noa', class: 'badge cart-item-number-badge', text: '-' , title:'Number of association'}).appendTo(item);
+        // $('<span />', { id: 'selected_btn_' + efoid + '_nos' ,class: 'badge cart-item-number-badge', text: '-' , title:'Number of study'}).appendTo(item);
+        // $('<span />', { id: 'selected_btn_' + efoid + '_noa', class: 'badge cart-item-number-badge', text: '-' , title:'Number of association'}).appendTo(item);
 
 
         //to highlight associations only for this term
-        item.click(() => {
-            //TOGGLE HIGHLIGHT
-            if(item.hasClass("highlight")){
-                item.removeClass("highlight");
-                reloadLocusZoom('#plot', data_association)
-            }else{
-                $('.highlightable.highlight').removeClass("highlight");
-                item.addClass("highlight");
-                var highlightAssociations = $('#selected_btn_' + efoid + '_noa').data('associations')
-                reloadLocusZoom('#plot', data_association, Object.keys(highlightAssociations),efoid);
-            }
-        })
+        // item.click(() => {
+        //     //TOGGLE HIGHLIGHT
+        //     if(item.hasClass("highlight")){
+        //         item.removeClass("highlight");
+        //         reloadLocusZoom('#plot', data_association)
+        //     }else{
+        //         $('.highlightable.highlight').removeClass("highlight");
+        //         item.addClass("highlight");
+        //         var highlightAssociations = $('#selected_btn_' + efoid + '_noa').data('associations')
+        //         reloadLocusZoom('#plot', data_association, Object.keys(highlightAssociations),efoid);
+        //     }
+        // })
 
-        item.append(additionalLabel)
+        // item.append(additionalLabel)
     })
 }
 
@@ -393,13 +395,24 @@ generateSelectedItemCheckBox = function(efoid,tagID){
                {
                    id: 'selected_cb_' + efoid,
                    type: 'checkbox',
-                   class: "cart-item-cb align-middle checkbox col-xs-1 col-sm-1 col-md-1 col-lg-1",
+                   // class: "cart-item-cb align-middle checkbox col-xs-1 col-sm-1 col-md-1 col-lg-1",
+                   class: "cart-item-cb",
+                   style: "margin:8px;",
                    value: efoid
                }).appendTo(container);
 
+
+    $('<label />',
+        {
+            text: 'Add sub-trait information',
+            class: "cart-item-cb",
+            style: "margin-left: 10px; transform: translateY(25%);"
+        }).appendTo(container);
+
+
+
     if (isDescendantRequired(efoid)){
         cb.attr('checked','checked');
-        // console.log("** isDescReq TRUE: "+efoid);
     }
 
     cb.change(function(){
@@ -410,7 +423,6 @@ generateSelectedItemCheckBox = function(efoid,tagID){
             addDataToTag(global_efo_info_tag_id, {[id]:true}, 'whichDescendant')
         }else{
             var tmp = getDataFromTag(global_efo_info_tag_id,'whichDescendant');
-            // console.log("** TMP: "+tmp);
             delete tmp[id];
         }
         updatePage()
@@ -711,7 +723,7 @@ function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false
     //xintodo need a post endpoint for this
     // http://localhost:8280/gwas/api/search/efotrait?&q=EFO_0000400,EFO_0000400&max=9999&group.limit=9999&group.field=resourcename&facet.field=resourcename&hl.fl=shortForm,efoLink&hl.snippets=100
     return Promise.all([p1, p2]).then(() => {
-        console.log("Solr research request received for " + searchQuery);
+        // console.log("Solr research request received for " + searchQuery);
         //xintodo optmize the query, use fl to return less field.
         //Cross origin not enable in solr
         // return promiseGet(global_solr_url,
@@ -770,7 +782,7 @@ function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false
                               'raw' : global_raw == undefined ? '' : global_raw,
                           },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
             processSolrData(data, initLoad);
-            console.log("Solr research done for " + searchQuery);
+            // console.log("Solr research done for " + searchQuery);
             return data;
         }).catch(function(err) {
             console.error('Error when searching solr for' + searchQuery + '. ' + err);
@@ -970,7 +982,7 @@ removeAssociationWithNonSelectedEFO = function() {
                     }).length == 0) {
                 return true
             }
-            console.log(`remove ${association_doc.id}!`);
+            // console.log(`remove ${association_doc.id}!`);
             return false
         })
     })
@@ -1606,7 +1618,7 @@ var OLS = {
         var dataPromise = getDataFromTag(global_efo_info_tag_id, 'ontologyInfo');
         if (dataPromise == undefined) {
             //lazy load
-            console.log('Loading Ontology Info...')
+            // console.log('Loading Ontology Info...')
             dataPromise = promiseGetRESTFUL(global_ols_restful_api_ontology,
                                             {'size': 1000}).then(_parseOntologies).catch(function(err) {
                 console.error('Error when loading ontology info! ' + err);
@@ -1614,7 +1626,7 @@ var OLS = {
             //cache data
             $(global_efo_info_tag_id).data('ontologyInfo',dataPromise);
         }else{
-            console.log('Loading Ontology Info from cache.')
+            // console.log('Loading Ontology Info from cache.')
         }
         return dataPromise;
     },
@@ -1631,7 +1643,7 @@ var OLS = {
         var dataPromise = getDataFromTag(global_efo_info_tag_id, 'prefix2ontId');
         if (dataPromise == undefined) {
             //lazy load
-            console.log('Loading prefix2ontId...')
+            // console.log('Loading prefix2ontId...')
             dataPromise = OLS.getOntologyInfo().then(function(ontoInfo){
                 var prefix2ontid = {}
                 Object.keys(ontoInfo).forEach(function(ontId){
@@ -1644,7 +1656,7 @@ var OLS = {
             //add to tag
             $(global_efo_info_tag_id).data('prefix2ontId',dataPromise);
         }else{
-            console.log('Loading prefix2ontId from cache.')
+            // console.log('Loading prefix2ontId from cache.')
         }
         return dataPromise;
     },
@@ -1719,8 +1731,8 @@ var OLS = {
     searchOLS : function(keyword,params){
         params = $.extend({}, params, {'q':keyword});
         return promiseGet(global_ols_seach_api,params).then(JSON.parse).then(function(data){
-            console.log("data returned by ols search:");
-            console.log(data);
+            // console.log("data returned by ols search:");
+            // console.log(data);
             return data;
         })
 
@@ -1735,7 +1747,7 @@ var OLS = {
      */
     getRelatedTerms : function(efoid){
         var queryRelatedTerms = function(efoid){
-            console.log('Loading related terms...')
+            // console.log('Loading related terms...')
             return OLS.searchOLS(efoid,{
                 'ontology': 'efo',
                 'fieldList': 'iri,ontology_name,ontology_prefix,short_form,description,id,label,is_defining_ontology,obo_id,type,logical_description'
@@ -1795,7 +1807,7 @@ var OLS = {
         return dataPromise.then(function(data) {
             if ($.inArray(efoid, Object.keys(data)) == -1) {
                 //efo info is not currently loaded
-                console.log('Loading efoInfo for ' + efoid)
+                // console.log('Loading efoInfo for ' + efoid)
                 dataPromise = queryEFOInfo(efoid);
                 return dataPromise.then(function(data){
                     //add to tag
@@ -2052,7 +2064,7 @@ getAvailableEFOs=function(){
     var dataPromise = getDataFromTag(global_efo_info_tag_id,'availableEFOs');
     if(dataPromise == undefined){
         //lazy load
-        console.log('Loading all available EFOs in Gwas Catalog...')
+        // console.log('Loading all available EFOs in Gwas Catalog...')
         //xintodo refactor this to use post
         dataPromise =  promisePost(window.location.pathname.split('/efotraits/')[0] + '/api/search/advancefilter', {
             'q': '*:*',
@@ -2118,7 +2130,7 @@ addPromiseToTag = function(tagID, promise, key, overwriteWarning=false) {
             });
             if (overlap.length > 0) {
                 overlap.forEach(function(d) {
-                    console.log(d + 'will be overwritten.')
+                    // console.log(d + 'will be overwritten.')
                 })
             }
         }
@@ -2173,7 +2185,7 @@ addDataToTag = function(tagID, hash, key, overwriteWarning) {
         });
         if (result.length > 0) {
             result.forEach(function(d) {
-                console.log(d + 'will be overwritten.')
+                // console.log(d + 'will be overwritten.')
             })
         }
     }
@@ -2213,7 +2225,7 @@ getDataFromTag = function(tagID, key) {
     if (key == '')
         return data
     if (Object.keys(data).indexOf(key) == -1){
-        console.warn('The requested data with key ' + key + ' to ' + tagID + ' does not exist!');
+        // console.warn('The requested data with key ' + key + ' to ' + tagID + ' does not exist!');
         return undefined;
     }
     return data[key]
@@ -2284,7 +2296,7 @@ getOXO = function(efoid){
     return dataPromise.then(function(data) {
         if ($.inArray(efoid, Object.keys(data)) == -1) {
             //efo info is not currently loaded
-            console.log('Loading oxo for ' + efoid)
+            // console.log('Loading oxo for ' + efoid)
             dataPromise = queryOXO(efoid);
             return dataPromise.then(function(data){
                 //add to tag
@@ -2293,7 +2305,7 @@ getOXO = function(efoid){
             })
         }else {
             //efo colour is has been loaded perviously
-            console.debug('Loading oxo from cache for ' + efoid);
+            // console.debug('Loading oxo from cache for ' + efoid);
             return data[efoid]
         }
     })
