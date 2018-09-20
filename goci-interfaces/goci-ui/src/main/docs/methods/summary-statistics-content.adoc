@@ -194,6 +194,6 @@ Harmonised file headings (not all may be present in file):
     'hm_effect_allele_frequency' = harmonised effect allele frequency
     'hm_code = harmonisation code (to lookup in 'Harmonisation Code Table')
 
-Headings prefixed with 'hm_' are the output from the orientation (step 3) in the harmonisation process (see above). With the exception of 'hm_code', these will take the value of 'NA' where it was not possible to orientate the allele. In this situation, the data are still harmonised according to definition given above, but the orientation was not possible.
+Headings prefixed with 'hm_' are the output from the orientation (step 2) in the harmonisation process (see above). With the exception of 'hm_code', these will take the value of 'NA' where it was not possible to orientate the allele. In this situation, the data are still harmonised according to definition given above, but the orientation was not possible.
 
 There may be differences between the data available on the FTP site compared to the database where number rounding has taken place. In the database, chromosome values of 'X', 'Y' and 'MT' will appear as 23, 24 and 25, respectively.
