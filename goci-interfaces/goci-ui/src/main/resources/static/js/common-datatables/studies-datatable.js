@@ -39,10 +39,16 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
         var linkFullPValue = "";
         var fullpvalset = study.fullPvalueSet;
         if(fullpvalset == 1) {
-        
-            linkFullPValue = "<span style='font-size: 12px' class='glyphicon glyphicon-signal clickable context-help'" +
-                " data-toggle='tooltip'" +
-                "data-original-title='Click for summary statistics'></span>";
+
+            var a = (study.authorAscii_s).replace(/\s/g,"");
+            var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
+
+            var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
+                .concat(dir).concat("' target='_blank'</a>");
+
+            linkFullPValue = ftplink.concat("<span class='glyphicon glyphicon-signal clickable context-help'" +
+                "data-toggle='tooltip'" +
+                "data-original-title='Click for summary statistics'></span></a>");
         
         }
         
