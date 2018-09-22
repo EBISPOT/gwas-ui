@@ -404,7 +404,7 @@ generateSelectedItemCheckBox = function(efoid,tagID){
 
     $('<label />',
         {
-            text: 'Add sub-trait information',
+            text: 'Add sub-trait data',
             class: "cart-item-cb",
             style: "margin-left: 10px; transform: translateY(25%);"
         }).appendTo(container);
@@ -621,6 +621,19 @@ updatePage = function(initLoad=false) {
     }).catch(function(err) {
         console.warning(`Error when trying to find all descendants with error messgae. ${err}`);
     })
+
+
+    //************************************************************
+    // Get child EFO terms to display as sub-traits in top panel
+    //************************************************************
+    var sub_traits = [];
+    OLS.getHierarchicalDescendants(getMainEFO()).then((childTerms) => {
+        $.each(childTerms, function (index, term) {
+            sub_traits.push(term.label);
+        });
+        $("#efo-sub-trait-label").html(longContentList(
+        "gwas_sub_traits_div", sub_traits, 'sub traits'));
+    });
 
 
     //**************************************
