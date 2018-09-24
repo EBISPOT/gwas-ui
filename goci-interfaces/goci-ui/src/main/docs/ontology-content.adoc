@@ -2,7 +2,7 @@
 
 == Ontologies in the GWAS Catalog
 
-All curated traits descriptions are mapped to terms from the http://www.ebi.ac.uk/efo/[Experimental Factor Ontology] (EFO).
+All curated trait descriptions are mapped to terms from the http://www.ebi.ac.uk/efo/[Experimental Factor Ontology] (EFO).
 Traits in the GWAS Catalog are highly diverse and include diseases, e.g. Type II diabetes, disease markers, e.g. measurements of blood glucose concentration, and non-clinical phenotypes, e.g. hair color.
 EFO was chosen as the ontology to represent GWAS Catalog traits as it is highly adaptable and extensible, combining parts of several biological domain-specific ontologies and allowing modelling of tests, diseases, anatomy and anthropometry.
 Accurate mapping of curated trait descriptions to EFO terms facilitates searching, visualisation and integration of GWAS Catalog data with other resources.
