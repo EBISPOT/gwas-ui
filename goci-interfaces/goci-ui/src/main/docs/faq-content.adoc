@@ -172,7 +172,7 @@ The GWAS Catalog data can be used under the standard terms of use for EBI servic
 
 New data is added to the GWAS Catalog and diagram on a weekly basis, with new data generally going public every Tuesday. Data releases include all downloadable spreadsheets.
 
-=== [[faq-A8]]8. A new GWAS paper has just been published. Why is it not in the GWAS Catalog?
+==== [[faq-A8]]8. A new GWAS paper has just been published. Why is it not in the GWAS Catalog?
 
 Due to the considerable manual curation effort that goes into each publication in the GWAS Catalog, it takes a while for publications to be included in the Catalog after they have been first indexed in PubMed. As the complexity of GWAS publication in terms of study design and statistical analysis of results continues to increase, so does the curation effort required to extract the correct information in line with our extraction guidelines. The GWAS Catalog curation team work as fast as they can to process studies while maintaining the high standard of accuracy our users expect of the Catalog. We are in the process of trialling various approaches to speed up the curation process.
 
@@ -324,7 +324,7 @@ LD information between a variant of interest and the surrounding variants can be
 In case of a dataset with more than 1 variant of interest, several independant calls to the Ensembl REST API (http://rest.ensembl.org/documentation/info/ld_pairwise_get) can be made.
 
 
-== [[D]]. Diagram
+== [[D]]D. Diagram
  
 ==== [[faq-D1]]1. How do I display SNP information for a given dot?
 
@@ -350,7 +350,7 @@ The diagram was designed to have GoogleMaps-style interactivity. There are two w
 The diagram can be moved around the viewing area by clicking on any part of the diagram with the left mouse button and, holding the mouse button down, dragging the diagram around the screen until the desired part is visible. This feature is particularly useful for centring the diagram on a specific location at higher zoom levels.
 
 
-== [[E]]. Genomic mappings
+== [[E]]E. Genomic mappings
 
 ==== [[faq-E1]]1. How is the genomic annotation for each SNP provided?
 
@@ -378,7 +378,7 @@ For SNP-SNP interactions, all elements that are specific to a given SNP (rsID, r
 While we do provide the mapped gene and position information in this format in both the results page and the download, we excluded some of the additional gene-related information such as upstream/downstream gene IDs and distances from SNPs to genes from the download spreadsheet. This decision was made as it is almost impossible to present this kind of multi-dimensional data cleanly in the current spreadsheet format. In particular in large multi-SNP haplotypes, it is possible for some of the SNPs to be located within a gene while others are intergenic. Splitting gene IDs and distances by in-gene, upstream and downstream position would make the individual values much harder to pair up.
 
 
-=== F.Ancestry
+== F. Ancestry
 
 ==== [[faq-F1]]1. How is the ancestry data in the GWAS Catalog provided?
 
@@ -399,14 +399,14 @@ As of September 2016, we release publicly all ancestry data extracted from the G
 Most GWAS Catalog studies include at least two ancestry entries, one for the initial stage and one for the replication stage, and some studies may have several entries for each stage. As there is no way of usefully representing this multi-dimensional data in a single row in a spreadsheet, this data is instead provided in a separate spreadsheet, with each ancestry entry in its own row.
 
 
-== [[G]]. Programmatic access
+== [[G]]G. Programmatic access
 
 ==== [[faq-G1]]1. How do I use the GWAS Catalog REST API?
 
 The GWAS Catalog REST API is now available for programmatic access to the Catalog. See the link:http://www.ebi.ac.uk/gwas/rest/docs/api[full technical documentation] here, as well as link:http://www.ebi.ac.uk/gwas/rest/docs/sample-scripts[usage examples].
 
 
-=== [[H]]. Summary Statistics
+=== [[H]]H. Summary Statistics
 
 ==== [[faq-H1]]1. What are summary statistics?
 
