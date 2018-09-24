@@ -303,6 +303,9 @@ CHD: Coronary heart disease
 CHS1: 1st principal component on transformed hue and saturation values
 
 
+CI: 95% confidence interval
+
+
 CK: creatinine kinase
 
 
@@ -1077,6 +1080,9 @@ QUICKI: fasting serum quantitative insulin sensitivity check index
 === R
 
 RA: Rheumatoid arthritis
+
+
+RAF: risk allele frequency
 
 
 RANTES: fasting serum regulated upon activation, normal T-cell expressed and secreted

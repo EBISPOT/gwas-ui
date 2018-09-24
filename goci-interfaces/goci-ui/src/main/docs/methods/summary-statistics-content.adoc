@@ -23,16 +23,16 @@ Summary statistics are acquired from a number of different sources:
 * Submitted to the GWAS Catalog by an author
 
 We urge authors of GWAS publications included in the Catalog to contact us if summary statistics are available.
-If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our ftp server. We can then make these available through the Catalog.
+If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our FTP server. We can then make these available through the Catalog.
 We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us.
 Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our eligibility criteria (see below).
 
 == Summary statistics database
 
-We have developed a database of GWAS summary statistics. The REST API for the summary statistics database is now available at www.ebi.ac.uk/gwas/summary-statistics/api/.
-For full documentation on the REST API, please see link:www.ebi.ac.uk/gwas/summary-statistics/docs/[here].
+We store summary statistics files in two different places, on our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], and in harmonised format in our database.
 
-The harmonised data accessible by the REST API are also available on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site]. The FTP site hosts the original files and, when they are processed, a subdirectory called 'harmonised' containing a README file, a standard formatted version of the original file (see below) and a harmonised version of the file (also below).
+The FTP site hosts the original files and, when they are processed, a subdirectory called 'harmonised' containing a README file, a standard formatted version of the original file (see below) and a harmonised version of the file (also below). The REST API for the summary statistics database is now available at www.ebi.ac.uk/gwas/summary-statistics/api/.
+For full documentation on the REST API, please see link:www.ebi.ac.uk/gwas/summary-statistics/docs/[here].
 
 == Summary statistics standards and harmonisation
 
@@ -45,25 +45,26 @@ Summary statistics files are formatted by a scientific curator using a semi-auto
 
 - Headers will be transformed to the 'standard format'.
 - Rows will never be removed.
-- Columns may be split, merged, deleted or moved.
+- Columns may be split, merged, deleted, added or moved.
 - Values will be unaltered.
+- Blanks will be set to 'NA'
 
-Formatted file headings
+Standard format file headings
 
-    'snp' = variant ID
-    'pval' = p-value
-    'chr' = chromosome
-    'bp' = base pair location
-    'or' = odds ratio
+    'variant_id' = variant ID
+    'p-value' = p-value
+    'chromosome' = chromosome
+    'base_pair_location' = base pair location
+    'odds_ratio' = odds ratio
     'ci_lower' = lower 95% confidence interval
     'ci_upper' = upper 95% confidence interval
     'beta' = beta
-    'se' = standard error
+    'standard_error' = standard error
     'effect_allele' = effect allele
     'other_allele' = other allele
-    'eaf' = effect allele frequency
+    'effect_allele_frequency' = effect allele frequency
 
-Note that the headers in the formatted file are not limited to the above headers, nor are they required to have all of them.
+Note that the headers in the formatted file are not limited to the above headers.
 
 Formatted data is accessible on the GWAS Catalog dedicated summary statistics link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site]. Where the formatted files are available, they are nested within the 'harmonised' directory in the study directory.
 
@@ -73,11 +74,6 @@ Formatted data is accessible on the GWAS Catalog dedicated summary statistics li
 Formatted files are harmonised using an automated link:https://github.com/EBISPOT/sum-stats-formatter/tree/master/harmonisation[pipeline], which is detailed below. By 'harmonised' we mean that all genomic position data will be reported against the same and latest genome build. Missing chromosome, base pair location and variant ID data that can be inferred, will be. Furthermore, where possible, alleles are also orientated to the forward strand.
 
 The harmonisation process is the following:
-
-. Formatting
-.. Rename headers
-.. Set blank values to 'NA'
-.. Chromosome values X, Y and MT are mapped to 23, 24 and 25, respectively.
 
 . Mapping variant IDs to locations
 .. Update base pair location value by mapping variant ID using latest Ensembl release, or
@@ -198,6 +194,6 @@ Harmonised file headings (not all may be present in file):
     'hm_effect_allele_frequency' = harmonised effect allele frequency
     'hm_code = harmonisation code (to lookup in 'Harmonisation Code Table')
 
-Headings prefixed with 'hm_' are the output from the orientation (step 3) in the harmonisation process (see above). With the exception of 'hm_code', these will take the value of 'NA' where it was not possible to orientate the allele. In this situation, the data are still harmonised according to definition given above, but the orientation was not possible.
+Headings prefixed with 'hm_' are the output from the orientation (step 2) in the harmonisation process (see above). With the exception of 'hm_code', these will take the value of 'NA' where it was not possible to orientate the allele. In this situation, the data are still harmonised according to definition given above, but the orientation was not possible.
 
-There may be differences between the data available on the FTP site compared to the database where number rounding has taken place.
+There may be differences between the data available on the FTP site compared to the database where number rounding has taken place. In the database, chromosome values of 'X', 'Y' and 'MT' will appear as 23, 24 and 25, respectively.

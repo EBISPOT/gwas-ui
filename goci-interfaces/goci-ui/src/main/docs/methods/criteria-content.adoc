@@ -1,5 +1,7 @@
 = Inclusion criteria
 
+== Genome-wide association studies
+
 Studies and associations are eligible for inclusion in the GWAS Catalog if they meet the following criteria:
 
 * Include a primary GWAS analysis, defined as array-based genotyping and analysis of 100,000+ pre-QC SNPs selected to tag variation across the genome and without regard to gene content.
@@ -16,8 +18,8 @@ Studies and associations are excluded if:
 
 Individual SNP-trait associations identified in eligible studies are included in the Catalog if they meet the following criteria:
 
-* Statistical significance (SNP-trait p-value <1.0 x 10-5) in the overall (initial GWAS + replication) population.
-* If a study does not report a combined p-value, the p-value and effect size from the largest sample size will be reported as long as the initial and replication samples each show an association of p < 1.0 x 10-5.
+* Statistical significance (SNP-trait p-value <1.0 x 10^-5^) in the overall (initial GWAS + replication) population.
+* If a study does not report a combined p-value, the p-value and effect size from the largest sample size will be reported as long as the initial and replication samples each show an association of p < 1.0 x 10^-5^.
 * If a study does not include a replication stage, significant SNPs from the discovery stage will be reported.
 * SNP-trait associations that are described as previously known at the time of publication and are statistically significant in the GWAS sample, but are not attempted for replication, are reported.
 * The most significant SNP from each independent locus is extracted.
@@ -25,8 +27,8 @@ Individual SNP-trait associations identified in eligible studies are included in
 == Targeted and Exome array studies
 
 * We are working on expanding the scope of the GWAS Catalog to include studies using large-scale targeted/non-genome-wide arrays, including the Metabochip, Immunochip and Exome arrays. This is currently in a pilot phase where prioritisation of targeted and exome array studies for inclusion in the Catalog is by 1) relevance of the trait analysed 2) user request.
-* Targeted array studies included in the Catalog are indicated in the search interface using  a small “target” icon, close to the number of associations curated from that specific study.
+* Publications containing targeted array studies are indicated in the search results using  a small “target” icon. This icon also appears in the "Studies" table on specific pages, next to the study accession number.
 
 == Extending Catalog scope
 
-Pilots to investigate extending Catalog scope and alternative methods of data acquisition are described on our link:pilots[pilot projects page]. For a full list of publications by the GWAS Catalog team, and other useful background reading, please visit our link:related-resources[Resources page]
+Pilots to investigate extending Catalog scope and alternative methods of data acquisition are described on our link:pilots[pilot projects page]. For a full list of publications by the GWAS Catalog team, and other useful background reading, please visit our link:related-resources[Related Resources page]
