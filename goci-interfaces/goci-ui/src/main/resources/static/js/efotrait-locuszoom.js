@@ -511,8 +511,8 @@ reloadLocusZoom = function(plot_id, data_association, highlight_associations=und
     //adding information to association doc
     LocusZoom.Data.EfoWASSource.prototype.parseResponse = function(resp, chain, fields, outnames, trans) {
         var data = JSON.parse(JSON.stringify(data_association.docs));
-        console.log("Parsing association doc to locus zoom.");
-        console.log(data_association.docs);
+        // console.log("Parsing association doc to locus zoom.");
+        // console.log(data_association.docs);
         data = data.map( (d, i, object) =>{
 
             if (d.chromLocation) {
@@ -532,8 +532,8 @@ reloadLocusZoom = function(plot_id, data_association, highlight_associations=und
             }
             else {
                 //some association don't have chromosome information
-                console.warn('no location information available for association:')
-                console.warn(d);
+                // console.warn('no location information available for association:')
+                // console.warn(d);
                 return false
             }
         }).filter((d)=>{return d});

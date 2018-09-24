@@ -111,6 +111,18 @@
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-label">-</div>
                         </div>
 
+                        <!-- EFO Sub-traits -->
+                        <div class="clearfix">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
+                                <span>Sub-trait labels</span>
+                                <!--<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="A disease,-->
+                                    <!--phenotype, measurement or drug response as assigned by a specific EFO term that-->
+                                    <!--can be used to integrate information across studies.">-->
+                                <!--</span>-->
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efo-sub-trait-label">-</div>
+                        </div>
+
                         <!-- EFO ID -->
                         <div class="clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
@@ -209,7 +221,6 @@
                             <div class="col-lg-9" style="text-align: justify;" id="reported-traits">-</div>
                         </div>
                     </div>
-
 
                     <!-- Highlighted Study button here -->
                     <div class="panel-body col-xs-2">
@@ -358,9 +369,12 @@
             <!--</div>-->
             <!--</div>-->
 
+
+            <!-- ORIGINAL -->
             <!--<div class="list-group col-xs-12" id="cart-loading">-->
             <!--<div id="cart"></div>-->
             <!--</div>-->
+
 
             <!--<div class="col-xs-12" style="float:left">-->
             <!--<input id="cb-query-include-descendants" type="checkbox" checked=""/>-->
@@ -490,6 +504,13 @@
                         <!--<button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#diseasetrait_panel')">-->
                         <!--<span class="diseasetrait_label">Traits</span><span class="diseasetrait_count badge" style="background-color: #398A96;margin-left:10px"></span>-->
                         <!--</button>-->
+                    </div>
+                </div>
+
+
+                <!-- Use "cart" to add/remove EFO child terms -->
+                <div class="row" id="cart-loading" style="margin-top:0px">
+                    <div id="cart" class="panel clearfix">
                     </div>
                 </div>
 
