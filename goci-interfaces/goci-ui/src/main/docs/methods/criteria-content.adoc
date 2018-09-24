@@ -18,8 +18,8 @@ Studies and associations are excluded if:
 
 Individual SNP-trait associations identified in eligible studies are included in the Catalog if they meet the following criteria:
 
-* Statistical significance (SNP-trait p-value <1.0 x 10-5) in the overall (initial GWAS + replication) population.
-* If a study does not report a combined p-value, the p-value and effect size from the largest sample size will be reported as long as the initial and replication samples each show an association of p < 1.0 x 10-5.
+* Statistical significance (SNP-trait p-value <1.0 x 10^-5^) in the overall (initial GWAS + replication) population.
+* If a study does not report a combined p-value, the p-value and effect size from the largest sample size will be reported as long as the initial and replication samples each show an association of p < 1.0 x 10^-5^.
 * If a study does not include a replication stage, significant SNPs from the discovery stage will be reported.
 * SNP-trait associations that are described as previously known at the time of publication and are statistically significant in the GWAS sample, but are not attempted for replication, are reported.
 * The most significant SNP from each independent locus is extracted.
