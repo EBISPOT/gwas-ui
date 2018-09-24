@@ -126,7 +126,7 @@
 
 2. <<faq-H2,How do I find out which publications have full summary statistics available?>>
 
-3. <<faq-H3,I am an author and would like to deposit my summary statistics in the GWAS Catalog, how to I go about this?>>
+3. <<faq-H3,I am an author and would like to deposit my summary statistics in the GWAS Catalog, how do I go about this?>>
 
 4. <<faq-H4,How do I access summary statistics?>>
 
