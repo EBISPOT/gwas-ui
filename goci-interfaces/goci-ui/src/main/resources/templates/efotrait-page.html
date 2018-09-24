@@ -87,11 +87,6 @@
                 <!--heading-->
                 <div class="panel-heading background-color-primary-accent">
                     <h3 class="panel-title">Trait information
-                        <span class="glyphicon glyphicon-question-sign"
-                              data-toggle="tooltip"
-                              title="Trait summary information displayed relates to specific EFO trait searched for."
-                              style="margin-left:2px;font-size:smaller">
-                        </span>
                     </h3>
                 </div>
 
@@ -103,9 +98,8 @@
                         <div class="clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
                                 <span>Trait label</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="A disease,
-                                    phenotype, measurement or drug response as assigned by a specific EFO term that
-                                    can be used to integrate information across studies.">
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                      title="Trait name in the Experimental Factor Ontology (EFO)">
                                 </span>
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-label">-</div>
@@ -127,7 +121,8 @@
                         <div class="clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
                                 <span>EFO ID</span>
-                                <!--<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="EFO Identifier"></span>-->
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                      title="Trait ID in the Experimental Factor Ontology (EFO)"></span>
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-id">-</div>
                         </div>
@@ -146,7 +141,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
                                 <span>Mapped terms</span>
                                 <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
-                                      title="This trait in other ontologies.">
+                                      title="Equivalent trait IDs in other ontologies">
                                 </span>
                             </div>
 
@@ -213,9 +208,9 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="col-lg-2 item-left">
                                 <span>Reported Traits</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="The trait
-                                    analysed in any given study, as described by the author, taking into account the
-                                    study design. The reported trait is used to determine the ontology Trait assignment.">
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                      title="List of detailed trait descriptions that are annotated with this trait.
+                                      Reported traits are based on author language and take into account study design.">
                                 </span>
                             </div>
                             <div class="col-lg-9" style="text-align: justify;" id="reported-traits">-</div>
