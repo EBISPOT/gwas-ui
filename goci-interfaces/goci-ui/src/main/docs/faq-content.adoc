@@ -406,7 +406,7 @@ Most GWAS Catalog studies include at least two ancestry entries, one for the ini
 The GWAS Catalog REST API is now available for programmatic access to the Catalog. See the link:http://www.ebi.ac.uk/gwas/rest/docs/api[full technical documentation] here, as well as link:http://www.ebi.ac.uk/gwas/rest/docs/sample-scripts[usage examples].
 
 
-=== [[H]]H. Summary Statistics
+== [[H]]H. Summary Statistics
 
 ==== [[faq-H1]]1. What are summary statistics?
 
