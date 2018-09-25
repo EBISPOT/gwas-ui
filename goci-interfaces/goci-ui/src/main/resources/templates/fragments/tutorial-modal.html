@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<body th:fragment="tutorial-modal">
+<!-- Large modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">GWAS Catalog Tutorial</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-content">
+                <p th:align="center"><video width="800" height="600" controls="controls">
+                    <source th:src="@{/video/GWAS_tutorial.mp4}" type="video/mp4" />
+                    <source th:src="@{/video/GWAS_tutorial.ogg}" type="video/ogg" />
+                    Your browser does not support the video tag.
+                </video>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

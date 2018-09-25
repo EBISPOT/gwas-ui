@@ -49,15 +49,14 @@
 
 <div th:include="fragments/header :: jumbotron"></div>
 
+<div th:include="fragments/tutorial-modal :: tutorial-modal"></div>
 
 <div class="container">
     <div class="row" style="text-align: center">
-        <a href="tutorial" data-original-title="" title="">
-
-            <p></p><h2 class="color-primary-bold">Take a tour of the new search interface</h2>
-
             <p></p>
-        </a>
+
+        <a href="#" target="_blank" data-toggle="modal" data-target="#exampleModal"><h2 class="color-primary-bold">Take a tour of the NEW search interface...</h2></a>
+
     </div>
     <div class="row">
         <a th:href="@{/search}">
