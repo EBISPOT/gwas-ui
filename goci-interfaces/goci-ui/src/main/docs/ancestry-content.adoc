@@ -8,11 +8,11 @@ Following a detailed review of ancestry information in the GWAS Catalog, we have
 
 == Curation Process
 
-Each GWAS Catalog study entry comprises one or more samples, designated as “Initial” or “Replication” samples, depending on the stage of the GWA study in which they were analysed. For each sample, we created the detailed description by extracting the ancestry descriptor utilized by the author in the relevant publication. To generate the controlled description, we selected, from a limited list of terms, the category noted by the author or, if not stated, the category that best correlates with the detailed description for the same sample. For example, we selected the category “East Asian” for detailed descriptions containing the descriptor “Han Chinese”. 
+Each GWAS Catalog study entry comprises one or more samples, designated as “Discovery” or “Replication” samples, depending on the stage of the GWA study in which they were analysed. For each sample, we created the detailed description by extracting the ancestry descriptor utilized by the author in the relevant publication. To generate the controlled description, we selected, from a limited list of terms, the category noted by the author or, if not stated, the category that best correlates with the detailed description for the same sample. For example, we selected the category “East Asian” for detailed descriptions containing the descriptor “Han Chinese”. 
 
-We rely heavily on data stated by authors in the GWAS publication, giving precedence to information inferred using genomic methods, such as principal component analysis (PCA). In some cases, we considered other sources, but only when the information provided by authors was limited or ambiguous. We consulted peer-reviewed population genetics publications to obtain additional information on lesser-known groups that were not adequately characterized by authors or when samples were described using ethno-cultural terms.
+We rely heavily on data stated by authors in the GWAS publication, giving precedence to information inferred using genomic methods, such as principal component analysis (PCA). In some cases, we consider other sources, but only when the information provided by authors is limited or ambiguous. We consult peer-reviewed population genetics publications to obtain additional information on lesser-known groups that are not adequately characterized by authors or when samples are solely described using ethno-cultural terms.
 
-When the only information provided in the curated publication was the location of recruitment, we consulted link:https://unstats.un.org/unsd/methodology/m49[The United Nations M49 Standard of Geographic Regions] and link:https://www.cia.gov/library/publications/resources/the-world-factbook/index.html[The World Factbook]. The latter is a regularly updated compendium of worldwide demographic data, covering all countries and territories of the world. 
+When the only information provided in the curated publication is the location of recruitment, we consult link:https://unstats.un.org/unsd/methodology/m49[The United Nations M49 Standard of Geographic Regions] and link:https://www.cia.gov/library/publications/resources/the-world-factbook/index.html[The World Factbook]. The latter is a regularly updated compendium of worldwide demographic data, covering all countries and territories of the world. 
 
 We also extract country information as it  provides additional detail on sample demographics. 
 
@@ -20,12 +20,12 @@ We also extract country information as it  provides additional detail on sample 
 
 === Detailed Sample Description
 
-* Detailed descriptions for the initial and replication stages of the GWAS are entered separately as “Initial Sample Description” and “Replication Sample Description”.  
-* Catalog detailed descriptions include the most detailed ancestry descriptor provided by the author, e.g. “Han Chinese”, “Black”, “Jewish”, “Thai”, “Colored African”.
-* Samples described in a publication as “White” or “Caucasian” are described in the detailed description as European.
-* If multiple populations of the same ancestry category are included in a study, the samples are combined by ancestry category. For example, for a study that includes 100 Japanese ancestry individuals and 200 Korean ancestry individuals, the detailed description states "300 East Asian ancestry individuals". When multiple sample populations are combined in this way the descriptions provided by the author for each sample population are included in the “Additional information” field in the structured ancestry data.
-* It is assumed that a descriptor, e.g. “Dutch”, refers to ancestry and not citizenship or country of recruitment unless information is provided to contradict this. For example, if the author states “100 Dutch cases”, European ancestry is inferred, rather than recruitment in The Netherlands.
-* A founder population or genetic isolate has genetic homogeneity or limited genetic variation within the population. Each founder/genetic isolate descriptor is decided on a case by case basis, using the authors’ language and description of the sample from the paper being curated, followed by the term “founder/genetic isolate”. For example, the Sardinian population isolate from Sardinia, Italy is listed as “Sardinian (founder/genetic isolate)”. 
+* Detailed descriptions for the discovery and replication stages of the GWAS are entered separately as “Discovery Sample Description” and “Replication Sample Description”.  
+* Catalog detailed descriptions include the most detailed ancestry descriptor provided by the author, e.g. “Han Chinese”, “Black”, “Jewish”, “Thai”.
+* Samples described in a publication as “White” or “Caucasian” are described in the detailed description as “European”.
+* If multiple populations of the same ancestry category are included in a study, the samples are combined by ancestry category. For example, for a study that includes 100 Japanese ancestry individuals and 200 Korean ancestry individuals, the detailed description states "300 East Asian ancestry individuals". When multiple sample populations are combined in this way, the “Additional description” field contains the descriptions provided by the author for each sample population. Information in the “Additional description” field is only included in the link:file-downloads[spreadsheet download].
+* It is assumed that a descriptor refers to ancestry and not citizenship or country of recruitment unless information is provided to contradict this. For example, if the author states “100 Dutch cases”, European ancestry is inferred, rather than recruitment in The Netherlands.
+* A founder or genetically isolated population has genetic homogeneity or limited genetic variation within the population. Each founder/genetic isolate descriptor is decided on a case by case basis, using the language and description provided by the author in the paper being curated, followed by the term “founder/genetic isolate”. For example, the Sardinian population isolate from Sardinia, Italy is listed as “Sardinian (founder/genetic isolate)”. 
 * Populations with ancestry from more than one distinct parental population are considered to be admixed. Currently, the vast majority of Catalog samples with recent admixture can be categorized as “African American or Afro-Caribbean” or “Hispanic or Latin American”. When describing samples with recent admixture distinct from these populations, the detailed descriptor is decided on a case by case basis, using the authors’ language from the paper being curated. 
 
 === Ancestry Category
@@ -33,7 +33,7 @@ We also extract country information as it  provides additional detail on sample 
 * Each detailed descriptor is mapped to an ancestry category and the samples are combined if they belong to the same category. A complete list of ancestry categories used in the Catalog can be found in link:https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5815218/table/Tab1/?report=objectonly[Table 1, Morales et al 2018].
 * The mappings of detailed descriptions to ancestry categories are carefully considered for each study.  The decision is based on information provided by the author and, where not stated, information provided by peer-reviewed population genetics publications, The World Factbook, the geographical region and additional published resources.  
 * If the author reports that ancestry is both "genetically assessed" and "self-reported", the sample ancestry in the Catalog is reported according to the genetically assessed methods.
-* Founder populations are assigned the category provided by the author. If no category is given, these are assigned the category “Other”.
+* Founder or genetically isolated populations are assigned the category provided by the author. If no category is given, these are assigned the category “Other”.
 * “Asian unspecified” or “African unspecified” is used when curators are not able to assign a more specific ancestry category. For example, “200 Asian individuals recruited in Malaysia, Singapore, and the U.S.” is listed as “Asian unspecified”.
 *  “Other” - “other” is assigned if an ancestry descriptor is provided by the author but insufficient information is given to allow curators to assign it to one of the categories, e.g. “Russian”.
 * “Other admixed ancestry” – “other admixed ancestry” is selected if the author has stated that the samples are admixed but the admixture is other than the known admixture represented in the categories “African American or Afro-Caribbean” and “Hispanic or Latin American” 
@@ -41,7 +41,7 @@ We also extract country information as it  provides additional detail on sample 
 
 ==== When no ancestry data is provided by authors
 
-* When no ancestry descriptor is used by the author but a country of recruitment is stated, curators use additional published materials to infer the category. This includes relevant ancestry publications and population information provided by link:https://www.cia.gov/library/publications/resources/the-world-factbook/index.html[The World Factbook]. 
+* When no ancestry descriptor is listed by the author but a country of recruitment is stated, curators use additional published materials to infer the category. This includes relevant ancestry publications and population information provided by link:https://www.cia.gov/library/publications/resources/the-world-factbook/index.html[The World Factbook]. 
 * The World Factbook is a reference resource, produced by the U.S. Central Intelligence Agency, which provides information about the demographics, geography, communications, government, economy, and military of countries. This may include information on the ancestry of groups that make up the population of a country. This information is used to infer the ancestry of a study sample when the country of recruitment of the samples is the only information provided. Ancestry is only inferred for countries with > 90% of the same ancestry according to The World Factbook. Ancestry is not assumed for countries with < 90% of the same ancestry; in this case “NR” is entered.
 * Other resources are consulted for a number of countries with a high proportion of admixture. For example, scientific papers have been consulted to provide ancestry information on countries in Latin America and the Caribbean.
 
@@ -64,6 +64,7 @@ We also extract country information as it  provides additional detail on sample 
 
 * All ancestry descriptors provided by the author are entered in the “Additional description” under the “Ancestry category” to which they have been mapped (this applies to GWAS Catalog studies from January 2016 onwards).
 * When describing admixed samples, if provided by the author, the distinct ancestral backgrounds that contribute to admixture are entered in the “Additional description” under the “Other admixed ancestry” category.
+* Information in the “Additional description” field is only included in the link:file-downloads[spreadsheet download].
 
 
 == Full Ancestry Extraction details
@@ -73,7 +74,11 @@ For additional information please review our link:ftp://ftp.ebi.ac.uk/pub/databa
 
 == Finding Curated Ancestry Data
 
-Ancestry-related data are found in the Studies and Associations tables when searching the Catalog. The detailed and controlled descriptions can be found in the Studies table, either by pressing “Expand all Studies” or the “+” on the study of interest. The controlled description follows the format: sample size, category, (country of recruitment). In cases where multiple ancestries are included in a study, the ancestry associated with a particular association is found as an annotation in the p value column in the Associations table. Ancestry data is also available as a download from our download page. For an overview of the kind of data found in this file, refer to link:http://www.ebi.ac.uk/gwas/docs/fileheaders#_file_headers_for_ancestry_download[the file header descriptions.]
+Ancestry-related data are found in the Studies and Associations tables when searching the Catalog. The detailed descriptions can be found in the Studies table, which is contained within the Trait, Publication and Variant pages. The controlled descriptions are also accessible from the Studies table, by opening additional columns using the “Add/Remove columns” button. The controlled description follows the format: sample size, category. In cases where multiple ancestries are included in a study, the ancestry associated with a particular association is found in the "p value annotation" column in the Associations table. Specific ancestry data can be searched within both tables by limiting the search to the column of interest (e.g. “East Asian” in the “Discovery sample description” column; “East Asian” in the “P value annotation” column).
+
+Ancestry information, including country of recruitment, for a particular study can be found in the dedicated Study-specific page, which can be accessed using the GWAS Catalog Study identifier for that study (GCST Id; e.g. GCST002735).
+
+All ancestry data, including Country of Recruitment and Additional information, is available as a download file from our link:http://www.ebi.ac.uk/gwas/docs/file-downloads[download page.] For an overview of the kind of data found in this file, refer to link:http://www.ebi.ac.uk/gwas/docs/fileheaders#_file_headers_for_ancestry_download[the file header descriptions.]
 
 == References
 
