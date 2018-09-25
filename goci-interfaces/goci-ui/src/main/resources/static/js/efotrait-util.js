@@ -395,7 +395,6 @@ generateSelectedItemCheckBox = function(efoid,tagID){
                {
                    id: 'selected_cb_' + efoid,
                    type: 'checkbox',
-                   // class: "cart-item-cb align-middle checkbox col-xs-1 col-sm-1 col-md-1 col-lg-1",
                    class: "cart-item-cb",
                    style: "margin:8px;",
                    value: efoid
@@ -404,19 +403,20 @@ generateSelectedItemCheckBox = function(efoid,tagID){
 
     $('<label />',
         {
-            text: 'Add sub-trait data',
+            text: 'Add child trait data',
             class: "cart-item-cb",
-            style: "margin-left: 10px; transform: translateY(25%);"
+            style: "margin-left: 10px; margin-right: 4px; transform: translateY(25%);"
         }).appendTo(container);
 
     $('<span />',
         {
-            id: 'sub_trait_data',
-            class: 'glyphicon glyphicon-question-sign'
+            id: 'child_trait_data',
+            class: 'glyphicon glyphicon-question-sign',
+            style: "transform: translateY(25%);"
         }).appendTo(container);
 
-    $("#sub_trait_data").attr("data-toggle", "tooltip");
-    $("#sub_trait_data").attr("title", "Include GWAS Catalog data for all child terms of this trait in the EFO hierarchy");
+    $("#child_trait_data").attr("data-toggle", "tooltip");
+    $("#child_trait_data").attr("title", "Include GWAS Catalog data for all child terms of this trait in the EFO hierarchy");
 
 
 
@@ -640,8 +640,8 @@ updatePage = function(initLoad=false) {
         $.each(childTerms, function (index, term) {
             sub_traits.push(term.label);
         });
-        $("#efo-sub-trait-label").html(longContentList(
-        "gwas_sub_traits_div", sub_traits, 'sub traits'));
+        $("#efo-child-trait-label").html(longContentList(
+        "gwas_child_traits_div", sub_traits, 'child traits'));
     });
 
 
