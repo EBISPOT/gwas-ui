@@ -112,7 +112,7 @@
 
 2. <<faq-F2, How do I search for ancestry data in the GWAS Catalog?>>
 
-3. <<faq-F3, Can I find all associations for a particular ancestry?
+3. <<faq-F3, Can I find all associations for a particular ancestry?>>
 
 4. <<faq-F4, What does the "Pre-2011 ancestry not double-curated" flag next to some of the ancestry data mean?>>
 
