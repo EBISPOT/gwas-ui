@@ -409,6 +409,15 @@ generateSelectedItemCheckBox = function(efoid,tagID){
             style: "margin-left: 10px; transform: translateY(25%);"
         }).appendTo(container);
 
+    $('<span />',
+        {
+            id: 'sub_trait_data',
+            class: 'glyphicon glyphicon-question-sign'
+        }).appendTo(container);
+
+    $("#sub_trait_data").attr("data-toggle", "tooltip");
+    $("#sub_trait_data").attr("title", "Include GWAS Catalog data for all child terms of this trait in the EFO hierarchy");
+
 
 
     if (isDescendantRequired(efoid)){
