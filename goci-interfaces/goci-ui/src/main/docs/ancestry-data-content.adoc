@@ -4,7 +4,7 @@
 
 == Ancestry category distribution in the GWAS Catalog.
 
-Here we present analysis of the ancestry data contained in the GWAS Catalog, last updated Jan 2018.
+Here we present an analysis of the ancestry data contained in the GWAS Catalog for studies published from 2005 - Dec 2016.
 
 image::ancestry-data.png[Ancestry data,1000,1000,align="center"]
 
