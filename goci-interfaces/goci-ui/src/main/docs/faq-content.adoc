@@ -390,15 +390,15 @@ The GWAS Catalog team has developed and published a link:https://genomebiology.b
 
 Ancestry data can be searched by entering relevant text in the search bar, including ancestry category or country (e.g. “European”, “South Africa”). Any publications containing those ancestries or countries of recruitment will be returned. Ancestry data can then be found in the "Studies" table within the Publication page. Ancestry data can also be found on the “Study” page and in the “Studies” table in the Trait and Variant pages. For more information please view our link:ancestry[Ancestry Documentation] page. 
 
-==== [[faq-F2]]3. Can I find all associations for a particular ancestry?
+==== [[faq-F3]]3. Can I find all associations for a particular ancestry?
 
 The GWAS Catalog website does not currently have a way to view all associations for a particular ancestry. We recommend using our REST API. All Ancestry data, including Country of Recruitment and Additional information, is also available as a download file from our link:http://www.ebi.ac.uk/gwas/docs/file-downloads[download page.] For an overview of the kind of data found in this file, refer to link:http://www.ebi.ac.uk/gwas/docs/fileheaders#_file_headers_for_ancestry_download[the file header descriptions.] 
 
-==== [[faq-F3]]4. What does the "Pre-2011 ancestry not double-curated" flag next to some of the ancestry data mean?
+==== [[faq-F4]]4. What does the "Pre-2011 ancestry not double-curated" flag next to some of the ancestry data mean?
 
 As of September 2016, we release publicly all ancestry data extracted from the GWAS Catalog. Ancestry data from studies published before 2011 has not been reviewed by a second curator and so may not always conform to the strict standardised way we present more recent ancestry data.
 
-==== [[faq-F4]]5. Why is the ancestry information provided in a separate downloadable spreadsheet to the rest of the study-level information?
+==== [[faq-F5]]5. Why is the ancestry information provided in a separate downloadable spreadsheet to the rest of the study-level information?
 
 Most GWAS Catalog studies include at least two ancestry entries, one for the initial stage and one for the replication stage, and some studies may have several entries for each stage. As there is no way of usefully representing this multi-dimensional data in a single row in a spreadsheet, this data is instead provided in a separate spreadsheet, with each ancestry entry in its own row.
 
