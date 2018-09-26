@@ -1,3 +1,5 @@
+= Curation
+
 == Curation process
 
 The GWAS Catalog data is extracted from the literature. Extracted information includes publication information, study cohort information such as cohort size, country of recruitment and subject ancestry, and SNP-disease association information including SNP identifier (i.e. RSID), p-value, gene and risk allele.
