@@ -40,39 +40,39 @@
 
 1. <<faq-B1, How do I search the GWAS Catalog?>>
 
-=== B(i). Searching by publication
+==== B(i). Searching by publication
 
-2. <<faq-B2, How do I search by publication?>>
+1. <<faq-B2, How do I search by publication?>>
 
-3. <<faq-B3, I am searching for the author of a publication. Why do my search results also contain traits?>>
+2. <<faq-B3, I am searching for the author of a publication. Why do my search results also contain traits?>>
 
-=== B(ii). Searching by variant
+==== B(ii). Searching by variant
 
-4. <<faq-B4, How do I search by variant?>>
+1. <<faq-B4, How do I search by variant?>>
 
-5. <<faq-B5, How do I search by gene?>>
+2. <<faq-B5, How do I search by gene?>>
 
-6. <<faq-B6, How do I search by genomic region?>>
+3. <<faq-B6, How do I search by genomic region?>>
 
-7. <<faq-B7, Can I find all associations for a particular gene or genomic region?>>
+4. <<faq-B7, Can I find all associations for a particular gene or genomic region?>>
 
-=== B(iii). Searching by trait
+==== B(iii). Searching by trait
 
-8. <<faq-B8, How do I search by trait?>>
+1. <<faq-B8, How do I search by trait?>>
 
-9. <<faq-B9, When searching for a trait, do the results include all publications for that trait?>>
+2. <<faq-B9, When searching for a trait, do the results include all publications for that trait?>>
 
-10. <<faq-B10, When I search for a certain trait why are other traits returned?>>
+3. <<faq-B10, When I search for a certain trait why are other traits returned?>>
 
-11. <<faq-B11, How are multiple or compound traits represented in the Catalog?>>
+4. <<faq-B11, How are multiple or compound traits represented in the Catalog?>>
 
-12. <<faq-B12, Why did my search return no results even though I am sure there used to be a trait like this in the Catalog?>>
+5. <<faq-B12, Why did my search return no results even though I am sure there used to be a trait like this in the Catalog?>>
 
-=== B(iv). Searching by study
+==== B(iv). Searching by study
 
-13. <<faq-B13, Can I search for a study?>>
+1. <<faq-B13, Can I search for a study?>>
 
-14. <<faq-B14, How can I search for targeted and exome array studies and associations?>>
+2. <<faq-B14, How can I search for targeted and exome array studies and associations?>>
 
 === C. Exploring specific pages
 
@@ -229,47 +229,47 @@ Type your query, e.g. “breast carcinoma”, into the search box and hit return
 
 === B(i). Searching by publication
 
-==== [[faq-B2]]2. How do I search by publication?
+==== [[faq-B2]]1. How do I search by publication?
 
 You can find a publication by searching for the PubMed ID, any author or any word within the publication title. Note that all authors associated with a publication are included in our database, so searching for an author name will return all publications featuring that author, not only first author publications. This means that an author name can return a very large number of results. If you are looking for a specific publication we recommend searching by PubMed ID. 
 
-==== [[faq-B3]]3. I am searching for the author of a publication. Why do my search results also contain traits?
+==== [[faq-B3]]2. I am searching for the author of a publication. Why do my search results also contain traits?
 
 The search returns all publications, traits and variants that contain a match for the text string entered across all fields, so if your search term is for example "Parkinson", you will find publications with an author named Parkinson as well as publications with “Parkinson” in the title and traits related to Parkinson’s disease. If you are looking for a specific publication we recommend searching by PubMed ID.
 
 === B(ii). Searching by variant
 
-==== [[faq-B4]]4. How do I search by variant?
+==== [[faq-B4]]1. How do I search by variant?
 
 You can find a variant (or single nucleotide polymorphism, SNP) by searching for an rsID, a genomic region or a gene mapped to that variant. As mapped genes and genomic regions can return a large number of results, we recommend searching by rsID if you are looking for a specific variant. 
 
-==== [[faq-B5]]5. How do I search by gene?
+==== [[faq-B5]]2. How do I search by gene?
 
 Searching for a gene name currently returns a list of variants that have been mapped to that gene. You can then select a specific variant for more information, including association data. See <<E, Genomic mappings below>> for details of how we map variants to genes.
 
 Note that searching for a gene may also return publications with the gene name in the title.
 
-==== [[faq-B6]]6. How do I search by genomic region?
+==== [[faq-B6]]3. How do I search by genomic region?
 
 You can search by genomic region using the format chromNumber:bpLocation-bpLocation, for example 6:16000000-25000000. You can also search using cytogenetic nomenclature, for example 2q37.1. These searches will return a list of variants.
 
-==== [[faq-B7]]7. Can I find all associations for a particular gene or genomic region?
+==== [[faq-B7]]4. Can I find all associations for a particular gene or genomic region?
 
 The GWAS Catalog website does not currently have a way to view all associations for a particular gene or genomic region. We are currently working to improve this functionality. For now, we recommend using our <<G,REST API>> to return associations for a specific gene or genomic region.
 
 === B(iii). Searching by trait
 
-==== [[faq-B8]]8. How do I search by trait?
+==== [[faq-B8]]1. How do I search by trait?
 
 To find a trait, type the name of any disease, phenotype, measurement or drug response. The search will return traits matching your search term, synonyms of traits matching your search term and child traits of both of these e.g. a search for “cancer” would also return all cancer subtypes. Note that it will also return publications where the title includes your search term.
 
 If you can’t find your trait of interest, it may be that it is included in the GWAS Catalog under a different name. For example, searching for “general cognitive ability” will return the synonym “intelligence”, which is how that trait is stored in the GWAS Catalog. Note that the search bar offers suggestions as you type, including possible synonyms for your trait of interest.
 
-==== [[faq-B9]]9. When searching for a trait, do the results include all publications for that trait?
+==== [[faq-B9]]2. When searching for a trait, do the results include all publications for that trait?
 
 A publication is only returned if the publication title, authors or PubMed ID contain your search term. If you want to find all of the studies on a particular trait, first go to the “Trait” page and then look at the “Studies” table.
 
-==== [[faq-B10]]10. When I search for a certain trait why are other traits returned?
+==== [[faq-B10]]3. When I search for a certain trait why are other traits returned?
 
 Sometimes it may not be immediately obvious why your search has returned a particular trait. 
 
@@ -279,7 +279,7 @@ The search results may also contain traits that have been studied together with 
 
 You may also find a publication in the search results, if the publication title contains your trait of interest.
 
-==== [[faq-B11]]11. How are multiple or compound traits represented in the Catalog?
+==== [[faq-B11]]4. How are multiple or compound traits represented in the Catalog?
 
 Some studies are mapped to more than one trait, usually because those studies involve a more complex definition of the phenotype under investigation. Currently, the best way to understand the relationship between multiple traits in the same study is to look at the *reported trait*, which is based on the phenotype description used in the original paper. 
 
@@ -289,19 +289,19 @@ Where a study has combined groups of individuals with different traits in the sa
 
 Where a study includes individuals each having multiple traits, this is indicated by the word “and” in the reported trait. For example, if individuals diagnosed with bipolar disorder who show binge-eating behaviour were compared to controls, the reported trait would be “bipolar disorder and binge eating”. The study would be mapped to two traits from the ontology: “bipolar disorder” and “binge eating”.
 
-==== [[faq-B12]]12. Why did my search return no results even though I am sure there used to be a trait like this in the Catalog?
+==== [[faq-B12]]5. Why did my search return no results even though I am sure there used to be a trait like this in the Catalog?
 
 Our search functionality searches for exact text string matches, so if you accidentally type "beast cancer" instead of "breast cancer", you will not get any results. Equally, "metabolic disorder" won't return any results while "metabolic disease" will return a lot. The search bar provides an autocomplete function that will suggest possible search terms as you type. Alternatively, try varying your search term or searching for your term in http://www.ebi.ac.uk/efo[EFO] to get an idea of what other terms might be available.
 
 === B(iv). Searching by study
 
-==== [[faq-B13]]13. Can I search for a study?
+==== [[faq-B13]]6. Can I search for a study?
 
 Individual studies within a particular publication are not currently displayed in the search results. To find a study, search for a publication, trait or variant and then go to the “Studies” table to click through to the linked studies.
 
 If you already know the accession number of a particular study (beginning with “GCST”), you can search for this on the homepage to return the publication containing that study.
 
-==== [[faq-B14]]14. How can I search for targeted and exome array studies and associations?
+==== [[faq-B14]]7. How can I search for targeted and exome array studies and associations?
 
 You can enter the genotyping technology of your interest in the search bar, e.g. “targeted genotyping array”, “exome genotyping array”. This will return any publication that uses that specific genotyping technology.
 
