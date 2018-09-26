@@ -14,8 +14,10 @@
  * http://es6-features.org/#ParameterContextMatching
  * http://es6-features.org/#ObjectPropertyAssignment //merge object
  */
-var global_color_url = 'https://wwwdev.ebi.ac.uk/gwas/labs/rest/api/parentMapping/';
-var global_color_url_batch = 'https://wwwdev.ebi.ac.uk/gwas/labs/rest/api/parentMappings';
+
+var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
+var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
+
 var global_ols_api = 'https://www.ebi.ac.uk/ols/api/';
 var global_ols = 'https://www.ebi.ac.uk/ols/';
 var global_ols_seach_api =  global_ols_api + 'search';
