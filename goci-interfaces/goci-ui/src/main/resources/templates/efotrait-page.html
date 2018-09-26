@@ -96,7 +96,7 @@
 
                         <!-- EFO Label -->
                         <div class="clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
                                 <span>Trait label</span>
                                 <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
                                       title="Trait name in the Experimental Factor Ontology (EFO)">
@@ -105,20 +105,9 @@
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-label">-</div>
                         </div>
 
-                        <!-- EFO Sub-traits -->
-                        <div class="clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
-                                <span>Sub-trait labels</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
-                                             title="Child terms of this trait in the EFO hierarchy">
-                                </span>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efo-sub-trait-label">-</div>
-                        </div>
-
                         <!-- EFO ID -->
                         <div class="clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
                                 <span>EFO ID</span>
                                 <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
                                       title="Trait ID in the Experimental Factor Ontology (EFO)"></span>
@@ -213,6 +202,19 @@
                                 </span>
                             </div>
                             <div class="col-lg-9" style="text-align: justify;" id="reported-traits">-</div>
+                        </div>
+                    </div>
+
+                    <!-- EFO Child traits -->
+                    <div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 item-left">
+                                <span>Child traits</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                  title="Child terms of this trait in the EFO hierarchy">
+                                </span>
+                            </div>
+                            <div class="col-lg-9" style="text-align: justify;" id="efo-child-trait-label">-</div>
                         </div>
                     </div>
 
@@ -504,7 +506,7 @@
 
                 <!-- Use "cart" to add/remove EFO child terms -->
                 <div class="row" id="cart-loading" style="margin-top:0px">
-                    <div id="cart" class="panel clearfix">
+                    <div id="cart" class="panel clearfix item-left">
                     </div>
                 </div>
 
