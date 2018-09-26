@@ -140,7 +140,7 @@
 
 ==== [[faq-A1]]1. How can I access GWAS Catalog data?
 
-In autumn 2018, we updated the GWAS Catalog search interface. Previously all Catalog data was displayed on a single page, with tables for “Studies”, “Associations” and “Catalog traits”. We have now created separate pages for each *publication*, *study*, *trait* and *variant* in the Catalog so that each of these can be explored individually. To get started, search for any text you wish in the search bar, then select a specific page for more information. See <<B,Searching in the GWAS Catalog below>> for further tips on how to find specific types of information, or see our link:[introductory video].
+In autumn 2018, we updated the GWAS Catalog search interface. Previously all Catalog data was displayed on a single page, with tables for “Studies”, “Associations” and “Catalog traits”. We have now created separate pages for each *publication*, *study*, *trait* and *variant* in the Catalog so that each of these can be explored individually. To get started, search for any text you wish in the search bar, then select a specific page for more information. See <<B,Searching in the GWAS Catalog below>> for further tips on how to find specific types of information, or see the tutorial link:[introductory video].
 
 GWAS Catalog data can be downloaded in spreadsheet form. To download full association and study data, see our link:file-downloads[file downloads] page. You can also download specific association data sets from each “Publication”, “Study”, “Trait” and “Variant” page using the “Download Catalog data” button.
 
@@ -198,7 +198,7 @@ In addition, each study has a *reported trait*, based on the authors’ descript
 
 ==== [[faq-A13]]13. How do I identify interaction studies in the GWAS Catalog?
 
-The GWAS Catalog contains SNP-by-SNP and SNP-by-environment interaction studies as long as the SNPs analysed meet our criteria of being genome-wide (see www.ebi.ac.uk/gwas/docs/methods). For both types of study, the term “interaction” is included in the reported trait.
+The GWAS Catalog contains SNP-by-SNP and SNP-by-environment interaction studies as long as the SNPs analysed meet our link:methods/criteria-content[criteria] of being genome-wide. For both types of study, the term “interaction” is included in the reported trait.
 
 For SNP-by-SNP interaction studies the term “SNP x SNP interaction” is added in parenthesis. For SNP-by-environment interaction studies, the environmental component is included in the reported trait. Since July 2018, we have added information to distinguish between the different statistical tests for SNP-by-environment interactions: the 2-degree of freedom test of both the main effect and the interaction term versus the 1-degree of freed test of just the interaction term. For these recent studies, the reported trait is represented as e.g. “Lung cancer x smoking interaction (1df test)”. Earlier studies do not include the type of test e.g. “Lung cancer (smoking interaction)”.
 
@@ -255,7 +255,7 @@ You can search by genomic region using the format chromNumber:bpLocation-bpLocat
 
 ==== [[faq-B7]]4. Can I find all associations for a particular gene or genomic region?
 
-The GWAS Catalog website does not currently have a way to view all associations for a particular gene or genomic region. We are currently working to improve this functionality. For now, we recommend using our <<G,REST API>> to return associations for a specific gene or genomic region.
+The GWAS Catalog website does not currently have a way to view all associations for a particular gene or genomic region. We are currently working to improve this functionality. For now, we recommend using our link:api-content[REST API] to return associations for a specific gene or genomic region.
 
 === B(iii). Searching by trait
 
@@ -407,7 +407,7 @@ Most GWAS Catalog studies include at least two ancestry entries, one for the ini
 
 ==== [[faq-G1]]1. How do I use the GWAS Catalog REST API?
 
-The GWAS Catalog REST API is now available for programmatic access to the Catalog. See the link:http://www.ebi.ac.uk/gwas/rest/docs/api[full technical documentation] here, as well as link:http://www.ebi.ac.uk/gwas/rest/docs/sample-scripts[usage examples].
+The GWAS Catalog REST API is now available for programmatic access to the Catalog. See the http://www.ebi.ac.uk/gwas/rest/docs/api[full technical documentation] here, as well as http://www.ebi.ac.uk/gwas/rest/docs/sample-scripts[usage examples].
 
 
 == [[H]]H. Summary Statistics
@@ -426,11 +426,11 @@ We currently extract summary statistics files from publications where they are m
 
 ==== [[faw-H4]]4. How do I access summary statistics?
 
-There are two methods. We have developed a dedicated summary statistics database, enabling users with searchable, filterable, harmonised data via  the summary statistics link:http://www.ebi.ac.uk/gwas/summary-statistics/docs/[REST API]. Alternatively, non-programmatic access to the original, standardised and harmonised data is available on the link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site].
+There are two methods. We have developed a dedicated summary statistics database, enabling users with searchable, filterable, harmonised data via  the summary statistics http://www.ebi.ac.uk/gwas/summary-statistics/docs/[REST API]. Alternatively, non-programmatic access to the original, standardised and harmonised data is available on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site].
 
 ==== [[faq-H5]]5. What are standardised/harmonised summary statistics?
 
-Please refer to the documentation link:https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here].
+Please refer to the documentation https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here].
 
 '''
 
