@@ -316,7 +316,7 @@ The specific pages also contain “Studies” and “Associations” tables, whi
 
 ==== [[faq-C2]]2. How do I use the association plot on the “Trait” page?
 
-The association plot displays all associations in the Catalog for the selected trait. You can mouse over or click on one of the circles for more information about a particular variant. You can also download an image of the plot.
+The association plot displays all associations in the Catalog for the selected trait. Individual associations are plotted as circles and are coloured according to the same broad trait categories that are used in the GWAS Catalog <<D,Diagram>> (see the legend in the top left of the plot). You can mouse over or click on one of the circles for more information about a particular variant. You can also download an image of the plot. The plot is constructed using the LocusZoom link:http://statgen.github.io/locuszoom[plugin].
 
 ==== [[faq-C3]]3. How do I use the linkage disequilibrium (LD) plot on the “Variant” page?
 
