@@ -82,6 +82,8 @@
 
 3. <<faq-C3, How do I use the linkage disequilibrium plot on the “Variant” page?>>
 
+4. <<faq-C4, How do I view, search and download information from the "Associations" and "Studies" tables?>>
+
 === D. Diagram
 
 1. <<faq-D1, How do I display SNP information for a given dot?>>
@@ -325,6 +327,9 @@ The LD plot integrates data from Ensembl with GWAS Catalog data. It shows the de
 LD information between a variant of interest and the surrounding variants can be accessed programmatically using the Ensembl REST API (http://rest.ensembl.org/documentation/info/ld_pairwise_get) where you can specify a variant ID, a window size of the region surrounding the variant, a population and a cut-off for the calculation results.
 In case of a dataset with more than 1 variant of interest, several independant calls to the Ensembl REST API (http://rest.ensembl.org/documentation/info/ld_pairwise_get) can be made.
 
+==== [[faq-C4]]4. How do I view, search and download information from the "Associations" and "Studies" tables?
+
+These tables can be found on the each of the specific "Trait", "Variant" and "Publication" pages. The data displayed is highly customisable. You can refine the results by typing into a) the search box above the table, to display all rows containing your search term in any column, or b) the filter boxes at the top of each column to search only within that column. A set of columns are displayed by default, but you can also view extra columns or hide unnecessary columns using the "Add/Remove Columns" button. You can sort by any column by clicking on the column header, or use the "Multiple Sort" button for more complex multi-level sorting. Finally, you can use the "Export data" button to download the table as a csv file. Note that the csv file will be updated to match any changes you have made to the rows, columns or sorting.
 
 == [[D]]D. Diagram
  
@@ -424,7 +429,7 @@ Studies with full summary statistics are indicated by an icon in the “Associat
 
 We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also encourage authors to submit their data directly. If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-info@ebi.ac.uk for instructions on how to access our ftp server.  We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us. Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods/criteria[eligibility criteria], and the summary statistics files must reflect the published results, not a sub-set. For example if your study is a genome-wide meta-analysis, we can only include summary statistics for the meta-analysis, not a component thereof.
 
-==== [[faw-H4]]4. How do I access summary statistics?
+==== [[faq-H4]]4. How do I access summary statistics?
 
 There are two methods. We have developed a dedicated summary statistics database, enabling users with searchable, filterable, harmonised data via  the summary statistics http://www.ebi.ac.uk/gwas/summary-statistics/docs/[REST API]. Alternatively, non-programmatic access to the original, standardised and harmonised data is available on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site].
 
