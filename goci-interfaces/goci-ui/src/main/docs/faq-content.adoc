@@ -54,7 +54,7 @@
 
 3. <<faq-B6, How do I search by genomic region?>>
 
-4. <<faq-B7, Can I find all associations for a particular gene or genomic region?>>
+4. <<faq-B7, Can I download all associations for a particular gene or genomic region?>>
 
 ==== B(iii). Searching by trait
 
@@ -255,9 +255,9 @@ Note that searching for a gene may also return publications with the gene name i
 
 You can search by genomic region using the format chromNumber:bpLocation-bpLocation, for example 6:16000000-25000000. You can also search using cytogenetic nomenclature, for example 2q37.1. These searches will return a list of variants.
 
-==== [[faq-B7]]4. Can I find all associations for a particular gene or genomic region?
+==== [[faq-B7]]4. Can I downlaod all associations for a particular gene or genomic region?
 
-The GWAS Catalog website does not currently have a way to view all associations for a particular gene or genomic region. We are currently working to improve this functionality. For now, we recommend using our link:api-content[REST API] to return associations for a specific gene or genomic region.
+The GWAS Catalog website does not currently have a way to download all associations for a particular gene or genomic region. We are currently working to improve this functionality. For now, we recommend using our link:api-content[REST API] to return associations for a specific gene or genomic region.
 
 === B(iii). Searching by trait
 
