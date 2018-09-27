@@ -6,10 +6,10 @@ input[type=checkbox].cart-item-cb {
 }
 
 /* selected term cart */
-#cart {
-    max-height: 300px;
-    overflow-y: scroll;
-}
+/*#cart {*/
+    /*max-height: 300px;*/
+    /*overflow-y: scroll;*/
+/*}*/
 
 /* check box to select all descendants */
 #cb-query-include-descendants {
