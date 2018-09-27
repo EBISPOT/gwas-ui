@@ -4,4 +4,3 @@ Please refer to https://www.ebi.ac.uk/panda/jira/issues/?jql=project%20%3D%20GOC
 
 If you find an issue not documented in the tracker, please submit a bug report to gwas-info@ebi.ac.uk.
 
-Updated: 11 January 2016
