@@ -142,7 +142,7 @@
 
 ==== [[faq-A1]]1. How can I access GWAS Catalog data?
 
-In autumn 2018, we updated the GWAS Catalog search interface. Previously all Catalog data was displayed on a single page, with tables for “Studies”, “Associations” and “Catalog traits”. We have now created separate pages for each *publication*, *study*, *trait* and *variant* in the Catalog so that each of these can be explored individually. To get started, search for any text you wish in the search bar, then select a specific page for more information. See <<B,Searching in the GWAS Catalog below>> for further tips on how to find specific types of information, or see the https://www.youtube.com/watch?v=4FplAQzRfh8&feature=youtu.be[introductory video].
+In autumn 2018, we updated the GWAS Catalog search interface. Previously all Catalog data was displayed on a single page, with tables for “Studies”, “Associations” and “Catalog traits”. We have now created separate pages for each *publication*, *study*, *trait* and *variant* in the Catalog so that each of these can be explored individually. To get started, search for any text you wish in the search bar, then select a specific page for more information. See <<B,Searching in the GWAS Catalog below>> for further tips on how to find specific types of information, or see the https://youtu.be/4FplAQzRfh8[introductory video].
 
 GWAS Catalog data can be downloaded in spreadsheet form. To download full association and study data, see our link:file-downloads[file downloads] page. You can also download specific association data sets from each “Publication”, “Study”, “Trait” and “Variant” page using the “Download Catalog data” button.
 
