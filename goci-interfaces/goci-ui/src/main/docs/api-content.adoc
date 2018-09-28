@@ -14,4 +14,4 @@ Sample scripts for users and developers for common use cases for the GWAS Catalo
 
 === Summary statistics API
 
-The REST API for the summary statistics database is now available at https://wwwdev.ebi.ac.uk/gwas/summary-statistics
+The REST API for the summary statistics database is now available at https://www.ebi.ac.uk/gwas/summary-statistics
