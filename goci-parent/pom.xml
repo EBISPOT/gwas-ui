@@ -84,6 +84,17 @@
             </extension>
         </extensions>
     </build>
+    
+    <dependencyManagement>
+        <dependencies>
+            <!-- version management for project internal dependencies -->
+            <dependency>
+                <groupId>uk.ac.ebi.spot</groupId>
+                <artifactId>goci-ui</artifactId>
+                <version>${goci.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <!-- Reporting/Documentation output -->
     <reporting>
