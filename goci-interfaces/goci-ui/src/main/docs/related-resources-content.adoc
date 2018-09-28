@@ -4,7 +4,7 @@
 
 ==== Tour of new search interface
 
-Take a tour of our new search interface functionality in our http://www.ebi.ac.uk/gwas/video/GWAS_tutorial.mp4[video tutorial].
+Take a tour of our new search interface functionality in our https://youtu.be/4FplAQzRfh8[video tutorial].
 
 Please note that all the GWAS Catalog training resources below refer to our old website, and have not yet been updated to include the new functionality. They should be used for background information only.
 
