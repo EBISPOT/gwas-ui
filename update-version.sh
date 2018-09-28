@@ -42,12 +42,14 @@ base=${0%/*}/;
 # invoke maven versions plugin to increment project structure versions
 mvn -f $base/pom.xml versions:set -DnewVersion=$VERSION || exit 1
 
-# switch into goci-dependencies and increment all project module versions
-mvn -f $base/goci-dependencies/pom.xml versions:set -DnewVersion=$VERSION || exit 1
+# switch into goci-parent and increment all project module versions
+mvn -f $base/goci-parent/pom.xml versions:set -DnewVersion=$VERSION || exit 1
 
-# finally replace version number property in goci-dependencies pom with new version
+# finally replace version number property in goci-parent pom with new version
 #The option -i created a problem. Mac vs unix. Below an alternative version
-#sed -i "s/\(<goci.version>\)\([^<]*\)\(<\/goci.version>\)/\1$VERSION\3/g" $base/goci-dependencies/pom.xml || exit 1
-echo "Change goci-dependencies/pom.xml"
-cp $base/goci-dependencies/pom.xml $base/goci-dependencies/pom.xml.versionsBackup
-sed "s/\(<goci.version>\)\([^<]*\)\(<\/goci.version>\)/\1$VERSION\3/g" $base/goci-dependencies/pom.xml.versionsBackup > $base/goci-dependencies/pom.xml || exit 1
+#sed -i "s/\(<goci.version>\)\([^<]*\)\(<\/goci.version>\)/\1$VERSION\3/g" $base/goci-parent/pom.xml || exit 1
+echo "Change goci-parent/pom.xml"
+cp $base/goci-parent/pom.xml $base/goci-parent/pom.xml.versionsBackup
+sed "s/\(<goci.version>\)\([^<]*\)\(<\/goci.version>\)/\1$VERSION\3/g" $base/goci-parent/pom.xml.versionsBackup > $base/goci-parent/pom.xml || exit 1
+
+find . -type f -name "*.versionsBackup" | xargs rm 
