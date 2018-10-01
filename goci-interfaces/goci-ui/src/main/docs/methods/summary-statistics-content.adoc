@@ -1,9 +1,9 @@
 = Summary statistics
 
+== Summary statistics eligibility
+
 From 2017 the GWAS Catalog started hosting full summary statistics files (aggregate p-values and association data for every variant analysed in a study) in addition to curated associations.
 For summary statistics FAQ, please see https://www.ebi.ac.uk/gwas/docs/faq[here].
-
-== Summary statistics eligibility
 
 Summary statistics must meet a number of criteria to be eligible for inclusion in the GWAS Catalog:
 
