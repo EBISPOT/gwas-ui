@@ -15,8 +15,11 @@
  * http://es6-features.org/#ObjectPropertyAssignment //merge object
  */
 
-var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
-var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
+// var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
+// var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
+    // For local testing, use the full URL
+var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
+var global_color_url_batch = 'https://www.ebi.ac.uk/gwas/rest/api/parentMappings';
 
 var global_ols_api = 'https://www.ebi.ac.uk/ols/api/';
 var global_ols = 'https://www.ebi.ac.uk/ols/';
@@ -314,8 +317,7 @@ removeEFO = function(efoid) {
  * add bagdes to indicate the the toplevel efo and the number of association/trait for this efo
  * add checkkbox to indicate the descendants
  */
-addToCart = function(tagID, efoid, additionalLabel) {
-
+addToCart = function(tagID, efoid, additionalLabel, initLoad) {
     var isMain = isMainEFO(efoid);
 
     var colour, colourLabelInit, colourLabel;
@@ -335,7 +337,7 @@ addToCart = function(tagID, efoid, additionalLabel) {
     }).then(() =>{
         //generate selectedItem
         var container = $(tagID);
-        generateSelectedItemCheckBox(efoid,tagID);
+        generateSelectedItemCheckBox(efoid,tagID, initLoad);
 
 
         // TW - Comment out all below
@@ -389,7 +391,7 @@ addToCart = function(tagID, efoid, additionalLabel) {
  * @param {String} efoid
  * @param {String} tagID - usually the selected EFO item tag
  */
-generateSelectedItemCheckBox = function(efoid,tagID){
+generateSelectedItemCheckBox = function(efoid,tagID, initLoad=true){
     var container = $(tagID);
 
     //checkbox indicate require descendant
@@ -401,7 +403,6 @@ generateSelectedItemCheckBox = function(efoid,tagID){
                    style: "margin:8px;",
                    value: efoid
                }).appendTo(container);
-
 
     $('<label />',
         {
@@ -421,6 +422,13 @@ generateSelectedItemCheckBox = function(efoid,tagID){
     $("#child_trait_data").attr("title", "Include GWAS Catalog data for all child terms of this trait in the EFO hierarchy");
 
 
+    if(initLoad == true) {
+        // Display checked by default
+        $("#selected_cb_" + efoid).attr('checked', true);
+        addDataToTag(global_efo_info_tag_id, {[efoid]:true}, 'whichDescendant')
+        updatePage(initLoad=false)
+    }
+
 
     if (isDescendantRequired(efoid)){
         cb.attr('checked','checked');
@@ -436,7 +444,7 @@ generateSelectedItemCheckBox = function(efoid,tagID){
             var tmp = getDataFromTag(global_efo_info_tag_id,'whichDescendant');
             delete tmp[id];
         }
-        updatePage()
+        updatePage(initLoad=false)
     })
 
     if(isAlwaysDescendant()){
@@ -449,7 +457,6 @@ generateSelectedItemCheckBox = function(efoid,tagID){
     OLS.getHierarchicalDescendants(efoid).then((descendants) => {
         filterAvailableEFOs(Object.keys(descendants)).then((availableDescendants)=>{
             cb.attr("title", `${Object.keys(availableDescendants).length} trait subtypes available in GWAS Catalog.`);
-
         })
 //                cb.attr("title", `${Object.keys(descendants).length} descendants. ${Object.keys(descendants).join(',')}`);
     });
@@ -542,7 +549,7 @@ updatePage = function(initLoad=false) {
     //start spinner. The spinner will be stoped whenever the data is ready, thus closed by the coresponding data loading function.
     if(initLoad){
         showLoadingOverLay('#summary-panel-loading');
-//            showLoadingOverLay('#highlight-study-panel-loading');
+        showLoadingOverLay('#highlight-study-panel-loading');
     }
     showLoadingOverLay('#locus-plot-row-loading');
     showLoadingOverLay('#association-table-loading');
@@ -573,7 +580,7 @@ updatePage = function(initLoad=false) {
         return sequence.then(() => {
             return efoInfo;
         }).then(function(efoInfo) {
-            return addToCart('#cart', efoInfo.short_form,  `${efoInfo.label} [${efoInfo.short_form}]`).then(() =>{
+            return addToCart('#cart', efoInfo.short_form,  `${efoInfo.label} [${efoInfo.short_form}]`, initLoad).then(() =>{
                 return efoInfo;
             })
         });
