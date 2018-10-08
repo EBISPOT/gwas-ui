@@ -127,7 +127,7 @@ For more information on how we use these resources, see our link:https://www.ebi
 |http://www.ncbi.nlm.nih.gov/gap/PheGenIUCSC[Phenotype-Genotype Integrator]
 |Merges GWAS Catalog Data with other NCBI databases to facilitate prioritisation of GWAS hits for follow-up
 
-|http://targetvalidation.org[OpenTargets platform]
+|http://targetvalidation.org[Open Targets Platform]
 |Platform for the identification of drug targets using multiple data types including GWAS
 
 |link:http://locuszoom.org/[LocusZoom]
