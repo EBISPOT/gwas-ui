@@ -80,23 +80,23 @@ The harmonisation process is the following:
 .. if above not possible, liftover base pair location to latest genome build, or
 .. if above not possible, remove variant from file.
 
-. Orientation (link:https://github.com/opentargets/sumstat_harmoniser[OpenTargets project])
+. Orientation (link:https://github.com/opentargets/sumstat_harmoniser[Open Targets project])
 .. Using chromosome, base pair location and the effect and other alleles, check the orientation of all non-palindromic variants against Ensembl VCF references to detemine consensus:
 * forward
 * reverse
 * mixed
-.. If the consensus is 'forward' or 'reverse', the following harmonisation steps are performed on the palindromic variants, with the assumption that they are orientated according to the consensus, otherwise palindromic variants are not harmonised.
+.. If the consensus is 'forward' or 'reverse', the following harmonisation steps are performed on the palindromic variants, with the assumption that they are orientated according to the consensus, otherwise palindromic variants are not orientated.
 .. Using chromosome, base pair location and the effect and other alleles, query each variant against the Ensembl VCF reference to harmonise as appropriate by either:
 * keeping record as is because:
-** it is already harmonised
-** it cannot be harmonised
+** it is already correctly orientated
+** it cannot be orientated
 * orientating to reference strand:
 ** reverse complement the effect and other alleles
 * flipping the effect and other alleles
 ** because the effect and other alleles are flipped in the reference
 ** this also means the beta, odds ratio, 95% CI and effect allele frequency are inverted
 * a combination of the orientating and flipping the alleles.
-.. The result of the harmonisation is the addition of a set of new fields for each record (see below). A harmonisation code is assigned to each record indicating the harmonisation process that was performed (note that currently any processes involving 'Infer strand' are not being used).
+.. The result of the orientation is the addition of a set of new fields for each record (see below). A harmonisation code is assigned to each record indicating the harmonisation process that was performed (note that currently any processes involving 'Infer strand' are not being used).
 
 . Filtering and QC
 .. Variant ID is set to variant IDs found by step (5).
@@ -107,7 +107,7 @@ The harmonisation process is the following:
 [%header, cols="1*>,10"]
 |===
 |Code
-|Description of harmonisation process
+|Description of process
 
 |1
 |Palindromic; Infer strand; Forward strand; Alleles correct
@@ -134,7 +134,7 @@ The harmonisation process is the following:
 |Palindromic; Assume reverse strand; Flipped alleles
 
 |9
-|Palindromic; Drop palindromic; Not harmonised
+|Palindromic; Drop palindromic; Not orientated
 
 |10
 |Forward strand; Alleles correct
@@ -149,19 +149,19 @@ The harmonisation process is the following:
 |Reverse strand; Flipped alleles
 
 |14
-|Required fields are not known; Not harmonised
+|Required fields are not known; Not orientated
 
 |15
-|No matching variants in reference VCF; Not harmonised
+|No matching variants in reference VCF; Not orientated
 
 |16
-|Multiple matching variants in reference VCF; Not harmonised
+|Multiple matching variants in reference VCF; Not orientated
 
 |17
-|Palindromic; Infer strand; EAF or reference VCF AF not known; Not harmonised
+|Palindromic; Infer strand; EAF or reference VCF AF not known; Not orientated
 
 |18
-|Palindromic; Infer strand; EAF < specified minor allele frequency threshold; Not harmonised
+|Palindromic; Infer strand; EAF < specified minor allele frequency threshold; Not orientated
 |===
 
 - Headers will be coerced to the 'harmonised format'.
