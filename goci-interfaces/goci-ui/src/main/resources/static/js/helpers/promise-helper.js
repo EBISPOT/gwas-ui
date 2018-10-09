@@ -42,7 +42,7 @@ function promiseGet(url, params,debug)
         debug = false
     }
     
-    if (!url.startsWith("http")) {
+    if (!url.startsWith("https")) {
         url = window.location.origin + url
     }
     
@@ -100,7 +100,7 @@ function promiseGet(url, params,debug)
  */
 function promisePost(url, params={}, header='application/json') {
     
-    if (!url.startsWith("http")) {
+    if (!url.startsWith("https")) {
         url = window.location.origin + url
     }
     
