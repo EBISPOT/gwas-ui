@@ -80,7 +80,7 @@ The harmonisation process is the following:
 .. if above not possible, liftover base pair location to latest genome build, or
 .. if above not possible, remove variant from file.
 
-. Orientation (link:https://github.com/opentargets/sumstat_harmoniser[OpenTargets project])
+. Orientation (link:https://github.com/opentargets/sumstat_harmoniser[Open Targets project])
 .. Using chromosome, base pair location and the effect and other alleles, check the orientation of all non-palindromic variants against Ensembl VCF references to detemine consensus:
 * forward
 * reverse
@@ -134,7 +134,7 @@ The harmonisation process is the following:
 |Palindromic; Assume reverse strand; Flipped alleles
 
 |9
-|Palindromic; Drop palindromic; Not harmonised
+|Palindromic; Drop palindromic; Not orientated
 
 |10
 |Forward strand; Alleles correct
@@ -149,19 +149,19 @@ The harmonisation process is the following:
 |Reverse strand; Flipped alleles
 
 |14
-|Required fields are not known; Not harmonised
+|Required fields are not known; Not orientated
 
 |15
-|No matching variants in reference VCF; Not harmonised
+|No matching variants in reference VCF; Not orientated
 
 |16
-|Multiple matching variants in reference VCF; Not harmonised
+|Multiple matching variants in reference VCF; Not orientated
 
 |17
-|Palindromic; Infer strand; EAF or reference VCF AF not known; Not harmonised
+|Palindromic; Infer strand; EAF or reference VCF AF not known; Not orientated
 
 |18
-|Palindromic; Infer strand; EAF < specified minor allele frequency threshold; Not harmonised
+|Palindromic; Infer strand; EAF < specified minor allele frequency threshold; Not orientated
 |===
 
 - Headers will be coerced to the 'harmonised format'.
