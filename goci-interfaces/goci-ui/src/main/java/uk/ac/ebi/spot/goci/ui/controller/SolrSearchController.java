@@ -1071,6 +1071,7 @@ public class SolrSearchController {
         Date date = new Date();
         String now = dateFormat.format(date);
         String fileName;
+        String queryTag;
 
         if (query.contains("*")) {
             if (addedDateRange != "") {
@@ -1093,9 +1094,16 @@ public class SolrSearchController {
 
         }
         else {
+            if (query.split(",").length > 1) {
+                queryTag = query.split(",")[0] + "-withChildTraits";
+            }
+            else {
+                queryTag = query;
+            }
+
             fileName = "gwas-".concat(facet).concat("-downloaded_").concat(now)
                     .concat("-")
-                    .concat(query.substring(6, query.length() - 1))
+                    .concat(queryTag)
                     .concat(".tsv");
         }
         response.setContentType("text/tsv");
