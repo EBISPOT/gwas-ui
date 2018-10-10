@@ -17,7 +17,7 @@
 
 // var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
 // var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
-    // For local testing, use the full URL
+// For local testing, use the full URL - TODO Use URLs above for production
 var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
 var global_color_url_batch = 'https://www.ebi.ac.uk/gwas/rest/api/parentMappings';
 
@@ -425,7 +425,7 @@ generateSelectedItemCheckBox = function(efoid,tagID, initLoad=true){
     if(initLoad == true) {
         // Display checked by default
         $("#selected_cb_" + efoid).attr('checked', true);
-        addDataToTag(global_efo_info_tag_id, {[efoid]:true}, 'whichDescendant')
+        addDataToTag(global_efo_info_tag_id, {[efoid]:true}, 'whichDescendant');
         updatePage(initLoad=false)
     }
 
@@ -549,7 +549,7 @@ updatePage = function(initLoad=false) {
     //start spinner. The spinner will be stoped whenever the data is ready, thus closed by the coresponding data loading function.
     if(initLoad){
         showLoadingOverLay('#summary-panel-loading');
-        showLoadingOverLay('#highlight-study-panel-loading');
+        // showLoadingOverLay('#highlight-study-panel-loading');
     }
     showLoadingOverLay('#locus-plot-row-loading');
     showLoadingOverLay('#association-table-loading');
