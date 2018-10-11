@@ -200,3 +200,45 @@ function setDownloadLink(query) {
     $("#download_data").attr('onclick', url);
     
 }
+
+
+function setTraitDownloadLink(query) {
+    var baseUrl = gwasProperties.contextPath+'api/search/downloads?';
+    var q = "q=".concat(query);
+    console.log("** Query: "+query);
+
+    var facet = '&facet=association';
+    var efo = '&efo=true';
+    var params = '&pvalfilter=&orfilter=&betafilter=&datefilter=&genomicfilter=&genotypingfilter[]=&traitfilter[]=&dateaddedfilter=';
+
+
+    var url = "window.open('".concat(baseUrl).concat(q).concat(params).concat(facet).concat(efo).concat("',    '_blank')");
+    console.log("** URL: "+url);
+    // $("#download_data").attr('onclick', url);
+
+    var params = ''.concat(q).concat(params).concat(facet).concat(efo);
+    var dataJSON = JSON.stringify(params);
+
+    $('#download_data').click(function() {
+        $.ajax({
+            type: 'POST',
+            url: baseUrl,
+            dataType: 'json',
+            data: {
+                "q": query,
+                // "facet": 'association',
+                // "efo": 'true'
+                // "params": '&pvalfilter=&orfilter=&betafilter=&datefilter=&genomicfilter=&genotypingfilter[]=&traitfilter[]=&dateaddedfilter='
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function(response) {
+                console.log("** Success"+response);
+                window.open(response.fileUrl);
+                // $('#lblData').html(JSON.stringify(response));
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    })
+}
