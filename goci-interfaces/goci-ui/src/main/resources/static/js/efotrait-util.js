@@ -490,7 +490,9 @@ prepareDownloadData = function() {
         console.log("** Checkbox is NOT checked");
         var efoid = getMainEFO();
         console.log("** Parent EFO Id: "+efoid);
-        setTraitDownloadLink(efoid);
+        var singleEFO = [];
+        singleEFO.push(efoid);
+        setTraitDownloadLink(singleEFO);
     }
 }
 

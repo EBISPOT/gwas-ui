@@ -223,18 +223,19 @@ function setTraitDownloadLink(query) {
         $.ajax({
             type: 'POST',
             url: baseUrl,
-            dataType: 'json',
             data: {
                 "q": query,
                 // "facet": 'association',
                 // "efo": 'true'
                 // "params": '&pvalfilter=&orfilter=&betafilter=&datefilter=&genomicfilter=&genotypingfilter[]=&traitfilter[]=&dateaddedfilter='
             },
-            contentType: 'application/json; charset=utf-8',
+            //contentType: 'application/json; charset=utf-8',
             success: function(response) {
-                console.log("** Success"+response);
-                window.open(response.fileUrl);
-                // $('#lblData').html(JSON.stringify(response));
+                var blob=new Blob([response]);
+                var link=document.createElement('a');
+                link.href=window.URL.createObjectURL(blob);
+                link.download="myFileName.txt";
+                link.click();
             },
             error: function(error) {
                 console.log(error);
@@ -242,3 +243,11 @@ function setTraitDownloadLink(query) {
         });
     })
 }
+
+function setTraitDownloadLink(query) {
+    $('#download_data').hide();
+    var inputParams = query.join(",");
+    $("#queryInput").val(inputParams);
+    $('#download_data').show();
+}
+

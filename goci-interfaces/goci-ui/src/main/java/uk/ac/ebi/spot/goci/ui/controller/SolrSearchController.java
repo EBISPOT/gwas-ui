@@ -1126,10 +1126,15 @@ public class SolrSearchController {
 
         addFilterQuery(solrSearchBuilder, "resourcename", facet);
         addRowsAndPage(solrSearchBuilder, maxResults, page);
-
         String[] splitQuery;
         splitQuery = query.split("q=");
-        addQuery(solrSearchBuilder, splitQuery[1]);
+        String newString= splitQuery[1];
+        newString = URLEncoder.encode(newString,"UTF-8");
+        newString=newString.replace("%252C", ",");
+        query = newString;
+
+
+        addQuery(solrSearchBuilder,query);
 
         String searchString = solrSearchBuilder.toString();
         /*this step is necessary as something about calling the URL directly rather than through $.getJSON messes
