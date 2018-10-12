@@ -13,13 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.exception.IllegalParameterCombinationException;
 import uk.ac.ebi.spot.goci.ui.service.JsonProcessingService;
@@ -34,10 +30,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.*;
 
 
 /**
@@ -990,7 +983,7 @@ public class SolrSearchController {
     }
 
     //    @RequestMapping(value = "api/search/downloads", produces = MediaType.TEXT_PLAIN_VALUE)
-    @RequestMapping(value = "api/search/downloads")
+    @RequestMapping(value = "api/search/downloads", method = {RequestMethod.GET})
 //    @CrossOrigin
     public void getSearchResults(
             @RequestParam("q") String query,
@@ -1109,10 +1102,72 @@ public class SolrSearchController {
         response.setContentType("text/tsv");
         response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
 
+        System.out.println("** query: "+solrSearchBuilder);
+
         dispatchDownloadSearch(searchString, response.getOutputStream(), efo, facet, ancestry);
 
 
     }
+
+
+    @RequestMapping(value = "api/search/downloads", method = RequestMethod.POST)
+    @ResponseStatus(value=HttpStatus.OK)
+    @ResponseBody
+    public void testDownloadData(@RequestBody String query, HttpServletResponse response) throws IOException {
+
+        String facet = "association";
+        boolean efo = true;
+        boolean ancestry = false;
+
+        StringBuilder solrSearchBuilder = buildFatSearchRequest();
+
+        int maxResults = 1000000;
+        int page = 1;
+
+        addFilterQuery(solrSearchBuilder, "resourcename", facet);
+        addRowsAndPage(solrSearchBuilder, maxResults, page);
+        String[] splitQuery;
+        splitQuery = query.split("q=");
+        String newString= splitQuery[1];
+        newString = URLEncoder.encode(newString,"UTF-8");
+        newString=newString.replace("%252C", ",");
+        query = newString;
+
+
+        addQuery(solrSearchBuilder,query);
+
+        String searchString = solrSearchBuilder.toString();
+        /*this step is necessary as something about calling the URL directly rather than through $.getJSON messes
+        up the URL encoding but explicitly URL encoding causes other interference
+        */
+        searchString = searchString.replace(" ", "+");
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String now = dateFormat.format(date);
+        String fileName;
+        String queryTag;
+
+        if (query.split(",").length > 1) {
+            queryTag = query.split(",")[0] + "-withChildTraits";
+        }
+        else {
+            queryTag = query;
+        }
+
+        fileName = "gwas-".concat(facet).concat("-downloaded_").concat(now)
+                .concat("-")
+                .concat(queryTag)
+                .concat(".tsv");
+
+        response.setContentType("text/tsv");
+        response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
+
+        System.out.println("** query-Trait Download: "+solrSearchBuilder);
+
+        dispatchDownloadSearch(searchString, response.getOutputStream(), efo, facet, ancestry);
+    }
+
 
 
     private void dispatchDownloadSearch(String searchString, OutputStream outputStream, boolean efo, String facet, boolean ancestry) throws IOException {

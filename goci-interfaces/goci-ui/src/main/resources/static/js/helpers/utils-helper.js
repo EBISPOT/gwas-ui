@@ -200,3 +200,27 @@ function setDownloadLink(query) {
     $("#download_data").attr('onclick', url);
     
 }
+
+
+function setTraitDownloadLink(query) {
+    if (query.length >= 300) {
+        $('#download_data').hide();
+        $('#download_doc_page').show();
+    }
+    else {
+        $('#download_doc_page').hide();
+        $('#download_data').hide();
+
+        var inputParams = query.join(",");
+        $("#queryInput").val(inputParams);
+        $('#download_data').show();
+    }
+}
+
+
+/**
+ * Linkout to Downloads page
+ */
+$('#download_doc_page').click(() => {
+    window.open("https://www.ebi.ac.uk/gwas/docs/file-downloads", '_blank');
+});
