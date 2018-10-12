@@ -685,6 +685,7 @@ updatePage = function(initLoad=false) {
     //************************************************************
     var sub_traits = [];
     var parent_with_all_child_trait_ids = [];
+    parent_with_all_child_trait_ids.push(mainEFO);
     OLS.getHierarchicalDescendants(getMainEFO()).then((childTerms) => {
         $.each(childTerms, function (index, term) {
             sub_traits.push(term.label);
