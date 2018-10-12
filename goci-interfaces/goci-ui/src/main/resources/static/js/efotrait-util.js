@@ -1000,7 +1000,8 @@ function processSolrData(data, initLoad=false) {
  */
 function getTraitDataSolrSlim(mainEFO) {
     var searchQuery = mainEFO;
-    return promisePost(gwasProperties.contextPath+'api/search',
+    // changed promisePost with promiseGet
+    return promiseGet(gwasProperties.contextPath+'api/search',
         {
             'q': searchQuery,
             'max': 1,
