@@ -202,18 +202,21 @@ function setDownloadLink(query) {
 }
 
 
-function setTraitDownloadLink(query) {
-    if (query.length >= 300) {
+function setTraitDownloadLink(queryParam) {
+    if (queryParam.length >= 300) {
+        $('#download_data').prop('disabled', true);
         $('#download_data').hide();
         $('#download_doc_page').show();
     }
     else {
         $('#download_doc_page').hide();
-        $('#download_data').hide();
+        $('#download_data').prop('disabled', false);
 
-        var inputParams = query.join(",");
+        var inputParams = queryParam.join(",");
         $("#queryInput").val(inputParams);
         $('#download_data').show();
+        console.log('******')
+        console.log(inputParams);
     }
 }
 

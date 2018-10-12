@@ -447,11 +447,11 @@ generateSelectedItemCheckBox = function(efoid,tagID, initLoad=true){
 
         if(this.checked){
             addDataToTag(global_efo_info_tag_id, {[id]:true}, 'whichDescendant');
-            prepareDownloadData();
+            //prepareDownloadData();
         }else{
             var tmp = getDataFromTag(global_efo_info_tag_id,'whichDescendant');
             delete tmp[id];
-            prepareDownloadData();
+            //prepareDownloadData();
         }
         updatePage(initLoad=false)
     })
@@ -462,7 +462,7 @@ generateSelectedItemCheckBox = function(efoid,tagID, initLoad=true){
         cb.removeAttr("disabled");
     }
 
-    prepareDownloadData();
+    //prepareDownloadData();
 
     //show the descendants number in checkbox tooltips
     OLS.getHierarchicalDescendants(efoid).then((descendants) => {
@@ -477,9 +477,10 @@ generateSelectedItemCheckBox = function(efoid,tagID, initLoad=true){
 /**
  * Generate download data with or without child Trait data
  */
-prepareDownloadData = function() {
-    if ($('#selected_cb').is(":checked")){
-        setTraitDownloadLink(global_parent_with_all_child_trait_ids);
+prepareDownloadData = function(parent_with_all_child_trait_ids) {
+    var isSelected= $('#storeSelectedCB').val();
+    if (isSelected == "1"){
+        setTraitDownloadLink(parent_with_all_child_trait_ids);
     }
     else {
         var efoid = getMainEFO();
@@ -580,6 +581,14 @@ updatePage = function(initLoad=false) {
         showLoadingOverLay('#summary-panel-loading');
         // showLoadingOverLay('#highlight-study-panel-loading');
     }
+    else {
+        // Before destroy the structure the
+        if ($('#selected_cb').is(":checked")){
+            $('#storeSelectedCB').val('1');
+        } else {
+            $('#storeSelectedCB').val('0');
+        }
+    }
     showLoadingOverLay('#locus-plot-row-loading');
     showLoadingOverLay('#association-table-loading');
     showLoadingOverLay('#study-table-loading');
@@ -675,14 +684,15 @@ updatePage = function(initLoad=false) {
     // and EFO IDs to use with Download data button
     //************************************************************
     var sub_traits = [];
-    global_parent_with_all_child_trait_ids.length = 0;  // clear array
+    var parent_with_all_child_trait_ids = [];
     OLS.getHierarchicalDescendants(getMainEFO()).then((childTerms) => {
         $.each(childTerms, function (index, term) {
             sub_traits.push(term.label);
-            global_parent_with_all_child_trait_ids.push(term.short_form);
+            parent_with_all_child_trait_ids.push(term.short_form);
         });
         $("#efo-child-trait-label").html(longContentList(
         "gwas_child_traits_div", sub_traits, 'child traits'));
+        prepareDownloadData(parent_with_all_child_trait_ids);
     });
 
 
