@@ -42,12 +42,9 @@ function promiseGet(url, params,debug)
         debug = false
     }
     
-    debug=true;
-    console.log(url);
     if (!url.startsWith("http")) {
         url = window.location.origin + url
     }
-    console.log(url);
     
     // Return a new promise.
     return new Promise(function(resolve, reject) {
@@ -103,7 +100,7 @@ function promiseGet(url, params,debug)
  */
 function promisePost(url, params={}, header='application/json') {
     
-    if (!url.startsWith("https")) {
+    if (!url.startsWith("http")) {
         url = window.location.origin + url
     }
     
