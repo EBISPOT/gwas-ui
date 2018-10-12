@@ -493,11 +493,20 @@
                                 onclick="toggle_and_scroll('#locus_panel')">
                             <span class="locus_label">LocusZoom</span>
                         </button>
-                        <form action="/gwas/api/search/downloads" method="POST" id="form1" style="display: none">
-                            First name: <input id="queryInput" type="text" name="q" value="EFO_1000630;EFO_0000305"/>
+                        <!-- hidden form used to generate download association data for traits -->
+                        <form th:action="@{/api/search/downloads}" method="POST" id="form1" style="display: none">
+                            Trait Association download data: <input id="queryInput" type="text" name="q" value=""/>
                         </form>
                         <button type="submit" class="btn btn-default pull-right" style="display: none;margin-right:10px;font-weight:bold" id="download_data" form="form1" value="Submit">
                             <span>Download Catalog data</span><span class="glyphicon glyphicon-download-alt" style="color:#398A96;margin-left:10px"></span>
+                        </button>
+
+                        <!-- Alternative button to display for large file downloads  -->
+                        <button id="download_doc_page"
+                                type="button"
+                                class="btn btn-default pull-right"
+                                style="display: none;margin-right:10px;font-weight:bold">
+                            <span>Download files</span><span class="glyphicon glyphicon-new-window external-link"></span>
                         </button>
 
                         <!--<button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#diseasetrait_panel')">-->

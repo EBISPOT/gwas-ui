@@ -203,51 +203,24 @@ function setDownloadLink(query) {
 
 
 function setTraitDownloadLink(query) {
-    var baseUrl = gwasProperties.contextPath+'api/search/downloads?';
-    var q = "q=".concat(query);
-    console.log("** Query: "+query);
+    if (query.length >= 300) {
+        $('#download_data').hide();
+        $('#download_doc_page').show();
+    }
+    else {
+        $('#download_doc_page').hide();
+        $('#download_data').hide();
 
-    var facet = '&facet=association';
-    var efo = '&efo=true';
-    var params = '&pvalfilter=&orfilter=&betafilter=&datefilter=&genomicfilter=&genotypingfilter[]=&traitfilter[]=&dateaddedfilter=';
-
-
-    var url = "window.open('".concat(baseUrl).concat(q).concat(params).concat(facet).concat(efo).concat("',    '_blank')");
-    console.log("** URL: "+url);
-    // $("#download_data").attr('onclick', url);
-
-    var params = ''.concat(q).concat(params).concat(facet).concat(efo);
-    var dataJSON = JSON.stringify(params);
-
-    $('#download_data').click(function() {
-        $.ajax({
-            type: 'POST',
-            url: baseUrl,
-            data: {
-                "q": query,
-                // "facet": 'association',
-                // "efo": 'true'
-                // "params": '&pvalfilter=&orfilter=&betafilter=&datefilter=&genomicfilter=&genotypingfilter[]=&traitfilter[]=&dateaddedfilter='
-            },
-            //contentType: 'application/json; charset=utf-8',
-            success: function(response) {
-                var blob=new Blob([response]);
-                var link=document.createElement('a');
-                link.href=window.URL.createObjectURL(blob);
-                link.download="myFileName.txt";
-                link.click();
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    })
+        var inputParams = query.join(",");
+        $("#queryInput").val(inputParams);
+        $('#download_data').show();
+    }
 }
 
-function setTraitDownloadLink(query) {
-    $('#download_data').hide();
-    var inputParams = query.join(",");
-    $("#queryInput").val(inputParams);
-    $('#download_data').show();
-}
 
+/**
+ * Linkout to Downloads page
+ */
+$('#download_doc_page').click(() => {
+    window.open("https://www.ebi.ac.uk/gwas/docs/file-downloads", '_blank');
+});

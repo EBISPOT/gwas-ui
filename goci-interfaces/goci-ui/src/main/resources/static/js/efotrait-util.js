@@ -15,11 +15,8 @@
  * http://es6-features.org/#ObjectPropertyAssignment //merge object
  */
 
-// var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
-// var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
-// For local testing, use the full URL - TODO Use URLs above for production
-var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
-var global_color_url_batch = 'https://www.ebi.ac.uk/gwas/rest/api/parentMappings';
+var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
+var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
 
 var global_ols_api = 'https://www.ebi.ac.uk/ols/api/';
 var global_ols = 'https://www.ebi.ac.uk/ols/';
@@ -481,15 +478,11 @@ generateSelectedItemCheckBox = function(efoid,tagID, initLoad=true){
  * Generate download data with or without child Trait data
  */
 prepareDownloadData = function() {
-    console.log("** Preparing download data with: ");
     if ($('#selected_cb').is(":checked")){
-        console.log("** Checkbox is checked");
         setTraitDownloadLink(global_parent_with_all_child_trait_ids);
     }
     else {
-        console.log("** Checkbox is NOT checked");
         var efoid = getMainEFO();
-        console.log("** Parent EFO Id: "+efoid);
         var singleEFO = [];
         singleEFO.push(efoid);
         setTraitDownloadLink(singleEFO);
