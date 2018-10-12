@@ -89,7 +89,7 @@ function getDataSolr(main, initLoad=false) {
     // initLoad will be pass to processEfotraitData, controlling whether to upload the triat information(initload)
     // or just reload the tables(adding another efo term)
     
-    var searchQuery = main;
+    var searchQuery = 'pubmedId:'+main;
     
     console.log("Solr research request received for " + searchQuery);
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
