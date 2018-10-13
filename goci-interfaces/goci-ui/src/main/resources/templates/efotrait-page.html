@@ -494,7 +494,7 @@
                             <span class="locus_label">LocusZoom</span>
                         </button>
                         <!-- hidden form used to generate download association data for traits -->
-                        <form th:action="@{/api/search/downloads}" method="POST" id="form1" style="display: none">
+                        <form name="form1" id="form1" style="display: none">
                             Trait Association download data: <input id="queryInput" type="text" name="q" value=""/>
                             <input id="storeSelectedCB" type="text" value="1"/>
                         </form>
@@ -506,7 +506,8 @@
                         <button id="download_doc_page"
                                 type="button"
                                 class="btn btn-default pull-right"
-                                style="display: none;margin-right:10px;font-weight:bold">
+                                style="display: none;margin-right:10px;font-weight:bold"
+                        >
                             <span>Download files</span><span class="glyphicon glyphicon-new-window external-link"></span>
                         </button>
 

@@ -232,6 +232,58 @@ $(document).ready(() => {
     //jump to the top of the page
     $('html,body').scrollTop(0);
 
+    
+    $("#form1").submit(function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        console.log("Use promises for download");
+        $('#download_data').prop('disabled', true);
+        var searchQuery = $("#queryInput").val();
+    
+        console.log("Download the file for " + searchQuery);
+        return promisePost( gwasProperties.contextPath + '/api/search/downloads',
+            {
+                'q': searchQuery
+            },'application/octet-stream').then(function(result) {
+            console.log(result); // "Stuff worked!"
+            var disposition=result.getResponseHeader('Content-Disposition');
+            var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+            var matches = filenameRegex.exec(disposition);
+            var fileDownload = 'gwas-association-downloaded_2018-10-12-EFO.tsv';
+            if (matches != null && matches[1]) {
+                fileDownload = matches[1].replace(/['"]/g, '');
+            }
+            var download_file= new File([result.response], fileDownload, { type: 'text/tsv' });
+            if (typeof window.navigator.msSaveBlob !== 'undefined') {
+                // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
+                window.navigator.msSaveBlob(download_file, filename);
+            } else {
+                var URL = window.URL || window.webkitURL;
+                var downloadUrl = URL.createObjectURL(download_file);
+    
+                if (fileDownload) {
+                    // use HTML5 a[download] attribute to specify filename
+                    var a = document.createElement("a");
+                    // safari doesn't support this yet
+                    if (typeof a.download === 'undefined') {
+                        window.location = downloadUrl;
+                    } else {
+                        a.href = downloadUrl;
+                        a.download = fileDownload;
+                        document.body.appendChild(a);
+                        a.click();
+                    }
+                } else {
+                    window.location = downloadUrl;
+                }
+            }
+            $('#download_data').prop('disabled', false);
+        }).catch(function(err) {
+            console.error('Error download file seaching solr for. ' + err);
+            throw(err);
+        })
+    });
+    
     var searchTerm = getMainEFO();
     var included = $('#included').text();
     if (included != '') {
@@ -2906,11 +2958,6 @@ createPopover = function(label,header,content){
                          });
     return content_text;
 }
-
-
-
-
-
 
 
 

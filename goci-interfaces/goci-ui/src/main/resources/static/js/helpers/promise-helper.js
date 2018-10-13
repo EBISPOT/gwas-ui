@@ -116,8 +116,14 @@ function promisePost(url, params={}, header='application/json') {
                 return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
             }).join('&');
         }
-        
-        
+    
+        if(header == 'application/octet-stream') {
+            params = Object.keys(params).map(function (key) {
+                return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+            }).join('&');
+            req.responseType = 'arraybuffer';
+        }
+    
         req.open('POST', url);
         
         req.setRequestHeader("Content-Type", header);
@@ -127,8 +133,13 @@ function promisePost(url, params={}, header='application/json') {
             // This is called even on 404 etc
             // so check the status
             if (req.status == 200) {
-                // Resolve the promise with the response text
-                resolve(req.response);
+                if(header == 'application/octet-stream'){
+                    resolve(req);
+                }
+                else {
+                    // Resolve the promise with the response text
+                    resolve(req.response);
+                }
             }
             else {
                 // Otherwise reject with the status text
@@ -144,6 +155,7 @@ function promisePost(url, params={}, header='application/json') {
         
         // Make the request
         req.send(params);
+        
     });
     
     
