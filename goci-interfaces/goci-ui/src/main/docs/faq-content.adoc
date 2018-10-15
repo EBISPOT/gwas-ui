@@ -74,6 +74,10 @@
 
 2. <<faq-B14, How can I search for targeted and exome array studies and associations?>>
 
+==== B(v). Searching by gene
+
+1. <<faq-B15, Can I search for a gene?>>
+
 === C. Exploring specific pages
 
 1. <<faq-C1, How do I download a list of associations for a given trait, publication, study or variant?>>
@@ -307,6 +311,21 @@ If you already know the accession number of a particular study (beginning with �
 
 You can enter the genotyping technology of your interest in the search bar, e.g. “targeted genotyping array”, “exome genotyping array”. This will return any publication that uses that specific genotyping technology.
 
+==== [[faq-B15]]8. Can I search for a gene?
+
+You can search for a gene in the main search bar eg. STAT4. This will return a list of all the variants annotated with that gene, as well as any publications with the gene name in the title. 
+
+Clicking any of the variants with take you to the variant page and allow you to browse a limited region surrounding any given SNP using the LD plot. However, for a wider region this may be time consuming since each page needs to be accessed variant-by-variant. At the moment, it is not possible to download all associations with a gene from a single place.
+
+We are in the process of developing a new gene page summarising all associations mapped to a specific gene. 
+
+As an interim measure, we have made available our old search interface in the https://www.ebi.ac.uk/gwas/labs/[GWAS labs site], in response to user feedback. This site is up to date with the main GWAS Catalog and includes the previous gene search functionality. Please note, however, that this search is less specific and will return all associations in publications containing the gene name.  
+
+Another option is to use the https://www.ebi.ac.uk/gwas/docs/file-downloads[full data download]. Applying a https://support.office.com/en-us/article/Quick-start-Filter-data-by-using-an-AutoFilter-08647E19-11D1-42F6-B376-27B932E186E0[filter] for your gene of interest to the MAPPED_GENE column will enable you to extract all associations in that gene. 
+
+If you are interested in gene data within a specific trait or publication, you can search for the trait or publication, click through to the relevant page, and then filter for a mapped gene in the associations table. 
+
+Alternatively, you may wish to use the http://www.ensembl.org/index.html[Ensembl] or https://www.targetvalidation.org[Open Targets] platforms, both of which include data from the GWAS Catalog. 
 
 == C. Exploring specific pages
 
