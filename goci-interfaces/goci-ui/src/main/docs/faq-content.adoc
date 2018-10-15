@@ -46,7 +46,7 @@
 
 2. <<faq-B3, I am searching for the author of a publication. Why do my search results also contain traits?>>
 
-==== B(ii). Searching by variant
+==== B(ii). Searching by variant or gene
 
 1. <<faq-B4, How do I search by variant?>>
 
