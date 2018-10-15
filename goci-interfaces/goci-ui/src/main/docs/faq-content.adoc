@@ -54,8 +54,6 @@
 
 3. <<faq-B6, How do I search by genomic region?>>
 
-4. <<faq-B7, Can I download all associations for a particular gene or genomic region?>>
-
 ==== B(iii). Searching by trait
 
 1. <<faq-B8, How do I search by trait?>>
@@ -73,10 +71,6 @@
 1. <<faq-B13, Can I search for a study?>>
 
 2. <<faq-B14, How can I search for targeted and exome array studies and associations?>>
-
-==== B(v). Searching by gene
-
-1. <<faq-B15, Can I search for a gene?>>
 
 === C. Exploring specific pages
 
@@ -243,25 +237,37 @@ You can find a publication by searching for the PubMed ID, any author or any wor
 
 The search returns all publications, traits and variants that contain a match for the text string entered across all fields, so if your search term is for example "Parkinson", you will find publications with an author named Parkinson as well as publications with “Parkinson” in the title and traits related to Parkinson’s disease. If you are looking for a specific publication we recommend searching by PubMed ID.
 
-=== B(ii). Searching by variant
+=== B(ii). Searching by variant or gene
 
 ==== [[faq-B4]]1. How do I search by variant?
 
 You can find a variant (or single nucleotide polymorphism, SNP) by searching for an rsID, a genomic region or a gene mapped to that variant. As mapped genes and genomic regions can return a large number of results, we recommend searching by rsID if you are looking for a specific variant. 
 
+See <<E, Genomic mappings below>> for details of how we map variants to genes.
+
 ==== [[faq-B5]]2. How do I search by gene?
 
-Searching for a gene name currently returns a list of variants that have been mapped to that gene. You can then select a specific variant for more information, including association data. See <<E, Genomic mappings below>> for details of how we map variants to genes.
+You can search for a gene in the main search bar eg. STAT4. This will return a list of all the variants annotated with that gene, as well as any publications with the gene name in the title. 
 
-Note that searching for a gene may also return publications with the gene name in the title.
+Clicking any of the variants with take you to the variant page and allow you to browse a limited region surrounding any given SNP using the LD plot. However, for a wider region this may be time consuming since each page needs to be accessed variant-by-variant. At the moment, it is not possible to download all associations with a gene from a single place.
+
+We are in the process of developing a new gene page summarising all associations mapped to a specific gene. 
+
+As an interim measure, we have made available our old search interface in the https://www.ebi.ac.uk/gwas/labs/[GWAS labs site], in response to user feedback. This site is up to date with the main GWAS Catalog and includes the previous gene search functionality. Please note, however, that this search is less specific and will return all associations in publications containing the gene name.  
+
+Another option is to use the https://www.ebi.ac.uk/gwas/docs/file-downloads[full data download]. Opening the file in Excel and applying a https://support.office.com/en-us/article/Quick-start-Filter-data-by-using-an-AutoFilter-08647E19-11D1-42F6-B376-27B932E186E0[filter] for your gene of interest to the MAPPED_GENE column will enable you to extract all associations in that gene. 
+
+If you are interested in gene data within a specific trait or publication, you can search in the new web interface for the trait or publication, click through to the relevant page, and then filter for a mapped gene in the associations table. 
+
+Alternatively, you may wish to use the http://www.ensembl.org/index.html[Ensembl] or https://www.targetvalidation.org[Open Targets] platforms, both of which include data from the GWAS Catalog. 
+
+Finally, you can use our link:api[REST API] to return associations for a specific gene or genomic region.
+
 
 ==== [[faq-B6]]3. How do I search by genomic region?
 
 You can search by genomic region using the format chromNumber:bpLocation-bpLocation, for example 6:16000000-25000000. You can also search using cytogenetic nomenclature, for example 2q37.1. These searches will return a list of variants.
 
-==== [[faq-B7]]4. Can I download all associations for a particular gene or genomic region?
-
-The GWAS Catalog website does not currently have a way to download all associations for a particular gene or genomic region. We are currently working to improve this functionality. For now, we recommend using our link:api[REST API] to return associations for a specific gene or genomic region.
 
 === B(iii). Searching by trait
 
@@ -310,22 +316,6 @@ If you already know the accession number of a particular study (beginning with �
 ==== [[faq-B14]]7. How can I search for targeted and exome array studies and associations?
 
 You can enter the genotyping technology of your interest in the search bar, e.g. “targeted genotyping array”, “exome genotyping array”. This will return any publication that uses that specific genotyping technology.
-
-==== [[faq-B15]]8. Can I search for a gene?
-
-You can search for a gene in the main search bar eg. STAT4. This will return a list of all the variants annotated with that gene, as well as any publications with the gene name in the title. 
-
-Clicking any of the variants with take you to the variant page and allow you to browse a limited region surrounding any given SNP using the LD plot. However, for a wider region this may be time consuming since each page needs to be accessed variant-by-variant. At the moment, it is not possible to download all associations with a gene from a single place.
-
-We are in the process of developing a new gene page summarising all associations mapped to a specific gene. 
-
-As an interim measure, we have made available our old search interface in the https://www.ebi.ac.uk/gwas/labs/[GWAS labs site], in response to user feedback. This site is up to date with the main GWAS Catalog and includes the previous gene search functionality. Please note, however, that this search is less specific and will return all associations in publications containing the gene name.  
-
-Another option is to use the https://www.ebi.ac.uk/gwas/docs/file-downloads[full data download]. Applying a https://support.office.com/en-us/article/Quick-start-Filter-data-by-using-an-AutoFilter-08647E19-11D1-42F6-B376-27B932E186E0[filter] for your gene of interest to the MAPPED_GENE column will enable you to extract all associations in that gene. 
-
-If you are interested in gene data within a specific trait or publication, you can search for the trait or publication, click through to the relevant page, and then filter for a mapped gene in the associations table. 
-
-Alternatively, you may wish to use the http://www.ensembl.org/index.html[Ensembl] or https://www.targetvalidation.org[Open Targets] platforms, both of which include data from the GWAS Catalog. 
 
 == C. Exploring specific pages
 
