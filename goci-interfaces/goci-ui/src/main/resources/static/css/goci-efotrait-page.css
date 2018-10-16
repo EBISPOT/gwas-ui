@@ -126,5 +126,7 @@ a.highlight {
 /* The top page of the page <Trait XXXXX> */
 h2 > span {
     color: #222222;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
 }
 
