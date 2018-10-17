@@ -25,16 +25,16 @@ $('html,body').scrollTop(0);
 
 var searchTerm = getTextToSearch('#query');
 
-console.log("Loading search module!");
+// console.log("Loading search module!");
 if (searchTerm != '') {
-    console.log("Start search for the text " + searchTerm);
+    // console.log("Start search for the text " + searchTerm);
     var elements = {};
     searchTerm.split(',').forEach((term) => {
         elements[term] = term;
 }
 )
     //first load
-    console.log(elements);
+    // console.log(elements);
     executeQuery(elements, true);
 }
 });
@@ -51,7 +51,7 @@ getTextToSearch = function(divId){
 }
 
 executeQuery = function(data={}, initLoad=false) {
-      console.log("executeQuery");
+      // console.log("executeQuery");
       updatePage(initLoad);
 }
 
@@ -91,7 +91,7 @@ function getDataSolr(main, initLoad=false) {
     
     var searchQuery = 'pubmedId:'+main;
     
-    console.log("Solr research request received for " + searchQuery);
+    // console.log("Solr research request received for " + searchQuery);
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
             'q': searchQuery,
@@ -114,10 +114,10 @@ function getDataSolr(main, initLoad=false) {
             //downloads link : utils-helper.js
             setDownloadLink(searchQuery);
         }
-        console.log("Solr research done for " + searchQuery);
+        // console.log("Solr research done for " + searchQuery);
         return data;
     }).catch(function(err) {
-        console.error('Error when seaching solr for' + searchQuery + '. ' + err);
+        // console.error('Error when seaching solr for' + searchQuery + '. ' + err);
         throw(err);
     })
 
@@ -214,6 +214,7 @@ function displaySummaryPublication(data,clearBeforeInsert) {
     $("#publication-author").html(first_author);
     $("#publication-pubmedid").html(publication.pubmedId);
     $("#publication-title").html(publication.title);
+    $("#top-panel-pub-title").html(publication.title);  // display title in header
     $("#publication-journal").html(publication.publication);
     $("#publication-datepublication").html(publication.publicationDate.split('T')[0]);
     if ('authorsList' in publication) {
