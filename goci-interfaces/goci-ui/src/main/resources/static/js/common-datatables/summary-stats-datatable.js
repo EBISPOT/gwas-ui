@@ -135,7 +135,7 @@ function checkSummaryStatsDatabase(data) {
 }
 
 function checkIfStudyLoaded(study_accession, index, dir) {
-    return promiseGet('/gwas/summary-statistics/api/studies/' + study_accession,
+    return promiseGet('https://www.ebi.ac.uk/gwas/summary-statistics/api/studies/' + study_accession,
         {}, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
         // Only studies loaded in the Summary stats db will have a 200 response
         updateColumn(index, dir);
@@ -148,7 +148,7 @@ function checkIfStudyLoaded(study_accession, index, dir) {
 function updateColumn(index, dir) {
     var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
         .concat(dir).concat("' target='_blank'>");
-    var linkFullPValue = ftplink.concat("FTP Download");
+    var linkFullPValue = ftplink.concat("FTP Download</a>");
     var apiLink = "&nbsp;&nbsp;or&nbsp;&nbsp;<a href='http://www.ebi.ac.uk/gwas/summary-statistics/docs' target='_blank'>API access</a>";
 
     $('#summary-stats-table').bootstrapTable('updateRow', {
