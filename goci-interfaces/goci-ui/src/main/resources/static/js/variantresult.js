@@ -120,6 +120,7 @@ function processVariantData(data,rsId) {
 
         displayDatatableAssociations(data_association.docs);
         displayDatatableStudies(data_study.docs);
+        checkSummaryStatsDatabase(data_study.docs);
         //downloads link : utils-helper.js
         setDownloadLink(rsId);
     }

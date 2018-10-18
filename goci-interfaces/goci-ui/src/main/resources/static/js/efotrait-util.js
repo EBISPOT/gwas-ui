@@ -236,11 +236,11 @@ $(document).ready(() => {
     $("#form1").submit(function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        console.log("Use promises for download");
+        // console.log("Use promises for download");
         $('#download_data').prop('disabled', true);
         var searchQuery = $("#queryInput").val();
     
-        console.log("Download the file for " + searchQuery);
+        // console.log("Download the file for " + searchQuery);
         return promisePost( gwasProperties.contextPath + '/api/search/downloads',
             {
                 'q': searchQuery
@@ -973,6 +973,7 @@ function processSolrData(data, initLoad=false) {
         //update association/study table
         displayDatatableAssociations(data_association.docs);
         displayDatatableStudies(data_study.docs);
+        checkSummaryStatsDatabase(data_study.docs);
 
         //work out highlight study
         var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
