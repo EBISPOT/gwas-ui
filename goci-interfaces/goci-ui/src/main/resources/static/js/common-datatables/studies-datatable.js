@@ -35,8 +35,9 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
                 " data-toggle='tooltip'" +
                 "data-original-title='Targeted or exome array study'></span>";
         }
-        
-        var linkFullPValue = "";
+
+        // declare default value
+        var linkFullPValue = "NA";
         var fullpvalset = study.fullPvalueSet;
         if(fullpvalset == 1) {
 
@@ -46,11 +47,11 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
             var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
                 .concat(dir).concat("' target='_blank'</a>");
 
-            linkFullPValue = ftplink.concat("<span class='glyphicon glyphicon-signal clickable context-help'" +
-                "data-toggle='tooltip'" +
-                "data-original-title='Click for summary statistics'></span></a>");
-        
+            linkFullPValue = ftplink.concat("FTP Download");
         }
+
+        // Add column for Summary Stats access
+        tmp['link'] = linkFullPValue;
         
         
         tmp['Author'] = study.author_s;
@@ -90,7 +91,7 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
         }
         
         // Number Associations
-        tmp['nr_associations'] = nr_association.toString()+linkFullPValue;
+        tmp['nr_associations'] = nr_association;
         
         // Initial sample desc
         var initial_sample_text = '-';
@@ -141,7 +142,6 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
         }
         tmp['initial_ancestral_links_text'] = initial_ancestral_links_text;
         tmp['replicate_ancestral_links_text'] = replicate_ancestral_links_text;
-
         
         data_json.push(tmp)
     }
@@ -172,7 +172,7 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
             sortable: true,
             visible: defaultVisible,
             filterControl: 'input'
-        }, {
+        },  {
             field: 'study',
             title: 'Study accession',
             sortable: true,
@@ -235,7 +235,12 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
             title: 'Association count',
             sortable: true,
             filterControl: 'input'
-        }],
+        }, {
+            field: 'link',
+            title: 'Summary statistics',
+            sortable: true,
+            filterControl: 'input'
+        } ],
         data: data_json,
     });
 
@@ -246,4 +251,40 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
     // Add custom tooltip text for button
     $('.keep-open').attr('title','Add/Remove Columns');
     hideLoadingOverLay('#study-table-loading')
+}
+
+/**
+ * display FTP and API access links
+ * @param {Object} data - study solr docs
+ */
+function checkSummaryStatsDatabase(data) {
+    $.each(data, (index, summary_stats) => {
+        var a = (summary_stats.authorAscii_s).replace(/\s/g, "");
+    var dir = a.concat("_").concat(summary_stats.pubmedId).concat("_").concat(summary_stats.accessionId);
+    checkIfStudyLoaded(summary_stats.accessionId, index, dir);
+});
+}
+
+function checkIfStudyLoaded(study_accession, index, dir) {
+    return promiseGet('https://www.ebi.ac.uk/gwas/summary-statistics/api/studies/' + study_accession,
+        {}, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
+        // Only studies loaded in the Summary stats db will have a 200 response
+        updateColumn(index, dir);
+        return data;
+    }).catch(function (err) {
+    })
+}
+
+function updateColumn(index, dir) {
+    var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
+        .concat(dir).concat("' target='_blank'>");
+    var linkFullPValue = ftplink.concat("FTP Download</a>");
+    var apiLink = "&nbsp;&nbsp;or&nbsp;&nbsp;<a href='http://www.ebi.ac.uk/gwas/summary-statistics/docs' target='_blank'>API access</a>";
+
+    $('#study-table').bootstrapTable('updateRow', {
+        index: index,
+        row: {
+            link: linkFullPValue+apiLink
+        }
+    });
 }
