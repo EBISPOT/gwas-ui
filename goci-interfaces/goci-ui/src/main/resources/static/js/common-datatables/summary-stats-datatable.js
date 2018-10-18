@@ -135,7 +135,7 @@ function checkSummaryStatsDatabase(data) {
 }
 
 function checkIfStudyLoaded(study_accession, index, dir) {
-    return promiseGet('https://www.ebi.ac.uk/gwas/summary-statistics/api/studies/' + study_accession,
+    return promiseGet('/gwas/summary-statistics/api/studies/' + study_accession,
         {}, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
         // Only studies loaded in the Summary stats db will have a 200 response
         updateColumn(index, dir);
