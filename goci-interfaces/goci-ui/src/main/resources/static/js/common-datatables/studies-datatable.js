@@ -92,14 +92,27 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
         
         // Number Associations
         tmp['nr_associations'] = nr_association;
-        
+
         // Initial sample desc
+        var splitDescription = [];
+        var descriptionToDisplay = [];
         var initial_sample_text = '-';
         if (study.initialSampleDescription) {
-            
-            initial_sample_text = displayArrayAsList(study.initialSampleDescription.split(', '));
-            if(study.initialSampleDescription.split(', ').length>1)
-                initial_sample_text = initial_sample_text.html()
+
+            // Split after each sample number, splitDescription[0] is an empty string
+            splitDescription = study.initialSampleDescription.split(/([1-9][0-9]{0,2}(?:,[0-9]{3})*)/);
+            for (var i = 1; i < splitDescription.length; i++) {
+                if ( i % 2 == 0) {
+                    // Join the sample number and it's description as one item
+                    var item = splitDescription[i-1]+splitDescription[i].replace(/(,\s+$)/, "");
+                    descriptionToDisplay.push(" ".concat(item));
+                }
+            }
+            initial_sample_text = displayArrayAsList(descriptionToDisplay);
+
+            if(splitDescription.length > 3 ) {
+                initial_sample_text = initial_sample_text.html();
+            }
         }
         tmp['initial_sample_text'] = initial_sample_text;
         
