@@ -215,8 +215,6 @@ function setTraitDownloadLink(queryParam) {
         var inputParams = queryParam.join(",");
         $("#queryInput").val(inputParams);
         $('#download_data').show();
-        console.log('******')
-        console.log(inputParams);
     }
 }
 
