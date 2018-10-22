@@ -2820,7 +2820,7 @@ buildLocusPlotPopoverHTML = function(association){
     text.append(_addNameValuePairHTML('P-value',association.pValueMantissa+' x 10'+"<sup>"+association.pValueExponent+"</sup>"));
     text.append(_addNameValuePairHTML('Mapped gene(s)',association.entrezMappedGenes));
     text.append(_addNameValuePairHTML('Reported trait', association.traitName_s));
-    text.append(_addNameValuePairHTML('Trait(s)', association.mappedLabel[0].toString()));
+    text.append(_addNameValuePairHTML('Trait(s)', association.mappedLabel.toString()));
     text.append(_addNameValuePairHTML('Study accession', association.accessionId));
     text.append(_addNameValuePairHTML('PubMed ID', association.pubmedId));
     text.append(_addNameValuePairHTML('Author',association.author_s));
