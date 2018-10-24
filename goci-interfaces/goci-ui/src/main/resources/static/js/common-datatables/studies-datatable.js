@@ -223,25 +223,23 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
             field: 'initial_sample_text',
             title: 'Discovery sample description',
             sortable: true,
-            visible: defaultVisible,
+            visible:  false,
             filterControl: 'input'
         }, {
             field: 'replicate_sample_text',
             title: 'Replication sample description',
             sortable: true,
-            visible: defaultVisible,
+            visible: false,
             filterControl: 'input'
         }, {
             field: 'initial_ancestral_links_text',
             title: 'Discovery sample number and ancestry',
             sortable: true,
-            visible: defaultNotVisible,
             filterControl: 'input'
         }, {
             field: 'replicate_ancestral_links_text',
             title: 'Replication sample number and ancestry',
             sortable: true,
-            visible: defaultNotVisible,
             filterControl: 'input'
         }, {
             field: 'nr_associations',
