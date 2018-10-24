@@ -6277,6 +6277,10 @@ LocusZoom.Legend.prototype.render = function(){
                 var label_size = +element.label_size || +this.layout.label_size || 12;
                 var label_x = 0;
                 var label_y = (label_size/2) + (padding/2);
+                var label_y_legend = -24;
+                // Draw the legend element title
+                selector.append("text").attr("text-anchor", "left").attr("class", "lz-title")
+                    .attr("x", label_x).attr("y", label_y_legend).style({"font-size": label_size}).text("Trait category");
                 line_height = Math.max(line_height, label_size + padding);
                 // Draw the legend element symbol (line, rect, shape, etc)
                 if (element.shape == "line"){
@@ -6316,8 +6320,9 @@ LocusZoom.Legend.prototype.render = function(){
                 // Position the legend element group based on legend layout orientation
                 var bcr = selector.node().getBoundingClientRect();
                 if (this.layout.orientation == "vertical"){
-                    y += bcr.height + padding;
+                    y += bcr.height + padding - 12;
                     line_height = 0;
+                    selector.attr("transform", "translate(" + x + "," + y + ")");
                 } else {
                     // Ensure this element does not exceed the panel width
                     // (E.g. drop to the next line if it does, but only if it's not the only element on this line)
