@@ -1392,8 +1392,19 @@ displayOXO = function(){
             });
         }
 
+        // remove duplicate Ids and sort
+        var uniqueXrefs = Array.from(new Set(xrefs));
+        uniqueXrefs = uniqueXrefs.sort();
+
+        // remove parent EFO ID from XRef list
+        var parentEFOIndex = uniqueXrefs.indexOf(getMainEFO().replace('_',':'));
+        uniqueXrefs.splice(parentEFOIndex, 1);
+
+        // update totalMapping count
+        totalMapping = uniqueXrefs.length;
+
         if(totalMapping > 0) {
-            $('#oxo-list').append(displayArrayAsList(xrefs))
+            $('#oxo-list').append(displayArrayAsList(uniqueXrefs))
         }
 
 
