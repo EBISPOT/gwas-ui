@@ -744,7 +744,7 @@ updatePage = function(initLoad=false) {
             parent_with_all_child_trait_ids.push(term.short_form);
         });
         $("#efo-child-trait-label").html(longContentList(
-        "gwas_child_traits_div", sub_traits, 'child traits'));
+        "gwas_child_traits_div", sub_traits.sort(), 'child traits'));
         prepareDownloadData(parent_with_all_child_trait_ids);
     });
 
@@ -1090,7 +1090,7 @@ function processSolrSlimData(data) {
     });
 
     $("#reported-traits").html(longContentList("gwas_reported_traits_div",
-        reportedTraits,
+        reportedTraits.sort(),
         'reported traits'));
 }
 
@@ -1454,7 +1454,7 @@ displayEfoTraitInfo = function(efoinfo) {
     if (synonym) {
         if (synonym.length > list_min) {
             $("#efotrait-synonym").html(longContentList("gwas_efotrait_synonym_div",
-                                                        synonym,
+                                                        synonym.sort(),
                                                         'synonyms'));
         }
         else {
