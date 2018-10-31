@@ -255,6 +255,12 @@ function generateGeneInformationTable(geneName, studies) {
     // Extracting cross-references:
     var xrefQueryURL = EnsemblRestBaseURL + '/xrefs/id/' + geneData.id + '?content-type=application/json'
     var xrefData = getEnsemblREST(xrefQueryURL);
+    var entrezID = "NA"
+    for ( xref of xrefData ){
+        if ( xref.dbname == "EntrezGene" ){
+            entrezID = xref.primary_id
+        }
+    }
 
     // Adding automatic cross references pointing to Ensembl:
     $("#ensembl_button").attr('onclick', "window.open('"+EnsemblURL+"Summary?db=core;g="+geneData.id+"',    '_blank')");
@@ -266,8 +272,9 @@ function generateGeneInformationTable(geneName, studies) {
     $("#opentargets_button").attr('onclick', "window.open('"+OpenTargetsURL+ geneData.id+"',    '_blank')");
 
     // Looping through the cross references and extract entrez id:
-    $("#entrez_button").attr('onclick', "window.open('"+EntrezURL+ geneData.id+"',    '_blank')");
-
+    if ( entrezID != "NA" ){
+        $("#entrez_button").attr('onclick', "window.open('"+EntrezURL+ entrezID + "',    '_blank')");
+    }
 
     // Print out some info to make sure things are not messed up completely:
     console.log("[Info] Number of reported traits:" + reportedTraits.length)
