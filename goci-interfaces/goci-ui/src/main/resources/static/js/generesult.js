@@ -2,7 +2,6 @@
 
 var global_fl;
 var global_raw;
-
 global_fl = 'pubmedId,title,author_s,orcid_s,publication,publicationDate,catalogPublishDate,authorsList,' +
     'initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,' +
     'ancestryLinks,' + 'fullPvalueSet,' + 'genotypingTechnologies,' + 'authorAscii_s,' +
@@ -10,9 +9,13 @@ global_fl = 'pubmedId,title,author_s,orcid_s,publication,publicationDate,catalog
     'traitName,mappedLabel,mappedUri,traitUri,shortForm,' +
     'label,' + 'efoLink,parent,id,resourcename,';
 global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,snpInteraction,multiSnpHaplotype,rsId,strongestAllele,context,region,entrezMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,chromosomePosition,chromLocation,positionLinks,author_s,publication,publicationDate,catalogPublishDate,publicationLink,accessionId,initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,numberOfIndividuals,traitName_s,mappedLabel,mappedUri,traitUri,shortForm,labelda,synonym,efoLink,id,resourcename,range,orPerCopyNum,betaNum,betaUnit,betaDirection'
-global_raw = 'fq:resourcename:association or resourcename:study'
+global_raw = 'fq:resourcename:association or resourcename:study';
 
-
+// Gene page specific constans:
+const EnsemblRestBaseURL = "https://rest.ensembl.org";
+const EnsemblURL = "http://www.ensembl.org/Homo_sapiens/Gene/";
+const OpenTargetsURL = "https://www.targetvalidation.org/target/";
+const EntrezURL = "https://www.ncbi.nlm.nih.gov/gene/"
 /**
  * Other global setting
  */
@@ -24,15 +27,14 @@ $(document).ready(() => {
     $('html,body').scrollTop(0);
 
 var searchTerm = getTextToSearch('#query');
-
-// console.log("Loading search module!");
+console.log("Query:" + searchTerm);
+console.log("Loading search module!");
 if (searchTerm != '') {
     // console.log("Start search for the text " + searchTerm);
     var elements = {};
     searchTerm.split(',').forEach((term) => {
         elements[term] = term;
-}
-)
+    });
     //first load
     // console.log(elements);
     executeQuery(elements, true);
@@ -91,10 +93,10 @@ function getDataSolr(main, initLoad=false) {
     
     var searchQuery = main;
     
-    // console.log("Solr research request received for " + searchQuery);
+    console.log("Solr research request received for " + searchQuery);
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
-            'q': searchQuery,
+            'q': 'entrezMappedGenes : ' + searchQuery + ' OR association_entrezMappedGenes : ' + searchQuery,
             'max': 99999,
             'group.limit': 99999,
             'group.field': 'resourcename',
@@ -107,10 +109,10 @@ function getDataSolr(main, initLoad=false) {
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         // Check if Solr returns some results
         if (data.grouped.resourcename.groups.length == 0) {
-            $('#lower_container').html("<h2>The PubmedId <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
+            $('#lower_container').html("<h2>The Gene name <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
         }
         else {
-            processSolrData(data, initLoad);
+            processSolrData(data, initLoad, searchQuery); // gene name is now added to the process solr data function.
             //downloads link : utils-helper.js
             setDownloadLink(searchQuery);
         }
@@ -134,7 +136,7 @@ function getDataSolr(main, initLoad=false) {
  * @param {{}} data - solr result
  * @param {Boolean} initLoad
  */
-function processSolrData(data, initLoad=false) {
+function processSolrData(data, initLoad=false, searchTerm) {
     var isInCatalog=true;
     
     data_association = [];
@@ -146,10 +148,9 @@ function processSolrData(data, initLoad=false) {
         isInCatalog = false;
     }
     //split the solr search by groups
-    //data_efo, data_study, data_association, data_diseasetrait;
+    //data_study, data_association
     data_facet = data.facet_counts.facet_fields.resourcename;
     data_highlighting = data.highlighting;
-    
     //TODO not repeat yourself!!!!
     $.each(data.grouped.resourcename.groups, (index, group) => {
         switch (group.groupValue) {
@@ -172,79 +173,111 @@ function processSolrData(data, initLoad=false) {
     
     //remove association that annotated with efos which are not in the list
     var remove = Promise.resolve();
-    
+
     remove.then(()=>{
         //If no solr return,greate a fake empyt array so tables/plot are empty
         if(!isInCatalog) {
         data_association.docs = []
         data_study.docs = []
     }
-    
-    var PAGE_TYPE = "publication";
+
+    var PAGE_TYPE = "gene";
     
     //update association/study table
     displayDatatableAssociations(data_association.docs);
+    console.log("[Info] displayDatatableAssociations - OK")
     displayDatatableStudies(data_study.docs, PAGE_TYPE);
+    console.log("[Info] displayDatatableStudies - OK")
     checkSummaryStatsDatabase(data_study.docs);
-    displaySummaryPublication(data_study.docs);
-    
-    //work out highlight study
-    //var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
-    //displayHighlightedStudy(highlightedStudy);
-    //display summary information like 'EFO trait first reported in GWAS Catalog in 2007, 5 studies report this efotrait'
-    //getSummary(findStudiesForEFO(getMainEFO()));
+    console.log("[Info] checkSummaryStatsDatabase - OK")
+    generateGeneInformationTable(searchTerm, data_study)
+    console.log("[Info] generateGeneInformationTable - OK")
+    //displaySummaryPublication(data_study.docs);
     
 })
 
 }
 
-/**
- * display study summary
- * @param {Object} data - study solr docs
- * @param {Boolean} cleanBeforeInsert
- */
-function displaySummaryPublication(data,clearBeforeInsert) {
-    var study_count = data.length;
-    var publication = data[0];
-    var first_author = publication.author_s;
-    if ('orcid_s' in publication) {
-        // the variable is defined
-        var orchid = create_orcid_link(publication.orcid_s,16);
-        first_author = first_author +orchid;
-    }
-    $("#publication-author").html(first_author);
-    $("#publication-pubmedid").html(publication.pubmedId);
-    $("#publication-title").html(publication.title);
-    $("#top-panel-pub-title").html(publication.title);  // display title in header
-    $("#publication-journal").html(publication.publication);
-    $("#publication-datepublication").html(publication.publicationDate.split('T')[0]);
-    if ('authorsList' in publication) {
-        // require toggle-resize.js
-        var reduce_text= displayAuthorsListAsList(publication.authorsList);
-        reduce_text = addShowMoreLink(reduce_text, 500, "...");
-        $("#publication-authors-list").html(reduce_text);
-    }
-    // Display Summary stats icon if any study in publication has fullPvalueSet: true
-    var fullpvalset=checkFullPValueStatus(data);
-    $("#study-summary-stats").html(fullpvalset);
-    
-    
-    $("#pubmedid_button").attr('onclick',     "window.open('"+gwasProperties.NCBI_URL+publication.pubmedId+"',    '_blank')");
-    $("#europepmc_button").attr('onclick',     "window.open('"+gwasProperties.EPMC_URL+publication.pubmedId+"',    '_blank')");
-    
-    hideLoadingOverLay('#summary-panel-loading');
-    
-}
-
-
-function checkFullPValueStatus(data) {
-    var summaryStatsIcon = "<span>-</span>";
-    for (var i=0; i < data.length; i++) {
-        if (data[i].fullPvalueSet == true) {
-            summaryStatsIcon = "<a href='#study_panel'><span style='font-size: 20px;' " +
-                "class='glyphicon glyphicon-signal clickable'></span></a>";
-            return summaryStatsIcon;
+// Helper function to retrieve Ensembl data through the REST API
+// SYNC!!
+function getEnsemblREST( URL )
+{
+    var result = null;
+    $.ajax({
+        url: URL,
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            result = data;
         }
-    }
-    return summaryStatsIcon;
+    });
+    return result;
 }
+
+/**
+ * This function fills up the gene table.
+ * Input:
+ *    Gene name      -  searchTerm
+ *    Study document -  data_study.docs
+ *
+ * Behaviour:
+ *    Fills up gene information table
+ *    1) Extracts data from Ensembl based on gene name.
+ *    2) Extracts cross reference data from Ensembl.
+ *    3) Extracts reported traits from study documents.
+ */
+function generateGeneInformationTable(geneName, studies) {
+    // Extracting gene data from Ensembl:
+    var geneQueryURL = EnsemblRestBaseURL + "/lookup/symbol/homo_sapiens/" + geneName + "?content-type=application/json"
+    var geneData = getEnsemblREST(geneQueryURL);
+
+    // adding gene data to html:
+    $("#geneSymbol").html(`${geneData.display_name}`);
+    var description = geneData.description.split(" [S")[0];
+    $("#description").html(`${description}`)
+    $("#genomicCoordinates").html(`${geneData.seq_region_name}:${geneData.start}-${geneData.end} (${geneData.assembly_name})`);
+    $("#biotype").html(`${geneData.biotype.replace("_", " ")}`);
+
+    console.log(studies.length)
+
+    // Looping through all studies and parse out repoted genes:
+    var reportedTraits = {};
+    for ( var study of studies.docs) {
+        reportedTraits[study.traitName_s] = 1;
+    }
+
+    // joining reported traits:
+    var joinedTraits = Object.keys(reportedTraits).join("</li>\n\t<li>")
+    $("#reportedTraits").html(`<ul>\n\t<li>${joinedTraits}</li></ul>`);
+    console.log(joinedTraits)
+
+    // Extracting cross-references:
+    var xrefQueryURL = EnsemblRestBaseURL + '/xrefs/id/' + geneData.id + '?content-type=application/json'
+    var xrefData = getEnsemblREST(xrefQueryURL);
+
+    // Adding automatic cross references pointing to Ensembl:
+    $("#ensembl_button").attr('onclick', "window.open('"+EnsemblURL+"Summary?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_phenotype_button").attr('onclick', "window.open('"+EnsemblURL+"Phenotype?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_pathway_button").attr('onclick', "window.open('"+EnsemblURL+"Pathway?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_regulation_button").attr('onclick', "window.open('"+EnsemblURL+"Regulation?db=core;g="+geneData.id+"',    '_blank')");
+
+    // Adding automatic cross reference pointing to Open targets:
+    $("#opentargets_button").attr('onclick', "window.open('"+OpenTargetsURL+ geneData.id+"',    '_blank')");
+
+    // Looping through the cross references and extract entrez id:
+    $("#entrez_button").attr('onclick', "window.open('"+EntrezURL+ geneData.id+"',    '_blank')");
+
+
+    // Print out some info to make sure things are not messed up completely:
+    console.log("[Info] Number of reported traits:" + reportedTraits.length)
+    console.log("[Info] ID: " + geneData.id);
+    console.log("[Info] Biotype: " + geneData.biotype);
+    console.log("[Info] Description: " + geneData.description);
+    console.log("[Info] Genomic location: " + geneData.seq_region_name + ":" + geneData.start + "-" + geneData.end)
+
+    // OK, loading is complete:
+    hideLoadingOverLay('#summary-panel-loading');
+}
+
+

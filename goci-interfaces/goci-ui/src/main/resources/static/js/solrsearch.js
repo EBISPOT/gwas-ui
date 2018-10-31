@@ -123,7 +123,9 @@ function buildBreadcrumbs() {
         else if (facet == "trait") {
             last.text("Traits");
         }
-
+        else if (facet == "gene") {
+            last.text("Genes");
+        }
         breadcrumbs.append(last);
     }
 }
@@ -297,7 +299,12 @@ function processData(data) {
                     row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-variant'>&nbsp;V&nbsp;</span><a href="+variantsLabsUrl+">"+doc.title+"</a></h3>"));
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                 }
-        
+                if (doc.resourcename == "gene") {
+                    var genesLabsUrl = gwasProperties.contextPath+"genes/"+doc.title
+                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+                    row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-gene'>&nbsp;G&nbsp;</span><a href="+genesLabsUrl+">"+doc.title+"</a></h3>"));
+                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+                }
         
                 tbody.append(row);
                 // Function to parse the description
@@ -307,10 +314,25 @@ function processData(data) {
                 // Add custom formatting for Variant description
                 if (doc.resourcename == "variant") {
                     var descriptionElements = descriptionTruncated.split("|");
-                    var variantDescription = "<b>Location: </b>"+descriptionElements[0] +
-                        "; <b>Cytogenetic region: </b>" + descriptionElements[1] +
-                        "; <b>Most severe consequence: </b>" + descriptionElements[2] +
-                        "; <b>Mapped gene(s): </b>" + descriptionElements[3].split(",").join(", ");
+                    if (descriptionElements[1] == "NA"){
+                        var variantDescription = "This variant could not be mapped to the genome."
+                    }
+                    else {
+                        var variantDescription = "<b>Location: </b>"+descriptionElements[0] +
+                            "; <b>Cytogenetic region:</b>" + descriptionElements[1] +
+                            "; <b>Most severe consequence: </b>" + descriptionElements[2] +
+                            "; <b>Mapped gene(s): </b>" + descriptionElements[3];
+                    }
+                    descriptionTruncated = variantDescription;
+                }
+
+                // Add custom formatting for gene description
+                if (doc.resourcename == "gene") {
+                    var descriptionElements = descriptionTruncated.split("|");
+                    var variantDescription = "<b>Description: </b>"+descriptionElements[0] +
+                        "<br><b>Genomic location: </b>" + descriptionElements[1] +
+                        "; <b>Cytogenetic region: </b>" + descriptionElements[2] +
+                        "; <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
                     descriptionTruncated = variantDescription;
                 }
 
