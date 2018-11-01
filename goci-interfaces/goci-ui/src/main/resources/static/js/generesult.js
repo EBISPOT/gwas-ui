@@ -236,7 +236,7 @@ function generateGeneInformationTable(geneName, studies) {
     $("#geneSymbol").html(`${geneData.display_name}`);
     var description = geneData.description.split(" [S")[0];
     $("#description").html(`${description}`)
-    $("#genomicCoordinates").html(`${geneData.seq_region_name}:${geneData.start}-${geneData.end} (${geneData.assembly_name})`);
+    $("#genomicCoordinates").html(`${geneData.seq_region_name}:${geneData.start}-${geneData.end}`);
     $("#biotype").html(`${geneData.biotype.replace("_", " ")}`);
 
     console.log(studies.length)
@@ -267,6 +267,7 @@ function generateGeneInformationTable(geneName, studies) {
     $("#ensembl_phenotype_button").attr('onclick', "window.open('"+EnsemblURL+"Phenotype?db=core;g="+geneData.id+"',    '_blank')");
     $("#ensembl_pathway_button").attr('onclick', "window.open('"+EnsemblURL+"Pathway?db=core;g="+geneData.id+"',    '_blank')");
     $("#ensembl_regulation_button").attr('onclick', "window.open('"+EnsemblURL+"Regulation?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_expression_button").attr('onclick', "window.open('"+EnsemblURL+"ExpressionAtlas?db=core;g="+geneData.id+"',    '_blank')");
 
     // Adding automatic cross reference pointing to Open targets:
     $("#opentargets_button").attr('onclick', "window.open('"+OpenTargetsURL+ geneData.id+"',    '_blank')");
