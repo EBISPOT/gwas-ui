@@ -96,7 +96,7 @@ function getDataSolr(main, initLoad=false) {
     console.log("Solr research request received for " + searchQuery);
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
-            'q': 'entrezMappedGenes : ' + searchQuery + ' OR association_entrezMappedGenes : ' + searchQuery,
+                'q': 'entrezMappedGenes : ' + searchQuery + ' OR association_entrezMappedGenes : ' + searchQuery,
             'max': 99999,
             'group.limit': 99999,
             'group.field': 'resourcename',

@@ -1,6 +1,9 @@
 /**
  * Created by dwelter on 20/01/15.
  */
+
+
+
 var SearchState = {
     LOADING: {value: 0},
     NO_RESULTS: {value: 1},
@@ -301,6 +304,7 @@ function processData(data) {
                 }
                 if (doc.resourcename == "gene") {
                     var genesLabsUrl = gwasProperties.contextPath+"genes/"+doc.title
+
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                     row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-gene'>&nbsp;G&nbsp;</span><a href="+genesLabsUrl+">"+doc.title+"</a></h3>"));
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
@@ -328,8 +332,20 @@ function processData(data) {
 
                 // Add custom formatting for gene description
                 if (doc.resourcename == "gene") {
+                    var variantDescription = '' // initializing empty description
+                    var querySting = $('#query').text().toUpperCase()
+
+                    // Checking if the queried term is not the same as the title:
+                    if ( doc.title != $('#query').text().toUpperCase()){
+                        console.log("[Info] The queried string is different from the gene symbol...")
+                        // Checking for synonyms:
+                        if (doc.synonymsGene.match(querySting)){
+                            variantDescription += "<i>" + querySting + " is a synonym for " + doc.title + "</i><br>"
+                        }
+                    }
+
                     var descriptionElements = descriptionTruncated.split("|");
-                    var variantDescription = "<b>Description: </b>"+descriptionElements[0] +
+                    variantDescription += "<b>Description: </b>"+descriptionElements[0] +
                         "<br><b>Genomic location: </b>" + descriptionElements[1] +
                         "; <b>Cytogenetic region: </b>" + descriptionElements[2] +
                         "; <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
@@ -350,9 +366,9 @@ function processData(data) {
                 }
         
                 descriptionTruncated = descriptionTruncated+description_stats;
-        
+
                 descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
-        
+
                 rowDescription.append($("<td style=\"width: 88%\">").html(descriptionTruncated));
                 tbody.append(rowDescription);
                 divResult.append(table);

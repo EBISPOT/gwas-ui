@@ -327,12 +327,23 @@ function addResults(data, expand, id) {
 
                     // Add custom formatting for gene description
                     if (doc.resourcename == "gene") {
+                        var geneDescription = '' // initializing empty description
+                        var querySting = $('#query').text().toUpperCase()
+
+                        // Checking if the queried term is not the same as the title:
+                        if ( doc.title != querySting){
+                            console.log("[Info] The queried string is different from the gene symbol..." + querySting +" vs. " + doc.title)
+                            // Checking for synonyms:
+                            if (doc.synonymsGene.match(querySting)){
+                                geneDescription += "<i>" + querySting + " is a synonym for " + doc.title + "</i><br>"
+                            }
+                        }
                         var descriptionElements = descriptionTruncated.split("|");
-                        var variantDescription = "<b>Description: </b>"+descriptionElements[0] +
+                        geneDescription += "<b>Description: </b>"+descriptionElements[0] +
                             "<br><b>Genomic location: </b>" + descriptionElements[1] +
                             "; <b>Cytogenetic region: </b>" + descriptionElements[2] +
                             "; <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
-                        descriptionTruncated = variantDescription;
+                        descriptionTruncated = geneDescription;
                     }
 
                     descriptionTruncated=addShowMoreLink(descriptionTruncated, 200,"...");
