@@ -273,7 +273,13 @@ function getVariantInfo(data,rsId) {
         $("#variant-traits").html(longContentList("gwas_traits_div",traits_reported_url,'traits'));
     }
 
-    $("#variant-location").html(location);
+    if (typeof location == 'undefined') {
+        $("#variant-location").html('Not mapped');
+    }
+    else {
+        $("#variant-location").html(location);
+    }
+
     $("#variant-region").html(region);
     if (func) {
         $("#variant-class").html(variationClassLabel(func));
