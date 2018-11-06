@@ -43,6 +43,10 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
 
             // Risk allele
             var riskAllele = asso.strongestAllele[0];
+
+            // This line will remove the space from the risk allele (see GOCI-2480)
+            riskAllele = riskAllele.replace(" -", "-")
+
             // there may be more than one riskAllele value
             var riskAlleles = riskAllele.split(";");
 
