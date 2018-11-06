@@ -199,7 +199,7 @@ function getVariantInfo(data,rsId) {
 
         // Mapped Traits
         var mapped_traits = doc.mappedLabel;
-        if (doc.hasOwnProperty('entrezMappedGenes')) {
+        if (doc.mappedLabel) {
             $.each(mapped_traits, function(index, mapped_trait) {
                 var link = gwasProperties.contextPath + 'efotraits/' + doc.mappedUri[index].split('/').slice(-1)[0];
                 mapped_traits[index] = setInternalLinkText(link, mapped_trait);
@@ -266,25 +266,51 @@ function getVariantInfo(data,rsId) {
     traits_reported_url.sort();
 
     // Reported Traits display
-    if (traits_reported.length <= list_min) {
-        $("#variant-traits").html(traits_reported_url.join(', '));
+    if (jQuery.isEmptyObject(traits_reported_url)){
+        $("#variant-traits-label").hide();
     }
     else {
-        $("#variant-traits").html(longContentList("gwas_traits_div",traits_reported_url,'traits'));
+        if (traits_reported.length <= list_min) {
+            $("#variant-traits").html(traits_reported_url.join(', '));
+        }
+        else {
+            $("#variant-traits").html(longContentList("gwas_traits_div", traits_reported_url, 'traits'));
+        }
     }
 
-    if (typeof location == 'undefined') {
+    // Location
+    if (jQuery.type(location) == 'undefined') {
         $("#variant-location").html('Variant does not map to the genome');
     }
     else {
         $("#variant-location").html(location);
     }
 
-    $("#variant-region").html(region);
-    if (func) {
+    // Cytogenetic region
+    if (jQuery.type(region) == 'undefined') {
+        $("#variant-region-label").hide();
+    }
+    else {
+        $("#variant-region").html(region);
+    }
+
+    // Most severe consequence
+    if (jQuery.type(func) == 'undefined') {
+        $("#variant-class-label").hide();
+    }
+    else {
         $("#variant-class").html(variationClassLabel(func));
     }
-    $("#variant-mapped-genes").html(genes_mapped_url.join(', '));
+
+    // Mapped genes
+    if (jQuery.isEmptyObject(genes_mapped_url)) {
+        $("#variant-mapped-genes-label").hide();
+    }
+    else {
+        $("#variant-mapped-genes").html(genes_mapped_url.join(', '));
+    }
+
+
     $("#variant-summary-content").html(getSummary(data));
 }
 
@@ -485,8 +511,17 @@ function getVariantInfoFromEnsembl(rsId) {
             .done(function(data) {
                 console.log(data);
                 processVariantInfoFromEnsembl(rsId,data);
+            })
+            .fail(function() {
+                hideLabels();
             });
     console.log("Ensembl REST query done to retrieve variant information");
+}
+
+function hideLabels () {
+    $("#variant-alleles-label").hide();
+    $("#minor-allele-label").hide();
+    $("#minor-allele-freq-label").hide();
 }
 
 function processVariantInfoFromEnsembl(rsId, data) {
