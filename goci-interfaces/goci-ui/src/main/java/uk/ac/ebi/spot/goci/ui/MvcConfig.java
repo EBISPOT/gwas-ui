@@ -63,5 +63,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/docs/ancestry-data").setViewName("docs-template");
         registry.addViewController("/docs/ancestry-recommendation").setViewName("docs-template");
 
+        // teting stuff:
+        registry.addViewController("/module_test").setViewName("module_test");
     }
 }
