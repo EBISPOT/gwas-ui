@@ -274,7 +274,7 @@ function getVariantInfo(data,rsId) {
     }
 
     if (typeof location == 'undefined') {
-        $("#variant-location").html('Not mapped');
+        $("#variant-location").html('Variant does not map to the genome');
     }
     else {
         $("#variant-location").html(location);
