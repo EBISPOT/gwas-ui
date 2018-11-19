@@ -744,7 +744,7 @@ updatePage = function(initLoad=false) {
             parent_with_all_child_trait_ids.push(term.short_form);
         });
         $("#efo-child-trait-label").html(longContentList(
-        "gwas_child_traits_div", sub_traits, 'child traits'));
+        "gwas_child_traits_div", sub_traits.sort(), 'child traits'));
         prepareDownloadData(parent_with_all_child_trait_ids);
     });
 
@@ -1090,7 +1090,7 @@ function processSolrSlimData(data) {
     });
 
     $("#reported-traits").html(longContentList("gwas_reported_traits_div",
-        reportedTraits,
+        reportedTraits.sort(),
         'reported traits'));
 }
 
@@ -1392,8 +1392,19 @@ displayOXO = function(){
             });
         }
 
+        // remove duplicate Ids and sort
+        var uniqueXrefs = Array.from(new Set(xrefs));
+        uniqueXrefs = uniqueXrefs.sort();
+
+        // remove parent EFO ID from XRef list
+        var parentEFOIndex = uniqueXrefs.indexOf(getMainEFO().replace('_',':'));
+        uniqueXrefs.splice(parentEFOIndex, 1);
+
+        // update totalMapping count
+        totalMapping = uniqueXrefs.length;
+
         if(totalMapping > 0) {
-            $('#oxo-list').append(displayArrayAsList(xrefs))
+            $('#oxo-list').append(displayArrayAsList(uniqueXrefs))
         }
 
 
@@ -1443,7 +1454,7 @@ displayEfoTraitInfo = function(efoinfo) {
     if (synonym) {
         if (synonym.length > list_min) {
             $("#efotrait-synonym").html(longContentList("gwas_efotrait_synonym_div",
-                                                        synonym,
+                                                        synonym.sort(),
                                                         'synonyms'));
         }
         else {

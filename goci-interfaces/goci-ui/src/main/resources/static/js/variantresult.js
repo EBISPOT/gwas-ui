@@ -153,9 +153,18 @@ function getSolrProperty(data, property) {
 function getVariantInfo(data,rsId) {
     var valid_index = getSolrProperty(data,'context');
     var data_sample = data[valid_index];
-    var location = data_sample.chromLocation[0];
-    var region = data_sample.region[0];
-    var func = data_sample.context[0];
+
+    if (data_sample.chromLocation) {
+        var location = data_sample.chromLocation[0];
+    }
+
+    if (data_sample.region) {
+        var region = data_sample.region[0];
+    }
+
+    if (data_sample.context) {
+        var func = data_sample.context[0];
+    }
 
     var genes_mapped = [];
     var genes_mapped_url = [];
@@ -264,9 +273,17 @@ function getVariantInfo(data,rsId) {
         $("#variant-traits").html(longContentList("gwas_traits_div",traits_reported_url,'traits'));
     }
 
-    $("#variant-location").html(location);
+    if (typeof location == 'undefined') {
+        $("#variant-location").html('Variant does not map to the genome');
+    }
+    else {
+        $("#variant-location").html(location);
+    }
+
     $("#variant-region").html(region);
-    $("#variant-class").html(variationClassLabel(func));
+    if (func) {
+        $("#variant-class").html(variationClassLabel(func));
+    }
     $("#variant-mapped-genes").html(genes_mapped_url.join(', '));
     $("#variant-summary-content").html(getSummary(data));
 }
@@ -297,8 +314,12 @@ function getSummary(data) {
 function getLinkButtons (data,rsId) {
     var valid_index = getSolrProperty(data,'chromosomeName');
     var data_sample = data[valid_index];
-    var chr = data_sample.chromosomeName[0];
-    var pos = data_sample.chromosomePosition[0];
+    if (data_sample.chromosomeName) {
+        var chr = data_sample.chromosomeName[0];
+    }
+    if (data_sample.chromosomePosition) {
+        var pos = data_sample.chromosomePosition[0];
+    }
     var pos_start = pos - CONTEXT_RANGE;
     if (pos_start < 1) {
         pos_start = 1;
