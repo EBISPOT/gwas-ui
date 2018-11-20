@@ -303,7 +303,7 @@ function processData(data) {
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                 }
                 if (doc.resourcename == "gene") {
-                    var genesLabsUrl = gwasProperties.contextPath+"genes/"+doc.title
+                    var genesLabsUrl = gwasProperties.contextPath+"genes/"+doc.ensemblID
 
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                     row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-gene'>&nbsp;G&nbsp;</span><a href="+genesLabsUrl+">"+doc.title+"</a></h3>"));

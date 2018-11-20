@@ -94,9 +94,14 @@ function getDataSolr(main, initLoad=false) {
     var searchQuery = main;
     
     console.log("Solr research request received for " + searchQuery);
+
+    // Step 1: returning list of variants mapped to the queried gene:
+    var mappedRsIDs = getMappedRsIDs(searchQuery)
+    console.log("Mapped rsIDs:" + mappedRsIDs)
+
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
-                'q': 'entrezMappedGenes : ' + searchQuery + ' OR association_entrezMappedGenes : ' + searchQuery,
+            'q': mappedRsIDs,
             'max': 99999,
             'group.limit': 99999,
             'group.field': 'resourcename',
@@ -198,6 +203,31 @@ function processSolrData(data, initLoad=false, searchTerm) {
 
 }
 
+// Query slim solr to return rsIDs that are mapped to a given gene:
+// WARNING: syncronous call!!
+function getMappedRsIDs(geneID){
+    var result = null;
+    console.log("Ensembl gene ID: " + geneID)
+    $.ajax({
+        url: '../api/search',
+        data : {'q': geneID + ' AND resourcename:gene'},
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        success: function(data){
+            // Parse returned JSON;
+            var rsIDs = ''
+            for (doc of data.response.docs) {
+                if ( doc.resourcename == 'gene' && doc.ensemblID == geneID){
+                    // console.log(doc.rsIDs)
+                    result = doc.rsIDs.join(" OR ")
+                }
+            }
+        }
+    });
+    return result;
+}
+
 // Helper function to retrieve Ensembl data through the REST API
 // SYNC!!
 function getEnsemblREST( URL )
@@ -229,7 +259,7 @@ function getEnsemblREST( URL )
  */
 function generateGeneInformationTable(geneName, studies) {
     // Extracting gene data from Ensembl:
-    var geneQueryURL = EnsemblRestBaseURL + "/lookup/symbol/homo_sapiens/" + geneName + "?content-type=application/json"
+    var geneQueryURL = EnsemblRestBaseURL + "/lookup/id/" + geneName + "?content-type=application/json"
     var geneData = getEnsemblREST(geneQueryURL);
 
     // adding gene data to html:

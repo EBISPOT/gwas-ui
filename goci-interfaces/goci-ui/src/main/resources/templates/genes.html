@@ -61,17 +61,17 @@
     <div class="row">
         <h2 style="color: black"><img id="news_image" th:src="@{/icons/dna13.png}" style="vertical-align:middle" th:width="32" th:height="32"/>&nbsp;GWAS Catalog genes</h2>
         <p>There are now dedicated pages for genes with mapped associations in GWAS Catalog. Each gene may be mapped to multiple associations discovered by separate GWAS analyses (studies).
-            You can access a gene page by appending the gene name to the genes base link <a th:href="@{/publications}">www.ebi.ac.uk/gwas/labs/genes/</a> or by following the search result links pointing to genes.
+            You can access a gene page by appending the Ensembl stable ID of the gene the base link <a th:href="@{/genes}">www.ebi.ac.uk/gwas/labs/genes/</a> or by following the search result links pointing to genes.
             <br/>
             <br/>
         <h3>Examples</h3>
         <br/>
         <ul>
-            <li><a th:href="@{/genes/MYO6}">MYO6</a></li>
-            <li><a th:href="@{/genes/BRCA1}">BRCA1</a></li>
-            <li><a th:href="@{/genes/FTO}">FTO</a></li>
-            <li><a th:href="@{/genes/TNF}">TNF</a></li>
-            <li><a th:href="@{/genes/EGFR}">EGFR</a></li>
+            <li><a th:href="@{/genes/ENSG00000196586}">MYO6</a></li>
+            <li><a th:href="@{/genes/ENSG00000012048}">BRCA1</a></li>
+            <li><a th:href="@{/genes/ENSG00000140718}">FTO</a></li>
+            <li><a th:href="@{/genes/ENSG00000232810}">TNF</a></li>
+            <li><a th:href="@{/genes/ENSG00000146648}">EGFR</a></li>
 
         </ul>
         </p>

@@ -299,7 +299,7 @@ function addResults(data, expand, id) {
                         row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                     }
                     if (doc.resourcename == "gene") {
-                        var genesUrl = gwasProperties.contextPath+"genes/"+doc.title
+                        var genesUrl = gwasProperties.contextPath+"genes/"+doc.ensemblID
                         row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                         row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-gene'>&nbsp;G&nbsp;</span><a href="+genesUrl+">"+doc.title+"</a></h3>"));
                         row.append($("<td rowspan='2' style='width: 3%'>").html(''));
