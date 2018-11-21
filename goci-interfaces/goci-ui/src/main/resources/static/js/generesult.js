@@ -12,10 +12,7 @@ global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,s
 global_raw = 'fq:resourcename:association or resourcename:study';
 
 // Gene page specific constans:
-const EnsemblRestBaseURL = "https://rest.ensembl.org";
-const EnsemblURL = "http://www.ensembl.org/Homo_sapiens/Gene/";
-const OpenTargetsURL = "https://www.targetvalidation.org/target/";
-const EntrezURL = "https://www.ncbi.nlm.nih.gov/gene/"
+
 /**
  * Other global setting
  */
@@ -113,7 +110,7 @@ function getDataSolr(main, initLoad=false) {
             'raw' : global_raw == undefined ? '' : global_raw,
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         // Check if Solr returns some results
-        if (data.grouped.resourcename.groups.length == 0) {
+        if (data.grouped.resourcename.groups.length == 0 || mappedRsIDs == null ) {
             $('#lower_container').html("<h2>The Gene name <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
         }
         else {
@@ -259,7 +256,7 @@ function getEnsemblREST( URL )
  */
 function generateGeneInformationTable(geneName, studies) {
     // Extracting gene data from Ensembl:
-    var geneQueryURL = EnsemblRestBaseURL + "/lookup/id/" + geneName + "?content-type=application/json"
+    var geneQueryURL = gwasProperties.EnsemblRestBaseURL + "/lookup/id/" + geneName + "?content-type=application/json"
     var geneData = getEnsemblREST(geneQueryURL);
 
     // adding gene data to html:
@@ -283,7 +280,7 @@ function generateGeneInformationTable(geneName, studies) {
     console.log(joinedTraits)
 
     // Extracting cross-references:
-    var xrefQueryURL = EnsemblRestBaseURL + '/xrefs/id/' + geneData.id + '?content-type=application/json'
+    var xrefQueryURL = gwasProperties.EnsemblRestBaseURL + '/xrefs/id/' + geneData.id + '?content-type=application/json'
     var xrefData = getEnsemblREST(xrefQueryURL);
     var entrezID = "NA"
     for ( xref of xrefData ){
@@ -293,18 +290,18 @@ function generateGeneInformationTable(geneName, studies) {
     }
 
     // Adding automatic cross references pointing to Ensembl:
-    $("#ensembl_button").attr('onclick', "window.open('"+EnsemblURL+"Summary?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_phenotype_button").attr('onclick', "window.open('"+EnsemblURL+"Phenotype?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_pathway_button").attr('onclick', "window.open('"+EnsemblURL+"Pathway?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_regulation_button").attr('onclick', "window.open('"+EnsemblURL+"Regulation?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_expression_button").attr('onclick', "window.open('"+EnsemblURL+"ExpressionAtlas?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Summary?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_phenotype_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Phenotype?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_pathway_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Pathway?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_regulation_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Regulation?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_expression_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"ExpressionAtlas?db=core;g="+geneData.id+"',    '_blank')");
 
     // Adding automatic cross reference pointing to Open targets:
-    $("#opentargets_button").attr('onclick', "window.open('"+OpenTargetsURL+ geneData.id+"',    '_blank')");
+    $("#opentargets_button").attr('onclick', "window.open('"+gwasProperties.OpenTargetsURL+ geneData.id+"',    '_blank')");
 
     // Looping through the cross references and extract entrez id:
     if ( entrezID != "NA" ){
-        $("#entrez_button").attr('onclick', "window.open('"+EntrezURL+ entrezID + "',    '_blank')");
+        $("#entrez_button").attr('onclick', "window.open('"+gwasProperties.EntrezURL+ entrezID + "',    '_blank')");
     }
 
     // Print out some info to make sure things are not messed up completely:
