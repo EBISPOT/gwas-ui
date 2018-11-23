@@ -303,7 +303,7 @@ function processData(data) {
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                 }
                 if (doc.resourcename == "gene") {
-                    var genesLabsUrl = gwasProperties.contextPath+"genes/"+doc.ensemblID
+                    var genesLabsUrl = gwasProperties.contextPath+"genes/"+doc.title
 
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                     row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-gene'>&nbsp;G&nbsp;</span><a href="+genesLabsUrl+">"+doc.title+"</a></h3>"));
@@ -323,9 +323,9 @@ function processData(data) {
                     }
                     else {
                         var variantDescription = "<b>Location: </b>"+descriptionElements[0] +
-                            "; <b>Cytogenetic region:</b>" + descriptionElements[1] +
-                            "; <b>Most severe consequence: </b>" + descriptionElements[2] +
-                            "; <b>Mapped gene(s): </b>" + descriptionElements[3];
+                            " <b>Cytogenetic region:</b>" + descriptionElements[1] +
+                            " <b>Most severe consequence: </b>" + descriptionElements[2] +
+                            " <b>Mapped gene(s): </b>" + descriptionElements[3];
                     }
                     descriptionTruncated = variantDescription;
                 }
@@ -347,8 +347,8 @@ function processData(data) {
                     var descriptionElements = descriptionTruncated.split("|");
                     variantDescription += "<b>Description: </b>"+descriptionElements[0] +
                         "<br><b>Genomic location: </b>" + descriptionElements[1] +
-                        "; <b>Cytogenetic region: </b>" + descriptionElements[2] +
-                        "; <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
+                        " <b>Cytogenetic region: </b>" + descriptionElements[2] +
+                        " <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
                     descriptionTruncated = variantDescription;
                 }
 
@@ -465,6 +465,7 @@ function processTraitCounts(data) {
     var traits = data.facet_counts.facet_fields.traitName_s;
 
     $('#trait-dropdown ul').empty();
+    traits = traits.sort()
 
     for (var i = 0; i < traits.length; i = i + 2) {
         var trait = traits[i];

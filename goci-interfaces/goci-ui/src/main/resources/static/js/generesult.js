@@ -202,12 +202,12 @@ function processSolrData(data, initLoad=false, searchTerm) {
 
 // Query slim solr to return rsIDs that are mapped to a given gene:
 // WARNING: syncronous call!!
-function getMappedRsIDs(geneID){
+function getMappedRsIDs(geneName){
     var result = null;
-    console.log("Ensembl gene ID: " + geneID)
+    console.log("Ensembl gene ID: " + geneName)
     $.ajax({
         url: '../api/search',
-        data : {'q': geneID + ' AND resourcename:gene'},
+        data : {'q': "title:" + geneName + ' AND resourcename:gene'},
         type: 'get',
         dataType: 'json',
         async: false,
@@ -215,7 +215,7 @@ function getMappedRsIDs(geneID){
             // Parse returned JSON;
             var rsIDs = ''
             for (doc of data.response.docs) {
-                if ( doc.resourcename == 'gene' && doc.ensemblID == geneID){
+                if ( doc.resourcename == 'gene' && doc.title == geneName){
                     // console.log(doc.rsIDs)
                     result = doc.rsIDs.join(" OR ")
                 }
@@ -256,7 +256,7 @@ function getEnsemblREST( URL )
  */
 function generateGeneInformationTable(geneName, studies) {
     // Extracting gene data from Ensembl:
-    var geneQueryURL = gwasProperties.EnsemblRestBaseURL + "/lookup/id/" + geneName + "?content-type=application/json"
+    var geneQueryURL = gwasProperties.EnsemblRestBaseURL + "/lookup/symbol/homo_sapiens/" + geneName + "?content-type=application/json"
     var geneData = getEnsemblREST(geneQueryURL);
 
     // adding gene data to html:
@@ -274,8 +274,9 @@ function generateGeneInformationTable(geneName, studies) {
         reportedTraits[study.traitName_s] = 1;
     }
 
-    // joining reported traits:
-    var joinedTraits = Object.keys(reportedTraits).join("</li>\n\t<li>")
+    // joining reported traits & sort:
+    reportedTraits = Object.keys(reportedTraits).sort()
+    var joinedTraits = reportedTraits.join("</li>\n\t<li>")
     $("#reportedTraits").html(`<ul>\n\t<li>${joinedTraits}</li></ul>`);
     console.log(joinedTraits)
 

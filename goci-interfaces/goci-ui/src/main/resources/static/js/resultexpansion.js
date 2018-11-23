@@ -299,7 +299,7 @@ function addResults(data, expand, id) {
                         row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                     }
                     if (doc.resourcename == "gene") {
-                        var genesUrl = gwasProperties.contextPath+"genes/"+doc.ensemblID
+                        var genesUrl = gwasProperties.contextPath+"genes/"+doc.title
                         row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                         row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-gene'>&nbsp;G&nbsp;</span><a href="+genesUrl+">"+doc.title+"</a></h3>"));
                         row.append($("<td rowspan='2' style='width: 3%'>").html(''));
@@ -341,12 +341,12 @@ function addResults(data, expand, id) {
                         var descriptionElements = descriptionTruncated.split("|");
                         geneDescription += "<b>Description: </b>"+descriptionElements[0] +
                             "<br><b>Genomic location: </b>" + descriptionElements[1] +
-                            "; <b>Cytogenetic region: </b>" + descriptionElements[2] +
-                            "; <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
+                            " <b>Cytogenetic region: </b>" + descriptionElements[2] +
+                            " <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
                         descriptionTruncated = geneDescription;
                     }
 
-                    descriptionTruncated=addShowMoreLink(descriptionTruncated, 200,"...");
+                    descriptionTruncated=addShowMoreLink(descriptionTruncated, 220,"...");
                     descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
     
     
