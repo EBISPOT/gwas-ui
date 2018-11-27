@@ -283,10 +283,14 @@ function generateGeneInformationTable(geneName, studies) {
     // Extracting cross-references:
     var xrefQueryURL = gwasProperties.EnsemblRestBaseURL + '/xrefs/id/' + geneData.id + '?content-type=application/json'
     var xrefData = getEnsemblREST(xrefQueryURL);
-    var entrezID = "NA"
+    var entrezID = "NA";
+    var OMIMID = "NA";
     for ( xref of xrefData ){
         if ( xref.dbname == "EntrezGene" ){
             entrezID = xref.primary_id
+        }
+        if ( xref.dbname == 'MIM_GENE' ){
+            OMIMID = xref.primary_id
         }
     }
 
@@ -303,6 +307,10 @@ function generateGeneInformationTable(geneName, studies) {
     // Looping through the cross references and extract entrez id:
     if ( entrezID != "NA" ){
         $("#entrez_button").attr('onclick', "window.open('"+gwasProperties.EntrezURL+ entrezID + "',    '_blank')");
+    }
+    // Looping through the cross references and extract OMIM id:
+    if ( OMIMID != "NA" ){
+        $("#OMIM_button").attr('onclick', "window.open('"+gwasProperties.OMIMURL+ OMIMID + "',    '_blank')");
     }
 
     // Print out some info to make sure things are not messed up completely:
