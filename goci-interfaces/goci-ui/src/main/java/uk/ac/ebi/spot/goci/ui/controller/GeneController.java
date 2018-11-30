@@ -30,7 +30,7 @@ public class GeneController {
     //    return "genes";
     //}
 
-    @RequestMapping(value = "/genes/{geneId}", produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/genes/{geneId:.+}", produces = MediaType.TEXT_HTML_VALUE)
     public String search(Model model,
                          @PathVariable(required = false) String geneId,
                          @RequestParam(required = false) String filter) {
