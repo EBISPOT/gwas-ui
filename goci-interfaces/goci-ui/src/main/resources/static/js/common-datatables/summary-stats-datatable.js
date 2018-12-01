@@ -55,6 +55,10 @@ function displayDatatableSummaryStats(data) {
     
     var linkFullPValue = ftplink.concat("FTP Download");
     tmp['link']=linkFullPValue;
+
+    var ftpPath = "ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(dir);
+    tmp['ftpPath'] = ftpPath;
+
     data_json.push(tmp);
     
     });
@@ -114,6 +118,11 @@ function displayDatatableSummaryStats(data) {
                 field: 'link',
                 title: 'Data access',
                 sortable: true
+            },
+            {
+                field: 'ftpPath',
+                title: 'FTP Path',
+                visible: false
             }
         ],
         data: data_json,
