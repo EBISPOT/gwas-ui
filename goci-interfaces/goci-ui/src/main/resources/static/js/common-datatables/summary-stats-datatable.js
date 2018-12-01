@@ -59,8 +59,12 @@ function displayDatatableSummaryStats(data) {
     
     });
  
+    var filename = 'gwas-summary-statistics';
     $('#summary-stats-table').bootstrapTable({
         exportDataType: 'all',
+        exportOptions: {
+            fileName: filename
+        },
         columns: [
             {
                 field: 'author',
