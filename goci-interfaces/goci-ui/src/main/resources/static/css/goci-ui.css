@@ -469,6 +469,10 @@ a > .toplevel-view {
     background-color: darkmagenta;
 }
 
+.letter-circle-gene {
+    background-color: firebrick;
+}
+
 .letter-circle-trait {
     background-color: #ffac1b;
 }

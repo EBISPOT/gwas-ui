@@ -1,6 +1,9 @@
 /**
  * Created by dwelter on 20/01/15.
  */
+
+
+
 var SearchState = {
     LOADING: {value: 0},
     NO_RESULTS: {value: 1},
@@ -123,7 +126,9 @@ function buildBreadcrumbs() {
         else if (facet == "trait") {
             last.text("Traits");
         }
-
+        else if (facet == "gene") {
+            last.text("Genes");
+        }
         breadcrumbs.append(last);
     }
 }
@@ -144,7 +149,10 @@ function solrSearch(queryTerm) {
         var bp1 = elements[1].split('-')[0].trim();
         var bp2 = elements[1].split('-')[1].trim();
 
-        var searchPhrase = 'chromosomeName:'.concat(chrom).concat(' AND chromosomePosition:[').concat(bp1).concat(' TO ').concat(bp2).concat(']');
+        // Returning variants based on coordinates:
+        // var searchPhrase = 'chromosomeName:'.concat(chrom).concat(' AND chromosomePosition:[').concat(bp1).concat(' TO ').concat(bp2).concat(']');
+        var searchPhrase = "chromosomeName: "+chrom+" AND ( chromosomePosition:[ "+bp1+" TO "+bp2+" ] OR chromosomeEnd : [ "+bp1+" TO "+bp2+" ] OR chromosomeStart : [ "+bp1+" TO "+bp2+" ] )"
+
     }
     else {
         var searchTerm = 'text:"'.concat(queryTerm).concat('"');
@@ -297,7 +305,13 @@ function processData(data) {
                     row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-variant'>&nbsp;V&nbsp;</span><a href="+variantsLabsUrl+">"+doc.title+"</a></h3>"));
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                 }
-        
+                if (doc.resourcename == "gene") {
+                    var genesLabsUrl = gwasProperties.contextPath+"genes/"+doc.title
+
+                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+                    row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-gene'>&nbsp;G&nbsp;</span><a href="+genesLabsUrl+">"+doc.title+"</a></h3>"));
+                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+                }
         
                 tbody.append(row);
                 // Function to parse the description
@@ -307,10 +321,37 @@ function processData(data) {
                 // Add custom formatting for Variant description
                 if (doc.resourcename == "variant") {
                     var descriptionElements = descriptionTruncated.split("|");
-                    var variantDescription = "<b>Location: </b>"+descriptionElements[0] +
-                        "; <b>Cytogenetic region: </b>" + descriptionElements[1] +
-                        "; <b>Most severe consequence: </b>" + descriptionElements[2] +
-                        "; <b>Mapped gene(s): </b>" + descriptionElements[3].split(",").join(", ");
+                    if (descriptionElements[1] == "NA"){
+                        var variantDescription = "This variant could not be mapped to the genome."
+                    }
+                    else {
+                        var variantDescription = "<b>Location: </b>"+descriptionElements[0] +
+                            " <b>Cytogenetic region:</b>" + descriptionElements[1] +
+                            " <b>Most severe consequence: </b>" + descriptionElements[2] +
+                            " <b>Mapped gene(s): </b>" + descriptionElements[3];
+                    }
+                    descriptionTruncated = variantDescription;
+                }
+
+                // Add custom formatting for gene description
+                if (doc.resourcename == "gene") {
+                    var variantDescription = '' // initializing empty description
+                    var querySting = $('#query').text().toUpperCase()
+
+                    // Checking if the queried term is not the same as the title:
+                    if ( doc.title != $('#query').text().toUpperCase()){
+                        console.log("[Info] The queried string is different from the gene symbol...")
+                        // Checking for synonyms:
+                        if (doc.synonymsGene.match(querySting)){
+                            variantDescription += "<i>" + querySting + " is a synonym for " + doc.title + "</i><br>"
+                        }
+                    }
+
+                    var descriptionElements = descriptionTruncated.split("|");
+                    variantDescription += "<b>Description: </b>"+descriptionElements[0] +
+                        "<br><b>Genomic location: </b>" + descriptionElements[1] +
+                        " <b>Cytogenetic region: </b>" + descriptionElements[2] +
+                        " <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
                     descriptionTruncated = variantDescription;
                 }
 
@@ -328,9 +369,9 @@ function processData(data) {
                 }
         
                 descriptionTruncated = descriptionTruncated+description_stats;
-        
+
                 descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
-        
+
                 rowDescription.append($("<td style=\"width: 88%\">").html(descriptionTruncated));
                 tbody.append(rowDescription);
                 divResult.append(table);
@@ -427,6 +468,7 @@ function processTraitCounts(data) {
     var traits = data.facet_counts.facet_fields.traitName_s;
 
     $('#trait-dropdown ul').empty();
+    traits = traits.sort()
 
     for (var i = 0; i < traits.length; i = i + 2) {
         var trait = traits[i];
