@@ -69,8 +69,17 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     data_json.push(tmp);
     
     });
+
+    // get current date
+    var d = new Date();
+    var curr_date = d.getDate();
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var curr_month = monthNames[d.getMonth()];
+    var curr_year = d.getFullYear();
+    var date = (curr_date + "_" + curr_month + "_" + curr_year);
  
-    var filename = 'gwas-summary-statistics';
+    var filename = 'gwas_summary_statistics_'+date;
     $('#summary-stats-table').bootstrapTable({
         exportDataType: 'all',
         exportOptions: {
