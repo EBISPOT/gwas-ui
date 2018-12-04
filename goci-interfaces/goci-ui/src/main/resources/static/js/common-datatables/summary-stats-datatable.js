@@ -8,7 +8,7 @@
  * @param {Object} data - summary_stats solr docs
  * @param {Boolean} cleanBeforeInsert
  */
-function displayDatatableSummaryStats(data) {
+function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     //by default, we clean the table before inserting data
     var summary_stats_ids = [];
     $('#summary-stats-table').bootstrapTable('removeAll');
@@ -50,12 +50,19 @@ function displayDatatableSummaryStats(data) {
     var a = (summary_stats.authorAscii_s).replace(/\s/g,"");
     var dir = a.concat("_").concat(summary_stats.pubmedId).concat("_").concat(summary_stats.accessionId);
 
+    // Data Access
     var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
         .concat(dir).concat("' target='_blank'>");
-    
-    var linkFullPValue = ftplink.concat("FTP Download");
-    tmp['link']=linkFullPValue;
+    var linkFullPValue = ftplink.concat("FTP Download</a>");
 
+    if ($.inArray(summary_stats_id, summaryStatsStudyAccessions) != -1) {
+        var apiLink = "&nbsp;&nbsp;or&nbsp;&nbsp;<a href='http://www.ebi.ac.uk/gwas/summary-statistics/docs' target='_blank'>API access</a>";
+        tmp['link'] = linkFullPValue+apiLink;
+    } else {
+        tmp['link'] = linkFullPValue;
+    }
+
+    // FTP Path
     var ftpPath = "ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(dir);
     tmp['ftpPath'] = ftpPath;
 
@@ -138,37 +145,4 @@ function displayDatatableSummaryStats(data) {
     hideLoadingOverLay('#summary-stats-table-loading');
 }
 
-
-function checkSummaryStatsDatabase(data) {
-    $.each(data.response.docs, (index, summary_stats) => {
-        var a = (summary_stats.authorAscii_s).replace(/\s/g, "");
-        var dir = a.concat("_").concat(summary_stats.pubmedId).concat("_").concat(summary_stats.accessionId);
-        checkIfStudyLoaded(summary_stats.accessionId, index, dir);
-    });
-}
-
-function checkIfStudyLoaded(study_accession, index, dir) {
-    return promiseGet('/gwas/summary-statistics/api/studies/' + study_accession,
-        {}, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
-        // Only studies loaded in the Summary stats db will have a 200 response
-        updateColumn(index, dir);
-        return data;
-    }).catch(function (err) {
-        // console.error('Error when searching Summary Stats data for: ' + study_accession + '. ' + err);
-    })
-}
-
-function updateColumn(index, dir) {
-    var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
-        .concat(dir).concat("' target='_blank'>");
-    var linkFullPValue = ftplink.concat("FTP Download</a>");
-    var apiLink = "&nbsp;&nbsp;or&nbsp;&nbsp;<a href='http://www.ebi.ac.uk/gwas/summary-statistics/docs' target='_blank'>API access</a>";
-
-    $('#summary-stats-table').bootstrapTable('updateRow', {
-        index: index,
-        row: {
-            link: linkFullPValue+apiLink
-        }
-    });
-}
 
