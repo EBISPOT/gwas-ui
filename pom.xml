@@ -6,7 +6,7 @@
 
     <groupId>uk.ac.ebi.spot</groupId>
     <artifactId>gwas-ui</artifactId>
-    <version>3.0.7-SNAPSHOT</version>
+    <version>3.0.7</version>
 
     <packaging>pom</packaging>
     <name>GOCI (root)</name>
