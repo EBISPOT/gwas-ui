@@ -79,7 +79,7 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     var curr_year = d.getFullYear();
     var date = (curr_date + "_" + curr_month + "_" + curr_year);
  
-    var filename = 'gwas_summary_statistics_'+date;
+    var filename = 'list_gwas_summary_statistics_'+date;
     $('#summary-stats-table').bootstrapTable({
         exportDataType: 'all',
         exportOptions: {
