@@ -247,9 +247,9 @@ See <<E, Genomic mappings below>> for details of how we map variants to genes.
 
 ==== [[faq-B5]]2. How do I search by gene?
 
-You can search for a gene in the main search bar eg. STAT4. This will return any matching genes, as well as variants annotated with that gene. The results may also include publications with the gene name in the title.
+You can search for a gene in the main search bar eg. STAT4. This will return any matching genes, as well as variants annotated with that gene by out mapping pipeline. The results may also include publications with the gene name in the title.
 
-The "Gene" page is the best place to find gene-specific data, including a list of all associations mapped to that gene. See <<E, Genomic mappings below>> for details of how we map variants to genes. Note that this may not always match the gene reported by authors for a given variant, as they may use different criteria.
+The "Gene" page provides a list of all associations mapped to that gene as well as other gene-specific data. See <<E, Genomic mappings below>> for details of how we map variants to genes. Note that this may not always match the gene reported by authors for a given variant, as they may use different criteria.
 
 Author-reported genes can be found in the https://www.ebi.ac.uk/gwas/docs/file-downloads[full data download]. Opening the file in Excel and applying a https://support.office.com/en-us/article/Quick-start-Filter-data-by-using-an-AutoFilter-08647E19-11D1-42F6-B376-27B932E186E0[filter] for your gene of interest to the REPORTED GENE(S) column will enable you to extract all associations in that gene. 
 
