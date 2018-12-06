@@ -338,15 +338,6 @@ function processData(data) {
                     var variantDescription = '' // initializing empty description
                     var querySting = $('#query').text().toUpperCase()
 
-                    // Checking if the queried term is not the same as the title:
-                    if ( doc.title != $('#query').text().toUpperCase()){
-                        console.log("[Info] The queried string is different from the gene symbol...")
-                        // Checking for synonyms:
-                        if (doc.synonymsGene.match(querySting)){
-                            variantDescription += "<i>" + querySting + " is a synonym for " + doc.title + "</i><br>"
-                        }
-                    }
-
                     var descriptionElements = descriptionTruncated.split("|");
                     variantDescription += "<b>Description: </b>"+descriptionElements[0] +
                         "<br><b>Genomic location: </b>" + descriptionElements[1] +
