@@ -133,6 +133,46 @@ function buildBreadcrumbs() {
     }
 }
 
+// This function tests if the query was a region, in which case it updates the returned documents:
+function test_for_region(queryTerm, data){
+    // Query must contain : and -:
+    if ( queryTerm.indexOf(':') == -1 || queryTerm.indexOf('-') == -1 ){
+        console.log("** In the loop." )
+        return(data)
+    }
+
+    // Parsing:
+    var elements = queryTerm.split(':');
+    var chrom = elements[0].trim().toLocaleUpperCase().replace("CHR", "")
+
+    // Testing for valid chromosomes:
+    var chromosomes = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y"]
+    if ( ! chromosomes.includes(chrom)){ return(data) }
+
+    var bp1 = elements[1].split('-')[0].trim();
+    var bp2 = elements[1].split('-')[1].trim();
+
+    // Testing if bp-s are numbers:
+    if (isNaN(bp1) || isNaN(bp2)){ return(data) }
+
+    // Testing if bp1 is smaller than bp2:
+    if ( parseInt(bp1) >=  parseInt(bp2)){ return(data) }
+
+    // At this point we know the query is a valid region. We now have to add a "fake" document:
+    var fakeDoc = {
+        "description": chrom+"|"+bp1+"|"+bp2,
+        "chromosomeName" : chrom,
+        "chromosomeStart" : bp1,
+        "chromosomeEnd" : bp2,
+        "title": "chr"+chrom+":"+bp1 +"-"+bp2,
+        "resourcename": "region"
+    }
+
+    // Adding doc:
+    data.unshift(fakeDoc)
+    return(data)
+}
+
 function solrSearch(queryTerm) {
     console.log("Solr research request received for " + queryTerm);
     if (queryTerm == '*') {
@@ -243,6 +283,9 @@ function processData(data) {
         $(".results-container .table-toggle").hide();
         var divResult = $('#resultQuery').empty();
 
+        // Test if the query is a region, if so, adding a doc:
+        documents = test_for_region($('#query').text(), documents)
+
         for (var j = 0; j < documents.length; j++) {
             var doc = documents[j];
     
@@ -312,6 +355,13 @@ function processData(data) {
                     row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-gene'>&nbsp;G&nbsp;</span><a href="+genesLabsUrl+">"+doc.title+"</a></h3>"));
                     row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                 }
+                if(doc.resourcename == "region") {
+                    var URL_end = doc.chromosomeName+"-"+doc.chromosomeStart+"-"+doc.chromosomeEnd
+                    var regionsLabsUrl = gwasProperties.contextPath+"regions/"+URL_end
+                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+                    row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-region'>&nbsp;R&nbsp;</span><a href="+regionsLabsUrl+">"+doc.title+"</a></h3>"));
+                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+                }
         
                 tbody.append(row);
                 // Function to parse the description
@@ -353,6 +403,13 @@ function processData(data) {
                         " <b>Cytogenetic region: </b>" + descriptionElements[2] +
                         " <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
                     descriptionTruncated = variantDescription;
+                }
+                if(doc.resourcename == "region") {
+                    var descriptionElements = descriptionTruncated.split("|");
+                    descriptionTruncated = "<b>Description:</b> custom genomic region" +
+                        "<br><b>Chromosome: </b>" + descriptionElements[0] +
+                        " <b>Start: </b>" + descriptionElements[1] +
+                        " <b>end: </b>" + descriptionElements[2] + '<br> ';
                 }
 
                 descriptionTruncated=addShowMoreLink(descriptionTruncated, 200,"...");

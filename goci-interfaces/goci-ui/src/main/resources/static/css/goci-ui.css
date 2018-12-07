@@ -473,6 +473,10 @@ a > .toplevel-view {
     background-color: firebrick;
 }
 
+.letter-circle-region {
+    background-color: #2aabd2;
+}
+
 .letter-circle-trait {
     background-color: #ffac1b;
 }
