@@ -174,6 +174,30 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
                 tmp['mappedTraits'] = '-';
             }
 
+            // Adding genomic location to the table (but excluding mappings to patch regions)
+            var genomicCoordinate = 'Mapping not available';
+            if (asso.positionLinks){
+                var parsedPositions = []
+                var positions = asso.positionLinks;
+                $.each(positions, function (index, position) {
+                    // split position: "6|31237209|6p21.33",
+                    positionValues = position.split('|');
+                    var chrom = positionValues[0]
+                    var bpLocation = positionValues[1]
+
+                    // Test if the mapping is on a chromosome:
+                    if ( chrom.length < 3 ){
+                        parsedPositions.unshift(chrom + ':' + bpLocation)
+                    }
+                })
+
+                // Updating coordinate string:
+                if ( parsedPositions.length > 0 ){
+                    genomicCoordinate = parsedPositions.join('|')
+                }
+            }
+            tmp['coordinates'] = genomicCoordinate;
+
             // Study
             var author = asso.author_s;
             tmp['author'] = author;
@@ -265,6 +289,12 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             title: 'First Author',
             sortable: true,
             visible: false,
+            filterControl: 'input'
+        },{
+            field: 'coordinates',
+            title: 'Genomic coordinates',
+            sortable: true,
+            visible: true,
             filterControl: 'input'
         }],
         data: data_json,

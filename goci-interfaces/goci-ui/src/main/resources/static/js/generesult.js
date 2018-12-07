@@ -206,7 +206,7 @@ function getSlimSolrData(geneName){
     console.log("Ensembl gene ID: " + geneName)
     var returnData = {
         'rsIDs' : '',
-        'region': ''
+        'region': '-'
     }
     $.ajax({
         url: '../api/search',
