@@ -57,8 +57,8 @@ executeQuery = function(data={}, initLoad=false) {
 
 
 updatePage = function(initLoad=false) {
-    
-    //start spinner. The spinner will be stoped whenever the data is ready, thus closed by the coresponding data loading function.
+
+    //start spinner. The spinner will be stopped whenever the data is ready, thus closed by the corresponding data loading function.
     if(initLoad){
         showLoadingOverLay('#summary-panel-loading');
 //            showLoadingOverLay('#highlight-study-panel-loading');
@@ -89,17 +89,29 @@ function getDataSolr(main, initLoad=false) {
     // or just reload the tables(adding another efo term)
     
     var searchQuery = main;
-    
-    console.log("Solr research request received for " + searchQuery);
-    var fields =
-    // Step 1: returning list of variants mapped to the queried gene:
-    // var mappedRsIDs = getMappedRsIDs(searchQuery)
+    var solrQuery = '';
+    var regionTest = /([XY0-9]{1,2}):(\d+)-(\d+)/gi; // matches regions 6:234511-23500
+    var cytobandTest = /([XY0-9]{1,2})([PQ][0-9]+\.[0-9]+)/gi; // matches cytobands eg 6p33.1
 
-    // console.log("Mapped rsIDs:" + mappedRsIDs)
+    console.log("Solr research request received for " + searchQuery);
+
+    // Testing if the query was a cytoband or region:
+    if ( searchQuery.match(cytobandTest) ){
+        solrQuery = searchQuery;
+    }
+    else if (searchQuery.match(regionTest) ){
+        var coordinates = regionTest.exec(searchQuery);
+        solrQuery =  "chromosomeName: "+coordinates[1]+" AND chromosomePosition:[ "+coordinates[2]+" TO "+coordinates[3]+" ]"
+    }
+    else {
+        $('#lower_container').html("<h2>The provided query term <em>"+searchQuery+"</em> cannot be interpret as a region.</h2>");
+    }
+
+    console.log("** solr Query: "+ solrQuery)
 
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
-            'q': mappedRsIDs,
+            'q': solrQuery,
             'max': 99999,
             'group.limit': 99999,
             'group.field': 'resourcename',
@@ -110,9 +122,10 @@ function getDataSolr(main, initLoad=false) {
             // 'fq' : global_fq == undefined ? '*:*':global_fq,
             'raw' : global_raw == undefined ? '' : global_raw,
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
+
         // Check if Solr returns some results
-        if (data.grouped.resourcename.groups.length == 0 || mappedRsIDs == null ) {
-            $('#lower_container').html("<h2>The Gene name <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
+        if ( data.grouped.resourcename.groups.length == 0 ) {
+            $('#lower_container').html("<h2>No associaitons could be found in the region: <em>"+searchQuery+"</em> in the GWAS Catalog database</h2>");
         }
         else {
             processSolrData(data, initLoad, searchQuery); // gene name is now added to the process solr data function.
@@ -193,7 +206,7 @@ function processSolrData(data, initLoad=false, searchTerm) {
     console.log("[Info] displayDatatableStudies - OK")
     checkSummaryStatsDatabase(data_study.docs);
     console.log("[Info] checkSummaryStatsDatabase - OK")
-    generateGeneInformationTable(searchTerm, data_study)
+    //generateGeneInformationTable(searchTerm, data_study)
     console.log("[Info] generateGeneInformationTable - OK")
     //displaySummaryPublication(data_study.docs);
     
