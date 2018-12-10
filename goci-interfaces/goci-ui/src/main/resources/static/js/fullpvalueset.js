@@ -29,7 +29,7 @@ function getAllSummaryStatsStudies () {
     $('#loadingStudies').show();
 
 
-    var sumStatsUrl = '/gwas/summary-statistics/api/studies?size=2000'
+    var sumStatsUrl = 'https://www.ebi.ac.uk/gwas/summary-statistics/api/studies?size=2000';
 
     var summaryStatsStudyAccessions = [];
     return promiseGet(sumStatsUrl,
