@@ -51,8 +51,10 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     var dir = a.concat("_").concat(summary_stats.pubmedId).concat("_").concat(summary_stats.accessionId);
 
     // Data Access
-    var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
-        .concat(dir).concat("' target='_blank'>");
+    var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(dir);
+
+    var ftplink = "<a href='"+ftpPath.concat("' target='_blank'>");
+
     var linkFullPValue = ftplink.concat("FTP Download</a>");
 
     if ($.inArray(summary_stats_id, summaryStatsStudyAccessions) != -1) {
@@ -63,7 +65,6 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     }
 
     // FTP Path
-    var ftpPath = "ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(dir);
     tmp['ftpPath'] = ftpPath;
 
     data_json.push(tmp);
