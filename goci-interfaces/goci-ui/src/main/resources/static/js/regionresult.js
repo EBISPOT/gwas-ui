@@ -125,12 +125,15 @@ function getDataSolr(main, initLoad=false) {
 
         // Check if Solr returns some results
         if ( data.grouped.resourcename.groups.length == 0 ) {
+            console.log(data)
             $('#lower_container').html("<h2>No associaitons could be found in the region: <em>"+searchQuery+"</em> in the GWAS Catalog database</h2>");
         }
         else {
-            processSolrData(data, initLoad, searchQuery); // gene name is now added to the process solr data function.
+            //processSolrData(data, initLoad, searchQuery); // gene name is now added to the process solr data function.
             //downloads link : utils-helper.js
-            setDownloadLink(searchQuery);
+            // setDownloadLink(searchQuery);
+            console.log("What the fuck is going on?" + data)
+            fetchStudies(data.grouped.resourcename.groups[0].doclist.docs)
         }
         // console.log("Solr research done for " + searchQuery);
         return data;
@@ -241,8 +244,7 @@ function getMappedRsIDs(geneName){
 
 // Helper function to retrieve Ensembl data through the REST API
 // SYNC!!
-function getEnsemblREST( URL )
-{
+function getEnsemblREST( URL ){
     var result = null;
     $.ajax({
         url: URL,
@@ -339,3 +341,47 @@ function generateGeneInformationTable(geneName, studies) {
 }
 
 
+// This function returns studies based on GCSC accession id extracted from association documents:
+function fetchStudies(associationDocs){
+    // Look through all the docs and get accessions:
+    accessionIDs = [];
+    for (var assoc of associationDocs){
+        if ( ! accessionIDs.isPrototypeOf(assoc.accessionId)){
+            accessionIDs.unshift(assoc.accessionId)
+        }
+    }
+    var stepSize = 50;
+    var step = 0;
+    for
+    console.log(accessionIDs.length)
+    // Generate unqiue list of accessions:
+    // Loop through the accessions and download data by 50 studies at a time: (might need to be an other function for that)
+
+
+};
+getDataSolr("6:16000000-20000000")
+
+// Query slim solr to return rsIDs that are mapped to a given gene:
+// WARNING: syncronous call!!
+function getStudyData(studyIDs){
+    var result = null;
+    console.log("Ensembl gene ID: " + geneName)
+    $.ajax({
+        url: '../api/search',
+        data : {'q': "title:" + geneName + ' AND resourcename:gene'},
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        success: function(data){
+            // Parse returned JSON;
+            var rsIDs = ''
+            for (doc of data.response.docs) {
+                if ( doc.resourcename == 'gene' && doc.title == geneName){
+                    // console.log(doc.rsIDs)
+                    result = doc.rsIDs.join(" OR ")
+                }
+            }
+        }
+    });
+    return result;
+}
