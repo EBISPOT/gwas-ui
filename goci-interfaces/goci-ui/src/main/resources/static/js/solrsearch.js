@@ -140,22 +140,23 @@ function solrSearch(queryTerm) {
         var boost_field = ' OR title:"'.concat(queryTerm).concat('"')+' OR synonyms:"'.concat(queryTerm).concat('"');
         var searchPhrase = searchTerm.concat(boost_field)
     }
-    else if(queryTerm.indexOf(':') != -1 && queryTerm.indexOf('-') != -1){
+    else if(queryTerm.match(/[XY0-9]\:[0-9]+-[0-9]+/gi)){
         var elements = queryTerm.split(':');
-        var chrom = elements[0].trim();
-        if(chrom == 23){
-            chrom = 'X'
-        }
+
+        // suitable for chr#: and #: as well:
+        var chrom = elements[0].trim().toUpperCase().replace("CHR","");
+
+        // We don't check if the submitted chromosome valid or not. We should though.
+        // We need to test if the start position is smaller than the end.
         var bp1 = elements[1].split('-')[0].trim();
         var bp2 = elements[1].split('-')[1].trim();
 
         // Returning variants based on coordinates:
-        // var searchPhrase = 'chromosomeName:'.concat(chrom).concat(' AND chromosomePosition:[').concat(bp1).concat(' TO ').concat(bp2).concat(']');
         var searchPhrase = "chromosomeName: "+chrom+" AND ( chromosomePosition:[ "+bp1+" TO "+bp2+" ] OR chromosomeEnd : [ "+bp1+" TO "+bp2+" ] OR chromosomeStart : [ "+bp1+" TO "+bp2+" ] )"
-
     }
     else {
         var searchTerm = 'text:"'.concat(queryTerm).concat('"');
+
         // Search using title field also in query
         var boost_field = ' OR title:"'.concat(queryTerm).concat('"')+' OR synonyms:"'.concat(queryTerm).concat('"');
         var searchPhrase = searchTerm.concat(boost_field);
