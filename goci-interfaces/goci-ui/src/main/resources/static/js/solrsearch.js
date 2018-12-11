@@ -336,7 +336,6 @@ function processData(data) {
                 // Add custom formatting for gene description
                 if (doc.resourcename == "gene") {
                     var variantDescription = '' // initializing empty description
-                    var querySting = $('#query').text().toUpperCase()
 
                     var descriptionElements = descriptionTruncated.split("|");
                     variantDescription += "<b>Description: </b>"+descriptionElements[0] +

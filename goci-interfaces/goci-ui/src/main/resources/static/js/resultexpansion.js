@@ -328,7 +328,6 @@ function addResults(data, expand, id) {
                     // Add custom formatting for gene description
                     if (doc.resourcename == "gene") {
                         var geneDescription = '' // initializing empty description
-                        var querySting = $('#query').text().toUpperCase()
 
                         var descriptionElements = descriptionTruncated.split("|");
                         geneDescription += "<b>Description: </b>"+descriptionElements[0] +
