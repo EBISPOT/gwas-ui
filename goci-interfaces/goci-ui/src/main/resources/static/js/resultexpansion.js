@@ -171,7 +171,7 @@ function loadAdditionalResults(facet, expand) {
         var bp1 = elements[1].split('-')[0].trim();
         var bp2 = elements[1].split('-')[1].trim();
 
-        var searchPhrase = 'chromosomeName:'.concat(chrom).concat(' AND chromosomePosition:[').concat(bp1).concat(' TO ').concat(bp2).concat(']');
+        var searchPhrase = "chromosomeName: "+chrom+" AND ( chromosomePosition:[ "+bp1+" TO "+bp2+" ] OR chromosomeEnd : [ "+bp1+" TO "+bp2+" ] OR chromosomeStart : [ "+bp1+" TO "+bp2+" ] )"
 
     }
     else {
@@ -298,7 +298,12 @@ function addResults(data, expand, id) {
                         row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-variant'>&nbsp;V&nbsp;</span><a href="+variantsLabsUrl+">"+doc.title+"</a></h3>"));
                         row.append($("<td rowspan='2' style='width: 3%'>").html(''));
                     }
-    
+                    if (doc.resourcename == "gene") {
+                        var genesUrl = gwasProperties.contextPath+"genes/"+doc.title
+                        row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+                        row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-gene'>&nbsp;G&nbsp;</span><a href="+genesUrl+">"+doc.title+"</a></h3>"));
+                        row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+                    }
     
                     tbody.append(row);
                     // Function to parse the description
@@ -308,14 +313,40 @@ function addResults(data, expand, id) {
                     // Add custom formatting for Variant description
                     if (doc.resourcename == "variant") {
                         var descriptionElements = descriptionTruncated.split("|");
-                        var variantDescription = "<b>Location: </b>"+descriptionElements[0] +
-                            "; <b>Cytogenetic region:</b>" + descriptionElements[1] +
-                            "; <b>Most severe consequence: </b>" + descriptionElements[2] +
-                            "; <b>Mapped gene(s): </b>" + descriptionElements[3];
+                        if (descriptionElements[1] == "NA"){
+                            var variantDescription = "This variant could not be mapped to the genome."
+                        }
+                        else {
+                            var variantDescription = "<b>Location: </b>"+descriptionElements[0] +
+                                "; <b>Cytogenetic region:</b>" + descriptionElements[1] +
+                                "; <b>Most severe consequence: </b>" + descriptionElements[2] +
+                                "; <b>Mapped gene(s): </b>" + descriptionElements[3];
+                        }
                         descriptionTruncated = variantDescription;
                     }
 
-                    descriptionTruncated=addShowMoreLink(descriptionTruncated, 200,"...");
+                    // Add custom formatting for gene description
+                    if (doc.resourcename == "gene") {
+                        var geneDescription = '' // initializing empty description
+                        var querySting = $('#query').text().toUpperCase()
+
+                        // Checking if the queried term is not the same as the title:
+                        if ( doc.title != querySting){
+                            console.log("[Info] The queried string is different from the gene symbol..." + querySting +" vs. " + doc.title)
+                            // Checking for synonyms:
+                            if (doc.synonymsGene.match(querySting)){
+                                geneDescription += "<i>" + querySting + " is a synonym for " + doc.title + "</i><br>"
+                            }
+                        }
+                        var descriptionElements = descriptionTruncated.split("|");
+                        geneDescription += "<b>Description: </b>"+descriptionElements[0] +
+                            "<br><b>Genomic location: </b>" + descriptionElements[1] +
+                            " <b>Cytogenetic region: </b>" + descriptionElements[2] +
+                            " <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
+                        descriptionTruncated = geneDescription;
+                    }
+
+                    descriptionTruncated=addShowMoreLink(descriptionTruncated, 220,"...");
                     descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
     
     
