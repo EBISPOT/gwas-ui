@@ -367,8 +367,8 @@ function getStudyData(studyIDs){
     var result = null;
     console.log("Ensembl gene ID: " + geneName)
     $.ajax({
-        url: '../api/search',
-        data : {'q': "title:" + geneName + ' AND resourcename:gene'},
+        url : gwasProperties.contextPath + 'api/search/advancefilter'
+        data : {'q': "title:" + geneName + ' AND resourcename:study'},
         type: 'get',
         dataType: 'json',
         async: false,
