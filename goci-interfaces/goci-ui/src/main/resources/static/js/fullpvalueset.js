@@ -11,7 +11,7 @@ $(document).ready(function() {
         console.log("About to load all studies with full p-value sets");
         $("#downloads-item").addClass("active");
 
-        loadStudiesList();
+        getAllSummaryStatsStudies();
 
         loadResourcesList();
     }
@@ -24,10 +24,37 @@ $(document).ready(function() {
     });
 });
 
-function loadStudiesList() {
 
+function getAllSummaryStatsStudies () {
     $('#loadingStudies').show();
 
+
+    var sumStatsUrl = 'https://www.ebi.ac.uk/gwas/summary-statistics/api/studies?size=2000';
+
+    var summaryStatsStudyAccessions = [];
+    return promiseGet(sumStatsUrl,
+        {}, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
+        summaryStatsStudyAccessions = parseSumStats(data)
+    }).catch(function (err) {
+        console.error('Error getting Summary Stats data:' + err);
+    }).then(function () {
+        loadStudiesList(summaryStatsStudyAccessions);
+    });
+
+}
+
+function parseSumStats (data) {
+    var accessionList = [];
+    $.each(data._embedded, (index, studies) => {
+        $.each(studies, (internal_index, study) => {
+            accessionList.push(study[0].study_accession)
+        })
+    });
+    return accessionList;
+}
+
+
+function loadStudiesList(summaryStatsStudyAccessions) {
     var searchTerm = 'fullPvalueSet:true';
 
     $.getJSON('../api/search/summaryStatistics', {
@@ -36,8 +63,7 @@ function loadStudiesList() {
                 'fl': 'author,publicationDate,pubmedId,publication,title,traitName,associationCount,author_s,accessionId',
             })
             .done(function(data) {
-                displayDatatableSummaryStats(data);
-                checkSummaryStatsDatabase(data);
+                displayDatatableSummaryStats(data, summaryStatsStudyAccessions);
                 $('#loadingStudies').hide();
             });
 }
