@@ -54,8 +54,6 @@ executeQuery = function(data={}, initLoad=false) {
     updatePage(initLoad);
 }
 
-
-
 updatePage = function(initLoad=false) {
     
     //start spinner. The spinner will be stoped whenever the data is ready, thus closed by the coresponding data loading function.
@@ -90,11 +88,13 @@ function getDataSolr(main, initLoad=false) {
     
     var searchQuery = main;
     
-    console.log("Solr research request received for " + searchQuery);
+    // console.log("** Solr research request received for " + searchQuery);
 
     // Step 1: returning list of variants mapped to the queried gene:
-    var mappedRsIDs = getMappedRsIDs(searchQuery)
-    console.log("Mapped rsIDs:" + mappedRsIDs)
+    var slimData = getSlimSolrData(searchQuery)
+    var mappedRsIDs = slimData.rsIDs
+
+    // console.log("** Mapped rsIDs:" + mappedRsIDs)
 
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
@@ -114,7 +114,7 @@ function getDataSolr(main, initLoad=false) {
             $('#lower_container').html("<h2>The Gene name <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
         }
         else {
-            processSolrData(data, initLoad, searchQuery); // gene name is now added to the process solr data function.
+            processSolrData(data, initLoad, searchQuery, slimData.region); // gene name is now added to the process solr data function.
             //downloads link : utils-helper.js
             setDownloadLink(searchQuery);
         }
@@ -138,7 +138,7 @@ function getDataSolr(main, initLoad=false) {
  * @param {{}} data - solr result
  * @param {Boolean} initLoad
  */
-function processSolrData(data, initLoad=false, searchTerm) {
+function processSolrData(data, initLoad=false, searchTerm, region) {
     var isInCatalog=true;
     
     data_association = [];
@@ -192,7 +192,7 @@ function processSolrData(data, initLoad=false, searchTerm) {
     console.log("[Info] displayDatatableStudies - OK")
     checkSummaryStatsDatabase(data_study.docs);
     console.log("[Info] checkSummaryStatsDatabase - OK")
-    generateGeneInformationTable(searchTerm, data_study)
+    generateGeneInformationTable(searchTerm, data_study, region)
     console.log("[Info] generateGeneInformationTable - OK")
     //displaySummaryPublication(data_study.docs);
     
@@ -202,9 +202,12 @@ function processSolrData(data, initLoad=false, searchTerm) {
 
 // Query slim solr to return rsIDs that are mapped to a given gene:
 // WARNING: syncronous call!!
-function getMappedRsIDs(geneName){
-    var result = null;
+function getSlimSolrData(geneName){
     console.log("Ensembl gene ID: " + geneName)
+    var returnData = {
+        'rsIDs' : '',
+        'region': '-'
+    }
     $.ajax({
         url: '../api/search',
         data : {'q': "title:" + geneName + ' AND resourcename:gene'},
@@ -213,16 +216,17 @@ function getMappedRsIDs(geneName){
         async: false,
         success: function(data){
             // Parse returned JSON;
-            var rsIDs = ''
             for (doc of data.response.docs) {
                 if ( doc.resourcename == 'gene' && doc.title == geneName){
                     // console.log(doc.rsIDs)
-                    result = doc.rsIDs.join(" OR ")
+                    returnData.rsIDs = doc.rsIDs.join(" OR ")
+                    returnData.region = doc.cytobands
                 }
             }
         }
     });
-    return result;
+
+    return returnData;
 }
 
 // Helper function to retrieve Ensembl data through the REST API
@@ -254,7 +258,9 @@ function getEnsemblREST( URL )
  *    2) Extracts cross reference data from Ensembl.
  *    3) Extracts reported traits from study documents.
  */
-function generateGeneInformationTable(geneName, studies) {
+function generateGeneInformationTable(geneName, studies, region) {
+    // console.log("** Region: "+region)
+
     // Extracting gene data from Ensembl:
     var geneQueryURL = gwasProperties.EnsemblRestBaseURL + "/lookup/symbol/homo_sapiens/" + geneName + "?content-type=application/json"
     var geneData = getEnsemblREST(geneQueryURL);
@@ -264,11 +270,12 @@ function generateGeneInformationTable(geneName, studies) {
     var description = geneData.description.split(" [S")[0];
     $("#description").html(`${description}`)
     $("#genomicCoordinates").html(`${geneData.seq_region_name}:${geneData.start}-${geneData.end}`);
+    $("#cytogenicRegion").html(`${region}`)
     $("#biotype").html(`${geneData.biotype.replace("_", " ")}`);
 
-    console.log(studies.length)
+    // console.log("** Number of studies: " + studies.length)
 
-    // Looping through all studies and parse out repoted genes:
+    // Looping through all studies and parse out reported genes:
     var reportedTraits = {};
     for ( var study of studies.docs) {
         reportedTraits[study.traitName_s] = 1;
@@ -314,11 +321,11 @@ function generateGeneInformationTable(geneName, studies) {
     }
 
     // Print out some info to make sure things are not messed up completely:
-    console.log("[Info] Number of reported traits:" + reportedTraits.length)
-    console.log("[Info] ID: " + geneData.id);
-    console.log("[Info] Biotype: " + geneData.biotype);
-    console.log("[Info] Description: " + geneData.description);
-    console.log("[Info] Genomic location: " + geneData.seq_region_name + ":" + geneData.start + "-" + geneData.end)
+    // console.log("[Info] Number of reported traits:" + reportedTraits.length)
+    // console.log("[Info] ID: " + geneData.id);
+    // console.log("[Info] Biotype: " + geneData.biotype);
+    // console.log("[Info] Description: " + geneData.description);
+    // console.log("[Info] Genomic location: " + geneData.seq_region_name + ":" + geneData.start + "-" + geneData.end)
 
     // OK, loading is complete:
     hideLoadingOverLay('#summary-panel-loading');
