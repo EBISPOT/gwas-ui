@@ -267,9 +267,10 @@ function generateGeneInformationTable(geneName, studies, region) {
 
     // adding gene data to html:
     $("#geneSymbol").html(`${geneData.display_name}`);
-    var description = geneData.description.split(" [S")[0];
+    var description = "No description available."
+    if (geneData.description ){ description = geneData.description.split(" [S")[0] }
     $("#description").html(`${description}`)
-    $("#genomicCoordinates").html(`${geneData.seq_region_name}:${geneData.start}-${geneData.end}`);
+    $("#location").html(`${geneData.seq_region_name}:${geneData.start}-${geneData.end}`);
     $("#cytogenicRegion").html(`${region}`)
     $("#biotype").html(`${geneData.biotype.replace("_", " ")}`);
 
