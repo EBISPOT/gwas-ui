@@ -129,11 +129,11 @@ function getDataSolr(main, initLoad=false) {
             $('#lower_container').html("<h2>No associaitons could be found in the region: <em>"+searchQuery+"</em> in the GWAS Catalog database</h2>");
         }
         else {
-            //processSolrData(data, initLoad, searchQuery); // gene name is now added to the process solr data function.
+            processSolrData(data, initLoad, searchQuery); // gene name is now added to the process solr data function.
             //downloads link : utils-helper.js
-            // setDownloadLink(searchQuery);
-            console.log("What the fuck is going on?" + data)
-            fetchStudies(data.grouped.resourcename.groups[0].doclist.docs)
+            setDownloadLink(searchQuery);
+            //console.log("What the fuck is going on?" + data)
+            //fetchStudies(data.grouped.resourcename.groups[0].doclist.docs)
         }
         // console.log("Solr research done for " + searchQuery);
         return data;
@@ -209,7 +209,7 @@ function processSolrData(data, initLoad=false, searchTerm) {
     console.log("[Info] displayDatatableStudies - OK")
     checkSummaryStatsDatabase(data_study.docs);
     console.log("[Info] checkSummaryStatsDatabase - OK")
-    //generateGeneInformationTable(searchTerm, data_study)
+    generateGeneInformationTable(searchTerm, data_study)
     console.log("[Info] generateGeneInformationTable - OK")
     //displaySummaryPublication(data_study.docs);
     
@@ -272,69 +272,69 @@ function getEnsemblREST( URL ){
  */
 function generateGeneInformationTable(geneName, studies) {
     // Extracting gene data from Ensembl:
-    var geneQueryURL = gwasProperties.EnsemblRestBaseURL + "/lookup/symbol/homo_sapiens/" + geneName + "?content-type=application/json"
-    var geneData = getEnsemblREST(geneQueryURL);
+    // var geneQueryURL = gwasProperties.EnsemblRestBaseURL + "/lookup/symbol/homo_sapiens/" + geneName + "?content-type=application/json"
+    // var geneData = getEnsemblREST(geneQueryURL);
 
     // adding gene data to html:
-    $("#geneSymbol").html(`${geneData.display_name}`);
-    var description = geneData.description.split(" [S")[0];
-    $("#description").html(`${description}`)
-    $("#genomicCoordinates").html(`${geneData.seq_region_name}:${geneData.start}-${geneData.end}`);
-    $("#biotype").html(`${geneData.biotype.replace("_", " ")}`);
-
-    console.log(studies.length)
-
-    // Looping through all studies and parse out repoted genes:
-    var reportedTraits = {};
-    for ( var study of studies.docs) {
-        reportedTraits[study.traitName_s] = 1;
-    }
-
-    // joining reported traits & sort:
-    reportedTraits = Object.keys(reportedTraits).sort()
-    var joinedTraits = reportedTraits.join("</li>\n\t<li>")
-    $("#reportedTraits").html(`<ul>\n\t<li>${joinedTraits}</li></ul>`);
-    console.log(joinedTraits)
-
-    // Extracting cross-references:
-    var xrefQueryURL = gwasProperties.EnsemblRestBaseURL + '/xrefs/id/' + geneData.id + '?content-type=application/json'
-    var xrefData = getEnsemblREST(xrefQueryURL);
-    var entrezID = "NA";
-    var OMIMID = "NA";
-    for ( xref of xrefData ){
-        if ( xref.dbname == "EntrezGene" ){
-            entrezID = xref.primary_id
-        }
-        if ( xref.dbname == 'MIM_GENE' ){
-            OMIMID = xref.primary_id
-        }
-    }
-
-    // Adding automatic cross references pointing to Ensembl:
-    $("#ensembl_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Summary?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_phenotype_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Phenotype?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_pathway_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Pathway?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_regulation_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Regulation?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_expression_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"ExpressionAtlas?db=core;g="+geneData.id+"',    '_blank')");
-
-    // Adding automatic cross reference pointing to Open targets:
-    $("#opentargets_button").attr('onclick', "window.open('"+gwasProperties.OpenTargetsURL+ geneData.id+"',    '_blank')");
-
-    // Looping through the cross references and extract entrez id:
-    if ( entrezID != "NA" ){
-        $("#entrez_button").attr('onclick', "window.open('"+gwasProperties.EntrezURL+ entrezID + "',    '_blank')");
-    }
-    // Looping through the cross references and extract OMIM id:
-    if ( OMIMID != "NA" ){
-        $("#OMIM_button").attr('onclick', "window.open('"+gwasProperties.OMIMURL+ OMIMID + "',    '_blank')");
-    }
+    // $("#geneSymbol").html(`${geneData.display_name}`);
+    // var description = geneData.description.split(" [S")[0];
+    // $("#description").html(`${description}`)
+    // $("#genomicCoordinates").html(`${geneData.seq_region_name}:${geneData.start}-${geneData.end}`);
+    // $("#biotype").html(`${geneData.biotype.replace("_", " ")}`);
+    //
+    // console.log(studies.length)
+    //
+    // // Looping through all studies and parse out repoted genes:
+    // var reportedTraits = {};
+    // for ( var study of studies.docs) {
+    //     reportedTraits[study.traitName_s] = 1;
+    // }
+    //
+    // // joining reported traits & sort:
+    // reportedTraits = Object.keys(reportedTraits).sort()
+    // var joinedTraits = reportedTraits.join("</li>\n\t<li>")
+    // $("#reportedTraits").html(`<ul>\n\t<li>${joinedTraits}</li></ul>`);
+    // console.log(joinedTraits)
+    //
+    // // Extracting cross-references:
+    // var xrefQueryURL = gwasProperties.EnsemblRestBaseURL + '/xrefs/id/' + geneData.id + '?content-type=application/json'
+    // var xrefData = getEnsemblREST(xrefQueryURL);
+    // var entrezID = "NA";
+    // var OMIMID = "NA";
+    // for ( xref of xrefData ){
+    //     if ( xref.dbname == "EntrezGene" ){
+    //         entrezID = xref.primary_id
+    //     }
+    //     if ( xref.dbname == 'MIM_GENE' ){
+    //         OMIMID = xref.primary_id
+    //     }
+    // }
+    //
+    // // Adding automatic cross references pointing to Ensembl:
+    // $("#ensembl_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Summary?db=core;g="+geneData.id+"',    '_blank')");
+    // $("#ensembl_phenotype_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Phenotype?db=core;g="+geneData.id+"',    '_blank')");
+    // $("#ensembl_pathway_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Pathway?db=core;g="+geneData.id+"',    '_blank')");
+    // $("#ensembl_regulation_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Regulation?db=core;g="+geneData.id+"',    '_blank')");
+    // $("#ensembl_expression_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"ExpressionAtlas?db=core;g="+geneData.id+"',    '_blank')");
+    //
+    // // Adding automatic cross reference pointing to Open targets:
+    // $("#opentargets_button").attr('onclick', "window.open('"+gwasProperties.OpenTargetsURL+ geneData.id+"',    '_blank')");
+    //
+    // // Looping through the cross references and extract entrez id:
+    // if ( entrezID != "NA" ){
+    //     $("#entrez_button").attr('onclick', "window.open('"+gwasProperties.EntrezURL+ entrezID + "',    '_blank')");
+    // }
+    // // Looping through the cross references and extract OMIM id:
+    // if ( OMIMID != "NA" ){
+    //     $("#OMIM_button").attr('onclick', "window.open('"+gwasProperties.OMIMURL+ OMIMID + "',    '_blank')");
+    // }
 
     // Print out some info to make sure things are not messed up completely:
-    console.log("[Info] Number of reported traits:" + reportedTraits.length)
-    console.log("[Info] ID: " + geneData.id);
-    console.log("[Info] Biotype: " + geneData.biotype);
-    console.log("[Info] Description: " + geneData.description);
-    console.log("[Info] Genomic location: " + geneData.seq_region_name + ":" + geneData.start + "-" + geneData.end)
+    // console.log("[Info] Number of reported traits:" + reportedTraits.length)
+    // console.log("[Info] ID: " + geneData.id);
+    // console.log("[Info] Biotype: " + geneData.biotype);
+    // console.log("[Info] Description: " + geneData.description);
+    // console.log("[Info] Genomic location: " + geneData.seq_region_name + ":" + geneData.start + "-" + geneData.end)
 
     // OK, loading is complete:
     hideLoadingOverLay('#summary-panel-loading');
@@ -352,7 +352,7 @@ function fetchStudies(associationDocs){
     }
     var stepSize = 50;
     var step = 0;
-    for
+
     console.log(accessionIDs.length)
     // Generate unqiue list of accessions:
     // Loop through the accessions and download data by 50 studies at a time: (might need to be an other function for that)
@@ -367,7 +367,7 @@ function getStudyData(studyIDs){
     var result = null;
     console.log("Ensembl gene ID: " + geneName)
     $.ajax({
-        url : gwasProperties.contextPath + 'api/search/advancefilter'
+        url : gwasProperties.contextPath + 'api/search/advancefilter',
         data : {'q': "title:" + geneName + ' AND resourcename:study'},
         type: 'get',
         dataType: 'json',
