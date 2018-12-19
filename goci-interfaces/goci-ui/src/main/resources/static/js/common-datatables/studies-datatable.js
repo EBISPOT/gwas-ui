@@ -175,6 +175,9 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
         defaultNotVisible = true;
     }
 
+    var pub_date_help = '<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" ' +
+                                'data-container="body" title="Journal publication date YYYY-MM-DD"></span>'
+
 
     $('#study-table').bootstrapTable({
         exportDataType: 'all',
@@ -192,7 +195,7 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
             filterControl: 'input'
         }, {
             field: 'publi',
-            title: 'Publication date',
+            title: 'Publication date '+pub_date_help,
             sortable: true,
             visible: defaultVisible,
             filterControl: 'input'
