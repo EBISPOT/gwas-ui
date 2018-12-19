@@ -195,7 +195,7 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
             filterControl: 'input'
         }, {
             field: 'publi',
-            title: 'Pub date '+pub_date_help,
+            title: 'Publication date '+pub_date_help,
             sortable: true,
             visible: defaultVisible,
             filterControl: 'input'
