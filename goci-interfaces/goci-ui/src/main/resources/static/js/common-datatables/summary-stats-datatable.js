@@ -27,6 +27,11 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     var p_date = summary_stats.publicationDate;
     var publi = p_date.split('T')[0];
     tmp['publication_date'] = publi;
+
+    var catalog_publish_date = summary_stats.catalogPublishDate;
+    var cp_date = catalog_publish_date.split('T')[0];
+    tmp['catalog_publish_date'] = cp_date;
+
     tmp['reported_trait'] = summary_stats.traitName_s;
     
     var mappedTraits = summary_stats.mappedLabel;
@@ -106,7 +111,13 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
                 field: 'publication_date',
                 title: 'Publication date',
                 sortable: true
-            }, {
+            },
+            {
+                field: 'catalog_publish_date',
+                title: 'Data Release date',
+                sortable: true
+            },
+            {
                 field: 'journal',
                 title: 'Journal',
                 sortable: true
