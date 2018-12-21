@@ -276,9 +276,11 @@ function getVariantInfo(data,rsId) {
     // Location
     if (jQuery.type(location) == 'undefined') {
         $("#variant-location").html('Variant does not map to the genome');
+        $("._ld_graph").html('Variant does not map to the genome');
     }
     else {
         $("#variant-location").html(location);
+        displayLDPlot();
     }
 
     // Cytogenetic region
