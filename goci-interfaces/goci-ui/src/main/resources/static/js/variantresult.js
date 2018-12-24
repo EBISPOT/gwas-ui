@@ -68,7 +68,25 @@ $(document).ready(function() {
         getVariantData(searchTerm);
     }
     getVariantInfoFromEnsembl(searchTerm);
+
+    $.getJSON(gwasProperties.contextPath+'api/search/stats')
+        .done(function(data) {
+            setGenomeStats(data);
+        }).fail(function () {
+            $('#genome-build-stats').text("GWAS Catalog data is currently mapped to unknown - unable to get data");
+    });
 });
+
+function setGenomeStats(data) {
+    try {
+        $('#genome-build-stats').text("GWAS Catalog data is currently mapped to " +
+            "Genome Assembly "+data.genebuild+" and dbSNP Build"+data.dbsnpbuild);
+    }
+    catch (ex) {
+        $('#genome-build-stats').text("GWAS Catalog data is currently mapped to unknown - unable to process data");
+        console.log("Failure to process stats " + ex);
+    }
+}
 
 function getVariantData(rsId) {
     console.log("Solr research request received for " + rsId);
