@@ -10,6 +10,7 @@ global_fl = 'pubmedId,title,author_s,orcid_s,publication,publicationDate,catalog
     'label,' + 'efoLink,parent,id,resourcename,';
 global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,snpInteraction,multiSnpHaplotype,rsId,strongestAllele,context,region,entrezMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,chromosomePosition,chromLocation,positionLinks,author_s,publication,publicationDate,catalogPublishDate,publicationLink,accessionId,initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,numberOfIndividuals,traitName_s,mappedLabel,mappedUri,traitUri,shortForm,labelda,synonym,efoLink,id,resourcename,range,orPerCopyNum,betaNum,betaUnit,betaDirection'
 global_raw = 'fq:resourcename:association or resourcename:study';
+var list_min = 5;
 
 // Gene page specific constans:
 
@@ -24,18 +25,14 @@ $(document).ready(() => {
     $('html,body').scrollTop(0);
 
 var searchTerm = getTextToSearch('#query');
-console.log("Query:" + searchTerm);
-console.log("Loading search module!");
 if (searchTerm != '') {
-    // console.log("Start search for the text " + searchTerm);
     var elements = {};
     searchTerm.split(',').forEach((term) => {
         elements[term] = term;
     });
     //first load
-    // console.log(elements);
     executeQuery(elements, true);
-}
+    }
 });
 
 /**
@@ -50,7 +47,6 @@ getTextToSearch = function(divId){
 }
 
 executeQuery = function(data={}, initLoad=false) {
-    // console.log("executeQuery");
     updatePage(initLoad);
 }
 
@@ -87,14 +83,10 @@ function getDataSolr(main, initLoad=false) {
     // or just reload the tables(adding another efo term)
     
     var searchQuery = main;
-    
-    // console.log("** Solr research request received for " + searchQuery);
 
     // Step 1: returning list of variants mapped to the queried gene:
     var slimData = getSlimSolrData(searchQuery)
     var mappedRsIDs = slimData.rsIDs
-
-    // console.log("** Mapped rsIDs:" + mappedRsIDs)
 
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
@@ -118,10 +110,8 @@ function getDataSolr(main, initLoad=false) {
             //downloads link : utils-helper.js
             setDownloadLink(searchQuery);
         }
-        // console.log("Solr research done for " + searchQuery);
         return data;
     }).catch(function(err) {
-        // console.error('Error when seaching solr for' + searchQuery + '. ' + err);
         throw(err);
     })
     
@@ -187,23 +177,16 @@ function processSolrData(data, initLoad=false, searchTerm, region) {
     
     //update association/study table
     displayDatatableAssociations(data_association.docs);
-    console.log("[Info] displayDatatableAssociations - OK")
     displayDatatableStudies(data_study.docs, PAGE_TYPE);
-    console.log("[Info] displayDatatableStudies - OK")
     checkSummaryStatsDatabase(data_study.docs);
-    console.log("[Info] checkSummaryStatsDatabase - OK")
-    generateGeneInformationTable(searchTerm, data_study, region)
-    console.log("[Info] generateGeneInformationTable - OK")
-    //displaySummaryPublication(data_study.docs);
-    
+    generateGeneInformationTable(searchTerm, data_study, region);
 })
 
 }
 
 // Query slim solr to return rsIDs that are mapped to a given gene:
 // WARNING: syncronous call!!
-function getSlimSolrData(geneName){
-    console.log("Ensembl gene ID: " + geneName)
+function getSlimSolrData(geneName) {
     var returnData = {
         'rsIDs' : '',
         'region': '-'
@@ -218,7 +201,6 @@ function getSlimSolrData(geneName){
             // Parse returned JSON;
             for (doc of data.response.docs) {
                 if ( doc.resourcename == 'gene' && doc.title == geneName){
-                    // console.log(doc.rsIDs)
                     returnData.rsIDs = doc.rsIDs.join(" OR ")
                     returnData.region = doc.cytobands
                 }
@@ -259,8 +241,6 @@ function getEnsemblREST( URL )
  *    3) Extracts reported traits from study documents.
  */
 function generateGeneInformationTable(geneName, studies, region) {
-    // console.log("** Region: "+region)
-
     // Extracting gene data from Ensembl:
     var geneQueryURL = gwasProperties.EnsemblRestBaseURL + "/lookup/symbol/homo_sapiens/" + geneName + "?content-type=application/json"
     var geneData = getEnsemblREST(geneQueryURL);
@@ -274,19 +254,23 @@ function generateGeneInformationTable(geneName, studies, region) {
     $("#cytogenicRegion").html(`${region}`)
     $("#biotype").html(`${geneData.biotype.replace("_", " ")}`);
 
-    // console.log("** Number of studies: " + studies.length)
-
-    // Looping through all studies and parse out reported genes:
-    var reportedTraits = {};
+    // Loop through all studies and parse out Reported traits:
+    var reported_traits = [];
     for ( var study of studies.docs) {
-        reportedTraits[study.traitName_s] = 1;
+        if ($.inArray(study.traitName_s, reported_traits) == -1) {
+            reported_traits.push(study.traitName_s);
+        }
     }
 
-    // joining reported traits & sort:
-    reportedTraits = Object.keys(reportedTraits).sort()
-    var joinedTraits = reportedTraits.join("</li>\n\t<li>")
-    $("#reportedTraits").html(`<ul>\n\t<li>${joinedTraits}</li></ul>`);
-    console.log(joinedTraits)
+    // Reported Traits display
+    reported_traits = reported_traits.sort();
+
+    if (reported_traits.length <= list_min) {
+        $("#reportedTraits").html(reported_traits.join(', '));
+    }
+    else {
+        $("#reportedTraits").html(longContentList("gwas_traits_div", reported_traits, 'traits'));
+    }
 
     // Extracting cross-references:
     var xrefQueryURL = gwasProperties.EnsemblRestBaseURL + '/xrefs/id/' + geneData.id + '?content-type=application/json'
@@ -321,15 +305,45 @@ function generateGeneInformationTable(geneName, studies, region) {
         $("#OMIM_button").attr('onclick', "window.open('"+gwasProperties.OMIMURL+ OMIMID + "',    '_blank')");
     }
 
-    // Print out some info to make sure things are not messed up completely:
-    // console.log("[Info] Number of reported traits:" + reportedTraits.length)
-    // console.log("[Info] ID: " + geneData.id);
-    // console.log("[Info] Biotype: " + geneData.biotype);
-    // console.log("[Info] Description: " + geneData.description);
-    // console.log("[Info] Genomic location: " + geneData.seq_region_name + ":" + geneData.start + "-" + geneData.end)
-
     // OK, loading is complete:
     hideLoadingOverLay('#summary-panel-loading');
 }
 
+// Create a hidden list of items - Used when we have to display a more or less long list of information
+function longContentList (content_id, list, type) {
 
+    var content_text = $('<span></span>');
+    content_text.css('padding-right', '8px');
+    content_text.html('<b>'+list.length+'</b> '+type);
+
+    var content_div  = $('<div></div>');
+    content_div.attr('id', content_id);
+    content_div.addClass('collapse');
+
+    var content_list = $('<ul></ul>');
+    content_list.css('padding-left', '25px');
+    content_list.css('padding-top', '6px');
+    $.each(list, function(index, item) {
+        content_list.append(newItem(item));
+    });
+    content_div.append(content_list);
+
+    var container = $('<div></div>');
+    container.append(content_text);
+    container.append(showHideDiv(content_id));
+    container.append(content_div);
+
+    return container;
+}
+
+// Create a button to show/hide content
+function showHideDiv(div_id) {
+    var div_button = $("<button></button>");
+    div_button.attr('title', 'Click to show/hide more information');
+    div_button.attr('id', 'button-'+div_id);
+    div_button.attr('onclick', 'toggleDiv("'+div_id+'")');
+    div_button.addClass("btn btn-default btn-xs btn-study");
+    div_button.html('<span class="glyphicon glyphicon-plus tgb"></span>');
+
+    return div_button;
+}
