@@ -10,6 +10,7 @@ global_fl = 'pubmedId,title,author_s,orcid_s,publication,publicationDate,catalog
     'label,' + 'efoLink,parent,id,resourcename,';
 global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,snpInteraction,multiSnpHaplotype,rsId,strongestAllele,context,region,entrezMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,chromosomePosition,chromLocation,positionLinks,author_s,publication,publicationDate,catalogPublishDate,publicationLink,accessionId,initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,numberOfIndividuals,traitName_s,mappedLabel,mappedUri,traitUri,shortForm,labelda,synonym,efoLink,id,resourcename,range,orPerCopyNum,betaNum,betaUnit,betaDirection'
 global_raw = 'fq:resourcename:association or resourcename:study';
+var list_min = 5;
 
 // Gene page specific constans:
 
@@ -276,17 +277,23 @@ function generateGeneInformationTable(geneName, studies, region) {
 
     // console.log("** Number of studies: " + studies.length)
 
-    // Looping through all studies and parse out reported genes:
-    var reportedTraits = {};
+    // Loop through all studies and parse out Reported traits:
+    var reported_traits = [];
     for ( var study of studies.docs) {
-        reportedTraits[study.traitName_s] = 1;
+        if ($.inArray(study.traitName_s, reported_traits) == -1) {
+            reported_traits.push(study.traitName_s);
+        }
     }
 
-    // joining reported traits & sort:
-    reportedTraits = Object.keys(reportedTraits).sort()
-    var joinedTraits = reportedTraits.join("</li>\n\t<li>")
-    $("#reportedTraits").html(`<ul>\n\t<li>${joinedTraits}</li></ul>`);
-    console.log(joinedTraits)
+    // Reported Traits display
+    reported_traits = reported_traits.sort();
+
+    if (reported_traits.length <= list_min) {
+        $("#reportedTraits").html(reported_traits.join(', '));
+    }
+    else {
+        $("#reportedTraits").html(longContentList("gwas_traits_div", reported_traits, 'traits'));
+    }
 
     // Extracting cross-references:
     var xrefQueryURL = gwasProperties.EnsemblRestBaseURL + '/xrefs/id/' + geneData.id + '?content-type=application/json'
@@ -332,4 +339,41 @@ function generateGeneInformationTable(geneName, studies, region) {
     hideLoadingOverLay('#summary-panel-loading');
 }
 
+// Create a hidden list of items - Used when we have to display a more or less long list of information
+function longContentList (content_id, list, type) {
 
+    var content_text = $('<span></span>');
+    content_text.css('padding-right', '8px');
+    content_text.html('<b>'+list.length+'</b> '+type);
+
+    var content_div  = $('<div></div>');
+    content_div.attr('id', content_id);
+    content_div.addClass('collapse');
+
+    var content_list = $('<ul></ul>');
+    content_list.css('padding-left', '25px');
+    content_list.css('padding-top', '6px');
+    $.each(list, function(index, item) {
+        content_list.append(newItem(item));
+    });
+    content_div.append(content_list);
+
+    var container = $('<div></div>');
+    container.append(content_text);
+    container.append(showHideDiv(content_id));
+    container.append(content_div);
+
+    return container;
+}
+
+// Create a button to show/hide content
+function showHideDiv(div_id) {
+    var div_button = $("<button></button>");
+    div_button.attr('title', 'Click to show/hide more information');
+    div_button.attr('id', 'button-'+div_id);
+    div_button.attr('onclick', 'toggleDiv("'+div_id+'")');
+    div_button.addClass("btn btn-default btn-xs btn-study");
+    div_button.html('<span class="glyphicon glyphicon-plus tgb"></span>');
+
+    return div_button;
+}
