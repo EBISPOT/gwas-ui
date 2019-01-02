@@ -20,10 +20,9 @@ var pageRowLimit=5;
 
 $(document).ready(() => {
 
-    //jump to the top of the page
     $('html,body').scrollTop(0);
-
     var searchTerm = getTextToSearch('#query');
+
     // console.log("Query:" + searchTerm);
     // console.log("Loading search module!");
     if (searchTerm != '') {
@@ -34,7 +33,6 @@ $(document).ready(() => {
             elements[term] = term;
         });
 
-        //first load
         // console.log(elements);
         executeQuery(elements, true);
     }
@@ -77,13 +75,8 @@ updatePage = function(initLoad=false) {
 }
 
 
-/**
- * Make solr query.
- * @param {String} mainEFO
- * @param {[]String} additionalEFO
- * @param {[]String} descendants
- * @param {Boolean} initLoad
- * @returns {Promise}
+/*
+Extracting data from the fat solr based on the query term
  */
 function getDataSolr(main, initLoad=false) {
     // initLoad will be pass to processEfotraitData, controlling whether to upload the triat information(initload)
@@ -94,7 +87,7 @@ function getDataSolr(main, initLoad=false) {
     var regionTest = /([XY0-9]{1,2}):(\d+)-(\d+)/gi; // matches regions 6:234511-23500
     var cytobandTest = /([XY0-9]{1,2})([PQ][0-9]+\.[0-9]+)/gi; // matches cytobands eg 6p33.1
 
-    console.log("Solr research request received for " + searchQuery);
+    // console.log("Solr research request received for " + searchQuery);
 
     // Testing if the query was a cytoband or region:
     if ( searchQuery.match(cytobandTest) ){
@@ -108,7 +101,7 @@ function getDataSolr(main, initLoad=false) {
         $('#lower_container').html("<h2>The provided query term <em>"+searchQuery+"</em> cannot be interpret as a region.</h2>");
     }
 
-    console.log("** solr Query: "+ solrQuery)
+    // console.log("** solr Query: "+ solrQuery)
 
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
@@ -125,7 +118,8 @@ function getDataSolr(main, initLoad=false) {
 
         // Check if Solr returns some results
         if ( data.grouped.resourcename.groups.length == 0 ) {
-            console.log(data)
+
+            // console.log(data)
             $('#lower_container').html("<h2>No associaitons could be found in the region: <em>"+searchQuery+"</em> in the GWAS Catalog database</h2>");
         }
         else {
@@ -137,23 +131,13 @@ function getDataSolr(main, initLoad=false) {
         return data;
     }).catch(function(err) {
 
-        // console.error('Error when seaching solr for' + searchQuery + '. ' + err);
+        console.error('Error when seaching solr for' + searchQuery + '. ' + err);
         throw(err);
     })
     
 }
 
-/**
- * Parse the Solr results and display the data on the HTML page
- * @param {{}} data - solr result
- * @param {Boolean} initLoad
- */
 
-/**
- * Parse the Solr results and display the data on the HTML page
- * @param {{}} data - solr result
- * @param {Boolean} initLoad
- */
 function processSolrData(data, initLoad=false, searchTerm) {
     var isInCatalog=true;
     
@@ -165,11 +149,12 @@ function processSolrData(data, initLoad=false, searchTerm) {
     if (data.grouped.resourcename.matches == 0) {
         isInCatalog = false;
     }
+
     //split the solr search by groups
     //data_study, data_association
     data_facet = data.facet_counts.facet_fields.resourcename;
     data_highlighting = data.highlighting;
-    // TODO not repeat yourself!!!!
+
     $.each(data.grouped.resourcename.groups, (index, group) => {
             switch (group.groupValue) {
         case "efotrait":
@@ -193,60 +178,36 @@ function processSolrData(data, initLoad=false, searchTerm) {
     var remove = Promise.resolve();
 
     remove.then(()=>{
-        // If no solr return,greate a fake empyt array so tables/plot are empty
-        if(!isInCatalog) {
-        data_association.docs = []
-        data_study.docs = []
-    }
-
-    var PAGE_TYPE = "region";
-
-    displayDatatableAssociations(data_association.docs);
-    console.log("[Info] displayDatatableAssociations - OK")
-
-    generateGeneInformationTable(searchTerm, data_study)
-    console.log("[Info] generateGeneInformationTable - OK")
-
-    if ( data_study.docs.length == 0 ){
-        console.log("** There's no sudy!!!")
-        data_study.docs = fetchStudies(data_association.docs)
-        displayDatatableStudies(data_study.docs, PAGE_TYPE);
-    }
-    else {
-        displayDatatableStudies(data_study.docs, PAGE_TYPE);
-    }
-    console.log("[Info] displayDatatableStudies - OK")
-
-    checkSummaryStatsDatabase(data_study.docs);
-    console.log("[Info] checkSummaryStatsDatabase - OK")
-
-})
-
-}
-
-// Query slim solr to return rsIDs that are mapped to a given gene:
-// WARNING: syncronous call!!
-function getMappedRsIDs(geneName){
-    var result = null;
-    console.log("Ensembl gene ID: " + geneName)
-    $.ajax({
-        url: '../api/search',
-        data : {'q': "title:" + geneName + ' AND resourcename:gene'},
-        type: 'get',
-        dataType: 'json',
-        async: false,
-        success: function(data){
-            // Parse returned JSON;
-            var rsIDs = ''
-            for (doc of data.response.docs) {
-                if ( doc.resourcename == 'gene' && doc.title == geneName){
-                    // console.log(doc.rsIDs)
-                    result = doc.rsIDs.join(" OR ")
-                }
-            }
+        // If no solr return, greate a fake empty array so tables/plot are empty
+        if( !isInCatalog ){
+            data_association.docs = [];
+            data_study.docs = [];
         }
-    });
-    return result;
+
+        var PAGE_TYPE = "region";
+
+        displayDatatableAssociations(data_association.docs);
+        console.log("[Info] displayDatatableAssociations - OK");
+
+        generateGeneInformationTable(searchTerm, data_study);
+        console.log("[Info] generateGeneInformationTable - OK");
+
+        // when chr:pos is queried, there's no returned study. We have to specifically fetch those.
+        if ( data_study.docs.length == 0 ){
+            console.log("** There's no sudy!!!");
+            data_study.docs = fetchStudies(data_association.docs);
+            displayDatatableStudies(data_study.docs, PAGE_TYPE);
+        }
+        else {
+            displayDatatableStudies(data_study.docs, PAGE_TYPE);
+        }
+        console.log("[Info] displayDatatableStudies - OK");
+
+        checkSummaryStatsDatabase(data_study.docs);
+        console.log("[Info] checkSummaryStatsDatabase - OK");
+
+    })
+
 }
 
 // Helper function to retrieve Ensembl data through the REST API
