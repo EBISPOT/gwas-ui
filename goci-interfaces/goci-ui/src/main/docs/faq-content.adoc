@@ -140,9 +140,9 @@
 
 ==== [[faq-A1]]1. How can I access GWAS Catalog data?
 
-In autumn 2018, we updated the GWAS Catalog search interface. Previously all Catalog data was displayed on a single page, with tables for “Studies”, “Associations” and “Catalog traits”. We have now created separate pages for each *publication*, *study*, *trait* and *variant* in the Catalog so that each of these can be explored individually. To get started, search for any text you wish in the search bar, then select a specific page for more information. See <<B,Searching in the GWAS Catalog below>> for further tips on how to find specific types of information, or see the https://youtu.be/4FplAQzRfh8[introductory video].
+In autumn 2018, we updated the GWAS Catalog search interface. Previously all Catalog data was displayed on a single page, with tables for “Studies”, “Associations” and “Catalog traits”. We have now created separate pages for each *publication*, *study*, *trait*, *variant* and *gene* in the Catalog so that each of these can be explored individually. To get started, search for any text you wish in the search bar, then select a specific page for more information. See <<B,Searching in the GWAS Catalog below>> for further tips on how to find specific types of information, or see the https://youtu.be/4FplAQzRfh8[introductory video].
 
-GWAS Catalog data can be downloaded in spreadsheet form. To download full association and study data, see our link:file-downloads[file downloads] page. You can also download specific association data sets from each “Publication”, “Study”, “Trait” and “Variant” page using the “Download Catalog data” button.
+GWAS Catalog data can be downloaded in spreadsheet form. To download full association and study data, see our link:file-downloads[file downloads] page. You can also download specific association data sets from each “Publication”, “Study”, “Trait”, “Variant” and "Gene" page using the “Download Catalog data” button.
 
 The GWAS Catalog <<D,diagram>> presents a graphical view of the GWAS Catalog data.
 
@@ -208,7 +208,7 @@ You can also search for “interaction” in the download spreadsheet.
 
 ==== [[faq-A14]]14. How do I identify targeted and exome array studies in the GWAS Catalog??
 
-Targeted/exome array studies included in the Catalog are indicated by a small “target” icon. This icon appears in the search results next to any publication that includes a targeted array study. It is also displayed in the “Studies” table (on the “Publication”, “Trait” or “Variant” page), in the “Study accession” column.  
+Targeted/exome array studies included in the Catalog are indicated by a small “target” icon. This icon appears in the search results next to any publication that includes a targeted array study. It is also displayed in the “Studies” table (on the “Publication”, “Trait”, “Variant” or "Gene" page), in the “Study accession” column.  
 
 Targeted/exome array studies are identifiable in the download file from the presence of an extra column displaying the field “Genotyping technology (additional array information)”, as described in https://www.ebi.ac.uk/gwas/docs/file-downloads[our download section].
 
@@ -247,27 +247,17 @@ See <<E, Genomic mappings below>> for details of how we map variants to genes.
 
 ==== [[faq-B5]]2. How do I search by gene?
 
-You can search for a gene in the main search bar eg. STAT4. This will return a list of all the variants annotated with that gene, as well as any publications with the gene name in the title. 
+You can search for a gene in the main search bar eg. STAT4. This will return any matching genes, as well as variants annotated with that gene by out mapping pipeline. The results may also include publications with the gene name in the title.
 
-Clicking any of the variants will take you to the variant page and allow you to browse a limited region surrounding any given SNP using the LD plot. However, for a wider region this may be time consuming since each page needs to be accessed variant-by-variant. At the moment, it is not possible to download all associations with a gene from a single place.
+The "Gene" page provides a list of all associations mapped to that gene as well as other gene-specific data. See <<E, Genomic mappings below>> for details of how we map variants to genes. Note that this may not always match the gene reported by authors for a given variant, as they may use different criteria.
 
-We are in the process of developing a new gene page summarising all associations mapped to a specific gene. 
+Author-reported genes can be found in the https://www.ebi.ac.uk/gwas/docs/file-downloads[full data download]. Opening the file in Excel and applying a https://support.office.com/en-us/article/Quick-start-Filter-data-by-using-an-AutoFilter-08647E19-11D1-42F6-B376-27B932E186E0[filter] for your gene of interest to the REPORTED GENE(S) column will enable you to extract all associations in that gene. 
 
-As an interim measure, we have made available our old search interface in the https://www.ebi.ac.uk/gwas/labs/[GWAS labs site], in response to user feedback. This site is up to date with the main GWAS Catalog and includes the previous gene search functionality. Please note, however, that this search is less specific and will return all associations in publications containing the gene name.  
-
-Another option is to use the https://www.ebi.ac.uk/gwas/docs/file-downloads[full data download]. Opening the file in Excel and applying a https://support.office.com/en-us/article/Quick-start-Filter-data-by-using-an-AutoFilter-08647E19-11D1-42F6-B376-27B932E186E0[filter] for your gene of interest to the MAPPED_GENE column will enable you to extract all associations in that gene. 
-
-If you are interested in gene data within a specific trait or publication, you can search in the new web interface for the trait or publication, click through to the relevant page, and then filter for a mapped gene in the associations table. 
-
-Alternatively, you may wish to use the http://www.ensembl.org/index.html[Ensembl] or https://www.targetvalidation.org[Open Targets] platforms, both of which include data from the GWAS Catalog. 
-
-Finally, you can use our link:api[REST API] to return associations for a specific gene or genomic region.
-
+You can also use our link:api[REST API] to return associations for a specific gene or genomic region.
 
 ==== [[faq-B6]]3. How do I search by genomic region?
 
-You can search by genomic region using the format chromNumber:bpLocation-bpLocation, for example 6:16000000-25000000. You can also search using cytogenetic nomenclature, for example 2q37.1. These searches will return a list of variants.
-
+You can search by genomic region using the format chromNumber:bpLocation-bpLocation, for example 6:16000000-25000000. You can also search using cytogenetic nomenclature, for example 2q37.1. These searches will return a list of genes and variants within the region.
 
 === B(iii). Searching by trait
 
@@ -321,7 +311,7 @@ You can enter the genotyping technology of your interest in the search bar, e.g.
 
 ==== [[faq-C1]]1. How do I download a list of associations for a given trait, publication, study or variant?
 
-There are two ways to download association data on the specific “Trait”, “Publication”, “Study” or “Variant” pages. The “Download Catalog data” button downloads a spreadsheet (.tsv) of the full data for every association displayed on the current page. This data is formatted in the same way as the full Catalog spreadsheets available from our link:file-downloads[file downloads] page and includes study information for each association.
+There are two ways to download association data on the specific “Trait”, “Publication”, “Study”, “Variant” or "Gene" pages. The “Download Catalog data” button downloads a spreadsheet (.tsv) of the full data for every association displayed on the current page. This data is formatted in the same way as the full Catalog spreadsheets available from our link:file-downloads[file downloads] page and includes study information for each association.
 
 The specific pages also contain “Studies” and “Associations” tables, which display a condensed view of the data with fewer columns. These can be downloaded in .csv format using the “export” button in the top righthand corner of each table. Columns can be added or removed from this table using the “Add/Remove Columns” button – only the selected columns will be included in the exported table.  
 
@@ -338,7 +328,7 @@ In case of a dataset with more than 1 variant of interest, several independant c
 
 ==== [[faq-C4]]4. How do I view, search and download information from the "Associations" and "Studies" tables?
 
-These tables can be found on the each of the specific "Trait", "Variant", "Publication" and "Study" pages. The data displayed is highly customisable. You can refine the results by typing into a) the search box above the table, to search all columns, or b) the filter boxes at the top of each column, to search only within a specific column. You can customise the columns displayed using the "Add/Remove Columns" button. You can sort by clicking on the column header, or use the "Multiple Sort" button for more complex multi-column sorting. Finally, you can use the "Export data" button to download the table as a csv file. Note that the csv file will contain the data displayed in the table, taking into account any changes you have made to the rows, columns displayed or sorting.
+These tables can be found on the each of the specific "Trait", "Variant", "Gene", "Publication" and "Study" pages. The data displayed is highly customisable. You can refine the results by typing into a) the search box above the table, to search all columns, or b) the filter boxes at the top of each column, to search only within a specific column. You can customise the columns displayed using the "Add/Remove Columns" button. You can sort by clicking on the column header, or use the "Multiple Sort" button for more complex multi-column sorting. Finally, you can use the "Export data" button to download the table as a csv file. Note that the csv file will contain the data displayed in the table, taking into account any changes you have made to the rows, columns displayed or sorting.
 
 == [[D]]D. Diagram
  

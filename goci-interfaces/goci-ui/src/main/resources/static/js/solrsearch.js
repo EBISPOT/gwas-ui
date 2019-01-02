@@ -468,6 +468,9 @@ function processData(data) {
                     var variantDescription = '' // initializing empty description
 
                     var descriptionElements = descriptionTruncated.split("|");
+                    if (! descriptionElements[0]){
+                        descriptionElements[0] = "No description available.";
+                    }
                     variantDescription += "<b>Description: </b>"+descriptionElements[0] +
                         "<br><b>Genomic location: </b>" + descriptionElements[1] +
                         " <b>Cytogenetic region: </b>" + descriptionElements[2] +

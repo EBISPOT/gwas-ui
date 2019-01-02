@@ -196,7 +196,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
                     genomicCoordinate = parsedPositions.join('|')
                 }
             }
-            tmp['coordinates'] = genomicCoordinate;
+            tmp['location'] = genomicCoordinate;
 
             // Study
             var author = asso.author_s;
@@ -291,8 +291,8 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             visible: false,
             filterControl: 'input'
         },{
-            field: 'coordinates',
-            title: 'Genomic coordinates',
+            field: 'location',
+            title: 'Location',
             sortable: true,
             visible: true,
             filterControl: 'input'
