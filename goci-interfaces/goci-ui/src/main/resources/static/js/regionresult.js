@@ -20,22 +20,24 @@ var pageRowLimit=5;
 
 $(document).ready(() => {
 
-//jump to the top of the page
+    //jump to the top of the page
     $('html,body').scrollTop(0);
 
-var searchTerm = getTextToSearch('#query');
-console.log("Query:" + searchTerm);
-console.log("Loading search module!");
-if (searchTerm != '') {
-    // console.log("Start search for the text " + searchTerm);
-    var elements = {};
-    searchTerm.split(',').forEach((term) => {
-        elements[term] = term;
-    });
-    //first load
-    // console.log(elements);
-    executeQuery(elements, true);
-}
+    var searchTerm = getTextToSearch('#query');
+    // console.log("Query:" + searchTerm);
+    // console.log("Loading search module!");
+    if (searchTerm != '') {
+
+        // console.log("Start search for the text " + searchTerm);
+        var elements = {};
+        searchTerm.split(',').forEach((term) => {
+            elements[term] = term;
+        });
+
+        //first load
+        // console.log(elements);
+        executeQuery(elements, true);
+    }
 });
 
 /**
@@ -61,7 +63,6 @@ updatePage = function(initLoad=false) {
     //start spinner. The spinner will be stopped whenever the data is ready, thus closed by the corresponding data loading function.
     if(initLoad){
         showLoadingOverLay('#summary-panel-loading');
-//            showLoadingOverLay('#highlight-study-panel-loading');
     }
     showLoadingOverLay('#study-table-loading');
     showLoadingOverLay('#association-table-loading');
@@ -119,7 +120,6 @@ function getDataSolr(main, initLoad=false) {
             'hl.fl': 'shortForm,efoLink',
             'hl.snippets': 100,
             'fl' : global_fl == undefined ? '*':global_fl,
-            // 'fq' : global_fq == undefined ? '*:*':global_fq,
             'raw' : global_raw == undefined ? '' : global_raw,
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
 
@@ -129,15 +129,14 @@ function getDataSolr(main, initLoad=false) {
             $('#lower_container').html("<h2>No associaitons could be found in the region: <em>"+searchQuery+"</em> in the GWAS Catalog database</h2>");
         }
         else {
-            processSolrData(data, initLoad, searchQuery); // gene name is now added to the process solr data function.
-            //downloads link : utils-helper.js
+            processSolrData(data, initLoad, searchQuery);
             setDownloadLink(searchQuery);
-            //console.log("What the fuck is going on?" + data)
-            //fetchStudies(data.grouped.resourcename.groups[0].doclist.docs)
         }
+
         // console.log("Solr research done for " + searchQuery);
         return data;
     }).catch(function(err) {
+
         // console.error('Error when seaching solr for' + searchQuery + '. ' + err);
         throw(err);
     })
@@ -170,49 +169,57 @@ function processSolrData(data, initLoad=false, searchTerm) {
     //data_study, data_association
     data_facet = data.facet_counts.facet_fields.resourcename;
     data_highlighting = data.highlighting;
-    //TODO not repeat yourself!!!!
+    // TODO not repeat yourself!!!!
     $.each(data.grouped.resourcename.groups, (index, group) => {
-        switch (group.groupValue) {
-    case "efotrait":
-        data_efo = group.doclist;
-        break;
-    case "study":
-        data_study = group.doclist;
-        break;
-    case "association":
-        data_association = group.doclist;
-        break;
-        //not sure we need this!
-    case "diseasetrait":
-        data_diseasetrait = group.doclist;
-        break;
-    default:
-    }
-});
+            switch (group.groupValue) {
+        case "efotrait":
+            data_efo = group.doclist;
+            break;
+        case "study":
+            data_study = group.doclist;
+            break;
+        case "association":
+            data_association = group.doclist;
+            break;
+            //not sure we need this!
+        case "diseasetrait":
+            data_diseasetrait = group.doclist;
+            break;
+        default:
+        }
+    });
     
     //remove association that annotated with efos which are not in the list
     var remove = Promise.resolve();
 
     remove.then(()=>{
-        //If no solr return,greate a fake empyt array so tables/plot are empty
+        // If no solr return,greate a fake empyt array so tables/plot are empty
         if(!isInCatalog) {
         data_association.docs = []
         data_study.docs = []
     }
 
-    var PAGE_TYPE = "gene";
-    
-    //update association/study table
+    var PAGE_TYPE = "region";
+
     displayDatatableAssociations(data_association.docs);
     console.log("[Info] displayDatatableAssociations - OK")
-    displayDatatableStudies(data_study.docs, PAGE_TYPE);
-    console.log("[Info] displayDatatableStudies - OK")
-    checkSummaryStatsDatabase(data_study.docs);
-    console.log("[Info] checkSummaryStatsDatabase - OK")
+
     generateGeneInformationTable(searchTerm, data_study)
     console.log("[Info] generateGeneInformationTable - OK")
-    //displaySummaryPublication(data_study.docs);
-    
+
+    if ( data_study.docs.length == 0 ){
+        console.log("** There's no sudy!!!")
+        data_study.docs = fetchStudies(data_association.docs)
+        displayDatatableStudies(data_study.docs, PAGE_TYPE);
+    }
+    else {
+        displayDatatableStudies(data_study.docs, PAGE_TYPE);
+    }
+    console.log("[Info] displayDatatableStudies - OK")
+
+    checkSummaryStatsDatabase(data_study.docs);
+    console.log("[Info] checkSummaryStatsDatabase - OK")
+
 })
 
 }
@@ -344,44 +351,43 @@ function generateGeneInformationTable(geneName, studies) {
 // This function returns studies based on GCSC accession id extracted from association documents:
 function fetchStudies(associationDocs){
     // Look through all the docs and get accessions:
-    accessionIDs = [];
-    for (var assoc of associationDocs){
-        if ( ! accessionIDs.isPrototypeOf(assoc.accessionId)){
-            accessionIDs.unshift(assoc.accessionId)
-        }
-    }
-    var stepSize = 50;
-    var step = 0;
+    var accessionIDs = [];
+    var stepSize = 20;
+    var studyData = [];
 
-    console.log(accessionIDs.length)
+    for (var assoc of associationDocs){
+        accessionIDs.unshift(assoc.accessionId)
+    }
+
+    accessionIDs = Array.from(new Set(accessionIDs))
+
     // Generate unqiue list of accessions:
     // Loop through the accessions and download data by 50 studies at a time: (might need to be an other function for that)
-
-
+    for (var i = 0; i < accessionIDs.length; i += stepSize) {
+        temparray = accessionIDs.slice(i, i + stepSize);
+        console.log("** Looping through the accession IDs. Chunk: ", i);
+        studyData = studyData.concat(getStudyData(temparray))
+    }
+    return(studyData)
 };
-getDataSolr("6:16000000-20000000")
 
 // Query slim solr to return rsIDs that are mapped to a given gene:
 // WARNING: syncronous call!!
 function getStudyData(studyIDs){
+    var queryString = studyIDs.join(" OR ")
     var result = null;
-    console.log("Ensembl gene ID: " + geneName)
+    console.log("** queried accessions: " + queryString)
     $.ajax({
         url : gwasProperties.contextPath + 'api/search/advancefilter',
-        data : {'q': "title:" + geneName + ' AND resourcename:study'},
+        data : {'q': "( " + queryString + ') AND resourcename:study'},
         type: 'get',
         dataType: 'json',
         async: false,
         success: function(data){
-            // Parse returned JSON;
-            var rsIDs = ''
-            for (doc of data.response.docs) {
-                if ( doc.resourcename == 'gene' && doc.title == geneName){
-                    // console.log(doc.rsIDs)
-                    result = doc.rsIDs.join(" OR ")
-                }
-            }
+            // Parsing out response:
+            result = data.grouped.resourcename.groups[0].doclist.docs
         }
     });
+    console.log(result)
     return result;
 }
