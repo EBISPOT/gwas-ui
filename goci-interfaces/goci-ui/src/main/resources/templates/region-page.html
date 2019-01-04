@@ -66,7 +66,7 @@
     <ol class="breadcrumb background-color-complementary-accent">
         <li><a th:href="@{/home}">GWAS</a></li>
         <!--li><a href="studies.html" th:href="@{/studies}">Studies</a></-li-->
-        <li>Region</li>
+        <li><a th:href="@{/regions}">regions</a></li>
         <li class="active" th:text="${result.query}"></li>
     </ol>
 
@@ -96,33 +96,18 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
                                 <span class="item-left-bold">Region name</span>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="cytobandName">2q37.1</div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="cytobandName">-</div>
 
                         </div>
 
                         <div class="clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
-                                <span class="item-left-bold">Description </span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="As extracted from Ensembl"></span>
+                                <span class="item-left-bold">Location</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Chromosome and basepair location on the reference genome"></span>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="cytobandDescription">gneg</div>
-
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="genomicCoordinates">-</div>
                         </div>
 
-                        <div class="clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
-                                <span class="item-left-bold">Genomic coordinates</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="On build GRCh38"></span>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="genomicCoordinates">2:230100001-234700000</div>
-                        </div>
-
-                        <div class="clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
-                                <span class="item-left-bold">Reported traits</span>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="reportedTraits">-</div>
-                        </div>
                     </div>
                     <div id="links" class="panel-body col-lg-4 col-md-4 col-sm-4 col-xs-3"></div>
                     <div id="links" class="panel-body col-lg-2 col-md-2 col-sm-2 col-xs-3">

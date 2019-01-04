@@ -189,9 +189,6 @@ function processSolrData(data, initLoad=false, searchTerm) {
         displayDatatableAssociations(data_association.docs);
         console.log("[Info] displayDatatableAssociations - OK");
 
-        generateGeneInformationTable(searchTerm, data_study);
-        console.log("[Info] generateGeneInformationTable - OK");
-
         // when chr:pos is queried, there's no returned study. We have to specifically fetch those.
         if ( data_study.docs.length == 0 ){
             console.log("** There's no sudy!!!");
@@ -202,6 +199,9 @@ function processSolrData(data, initLoad=false, searchTerm) {
             displayDatatableStudies(data_study.docs, PAGE_TYPE);
         }
         console.log("[Info] displayDatatableStudies - OK");
+
+        generateRegionInformationTable(searchTerm, data_study);
+        console.log("[Info] generateGeneInformationTable - OK");
 
         checkSummaryStatsDatabase(data_study.docs);
         console.log("[Info] checkSummaryStatsDatabase - OK");
@@ -238,71 +238,52 @@ function getEnsemblREST( URL ){
  *    2) Extracts cross reference data from Ensembl.
  *    3) Extracts reported traits from study documents.
  */
-function generateGeneInformationTable(geneName, studies) {
-    // Extracting gene data from Ensembl:
-    // var geneQueryURL = gwasProperties.EnsemblRestBaseURL + "/lookup/symbol/homo_sapiens/" + geneName + "?content-type=application/json"
-    // var geneData = getEnsemblREST(geneQueryURL);
+function generateRegionInformationTable(searchQuery, studies) {
 
-    // adding gene data to html:
-    // $("#geneSymbol").html(`${geneData.display_name}`);
-    // var description = geneData.description.split(" [S")[0];
-    // $("#description").html(`${description}`)
-    // $("#genomicCoordinates").html(`${geneData.seq_region_name}:${geneData.start}-${geneData.end}`);
-    // $("#biotype").html(`${geneData.biotype.replace("_", " ")}`);
-    //
-    // console.log(studies.length)
-    //
-    // // Looping through all studies and parse out repoted genes:
-    // var reportedTraits = {};
-    // for ( var study of studies.docs) {
-    //     reportedTraits[study.traitName_s] = 1;
-    // }
-    //
-    // // joining reported traits & sort:
-    // reportedTraits = Object.keys(reportedTraits).sort()
-    // var joinedTraits = reportedTraits.join("</li>\n\t<li>")
-    // $("#reportedTraits").html(`<ul>\n\t<li>${joinedTraits}</li></ul>`);
-    // console.log(joinedTraits)
-    //
-    // // Extracting cross-references:
-    // var xrefQueryURL = gwasProperties.EnsemblRestBaseURL + '/xrefs/id/' + geneData.id + '?content-type=application/json'
-    // var xrefData = getEnsemblREST(xrefQueryURL);
-    // var entrezID = "NA";
-    // var OMIMID = "NA";
-    // for ( xref of xrefData ){
-    //     if ( xref.dbname == "EntrezGene" ){
-    //         entrezID = xref.primary_id
-    //     }
-    //     if ( xref.dbname == 'MIM_GENE' ){
-    //         OMIMID = xref.primary_id
-    //     }
-    // }
-    //
-    // // Adding automatic cross references pointing to Ensembl:
-    // $("#ensembl_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Summary?db=core;g="+geneData.id+"',    '_blank')");
-    // $("#ensembl_phenotype_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Phenotype?db=core;g="+geneData.id+"',    '_blank')");
-    // $("#ensembl_pathway_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Pathway?db=core;g="+geneData.id+"',    '_blank')");
-    // $("#ensembl_regulation_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Regulation?db=core;g="+geneData.id+"',    '_blank')");
-    // $("#ensembl_expression_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"ExpressionAtlas?db=core;g="+geneData.id+"',    '_blank')");
-    //
-    // // Adding automatic cross reference pointing to Open targets:
-    // $("#opentargets_button").attr('onclick', "window.open('"+gwasProperties.OpenTargetsURL+ geneData.id+"',    '_blank')");
-    //
-    // // Looping through the cross references and extract entrez id:
-    // if ( entrezID != "NA" ){
-    //     $("#entrez_button").attr('onclick', "window.open('"+gwasProperties.EntrezURL+ entrezID + "',    '_blank')");
-    // }
-    // // Looping through the cross references and extract OMIM id:
-    // if ( OMIMID != "NA" ){
-    //     $("#OMIM_button").attr('onclick', "window.open('"+gwasProperties.OMIMURL+ OMIMID + "',    '_blank')");
-    // }
+    var regionTest = /([XY0-9]{1,2}):(\d+)-(\d+)/gi; // matches regions 6:234511-23500
+    var cytobandTest = /([XY0-9]{1,2})([PQ][0-9]+\.[0-9]+)/gi; // matches cytobands eg 6p33.1
+    var chromosome = '';
+    var start = '';
+    var end = '';
 
-    // Print out some info to make sure things are not messed up completely:
-    // console.log("[Info] Number of reported traits:" + reportedTraits.length)
-    // console.log("[Info] ID: " + geneData.id);
-    // console.log("[Info] Biotype: " + geneData.biotype);
-    // console.log("[Info] Description: " + geneData.description);
-    // console.log("[Info] Genomic location: " + geneData.seq_region_name + ":" + geneData.start + "-" + geneData.end)
+    // console.log("Solr research request received for " + searchQuery);
+
+    // Testing if the query was a cytoband or region:
+    if ( searchQuery.match(cytobandTest) ){
+        // If cytological band is queried, it has a name:
+        $("#cytobandName").html(`${searchQuery}`);
+
+        // Extracting coordinates for a given cytoband from Ensembl:
+        var bandElements = cytobandTest.exec(searchQuery);
+        var cbURL = gwasProperties.EnsemblRestBaseURL + '/info/assembly/homo_sapiens/' + bandElements[1] + '?content-type=application/json&bands=1';
+        var assemblyInfo =  getEnsemblREST(cbURL);
+
+        // Parse REST response:
+        for( var band of assemblyInfo.karyotype_band ){
+            if (band.id == bandElements[2]){
+                chromosome = band.seq_region_name;
+                start = band.start;
+                end = band.end;
+            }
+        }
+    }
+    else if (searchQuery.match(regionTest) ){
+        var coordinates = regionTest.exec(searchQuery);
+        chromosome = coordinates[1];
+        start = coordinates[2];
+        end = coordinates[3];
+    }
+
+    var coordinate = `${chromosome}:${start}-${end}`;
+    $("#genomicCoordinates").html(`${coordinate}`);
+
+    // Adding cross references pointing to Ensembl:
+    var EnsemblregionLink = `Location/View?r=${chromosome}%3A${start}-${end}`;
+    $("#ensembl_button").attr('onclick', "window.open('" + gwasProperties.EnsemblURL + EnsemblregionLink + "',    '_blank')");
+
+    // Adding cross references pointing to NCBI:
+    var NCBIregionLink = `https://www.ncbi.nlm.nih.gov/genome/gdv/browser/?context=genome&acc=GCA_000001405.27&chr=${chromosome}&from=${start}&to=${end}`;
+    $("#entrez_button").attr('onclick', "window.open('" + NCBIregionLink + "',    '_blank')");
 
     // OK, loading is complete:
     hideLoadingOverLay('#summary-panel-loading');

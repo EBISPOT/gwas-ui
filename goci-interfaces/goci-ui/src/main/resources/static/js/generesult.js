@@ -287,11 +287,11 @@ function generateGeneInformationTable(geneName, studies, region) {
     }
 
     // Adding automatic cross references pointing to Ensembl:
-    $("#ensembl_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Summary?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_phenotype_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Phenotype?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_pathway_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Pathway?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_regulation_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Regulation?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_expression_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"ExpressionAtlas?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Summary?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_phenotype_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Phenotype?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_pathway_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Pathway?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_regulation_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Regulation?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_expression_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/ExpressionAtlas?db=core;g="+geneData.id+"',    '_blank')");
 
     // Adding automatic cross reference pointing to Open targets:
     $("#opentargets_button").attr('onclick', "window.open('"+gwasProperties.OpenTargetsURL+ geneData.id+"',    '_blank')");

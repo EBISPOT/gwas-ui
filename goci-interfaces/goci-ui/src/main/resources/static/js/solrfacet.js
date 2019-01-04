@@ -3,7 +3,7 @@
  */
 
 // var resources = ['study', 'association', 'diseasetrait'];
-var resources = ['study', 'variant', 'trait', 'publication', 'gene'];
+var resources = ['study', 'variant', 'trait', 'publication', 'gene', 'region'];
 
 function applyFacet() {
     var searchTerm = $("#search-box").val();
