@@ -19,17 +19,11 @@ $(document).ready(function() {
                 setStats(data);
             });
 
-    
-    if (window.history && window.history.pushState) {
-        $(window).on('popstate', function() {
-            applyFacet();
-        });
-    }
-    
-    // Search for everything.
+    // If searched nothing change it to everything:
     if ($('#query').text() == '') {
         $('#query').text('*');
     }
+
     loadResults();
 });
 
@@ -39,81 +33,44 @@ function loadResults() {
     buildBreadcrumbs();
 
     if (searchTerm == '*') {
-        if ($('#filter').text() == 'recent') {
-            $('#search-term').text('most recent studies');
-
-        }
-        else {
-            // $('#search-term').text('selected traits from list');
-            $('#search-term').text('all results');
-        }
+        $('#search-term').text('all results');
     }
 
-    //add the link to the specific page, for example, for snp, to variant-page
-    // if(/^rs[0-9]/.test(searchTerm)){
-    //     //xintodo this is currently beta so need to change
-    //     $('#search-term').attr("href", "beta/variants/"+searchTerm);
-    //     $("#search-term-popup").attr("data-original-title","Go to the variant page.");
-    // }else{
-    //     //we currently only ave variant page, so for other search, we disable the link and hide the popup
-    //     $('#search-term').replaceWith('<span id=search-term th:text="*{query}">' + searchTerm +'</span>')
-    //     $("#search-term-popup").attr("style","display: none");
-    // }
-
-
+    $('#search-box').val(searchTerm);
     $('#welcome-container').hide();
     $('#search-results-container').show();
     $('#loadingResults').show();
-    $('#search-box').val(searchTerm);
 
-
-    if ($('#filter').text() != '') {
-        if ($('#filter').text() == 'recent') {
-            getMostRecentStudies();
-        }
-        else {
-            console.log("Value from filter variable: " + $('#filter').text());
-            var traits = $('#filter').text();
-            traitOnlySearch(traits);
-        }
-
-    }
-    else {
-        $('#welcome-container').hide();
-        $('#search-results-container').show();
-        $('#loadingResults').show();
-
-        solrSearch(searchTerm);
-        if (window.location.hash) {
-            console.log("Applying a facet");
-            applyFacet();
-        }
-        else {
-            $('#facet').text();
-        }
-
-    }
+    solrSearch(searchTerm);
 }
 
 function buildBreadcrumbs() {
+
     // build breadcrumb trail
-    console.log("Updating breadcrumbs...");
     $(".breadcrumb").empty();
     var breadcrumbs = $("ol.breadcrumb");
-    // defaults
+
+    // default breadcrumb elements:
     breadcrumbs.append('<li><a href="home">GWAS</a></li>');
     breadcrumbs.append('<li><a href="search">Search</a></li>');
-    var searchTerm = $('#query').text();
 
-    if (!window.location.hash) {
+    // Extract search term and update if searched with a star:
+    var searchTerm = $('#query').text();
+    if ( searchTerm == '*' ){
+        searchTerm = 'all results'
+    }
+
+    if (! window.location.hash) {
         console.log("Final breadcrumb is for '" + searchTerm + "'");
         breadcrumbs.append('<li class="active">' + searchTerm + '</li>');
     }
     else {
         var facet = window.location.hash.substr(1);
         console.log("Need breadcrumbs for '" + searchTerm + "' and '" + facet + "'");
+
         breadcrumbs.append('<li><a href="search?query=' + searchTerm + '">' + searchTerm + '</a></li>');
         var last = $("<li></li>").attr("class", "active");
+
         if (facet == "study") {
             last.text("Studies");
         }
@@ -129,8 +86,411 @@ function buildBreadcrumbs() {
         else if (facet == "gene") {
             last.text("Genes");
         }
+        else if (facet == "region") {
+            last.text("Genes");
+        }
         breadcrumbs.append(last);
     }
+}
+
+function solrSearch(queryTerm) {
+    console.log("Solr research request received for " + queryTerm);
+    if (queryTerm == '*') {
+        var searchTerm = 'text:'.concat(queryTerm);
+        var boost_field = ' OR title:"'.concat(queryTerm).concat('"')+' OR synonyms:"'.concat(queryTerm).concat('"');
+        var searchPhrase = searchTerm.concat(boost_field)
+    }
+
+    // This needs to be fixed.... this is just tragic..
+    else if(queryTerm.match(/[XY0-9]\:[0-9]+-[0-9]+/gi)){
+        var elements = queryTerm.split(':');
+
+        // suitable for chr#: and #: as well:
+        var chrom = elements[0].trim().toUpperCase().replace("CHR","");
+
+        // We don't check if the submitted chromosome valid or not. We should though.
+        // We need to test if the start position is smaller than the end.
+        var bp1 = elements[1].split('-')[0].trim();
+        var bp2 = elements[1].split('-')[1].trim();
+
+        // Returning variants based on coordinates:
+        var searchPhrase = "chromosomeName: "+chrom+" AND ( chromosomePosition:[ "+bp1+" TO "+bp2+" ] OR chromosomeEnd : [ "+bp1+" TO "+bp2+" ] OR chromosomeStart : [ "+bp1+" TO "+bp2+" ] )"
+    }
+    else {
+        var searchTerm = 'text:"'.concat(queryTerm).concat('"');
+
+        // Search using title field also in query
+        var boost_field = ' OR title:"'.concat(queryTerm).concat('"')+' OR synonyms:"'.concat(queryTerm).concat('"');
+        var searchPhrase = searchTerm.concat(boost_field);
+    }
+    setState(SearchState.LOADING);
+
+    $.getJSON('api/search', {'q': searchPhrase})
+            .done(function(data) {
+                console.log(data);
+                processData(data);
+            });
+}
+
+//
+// Test module ends
+//
+var drawSnippets = (function () {
+
+    // This is the main public function:
+    var renderer = function(documents){
+
+        // prepare page:
+        $(".results-container .table-toggle").hide();
+        var divResult = $('#resultQuery').empty();
+
+        // Looping through all documents:
+        for (var doc of documents) {
+
+            // Prototyping table:
+            var prototype = generateSnippet(doc.resourcename);
+
+            switch(doc.resourcename) {
+                case 'publication':
+                    prototype = publication(prototype, doc);
+                    break;
+
+                case 'trait':
+                    prototype = trait(prototype, doc);
+                    break;
+
+                case 'variant':
+                    prototype = variant(prototype, doc);
+                    break;
+
+                case 'gene':
+                    prototype = gene(prototype, doc);
+                    break;
+
+                case 'region':
+                    prototype = region(prototype, doc);
+                    break;
+
+                default:
+                    console.log("[Error] Failure to process document " + doc.resourcename);
+            }
+
+            // Adding formatted table to the page:
+            divResult.append(prototype);
+        }
+
+        setState(SearchState.RESULTS);
+    }
+
+    // a function to create a blank snippet:
+    var generateSnippet = function (resourceName) {
+
+        // Creating table:
+        var table =  $(`<table class="border-search-box" style = "display: table; margin-bottom: 20px;" id="${resourceName}">`);
+        var tbody = table.append('<tbody />').children('tbody');
+
+        // Select letter for resource name:
+        var resourceNameLetter = resourceName[0].toUpperCase()
+
+        // creating and populating a title row:
+        var titleRow = $("<tr>");
+
+        // Addind left edge cell:
+        titleRow.append($("<td rowspan='2' style='width: 3%'>").html(''));
+
+        // Adding the title cell:
+        titleRow.append($("<td style=\"width: 94%\">").html(`<h3><span class="letter-circle letter-circle-${resourceName}">&nbsp;${resourceNameLetter}&nbsp;</span><a href=""></a></h3>`));
+
+        // Adding the spacer cell for icons:
+        titleRow.append($("<td style='width: 10%'>").html("<h3 class='pull-right' id='iconCell'></h3>"));
+
+        // Adding right edge cell:
+        titleRow.append($("<td rowspan='2' style='width: 3%'>").html(''));
+
+        // Adding row to table body:
+        tbody.append(titleRow);
+
+        // creating and populating the description row:
+        var descriptionRow = $("<tr>");
+        var descriptionTruncated = "<p class='descriptionSearch'></p>";
+        descriptionRow.append($("<td style=\"width: 88%\" id='descriptionCell' >").html(descriptionTruncated));
+        descriptionRow.find('td#descriptionCell').append($("<p id='statsParagraph'>"));
+
+        // Adding description row to the table:
+        tbody.append(descriptionRow);
+
+        return(table);
+
+    };
+
+    // Adding association and study counts:
+    var addStats = function (doc, table) {
+
+        // Adding association count:
+        if ('associationCount' in doc) {
+            table.find('p#statsParagraph').append('Associations <span class="badge background-color-primary-bold ">'+doc.associationCount + '</span>&nbsp;&nbsp;&nbsp;');
+        }
+
+        // Adding study count:
+        if ('studyCount' in doc) {
+            table.find('p#statsParagraph').append('Studies <span class="badge background-color-primary-bold ">'+doc.studyCount + '</span>');
+        }
+        return(table);
+    }
+
+    // Shortening description:
+    var addShowMoreLink = function (content, showCharParam, ellipsestext) {
+        var moretext = "Show more >";
+
+        var html="";
+        if(content.length > showCharParam) {
+
+            var visible_text = content.substr(0, showCharParam);
+            var lastSpace = visible_text.lastIndexOf("\&nbsp;");
+            if (lastSpace > -1) {
+                showCharParam = lastSpace;
+                visible_text = content.substr(0, showCharParam);
+            }
+            var extra_text = content.substr(showCharParam, content.length - showCharParam);
+
+            html = visible_text + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + extra_text + '</span>&nbsp;&nbsp;<a href="javascript:void(0)" class="morelink">' + moretext + '</a></span>';
+        }
+        else {
+            html = content;
+        }
+        return html;
+    };
+
+    // Updating snippet fields for publications:
+    var publication = function(table, doc){
+
+        // Update title:
+        table.find('a').text(doc.title);
+
+        // Update publication URL:
+        table.find('a').attr('href',gwasProperties.contextPath+"publications/"+doc.pmid);
+
+        // Update description:
+        table.find('p.descriptionSearch').text(doc.description);
+
+        // Defining targeted array icon:
+        var genotypingIcon="<span class='glyphicon targeted-icon-GWAS_target_icon context-help' " +
+            "style='font-size: 20px' data-toggle='tooltip' data-placement='bottom'" +
+            "data-original-title='Targeted or exome array study'></span>";
+
+        // Defining full p-value set array icon:
+        var linkFullPValue = "<span class='glyphicon glyphicon-signal context-help' " +
+            "style='font-size: 20px' data-toggle='tooltip' data-placement='bottom' " +
+            "data-original-title='Full summary statistics available'></span>";
+
+        // Adding icons:
+        if (doc.fullPvalueSet == 1){
+            table.find('h3#iconCell').append(linkFullPValue+"&nbsp;&nbsp");
+        }
+        if ((doc.genotypingTechnologies.indexOf("Targeted genotyping array") > -1) ||
+            (doc.genotypingTechnologies.indexOf("Exome genotyping array") > -1) ){
+            table.find('h3#iconCell').append(genotypingIcon);
+        }
+
+        // Adding stats:
+        table = addStats(doc, table)
+
+        return(table);
+
+    }
+
+    // Updating snippet fields for variants:
+    var variant = function(table, doc) {
+
+        // Update title:
+        table.find('a').text(doc.title);
+
+        // Update publication URL:
+        table.find('a').attr('href', gwasProperties.contextPath+"variants/"+doc.rsID);
+
+        // Update description:
+        var descriptionElements = doc.description.split("|");
+        if (descriptionElements[1] == "NA"){
+            var variantDescription = "This variant could not be mapped to the genome."
+        }
+        else {
+            var variantDescription = "<b>Location: </b>"+descriptionElements[0] +
+                " <b>Cytogenetic region:</b>" + descriptionElements[1] +
+                " <b>Most severe consequence: </b>" + descriptionElements[2] +
+                " <b>Mapped gene(s): </b>" + descriptionElements[3];
+        }
+        table.find('p.descriptionSearch').append(variantDescription);
+
+        // Adding stats:
+        table = addStats(doc, table)
+
+        return(table);
+
+    }
+
+    // Updating snippet fields for traits:
+    var trait = function(divResult, doc) {
+        var table = $('<table class="border-search-box">');
+        var tbody = table.append('<tbody />').children('tbody');
+        var row = $("<tr>");
+
+        var efoLabsUrl = gwasProperties.contextPath+"efotraits/"+doc.shortForm
+        row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+        row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-trait'>&nbsp;T&nbsp;</span><a href="+efoLabsUrl+">"+doc.title+"</a>&nbsp;&nbsp;<span class='badge letter-circle-trait'>"+doc.shortForm+"</span></h3>"));
+        row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+
+        tbody.append(row);
+
+        // Function to parse the description
+        var rowDescription = $("<tr>");
+        var descriptionTruncated = doc.description;
+
+        descriptionTruncated = addShowMoreLink(descriptionTruncated, 200,"...");
+        descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
+
+        var description_stats = "";
+        if ('associationCount' in doc) {
+            description_stats = description_stats.concat("<br><p>Associations ").concat('<span class="badge background-color-primary-bold ">').concat(doc.associationCount).concat('</span>&nbsp;');
+
+        }
+
+        if ('studyCount' in doc) {
+            description_stats = description_stats.concat("&nbsp;&nbsp;Studies ").concat('<span class="badge background-color-primary-bold ">').concat(doc.studyCount).concat('</span>');
+        }
+
+        descriptionTruncated = descriptionTruncated+description_stats;
+
+        descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
+
+        rowDescription.append($("<td style=\"width: 88%\">").html(descriptionTruncated));
+        tbody.append(rowDescription);
+        divResult.append(table);
+        // divResult.append("<br>");
+
+    }
+
+    // Updating snippet fields for genes:
+    var gene = function(table, doc) {
+
+        // Update title:
+        table.find('a').text(doc.title);
+
+        // Update publication URL:
+        table.find('a').attr('href', gwasProperties.contextPath+"genes/"+doc.title);
+
+        // Update description:
+        var descriptionElements = doc.description.split("|");
+        if (! descriptionElements[0]){
+            var geneDescription = "No description available.";
+        }
+        else {
+            var geneDescription = "<b>Description: </b>"+descriptionElements[0] +
+                "</br><b>Location: </b>" + descriptionElements[1] +
+                " <b>Cytogenetic region: </b>" + descriptionElements[2] +
+                " <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
+        }
+        table.find('p.descriptionSearch').append(geneDescription);
+
+        // Adding stats:
+        table = addStats(doc, table)
+
+        return(table);
+
+    }
+
+    // Updating snippet fields for regions:
+    var region = function(table, doc) {
+
+        // Update title:
+        table.find('a').text(doc.title);
+
+        // Update publication URL:
+        table.find('a').attr('href', gwasProperties.contextPath+"regions/" + doc.title);
+
+        // Update description:
+        var regionDescription = "<b>Description: </b>" +doc.description +
+            "<br><b>Chromosome: </b>" + doc.chromosomeName +
+            " <b>Start: </b>" + doc.chromosomeStart +
+            " <b>end: </b>" + doc.chromosomeEnd + '<br> ';
+
+        table.find('p.descriptionSearch').append(regionDescription);
+
+        return(table);
+
+    }
+
+    // Public function:
+    return {
+        renderer: renderer,
+    }
+})();
+
+//
+// Test module ends
+//
+
+function processData(data) {
+    var documents = data.response.docs;
+
+    // setDownloadLink(data.responseHeader.params);
+    console.log("Solr search returned " + documents.length + " documents");
+
+    searchTermParam = data.responseHeader.params.q
+    // formattedSearchTerm = searchTermParam.replace(/['"]+/g, '').split(":");
+    // change parsing when using "title:searchTerm" in query
+    formattedSearchTerm = searchTermParam.replace(/['"]+/g, '').split("OR");
+    formattedSearchTerm = formattedSearchTerm[0].split(":");
+
+    updateCountBadges(data.facet_counts.facet_fields.resourcename, formattedSearchTerm[1]);
+
+    if(data.responseHeader.params.sort != null && data.responseHeader.params.sort.indexOf('pValue') != -1 && data.responseHeader.params.sort.indexOf('asc') != -1){
+        $('#pValue').find('span.unsorted').removeClass('glyphicon-sort').addClass('glyphicon-arrow-up').removeClass('unsorted').addClass('sorted asc');
+    }
+
+    if (!$('#filter-form').hasClass('in-use')) {
+        if (data.responseHeader.params.q.indexOf('*') != -1 && data.responseHeader.params.fq != null) {
+            var fq = data.responseHeader.params.fq;
+
+            if (fq.indexOf("catalogPublishDate") != -1) {
+                var dateRange = "[NOW-1MONTH+TO+*]";
+                generateTraitDropdown(data.responseHeader.params.q, null, dateRange);
+            }
+            else {
+                if (fq.charAt(fq.length - 1) == '"') {
+                    fq = fq.substr(0, fq.length - 1);
+                }
+                ;
+
+                var terms = fq.split('"');
+                var traits = []
+
+                for (var i = 0; i < terms.length; i++) {
+                    if (terms[i].indexOf('traitName') == -1) {
+                        traits.push(terms[i].replace(/\s/g, '+'));
+                    }
+                }
+                //generateTraitDropdown(data.responseHeader.params.q, traits, null);
+            }
+        }
+        else {
+            //generateTraitDropdown(data.responseHeader.params.q, null, null);
+        }
+    }
+
+    if (documents.length != 0) {
+        // Test if the query is a region, if so, adding a doc:
+        documents = test_for_region($('#query').text(), documents)
+
+        // Drawing all snippets:
+        drawSnippets.renderer(documents)
+    }
+    else {
+        setState(SearchState.NO_RESULTS);
+    }
+
+    $('#loadingResults').hide();
+    
+    console.log("Data display complete");
 }
 
 // Extracting data from Ensembl:
@@ -183,11 +543,6 @@ function lookUpCytoband(cytoband){
         }
     }
 
-    // console.log("** Chrom: " + returnData.chrom);
-    // console.log("** band: " + returnData.band);
-    // console.log("** start: " + returnData.start);
-    // console.log("** end: " + returnData.end);
-    // console.log("** stain: " + returnData.stain);
     return(returnData)
 }
 
@@ -252,276 +607,6 @@ function test_for_region(queryTerm, data){
     return(data)
 }
 
-function solrSearch(queryTerm) {
-    console.log("Solr research request received for " + queryTerm);
-    if (queryTerm == '*') {
-        var searchTerm = 'text:'.concat(queryTerm);
-        var boost_field = ' OR title:"'.concat(queryTerm).concat('"')+' OR synonyms:"'.concat(queryTerm).concat('"');
-        var searchPhrase = searchTerm.concat(boost_field)
-    }
-    else if(queryTerm.match(/[XY0-9]\:[0-9]+-[0-9]+/gi)){
-        var elements = queryTerm.split(':');
-
-        // suitable for chr#: and #: as well:
-        var chrom = elements[0].trim().toUpperCase().replace("CHR","");
-
-        // We don't check if the submitted chromosome valid or not. We should though.
-        // We need to test if the start position is smaller than the end.
-        var bp1 = elements[1].split('-')[0].trim();
-        var bp2 = elements[1].split('-')[1].trim();
-
-        // Returning variants based on coordinates:
-        var searchPhrase = "chromosomeName: "+chrom+" AND ( chromosomePosition:[ "+bp1+" TO "+bp2+" ] OR chromosomeEnd : [ "+bp1+" TO "+bp2+" ] OR chromosomeStart : [ "+bp1+" TO "+bp2+" ] )"
-    }
-    else {
-        var searchTerm = 'text:"'.concat(queryTerm).concat('"');
-
-        // Search using title field also in query
-        var boost_field = ' OR title:"'.concat(queryTerm).concat('"')+' OR synonyms:"'.concat(queryTerm).concat('"');
-        var searchPhrase = searchTerm.concat(boost_field);
-    }
-    setState(SearchState.LOADING);
-    // $.getJSON('api/search', {'q': searchTerm})
-    $.getJSON('api/search', {'q': searchPhrase})
-            .done(function(data) {
-                console.log(data);
-                processData(data);
-            });
-}
-
-function getMostRecentStudies() {
-    console.log("Solr research request received for most recent studies");
-    setState(SearchState.LOADING);
-
-    var searchTerm = 'text:*';
-    var dateRange = "[NOW-1MONTH+TO+*]";
-    var sort = "catalogPublishDate+desc"
-
-    $.getJSON('api/search/latest', {
-                'q': searchTerm,
-                'group': 'true',
-                'group.by': 'resourcename',
-                'group.limit': 5,
-                'dateFilter': dateRange,
-                'sort': sort
-            })
-            .done(function(data) {
-                console.log(data);
-                processData(data);
-            });
-}
-
-function processData(data) {
-    var documents = data.response.docs;
-
-    setDownloadLink(data.responseHeader.params);
-    console.log("Solr search returned " + documents.length + " documents");
-
-    searchTermParam = data.responseHeader.params.q
-    // formattedSearchTerm = searchTermParam.replace(/['"]+/g, '').split(":");
-    // change parsing when using "title:searchTerm" in query
-    formattedSearchTerm = searchTermParam.replace(/['"]+/g, '').split("OR");
-    formattedSearchTerm = formattedSearchTerm[0].split(":");
-
-    updateCountBadges(data.facet_counts.facet_fields.resourcename, formattedSearchTerm[1]);
-
-    if(data.responseHeader.params.sort != null && data.responseHeader.params.sort.indexOf('pValue') != -1 && data.responseHeader.params.sort.indexOf('asc') != -1){
-        $('#pValue').find('span.unsorted').removeClass('glyphicon-sort').addClass('glyphicon-arrow-up').removeClass('unsorted').addClass('sorted asc');
-    }
-
-    if (!$('#filter-form').hasClass('in-use')) {
-        if (data.responseHeader.params.q.indexOf('*') != -1 && data.responseHeader.params.fq != null) {
-            var fq = data.responseHeader.params.fq;
-
-            if (fq.indexOf("catalogPublishDate") != -1) {
-                var dateRange = "[NOW-1MONTH+TO+*]";
-                generateTraitDropdown(data.responseHeader.params.q, null, dateRange);
-            }
-            else {
-                if (fq.charAt(fq.length - 1) == '"') {
-                    fq = fq.substr(0, fq.length - 1);
-                }
-                ;
-
-                var terms = fq.split('"');
-                var traits = []
-
-                for (var i = 0; i < terms.length; i++) {
-                    if (terms[i].indexOf('traitName') == -1) {
-                        traits.push(terms[i].replace(/\s/g, '+'));
-                    }
-                }
-                //generateTraitDropdown(data.responseHeader.params.q, traits, null);
-            }
-        }
-        else {
-            //generateTraitDropdown(data.responseHeader.params.q, null, null);
-        }
-    }
-
-    if (documents.length != 0) {
-        $(".results-container .table-toggle").hide();
-        var divResult = $('#resultQuery').empty();
-
-        // Test if the query is a region, if so, adding a doc:
-        documents = test_for_region($('#query').text(), documents)
-
-        for (var j = 0; j < documents.length; j++) {
-            var doc = documents[j];
-    
-            try {
-                var table = $('<table class="border-search-box">');
-                var tbody = table.append('<tbody />').children('tbody');
-                var row = $("<tr>");
-                var linkFullPValue = '';
-                var genotypingIcon = '';
-        
-        
-                if (doc.resourcename == "publication") {
-                    var fullpvalset = doc.fullPvalueSet;
-                    if(fullpvalset == 1) {
-                        linkFullPValue = "<span class='glyphicon glyphicon-signal context-help' " +
-                            "style='font-size: 20px' data-toggle='tooltip' data-placement='bottom' " +
-                            "data-original-title='Full summary statistics available'></span>";
-                    }
-            
-                    if ((doc.genotypingTechnologies.indexOf("Targeted genotyping array") > -1) ||
-                        (doc.genotypingTechnologies.indexOf("Exome genotyping array") > -1) ) {
-                        genotypingIcon="<span class='glyphicon targeted-icon-GWAS_target_icon context-help' " +
-                            "style='font-size: 20px' data-toggle='tooltip' data-placement='bottom'" +
-                            "data-original-title='Targeted or exome array study'></span>";
-                    }
-            
-            
-                    var pubLabsUrl= gwasProperties.contextPath+"publications/"+doc.pmid;
-                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-                    row.append($("<td style='width: 84%'>").html("<h3><span class='letter-circle'>&nbsp;P&nbsp;</span><a href="+pubLabsUrl+">"+doc.title+"</a></h3>"));
-
-                    // Display Summary stat and Genotyping icons
-                    if (genotypingIcon != "" && linkFullPValue != "") {
-                        row.append($("<td style='width: 10%'>").html("<h3 class='pull-right'>"+genotypingIcon+
-                            "&nbsp;&nbsp"+linkFullPValue+"</h3>"));
-                    }
-
-                    if (genotypingIcon != "" && linkFullPValue == "") {
-                        row.append($("<td style='width: 10%'>").html("<h3 class='pull-right'>"+genotypingIcon+"</h3>"));
-                    }
-
-                    if (genotypingIcon == "" && linkFullPValue != "") {
-                        row.append($("<td style='width: 10%'>").html("<h3 class='pull-right'>"+linkFullPValue+"</h3>"));
-                    }
-                    if (genotypingIcon == "" && linkFullPValue == "") {
-                        // append h3 to have same CSS style
-                        row.append($("<td style='width: 10%'>").html("<h3></h3>"));
-                    }
-                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-                }
-                if (doc.resourcename == "trait") {
-                    var efoLabsUrl = gwasProperties.contextPath+"efotraits/"+doc.shortForm
-                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-                    row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-trait'>&nbsp;T&nbsp;</span><a href="+efoLabsUrl+">"+doc.title+"</a>&nbsp;&nbsp;<span class='badge letter-circle-trait'>"+doc.shortForm+"</span></h3>"));
-                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-                }
-                if (doc.resourcename == "variant") {
-                    var variantsLabsUrl = gwasProperties.contextPath+"variants/"+doc.rsID
-                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-                    row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-variant'>&nbsp;V&nbsp;</span><a href="+variantsLabsUrl+">"+doc.title+"</a></h3>"));
-                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-                }
-                if (doc.resourcename == "gene") {
-                    var genesLabsUrl = gwasProperties.contextPath+"genes/"+doc.title
-
-                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-                    row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-gene'>&nbsp;G&nbsp;</span><a href="+genesLabsUrl+">"+doc.title+"</a></h3>"));
-                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-                }
-                if(doc.resourcename == "region") {
-                    var URL_end = doc.title
-                    var regionsLabsUrl = gwasProperties.contextPath+"regions/"+URL_end
-                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-                    row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-region'>&nbsp;R&nbsp;</span><a href="+regionsLabsUrl+">"+doc.title+"</a></h3>"));
-                    row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-                }
-        
-                tbody.append(row);
-                // Function to parse the description
-                var rowDescription = $("<tr>");
-                var descriptionTruncated = doc.description;
-
-                // Add custom formatting for Variant description
-                if (doc.resourcename == "variant") {
-                    var descriptionElements = descriptionTruncated.split("|");
-                    if (descriptionElements[1] == "NA"){
-                        var variantDescription = "This variant could not be mapped to the genome."
-                    }
-                    else {
-                        var variantDescription = "<b>Location: </b>"+descriptionElements[0] +
-                            " <b>Cytogenetic region:</b>" + descriptionElements[1] +
-                            " <b>Most severe consequence: </b>" + descriptionElements[2] +
-                            " <b>Mapped gene(s): </b>" + descriptionElements[3];
-                    }
-                    descriptionTruncated = variantDescription;
-                }
-
-                // Add custom formatting for gene description
-                if (doc.resourcename == "gene") {
-                    var variantDescription = '' // initializing empty description
-
-                    var descriptionElements = descriptionTruncated.split("|");
-                    if (! descriptionElements[0]){
-                        descriptionElements[0] = "No description available.";
-                    }
-                    variantDescription += "<b>Description: </b>"+descriptionElements[0] +
-                        "<br><b>Genomic location: </b>" + descriptionElements[1] +
-                        " <b>Cytogenetic region: </b>" + descriptionElements[2] +
-                        " <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
-                    descriptionTruncated = variantDescription;
-                }
-                if(doc.resourcename == "region") {
-                    descriptionTruncated = "<b>Description: </b>" +doc.description +
-                        "<br><b>Chromosome: </b>" + doc.chromosomeName +
-                        " <b>Start: </b>" + doc.chromosomeStart +
-                        " <b>end: </b>" + doc.chromosomeEnd + '<br> ';
-                }
-
-                descriptionTruncated=addShowMoreLink(descriptionTruncated, 200,"...");
-                descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
-        
-                var description_stats = "";
-                if ('associationCount' in doc) {
-                    description_stats = description_stats.concat("<br><p>Associations ").concat('<span class="badge background-color-primary-bold ">').concat(doc.associationCount).concat('</span>&nbsp;');
-            
-                }
-        
-                if ('studyCount' in doc) {
-                    description_stats = description_stats.concat("&nbsp;&nbsp;Studies ").concat('<span class="badge background-color-primary-bold ">').concat(doc.studyCount).concat('</span>');
-                }
-        
-                descriptionTruncated = descriptionTruncated+description_stats;
-
-                descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
-
-                rowDescription.append($("<td style=\"width: 88%\">").html(descriptionTruncated));
-                tbody.append(rowDescription);
-                divResult.append(table);
-                divResult.append("<br>");
-            }
-            catch (ex) {
-                console.log("Failure to process document " + ex);
-            }
-        }
-
-        setState(SearchState.RESULTS);
-    }
-    else {
-        setState(SearchState.NO_RESULTS);
-    }
-
-    $('#loadingResults').hide();
-    
-    console.log("Data display complete");
-}
-
 function setState(state) {
     var loading = $('#loading');
     var noresults = $('#noResults');
@@ -549,7 +634,6 @@ function setState(state) {
             window.location = "search";
     }
 }
-
 
 function updateCountBadges(countArray, searchTerm) {
     console.log("Updating facet counts for " + (countArray.length / 2) + " badges");
@@ -689,7 +773,6 @@ function setDownloadLink(searchParams) {
 
 }
 
-
 function setStats(data) {
     try {
         $('#releasedate-stat').text("Last data release on " + data.date);
@@ -706,7 +789,6 @@ function setStats(data) {
     }
 }
 
-
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -717,18 +799,5 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-
-function addLoadingDiv(divId) {
-    var ctrl = $(divId);
-    
-    //uncomment for mask
-    /*ctrl.append('<div class="exposeMask" style="width: ' + ctrl.width() + '; height: ' + ctrl.height() + '; opacity = .5;"></div>');*/
-    
-    var left = ((ctrl.width() / 2) - 50) + 'px';
-    var top = ((ctrl.height() / 2) - 25) + 'px';
-    loadingDiv = '<div class="ajaxLoadingMore" style="top: ' + top + '; left: ' + left + ';">Loading...</div>';
-    ctrl.addClass('loading');
-    ctrl.append(loadingDiv);
-}
 
 
