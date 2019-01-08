@@ -199,7 +199,7 @@ var drawSnippets = (function () {
         titleRow.append($("<td rowspan='2' style='width: 3%'>").html(''));
 
         // Adding the title cell:
-        titleRow.append($("<td style=\"width: 94%\">").html(`<h3><span class="letter-circle letter-circle-${resourceName}">&nbsp;${resourceNameLetter}&nbsp;</span><a href=""></a></h3>`));
+        titleRow.append($("<td style=\"width: 94%\">").html(`<h3 id="titleCell"><span class="letter-circle letter-circle-${resourceName}">&nbsp;${resourceNameLetter}&nbsp;</span><a href=""></a></h3>`));
 
         // Adding the spacer cell for icons:
         titleRow.append($("<td style='width: 10%'>").html("<h3 class='pull-right' id='iconCell'></h3>"));
@@ -220,7 +220,6 @@ var drawSnippets = (function () {
         tbody.append(descriptionRow);
 
         return(table);
-
     };
 
     // Adding association and study counts:
@@ -329,44 +328,27 @@ var drawSnippets = (function () {
     }
 
     // Updating snippet fields for traits:
-    var trait = function(divResult, doc) {
-        var table = $('<table class="border-search-box">');
-        var tbody = table.append('<tbody />').children('tbody');
-        var row = $("<tr>");
+    var trait = function(table, doc) {
 
-        var efoLabsUrl = gwasProperties.contextPath+"efotraits/"+doc.shortForm
-        row.append($("<td rowspan='2' style='width: 3%'>").html(''));
-        row.append($("<td style=\"width: 94%\">").html("<h3><span class='letter-circle letter-circle-trait'>&nbsp;T&nbsp;</span><a href="+efoLabsUrl+">"+doc.title+"</a>&nbsp;&nbsp;<span class='badge letter-circle-trait'>"+doc.shortForm+"</span></h3>"));
-        row.append($("<td rowspan='2' style='width: 3%'>").html(''));
+        // Update title:
+        table.find('a').text(doc.title);
 
-        tbody.append(row);
+        // Update publication URL:
+        table.find('a').attr('href', gwasProperties.contextPath+"efotraits/" + doc.shortForm );
 
-        // Function to parse the description
-        var rowDescription = $("<tr>");
+        // Adding efo name to title:
+        table.find('h3#titleCell').append("&nbsp;&nbsp;");
+        table.find('h3#titleCell').append($("<span class='badge letter-circle-trait' id='efoID'>" + doc.shortForm + "</span>"));
+
+        // Adding description
         var descriptionTruncated = doc.description;
-
         descriptionTruncated = addShowMoreLink(descriptionTruncated, 200,"...");
-        descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
+        table.find('p.descriptionSearch').append(descriptionTruncated);
 
-        var description_stats = "";
-        if ('associationCount' in doc) {
-            description_stats = description_stats.concat("<br><p>Associations ").concat('<span class="badge background-color-primary-bold ">').concat(doc.associationCount).concat('</span>&nbsp;');
+        // Adding stats:
+        table = addStats(doc, table)
 
-        }
-
-        if ('studyCount' in doc) {
-            description_stats = description_stats.concat("&nbsp;&nbsp;Studies ").concat('<span class="badge background-color-primary-bold ">').concat(doc.studyCount).concat('</span>');
-        }
-
-        descriptionTruncated = descriptionTruncated+description_stats;
-
-        descriptionTruncated = "<p class='descriptionSearch'>"+descriptionTruncated+"</p>";
-
-        rowDescription.append($("<td style=\"width: 88%\">").html(descriptionTruncated));
-        tbody.append(rowDescription);
-        divResult.append(table);
-        // divResult.append("<br>");
-
+        return(table);
     }
 
     // Updating snippet fields for genes:
@@ -395,7 +377,6 @@ var drawSnippets = (function () {
         table = addStats(doc, table)
 
         return(table);
-
     }
 
     // Updating snippet fields for regions:
