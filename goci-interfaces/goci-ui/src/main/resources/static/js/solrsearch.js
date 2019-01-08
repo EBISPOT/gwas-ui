@@ -133,7 +133,10 @@ function solrSearch(queryTerm) {
 }
 
 //
-// Test module ends
+// The following module draws the search snippets on the results page.
+// This module is self contained, no outside functions are called.
+//
+// Input: list of solr slim documents.
 //
 var drawSnippets = (function () {
 
@@ -363,7 +366,7 @@ var drawSnippets = (function () {
         // Update description:
         var descriptionElements = doc.description.split("|");
         if (! descriptionElements[0]){
-            var geneDescription = "No description available.";
+            descriptionElements[0] = "No description available.";
         }
         else {
             var geneDescription = "<b>Description: </b>"+descriptionElements[0] +
@@ -405,10 +408,6 @@ var drawSnippets = (function () {
         renderer: renderer,
     }
 })();
-
-//
-// Test module ends
-//
 
 function processData(data) {
     var documents = data.response.docs;
