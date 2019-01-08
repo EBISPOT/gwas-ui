@@ -410,67 +410,40 @@ var drawSnippets = (function () {
 })();
 
 function processData(data) {
+
+    // Extracting search term:
+    var searchTerm = $('#query').text();
+
+    // Extracting components from the solr response:
     var documents = data.response.docs;
+    var resourceCounts = data.facet_counts.facet_fields.resourcename;
 
-    // setDownloadLink(data.responseHeader.params);
-    console.log("Solr search returned " + documents.length + " documents");
+    // Test if the query is a region, if so, adding to the returned data:
+    documents = test_for_region(searchTerm, documents)
 
-    searchTermParam = data.responseHeader.params.q
-    // formattedSearchTerm = searchTermParam.replace(/['"]+/g, '').split(":");
-    // change parsing when using "title:searchTerm" in query
-    formattedSearchTerm = searchTermParam.replace(/['"]+/g, '').split("OR");
-    formattedSearchTerm = formattedSearchTerm[0].split(":");
-
-    updateCountBadges(data.facet_counts.facet_fields.resourcename, formattedSearchTerm[1]);
-
-    if(data.responseHeader.params.sort != null && data.responseHeader.params.sort.indexOf('pValue') != -1 && data.responseHeader.params.sort.indexOf('asc') != -1){
-        $('#pValue').find('span.unsorted').removeClass('glyphicon-sort').addClass('glyphicon-arrow-up').removeClass('unsorted').addClass('sorted asc');
+    // if region document is added, we update the resourceCounts:
+    if ( documents.length > 0 && documents[0].resourcename == 'region' ){
+        resourceCounts = resourceCounts.concat(['region', 1]);
+    }
+    else {
+        resourceCounts = resourceCounts.concat(['region', 0]);
     }
 
-    if (!$('#filter-form').hasClass('in-use')) {
-        if (data.responseHeader.params.q.indexOf('*') != -1 && data.responseHeader.params.fq != null) {
-            var fq = data.responseHeader.params.fq;
+    // Updating the badges is a must:
+    // (however needs to be checked...)
+    updateCountBadges(resourceCounts);
 
-            if (fq.indexOf("catalogPublishDate") != -1) {
-                var dateRange = "[NOW-1MONTH+TO+*]";
-                generateTraitDropdown(data.responseHeader.params.q, null, dateRange);
-            }
-            else {
-                if (fq.charAt(fq.length - 1) == '"') {
-                    fq = fq.substr(0, fq.length - 1);
-                }
-                ;
-
-                var terms = fq.split('"');
-                var traits = []
-
-                for (var i = 0; i < terms.length; i++) {
-                    if (terms[i].indexOf('traitName') == -1) {
-                        traits.push(terms[i].replace(/\s/g, '+'));
-                    }
-                }
-                //generateTraitDropdown(data.responseHeader.params.q, traits, null);
-            }
-        }
-        else {
-            //generateTraitDropdown(data.responseHeader.params.q, null, null);
-        }
-    }
-
+    // Drawing all snippets if there is at least one document:
     if (documents.length != 0) {
-        // Test if the query is a region, if so, adding a doc:
-        documents = test_for_region($('#query').text(), documents)
-
-        // Drawing all snippets:
         drawSnippets.renderer(documents)
     }
     else {
         setState(SearchState.NO_RESULTS);
     }
 
+    // Once the snippets are done, we remove the spinner:
     $('#loadingResults').hide();
     
-    console.log("Data display complete");
 }
 
 // Extracting data from Ensembl:
@@ -556,7 +529,7 @@ function test_for_region(queryTerm, data){
             "chromosomeName" : chrom,
             "chromosomeStart" : start,
             "chromosomeEnd" : end,
-            "title": "chr"+chrom+":"+start +"-"+end,
+            "title": "chr" + chrom + ":" + start + "-" + end,
             "resourcename": "region"
         }
 
@@ -615,13 +588,10 @@ function setState(state) {
     }
 }
 
-function updateCountBadges(countArray, searchTerm) {
-    console.log("Updating facet counts for " + (countArray.length / 2) + " badges");
-
-    // Add search term to facet box
-    // var searchTermForHeader = $('#' + 'result-header');
-    // searchTermForHeader.append(searchTerm);
-
+//
+// This function is good. However needs to be reviewed.
+//
+function updateCountBadges(countArray) {
 
     for (var i = 0; i < countArray.length; i = i + 2) {
         var resource = countArray[i];
