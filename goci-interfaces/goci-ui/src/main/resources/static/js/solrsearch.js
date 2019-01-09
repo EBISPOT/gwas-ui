@@ -134,7 +134,6 @@ function solrSearch(queryTerm) {
 
 //
 // The following module draws the search snippets on the results page.
-// This module is self contained, no outside functions are called.
 //
 // Input: list of solr slim documents.
 //
@@ -409,6 +408,143 @@ var drawSnippets = (function () {
     }
 })();
 
+//
+// Test if the query string is a genomic region. If yes, then it adds a fake
+// region document to the document list.
+//
+// Input: search query, list of solr slim documents.
+//
+var testForRegion = (function () {
+
+    // This is the main public function:
+    var test = function(queryTerm, data) {
+        var regionTest = /([XY0-9]{1,2}):(\d+)-(\d+)/gi; // matches regions 6:234511-23500
+        var cytobandTest = /([XY0-9]{1,2})([PQ][0-9]+\.[0-9]+)/gi; // matches cytobands eg 6p33.1
+
+        // test if queryTerm looks like a region:
+        if (queryTerm.match(regionTest)) {
+
+            var match = regionTest.exec(queryTerm);
+            var chrom = match[1];
+            var start = match[2];
+            var end = match[3];
+
+
+            // Testing for valid chromosomes:
+            var chromosomes = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y"]
+            if (!chromosomes.includes(chrom)) {
+                return (data)
+            }
+
+            // Testing if bp-s are numbers:
+            if (isNaN(start) || isNaN(end)) {
+                return (data)
+            }
+
+            // Testing if bp1 is smaller than bp2:
+            if (parseInt(start) >= parseInt(end)) {
+                return (data)
+            }
+
+            // At this point we know the query is a valid region. We now have to add a "fake" document:
+            var fakeDoc = {
+                "description": 'Custom genomic location',
+                "chromosomeName": chrom,
+                "chromosomeStart": start,
+                "chromosomeEnd": end,
+                "title": "chr" + chrom + ":" + start + "-" + end,
+                "resourcename": "region"
+            }
+
+            // Adding doc:
+            data.unshift(fakeDoc)
+        }
+        else if (queryTerm.match(cytobandTest)) {
+            cytobandData = lookUpCytoband(queryTerm)
+
+            // If no cytoban could be found:
+            if (cytobandData.end.toString() == '-') {
+                return (data)
+            }
+
+            // At this point we know the query is a valid region. We now have to add a "fake" document:
+            var fakeDoc = {
+                "description": 'Cytogenic band',
+                "chromosomeName": cytobandData.chrom,
+                "chromosomeStart": cytobandData.start,
+                "chromosomeEnd": cytobandData.end,
+                "title": queryTerm,
+                "resourcename": "region"
+            }
+
+            // Adding doc:
+            data.unshift(fakeDoc)
+
+        }
+
+        return (data)
+    }
+
+    // This function extracts information of the cytoband from Ensembl:
+    var lookUpCytoband = function (cytoband){
+
+        // Parse cytoband name: 6p22.3
+        var myRegexp = /([0-9XY]+)([pq][0-9]+\.*[0-9]*)/i;
+        var match = myRegexp.exec(cytoband);
+
+        // Populate this object with data to be returned:
+        var returnData = {
+            'chrom' : match[1],
+            'band' : match[2],
+            'start' : '-',
+            'end' : '-',
+            'stain' : '-'
+        }
+
+        // https://rest.ensembl.org/info/assembly/homo_sapiens/X?content-type=application/json&bands=1
+        var assemblyQueryURL = gwasProperties.EnsemblRestBaseURL + "/info/assembly/homo_sapiens/" + returnData.chrom + "?content-type=application/json&bands=1"
+        var assemblyData =  getEnsemblREST(assemblyQueryURL)
+
+        // Test needed if assembly was found or not.
+        if (assemblyData.error){
+            console.log("[Error] REST query failed: " + assemblyQueryURL)
+            console.log("[Error] Returned value: " + assemblyData.error)
+            return(returnData)
+        }
+
+        // Looping through all cytobands to find the requested one:
+        for ( band of assemblyData.karyotype_band){
+            if(band.id == returnData.band){
+                returnData.start = band.start;
+                returnData.end = band.end;
+                returnData.stain = band.stain;
+            }
+        }
+
+        return(returnData)
+    }
+
+    // Extracting data from Ensembl:
+    var getEnsemblREST = function (URL) {
+        var result = null;
+        $.ajax({
+            url: URL,
+            type: 'get',
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                result = data;
+            }
+        });
+        return result;
+    }
+
+    // Public function:
+    return {
+        test: test,
+    }
+})();
+
 function processData(data) {
 
     // Extracting search term:
@@ -419,7 +555,7 @@ function processData(data) {
     var resourceCounts = data.facet_counts.facet_fields.resourcename;
 
     // Test if the query is a region, if so, adding to the returned data:
-    documents = test_for_region(searchTerm, documents)
+    documents = testForRegion.test(searchTerm, documents)
 
     // if region document is added, we update the resourceCounts:
     if ( documents.length > 0 && documents[0].resourcename == 'region' ){
@@ -444,120 +580,6 @@ function processData(data) {
     // Once the snippets are done, we remove the spinner:
     $('#loadingResults').hide();
     
-}
-
-// Extracting data from Ensembl:
-function getEnsemblREST(URL){
-    var result = null;
-    $.ajax({
-        url: URL,
-        type: 'get',
-        dataType: 'json',
-        async: false,
-        success: function(data) {
-            result = data;
-        }
-    });
-    return result;
-}
-
-// This function extracts cytoband data from Ensembl:
-function lookUpCytoband(cytoband){
-    // Parse cytoband name: 6p22.3
-    var myRegexp = /([0-9XY]+)([pq][0-9]+\.*[0-9]*)/i;
-    var match = myRegexp.exec(cytoband);
-
-    // Populate this object with data to be returned:
-    var returnData = {
-        'chrom' : match[1],
-        'band' : match[2],
-        'start' : '-',
-        'end' : '-',
-        'stain' : '-'
-    }
-
-    // https://rest.ensembl.org/info/assembly/homo_sapiens/X?content-type=application/json&bands=1
-    var assemblyQueryURL = gwasProperties.EnsemblRestBaseURL + "/info/assembly/homo_sapiens/" + returnData.chrom + "?content-type=application/json&bands=1"
-    var assemblyData =  getEnsemblREST(assemblyQueryURL)
-
-    // Test needed if assembly was found or not.
-    if (assemblyData.error){
-        console.log("[Error] REST query failed: " + assemblyQueryURL)
-        console.log("[Error] Returned value: " + assemblyData.error)
-        return(returnData)
-    }
-
-    // Looping through all cytobands to find the requested one:
-    for ( band of assemblyData.karyotype_band){
-        if(band.id == returnData.band){
-            returnData.start = band.start;
-            returnData.end = band.end;
-            returnData.stain = band.stain;
-        }
-    }
-
-    return(returnData)
-}
-
-// This function tests if the query was a region, in which case it updates the returned documents:
-function test_for_region(queryTerm, data){
-    var regionTest = /([XY0-9]{1,2}):(\d+)-(\d+)/gi; // matches regions 6:234511-23500
-    var cytobandTest = /([XY0-9]{1,2})([PQ][0-9]+\.[0-9]+)/gi; // matches cytobands eg 6p33.1
-
-    // test if queryTerm looks like a region:
-    if (queryTerm.match(regionTest)){
-
-        var match = regionTest.exec(queryTerm);
-        var chrom = match[1];
-        var start = match[2];
-        var end = match[3];
-
-
-        // Testing for valid chromosomes:
-        var chromosomes = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y"]
-        if ( ! chromosomes.includes(chrom)){ return(data) }
-
-        // Testing if bp-s are numbers:
-        if (isNaN(start) || isNaN(end)){ return(data) }
-
-        // Testing if bp1 is smaller than bp2:
-        if ( parseInt(start) >=  parseInt(end)){ return(data) }
-
-        // At this point we know the query is a valid region. We now have to add a "fake" document:
-        var fakeDoc = {
-            "description": 'Custom genomic location',
-            "chromosomeName" : chrom,
-            "chromosomeStart" : start,
-            "chromosomeEnd" : end,
-            "title": "chr" + chrom + ":" + start + "-" + end,
-            "resourcename": "region"
-        }
-
-        // Adding doc:
-        data.unshift(fakeDoc)
-    }
-    else if (queryTerm.match(cytobandTest)){
-        cytobandData = lookUpCytoband(queryTerm)
-
-        // If no cytoban could be found:
-        if (cytobandData.end.toString() == '-'){ return(data) }
-
-        // At this point we know the query is a valid region. We now have to add a "fake" document:
-        var fakeDoc = {
-            "description": 'Cytogenic band',
-            "chromosomeName" : cytobandData.chrom,
-            "chromosomeStart" : cytobandData.start,
-            "chromosomeEnd" : cytobandData.end,
-            "title": queryTerm,
-            "resourcename": "region"
-        }
-
-        // Adding doc:
-        data.unshift(fakeDoc)
-
-    }
-
-    return(data)
 }
 
 function setState(state) {
@@ -588,32 +610,21 @@ function setState(state) {
     }
 }
 
-//
-// This function is good. However needs to be reviewed.
-//
 function updateCountBadges(countArray) {
 
     for (var i = 0; i < countArray.length; i = i + 2) {
+
         var resource = countArray[i];
         var count = countArray[i + 1];
 
+        // Adding count:
         var facet = $('#' + resource + '-facet span');
         facet.empty();
         facet.append(count);
 
-        if ($('#' + resource + '-facet').hasClass("disabled")) {
-            $('#' + resource + '-facet').removeClass("disabled");
-            var summary = $('#' + resource + '-summaries');
-            summary.removeClass("no-results");
-            summary.show();
-            $('#' + resource + '-facet').show();
-        }
-
+        // hide resource with zero count
         if (count == 0) {
-            $('#' + resource + '-facet').addClass("disabled");
-            var summary = $('#' + resource + '-summaries');
-            summary.addClass("no-results");
-            summary.hide();
+            facet.addClass("disabled");
             $('#' + resource + '-facet').hide();
         }
     }
