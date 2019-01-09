@@ -56,3 +56,18 @@ $(document).on('click', ".morelink", function() {
     $(this).prev().toggle();
     return false;
 });
+
+// This function selects 
+$(document).on('click', ".list-group-item", function() {
+
+    // Which resource was selected:
+    var resourceName = $(this).attr('id');
+    resourceName = resourceName.replace('-facet', '');
+
+    // Show all snippets:
+    $(".border-search-box").show();
+
+    // Hide those snippets that are other than the expected:
+    $( ".border-search-box:not(#" + resourceName + ")").hide();
+
+});
