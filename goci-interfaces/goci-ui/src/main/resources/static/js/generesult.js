@@ -108,7 +108,7 @@ function getDataSolr(main, initLoad=false) {
         else {
             processSolrData(data, initLoad, searchQuery, slimData.region); // gene name is now added to the process solr data function.
             //downloads link : utils-helper.js
-            setDownloadLink(searchQuery);
+            setDownloadLink(mappedRsIDs);
         }
         return data;
     }).catch(function(err) {
