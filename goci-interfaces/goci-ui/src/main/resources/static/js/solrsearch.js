@@ -33,7 +33,7 @@ function loadResults() {
     buildBreadcrumbs();
 
     if (searchTerm == '*') {
-        $('#search-term').text('all results');
+        $('#search-term').text('20 most recent publication in the catalog');
     }
 
     $('#search-box').val(searchTerm);
@@ -57,7 +57,7 @@ function buildBreadcrumbs() {
     // Extract search term and update if searched with a star:
     var searchTerm = $('#query').text();
     if ( searchTerm == '*' ){
-        searchTerm = 'all results'
+        searchTerm = '20 most recent publication in the catalog'
     }
 
     if (! window.location.hash) {
@@ -95,10 +95,34 @@ function buildBreadcrumbs() {
 
 function solrSearch(queryTerm) {
     console.log("Solr research request received for " + queryTerm);
+    setState(SearchState.LOADING);
     if (queryTerm == '*') {
-        var searchTerm = 'text:'.concat(queryTerm);
-        var boost_field = ' OR title:"'.concat(queryTerm).concat('"')+' OR synonyms:"'.concat(queryTerm).concat('"');
-        var searchPhrase = searchTerm.concat(boost_field)
+
+        $.getJSON('api/search/moreresults',
+            {
+                // 'q': searchTerm,
+                'q': '*',
+                'max': 20,
+                'facet': 'publication',
+                'pvalfilter': '',
+                'orfilter': '',
+                'betafilter': '',
+                'datefilter': '',
+                'genomicfilter': '',
+                'traitfilter[]': '',
+                'genotypingfilter[]': '',
+                'sort': 'publicationDate%20desc'
+            })
+            .done(function(data) {
+                // Adding required fields to the returned dataset:
+                data['facet_counts'] = { 'facet_fields' : { 'resourcename' : ['publication', 50, 'variant', 0, 'gene', 0, 'trait', 0] }}
+
+                console.log(data);
+                processData(data);
+            })
+            .fail(function (jqXHR, textStatus, err) {
+                alert("Something went wrong.");
+            })
     }
 
     // This needs to be fixed.... this is just tragic..
@@ -115,6 +139,12 @@ function solrSearch(queryTerm) {
 
         // Returning variants based on coordinates:
         var searchPhrase = "chromosomeName: "+chrom+" AND ( chromosomePosition:[ "+bp1+" TO "+bp2+" ] OR chromosomeEnd : [ "+bp1+" TO "+bp2+" ] OR chromosomeStart : [ "+bp1+" TO "+bp2+" ] )"
+
+        $.getJSON('api/search', {'q': searchPhrase})
+            .done(function(data) {
+                console.log(data);
+                processData(data);
+            });
     }
     else {
         var searchTerm = 'text:"'.concat(queryTerm).concat('"');
@@ -122,14 +152,13 @@ function solrSearch(queryTerm) {
         // Search using title field also in query
         var boost_field = ' OR title:"'.concat(queryTerm).concat('"')+' OR synonyms:"'.concat(queryTerm).concat('"');
         var searchPhrase = searchTerm.concat(boost_field);
-    }
-    setState(SearchState.LOADING);
 
-    $.getJSON('api/search', {'q': searchPhrase})
+        $.getJSON('api/search', {'q': searchPhrase})
             .done(function(data) {
                 console.log(data);
                 processData(data);
             });
+    }
 }
 
 //

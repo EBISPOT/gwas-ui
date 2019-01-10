@@ -57,7 +57,7 @@ $(document).on('click', ".morelink", function() {
     return false;
 });
 
-// This function selects 
+// This function selects
 $(document).on('click', ".list-group-item", function() {
 
     // Which resource was selected:
