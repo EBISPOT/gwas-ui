@@ -388,15 +388,15 @@ var drawSnippets = (function () {
         // Update title:
         table.find('a').text(doc.title);
 
-        // Update publication URL:
+        // Update gene URL:
         table.find('a').attr('href', gwasProperties.contextPath+"genes/"+doc.title);
 
         // Update description:
         var descriptionElements = doc.description.split("|");
-        var geneDescription = '';
+        var geneDescription = 'empty';
         if (! descriptionElements[0]){
-            descriptionElements[0] = "No description available.";
-            console.log("[Warning] No description available for " + doc.title );
+            descriptionElements[0] = "No description available";
+            console.log(descriptionElements)
         }
         else {
             geneDescription = "<b>Description: </b>"+descriptionElements[0] +
