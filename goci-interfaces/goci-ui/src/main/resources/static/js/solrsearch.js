@@ -115,7 +115,7 @@ function solrSearch(queryTerm) {
             })
             .done(function(data) {
                 // Adding required fields to the returned dataset:
-                data['facet_counts'] = { 'facet_fields' : { 'resourcename' : ['publication', 50, 'variant', 0, 'gene', 0, 'trait', 0] }}
+                data['facet_counts'] = { 'facet_fields' : { 'resourcename' : ['publication', 20, 'variant', 0, 'gene', 0, 'trait', 0] }}
 
                 console.log(data);
                 processData(data);
