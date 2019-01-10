@@ -499,7 +499,7 @@ var testForRegion = (function () {
 
             // At this point we know the query is a valid region. We now have to add a "fake" document:
             var fakeDoc = {
-                "description": 'Cytogenic band',
+                "description": 'Cytogenetic region',
                 "chromosomeName": cytobandData.chrom,
                 "chromosomeStart": cytobandData.start,
                 "chromosomeEnd": cytobandData.end,
