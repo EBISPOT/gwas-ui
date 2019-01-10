@@ -47,8 +47,12 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             // This line will remove the space from the risk allele (see GOCI-2480)
             riskAllele = riskAllele.replace(" -", "-")
 
-            // there may be more than one riskAllele value
-            var riskAlleles = riskAllele.split(";");
+            // there may be more than one variants for an association:
+            var separator = ' x '; // SNP x SNP interactions are separated by ' x '
+            if ( riskAllele.match(';') ){
+                separator = ';'; // haplotypes are separated by ';'
+            }
+            var riskAlleles = riskAllele.split(separator);
 
             var items = [];
             for (var i = 0; i < riskAlleles.length; i++) {
@@ -72,7 +76,9 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
                 items.push(riskAllele);
             }
 
-            tmp['riskAllele'] = items.join(', ');
+            // Reconstructing the multi snp association:
+            if ( separator == ';'){ separator = ', '}
+            tmp['riskAllele'] = items.join(separator);
 
 
             // Risk allele frequency
