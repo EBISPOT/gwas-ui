@@ -393,11 +393,13 @@ var drawSnippets = (function () {
 
         // Update description:
         var descriptionElements = doc.description.split("|");
+        var geneDescription = '';
         if (! descriptionElements[0]){
             descriptionElements[0] = "No description available.";
+            console.log("[Warning] No description available for " + doc.title );
         }
         else {
-            var geneDescription = "<b>Description: </b>"+descriptionElements[0] +
+            geneDescription = "<b>Description: </b>"+descriptionElements[0] +
                 "</br><b>Location: </b>" + descriptionElements[1] +
                 " <b>Cytogenetic region: </b>" + descriptionElements[2] +
                 " <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
