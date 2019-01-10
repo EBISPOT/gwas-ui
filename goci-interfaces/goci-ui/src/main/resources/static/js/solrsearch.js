@@ -393,17 +393,16 @@ var drawSnippets = (function () {
 
         // Update description:
         var descriptionElements = doc.description.split("|");
-        var geneDescription = 'empty';
+
         if (! descriptionElements[0]){
             descriptionElements[0] = "No description available";
-            console.log(descriptionElements)
         }
-        else {
-            geneDescription = "<b>Description: </b>"+descriptionElements[0] +
-                "</br><b>Location: </b>" + descriptionElements[1] +
-                " <b>Cytogenetic region: </b>" + descriptionElements[2] +
-                " <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
-        }
+
+        var geneDescription = "<b>Description: </b>"+descriptionElements[0] +
+            "</br><b>Location: </b>" + descriptionElements[1] +
+            " <b>Cytogenetic region: </b>" + descriptionElements[2] +
+            " <b>Biotype: </b>" + descriptionElements[3].replace(/_/g, " ");
+
         table.find('p.descriptionSearch').append(geneDescription);
 
         // Adding stats:
