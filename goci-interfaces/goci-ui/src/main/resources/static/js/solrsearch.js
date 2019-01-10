@@ -33,7 +33,7 @@ function loadResults() {
     buildBreadcrumbs();
 
     if (searchTerm == '*') {
-        $('#search-term').text('20 most recent publication in the catalog');
+        $('#search-term').text('20 most recent publications in the Catalog');
     }
 
     $('#search-box').val(searchTerm);
@@ -57,7 +57,7 @@ function buildBreadcrumbs() {
     // Extract search term and update if searched with a star:
     var searchTerm = $('#query').text();
     if ( searchTerm == '*' ){
-        searchTerm = '20 most recent publication in the catalog'
+        searchTerm = '20 most recent publications in the Catalog'
     }
 
     if (! window.location.hash) {
@@ -103,7 +103,6 @@ function solrSearch(queryTerm) {
                 // 'q': searchTerm,
                 'q': '*',
                 'max': 20,
-                'facet': 'publication',
                 'pvalfilter': '',
                 'orfilter': '',
                 'betafilter': '',
@@ -111,7 +110,8 @@ function solrSearch(queryTerm) {
                 'genomicfilter': '',
                 'traitfilter[]': '',
                 'genotypingfilter[]': '',
-                'sort': 'publicationDate%20desc'
+                'sort': 'publicationDate%20desc',
+                'facet' : 'publication'
             })
             .done(function(data) {
                 // Adding required fields to the returned dataset:
@@ -424,7 +424,7 @@ var drawSnippets = (function () {
         var regionDescription = "<b>Description: </b>" +doc.description +
             "<br><b>Chromosome: </b>" + doc.chromosomeName +
             " <b>Start: </b>" + doc.chromosomeStart +
-            " <b>end: </b>" + doc.chromosomeEnd + '<br> ';
+            " <b>End: </b>" + doc.chromosomeEnd + '<br> ';
 
         table.find('p.descriptionSearch').append(regionDescription);
 
