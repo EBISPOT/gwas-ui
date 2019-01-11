@@ -102,16 +102,27 @@ function displayAncestryLinksAsList(data_array) {
             var initial;
             var replicate;
 
+            var initial_list = $('<ul/>');
+            initial_list.css('padding-left', '0px');
+
+            var replicate_list = $('<ul/>');
+            replicate_list.css('padding-left', '0px');
+
             if (data_array[0].startsWith('initial')) {
                 initial = data_array[0].split('|');
                 initial = initial[4]+' '+initial[3];
+                initial_list.append(newItem(initial))
             }
             else {
                 replicate = data_array[0].split('|');
                 replicate = replicate[4]+' '+replicate[3];
+                replicate_list.append(newItem(replicate))
             }
-            initial_data_text = initial;
-            replicate_data_text = replicate;
+
+            // initial_data_text = initial;
+            // replicate_data_text = replicate;
+            initial_data_text = initial_list;
+            replicate_data_text = replicate_list;
         }
         else if (data_array.length > 1) {
             var initial_list = $('<ul/>');
