@@ -148,8 +148,11 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert=true) {
             initial_ancestral_links_text = ancestry_and_sample_number_data.initial_data_text;
             replicate_ancestral_links_text = ancestry_and_sample_number_data.replicate_data_text;
 
-            if (study.ancestryLinks.length > 1) {
+            if (typeof initial_ancestral_links_text === 'object') {
                 initial_ancestral_links_text = initial_ancestral_links_text.html();
+            }
+
+            if (typeof replicate_ancestral_links_text === 'object') {
                 replicate_ancestral_links_text = replicate_ancestral_links_text.html();
             }
         }
