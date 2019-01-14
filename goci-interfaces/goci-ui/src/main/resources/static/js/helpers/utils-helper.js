@@ -100,29 +100,31 @@ function displayAncestryLinksAsList(data_array) {
     if (data_array) {
         if (data_array.length == 1) {
             var initial;
-            var replicate;
+            // var replicate;
 
             var initial_list = $('<ul/>');
             initial_list.css('padding-left', '0px');
 
-            var replicate_list = $('<ul/>');
-            replicate_list.css('padding-left', '0px');
+            // var replicate_list = $('<ul/>');
+            // replicate_list.css('padding-left', '0px');
 
             if (data_array[0].startsWith('initial')) {
                 initial = data_array[0].split('|');
-                initial = initial[4]+' '+initial[3];
+                initial = initial[4] + ' ' + initial[3];
                 initial_list.append(newItem(initial))
             }
-            else {
-                replicate = data_array[0].split('|');
-                replicate = replicate[4]+' '+replicate[3];
-                replicate_list.append(newItem(replicate))
-            }
+            // else {
+            //     replicate = data_array[0].split('|');
+            //     replicate = replicate[4]+' '+replicate[3];
+            //     console.log("** One - Rep: "+replicate);
+            //     replicate_list.append(newItem(replicate))
+            //     console.log("** One A - RL: "+replicate_list);
+            // }
 
             // initial_data_text = initial;
             // replicate_data_text = replicate;
             initial_data_text = initial_list;
-            replicate_data_text = replicate_list;
+            replicate_data_text = "-";
         }
         else if (data_array.length > 1) {
             var initial_list = $('<ul/>');
@@ -131,22 +133,28 @@ function displayAncestryLinksAsList(data_array) {
             var replicate_list = $('<ul/>');
             replicate_list.css('padding-left', '0px');
 
+            var replicate_count = 0;
+
             for (var i = 0; i < data_array.length; i++) {
                 var initial;
                 var replicate;
                 if (data_array[i].startsWith('initial')) {
                     // Example data: initial|NR|U.S.|Hispanic or Latin American|6499|NA
                     initial = data_array[i].split('|');
-                    initial = initial[4]+' '+initial[3];
+                    initial = initial[4] + ' ' + initial[3];
                     initial_list.append(newItem(initial))
                 }
                 else {
+                    replicate_count++;
                     replicate = data_array[i].split('|');
-                    replicate = replicate[4]+' '+replicate[3];
+                    replicate = replicate[4] + ' ' + replicate[3];
                     replicate_list.append(newItem(replicate))
                 }
             }
             initial_data_text = initial_list;
+            if (replicate_count == 0) {
+                replicate_list = "-";
+            }
             replicate_data_text = replicate_list;
         }
     }
