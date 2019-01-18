@@ -4,6 +4,19 @@
 
 <body th:fragment="page_footer">
 
+<script>
+    (function() {
+        console.log("Looking for search box...");
+        if (document.querySelector('#search-box') === null) {
+            console.log("Search box not found showing search bar on the header.");
+            document.getElementById("header-searchbar").style.display = "block";
+        }
+        else {
+            console.log("Search box found.");
+        }
+    })();
+</script>
+
 <footer class="footer background-color-primary-accent">
     <!--<div class="footer-banner background-color-primary"></div>-->
     <div class="container">

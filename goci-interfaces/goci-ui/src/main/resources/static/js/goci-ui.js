@@ -32,8 +32,19 @@ $(document).ready(function() {
         if(event.keyCode == 13) {
             if($('#search-box').val().length >0) {
                 doSearch();
-                
             } else {return false;}
+        }
+    });
+
+    /*
+    Functions to capture search term from the header:
+     */
+    $('#header-search-button').click(function () {
+        HeaderDoSearch();
+    });
+    $('#header-search-box').keydown(function (event) {
+        if (event.keyCode == 13 &&  $('#header-search-box').val().length > 0) {
+            HeaderDoSearch();
         }
     });
     
@@ -77,6 +88,13 @@ function displayGenotyping() {
         $('#genotyping-dropdown ul').append($("<li>").html('<input type="checkbox" class="genotyping-check" value="Genome-wide genotyping array"/>&nbsp;Genome-wide genotyping array'));
         $('#genotyping-dropdown ul').append($("<li>").html('<input type="checkbox" class="genotyping-check" value="Targeted genotyping array"/>&nbsp;Targeted genotyping array'));
     }
+}
+
+// Searching from header searchbar:
+function HeaderDoSearch() {
+    var searchTerm = $("#header-search-box").val();
+    var ORIGIN = window.location.origin;
+    window.location = ORIGIN + "/gwas/search?query=" + searchTerm;
 }
 
 function useAutoCompleteInput(){

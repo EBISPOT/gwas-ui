@@ -4283,6 +4283,13 @@ tbody.collapse.in {
     border-collapse: separate;
 }
 
+.input-group.header-input-group {
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px
+}
+
 .input-group[class*="col-"] {
     float: none;
     padding-right: 0;
