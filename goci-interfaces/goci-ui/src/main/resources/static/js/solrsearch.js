@@ -269,27 +269,27 @@ var drawSnippets = (function () {
     }
 
     // Shortening description:
-    var addShowMoreLink = function (content, showCharParam, ellipsestext) {
-        var moretext = "Show more >";
-
-        var html="";
-        if(content.length > showCharParam) {
-
-            var visible_text = content.substr(0, showCharParam);
-            var lastSpace = visible_text.lastIndexOf("\&nbsp;");
-            if (lastSpace > -1) {
-                showCharParam = lastSpace;
-                visible_text = content.substr(0, showCharParam);
-            }
-            var extra_text = content.substr(showCharParam, content.length - showCharParam);
-
-            html = visible_text + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + extra_text + '</span>&nbsp;&nbsp;<a href="javascript:void(0)" class="morelink">' + moretext + '</a></span>';
-        }
-        else {
-            html = content;
-        }
-        return html;
-    };
+    // var addShowMoreLink = function (content, showCharParam, ellipsestext) {
+    //     var moretext = "Show more >";
+    //
+    //     var html="";
+    //     if(content.length > showCharParam) {
+    //
+    //         var visible_text = content.substr(0, showCharParam);
+    //         var lastSpace = visible_text.lastIndexOf("\&nbsp;");
+    //         if (lastSpace > -1) {
+    //             showCharParam = lastSpace;
+    //             visible_text = content.substr(0, showCharParam);
+    //         }
+    //         var extra_text = content.substr(showCharParam, content.length - showCharParam);
+    //
+    //         html = visible_text + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + extra_text + '</span>&nbsp;&nbsp;<a href="javascript:void(0)" class="morelink">' + moretext + '</a></span>';
+    //     }
+    //     else {
+    //         html = content;
+    //     }
+    //     return html;
+    // };
 
     // Updating snippet fields for publications:
     var publication = function(table, doc){
