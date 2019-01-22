@@ -18,6 +18,7 @@ $(document).ready(function() {
 
 var loadDocumentation = function(pagename, content) {
     console.log("Attempting to load documentation...");
+
     return function(data, textStatus, jqXHR) {
         // set breadcrumb
         var displayName = pagename.replace(/(^| )(\w)/g, function(x) {
@@ -35,7 +36,11 @@ var loadDocumentation = function(pagename, content) {
         // }
         //
         // else
-        if (displayName.toLowerCase() == "downloads" || displayName.toLowerCase() == "file downloads" || displayName.toLowerCase() == "diagram downloads" || displayName.toLowerCase() == "summary statistics" ) {
+        if (displayName.toLowerCase() == "downloads" ||
+            displayName.toLowerCase() == "file downloads" ||
+            displayName.toLowerCase() == "diagram downloads" ||
+            displayName.toLowerCase() == "summary statistics" ) {
+
             // $("#about-item").removeClass("active");
             $("#documentation-item").removeClass("active");
             $("#downloads-item").addClass("active");
