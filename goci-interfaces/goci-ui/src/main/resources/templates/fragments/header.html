@@ -25,13 +25,9 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" th:href="@{/home}">GWAS Catalog</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right" >
 
-                <!-- <li id="headerSearch" ><input type="text" placeholder="Search.."> </li> -->
-                <li style="height:50px; display: none" id="header-searchbar" >
-                    <span class="input-group header-input-group">
+            <!-- This is the header search bar -->
+            <span class="input-group header-input-group">
                         <input type="text"
                                class="form-control ac_input hidden-sm"
                                placeholder="Search" style="width:100%; font-size:14px; display:inline; padding-left: 10px; padding-bottom: 0px;padding-top: 0px;padding-right: 0px;height: 22px;" id="header-search-box"
@@ -48,8 +44,12 @@
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
-                    </span>
-                </li>
+            </span>
+
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right" >
+
 
                 <li th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}">
                     <a href="index.html" th:href="@{/}">
