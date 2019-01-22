@@ -124,7 +124,7 @@ function getDataSolr(main, initLoad=false) {
         }
         else {
             processSolrData(data, initLoad, searchQuery);
-            setDownloadLink(searchQuery);
+            setDownloadLink(solrQuery);
         }
 
         // console.log("Solr research done for " + searchQuery);
