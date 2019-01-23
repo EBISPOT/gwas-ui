@@ -27,9 +27,8 @@ $(document).ready(function() {
 
 function getAllSummaryStatsStudies () {
     $('#loadingStudies').show();
-
-
-    var sumStatsUrl = 'https://www.ebi.ac.uk/gwas/summary-statistics/api/studies?size=2000';
+    
+    var sumStatsUrl = 'https://www.ebi.ac.uk/gwas/summary-statistics/api/study_list';
 
     var summaryStatsStudyAccessions = [];
     return promiseGet(sumStatsUrl,
@@ -59,7 +58,7 @@ function loadStudiesList(summaryStatsStudyAccessions) {
 
     $.getJSON('../api/search/summaryStatistics', {
                 'q': searchTerm,
-                'max': 500,
+                'max': 2000,
                 'fl': 'author,publicationDate,pubmedId,publication,title,traitName,associationCount,author_s,accessionId',
             })
             .done(function(data) {
