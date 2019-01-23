@@ -98,7 +98,7 @@ function getDataSolr(main, initLoad=false) {
         solrQuery =  "chromosomeName: "+coordinates[1]+" AND chromosomePosition:[ "+coordinates[2]+" TO "+coordinates[3]+" ]"
     }
     else {
-        $('#lower_container').html("<h2>The provided query term <em>"+searchQuery+"</em> cannot be interpret as a region.</h2>");
+        $('#lower_container').html("<h2>The provided query term <em>"+searchQuery+"</em> cannot be interpreted as a region.</h2>");
     }
 
     // console.log("** solr Query: "+ solrQuery)
@@ -120,7 +120,7 @@ function getDataSolr(main, initLoad=false) {
         if ( data.grouped.resourcename.groups.length == 0 ) {
 
             // console.log(data)
-            $('#lower_container').html("<h2>No associaitons could be found in the region: <em>"+searchQuery+"</em> in the GWAS Catalog database</h2>");
+            $('#lower_container').html("<h2>No associations could be found in the region: <em>"+searchQuery+"</em> in the GWAS Catalog database</h2>");
         }
         else {
             processSolrData(data, initLoad, searchQuery);
@@ -185,27 +185,19 @@ function processSolrData(data, initLoad=false, searchTerm) {
         }
 
         var PAGE_TYPE = "region";
-
         displayDatatableAssociations(data_association.docs);
-        console.log("[Info] displayDatatableAssociations - OK");
 
         // when chr:pos is queried, there's no returned study. We have to specifically fetch those.
         if ( data_study.docs.length == 0 ){
-            console.log("** There's no sudy!!!");
             data_study.docs = fetchStudies(data_association.docs);
             displayDatatableStudies(data_study.docs, PAGE_TYPE);
         }
         else {
             displayDatatableStudies(data_study.docs, PAGE_TYPE);
         }
-        console.log("[Info] displayDatatableStudies - OK");
-
         generateRegionInformationTable(searchTerm, data_study);
-        console.log("[Info] generateGeneInformationTable - OK");
 
         checkSummaryStatsDatabase(data_study.docs);
-        console.log("[Info] checkSummaryStatsDatabase - OK");
-
     })
 
 }
@@ -301,13 +293,12 @@ function fetchStudies(associationDocs){
         accessionIDs.unshift(assoc.accessionId)
     }
 
-    accessionIDs = Array.from(new Set(accessionIDs))
+    accessionIDs = Array.from(new Set(accessionIDs));
 
-    // Generate unqiue list of accessions:
+    // Generate unique list of accessions:
     // Loop through the accessions and download data by 50 studies at a time: (might need to be an other function for that)
     for (var i = 0; i < accessionIDs.length; i += stepSize) {
         temparray = accessionIDs.slice(i, i + stepSize);
-        console.log("** Looping through the accession IDs. Chunk: ", i);
         studyData = studyData.concat(getStudyData(temparray))
     }
     return(studyData)
@@ -316,9 +307,8 @@ function fetchStudies(associationDocs){
 // Query slim solr to return rsIDs that are mapped to a given gene:
 // WARNING: syncronous call!!
 function getStudyData(studyIDs){
-    var queryString = studyIDs.join(" OR ")
+    var queryString = studyIDs.join(" OR ");
     var result = null;
-    console.log("** queried accessions: " + queryString)
     $.ajax({
         url : gwasProperties.contextPath + 'api/search/advancefilter',
         data : {'q': "( " + queryString + ') AND resourcename:study'},
@@ -330,6 +320,5 @@ function getStudyData(studyIDs){
             result = data.grouped.resourcename.groups[0].doclist.docs
         }
     });
-    console.log(result)
     return result;
 }
