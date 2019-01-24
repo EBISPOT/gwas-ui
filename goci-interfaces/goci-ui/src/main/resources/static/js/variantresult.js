@@ -191,9 +191,9 @@ function getVariantInfo(data,rsId) {
     var all_mapped_traits = [];
     $.each(data, function (index, doc) {
         // Mapped genes
-        if (doc.hasOwnProperty('entrezMappedGenes')) {
+        if (doc.hasOwnProperty('ensemblMappedGenes')) {
             var gene_list = [];
-            $.each(doc.entrezMappedGenes, function(index, gene) {
+            $.each(doc.ensemblMappedGenes, function(index, gene) {
                 // check if "gene" contains multiple values, e.g. ["GCKR; GCKR"]
                 if (gene.indexOf(";") > 0) {
                     gene_list = gene.split("; ");

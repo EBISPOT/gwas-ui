@@ -145,7 +145,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
 
             // Mapped genes
             var genes = [];
-            var mappedGenes = asso.entrezMappedGenes;
+            var mappedGenes = asso.ensemblMappedGenes;
             if (mappedGenes) {
                 $.each(mappedGenes, function (index, gene) {
                     genes.push(gene);

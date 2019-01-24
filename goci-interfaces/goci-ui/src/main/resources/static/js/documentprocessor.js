@@ -627,13 +627,13 @@ function processAssociation(association, table) {
     row.append($("<td>").html(repgene));
 
     var mapgene = '';
-    if (association.entrezMappedGeneLinks != null && association.entrezMappedGenes != null) {
+    if (association.ensemblMappedGeneLinks != null && association.ensemblMappedGenes != null) {
         var upstream = '';
         var downstream = '';
         var mapped = '';
         var lit = ''
-        for (var k = 0; k < association.entrezMappedGenes.length; k++) {
-            var emg = association.entrezMappedGenes[k];
+        for (var k = 0; k < association.ensemblMappedGenes.length; k++) {
+            var emg = association.ensemblMappedGenes[k];
 
             if(emg.indexOf(' - ') > -1 || emg.indexOf(' x ') > -1 || emg.indexOf('; ') > -1){
                 //type = 'delim';
@@ -645,12 +645,12 @@ function processAssociation(association, table) {
                 }
             }
             else{
-                for (var j = 0; j < association.entrezMappedGeneLinks.length; j++) {
-                    if(association.entrezMappedGeneLinks[j].indexOf(emg) > -1 || lit != ''){
-                        var gene = association.entrezMappedGeneLinks[j].split("|")[0];
-                        var geneId = association.entrezMappedGeneLinks[j].split("|")[1];
-                        var dist = association.entrezMappedGeneLinks[j].split("|")[2];
-                        var chromName = association.entrezMappedGeneLinks[j].split("|")[3];
+                for (var j = 0; j < association.ensemblMappedGeneLinks.length; j++) {
+                    if(association.ensemblMappedGeneLinks[j].indexOf(emg) > -1 || lit != ''){
+                        var gene = association.ensemblMappedGeneLinks[j].split("|")[0];
+                        var geneId = association.ensemblMappedGeneLinks[j].split("|")[1];
+                        var dist = association.ensemblMappedGeneLinks[j].split("|")[2];
+                        var chromName = association.ensemblMappedGeneLinks[j].split("|")[3];
 
                         var pattern = new RegExp("^\\d+$");
 
@@ -708,10 +708,10 @@ function processAssociation(association, table) {
         }
 
     }
-    else if (association.entrezMappedGenes != null) {
-        for (var j = 0; j < association.entrezMappedGenes.length; j++) {
-            var mapgenesearch = "<span><a href='search?query=".concat(association.entrezMappedGenes[j]).concat("'>").concat(
-                association.entrezMappedGenes[j]).concat("</a></span>");
+    else if (association.ensemblMappedGenes != null) {
+        for (var j = 0; j < association.ensemblMappedGenes.length; j++) {
+            var mapgenesearch = "<span><a href='search?query=".concat(association.ensemblMappedGenes[j]).concat("'>").concat(
+                association.ensemblMappedGenes[j]).concat("</a></span>");
             if (mapgene == '') {
                 mapgene = mapgenesearch;
             }
