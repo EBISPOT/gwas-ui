@@ -97,8 +97,7 @@ function displayGenotyping() {
 
 function useAutoCompleteInput(){
     if(window.location.pathname.indexOf("/diagram") > -1){
-        console.log("** useAutoCompleteInput - diagram")
-        // doFilter();
+        doFilter();
     }
     else{
         console.log("** useAutoCompleteInput - else")
