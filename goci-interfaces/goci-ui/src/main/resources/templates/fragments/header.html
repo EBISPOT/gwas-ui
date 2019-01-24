@@ -5,6 +5,7 @@
 <body>
 
 <div th:fragment="navbar">
+    <div class="autocomplete-suggestions" style="position: absolute; display: none; max-height: 300px; z-index: 9999;"></div>
 
     <div th:remove="tag" th:replace="fragments/scripts :: contextPath"></div>
 
@@ -26,8 +27,12 @@
             </button>
             <a class="navbar-brand" th:href="@{/home}">GWAS Catalog</a>
 
-            <!-- This is the header search bar -->
-            <span class="input-group header-input-group">
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right" >
+                <li id="header-searchbar" style="display: none">
+                    <!-- This is the header search bar -->
+                    <span class="input-group header-input-group">
                         <input type="text"
                                class="form-control ac_input hidden-sm"
                                placeholder="Search" style="width:100%; font-size:14px; display:inline; padding-left: 10px; padding-bottom: 0px;padding-top: 0px;padding-right: 0px;height: 22px;" id="header-search-box"
@@ -44,12 +49,8 @@
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
-            </span>
-
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right" >
-
+                    </span>
+                </li>
 
                 <li th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}">
                     <a href="index.html" th:href="@{/}">

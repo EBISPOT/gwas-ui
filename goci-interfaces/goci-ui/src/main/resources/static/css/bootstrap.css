@@ -4290,6 +4290,10 @@ tbody.collapse.in {
     padding-left: 15px
 }
 
+#header-search-box input:focus{
+    outline: none;
+}
+
 .input-group[class*="col-"] {
     float: none;
     padding-right: 0;
