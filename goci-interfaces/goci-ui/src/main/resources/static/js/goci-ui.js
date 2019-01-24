@@ -40,11 +40,16 @@ $(document).ready(function() {
     Functions to capture search term from the header:
      */
     $('#header-search-button').click(function () {
-        HeaderDoSearch();
+        doSearch();
     });
     $('#header-search-box').keydown(function (event) {
-        if (event.keyCode == 13 &&  $('#header-search-box').val().length > 0) {
-            HeaderDoSearch();
+        if (event.keyCode == 13){
+            if( $('#header-search-box').val().length > 0) {
+                doSearch();
+            }
+            else {
+                useAutoCompleteInput();
+            }
         }
     });
     
@@ -90,36 +95,31 @@ function displayGenotyping() {
     }
 }
 
-// Searching from header searchbar:
-function HeaderDoSearch() {
-    var searchTerm = $("#header-search-box").val();
-    var ORIGIN = window.location.origin;
-    window.location = ORIGIN + "/gwas/search?query=" + searchTerm;
-}
-
 function useAutoCompleteInput(){
     if(window.location.pathname.indexOf("/diagram") > -1){
-        doFilter();
+        console.log("** useAutoCompleteInput - diagram")
+        // doFilter();
     }
     else{
+        console.log("** useAutoCompleteInput - else")
         doSearch();
     }
 }
 
 function doSearch() {
-    var searchTerm = $("#search-box").val();
-
-    var path = window.location.pathname;
-    var pagename = path.substr(path.lastIndexOf('/') + 1);
+    var searchTerm = "*";
+    if( $("#search-box").length ) {
+        searchTerm = $("#search-box").val();
+    }
+    else if ($("#header-search-box").length) {
+        searchTerm = $("#header-search-box").val();
+    }
 
     // redirect to search page
+    var ORIGIN = window.location.origin;
+    //console.log("** Search term: " + ORIGIN + "/gwas/search?query=" + searchTerm)
+    window.location = ORIGIN + "/gwas/search?query=" + searchTerm;
 
-    if ((path.indexOf("docs") != -1 && pagename != "docs") || path.indexOf("variant") != -1 || (path.indexOf("downloads") != -1 && pagename != "downloads") || path.indexOf("traits") != -1) {
-        window.location = "../search?query=" + searchTerm;
-    }
-    else {
-        window.location = "search?query=" + searchTerm;
-    }
 }
 
 function toggleSidebar(ts) {
