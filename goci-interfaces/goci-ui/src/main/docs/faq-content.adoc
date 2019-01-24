@@ -328,7 +328,7 @@ In case of a dataset with more than 1 variant of interest, several independant c
 
 ==== [[faq-C4]]4. How do I view, search and download information from the "Associations" and "Studies" tables?
 
-These tables can be found on the each of the specific "Trait", "Variant", "Gene", "Publication" and "Study" pages. The data displayed is highly customisable. You can refine the results by typing into a) the search box above the table, to search all columns, or b) the filter boxes at the top of each column, to search only within a specific column. You can customise the columns displayed using the "Add/Remove Columns" button. You can sort by clicking on the column header, or use the "Multiple Sort" button for more complex multi-column sorting. Finally, you can use the "Export data" button to download the table as a csv file. Note that the csv file will contain the data displayed in the table, taking into account any changes you have made to the rows, columns displayed or sorting.
+These tables can be found on the each of the specific "Trait", "Variant", "Gene", "Publication" and "Study" pages. The data displayed is highly customisable. You can refine the results by typing into a) the search box above the table, to search all columns, or b) the filter boxes at the top of each column, to search only within a specific column. You can customise the columns displayed using the "Add/Remove Columns" button. You can sort by clicking on the column header. Finally, you can use the "Export data" button to download the table as a csv file. Note that the csv file will contain the data displayed in the table, taking into account any changes you have made to the rows, columns displayed or sorting.
 
 == [[D]]D. Diagram
  
