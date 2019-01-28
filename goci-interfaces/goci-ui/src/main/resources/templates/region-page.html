@@ -31,7 +31,7 @@
     <link rel="stylesheet" th:href="@{/css/goci-ui.css}"/>
     <link rel="stylesheet" th:href="@{/css/icons/flaticon.css}"/>
     <link rel="stylesheet" th:href="@{/css/goci-color-palette-1.css}"/>
-
+    <script src="../static/js/regionresult.js"></script>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -52,7 +52,7 @@
     <div class="container-fluid clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h2 style="margin:0px">
-                <span style="padding-left:5px">Gene: </span>
+                <span style="padding-left:5px">Region: </span>
                 <span id="top-panel-pub-title" th:text="${result.query}" style="padding-left:5px"></span>
             </h2>
         </div>
@@ -65,7 +65,7 @@
 
     <ol class="breadcrumb background-color-complementary-accent">
         <li><a th:href="@{/home}">GWAS</a></li>
-        <li>Genes</li>
+        <li>Regions</li>
         <li class="active" th:text="${result.query}"></li>
     </ol>
 
@@ -85,7 +85,7 @@
         <div class="row" style="margin-top:10px">
             <div id="summary-info" class="panel panel-default"  style="padding-left:0px">
                 <div class="panel-heading background-color-primary-accent">
-                    <h3 class="panel-title">Gene information</h3>
+                    <h3 class="panel-title">Region information</h3>
                 </div>
                 <div class="clearfix" id="summary-panel-loading">
 
@@ -93,76 +93,28 @@
 
                         <div class="clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
-                                <span class="item-left-bold">Gene name</span>
+                                <span class="item-left-bold">Region name</span>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="geneSymbol">-</div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="cytobandName">-</div>
 
                         </div>
 
-                        <div class="clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
-                                <span class="item-left-bold">Description </span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="As extracted from Ensembl"></span>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="description">-</div>
-
-                        </div>
                         <div class="clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
                                 <span class="item-left-bold">Location</span>
                                 <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Chromosome and base pair location on the reference genome"></span>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="location">-</div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="genomicCoordinates">-</div>
                         </div>
-                        <div class="clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
-                                <span class="item-left-bold">Cytogenetic region</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Cytogenetic band corresponding to the genomic location"></span>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="cytogenicRegion">-</div>
-                        </div>
-                        <div class="clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
-                                <span class="item-left-bold">Biotype</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Biological significance of the gene, manually added by the HAVANA team."></span>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="biotype">-</div>
-                        </div>
-                        <div class="clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
-                                <span class="item-left-bold">Reported trait(s)</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Detailed study-level trait descriptions associated with this variant, taking into account the study design"></span>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="reportedTraits">-</div>
-                        </div>
+
                     </div>
                     <div id="links" class="panel-body col-lg-4 col-md-4 col-sm-4 col-xs-3"></div>
                     <div id="links" class="panel-body col-lg-2 col-md-2 col-sm-2 col-xs-3">
                         <div style="margin-bottom: 0.6em">
-                            <button type="button" class="btn btn-default btn-sm" id="entrez_button">Gene in <b>NCBI</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
+                            <button type="button" class="btn btn-default btn-sm" id="entrez_button">Region in <b>NCBI</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
                         </div>
                         <div style="margin-bottom: 0.6em">
-                            <button type="button" class="btn btn-default btn-sm" id="ensembl_button">Gene in <b>Ensembl</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
-                        </div>
-                        <ul style="padding-left:2em">
-                            <li style="margin-bottom:0.5em">
-                                <button type="button" class="btn btn-default btn-xs" id="ensembl_phenotype_button">Phenotype information<span class="glyphicon glyphicon-new-window external-link"></span></button>
-                            </li>
-                            <li style="margin-bottom:0.5em">
-                                <button type="button" class="btn btn-default btn-xs" id="ensembl_pathway_button">Pathway information<span class="glyphicon glyphicon-new-window external-link"></span></button>
-                            </li>
-                            <li style="margin-bottom:0.5em">
-                                <button type="button" class="btn btn-default btn-xs" id="ensembl_regulation_button">Regulation<span class="glyphicon glyphicon-new-window external-link"></span></button>
-                            </li>
-                            <li style="margin-bottom:0.5em">
-                                <button type="button" class="btn btn-default btn-xs" id="ensembl_expression_button">Expression<span class="glyphicon glyphicon-new-window external-link"></span></button>
-                            </li>
-                        </ul>
-                        <div style="margin-bottom: 0.6em">
-                            <button type="button" class="btn btn-default btn-sm" id="opentargets_button">Gene in <b>Open Targets</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
-                        </div>
-                        <div style="margin-bottom: 0.6em">
-                            <button type="button" class="btn btn-default btn-sm" id="OMIM_button">Gene in <b>OMIM</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
+                            <button type="button" class="btn btn-default btn-sm" id="ensembl_button">Region in <b>Ensembl</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
                         </div>
                     </div>
                 </div>
@@ -241,14 +193,11 @@
     <script th:src="@{/js/helpers/toggle-resize.js}"></script>
     <!--script th:src="@{/js/helpers/summary-stats-api.js}"></script-->
 
-    <script th:src="@{/js/autocomplete-termselect.js}"></script>
-    <script th:src="@{/js/jquery.autocomplete.js}"></script>
-
     <script th:src="@{/js/common-datatables/associations-datatable.js}"></script>
     <script th:src="@{/js/common-datatables/studies-datatable.js}"></script>
 
     <!-- this file must be the last. onload action -->
-    <script th:src="@{/js/generesult.js}"></script>
+    <script th:src="@{/js/regionresult.js}"></script>
 
 
     <!-- clipboardjs
@@ -268,7 +217,7 @@
 
     <!-- refactor all the css and common js -->
     <link rel="stylesheet" th:href="@{/css/goci-efotrait-page.css}"/>
-    <link rel="stylesheet" th:href="@{/css/ontology-autocomplete.css}"/>
+
 
     <!-- Google analytics
     ================================================== -->

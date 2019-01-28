@@ -234,4 +234,3 @@ $('#download_doc_page').click(() => {
     window.open("https://www.ebi.ac.uk/gwas/docs/file-downloads", '_blank');
 })
 
-
