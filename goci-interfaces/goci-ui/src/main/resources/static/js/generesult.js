@@ -86,8 +86,7 @@ function getDataSolr(main, initLoad=false) {
 
     // Step 1: returning list of variants mapped to the queried gene:
     var slimData = getSlimSolrData(searchQuery);
-    var mappedRsIDs = slimData.rsIDs;
-    console.log(mappedRsIDs.join(" OR "));
+    var mappedRsIDs = slimData.rsIDs.join(" OR ");
 
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
@@ -148,22 +147,22 @@ function processSolrData(data, initLoad=false, slimData) {
     //TODO not repeat yourself!!!!
     $.each(data.grouped.resourcename.groups, (index, group) => {
         switch (group.groupValue) {
-    case "efotrait":
-        data_efo = group.doclist;
-        break;
-    case "study":
-        data_study = group.doclist;
-        break;
-    case "association":
-        data_association = group.doclist;
-        break;
-        //not sure we need this!
-    case "diseasetrait":
-        data_diseasetrait = group.doclist;
-        break;
-    default:
-    }
-});
+            case "efotrait":
+                data_efo = group.doclist;
+                break;
+            case "study":
+                data_study = group.doclist;
+                break;
+            case "association":
+                data_association = group.doclist;
+                break;
+                //not sure we need this!
+            case "diseasetrait":
+                data_diseasetrait = group.doclist;
+                break;
+            default:
+            }
+        });
     
     //remove association that annotated with efos which are not in the list
     var remove = Promise.resolve();
@@ -246,7 +245,7 @@ function generateGeneInformationTable(slimData, studies) {
     // adding gene data to html:
     $("#geneSymbol").html(slimData.title);
 
-    // Adding description related fields:
+    // Parsing description related fields:
     var descriptionFields = slimData.description.split("|");
     $("#description").html(descriptionFields[0])
     $("#location").html(descriptionFields[1]);
@@ -276,6 +275,7 @@ function generateGeneInformationTable(slimData, studies) {
     var xrefData = getEnsemblREST(xrefQueryURL);
     var entrezID = "NA";
     var OMIMID = "NA";
+    // If the request to Ensembl fails, the returned document will contain an error key:
     if (! "error" in xrefData){
         for ( xref of xrefData ){
             if ( xref.dbname == "EntrezGene" ){
