@@ -86,11 +86,11 @@ function getDataSolr(main, initLoad=false) {
 
     // Step 1: returning list of variants mapped to the queried gene:
     var slimData = getSlimSolrData(searchQuery)
-    var mappedRsIDs = slimData.rsIDs
+    // var mappedRsIDs = slimData.rsIDs
 
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
-            'q': mappedRsIDs,
+            'q': "ensemblMappedGenes:"+searchQuery + " OR association_ensemblMappedGenes:"+searchQuery,
             'max': 99999,
             'group.limit': 99999,
             'group.field': 'resourcename',
@@ -102,7 +102,7 @@ function getDataSolr(main, initLoad=false) {
             'raw' : global_raw == undefined ? '' : global_raw,
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         // Check if Solr returns some results
-        if (data.grouped.resourcename.groups.length == 0 || mappedRsIDs == null ) {
+        if (data.grouped.resourcename.groups.length == 0 ) {
             $('#lower_container').html("<h2>The Gene name <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
         }
         else {
