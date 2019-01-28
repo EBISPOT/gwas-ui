@@ -223,6 +223,9 @@ function getEnsemblREST( URL )
         async: false,
         success: function(data) {
             result = data;
+        },
+        error: function(){
+            result = {'error' : request.responseText};
         }
     });
     return result;

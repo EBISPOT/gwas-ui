@@ -303,7 +303,7 @@ function getSlimSolrData(rsID) {
     }
     $.ajax({
         url: '../api/search',
-        data : {'q': "rsID:" + rsID + ' AND resourcename:variant'},
+        data : {'q': "rsID:\"" + rsID + '\" AND resourcename:variant'},
         type: 'get',
         dataType: 'json',
         async: false,
