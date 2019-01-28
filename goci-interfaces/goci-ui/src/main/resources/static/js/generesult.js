@@ -106,7 +106,6 @@ function getDataSolr(main, initLoad=false) {
             $('#lower_container').html("<h2>The Gene name <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
         }
         else {
-            console.log(slimData);
             processSolrData(data, initLoad, slimData); // gene name is now added to the process solr data function.
             //downloads link : utils-helper.js
             setDownloadLink(searchQuery);
@@ -271,7 +270,7 @@ function generateGeneInformationTable(slimData, studies) {
     }
 
     // Extracting cross-references:
-    var xrefQueryURL = gwasProperties.EnsemblRestBaseURL + '/xrefs/id/' + slimData.title + '?content-type=application/json'
+    var xrefQueryURL = gwasProperties.EnsemblRestBaseURL + '/xrefs/id/' + slimData.ensemblID + '?content-type=application/json'
     var xrefData = getEnsemblREST(xrefQueryURL);
     var entrezID = "NA";
     var OMIMID = "NA";
