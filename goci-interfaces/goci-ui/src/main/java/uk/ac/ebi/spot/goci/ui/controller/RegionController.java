@@ -7,39 +7,34 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import uk.ac.ebi.spot.goci.model.GeneResult;
+import uk.ac.ebi.spot.goci.model.RegionResult;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 
 /**
- * Created by Daniel on 10/11/2018.
+ * Created by Daniel on 12/06/2018.
  * Based on the variant controller
  */
 @Controller
-public class GeneController {
+public class RegionController {
 
 
     private SearchConfiguration searchConfiguration;
 
     @Autowired
-    public GeneController(SearchConfiguration searchConfiguration) {
+    public RegionController(SearchConfiguration searchConfiguration) {
         this.searchConfiguration = searchConfiguration;
     }
 
-    //@RequestMapping(value = "genes", produces = MediaType.TEXT_HTML_VALUE)
-    //public String search() {
-    //    return "genes";
-    //}
-
-    @RequestMapping(value = "/genes/{geneId:.+}", produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/regions/{regionId:.+}", produces = MediaType.TEXT_HTML_VALUE)
     public String search(Model model,
-                         @PathVariable(required = false) String geneId,
+                         @PathVariable(required = false) String regionId,
                          @RequestParam(required = false) String filter) {
-        GeneResult geneResult = new GeneResult();
-        geneResult.setQuery(geneId);
-        geneResult.setFilter(filter);
-        geneResult.setGeneId(geneId);
-        model.addAttribute("result", geneResult);
-        return "gene-page";
+        RegionResult regionResult = new RegionResult();
+        regionResult.setQuery(regionId);
+        regionResult.setFilter(filter);
+        regionResult.setRegionId(regionId);
+        model.addAttribute("result", regionResult);
+        return "region-page";
     }
 
 }

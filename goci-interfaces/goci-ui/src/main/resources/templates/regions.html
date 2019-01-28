@@ -52,26 +52,22 @@
 <div class="container-fluid">
     <ol class="breadcrumb background-color-complementary-accent">
         <li><a th:href="@{/home}">Home</a></li>
-        <li class="active">Genes</li>
+        <li class="active">Regions</li>
     </ol>
 </div>
 
 <div class="container tight-to-top">
 
     <div class="row">
-        <h2 style="color: black"><img id="news_image" th:src="@{/icons/dna13.png}" style="vertical-align:middle" th:width="32" th:height="32"/>&nbsp;GWAS Catalog genes</h2>
-        <p>There are now dedicated pages for genes with mapped associations in GWAS Catalog. Each gene may be mapped to multiple associations discovered by separate GWAS analyses (studies).
-            You can access a gene page by appending the Ensembl gene name to the gene the base link <a th:href="@{/genes}">www.ebi.ac.uk/gwas/labs/genes/</a> or by following the search result links pointing to genes.
+        <h2 style="color: black"><img id="news_image" th:src="@{/icons/dna13.png}" style="vertical-align:middle" th:width="32" th:height="32"/>&nbsp;Genomic regions</h2>
+        <p>There are now dynamically generated pages for genomic regions to collect overlapping associations in GWAS Catalog. Regions can be defined by the chromosome name and the start and end basepairs, or the cytological band.
             <br/>
             <br/>
         <h3>Examples</h3>
         <br/>
         <ul>
-            <li><a th:href="@{/genes/MYO6}">MYO6</a></li>
-            <li><a th:href="@{/genes/BRCA1}">BRCA1</a></li>
-            <li><a th:href="@{/genes/FTO}">FTO</a></li>
-            <li><a th:href="@{/genes/TNF}">TNF</a></li>
-            <li><a th:href="@{/genes/EGFR}">EGFR</a></li>
+            <li><a th:href="@{/regions/chr6:16000000-25000000}">chr6:16000000-25000000</a></li>
+            <li><a th:href="@{/regions/2q37.1}">2q37.1</a></li>
 
         </ul>
         </p>
