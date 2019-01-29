@@ -35,21 +35,21 @@ var loadDocumentation = function(pagename, content) {
         // }
         //
         // else
-        if (displayName.toLowerCase() == "downloads" || displayName.toLowerCase() == "file downloads" || displayName.toLowerCase() == "diagram downloads" || displayName.toLowerCase() == "summary statistics" ) {
-            // $("#about-item").removeClass("active");
-            $("#documentation-item").removeClass("active");
-            $("#downloads-item").addClass("active");
-            $("#docs-crumb").hide();
-            $("#downloads-crumb").show();
-
-        }
-        else {
-            // $("#about-item").removeClass("active");
-            $("#downloads-item").removeClass("active");
-            $("#documentation-item").addClass("active");
-            $("#docs-crumb").show();
-            $("#downloads-crumb").hide();
-        }
+        // if (displayName.toLowerCase() == "downloads" || displayName.toLowerCase() == "file downloads" || displayName.toLowerCase() == "diagram downloads" || displayName.toLowerCase() == "summary statistics" ) {
+        //     // $("#about-item").removeClass("active");
+        //     $("#documentation-item").removeClass("active");
+        //     $("#downloads-item").addClass("active");
+        //     $("#docs-crumb").hide();
+        //     $("#downloads-crumb").show();
+        //
+        // }
+        // else {
+        //     // $("#about-item").removeClass("active");
+        //     $("#downloads-item").removeClass("active");
+        //     $("#documentation-item").addClass("active");
+        //     $("#docs-crumb").show();
+        //     $("#downloads-crumb").hide();
+        // }
 
         // Extracting path from URL:
         var pathName = window.location.pathname;
@@ -59,7 +59,6 @@ var loadDocumentation = function(pagename, content) {
         if (pathName.match('download')){
             pathName = pathName.replace('documentation', 'downloads'); // Changing downloads when required.
         }
-        pathName
 
         var pathComponents = pathName.split('/');
         for ( var i = 0; i < pathComponents.length; i++ ){
@@ -69,7 +68,6 @@ var loadDocumentation = function(pagename, content) {
             // Generate breadcrumb title:
             var pathTitle = pathComponent.replace('doc', 'documentation');
             pathTitle = pathTitle.charAt(0).toUpperCase() + pathTitle.slice(1);
-            console.log("** Crumb component: " + pathTitle);
 
             // Generate breadcrumb link:
             var URL = gwasProperties.contextPath;
@@ -81,18 +79,13 @@ var loadDocumentation = function(pagename, content) {
                 $("#breadcrumb ol").append(`<li><a href="${URL}">${pathComponent}</a></li>`);
             }
         }
-        console.log("Updated breadcrumb (" + displayName + ")");
-        // load the data content
-        console.log("Updating " + content + "...");
-        //console.log(data);
+
         content.html(data);
 
         $.getJSON(gwasProperties.contextPath+'api/search/stats')
             .done(function(stats) {
                 setBuilds(stats);
             });
-
-        console.log("Done!");
 
     }
 
