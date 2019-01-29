@@ -5,6 +5,7 @@
 <body>
 
 <div th:fragment="navbar">
+    <div class="autocomplete-suggestions" style="position: absolute; display: none; max-height: 300px; z-index: 9999;"></div>
 
     <div th:remove="tag" th:replace="fragments/scripts :: contextPath"></div>
 
@@ -25,30 +26,77 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" th:href="@{/home}">GWAS Catalog</a>
+
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}"><a href="index.html" th:href="@{/}">Home
-                    <span class="sr-only">(current)</span>
-                </a></li>
-                <li th:classappend="${#httpServletRequest.getServletPath() == '/search' ? 'active':''}"><a th:href="@{/search}">Search</a></li>
-                <li th:classappend="${#httpServletRequest.getServletPath() == '/diagram' ? 'active':''}"><a th:href="@{/diagram}">Diagram</a></li>
-                <li id="downloads-item" th:classappend="${#httpServletRequest.getServletPath() == '/downloads' ? 'active':''}" class="hidden-sm"><a th:href="@{/downloads}">Download</a></li>
-                <li id="documentation-item" th:classappend="${#httpServletRequest.getServletPath() == '/docs' ? 'active':''}"><a th:href="@{/docs}">Documentation</a></li>
-                <li th:classappend="${#httpServletRequest.getServletPath() == '/docs/about' ? 'active':''}" class="hidden-sm"><a th:href="@{/docs/about}">About</a></li>
+            <ul class="nav navbar-nav navbar-right" >
+                <li id="header-searchbar" style="display: none">
+                    <!-- This is the header search bar -->
+                    <span class="input-group header-input-group">
+                        <input type="text"
+                               class="form-control ac_input hidden-sm"
+                               placeholder="Search" style="width:100%; font-size:14px; display:inline; padding-left: 10px; padding-bottom: 0px;padding-top: 0px;padding-right: 0px;height: 22px;" id="header-search-box"
+                               name="q"
+                               data-widget="select"
+                               data-ontology=""
+                        />
+                        <span class="input-group-btn" style="height: 20px;width: 0px;">
+                            <button class="btn btn-default" type="button" id="header-search-button" style = "
+                                    padding-top: 0px;
+                                    padding-left: 3px;
+                                    padding-bottom: 0px;
+                                    padding-right: 3px">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </span>
+                </li>
+
+                <li th:classappend="${#httpServletRequest.getServletPath() == '/' ? 'active':''}">
+                    <a href="index.html" th:href="@{/}">
+                        Home
+                    <span class="sr-only">
+                        (current)
+                    </span>
+                    </a>
+                </li>
+
+                <li th:classappend="${#httpServletRequest.getServletPath() == '/diagram' ? 'active':''}">
+                    <a th:href="@{/diagram}">
+                        Diagram
+                    </a>
+                </li>
+
+                <li id="downloads-item" th:classappend="${#httpServletRequest.getServletPath() == '/downloads' ? 'active':''}" class="hidden-sm">
+                    <a th:href="@{/downloads}">
+                        Download
+                    </a>
+                </li>
+
+                <li id="documentation-item" th:classappend="${#httpServletRequest.getServletPath() == '/docs' ? 'active':''}">
+                    <a th:href="@{/docs}">
+                        Documentation
+                    </a>
+                </li>
+
+                <li th:classappend="${#httpServletRequest.getServletPath() == '/docs/about' ? 'active':''}" class="hidden-sm">
+                    <a th:href="@{/docs/about}">
+                        About
+                    </a>
+                </li>
 
                 <li>
                     <a class="icon" id="ebi-logo" href="//www.ebi.ac.uk">
-                        <img alt="EBI logo"
-                             th:src="@{/icons/EMBL_EBI_Logo_white.png}"/>
+                        <img alt="EBI logo" th:src="@{/icons/EMBL_EBI_Logo_white.png}"/>
                     </a>
                 </li>
+
                 <li>
                     <a class="icon" id="nhgri-logo" href="//www.genome.gov">
-                        <img alt="GWAS logo"
-                             th:src="@{/icons/NHGRI_NIH%20logo%20all%20verions-02-scaled.png}"/>
+                        <img alt="GWAS logo" th:src="@{/icons/NHGRI_NIH%20logo%20all%20verions-02-scaled.png}"/>
                     </a>
                 </li>
+
             </ul>
         </div>
         <!--/.navbar-collapse -->
