@@ -50,11 +50,37 @@ var loadDocumentation = function(pagename, content) {
             $("#docs-crumb").show();
             $("#downloads-crumb").hide();
         }
-        $("#breadcrumb ol").append(`<li><a href="cica.html">cica</a></li>`);
-        $("#current-page").text(displayName);
 
+        // Extracting path from URL:
+        var pathName = window.location.pathname;
+        pathName = pathName.replace('/gwas/',''); // Removing home link
+        pathName = pathName.replace("-", " "); // Removing underscores
+        pathName = pathName.replace('docs', 'documentation'); // Changing doc to documentation
+        if (pathName.match('download')){
+            pathName = pathName.replace('documentation', 'downloads'); // Changing downloads when required.
+        }
+        pathName
 
+        var pathComponents = pathName.split('/');
+        for ( var i = 0; i < pathComponents.length; i++ ){
+            // Selecting component:
+            var pathComponent = pathComponents[i];
 
+            // Generate breadcrumb title:
+            var pathTitle = pathComponent.replace('doc', 'documentation');
+            pathTitle = pathTitle.charAt(0).toUpperCase() + pathTitle.slice(1);
+            console.log("** Crumb component: " + pathTitle);
+
+            // Generate breadcrumb link:
+            var URL = gwasProperties.contextPath;
+            if ( i + 1 == pathComponents.length ){
+                $("#breadcrumb ol").append(`<li>${pathComponent}</li>`);
+            }
+            else{
+                URL = URL + pathComponent;
+                $("#breadcrumb ol").append(`<li><a href="${URL}">${pathComponent}</a></li>`);
+            }
+        }
         console.log("Updated breadcrumb (" + displayName + ")");
         // load the data content
         console.log("Updating " + content + "...");
