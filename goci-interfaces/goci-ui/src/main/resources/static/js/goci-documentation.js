@@ -44,9 +44,9 @@ var loadDocumentation = function(pagename, content) {
             pathTitle = pathTitle.replace("-", " ");
             pathTitle = pathTitle.charAt(0).toUpperCase() + pathTitle.slice(1);
 
-            // Generate breadcrumb link:
+            // Adding breadcrumb without and with link:
             if ( i + 1 == pathComponents.length ){
-                $("#breadcrumb ol").append(`<li>${pathComponent}</li>`);
+                $("#breadcrumb ol").append(`<li>${pathTitle}</li>`);
             }
             else{
                 URL = URL + "/" + pathComponent;
