@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<body th:fragment="efotraits_datatable">
+<!-- EFO Traits table: it should be the future STANDARD -->
+<div class="row" id="efotrait-table-loading" style="margin-top:20px">
+    <div id="efotrait_panel" class="panel panel-default">
+        <div class="panel-heading background-color-primary-accent">
+            <h3 class="panel-title">
+                <span class="efotrait_label">Traits</span><span class="efotrait_count badge available-data-btn-badge"></span>
+            </h3>
+            <span class="pull-right">
+                        <span class="clickable"
+                              style="margin-left:25px"
+                              onclick="toggleSidebar('#efotrait_panel span.clickable')">
+                              <span class="glyphicon glyphicon-chevron-up"></span>
+                        </span>
+                    </span>
+        </div>
+
+        <div class="panel-body">
+            <table id="efotrait-table" class="table table-striped borderless "
+                   data-flat="true"
+                   data-show-export="true"
+                   data-export-types="['csv']"
+                   data-search="true"
+                   data-show-columns="true"
+                   data-show-multi-sort="false"
+                   data-icons="icons"
+                   data-filter-control="true">
+            </table>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/common-datatables/datatable-icons.js}"></script>
+
+</body>
+</html>

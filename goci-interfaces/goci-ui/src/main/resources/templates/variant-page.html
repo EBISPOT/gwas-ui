@@ -202,6 +202,9 @@
         <div class="row" style="margin-top:0px">
             <div id="table-list" class="panel clearfix" style="padding-left:0px;box-shadow:none">
                 <span style="margin-right:10px;font-weight:bold">Available data:</span>
+                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#efotrait_panel')">
+                    <span class="efotrait_label">Traits</span><span class="efotrait_count badge" style="background-color: #398A96;margin-left:10px"></span>
+                </button>
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#association_panel')">
                     <span class="association_label">Associations</span><span class="association_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
@@ -219,6 +222,10 @@
 
 
         <!-- List the available tables -->
+        <div class="row search-results-container" >
+            <div th:include="fragments/efotrait-datatable :: efotraits_datatable"></div>
+        </div>
+
         <div class="row search-results-container" >
             <!-- Associations table -->
             <div th:include="fragments/association-datatable :: associations_datatable"></div>
@@ -318,6 +325,7 @@
     <script th:src="@{/js/helpers/orcid-helper.js}"></script>
     <script th:src="@{/js/common-datatables/associations-datatable.js}"></script>
     <script th:src="@{/js/common-datatables/studies-datatable.js}"></script>
+    <script th:src="@{/js/common-datatables/efotraits-datatable.js}"></script>
 
     <script th:src="@{/js/variantresult.js}"></script>
     <script th:src="@{/js/plugins/ensembl-ldplot-widget.js}"></script>
