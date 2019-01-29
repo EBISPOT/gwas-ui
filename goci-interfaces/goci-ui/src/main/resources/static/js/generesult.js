@@ -85,8 +85,8 @@ function getDataSolr(main, initLoad=false) {
     var searchQuery = main;
 
     // Step 1: returning list of variants mapped to the queried gene:
-    var slimData = getSlimSolrData(searchQuery)
-    var mappedRsIDs = slimData.rsIDs
+    var slimData = getSlimSolrData(searchQuery);
+    var mappedRsIDs = slimData.rsIDs.join(" OR ");
 
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
@@ -106,7 +106,7 @@ function getDataSolr(main, initLoad=false) {
             $('#lower_container').html("<h2>The Gene name <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
         }
         else {
-            processSolrData(data, initLoad, searchQuery, slimData.region); // gene name is now added to the process solr data function.
+            processSolrData(data, initLoad, slimData); // gene name is now added to the process solr data function.
             //downloads link : utils-helper.js
             setDownloadLink(mappedRsIDs);
         }
@@ -128,7 +128,7 @@ function getDataSolr(main, initLoad=false) {
  * @param {{}} data - solr result
  * @param {Boolean} initLoad
  */
-function processSolrData(data, initLoad=false, searchTerm, region) {
+function processSolrData(data, initLoad=false, slimData) {
     var isInCatalog=true;
     
     data_association = [];
@@ -146,22 +146,22 @@ function processSolrData(data, initLoad=false, searchTerm, region) {
     //TODO not repeat yourself!!!!
     $.each(data.grouped.resourcename.groups, (index, group) => {
         switch (group.groupValue) {
-    case "efotrait":
-        data_efo = group.doclist;
-        break;
-    case "study":
-        data_study = group.doclist;
-        break;
-    case "association":
-        data_association = group.doclist;
-        break;
-        //not sure we need this!
-    case "diseasetrait":
-        data_diseasetrait = group.doclist;
-        break;
-    default:
-    }
-});
+            case "efotrait":
+                data_efo = group.doclist;
+                break;
+            case "study":
+                data_study = group.doclist;
+                break;
+            case "association":
+                data_association = group.doclist;
+                break;
+                //not sure we need this!
+            case "diseasetrait":
+                data_diseasetrait = group.doclist;
+                break;
+            default:
+            }
+        });
     
     //remove association that annotated with efos which are not in the list
     var remove = Promise.resolve();
@@ -179,7 +179,7 @@ function processSolrData(data, initLoad=false, searchTerm, region) {
     displayDatatableAssociations(data_association.docs);
     displayDatatableStudies(data_study.docs, PAGE_TYPE);
     checkSummaryStatsDatabase(data_study.docs);
-    generateGeneInformationTable(searchTerm, data_study, region);
+    generateGeneInformationTable(slimData, data_study);
 })
 
 }
@@ -187,25 +187,21 @@ function processSolrData(data, initLoad=false, searchTerm, region) {
 // Query slim solr to return rsIDs that are mapped to a given gene:
 // WARNING: syncronous call!!
 function getSlimSolrData(geneName) {
-    var returnData = {
-        'rsIDs' : '',
-        'region': '-'
-    }
+    var returnData = {};
     $.ajax({
         url: '../api/search',
-        data : {'q': "title:" + geneName + ' AND resourcename:gene'},
+        data : {'q': "title: \"" + geneName + '\" AND resourcename:gene'},
         type: 'get',
         dataType: 'json',
         async: false,
         success: function(data){
             // Parse returned JSON;
-            for (doc of data.response.docs) {
-                if ( doc.resourcename == 'gene' && doc.title == geneName){
-                    returnData.rsIDs = doc.rsIDs.join(" OR ")
-                    returnData.region = doc.cytobands
-                }
-            }
+            returnData = data.response.docs[0];
+        },
+        error: function(request) {
+            returnData['error'] = request.responseText
         }
+
     });
 
     return returnData;
@@ -223,6 +219,9 @@ function getEnsemblREST( URL )
         async: false,
         success: function(data) {
             result = data;
+        },
+        error: function(request){
+            result = {'error' : request.responseText};
         }
     });
     return result;
@@ -240,19 +239,17 @@ function getEnsemblREST( URL )
  *    2) Extracts cross reference data from Ensembl.
  *    3) Extracts reported traits from study documents.
  */
-function generateGeneInformationTable(geneName, studies, region) {
-    // Extracting gene data from Ensembl:
-    var geneQueryURL = gwasProperties.EnsemblRestBaseURL + "/lookup/symbol/homo_sapiens/" + geneName + "?content-type=application/json"
-    var geneData = getEnsemblREST(geneQueryURL);
+function generateGeneInformationTable(slimData, studies) {
 
     // adding gene data to html:
-    $("#geneSymbol").html(`${geneData.display_name}`);
-    var description = "No description available."
-    if (geneData.description ){ description = geneData.description.split(" [S")[0] }
-    $("#description").html(`${description}`)
-    $("#location").html(`${geneData.seq_region_name}:${geneData.start}-${geneData.end}`);
-    $("#cytogenicRegion").html(`${region}`)
-    $("#biotype").html(`${geneData.biotype.replace("_", " ")}`);
+    $("#geneSymbol").html(slimData.title);
+
+    // Parsing description related fields:
+    var descriptionFields = slimData.description.split("|");
+    $("#description").html(descriptionFields[0])
+    $("#location").html(descriptionFields[1]);
+    $("#cytogenicRegion").html(descriptionFields[2])
+    $("#biotype").html(descriptionFields[3]);
 
     // Loop through all studies and parse out Reported traits:
     var reported_traits = [];
@@ -273,28 +270,31 @@ function generateGeneInformationTable(geneName, studies, region) {
     }
 
     // Extracting cross-references:
-    var xrefQueryURL = gwasProperties.EnsemblRestBaseURL + '/xrefs/id/' + geneData.id + '?content-type=application/json'
+    var xrefQueryURL = gwasProperties.EnsemblRestBaseURL + '/xrefs/id/' + slimData.ensemblID + '?content-type=application/json'
     var xrefData = getEnsemblREST(xrefQueryURL);
     var entrezID = "NA";
     var OMIMID = "NA";
-    for ( xref of xrefData ){
-        if ( xref.dbname == "EntrezGene" ){
-            entrezID = xref.primary_id
-        }
-        if ( xref.dbname == 'MIM_GENE' ){
-            OMIMID = xref.primary_id
+    // If the request to Ensembl fails, the returned document will contain an error key:
+    if (! "error" in xrefData){
+        for ( xref of xrefData ){
+            if ( xref.dbname == "EntrezGene" ){
+                entrezID = xref.primary_id
+            }
+            if ( xref.dbname == 'MIM_GENE' ){
+                OMIMID = xref.primary_id
+            }
         }
     }
 
     // Adding automatic cross references pointing to Ensembl:
-    $("#ensembl_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Summary?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_phenotype_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Phenotype?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_pathway_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Pathway?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_regulation_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Regulation?db=core;g="+geneData.id+"',    '_blank')");
-    $("#ensembl_expression_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/ExpressionAtlas?db=core;g="+geneData.id+"',    '_blank')");
+    $("#ensembl_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Summary?db=core;g="+slimData.ensemblID +"',    '_blank')");
+    $("#ensembl_phenotype_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Phenotype?db=core;g="+slimData.ensemblID+"',    '_blank')");
+    $("#ensembl_pathway_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Pathway?db=core;g="+slimData.ensemblID+"',    '_blank')");
+    $("#ensembl_regulation_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Regulation?db=core;g="+slimData.ensemblID+"',    '_blank')");
+    $("#ensembl_expression_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"ExpressionAtlas?db=core;g="+slimData.ensemblID+"',    '_blank')");
 
     // Adding automatic cross reference pointing to Open targets:
-    $("#opentargets_button").attr('onclick', "window.open('"+gwasProperties.OpenTargetsURL+ geneData.id+"',    '_blank')");
+    $("#opentargets_button").attr('onclick', "window.open('"+gwasProperties.OpenTargetsURL+ slimData.ensemblID+"',    '_blank')");
 
     // Looping through the cross references and extract entrez id:
     if ( entrezID != "NA" ){
