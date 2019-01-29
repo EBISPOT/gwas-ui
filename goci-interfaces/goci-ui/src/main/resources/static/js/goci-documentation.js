@@ -19,39 +19,8 @@ $(document).ready(function() {
 var loadDocumentation = function(pagename, content) {
     console.log("Attempting to load documentation...");
     return function(data, textStatus, jqXHR) {
-        // set breadcrumb
-        var displayName = pagename.replace(/(^| )(\w)/g, function(x) {
-            return x.toUpperCase();
-        });
 
-        displayName = displayName.replace("-", " ");
-
-        // if (displayName.toLowerCase() == "about") {
-        //     $("#help-item").removeClass("active");
-        //     $("#downloads-item").removeClass("active");
-        //     $("#about-item").addClass("active");
-        //     $("#downloads-crumb").hide();
-        //     $("#docs-crumb").show();
-        // }
-        //
-        // else
-        // if (displayName.toLowerCase() == "downloads" || displayName.toLowerCase() == "file downloads" || displayName.toLowerCase() == "diagram downloads" || displayName.toLowerCase() == "summary statistics" ) {
-        //     // $("#about-item").removeClass("active");
-        //     $("#documentation-item").removeClass("active");
-        //     $("#downloads-item").addClass("active");
-        //     $("#docs-crumb").hide();
-        //     $("#downloads-crumb").show();
-        //
-        // }
-        // else {
-        //     // $("#about-item").removeClass("active");
-        //     $("#downloads-item").removeClass("active");
-        //     $("#documentation-item").addClass("active");
-        //     $("#docs-crumb").show();
-        //     $("#downloads-crumb").hide();
-        // }
-
-        // Extracting path from URL:
+        // Extracting component names from URL:
         var pathName = window.location.pathname;
         pathName = pathName.replace('/gwas/',''); // Removing home link
         pathName = pathName.replace("-", " "); // Removing underscores
@@ -60,6 +29,7 @@ var loadDocumentation = function(pagename, content) {
             pathName = pathName.replace('documentation', 'downloads'); // Changing downloads when required.
         }
 
+        // Extracting
         var pathComponents = pathName.split('/');
         for ( var i = 0; i < pathComponents.length; i++ ){
             // Selecting component:
