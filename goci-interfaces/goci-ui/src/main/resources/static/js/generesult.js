@@ -176,6 +176,7 @@ function processSolrData(data, initLoad=false, searchTerm, region) {
     var PAGE_TYPE = "gene";
     
     //update association/study table
+    displayDatatableTraits(data_association.docs, searchTerm);
     displayDatatableAssociations(data_association.docs);
     displayDatatableStudies(data_study.docs, PAGE_TYPE);
     checkSummaryStatsDatabase(data_study.docs);
