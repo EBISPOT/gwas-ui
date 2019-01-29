@@ -20,7 +20,12 @@ var loadDocumentation = function(pagename, content) {
 
     // Parsing path to generate breadcrumbs:
     var pathName = window.location.pathname;
-    pathName = pathName.replace('/gwas/','')
+    pathName = pathName.replace('/gwas/',''); // Removing home link
+    pathName = pathName.replace("_", " "); // Removing underscores
+    pathName = pathName.replace('doc', 'documentation'); // Changing doc to documentation
+    if (pathName.match('download')){
+        pathName = pathName.replace('documentation', 'downloads'); // Changing downloads when required.
+    }
     var pathComponents = pathName.split('/');
 
     for ( var i = 0; i < pathComponents.length; i++ ){
@@ -29,18 +34,17 @@ var loadDocumentation = function(pagename, content) {
 
         // Generate breadcrumb title:
         var pathTitle = pathComponent.replace('doc', 'documentation');
+
         pathTitle = pathTitle.charAt(0).toUpperCase() + pathTitle.slice(1);
-        // <li id="docs-crumb"><a th:href="@{/docs}">Documentation</a></li>
-    //       <li id="downloads-crumb" style="display: none"><a th:href="@{/downloads}">Downloads</a></li>
-        //     <li id="current-page" class="active">Current page</li>
+        console.log("** Crumb component: " + pathTitle);
         // Generate breadcrumb link:
         var URL = gwasProperties.contextPath;
         if ( i + 1 == pathComponents.length ){
-            $("#breadcrumb ul").append(`<li>${pathComponent}</li>`);
+            $("#breadcrumb ol").append(`<li>${pathComponent}</li>`);
         }
         else{
             URL = URL + "/" + pathComponent;
-            $("#breadcrumb ul").append(`<li><a href="${URL}">${pathComponent}</a></li>`);
+            $("#breadcrumb ol").append(`<li><a href="${URL}">${pathComponent}</a></li>`);
         }
 
 
