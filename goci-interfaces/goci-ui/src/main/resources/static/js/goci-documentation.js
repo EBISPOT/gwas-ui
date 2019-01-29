@@ -19,34 +19,38 @@ $(document).ready(function() {
 var loadDocumentation = function(pagename, content) {
     console.log("Attempting to load documentation...");
     return function(data, textStatus, jqXHR) {
+        /*
+        The process of the generation of the breadcrumbs is a non-trivial issue, as the URL structure does not
+        follow the website page hierarchy. Therefore we have to implement logic to interpret the context based on the URL.
+         */
 
         // Extracting component names from URL:
         var pathName = window.location.pathname;
         pathName = pathName.replace('/gwas/',''); // Removing home link
-        pathName = pathName.replace("-", " "); // Removing underscores
-        pathName = pathName.replace('docs', 'documentation'); // Changing doc to documentation
         if (pathName.match('download')){
-            pathName = pathName.replace('documentation', 'downloads'); // Changing downloads when required.
+            pathName = pathName.replace('docs', 'downloads'); // Changing downloads when required.
         }
-
-        // Extracting
         var pathComponents = pathName.split('/');
+
+        // Looping through all URL components and generate the breadcrumb component
+        var URL = gwasProperties.contextPath; // The path will be extended by each component when generating the link
         for ( var i = 0; i < pathComponents.length; i++ ){
+
             // Selecting component:
             var pathComponent = pathComponents[i];
 
             // Generate breadcrumb title:
             var pathTitle = pathComponent.replace('doc', 'documentation');
+            pathTitle = pathTitle.replace("-", " ");
             pathTitle = pathTitle.charAt(0).toUpperCase() + pathTitle.slice(1);
 
             // Generate breadcrumb link:
-            var URL = gwasProperties.contextPath;
             if ( i + 1 == pathComponents.length ){
                 $("#breadcrumb ol").append(`<li>${pathComponent}</li>`);
             }
             else{
-                URL = URL + pathComponent;
-                $("#breadcrumb ol").append(`<li><a href="${URL}">${pathComponent}</a></li>`);
+                URL = URL + "/" + pathComponent;
+                $("#breadcrumb ol").append(`<li><a href="${URL}">${pathTitle}</a></li>`);
             }
         }
 
