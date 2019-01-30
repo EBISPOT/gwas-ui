@@ -48,12 +48,9 @@
 
 <div th:include="fragments/header :: jumbotron"></div>
 
-<div class="container-fluid">
+<div class="container-fluid" id="breadcrumb">
     <ol class="breadcrumb background-color-complementary-accent">
         <li><a th:href="@{/home}">Home</a></li>
-        <li id="docs-crumb"><a th:href="@{/docs}">Documentation</a></li>
-        <li id="downloads-crumb" style="display: none"><a th:href="@{/downloads}">Downloads</a></li>
-        <li id="current-page" class="active">Current page</li>
     </ol>
 </div>
 
