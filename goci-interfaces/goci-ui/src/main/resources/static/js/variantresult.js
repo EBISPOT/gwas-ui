@@ -31,7 +31,6 @@ function getDataSolr(main, initLoad=false) {
     
     var searchQuery = main;
     
-    console.log("Solr research request received for " + searchQuery);
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
             'q': '"' + searchQuery + '"' ,
@@ -47,10 +46,8 @@ function getDataSolr(main, initLoad=false) {
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         //processSolrData(data, initLoad);
         processVariantData(data,searchQuery);
-        console.log("Solr research done for " + searchQuery);
         return data;
     }).catch(function(err) {
-        console.error('Error when searching solr for' + searchQuery + '. ' + err);
         throw(err);
     })
     
@@ -102,7 +99,6 @@ function getVariantData(rsId) {
               });
     */
     var solrPromise = getDataSolr(rsId, false);
-    console.log("Solr research done for " + rsId);
 }
 
 // Parse the Solr results and display the data on the HTML page
@@ -136,6 +132,7 @@ function processVariantData(data,rsId) {
         // External links panel
         getLinkButtons(data_association.docs,rsId);
 
+        displayDatatableTraits(data_association.docs, rsId);
         displayDatatableAssociations(data_association.docs);
         displayDatatableStudies(data_study.docs);
         checkSummaryStatsDatabase(data_study.docs);
