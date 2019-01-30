@@ -92,11 +92,11 @@ function getDataSolr(main, initLoad = false) {
     // or just reload the tables(adding another efo term)
     
     var searchQuery = main;
-    console.log("Solr research request received for " + searchQuery);
+
     //Please use the contextPath !
     var URLService = gwasProperties.contextPath+'api/search/advancefilter';
     return promisePost(URLService, {
-        'q': searchQuery,
+        'q': "accessionId:" + searchQuery,
         'max': 99999,
         'group.limit': 99999,
         'group.field': 'resourcename',
@@ -117,7 +117,6 @@ function getDataSolr(main, initLoad = false) {
            setDownloadLink(searchQuery);
            displayDatatableAssociations(data_association.docs);
            displaySummaryStudy(data_study.docs);
-           console.log("Solr research done for " + searchQuery);
            return data;
         }
     }).catch(function(err) {
