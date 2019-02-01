@@ -94,12 +94,11 @@ function preprocessData(data) {
 
     var seen = [];
     var all_efo_trait_data = [];
-
     var all_mapped_traits = [];
 
     $.each(data, function (index, association_doc) {
-        var efo_trait_data = {};
 
+        var efo_trait_data = {};
         var efo_id = association_doc.shortForm.sort();
 
         // join EFO Id to form unique key
@@ -111,7 +110,6 @@ function preprocessData(data) {
 
             // Get mapped EFO traits
             var efo_traits = association_doc.mappedLabel;
-            console.log("** MT: "+efo_traits);
 
             if (association_doc.mappedLabel) {
                 $.each(efo_traits, function(index, mapped_trait) {
@@ -162,23 +160,18 @@ function preprocessData(data) {
                 return 0;
             });
 
-
-
-
-
-
             // Get reportedTraits
             var reported_traits = getReportedTrait(association_doc);
 
             // Get count of associations
-            var rsId = association_doc.rsId;
+            var association_count = association_doc.rsId.length;
 
             // Build-up EFO Trait object, this will become 1 row in table
             efo_trait_data = {
                 trait_id: efo_id_key,
                 efo_traits: efo_traits,
                 reported_traits: reported_traits,
-                num_associations: rsId.length
+                num_associations: association_count
             };
             all_efo_trait_data.push(efo_trait_data);
         }
@@ -190,15 +183,14 @@ function preprocessData(data) {
             var reported_traits = getReportedTrait(association_doc);
 
             // Get count of associations
-            var rsId = association_doc.rsId;
-            var new_association_count = rsId.length + all_efo_trait_data[index]['num_associations'];
+            var association_count = association_doc.rsId.length;
 
 
             // Update Object
+            var new_association_count = association_count + all_efo_trait_data[index]['num_associations'];
             all_efo_trait_data[index]['num_associations'] = new_association_count;
 
             var existing_reported_traits = all_efo_trait_data[index]['reported_traits'];
-
             // Add only unique Reported Traits to list
             if ($.inArray(reported_traits[0], existing_reported_traits) == -1) {
                 existing_reported_traits.push(reported_traits[0]);

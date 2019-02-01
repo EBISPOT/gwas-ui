@@ -320,6 +320,8 @@
     <script src="https://cdn.rawgit.com/wenzhixin/09e218c884f4f380b68a/raw/5d258d2f78225a4ac1a72d54a34cc7976d630df1/jquery.base64.js"></script>
     <script src="https://cdn.rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js"></script>
 
+    <script th:src="@{/js/autocomplete-termselect.js}"></script>
+    <script th:src="@{/js/jquery.autocomplete.js}"></script>
     <script th:src="@{/js/helpers/promise-helper.js}"></script>
     <script th:src="@{/js/helpers/utils-helper.js}"></script>
     <script th:src="@{/js/helpers/orcid-helper.js}"></script>
@@ -354,6 +356,8 @@
 
     <!--this come last to make sure trait page specific style is not overwritten by othe css.-->
     <link rel="stylesheet" th:href="@{/css/goci-efotrait-page.css}"/>
+    <link rel="stylesheet" th:href="@{/css/ontology-autocomplete.css}"/>
+
 </div>
 
 </body>

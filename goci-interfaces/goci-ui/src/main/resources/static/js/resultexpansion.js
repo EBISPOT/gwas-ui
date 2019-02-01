@@ -110,7 +110,6 @@ $(document).ready(function() {
 
 });
 
-
 function loadAdditionalResults(facet, expand) {
     var sort = '';
     var id = '';

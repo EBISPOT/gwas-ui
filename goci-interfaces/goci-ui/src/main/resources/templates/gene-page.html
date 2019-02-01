@@ -65,8 +65,7 @@
 
     <ol class="breadcrumb background-color-complementary-accent">
         <li><a th:href="@{/home}">GWAS</a></li>
-        <!--li><a href="studies.html" th:href="@{/studies}">Studies</a></-li-->
-        <li>Gene</li>
+        <li>Genes</li>
         <li class="active" th:text="${result.query}"></li>
     </ol>
 
@@ -249,6 +248,9 @@
     <script th:src="@{/js/helpers/toggle-resize.js}"></script>
     <!--script th:src="@{/js/helpers/summary-stats-api.js}"></script-->
 
+    <script th:src="@{/js/autocomplete-termselect.js}"></script>
+    <script th:src="@{/js/jquery.autocomplete.js}"></script>
+
     <script th:src="@{/js/common-datatables/associations-datatable.js}"></script>
     <script th:src="@{/js/common-datatables/studies-datatable.js}"></script>
     <script th:src="@{/js/common-datatables/efotraits-datatable.js}"></script>
@@ -274,7 +276,7 @@
 
     <!-- refactor all the css and common js -->
     <link rel="stylesheet" th:href="@{/css/goci-efotrait-page.css}"/>
-
+    <link rel="stylesheet" th:href="@{/css/ontology-autocomplete.css}"/>
 
     <!-- Google analytics
     ================================================== -->
