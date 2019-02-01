@@ -31,7 +31,6 @@ function getDataSolr(main, initLoad=false) {
     
     var searchQuery = main;
 
-    console.log("** Solr search request received for: " + searchQuery);
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
             'q': '"' + searchQuery + '"' ,
@@ -47,10 +46,8 @@ function getDataSolr(main, initLoad=false) {
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         //processSolrData(data, initLoad);
         processVariantData(data,searchQuery);
-        console.log("** Solr search successful for: " + searchQuery);
         return data;
     }).catch(function(err) {
-        console.error('** Error when searching solr for: ' + searchQuery + '. ' + err);
         throw(err);
     })
     
@@ -61,10 +58,7 @@ function getDataSolr(main, initLoad=false) {
 $(document).ready(function() {
 
     var searchTerm = $('#query').text();
-    console.log("Loading search module!");
-    console.log("rsID: "+searchTerm);
     if (searchTerm != '') {
-        console.log("Start search for the variant "+searchTerm);
         getVariantData(searchTerm);
     }
     getVariantInfoFromEnsembl(searchTerm);
@@ -84,12 +78,10 @@ function setGenomeStats(data) {
     }
     catch (ex) {
         $('#genome-build-stats').text("GWAS Catalog data is currently mapped to unknown - unable to process data");
-        console.log("Failure to process stats " + ex);
     }
 }
 
 function getVariantData(rsId) {
-    console.log("Solr research request received for " + rsId);
     setState(SearchState.LOADING);
     /*$.getJSON('../api/search/association',
               {
@@ -102,7 +94,6 @@ function getVariantData(rsId) {
               });
     */
     var solrPromise = getDataSolr(rsId, false);
-    console.log("** Solr search done for: " + rsId);
 }
 
 // Parse the Solr results and display the data on the HTML page
@@ -348,7 +339,6 @@ function getSlimSolrData(rsID) {
             returnData.mappedGenes = doc.description.split("|")[3].split(",")
         }
     });
-    console.log(returnData);
     return returnData;
 }
 
@@ -547,13 +537,10 @@ function toggle_and_scroll (id) {
 function getVariantInfoFromEnsembl(rsId) {
     $.getJSON('https://rest.ensembl.org/variation/human/'+rsId+'?content-type=application/json')
             .done(function(data) {
-                console.log(data);
                 processVariantInfoFromEnsembl(rsId,data);
             })
             .fail(function() {
-                console.log('Call failed')
             });
-    console.log("Ensembl REST query done to retrieve variant information");
 }
 
 function processVariantInfoFromEnsembl(rsId, data) {
@@ -589,8 +576,6 @@ function setState(state) {
     var loading = $('#loading');
     var noresults = $('#noResults');
     var results = $('#results');
-    console.log("Search state update...");
-    console.log(state);
     switch (state.value) {
         case 0:
             loading.show();
@@ -608,7 +593,6 @@ function setState(state) {
             results.show();
             break;
         default:
-            console.log("Unknown search state; redirecting to search page");
             window.location = "variant";
     }
 }
