@@ -30,7 +30,8 @@ var pageRowLimit=5;
 function getDataSolr(main, initLoad=false) {
     
     var searchQuery = main;
-    
+
+    console.log("** Solr search request received for: " + searchQuery);
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
             'q': '"' + searchQuery + '"' ,
@@ -46,8 +47,10 @@ function getDataSolr(main, initLoad=false) {
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         //processSolrData(data, initLoad);
         processVariantData(data,searchQuery);
+        console.log("** Solr search successful for: " + searchQuery);
         return data;
     }).catch(function(err) {
+        console.error('** Error when searching solr for: ' + searchQuery + '. ' + err);
         throw(err);
     })
     
@@ -99,6 +102,7 @@ function getVariantData(rsId) {
               });
     */
     var solrPromise = getDataSolr(rsId, false);
+    console.log("** Solr search done for: " + rsId);
 }
 
 // Parse the Solr results and display the data on the HTML page
@@ -211,82 +215,83 @@ function getVariantInfo(data,rsId) {
                 }
             });
         }
+        genes_mapped_url.sort();
 
         // Mapped Traits
-        var mapped_traits = doc.mappedLabel;
-        if (doc.mappedLabel) {
-            $.each(mapped_traits, function(index, mapped_trait) {
-                var link = gwasProperties.contextPath + 'efotraits/' + doc.mappedUri[index].split('/').slice(-1)[0];
-                mapped_traits[index] = setInternalLinkText(link, mapped_trait);
-                // add unique traits only
-                if (jQuery.inArray(mapped_traits[index], all_mapped_traits) == -1) {
-                    all_mapped_traits.push(mapped_traits[index]);
-                }
-            });
-        }
-        // sort multi-word traits in alphabetical order
-        all_mapped_traits.sort(function(a,b) {
-            // extract trait label from URL
-            var a_first_word_index = parseInt(a.indexOf(">")) + 1;
-            var a_last_word_index = a.indexOf("</a>");
-            var a_words = a.slice(a_first_word_index, a_last_word_index).toLowerCase();
-
-            var b_first_word_index = parseInt(b.indexOf(">")) + 1;
-            var b_last_word_index = b.indexOf("</a>");
-            var b_words = b.slice(b_first_word_index, b_last_word_index).toLowerCase();
-
-            // find shortest trait label
-            var shortest_trait_label;
-            if (a_words.split(' ').length < b_words.split(' ').length) {
-                shortest_trait_label = a_words.split(' ').length;
-            } else {
-                shortest_trait_label = b_words.split(' ').length;
-            }
-
-            // find word index in trait label to compare for alphabetical ordering, some traits
-            // start with the same word, e.g. coronary artery disease vs. coronary heart disease
-            for (var i = 0; i < shortest_trait_label; i++) {
-                if (a_words.split(' ')[i] == b_words.split(' ')[i]) {
-                    continue;
-                }
-                else {
-                    break;
-                }
-            }
-
-            if (a_words.split(' ')[i] < b_words.split(' ')[i]) {
-                return -1;
-            }
-            if (a_words.split(' ')[i] > b_words.split(' ')[i]) {
-                return 1;
-            }
-            return 0;
-        });
-        $("#traits").html(all_mapped_traits.join(', '));
+        // var mapped_traits = doc.mappedLabel;
+        // if (doc.mappedLabel) {
+        //     $.each(mapped_traits, function(index, mapped_trait) {
+        //         var link = gwasProperties.contextPath + 'efotraits/' + doc.mappedUri[index].split('/').slice(-1)[0];
+        //         mapped_traits[index] = setInternalLinkText(link, mapped_trait);
+        //         // add unique traits only
+        //         if (jQuery.inArray(mapped_traits[index], all_mapped_traits) == -1) {
+        //             all_mapped_traits.push(mapped_traits[index]);
+        //         }
+        //     });
+        // }
+        // // sort multi-word traits in alphabetical order
+        // all_mapped_traits.sort(function(a,b) {
+        //     // extract trait label from URL
+        //     var a_first_word_index = parseInt(a.indexOf(">")) + 1;
+        //     var a_last_word_index = a.indexOf("</a>");
+        //     var a_words = a.slice(a_first_word_index, a_last_word_index).toLowerCase();
+        //
+        //     var b_first_word_index = parseInt(b.indexOf(">")) + 1;
+        //     var b_last_word_index = b.indexOf("</a>");
+        //     var b_words = b.slice(b_first_word_index, b_last_word_index).toLowerCase();
+        //
+        //     // find shortest trait label
+        //     var shortest_trait_label;
+        //     if (a_words.split(' ').length < b_words.split(' ').length) {
+        //         shortest_trait_label = a_words.split(' ').length;
+        //     } else {
+        //         shortest_trait_label = b_words.split(' ').length;
+        //     }
+        //
+        //     // find word index in trait label to compare for alphabetical ordering, some traits
+        //     // start with the same word, e.g. coronary artery disease vs. coronary heart disease
+        //     for (var i = 0; i < shortest_trait_label; i++) {
+        //         if (a_words.split(' ')[i] == b_words.split(' ')[i]) {
+        //             continue;
+        //         }
+        //         else {
+        //             break;
+        //         }
+        //     }
+        //
+        //     if (a_words.split(' ')[i] < b_words.split(' ')[i]) {
+        //         return -1;
+        //     }
+        //     if (a_words.split(' ')[i] > b_words.split(' ')[i]) {
+        //         return 1;
+        //     }
+        //     return 0;
+        // });
+        // $("#traits").html(all_mapped_traits.join(', '));
 
         // Reported traits
-        var traits = [];
-        if (doc.traitName) {
-            $.each(doc.traitName, function(index, trait) {
-                if (jQuery.inArray(trait, traits_reported) == -1) {
-                    traits_reported.push(trait);
-                    // remove link
-                    // traits_reported_url.push(setQueryUrl(trait));
-                    traits_reported_url.push(trait);
-                }
-            });
-        }
+        // var traits = [];
+        // if (doc.traitName) {
+        //     $.each(doc.traitName, function(index, trait) {
+        //         if (jQuery.inArray(trait, traits_reported) == -1) {
+        //             traits_reported.push(trait);
+        //             // remove link
+        //             // traits_reported_url.push(setQueryUrl(trait));
+        //             traits_reported_url.push(trait);
+        //         }
+        //     });
+        // }
     });
-    genes_mapped_url.sort();
-    traits_reported_url.sort();
+
+    // traits_reported_url.sort();
 
     // Reported Traits display
-    if (traits_reported.length <= list_min) {
-        $("#variant-traits").html(traits_reported_url.join(', '));
-    }
-    else {
-        $("#variant-traits").html(longContentList("gwas_traits_div", traits_reported_url, 'traits'));
-    }
+    // if (traits_reported.length <= list_min) {
+    //     $("#variant-traits").html(traits_reported_url.join(', '));
+    // }
+    // else {
+    //     $("#variant-traits").html(longContentList("gwas_traits_div", traits_reported_url, 'traits'));
+    // }
 
     // Location
     if (jQuery.type(location) == 'undefined') {

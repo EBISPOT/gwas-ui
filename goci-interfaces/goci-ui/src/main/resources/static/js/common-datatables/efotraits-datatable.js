@@ -95,6 +95,8 @@ function preprocessData(data) {
     var seen = [];
     var all_efo_trait_data = [];
 
+    var all_mapped_traits = [];
+
     $.each(data, function (index, association_doc) {
         var efo_trait_data = {};
 
@@ -109,6 +111,61 @@ function preprocessData(data) {
 
             // Get mapped EFO traits
             var efo_traits = association_doc.mappedLabel;
+            console.log("** MT: "+efo_traits);
+
+            if (association_doc.mappedLabel) {
+                $.each(efo_traits, function(index, mapped_trait) {
+                    var link = gwasProperties.contextPath + 'efotraits/' + association_doc.mappedUri[index].split('/').slice(-1)[0];
+                    efo_traits[index] = setInternalLinkText(link, mapped_trait);
+                    // add unique traits only
+                    if (jQuery.inArray(efo_traits[index], all_mapped_traits) == -1) {
+                        all_mapped_traits.push(efo_traits[index]);
+                    }
+                });
+            }
+            // sort multi-word traits in alphabetical order
+            all_mapped_traits.sort(function(a,b) {
+                // extract trait label from URL
+                var a_first_word_index = parseInt(a.indexOf(">")) + 1;
+                var a_last_word_index = a.indexOf("</a>");
+                var a_words = a.slice(a_first_word_index, a_last_word_index).toLowerCase();
+
+                var b_first_word_index = parseInt(b.indexOf(">")) + 1;
+                var b_last_word_index = b.indexOf("</a>");
+                var b_words = b.slice(b_first_word_index, b_last_word_index).toLowerCase();
+
+                // find shortest trait label
+                var shortest_trait_label;
+                if (a_words.split(' ').length < b_words.split(' ').length) {
+                    shortest_trait_label = a_words.split(' ').length;
+                } else {
+                    shortest_trait_label = b_words.split(' ').length;
+                }
+
+                // find word index in trait label to compare for alphabetical ordering, some traits
+                // start with the same word, e.g. coronary artery disease vs. coronary heart disease
+                for (var i = 0; i < shortest_trait_label; i++) {
+                    if (a_words.split(' ')[i] == b_words.split(' ')[i]) {
+                        continue;
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+                if (a_words.split(' ')[i] < b_words.split(' ')[i]) {
+                    return -1;
+                }
+                if (a_words.split(' ')[i] > b_words.split(' ')[i]) {
+                    return 1;
+                }
+                return 0;
+            });
+
+
+
+
+
 
             // Get reportedTraits
             var reported_traits = getReportedTrait(association_doc);

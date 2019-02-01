@@ -173,14 +173,14 @@
         <div class="row" style="margin-top:0px">
             <div id="table-list" class="panel clearfix" style="padding-left:0px;box-shadow:none">
                 <span style="margin-right:10px;font-weight:bold">Available data:</span>
-                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#efotrait_panel')">
-                    <span class="efotrait_label">Traits</span><span class="efotrait_count badge" style="background-color: #398A96;margin-left:10px"></span>
-                </button>
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#association_panel')">
                     <span class="association_label">Associations</span><span class="association_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#study_panel')">
                     <span class="study_label">Studies</span><span class="study_count badge" style="background-color: #398A96;margin-left:10px"></span>
+                </button>
+                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#efotrait_panel')">
+                    <span class="efotrait_label">Traits</span><span class="efotrait_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
                 <button type="button" class="btn btn-default pull-right" style="margin-right:10px;font-weight:bold" id="download_data">
                     <span>Download Catalog data</span><span class="glyphicon glyphicon-download-alt" style="color:#398A96;margin-left:10px"></span>
@@ -190,16 +190,16 @@
 
 
         <div class="row search-results-container" >
-            <div th:include="fragments/efotrait-datatable :: efotraits_datatable"></div>
-        </div>
-
-        <div class="row search-results-container" >
             <!-- Associations table -->
             <div th:include="fragments/association-datatable :: associations_datatable"></div>
         </div>
         <div class="row search-results-container" >
             <!-- Studies table -->
             <div th:include="fragments/study-datatable :: studies_datatable"></div>
+        </div>
+
+        <div class="row search-results-container" >
+            <div th:include="fragments/efotrait-datatable :: efotraits_datatable"></div>
         </div>
 
     </div>
