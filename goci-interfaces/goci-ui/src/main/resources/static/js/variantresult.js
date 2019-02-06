@@ -50,7 +50,7 @@ function getDataSolr(main, initLoad=false) {
         console.log("Solr research done for " + searchQuery);
         return data;
     }).catch(function(err) {
-        console.error('Error when searching solr for' + searchQuery + '. ' + err);
+        console.error('Error when searching solr for ' + searchQuery + '. ' + err);
         throw(err);
     })
     
@@ -185,7 +185,7 @@ function getVariantInfo(data) {
 
     $.each(data, function (index, doc) {
         // Mapped genes
-        if (doc.hasOwnProperty('ensemblMappedGenes')) {
+        if (doc.hasOwnProperty('mappedGenes')) {
             var gene_list = [];
             $.each(doc.ensemblMappedGenes, function(index, gene) {
                 // check if "gene" contains multiple values, e.g. ["GCKR; GCKR"]
