@@ -107,7 +107,7 @@ function getDataSolr(main, initLoad=false) {
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         // Check if Solr returns some results
         if (data.grouped.resourcename.groups.length == 0) {
-            $('#lower_container').html("<h2>The PubmedId <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
+            $('#lower_container').html("<h2>Publication with Pubmed ID <em>"+main+"</em> cannot be found in the GWAS Catalog.</h2>");
         }
         else {
             processSolrData(data, initLoad);

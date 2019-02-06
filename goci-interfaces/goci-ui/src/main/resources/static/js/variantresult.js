@@ -168,27 +168,21 @@ function getSolrProperty(data, property) {
 }
 
 
-function getVariantInfo(data,rsId) {
-    var valid_index = getSolrProperty(data,'context');
-    var data_sample = data[valid_index];
+function getVariantInfo(data) {
 
-    if (data_sample.chromLocation) {
-        var location = data_sample.chromLocation[0];
-    }
+    // Retrieve variant info from the slim solr:
+    var rsId = $('#query').text();
+    var slimSolrData = getSlimSolrData(rsId);
+    var location = slimSolrData.position;
+    var consequence = slimSolrData.consequence;
+    var region = slimSolrData.region;
+    var mappedGenes = slimSolrData.mappedGenes;
 
-    if (data_sample.region) {
-        var region = data_sample.region[0];
-    }
-
-    if (data_sample.context) {
-        var func = data_sample.context[0];
-    }
-
-    var genes_mapped = [];
-    var genes_mapped_url = [];
+    // The following information is parsed from the fat solr:
     var traits_reported = [];
     var traits_reported_url = [];
     var all_mapped_traits = [];
+
     $.each(data, function (index, doc) {
         // Mapped genes
         if (doc.hasOwnProperty('ensemblMappedGenes')) {
@@ -280,7 +274,6 @@ function getVariantInfo(data,rsId) {
             });
         }
     });
-    genes_mapped_url.sort();
     traits_reported_url.sort();
 
     // Reported Traits display
@@ -292,9 +285,12 @@ function getVariantInfo(data,rsId) {
     }
 
     // Location
-    if (jQuery.type(location) == 'undefined') {
+    if (location == 'NA:NA') {
         $("#variant-location").html('Variant does not map to the genome');
         $("._ld_graph").html('Variant does not map to the genome');
+        region = '-';
+        consequence = '-';
+        mappedGenes = ['-']
     }
     else {
         $("#variant-location").html(location);
@@ -305,16 +301,47 @@ function getVariantInfo(data,rsId) {
     $("#variant-region").html(region);
 
     // Most severe consequence
-    if (func) {
-        $("#variant-class").html(variationClassLabel(func));
-    }
+    $("#variant-class").html(consequence);
 
     // Mapped genes
-    if (genes_mapped_url.length != 0) {
-        $("#variant-mapped-genes").html(genes_mapped_url.join(', '));
+    if (mappedGenes.length != 0 && mappedGenes[0] != '-') {
+        mappedGeneLinks = [];
+        for ( gene of mappedGenes ){
+            var link = gwasProperties.contextPath + 'genes/' + gene
+            mappedGeneLinks.push(`<a href="${link}">${gene}</a>`);
+
+        }
+        $("#variant-mapped-genes").html(mappedGeneLinks.join(', '));
     }
 
     $("#variant-summary-content").html(getSummary(data));
+}
+
+// To overcome the inconsistencies in the fat solr, we retrieve variant data from the slim solr
+function getSlimSolrData(rsID) {
+    var returnData = {
+        'position' : '-',
+        'region': '-',
+        'consequence' : '-',
+        'mappedGenes' : []
+    }
+    $.ajax({
+        url: '../api/search',
+        data : {'q': "rsID:\"" + rsID + '\" AND resourcename:variant'},
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        success: function(data){
+            // Parse returned JSON;
+            var doc = data.response.docs[0];
+            returnData.position = doc.chromosomeName + ":" + doc.chromosomePosition;
+            returnData.region = doc.region;
+            returnData.consequence = doc.consequence;
+            returnData.mappedGenes = doc.description.split("|")[3].split(",")
+        }
+    });
+    console.log(returnData);
+    return returnData;
 }
 
 
