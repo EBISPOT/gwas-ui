@@ -106,7 +106,7 @@ function getDataSolr(main, initLoad=false) {
             $('#lower_container').html("<h2>The Gene name <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
         }
         else {
-            processSolrData(data, initLoad, slimData); // gene name is now added to the process solr data function.
+            processSolrData(data, initLoad, searchQuery,slimData); // gene name is now added to the process solr data function.
             //downloads link : utils-helper.js
             setDownloadLink(main);
         }
@@ -128,7 +128,7 @@ function getDataSolr(main, initLoad=false) {
  * @param {{}} data - solr result
  * @param {Boolean} initLoad
  */
-function processSolrData(data, initLoad=false, slimData) {
+function processSolrData(data, initLoad=false, searchTerm, slimData) {
     var isInCatalog=true;
     
     data_association = [];
@@ -176,6 +176,7 @@ function processSolrData(data, initLoad=false, slimData) {
     var PAGE_TYPE = "gene";
     
     //update association/study table
+    displayDatatableTraits(data_association.docs, searchTerm);
     displayDatatableAssociations(data_association.docs);
     displayDatatableStudies(data_study.docs, PAGE_TYPE);
     checkSummaryStatsDatabase(data_study.docs);

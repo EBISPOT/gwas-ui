@@ -197,6 +197,8 @@ function processSolrData(data, initLoad=false, searchTerm) {
         }
         generateRegionInformationTable(searchTerm, data_study);
 
+        displayDatatableTraits(data_association.docs, searchTerm);
+
         checkSummaryStatsDatabase(data_study.docs);
     })
 

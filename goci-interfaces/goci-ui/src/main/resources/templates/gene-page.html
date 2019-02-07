@@ -128,13 +128,6 @@
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="biotype">-</div>
                         </div>
-                        <div class="clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
-                                <span class="item-left-bold">Reported trait(s)</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Detailed study-level trait descriptions associated with this variant, taking into account the study design"></span>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="reportedTraits">-</div>
-                        </div>
                     </div>
                     <div id="links" class="panel-body col-lg-4 col-md-4 col-sm-4 col-xs-3"></div>
                     <div id="links" class="panel-body col-lg-2 col-md-2 col-sm-2 col-xs-3">
@@ -178,6 +171,9 @@
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#study_panel')">
                     <span class="study_label">Studies</span><span class="study_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
+                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#efotrait_panel')">
+                    <span class="efotrait_label">Traits</span><span class="efotrait_count badge" style="background-color: #398A96;margin-left:10px"></span>
+                </button>
                 <button type="button" class="btn btn-default pull-right" style="margin-right:10px;font-weight:bold" id="download_data">
                     <span>Download Catalog data</span><span class="glyphicon glyphicon-download-alt" style="color:#398A96;margin-left:10px"></span>
                 </button>
@@ -192,6 +188,10 @@
         <div class="row search-results-container" >
             <!-- Studies table -->
             <div th:include="fragments/study-datatable :: studies_datatable"></div>
+        </div>
+
+        <div class="row search-results-container" >
+            <div th:include="fragments/efotrait-datatable :: efotraits_datatable"></div>
         </div>
 
     </div>
@@ -246,6 +246,7 @@
 
     <script th:src="@{/js/common-datatables/associations-datatable.js}"></script>
     <script th:src="@{/js/common-datatables/studies-datatable.js}"></script>
+    <script th:src="@{/js/common-datatables/efotraits-datatable.js}"></script>
 
     <!-- this file must be the last. onload action -->
     <script th:src="@{/js/generesult.js}"></script>
