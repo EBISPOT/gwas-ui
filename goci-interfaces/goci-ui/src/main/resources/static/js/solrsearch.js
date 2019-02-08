@@ -62,13 +62,13 @@ function buildBreadcrumbs() {
 
     if (! window.location.hash) {
         console.log("Final breadcrumb is for '" + searchTerm + "'");
-        breadcrumbs.append('<li class="active">' + searchTerm + '</li>');
+        breadcrumbs.append('<li class="active">' + sanitizeInput(searchTerm) + '</li>');
     }
     else {
         var facet = window.location.hash.substr(1);
         console.log("Need breadcrumbs for '" + searchTerm + "' and '" + facet + "'");
 
-        breadcrumbs.append('<li><a href="search?query=' + searchTerm + '">' + searchTerm + '</a></li>');
+        breadcrumbs.append('<li><a href="search?query=' + searchTerm + '">' + sanitizeInput(searchTerm) + '</a></li>');
         var last = $("<li></li>").attr("class", "active");
 
         if (facet == "study") {
@@ -675,3 +675,16 @@ function setStats(data) {
         console.log("Failure to process stats " + ex);
     }
 }
+
+/*
+A function to sanitize user input before it gets displayed on the website
+ */
+function sanitizeInput(input){
+    input = input.replace(/>/g, "&gt;");
+    input = input.replace(/</g, "&lt;");
+    input = input.replace(/"/g, "&quot;");
+    input = input.replace(/'/g, "&#x27;");
+
+    return(input)
+}
+
