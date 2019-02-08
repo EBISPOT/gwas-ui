@@ -210,8 +210,7 @@ function getSlimSolrData(geneName) {
 
 // Helper function to retrieve Ensembl data through the REST API
 // SYNC!!
-function getEnsemblREST( URL )
-{
+function getEnsemblREST( URL ) {
     var result = null;
     $.ajax({
         url: URL,
@@ -222,7 +221,9 @@ function getEnsemblREST( URL )
             result = data;
         },
         error: function(request){
-            result = {'error' : request.responseText};
+            console.log("[Error] Retrieving data from Ensembl failed. URL: " + URL);
+            console.log(request.responseText)
+            result = [];
         }
     });
     return result;
@@ -275,24 +276,22 @@ function generateGeneInformationTable(slimData, studies) {
     var xrefData = getEnsemblREST(xrefQueryURL);
     var entrezID = "NA";
     var OMIMID = "NA";
-    // If the request to Ensembl fails, the returned document will contain an error key:
-    if (! "error" in xrefData){
-        for ( xref of xrefData ){
-            if ( xref.dbname == "EntrezGene" ){
-                entrezID = xref.primary_id
-            }
-            if ( xref.dbname == 'MIM_GENE' ){
-                OMIMID = xref.primary_id
-            }
+
+    for ( xref of xrefData ){
+        if ( xref.dbname == "EntrezGene" ){
+            entrezID = xref.primary_id
+        }
+        if ( xref.dbname == 'MIM_GENE' ){
+            OMIMID = xref.primary_id
         }
     }
 
     // Adding automatic cross references pointing to Ensembl:
-    $("#ensembl_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Summary?db=core;g="+slimData.ensemblID +"',    '_blank')");
-    $("#ensembl_phenotype_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Phenotype?db=core;g="+slimData.ensemblID+"',    '_blank')");
-    $("#ensembl_pathway_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Pathway?db=core;g="+slimData.ensemblID+"',    '_blank')");
-    $("#ensembl_regulation_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Regulation?db=core;g="+slimData.ensemblID+"',    '_blank')");
-    $("#ensembl_expression_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"ExpressionAtlas?db=core;g="+slimData.ensemblID+"',    '_blank')");
+    $("#ensembl_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Summary?db=core;g="+slimData.ensemblID +"',    '_blank')");
+    $("#ensembl_phenotype_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Phenotype?db=core;g="+slimData.ensemblID+"',    '_blank')");
+    $("#ensembl_pathway_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Pathway?db=core;g="+slimData.ensemblID+"',    '_blank')");
+    $("#ensembl_regulation_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Regulation?db=core;g="+slimData.ensemblID+"',    '_blank')");
+    $("#ensembl_expression_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/ExpressionAtlas?db=core;g="+slimData.ensemblID+"',    '_blank')");
 
     // Adding automatic cross reference pointing to Open targets:
     $("#opentargets_button").attr('onclick', "window.open('"+gwasProperties.OpenTargetsURL+ slimData.ensemblID+"',    '_blank')");
