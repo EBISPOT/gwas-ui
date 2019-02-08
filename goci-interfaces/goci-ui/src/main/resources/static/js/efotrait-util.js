@@ -48,7 +48,7 @@ global_fl = 'pubmedId,title,author_s,publication,publicationDate,catalogPublishD
         'association_rsId,' + //size per study
         'label,' + 'efoLink,parent,id,resourcename,';
 global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,snpInteraction,multiSnpHaplotype,rsId,'+
-    'strongestAllele,context,region,entrezMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,'+
+    'strongestAllele,context,region,ensemblMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,'+
     'chromosomePosition,chromLocation,positionLinks,author_s,publication,publicationDate,catalogPublishDate,'+
     'publicationLink,accessionId,initialSampleDescription,replicateSampleDescription,ancestralGroups,'+
     'countriesOfRecruitment,numberOfIndividuals,traitName_s,mappedLabel,mappedUri,traitUri,shortForm,labelda,'+
@@ -2829,7 +2829,7 @@ buildLocusPlotPopoverHTML = function(association){
     text.append(_addNameValuePairHTML('Variant and risk allele', association.strongestAllele));
     text.append(_addNameValuePairHTML('Location',association.chromLocation));
     text.append(_addNameValuePairHTML('P-value',association.pValueMantissa+' x 10'+"<sup>"+association.pValueExponent+"</sup>"));
-    text.append(_addNameValuePairHTML('Mapped gene(s)',association.entrezMappedGenes));
+    text.append(_addNameValuePairHTML('Mapped gene(s)',association.ensemblMappedGenes));
     text.append(_addNameValuePairHTML('Reported trait', association.traitName_s));
     text.append(_addNameValuePairHTML('Trait(s)', association.mappedLabel.toString()));
     text.append(_addNameValuePairHTML('Study accession', association.accessionId));

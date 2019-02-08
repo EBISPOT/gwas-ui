@@ -8,7 +8,7 @@ global_fl = 'pubmedId,title,author_s,orcid_s,publication,publicationDate,catalog
     'association_rsId,' + //size per study
     'traitName,mappedLabel,mappedUri,traitUri,shortForm,' +
     'label,' + 'efoLink,parent,id,resourcename,';
-global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,snpInteraction,multiSnpHaplotype,rsId,strongestAllele,context,region,entrezMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,chromosomePosition,chromLocation,positionLinks,author_s,publication,publicationDate,catalogPublishDate,publicationLink,accessionId,initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,numberOfIndividuals,traitName_s,mappedLabel,mappedUri,traitUri,shortForm,labelda,synonym,efoLink,id,resourcename,range,orPerCopyNum,betaNum,betaUnit,betaDirection'
+global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,snpInteraction,multiSnpHaplotype,rsId,strongestAllele,context,region,ensemblMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,chromosomePosition,chromLocation,positionLinks,author_s,publication,publicationDate,catalogPublishDate,publicationLink,accessionId,initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,numberOfIndividuals,traitName_s,mappedLabel,mappedUri,traitUri,shortForm,labelda,synonym,efoLink,id,resourcename,range,orPerCopyNum,betaNum,betaUnit,betaDirection'
 global_raw = 'fq:resourcename:association or resourcename:study';
 var list_min = 5;
 
@@ -85,12 +85,12 @@ function getDataSolr(main, initLoad=false) {
     var searchQuery = main;
 
     // Step 1: returning list of variants mapped to the queried gene:
-    var slimData = getSlimSolrData(searchQuery);
-    var mappedRsIDs = slimData.rsIDs.join(" OR ");
+    var slimData = getSlimSolrData(searchQuery)
+    // var mappedRsIDs = slimData.rsIDs
 
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
-            'q': mappedRsIDs,
+            'q': "ensemblMappedGenes:"+searchQuery + " OR association_ensemblMappedGenes:"+searchQuery,
             'max': 99999,
             'group.limit': 99999,
             'group.field': 'resourcename',
@@ -102,13 +102,13 @@ function getDataSolr(main, initLoad=false) {
             'raw' : global_raw == undefined ? '' : global_raw,
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         // Check if Solr returns some results
-        if (data.grouped.resourcename.groups.length == 0 || mappedRsIDs == null ) {
+        if (data.grouped.resourcename.groups.length == 0 ) {
             $('#lower_container').html("<h2>The Gene name <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
         }
         else {
             processSolrData(data, initLoad, searchQuery,slimData); // gene name is now added to the process solr data function.
             //downloads link : utils-helper.js
-            setDownloadLink(mappedRsIDs);
+            setDownloadLink(main);
         }
         return data;
     }).catch(function(err) {
@@ -210,8 +210,7 @@ function getSlimSolrData(geneName) {
 
 // Helper function to retrieve Ensembl data through the REST API
 // SYNC!!
-function getEnsemblREST( URL )
-{
+function getEnsemblREST( URL ) {
     var result = null;
     $.ajax({
         url: URL,
@@ -222,7 +221,9 @@ function getEnsemblREST( URL )
             result = data;
         },
         error: function(request){
-            result = {'error' : request.responseText};
+            console.log("[Error] Retrieving data from Ensembl failed. URL: " + URL);
+            console.log(request.responseText)
+            result = [];
         }
     });
     return result;
@@ -275,24 +276,22 @@ function generateGeneInformationTable(slimData, studies) {
     var xrefData = getEnsemblREST(xrefQueryURL);
     var entrezID = "NA";
     var OMIMID = "NA";
-    // If the request to Ensembl fails, the returned document will contain an error key:
-    if (! "error" in xrefData){
-        for ( xref of xrefData ){
-            if ( xref.dbname == "EntrezGene" ){
-                entrezID = xref.primary_id
-            }
-            if ( xref.dbname == 'MIM_GENE' ){
-                OMIMID = xref.primary_id
-            }
+
+    for ( xref of xrefData ){
+        if ( xref.dbname == "EntrezGene" ){
+            entrezID = xref.primary_id
+        }
+        if ( xref.dbname == 'MIM_GENE' ){
+            OMIMID = xref.primary_id
         }
     }
 
     // Adding automatic cross references pointing to Ensembl:
-    $("#ensembl_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Summary?db=core;g="+slimData.ensemblID +"',    '_blank')");
-    $("#ensembl_phenotype_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Phenotype?db=core;g="+slimData.ensemblID+"',    '_blank')");
-    $("#ensembl_pathway_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Pathway?db=core;g="+slimData.ensemblID+"',    '_blank')");
-    $("#ensembl_regulation_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Regulation?db=core;g="+slimData.ensemblID+"',    '_blank')");
-    $("#ensembl_expression_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"ExpressionAtlas?db=core;g="+slimData.ensemblID+"',    '_blank')");
+    $("#ensembl_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Summary?db=core;g="+slimData.ensemblID +"',    '_blank')");
+    $("#ensembl_phenotype_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Phenotype?db=core;g="+slimData.ensemblID+"',    '_blank')");
+    $("#ensembl_pathway_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Pathway?db=core;g="+slimData.ensemblID+"',    '_blank')");
+    $("#ensembl_regulation_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/Regulation?db=core;g="+slimData.ensemblID+"',    '_blank')");
+    $("#ensembl_expression_button").attr('onclick', "window.open('"+gwasProperties.EnsemblURL+"Gene/ExpressionAtlas?db=core;g="+slimData.ensemblID+"',    '_blank')");
 
     // Adding automatic cross reference pointing to Open targets:
     $("#opentargets_button").attr('onclick', "window.open('"+gwasProperties.OpenTargetsURL+ slimData.ensemblID+"',    '_blank')");

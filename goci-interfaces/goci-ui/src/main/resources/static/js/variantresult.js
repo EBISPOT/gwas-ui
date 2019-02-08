@@ -178,6 +178,30 @@ function getVariantInfo(data) {
     var all_mapped_traits = [];
 
     $.each(data, function (index, doc) {
+        // Mapped genes
+        if (doc.hasOwnProperty('mappedGenes')) {
+            var gene_list = [];
+            $.each(doc.ensemblMappedGenes, function(index, gene) {
+                // check if "gene" contains multiple values, e.g. ["GCKR; GCKR"]
+                if (gene.indexOf(";") > 0) {
+                    gene_list = gene.split("; ");
+
+                    $.each(gene_list, function(index, split_gene) {
+                        if (jQuery.inArray(split_gene, genes_mapped) == -1) {
+                            genes_mapped.push(split_gene);
+                        }
+                    });
+                }
+                else {
+                    if (jQuery.inArray(gene, genes_mapped) == -1) {
+                        genes_mapped.push(gene);
+                        // remove link
+                        // genes_mapped_url.push(setQueryUrl(gene));
+                        genes_mapped_url.push(gene);
+                    }
+                }
+            });
+        }
 
         // Mapped genes
         if (doc.hasOwnProperty('entrezMappedGenes')) {
