@@ -1089,9 +1089,11 @@ function processSolrSlimData(data) {
         reportedTraits = data.reportedTrait;
     });
 
+    if (reportedTraits) {
     $("#reported-traits").html(longContentList("gwas_reported_traits_div",
         reportedTraits.sort(),
         'reported traits'));
+    }
 }
 
 
@@ -2543,11 +2545,13 @@ findStudiesForEFO = function(efoid) {
         }
     })
 
-    $.each(data_study.docs, function(index, value) {
-        if ($.inArray(value.id, Object.keys(studies)) != -1) {
-            studies[value.id] = value;
-        }
-    })
+    if (data_study.docs != undefined) {
+        $.each(data_study.docs, function (index, value) {
+            if ($.inArray(value.id, Object.keys(studies)) != -1) {
+                studies[value.id] = value;
+            }
+        });
+    }
     return studies;
 }
 
@@ -2605,11 +2609,13 @@ findStudiesForEFOs = function(efoids){
         }
     })
 
-    $.each(data_study.docs, function(index, value) {
-        if ($.inArray(value.id, Object.keys(studies)) != -1) {
-            studies[value.id] = value;
-        }
-    })
+    if (data_study.docs != undefined) {
+        $.each(data_study.docs, function (index, value) {
+            if ($.inArray(value.id, Object.keys(studies)) != -1) {
+                studies[value.id] = value;
+            }
+        });
+    }
     return studies;
 }
 
