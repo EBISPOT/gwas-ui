@@ -684,7 +684,8 @@ function sanitizeInput(input){
     input = input.replace(/</g, "&lt;");
     input = input.replace(/"/g, "&quot;");
     input = input.replace(/'/g, "&#x27;");
-
-    return(input)
+    input = input.replace(/&/g, "&amp;");
+    input = input.replace(/\//g, "&#x2F;");
+    return(input);
 }
 
