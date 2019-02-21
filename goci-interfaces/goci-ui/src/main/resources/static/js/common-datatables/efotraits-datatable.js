@@ -52,16 +52,8 @@ function displayDatatableTraits(data, HEADER_VALUE, cleanBeforeInsert) {
 
     var association_header = "Association count with "+HEADER_VALUE;
 
-    // get current date
-    var d = new Date();
-    var curr_date = d.getDate();
-    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    var curr_month = monthNames[d.getMonth()];
-    var curr_year = d.getFullYear();
-    var date = (curr_date + "_" + curr_month + "_" + curr_year);
-
-    var filename = 'traits_for_'+HEADER_VALUE+"_"+date;
+    // generate filename:
+    var filename = getFilename('traits');
 
     $('#efotrait-table').bootstrapTable({
         exportDataType: 'all',
@@ -86,10 +78,8 @@ function displayDatatableTraits(data, HEADER_VALUE, cleanBeforeInsert) {
             filterControl: 'input'
         }],
         data: data_json,
-
     });
 
-    $('#efotrait-table').bootstrapTable('load', data_json)
     if (data_json.length > 5) {
         $('#efotrait-table').bootstrapTable('refreshOptions', {
             pagination: true,

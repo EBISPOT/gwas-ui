@@ -1,8 +1,5 @@
 /** DRY. From Xin original code. We must refactor all these 'action'result.js in a common way! */
 
-
-
-
 $(document).ready(() => {
 
 //jump to the top of the page
@@ -51,7 +48,8 @@ updatePage = function(initLoad=false) {
     }
     showLoadingOverLay('#study-table-loading');
     showLoadingOverLay('#association-table-loading');
-    
+    showLoadingOverLay('#efotrait-table-loading');
+
     var main = getTextToSearch('#query');
     
     //******************************
@@ -171,13 +169,7 @@ function processSolrData(data, initLoad=false) {
     displayDatatableAssociations(data_association.docs);
     displayDatatableStudies(data_study.docs, PAGE_TYPE);
     displaySummaryPublication(data_study.docs);
-    
-    //work out highlight study
-    //var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
-    //displayHighlightedStudy(highlightedStudy);
-    //display summary information like 'EFO trait first reported in GWAS Catalog in 2007, 5 studies report this efotrait'
-    //getSummary(findStudiesForEFO(getMainEFO()));
-    
+
 })
 
 }

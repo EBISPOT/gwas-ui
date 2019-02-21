@@ -218,8 +218,14 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
 
         });
     }
+    // generate filename:
+    var filename = getFilename('associations');
+
     $('#association-table').bootstrapTable({
         exportDataType: 'all',
+        exportOptions: {
+            fileName: filename
+        },
         filterControl: true,
         columns: [{
             field: 'riskAllele',
@@ -301,6 +307,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
     });
 
     $('#association-table').bootstrapTable('load', data_json)
+
     if (data_json.length > 5) {
         $('#association-table').bootstrapTable('refreshOptions', {
             pagination: true,
@@ -348,4 +355,23 @@ function pValueSorter(a, b) {
     if (parseInt(value1[0]) > parseInt(value2[0])) return 1;
     if (parseInt(value1[0]) < parseInt(value2[0])) return -1;
     return 0;
+}
+
+/*
+ This generates the file name using the date, table type and page identifier
+  */
+function getFilename(table) {
+    // get current date
+    var d = new Date();
+    var curr_date = d.getDate();
+    var curr_month = d.getMonth() + 1;
+    curr_month = curr_month < 10 ? '0' + curr_month : curr_month;
+
+    var curr_year = d.getFullYear();
+    var date = `${curr_year}-${curr_month}-${curr_date}`;
+    // Set other parameters:
+    var pathArray = window.location.pathname.split('/');
+    var docType = pathArray[2];
+    var query = pathArray[3];
+    return (`${docType}_${query}-${table}-${date}`);
 }

@@ -301,16 +301,3 @@ function getLoadedStudies() {
     });
     return result;
 };
-function getFilename(table) {
-    // get current date
-    var d = new Date();
-    var curr_date = d.getDate();
-    var curr_month = d.getMonth() + 1;
-    var curr_year = d.getFullYear();
-    var date = `${curr_year}-${curr_month}-${curr_date}`;
-    // Set other parameters:
-    var pathArray = window.location.pathname.split('/');
-    var docType = pathArray[2];
-    var query = pathArray[3];
-    return (`${docType}_${query}-${table}-${date}`);
-}

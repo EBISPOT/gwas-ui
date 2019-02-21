@@ -12,12 +12,10 @@ var EPMC = "http://www.europepmc.org/abstract/MED/";
 var OLS  = "https://www.ebi.ac.uk/ols/search?q=";
 var ENSVAR = "https://www.ensembl.org/Homo_sapiens/Variation/";
 var DBSNP  = "http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?rs=";
-var UCSC   = "https://genome.ucsc.edu/cgi-bin/hgTracks?hgFind.matches=";
+var UCSC  = "https://genome.ucsc.edu/cgi-bin/hgTracks?hgFind.matches=";
 var ENS_SHARE_LINK = 'Variant_specific_location_link/97NKbgkp09vPRy1xXwnqG1x6KGgQ8s7S';
 var CONTEXT_RANGE = 500;
-var global_raw = 'fq:resourcename:association or resourcename:study'
-var list_min = 5;
-var pageRowLimit=5;
+
 
 /**
  * Make solr query.
@@ -98,6 +96,7 @@ function getVariantData(rsId) {
 
 // Parse the Solr results and display the data on the HTML page
 function processVariantData(data,rsId) {
+
     // Check if Solr returns some results
     if (data.grouped.resourcename.groups.length == 0) {
         $('#lower_container').html("<h2>The variant <em>"+rsId+"</em> cannot be found in the GWAS Catalog database</h2>");
@@ -130,9 +129,8 @@ function processVariantData(data,rsId) {
         displayDatatableTraits(data_association.docs, rsId);
         displayDatatableAssociations(data_association.docs);
         displayDatatableStudies(data_study.docs);
-        checkSummaryStatsDatabase(data_study.docs);
-        //downloads link : utils-helper.js
-        setDownloadLink(rsId);
+
+        setDownloadLink("rsId:" + rsId);
     }
     $('[data-toggle="tooltip"]').tooltip();
 }
@@ -321,7 +319,8 @@ function getVariantInfo(data) {
     }
 
     // Cytogenetic region
-    $("#variant-region").html(region);
+    var regionLink = $("<a></a>").attr("href", gwasProperties.contextPath + 'regions/' + region).append(region);
+    $("#variant-region").html(regionLink);
 
     // Most severe consequence
     $("#variant-class").html(consequence);
