@@ -74,7 +74,7 @@ public class SolrSearchController {
         else {
             addRowsAndPage(solrSearchBuilder, maxResults, page);
         }
-        addQueryFilter(solrSearchBuilder);
+        // addQueryFilter(solrSearchBuilder);
         addQuery(solrSearchBuilder, query);
 
         // dispatch search
@@ -82,9 +82,9 @@ public class SolrSearchController {
     }
 
     // Use queryFilter to return match to term synonym higher in the result list
-    private void addQueryFilter(StringBuilder solrSearchBuilder) {
-        solrSearchBuilder.append("&defType=dismax&qf=title%5E2.0+synonyms%5E20.0+parent%5E2.0+text%5E1.0");
-    }
+    //private void addQueryFilter(StringBuilder solrSearchBuilder) {
+    //    solrSearchBuilder.append("&defType=dismax&qf=title%5E2.0+synonyms%5E20.0+parent%5E2.0+text%5E1.0");
+    //}
 
 
     @RequestMapping(value = "/api/select", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)

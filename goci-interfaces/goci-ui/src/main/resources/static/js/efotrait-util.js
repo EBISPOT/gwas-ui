@@ -36,26 +36,6 @@ var global_solr_slim_url = 'http://localhost:8983/solr/gwas_slim/select';
 var global_parent_with_all_child_trait_ids = [];
 
 /**
- * This is to optimize solr query, only keep the fields/resources we need
- */
-var global_fl;
-var global_raw;
-
-global_fl = 'pubmedId,title,author_s,publication,publicationDate,catalogPublishDate,' +
-        'initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,' +
-        'ancestryLinks,' + 'fullPvalueSet,' + 'genotypingTechnologies,' + 'authorAscii_s,' +
-        'traitName,mappedLabel,mappedUri,traitUri,shortForm,' +
-        'association_rsId,' + //size per study
-        'label,' + 'efoLink,parent,id,resourcename,';
-global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,snpInteraction,multiSnpHaplotype,rsId,'+
-    'strongestAllele,context,region,ensemblMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,'+
-    'chromosomePosition,chromLocation,positionLinks,author_s,publication,publicationDate,catalogPublishDate,'+
-    'publicationLink,accessionId,initialSampleDescription,replicateSampleDescription,ancestralGroups,'+
-    'countriesOfRecruitment,numberOfIndividuals,traitName_s,mappedLabel,mappedUri,traitUri,shortForm,labelda,'+
-    'synonym,efoLink,id,resourcename,range,orPerCopyNum,betaNum,betaUnit,betaDirection'
-global_raw = 'fq:resourcename:association or resourcename:study'
-
-/**
  * global variable storing solr query result.
  */
 var data_efo={}
@@ -973,7 +953,7 @@ function processSolrData(data, initLoad=false) {
         //update association/study table
         displayDatatableAssociations(data_association.docs);
         displayDatatableStudies(data_study.docs);
-        checkSummaryStatsDatabase(data_study.docs);
+        // checkSummaryStatsDatabase(data_study.docs);
 
         //work out highlight study
         var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
