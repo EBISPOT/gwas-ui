@@ -143,7 +143,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
                 tmp['mappedGenes'] = combinedGenes.join(" x ");
             }
             else if (mappedGenes.length === 1 && mappedGenes[0].match("; ")){ // haplotype associations: rs2446581
-                tmp['mappedGenes'] = generateLinkedGene(mappedGenes[0].split("; "),"; ");
+                tmp['mappedGenes'] = generateLinkedGene(mappedGenes[0].split("; "), "; ");
             }
             else { // Ordinary variants, potentially multiple mapped genes: rs3897478
                 tmp['mappedGenes'] = generateLinkedGene(mappedGenes);
