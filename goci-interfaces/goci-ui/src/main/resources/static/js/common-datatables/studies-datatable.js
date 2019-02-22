@@ -7,26 +7,21 @@
  * @param {Boolean} cleanBeforeInsert
  */
 function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert = true) {
-    // Returning list of loaded studies from the summary stats database:
-    window.loadedStudies = getLoadedStudies();
 
     // We keep track of studies added to the datatable:
-    window.study_ids = [];
-
-    // By default, we clean the table before inserting data
-    if (cleanBeforeInsert) {
-        $('#study-table').bootstrapTable('removeAll');
-    }
+    if( typeof loadedStudies == "undefined" ){ window.loadedStudies = getLoadedStudies() }
+    if( typeof study_ids == "undefined" ){ window.study_ids = [] }
 
     // Process data to format for data table:
     var data_json = [];
-    if(data ){
+    if( data ){
         data_json = prepareDataForTable(data);
     }
 
     // Study count //
     $(".study_count").html(study_ids.length);
     if (study_ids.length == 1) {
+        console.log(study_ids);
         $(".study_label").html("Study");
     }
 
@@ -43,7 +38,8 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert = true) {
 
     // Generate filename for the downloaded file:
     var filename = getFilename('studies');
-
+    console.log("** study count: " + data_json.length);
+    console.log("** study accessions: " + study_ids.join(","))
     // Render table:
     $('#study-table').bootstrapTable({
         exportDataType: 'all',
@@ -128,7 +124,7 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert = true) {
         }],
         data: data_json
     });
-    // $('#study-table').bootstrapTable('load',data_json);
+    $('#study-table').bootstrapTable('load',data_json);
     if (data_json.length > 5) {
         $('#study-table').bootstrapTable('refreshOptions', {
             showRefresh: true,
@@ -159,12 +155,12 @@ function prepareDataForTable(data){
         var tmp = {};
 
         // Skipping study if already processed:
-        if (jQuery.inArray(study.id, study_ids) > 0){
-            return;
+        if (jQuery.inArray(study.id, study_ids) == -1){
+            study_ids.push(study.id);
         }
 
         // Save study ID for further checks in global variable:
-        study_ids.push(study.id);
+
 
         // Do we need to add genotyping icon:
         var genotypingIcon = "";

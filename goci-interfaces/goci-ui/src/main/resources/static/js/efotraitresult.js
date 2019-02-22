@@ -352,7 +352,6 @@ function longContent (content_id, str, label) {
     return container;
 }
 
-
 // Create a button to show/hide content
 function showHideDiv(div_id) {
     var div_button = $("<button></button>");

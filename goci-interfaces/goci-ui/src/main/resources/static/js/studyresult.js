@@ -93,7 +93,7 @@ function getDataSolr(main, initLoad = false) {
            processSolrData(data, initLoad);
            //downloads link : utils-helper.js
            setDownloadLink("accessionId:" + searchQuery);
-           displayDatatableAssociations(data_association.docs);
+           displayDatatableAssociations(data_association.docs, cleanBeforeInsert = false);
            displaySummaryStudy(data_study.docs);
            return data;
         }
