@@ -280,7 +280,7 @@ function getSlimSolrData(rsID) {
         success: function(data){
             // Parse returned JSON;
             var doc = data.response.docs[0];
-            returnData.position = doc.chromosomeName + ":" + doc.chromosomePosition;
+            returnData.position = doc.description.split("|")[0];
             returnData.region = doc.region;
             returnData.consequence = doc.consequence;
             returnData.mappedGenes = doc.description.split("|")[3].split(",")

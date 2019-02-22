@@ -45,9 +45,6 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert = true) {
         exportDataType: 'all',
         exportOptions: {
             fileName: filename,
-            csvEnclosure: '',
-            csvSeparator: '\t',
-            type: 'tsv'
         },
         columns: [{
             field: 'Author',
