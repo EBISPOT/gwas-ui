@@ -360,9 +360,7 @@ The diagram can be moved around the viewing area by clicking on any part of the 
 
 ==== [[faq-E1]]1. How is the genomic annotation for each SNP provided?
 
-We use an Ensembl mapping pipeline that provides the genomic annotation (chromosome location, cytogenetic region and mapped genes), alongside the curated content in the GWAS Catalog. The mapping information is updated at every Ensembl release, every 2-3 months. 
-
-The annotation includes any genes in which a SNP maps, or the closest upstream and downstream gene for intergenic SNPs. Mapped gene information is provided from the RefSeq import in Ensembl which includes multiple gene biotypes, such as protein coding genes, non-coding RNA and pseudogenes. 
+We use an Ensembl mapping pipeline that provides the genomic annotation (chromosome location, cytogenetic region and mapped genes), alongside the curated content in the GWAS Catalog. The mapping information is updated at every Ensembl release, every 2-3 months. The annotation includes any Ensembl genes in which a SNP maps, or the closest upstream and downstream gene for intergenic SNPs.  
 
 ==== [[faq-E2]]2. Which genome build is the Catalog on?
 ++++
