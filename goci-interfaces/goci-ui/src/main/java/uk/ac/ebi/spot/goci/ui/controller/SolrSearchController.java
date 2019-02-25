@@ -60,6 +60,7 @@ public class SolrSearchController {
     @CrossOrigin
     public void doSolrSearch(
             @RequestParam("q") String query,
+            @RequestParam(value = "generalTextQuery", required=false, defaultValue = "false") boolean generalTextQuery,
             @RequestParam(value = "jsonp", required = false, defaultValue = "false") boolean useJsonp,
             @RequestParam(value = "callback", required = false) String callbackFunction,
             @RequestParam(value = "max", required = false, defaultValue = "1000") int maxResults,
@@ -74,7 +75,10 @@ public class SolrSearchController {
         else {
             addRowsAndPage(solrSearchBuilder, maxResults, page);
         }
-        addQueryFilter(solrSearchBuilder);
+
+        if (generalTextQuery) {
+            addQueryFilter(solrSearchBuilder);
+        }
         addQuery(solrSearchBuilder, query);
 
         // dispatch search
