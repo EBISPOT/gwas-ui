@@ -362,7 +362,7 @@ The diagram can be moved around the viewing area by clicking on any part of the 
 
 We use an Ensembl mapping pipeline that provides the genomic annotation (chromosome location, cytogenetic region and mapped genes), alongside the curated content in the GWAS Catalog. The mapping information is updated at every Ensembl release, every 2-3 months.
 
-The annotation available on our online search interface includes any Ensembl genes in which a SNP maps, or the closest upstream and downstream gene for intergenic SNPs. More detailed mapping information is available through our REST API including all Ensembl and RefSeq genes mapping within 50kb upstream and downstream of each GWAS Catalog variant.
+The annotation available on our online search interface includes any Ensembl genes in which a SNP maps, or the closest upstream and downstream gene within 50kb. More detailed mapping information is available through our REST API including all Ensembl and RefSeq genes mapping within 50kb upstream and downstream of each GWAS Catalog variant.
 
 ==== [[faq-E2]]2. Which genome build is the Catalog on?
 ++++
