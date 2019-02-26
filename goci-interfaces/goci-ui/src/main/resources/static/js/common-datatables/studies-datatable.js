@@ -21,7 +21,6 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert = true) {
     // Study count //
     $(".study_count").html(study_ids.length);
     if (study_ids.length == 1) {
-        console.log(study_ids);
         $(".study_label").html("Study");
     }
 
@@ -38,8 +37,7 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert = true) {
 
     // Generate filename for the downloaded file:
     var filename = getFilename('studies');
-    console.log("** study count: " + data_json.length);
-    console.log("** study accessions: " + study_ids.join(","))
+
     // Render table:
     $('#study-table').bootstrapTable({
         exportDataType: 'all',
