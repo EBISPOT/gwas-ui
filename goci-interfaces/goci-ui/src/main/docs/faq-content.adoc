@@ -36,6 +36,8 @@
 
 16. <<faq-A16, Does the GWAS Catalog include CNV studies?>>
 
+17. <<faq-A17, How can I separate OR from beta in the Associations download?>>
+
 === B. Searching the GWAS Catalog
 
 1. <<faq-B1, How do I search the GWAS Catalog?>>
@@ -220,6 +222,11 @@ We are working on expanding the scope of the GWAS Catalog to include large-scale
 
 Studies looking at copy number variations (CNV) are not part of the remit of the GWAS Catalog. Historically, a couple of CNV studies had been included in the Catalog but these have now been removed. As the Catalog no longer contains any CNV studies, the decision was made to also eliminate the CNV flag from the search results for studies. The corresponding column is still available in the downloadable full Catalog spreadsheet to preserve backwards compatibility with previous spreadsheet versions.
 
+==== [[faq-A17]]17. How can I separate OR from beta in the associations download?
+
+It is not currently possible to download the entire Catalog with OR and beta in separate columns. However, betas and ORs can be distinguished as all betas have a unit and direction e.g. “unit increase” or “cm decrease”. In the download, this is included in the "95% CI (TEXT)” column. 
+
+Alternatively, if you download search results directly from the Associations table on the web interface (using the download button to the top right of the table), the file will replicate what you see in the table, with OR and beta in separate columns. 
 
 == [[B]]B. Searching the GWAS Catalog
 
