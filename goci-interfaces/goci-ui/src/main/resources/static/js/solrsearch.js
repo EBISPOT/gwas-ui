@@ -153,7 +153,7 @@ function solrSearch(queryTerm) {
         var boost_field = ' OR title:"'.concat(queryTerm).concat('"')+' OR synonyms:"'.concat(queryTerm).concat('"');
         var searchPhrase = searchTerm.concat(boost_field);
 
-        $.getJSON('api/search', {'q': searchPhrase})
+        $.getJSON('api/search', {'q': searchPhrase, 'generalTextQuery': true})
             .done(function(data) {
                 console.log(data);
                 processData(data);
