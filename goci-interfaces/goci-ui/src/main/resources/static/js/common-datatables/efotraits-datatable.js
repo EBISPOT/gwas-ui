@@ -113,7 +113,22 @@ function preprocessData(data) {
     $.each(data, function (index, association_doc) {
 
         var efo_trait_data = {};
-        var efo_id = association_doc.shortForm.sort();
+        // This block is to keep track of EFO term combinations:
+        var efo_id = [];
+        if (association_doc.hasOwnProperty('shortForm')){
+            efo_id = association_doc.shortForm.sort();
+        }
+        else if (association_doc.hasOwnProperty('mappedUri')){
+            var shortenedUri = [];
+            for( var uri of association_doc.mappedUri){
+                shortenedUri.push(uri.split("/").slice(-1)[0]);
+            }
+            efo_id = shortenedUri.sort();
+        }
+        else{
+            console.log("[Warning] No efo short form or trait uri is present in the returned solr document!");
+            return;
+        }
 
         // join EFO Id to form unique key
         var efo_id_key = efo_id.join("_");
