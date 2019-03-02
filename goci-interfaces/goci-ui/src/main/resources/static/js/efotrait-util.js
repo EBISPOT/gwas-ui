@@ -901,7 +901,7 @@ function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false
                               'group.limit': 99999,
                               'group.field': 'resourcename',
                               'facet.field': 'resourcename',
-                              'hl.fl': 'shortForm,efoLink',
+                              'hl.fl': 'shortForm,efoLink,mappedUri',
                               'hl.snippets': 100,
                               'fl' : global_fl == undefined ? '*':global_fl,
                               // 'fq' : global_fq == undefined ? '*:*':global_fq,
@@ -2537,11 +2537,13 @@ findStudiesForEFO = function(efoid) {
         return studies;
     Object.keys(data_highlighting).forEach(function(key) {
         if (/^study/.test(key)) {
-            data_highlighting[key].efoLink.forEach(function(highlightedefo) {
-                if (highlightedefo.match(/<b>(\w*_\d*)<\/b>/)[1] == efoid) {
-                    studies[key] = efoid;
-                }
-            });
+            if (data_highlighting[key].mappedUri != undefined) {
+                data_highlighting[key].mappedUri.forEach(function (highlightedefo) {
+                    if (highlightedefo.match(/<b>(\w*_\d*)<\/b>/)[1] == efoid) {
+                        studies[key] = efoid;
+                    }
+                });
+            }
         }
     })
 
@@ -2601,11 +2603,13 @@ findStudiesForEFOs = function(efoids){
         return studies;
     Object.keys(data_highlighting).forEach(function(key) {
         if (/^study/.test(key)) {
-            data_highlighting[key].efoLink.forEach(function(highlightedefo) {
-                if (efoids.indexOf(highlightedefo.match(/<b>(\w*_\d*)<\/b>/)[1]) != -1) {
-                    studies[key] = key;
-                }
-            });
+            if (data_highlighting[key].mappedUri != undefined) {
+                data_highlighting[key].mappedUri.forEach(function (highlightedefo) {
+                    if (efoids.indexOf(highlightedefo.match(/<b>(\w*_\d*)<\/b>/)[1]) != -1) {
+                        studies[key] = key;
+                    }
+                });
+            }
         }
     })
 
@@ -2633,11 +2637,13 @@ findAssociationForEFOs = function(efoids){
         return associations;
     Object.keys(data_highlighting).forEach(function(key) {
         if (/^association/.test(key)) {
-            data_highlighting[key].efoLink.forEach(function(highlightedefo) {
-                if (efoids.indexOf(highlightedefo.match(/<b>(\w*_\d*)<\/b>/)[1]) != -1) {
-                    associations[key] = key;
-                }
-            });
+            if (data_highlighting[key].mappedUri != undefined) {
+                data_highlighting[key].mappedUri.forEach(function (highlightedefo) {
+                    if (efoids.indexOf(highlightedefo.match(/<b>(\w*_\d*)<\/b>/)[1]) != -1) {
+                        associations[key] = key;
+                    }
+                });
+            }
         }
     })
     if ('docs' in data_association) {
@@ -2663,9 +2669,9 @@ var findAllEFOsforAssociation = function(association_id,data_association) {
     var association_doc = data_association.docs.filter((association) => {
         return association.id == association_id
     })
-    if(association_doc.length >0){
+    if(association_doc.length >0 && association_doc[0].efoLink != undefined){
         //"C-reactive protein measurement|EFO_0004458|http://www.ebi.ac.uk/efo/EFO_0004458"
-        return association_doc[0].efoLink.map((efoLink)=>{
+        return association_doc[0].efoLink.map((efoLink) => {
             return efoLink.split('|')[1]
         })
     }else{
@@ -2703,9 +2709,12 @@ var findAllEFOsforAssociation = function(association_id,data_association) {
  * @private
  */
 findHighlightEFOForAssociation = function(association_id,solr_highlighting) {
-    var terms = solr_highlighting[association_id].shortForm;
-    return terms.map((termHighlighted) => {
-        return termHighlighted.match(/<b>(\w*_\d*)<\/b>/)[1];
+    var terms = solr_highlighting[association_id].mappedUri[0].split("/")[4]+"b>";
+    var new_terms = [];
+    new_terms.push(terms);
+
+    return new_terms.map((termHighlighted) => {
+        return termHighlighted.match(/<b>(\w*_\d*)<\/b>/);
     })
 }
 
