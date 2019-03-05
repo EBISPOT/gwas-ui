@@ -932,7 +932,7 @@ public class SolrSearchController {
             @RequestParam(value = "group.limit", required = false, defaultValue = "100") int groupLimit,
             @RequestParam(value = "group.field", required = false, defaultValue = "resourcename") String groupField,
             @RequestParam(value = "facet.field", required = false, defaultValue = "resourcename") String facetField,
-            @RequestParam(value = "hl.fl", required = false, defaultValue = "shortForm,efoLink") String hlFl,
+            @RequestParam(value = "hl.fl", required = false, defaultValue = "shortForm,efoLink,mappedUri") String hlFl,
             @RequestParam(value = "hl.snippets", required = false, defaultValue = "1") int hlSnippets,
             @RequestParam(value = "fl", required = false, defaultValue = "") String fl,
             @RequestParam(value = "raw", required = false, defaultValue = "") String raw,
