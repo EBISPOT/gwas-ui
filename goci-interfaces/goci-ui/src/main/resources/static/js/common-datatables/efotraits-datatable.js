@@ -60,7 +60,6 @@ function displayDatatableTraits(data, HEADER_VALUE, cleanBeforeInsert) {
         exportOptions: {
             fileName: filename
         },
-        filterControl: true,
         columns: [{
             field: 'mappedTraits',
             title: 'Trait label(s)',

@@ -226,7 +226,6 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         exportOptions: {
             fileName: filename
         },
-        filterControl: true,
         columns: [{
             field: 'riskAllele',
             title: 'Variant and risk allele',
