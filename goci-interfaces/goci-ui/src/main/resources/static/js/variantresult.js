@@ -12,12 +12,10 @@ var EPMC = "http://www.europepmc.org/abstract/MED/";
 var OLS  = "https://www.ebi.ac.uk/ols/search?q=";
 var ENSVAR = "https://www.ensembl.org/Homo_sapiens/Variation/";
 var DBSNP  = "http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?rs=";
-var UCSC   = "https://genome.ucsc.edu/cgi-bin/hgTracks?hgFind.matches=";
+var UCSC  = "https://genome.ucsc.edu/cgi-bin/hgTracks?hgFind.matches=";
 var ENS_SHARE_LINK = 'Variant_specific_location_link/97NKbgkp09vPRy1xXwnqG1x6KGgQ8s7S';
 var CONTEXT_RANGE = 500;
-var global_raw = 'fq:resourcename:association or resourcename:study'
-var list_min = 5;
-var pageRowLimit=5;
+
 
 /**
  * Make solr query.
@@ -98,6 +96,7 @@ function getVariantData(rsId) {
 
 // Parse the Solr results and display the data on the HTML page
 function processVariantData(data,rsId) {
+
     // Check if Solr returns some results
     if (data.grouped.resourcename.groups.length == 0) {
         $('#lower_container').html("<h2>The variant <em>"+rsId+"</em> cannot be found in the GWAS Catalog database</h2>");
@@ -130,9 +129,8 @@ function processVariantData(data,rsId) {
         displayDatatableTraits(data_association.docs, rsId);
         displayDatatableAssociations(data_association.docs);
         displayDatatableStudies(data_study.docs);
-        checkSummaryStatsDatabase(data_study.docs);
-        //downloads link : utils-helper.js
-        setDownloadLink(rsId);
+
+        setDownloadLink("rsId:" + rsId);
     }
     $('[data-toggle="tooltip"]').tooltip();
 }
@@ -229,83 +227,7 @@ function getVariantInfo(data) {
         }
         genes_mapped_url.sort();
 
-
-
-        // Mapped Traits
-        // var mapped_traits = doc.mappedLabel;
-        // if (doc.mappedLabel) {
-        //     $.each(mapped_traits, function(index, mapped_trait) {
-        //         var link = gwasProperties.contextPath + 'efotraits/' + doc.mappedUri[index].split('/').slice(-1)[0];
-        //         mapped_traits[index] = setInternalLinkText(link, mapped_trait);
-        //         // add unique traits only
-        //         if (jQuery.inArray(mapped_traits[index], all_mapped_traits) == -1) {
-        //             all_mapped_traits.push(mapped_traits[index]);
-        //         }
-        //     });
-        // }
-        // // sort multi-word traits in alphabetical order
-        // all_mapped_traits.sort(function(a,b) {
-        //     // extract trait label from URL
-        //     var a_first_word_index = parseInt(a.indexOf(">")) + 1;
-        //     var a_last_word_index = a.indexOf("</a>");
-        //     var a_words = a.slice(a_first_word_index, a_last_word_index).toLowerCase();
-        //
-        //     var b_first_word_index = parseInt(b.indexOf(">")) + 1;
-        //     var b_last_word_index = b.indexOf("</a>");
-        //     var b_words = b.slice(b_first_word_index, b_last_word_index).toLowerCase();
-        //
-        //     // find shortest trait label
-        //     var shortest_trait_label;
-        //     if (a_words.split(' ').length < b_words.split(' ').length) {
-        //         shortest_trait_label = a_words.split(' ').length;
-        //     } else {
-        //         shortest_trait_label = b_words.split(' ').length;
-        //     }
-        //
-        //     // find word index in trait label to compare for alphabetical ordering, some traits
-        //     // start with the same word, e.g. coronary artery disease vs. coronary heart disease
-        //     for (var i = 0; i < shortest_trait_label; i++) {
-        //         if (a_words.split(' ')[i] == b_words.split(' ')[i]) {
-        //             continue;
-        //         }
-        //         else {
-        //             break;
-        //         }
-        //     }
-        //
-        //     if (a_words.split(' ')[i] < b_words.split(' ')[i]) {
-        //         return -1;
-        //     }
-        //     if (a_words.split(' ')[i] > b_words.split(' ')[i]) {
-        //         return 1;
-        //     }
-        //     return 0;
-        // });
-        // $("#traits").html(all_mapped_traits.join(', '));
-
-        // Reported traits
-        // var traits = [];
-        // if (doc.traitName) {
-        //     $.each(doc.traitName, function(index, trait) {
-        //         if (jQuery.inArray(trait, traits_reported) == -1) {
-        //             traits_reported.push(trait);
-        //             // remove link
-        //             // traits_reported_url.push(setQueryUrl(trait));
-        //             traits_reported_url.push(trait);
-        //         }
-        //     });
-        // }
     });
-
-    // traits_reported_url.sort();
-
-    // Reported Traits display
-    // if (traits_reported.length <= list_min) {
-    //     $("#variant-traits").html(traits_reported_url.join(', '));
-    // }
-    // else {
-    //     $("#variant-traits").html(longContentList("gwas_traits_div", traits_reported_url, 'traits'));
-    // }
 
     // Location
     if (location == 'NA:NA') {
@@ -321,7 +243,8 @@ function getVariantInfo(data) {
     }
 
     // Cytogenetic region
-    $("#variant-region").html(region);
+    var regionLink = $("<a></a>").attr("href", gwasProperties.contextPath + 'regions/' + region).append(region);
+    $("#variant-region").html(regionLink);
 
     // Most severe consequence
     $("#variant-class").html(consequence);
@@ -357,7 +280,7 @@ function getSlimSolrData(rsID) {
         success: function(data){
             // Parse returned JSON;
             var doc = data.response.docs[0];
-            returnData.position = doc.chromosomeName + ":" + doc.chromosomePosition;
+            returnData.position = doc.description.split("|")[0];
             returnData.region = doc.region;
             returnData.consequence = doc.consequence;
             returnData.mappedGenes = doc.description.split("|")[3].split(",")

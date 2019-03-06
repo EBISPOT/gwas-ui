@@ -45,7 +45,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             var riskAllele = asso.strongestAllele[0];
 
             // This line will remove the space from the risk allele (see GOCI-2480)
-            riskAllele = riskAllele.replace(" -", "-")
+            riskAllele = riskAllele.replace(" -", "-");
 
             // there may be more than one variants for an association:
             var separator = ' x '; // SNP x SNP interactions are separated by ' x '
@@ -125,35 +125,28 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
                 tmp['beta'] = '-';
             }
 
-            // CI
+            // Confidence interval:
             var ci = (asso.range) ? asso.range : '-';
             tmp['ci'] = ci;
 
-
-            // Reported genes
-            var genes = [];
-            var reportedGenes = asso.reportedGene;
-            if (reportedGenes) {
-                $.each(reportedGenes, function (index, gene) {
-                    genes.push(setQueryUrl(gene));
-                });
-                tmp['reportedGenes'] = genes.join(', ');
-            } else {
-                tmp['reportedGenes'] = '-';
-
-            }
-
-            // Mapped genes
-            var genes = [];
+            // Parsing mapped genes - gene names have links pointing to the gene pages.
+            // Handling unmapped, snp x snp, haplotype and regular associations.
             var mappedGenes = asso.ensemblMappedGenes;
-            if (mappedGenes) {
-                $.each(mappedGenes, function (index, gene) {
-                    genes.push(gene);
-                });
-                tmp['mappedGenes'] = genes.join(', ');
-            } else {
+            if ( typeof mappedGenes == 'undefined' ){ // no mapping available: kgp10698118
                 tmp['mappedGenes'] = '-';
-
+            }
+            else if (mappedGenes.length === 1 && mappedGenes[0].match(" x ")){ // snp x snp interaction: rs2282015-G
+                var combinedGenes = [];
+                for ( var mappedComponents of mappedGenes[0].split(" x ")){
+                    combinedGenes.push(generateLinkedGene(mappedComponents.split(" - "), " - "));
+                }
+                tmp['mappedGenes'] = combinedGenes.join(" x ");
+            }
+            else if (mappedGenes.length === 1 && mappedGenes[0].match("; ")){ // haplotype associations: rs2446581
+                tmp['mappedGenes'] = generateLinkedGene(mappedGenes[0].split("; "), "; ");
+            }
+            else { // Ordinary variants, potentially multiple mapped genes: rs3897478
+                tmp['mappedGenes'] = generateLinkedGene(mappedGenes);
             }
 
             // Reported traits
@@ -225,9 +218,14 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
 
         });
     }
+    // generate filename:
+    var filename = getFilename('associations');
+
     $('#association-table').bootstrapTable({
         exportDataType: 'all',
-        filterControl: true,
+        exportOptions: {
+            fileName: filename
+        },
         columns: [{
             field: 'riskAllele',
             title: 'Variant and risk allele',
@@ -308,6 +306,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
     });
 
     $('#association-table').bootstrapTable('load', data_json)
+
     if (data_json.length > 5) {
         $('#association-table').bootstrapTable('refreshOptions', {
             pagination: true,
@@ -333,6 +332,17 @@ function splitPValue(pValue) {
     return composedValue;
 }
 
+// Generate link for a given gene names passed as array:
+function generateLinkedGene(geneNames, separator = ', '){
+    var linkedGenes = [];
+    for ( var gene of geneNames){
+        var linkObject = $('<a></a>').attr("href", gwasProperties.contextPath + 'genes/' + gene)
+            .append(gene);
+        linkedGenes.push(linkObject.prop('outerHTML'))
+    }
+    return (linkedGenes.join(separator));
+}
+
 // compare two value a and b.
 // Split text into mantissa, exponent.
 // Compare exponent and after the mantissa. If a and b are equal no order
@@ -344,4 +354,23 @@ function pValueSorter(a, b) {
     if (parseInt(value1[0]) > parseInt(value2[0])) return 1;
     if (parseInt(value1[0]) < parseInt(value2[0])) return -1;
     return 0;
+}
+
+/*
+ This generates the file name using the date, table type and page identifier
+  */
+function getFilename(table) {
+    // get current date
+    var d = new Date();
+    var curr_date = d.getDate();
+    var curr_month = d.getMonth() + 1;
+    curr_month = curr_month < 10 ? '0' + curr_month : curr_month;
+
+    var curr_year = d.getFullYear();
+    var date = `${curr_year}-${curr_month}-${curr_date}`;
+    // Set other parameters:
+    var pathArray = window.location.pathname.split('/');
+    var docType = pathArray[2];
+    var query = pathArray[3];
+    return (`${docType}_${query}-${table}-${date}`);
 }

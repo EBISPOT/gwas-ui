@@ -1,3 +1,22 @@
+/*
+The following variables are used by all dedicated pages:
+ */
+var global_fl;
+var global_raw;
+
+// This is the global variable storing solr fields:
+global_fl = 'accessionId,ancestralGroups,ancestryLinks,associationCount,association_rsId,authorAscii_s,author_s,authorsList,' +
+    'betaDirection,betaNum,betaUnit,catalogPublishDate,chromLocation,chromosomeName,chromosomePosition,context,' +
+    'countriesOfRecruitment,currentSnp,efoLink,ensemblMappedGenes,fullPvalueSet,genotypingTechnologies,id,initialSampleDescription,' +
+    'label,labelda,mappedLabel,mappedUri,merged,multiSnpHaplotype,numberOfIndividuals,orPerCopyNum,orcid_s,pValueExponent,' +
+    'pValueMantissa,parent,positionLinks,publication,publicationDate,publicationLink,pubmedId,qualifier,range,region,' +
+    'replicateSampleDescription,reportedGene,resourcename,riskFrequency,rsId,shortForm,snpInteraction,strongestAllele,studyId,' +
+    'synonym,title,traitName,traitName_s,traitUri';
+global_raw = 'fq:resourcename:association or resourcename:study';
+
+// Number of rows displayed on the datatables
+pageRowLimit = 5;
+
 /** DRY. From Xin original code. Helper to share between modules! */
 /**
  * Display an overlay spinner on a tag

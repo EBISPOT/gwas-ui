@@ -1,22 +1,5 @@
 /** DRY. From Xin original code. We must refactor all these 'action'result.js in a common way! */
 
-var global_fl;
-var global_raw;
-global_fl = 'pubmedId,title,author_s,orcid_s,publication,publicationDate,catalogPublishDate,authorsList,' +
-    'initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,' +
-    'ancestryLinks,' + 'fullPvalueSet,' + 'genotypingTechnologies,' + 'authorAscii_s,' +
-    'association_rsId,' + //size per study
-    'traitName,mappedLabel,mappedUri,traitUri,shortForm,' +
-    'label,' + 'efoLink,parent,id,resourcename,';
-global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,snpInteraction,multiSnpHaplotype,rsId,strongestAllele,context,region,ensemblMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,chromosomePosition,chromLocation,positionLinks,author_s,publication,publicationDate,catalogPublishDate,publicationLink,accessionId,initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,numberOfIndividuals,traitName_s,mappedLabel,mappedUri,traitUri,shortForm,labelda,synonym,efoLink,id,resourcename,range,orPerCopyNum,betaNum,betaUnit,betaDirection'
-global_raw = 'fq:resourcename:association or resourcename:study';
-
-// Gene page specific constans:
-
-/**
- * Other global setting
- */
-var pageRowLimit=5;
 
 $(document).ready(() => {
 
@@ -64,6 +47,7 @@ updatePage = function(initLoad=false) {
     }
     showLoadingOverLay('#study-table-loading');
     showLoadingOverLay('#association-table-loading');
+    showLoadingOverLay('#efotrait-table-loading');
     
     var main = getTextToSearch('#query');
     
@@ -195,11 +179,9 @@ function processSolrData(data, initLoad=false, searchTerm) {
         else {
             displayDatatableStudies(data_study.docs, PAGE_TYPE);
         }
+
         generateRegionInformationTable(searchTerm, data_study);
-
         displayDatatableTraits(data_association.docs, searchTerm);
-
-        checkSummaryStatsDatabase(data_study.docs);
     })
 
 }
