@@ -36,6 +36,8 @@
 
 16. <<faq-A16, Does the GWAS Catalog include CNV studies?>>
 
+17. <<faq-A17, How can I separate OR from beta in the Associations download?>>
+
 === B. Searching the GWAS Catalog
 
 1. <<faq-B1, How do I search the GWAS Catalog?>>
@@ -93,6 +95,8 @@
 4. <<faq-D4, How do I display labels?>>
 
 5. <<faq-D5, How do I zoom and move the diagram?>>
+
+6. <<faq-D6, How should I cite the diagram?>>
 
 === E. Genomic mappings
 
@@ -220,6 +224,11 @@ We are working on expanding the scope of the GWAS Catalog to include large-scale
 
 Studies looking at copy number variations (CNV) are not part of the remit of the GWAS Catalog. Historically, a couple of CNV studies had been included in the Catalog but these have now been removed. As the Catalog no longer contains any CNV studies, the decision was made to also eliminate the CNV flag from the search results for studies. The corresponding column is still available in the downloadable full Catalog spreadsheet to preserve backwards compatibility with previous spreadsheet versions.
 
+==== [[faq-A17]]17. How can I separate OR from beta in the associations download?
+
+It is not currently possible to download the entire Catalog with OR and beta in separate columns. However, betas and ORs can be distinguished as all betas have a unit and direction e.g. “unit increase” or “cm decrease”. In the download, this is included in the "95% CI (TEXT)” column. 
+
+Alternatively, if you download search results directly from the Associations table on the web interface (using the download button to the top right of the table), the file will replicate what you see in the table, with OR and beta in separate columns. 
 
 == [[B]]B. Searching the GWAS Catalog
 
@@ -355,14 +364,18 @@ Chromosomes and traits (coloured circles) have labels that display when hovering
 The diagram was designed to have GoogleMaps-style interactivity. There are two ways to zoom in and out. The easiest option is to use the scroll wheel on the mouse or touch pad on a laptop. Scrolling up zooms in and scrolling down zooms out. This feature may not work with all touch pads. Alternatively, the top right-hand corner of the diagram features a zoom bar which can be used to generate exactly the same effect, by dragging the little square left or right along the bar with the mouse pointer or clicking the plus and minus buttons.
 The diagram can be moved around the viewing area by clicking on any part of the diagram with the left mouse button and, holding the mouse button down, dragging the diagram around the screen until the desired part is visible. This feature is particularly useful for centring the diagram on a specific location at higher zoom levels.
 
+==== [[faq-D6]]6. How should I cite the diagram?
+
+Please see the link:about[About] page for citation guidance.
+
 
 == [[E]]E. Genomic mappings
 
 ==== [[faq-E1]]1. How is the genomic annotation for each SNP provided?
 
-We use an Ensembl mapping pipeline that provides the genomic annotation (chromosome location, cytogenetic region and mapped genes), alongside the curated content in the GWAS Catalog. The mapping information is updated at every Ensembl release, every 2-3 months. 
+We use an Ensembl mapping pipeline that provides the genomic annotation (chromosome location, cytogenetic region and mapped genes), alongside the curated content in the GWAS Catalog. The mapping information is updated at every Ensembl release, every 2-3 months.
 
-The annotation includes any genes in which a SNP maps, or the closest upstream and downstream gene for intergenic SNPs. Mapped gene information is provided from the RefSeq import in Ensembl which includes multiple gene biotypes, such as protein coding genes, non-coding RNA and pseudogenes. 
+The annotation available on our online search interface includes any Ensembl genes in which a SNP maps, or the closest upstream and downstream gene within 50kb. More detailed mapping information is available through our REST API including all Ensembl and RefSeq genes mapping within 50kb upstream and downstream of each GWAS Catalog variant.
 
 ==== [[faq-E2]]2. Which genome build is the Catalog on?
 ++++
