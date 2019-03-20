@@ -40,7 +40,7 @@ var loadDocumentation = function(pagename, content) {
             var pathComponent = pathComponents[i];
 
             // Generate breadcrumb title:
-            var pathTitle = pathComponent.replace('doc', 'documentation');
+            var pathTitle = pathComponent.replace('docs', 'documentation');
             pathTitle = pathTitle.replace("-", " ");
             pathTitle = pathTitle.charAt(0).toUpperCase() + pathTitle.slice(1);
 
