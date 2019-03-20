@@ -275,7 +275,7 @@ function prepareDataForTable(data){
 
 function getLoadedStudies() {
     var result = [];
-    var URL = 'http://www.ebi.ac.uk/gwas/summary-statistics/api/study_list';
+    var URL = gwasProperties.SUMMARY_STATS_URL + '/study_list';
     $.ajax({
         url: URL,
         type: 'get',
