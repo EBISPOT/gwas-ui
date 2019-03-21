@@ -136,7 +136,9 @@
 
 4. <<faq-H4,How do I access summary statistics?>>
 
-5. <<faq-H5,What are harmonised summary statistics?>>
+5. <<faq-H5,How should I cite summary statistics downloaded from the GWAS Catalog?>>
+
+6. <<faq-H6,What are harmonised summary statistics?>>
 
 
 '''
@@ -445,7 +447,11 @@ We currently extract summary statistics files from publications where they are m
 
 There are two methods. We have developed a dedicated summary statistics database, enabling users with searchable, filterable, harmonised data via  the summary statistics http://www.ebi.ac.uk/gwas/summary-statistics/docs/[REST API]. Alternatively, non-programmatic access to the original, standardised and harmonised data is available on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site].
 
-==== [[faq-H5]]5. What are standardised/harmonised summary statistics?
+==== [[faq-H5]]5. How should I cite summary statistics downloaded from the GWAS Catalog?
+
+Users of summary statistics are requested to cite the data as follows: accession ID of the GWAS Catalog study e.g. “GCST007240”, the GWAS Catalog, and the date the summary statistics were downloaded. If the summary statistics originated from a published GWAS, please also cite the original publication. For example, “Summary statistics were downloaded from the NHGRI-EBI GWAS Catalog (Buniello, MacArthur et al., 2019) for study GCST007240 (Riveros-McKay et al., 2019) downloaded on 01/11/2018”.
+
+==== [[faq-H6]]6. What are standardised/harmonised summary statistics?
 
 Please refer to the documentation https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here].
 
