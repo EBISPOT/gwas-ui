@@ -51,87 +51,6 @@ var pageRowLimit=5;
 //*************************** registering button clicking event *************************
 
 /**
- * toggle checkAll/uncheck All for the cart item checkbox.
- */
-$('#btn-cart-toggle-check-cbs').click(() =>{
-    if($('.cart-item-cb:input:checked').length != $('.cart-item-cb:input').length){
-        //not everthing checked, check everthing
-        // $('#btn-cart-toggle-check-cbs > span').removeClass('glyphicon-check').addClass('glyphicon-unchecked')
-        $('.cart-item-cb:input').attr('checked','checked')
-        addDataToTag(global_efo_info_tag_id, getCurrentSelected(), 'whichDescendant')
-        addEFO({});
-    }else{
-        //uncheck everything
-        // $('#btn-cart-toggle-check-cbs > span').removeClass('glyphicon-unchecked').addClass('glyphicon-check')
-        $('.cart-item-cb:input').removeAttr('checked');
-        var tmp = getDataFromTag(global_efo_info_tag_id,'whichDescendant');
-        Object.keys(tmp).map((id) => {
-            delete tmp[id];
-        })
-        addEFO({});
-    }
-
-});
-
-/**
- * Trigger the download of the current cart.
- */
-$('#btn-cart-action-download').click(() =>{
-    generateDownloadContentForCart().then((content) => {
-        download(content,'term_list.txt')
-    })
-});
-
-/**
- * Trigger the remove of highlight from locus plot.
- * This button is currently removed since it is not really important.
- * The function is kept for future reference.
- */
-$('#btn-clear-highlight').click(() => {
-    $('.highlightable').removeClass("highlight");
-    reloadLocusZoom('#plot', data_association);
-});
-
-/**
- * toggle remove/add associations that annotated to efos which are currently not in the cart
- */
-$('#cb-remove-nonunique-association').change(function() {
-    updatePage()
-})
-
-
-/**
- * Trigger the remove of all cart items except the mainEFO.
- * This is functionally similar to reload the page, but instead, keep all the cache data.
- * This button is currently removed since it is not really important.
- * The function is kept for future reference.
- */
-$('#btn-clear-cart').click(() => {
-    var selected = getDataFromTag(global_efo_info_tag_id, 'selectedEfos')
-    var mainEFO = getMainEFO();
-    Object.keys(selected).map((key)=>{
-        if(key != mainEFO)
-            removeDataFromTag(global_efo_info_tag_id,'selectedEfos',key)
-    })
-
-    whichDescendant().map((key) => {
-        removeDataFromTag(global_efo_info_tag_id, 'whichDescendant', key)
-    })
-    addEFO({});
-});
-
-
-/**
- * Trigger the action to add all related terms to the cart.
- */
-$('#btn-query-include-related-terms').click(() => {
-    OLS.getRelatedTerms(getMainEFO()).then((relatedTerms) => {
-        addEFO(relatedTerms);
-    });
-});
-
-
-/**
  * Linkout to ols page of the main EFO term
  */
 $('#ols-link').click(() => {
@@ -154,57 +73,11 @@ $('#ot-link').click(() => {
     window.open("https://www.targetvalidation.org/disease/" + getMainEFO() , '_blank');
 });
 
-
-
 /**
- * Checkbox to toggle always include all descendants.
- * When uncheck, the newly added efo term will be added to the cart without any descendants.
- * The users can latter add the descendant by clicking the checkbox in front of the cart item.
- * When checked, descendant will always be included for newly added efo terms.
+ *  The page actually statrs loading from here.
+ *
+ *
  */
-$("#cb-query-include-descendants").change(() => {
-    if(isAlwaysDescendant()){
-        // $('#btn-cart-toggle-check-cbs > span').removeClass('glyphicon-check').addClass('glyphicon-unchecked')
-        addEFO({},false,$("#cb-query-include-descendants").is(":checked"));
-    }else{
-        $('.cart-item-cb').removeAttr("disabled");
-        $('#btn-cart-toggle-check-cbs').removeAttr("disabled");
-    }
-});
-
-
-//we add the options to hide associations that have multiple efo annotations.
-// $('#btn-filter-association-by-efo-number').click(() => {
-//
-//     if($('#btn-filter-association-by-efo-number > span').hasClass('glyphicon-minus')){
-//         //remove association which have multiple efos
-//         $('#btn-filter-association-by-efo-number > span').removeClass('glyphicon-minus').addClass('glyphicon-plus')
-//         var multipleEFOAssociation = {}
-//         data_association.docs.forEach((d, i) => {
-//             if (d.numberEFO > 1){
-//                 multipleEFOAssociation[d.id]=d.numberEFO;
-//             }
-//         })
-//         reloadLocusZoom('#plot', data_association, undefined,undefined, Object.keys(multipleEFOAssociation));
-//     }else{
-//         //replot, adding back the association which have multiple efos
-//         $('#btn-filter-association-by-efo-number > span').removeClass('glyphicon-plus').addClass('glyphicon-minus')
-//         reloadLocusZoom('#plot', data_association);
-//
-//     }
-// });
-
-
-
-
-/**
- * Copy the sharable link to clipboard.
- */
-new Clipboard('#sharable_link_btn', {
-    text: function (trigger) {
-        return $('#sharable_link').val();
-    }
-});
 
 $(document).ready(() => {
     //jump to the top of the page
@@ -263,35 +136,10 @@ $(document).ready(() => {
     });
     
     var searchTerm = getMainEFO();
-    var included = $('#included').text();
-    if (included != '') {
-        searchTerm = searchTerm + ',' + included;
-    }
+    var elements = {};
+    elements[searchTerm] = searchTerm;
 
-    var checked = $('#checked').text();
-    if (checked != '') {
-        if(checked != "true"){
-
-            $('#cb-query-include-descendants').attr('checked','checked')
-        }else{
-            checked.split(',').map((efoid) => {
-                addDataToTag(global_efo_info_tag_id, {[efoid]:true}, 'whichDescendant')
-            })
-        }
-        searchTerm = searchTerm + ',' + included;
-    }
-
-    // console.log("Loading search module!");
-    if (searchTerm != '') {
-        // console.log("Start search for the efotrait " + searchTerm);
-        var elements = {};
-        searchTerm.split(',').forEach((term) => {
-                                          elements[term] = term;
-                                      }
-        )
-        //first load
-        addEFO(elements, true);
-    }
+    addEFO(elements, true);
 });
 
 
@@ -307,7 +155,7 @@ $(document).ready(() => {
  */
 addEFO = function(data={}, initLoad=false) {
 
-    //If this is the first load, check ever efo id is valid
+    // If this is the first load, check ever efo id is valid
     if(initLoad){
         Promise.all(Object.keys(data).map(OLS.getEFOInfo)).catch((err)=>{
             $('#lower_container').html("<h2>Invalid EFO id.</h2>");
@@ -2086,7 +1934,8 @@ addDataToTag = function(tagID, hash, key, overwriteWarning) {
     else {
         $(tagID).data(result)
     }
-
+    console.log(old);
+    console.log(result);
     return result;
 }
 
