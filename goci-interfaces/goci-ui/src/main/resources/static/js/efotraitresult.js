@@ -16,97 +16,6 @@ var UCSC   = "https://genome.ucsc.edu/cgi-bin/hgTracks?hgFind.matches=";
 var ENS_SHARE_LINK = 'Variant_specific_location_link/97NKbgkp09vPRy1xXwnqG1x6KGgQ8s7S';
 var CONTEXT_RANGE = 500;
 
-
-// $(document).ready(function() {
-//     var searchTerm = $('#query').text();
-//     console.log("Loading search module!");
-//     console.log("efoTrait: " + searchTerm);
-//     if (searchTerm != '') {
-//         console.log("Start search for the efotrait " + searchTerm);
-//         getEfoTraitData(searchTerm);
-//     }
-//     //load the data from html tag and render
-//     // getVariantInfoFromEnsembl(searchTerm);
-// });
-
-// function getEfoTraitData(efotraitId) {
-//     console.log("Solr research request received for " + efotraitId);
-// //        setState(SearchState.LOADING);
-//     $.getJSON('/gwas/api/search/efotrait',
-//               {
-//                   'q': efotraitId,
-//                   'max': 1000
-//               })
-//             .done(function(data) {
-//                 console.log(data);
-// $("#hiddenresult").append(newItem(aaaa))
-//                 // $("#header ul").append('<li><a href="/user/messages"><span class="tab">Message Center</span></a></li>');
-//                 //
-//                 // $("#queryresultJsonString").html=JSON.stringify(data, null, 0)
-//
-// //                    document.write(data);
-// //                     document.getElementById("json").innerHTML = JSON.stringify(data, undefined, 2);
-// //                    window.open("data:text/json," + encodeURIComponent(JSON.stringify(data, undefined, 2)),
-// //                                "_blank");
-//                 processEfotraitData(data, efotraitId);
-//             });
-//     //serilize the data in html tag and save it in a tag for visulization
-//     console.log("Solr research done for " + efotraitId);
-// }
-
-// // Parse the Solr results and display the data on the HTML page
-// function processEfotraitData(data, efotraitId) {
-//     // Check if Solr returns some results
-//     if (data.grouped.resourcename.matches == 0) {
-//         $('#lower_container').html("<h2>The efotrait <em>" + efotraitId +
-//                                    "</em> cannot be found in the GWAS Catalog database</h2>");
-//     }
-//     else {
-//         //split the solr search by groups
-//         var data_efo;
-//         var data_study;
-//         var data_association;
-//         var data_diseasetrait;
-//         var data_facet = data.facet_counts.facet_fields.resourcename;
-//
-//         $.each(data.grouped.resourcename.groups, function(index, group) {
-//             if (group.groupValue == "efotrait") {
-//                 data_efo = group.doclist;
-//                 console.log(data_efo);
-//             }
-//             if (group.groupValue == "study") {
-//                 data_study = group.doclist;
-//                 console.log(data_study);
-//             }
-//             if (group.groupValue == "association") {
-//                 data_association = group.doclist;
-//                 console.log(data_association);
-//             }
-//             if (group.groupValue == "diseasetrait") {
-//                 data_diseasetrait = group.doclist;
-//                 console.log(data_diseasetrait);
-//             }
-//         })
-//
-//         //processing solr search data
-//         // Variant summary panel
-//         getEfoTraitInfo(data_efo.docs, efotraitId);
-//         getSummary(data_study);
-//         // External links panel
-// //            getLinkButtons(data_facet,efotraitId);
-// //            // Associations table
-//         displayEfotraitAssociations(data_association.docs);
-// //            // Studies table
-//         displayEfotraitStudies(data_study.docs);
-// //            // Traits table
-// //            getEfotraitDiseasetrait(data_diseasetrait.docs);
-// //
-// //            //downloads link
-// //            setDownloadLink(rsId);
-//     }
-// }
-
-
 // TW - this data is removed in the new spec
 // NOTE: this returns something that is used in LocusZoom
 function getSummary(data) {
@@ -208,8 +117,6 @@ function displayArrayAsList(data_array) {
     return data_text;
 }
 
-
-
 // Display the input array as a Paragraph
 function displayArrayAsParagraph(content_id, data_array) {
     var data_text = '';
@@ -255,7 +162,6 @@ function displayArrayAsParagraph(content_id, data_array) {
     }
     return data_text;
 }
-
 
 
 // Generate an internal link to the GWAS search page

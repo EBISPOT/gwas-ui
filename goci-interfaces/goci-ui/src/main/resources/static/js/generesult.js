@@ -3,19 +3,9 @@
 
 
 $(document).ready(() => {
+    // First time loading the page:
+    updatePage(true);
 
-//jump to the top of the page
-    $('html,body').scrollTop(0);
-
-var searchTerm = getTextToSearch('#query');
-if (searchTerm != '') {
-    var elements = {};
-    searchTerm.split(',').forEach((term) => {
-        elements[term] = term;
-    });
-    //first load
-    executeQuery(elements, true);
-    }
 });
 
 /**
@@ -29,16 +19,12 @@ getTextToSearch = function(divId){
     return $(divId).text();
 }
 
-executeQuery = function(data={}, initLoad=false) {
-    updatePage(initLoad);
-}
-
 updatePage = function(initLoad=false) {
     
-    //start spinner. The spinner will be stoped whenever the data is ready, thus closed by the coresponding data loading function.
+    //start spinner. The spinner will be stopped whenever the data is ready, thus closed by the corresponding data loading function.
     if(initLoad){
+        // The info panel is updated only in the initial loading
         showLoadingOverLay('#summary-panel-loading');
-//            showLoadingOverLay('#highlight-study-panel-loading');
     }
     showLoadingOverLay('#study-table-loading');
     showLoadingOverLay('#association-table-loading');
