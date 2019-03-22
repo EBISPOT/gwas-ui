@@ -96,7 +96,7 @@ $(document).ready(() => {
             {
                 'q': searchQuery
             },'application/octet-stream').then(function(result) {
-            console.log(result); // "Stuff worked!"
+
             var disposition=result.getResponseHeader('Content-Disposition');
             var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
             var matches = filenameRegex.exec(disposition);
@@ -155,17 +155,8 @@ $(document).ready(() => {
  */
 addEFO = function(data={}, initLoad=false) {
 
-    // If this is the first load, check ever efo id is valid
-    if(initLoad){
-        Promise.all(Object.keys(data).map(OLS.getEFOInfo)).catch((err)=>{
-            $('#lower_container').html("<h2>Invalid EFO id.</h2>");
-            return ''
-        })
-    }
-
-
     //add these terms to seleted
-    var selected = addDataToTag(global_efo_info_tag_id, data, 'selectedEfos')
+    var selected = addDataToTag(global_efo_info_tag_id, data, 'selectedEfos');
 
     //load all available efo terms in the GWAS Catalog(has at least one annotation)
     //save in the global_efo_info_tag_id tag with key 'availableEFOs'
@@ -195,7 +186,6 @@ removeEFO = function(efoid) {
  */
 addToCart = function(tagID, efoid, additionalLabel, initLoad) {
     var isMain = isMainEFO(efoid);
-    console.log("** Color function is called.");
 
     var colour, colourLabelInit, colourLabel;
     //add badge to the cart item to show the toplevel efo and the number of association/trait for this efo
@@ -457,7 +447,6 @@ updatePage = function(initLoad=false) {
     }, Promise.resolve()).catch((err) => {
         console.warning(`Error when updating cart! ${err}`);
     })
-    console.log(updateSelectedBoxPromise);
 
     //******************************
     // update efo information panel
@@ -629,7 +618,6 @@ function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false
     //xintodo need a post endpoint for this
     // http://localhost:8280/gwas/api/search/efotrait?&q=EFO_0000400,EFO_0000400&max=9999&group.limit=9999&group.field=resourcename&facet.field=resourcename&hl.fl=shortForm,efoLink&hl.snippets=100
     return Promise.all([p1, p2]).then(() => {
-        console.log("Mi a fasz van itt???")
         return promisePost( gwasProperties.contextPath+'api/search/advancefilter',
                           {
                               'q': searchQuery,
@@ -644,10 +632,8 @@ function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false
                               'raw' : global_raw == undefined ? '' : global_raw,
                           },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
             if( data.grouped.resourcename.groups.length == 0 ){
-                console.log("Zero hit");
                 $('#lower_container').html("<h2>The EFO trait <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
             } else{
-                console.log("Non zero hit");
                 processSolrData(data, initLoad);
                 return data;
             }
@@ -702,7 +688,7 @@ function processSolrData(data, initLoad=false) {
 
 
     remove.then(()=>{
-        //If no solr return, generate a fake empty array so tables/plot are empty
+        // If no solr return, generate a fake empty array so tables/plot are empty
         if(!isInCatalog) {
             data_association.docs = []
             data_study.docs = []
@@ -722,68 +708,43 @@ function processSolrData(data, initLoad=false) {
 
         // GOCI_CM_TW_Integration_Plot_no_association
         if ('docs' in data_association) {
-            //we add preferEFO for each association, generate the association data for popup of data points in the locus plot.
+            // we add preferEFO for each association, generate the association data for popup of data points in the locus plot.
             var allUniqueEFO = {}
             data_association.docs.forEach((d, i) => {
                 d.preferedEFO = findHighlightEFOForAssociation(d.id, data_highlighting)[0];
-            d.numberEFO = findAllEFOsforAssociation(d.id, data_association).length;
-            allUniqueEFO[d.preferedEFO] = 1;
-            //add any string data that will be use in the locus plot popover
-            d.popoverHTML = buildLocusPlotPopoverHTML(d);
-        })
+                d.numberEFO = findAllEFOsforAssociation(d.id, data_association).length;
+                allUniqueEFO[d.preferedEFO] = 1;
+                //add any string data that will be use in the locus plot popover
+                d.popoverHTML = buildLocusPlotPopoverHTML(d);
+            });
     
             //get all ancestries of all associations
             var allAncestries = {};
             data_association.docs.map((d) => {
-                if(d.ancestralGroups != undefined
-        )
-            {
-                d.ancestralGroups.map((a) => {
-                    if(allAncestries[a] == undefined
-            )
-                allAncestries[a] = [];
-                allAncestries[a].push(d.id);
-            })
-            }
-        })
+                if(d.ancestralGroups != undefined){
+                    d.ancestralGroups.map((a) => {
+                    if(allAncestries[a] == undefined)
+                    allAncestries[a] = [];
+                    allAncestries[a].push(d.id)})
+                }
+            });
     
             prepareAncestryFilter(allAncestries);
-    
-    
-            // Source: https://www.ebi.ac.uk/gwas/rest/api/parentMapping/EFO_0000400
-            // Load colour for unique efo
-            var allColorLoaded = []
-            Object.keys(allUniqueEFO).forEach((efo) => {
-                allColorLoaded.push(getColourForEFO(efo).then((response) => {
-                    allUniqueEFO[efo] = response;
-                    return response;
-                }))
-            ;})
-    
-            // When all colour are received, replot
-            Promise.all(allColorLoaded).then(() => {
-                //assign colour to associations for plot
-                console.debug(`Finish loading color from ${global_color_url}`);
-            console.debug(allUniqueEFO);
-            data_association.docs.forEach(function (d, i) {
-                d.preferedColor = allUniqueEFO[d.preferedEFO].colour;
-                d.preferedParentUri = allUniqueEFO[d.preferedEFO].parentUri;
-                d.preferedParentLabel = allUniqueEFO[d.preferedEFO].parent;
-                d.category = allUniqueEFO[d.preferedEFO].parent;
-            })
-        }
-        ).
-            catch((err) => {
+
+            // Getting color for the main EFO and add to ALL associations.
+            getColourForEFO(getMainEFO()).then((response) => {
+                data_association.docs.forEach(function (d, i) {
+                    d.preferedColor = response.colour;
+                    d.preferedParentUri = response.parentUri;
+                    d.preferedParentLabel = response.parent;
+                    d.category = response.parent;
+                })
+            }).catch((err) => {
                 console.warn(`Error loading colour for Locus zoom plot from ${global_color_url}. ${err}. Using default colour.`)
-            //xintodo create a default colour to plot, if the colour query fail
-        }).
-            then(() => {
-                //replot
-                reloadLocusZoom('#plot', data_association
-        )
-            ;
-        })
-            ;
+            }).then(() => {
+                reloadLocusZoom('#plot', data_association);
+            });
+
         } else {
             $("#plot").html('<span>No Associations for this EFO Trait</span>');
             hideLoadingOverLay("#locus-plot-row-loading");
@@ -848,7 +809,6 @@ removeAssociationWithNonSelectedEFO = function() {
                     }).length == 0) {
                 return true
             }
-            // console.log(`remove ${association_doc.id}!`);
             return false
         })
     })
@@ -1368,7 +1328,6 @@ var OLS = {
         var dataPromise = getDataFromTag(global_efo_info_tag_id, 'ontologyInfo');
         if (dataPromise == undefined) {
             //lazy load
-            // console.log('Loading Ontology Info...')
             dataPromise = promiseGetRESTFUL(global_ols_restful_api_ontology,
                                             {'size': 1000}).then(_parseOntologies).catch(function(err) {
                 console.error('Error when loading ontology info! ' + err);
@@ -1719,7 +1678,6 @@ var EPMC = {
  * @returns {Promise} - json result.
  */
 getColourForEFO = function(efoid) {
-
     var queryColour = function(efoid){
         console.debug('Loading Colour...')
         return promiseGet(global_color_url + efoid).then(JSON.parse).then(function(response) {
@@ -1733,7 +1691,6 @@ getColourForEFO = function(efoid) {
 
     return dataPromise.then(function(data) {
         if ($.inArray(efoid, Object.keys(data)) == -1) {
-            //efo colour is not currently loaded
             console.debug('Loading Colour...')
             dataPromise = queryColour(efoid);
             return dataPromise.then(function(data){
@@ -1934,8 +1891,6 @@ addDataToTag = function(tagID, hash, key, overwriteWarning) {
     else {
         $(tagID).data(result)
     }
-    console.log(old);
-    console.log(result);
     return result;
 }
 

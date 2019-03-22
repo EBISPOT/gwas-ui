@@ -19,8 +19,8 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert = true) {
     }
 
     // Study count //
-    $(".study_count").html(study_ids.length);
-    if (study_ids.length == 1) {
+    $(".study_count").html(data_json.length);
+    if( study_ids.length == 1 ) {
         $(".study_label").html("Study");
     }
 
