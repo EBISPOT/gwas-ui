@@ -31,7 +31,7 @@ function getDataSolr(main, initLoad=false) {
 
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
-            'q': '"' + searchQuery + '"' ,
+            'q': 'rsId: "' + searchQuery + '" OR association_rsId : "' + searchQuery + '"',
             'max': 99999,
             'group.limit': 99999,
             'group.field': 'resourcename',
