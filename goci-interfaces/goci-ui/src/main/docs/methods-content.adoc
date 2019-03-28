@@ -19,7 +19,7 @@ The current eligibility criteria and extraction methods are described below. Pil
 
 === Identification of studies
 
-Published GWA studies are identified through a weekly PubMed search. The search terms are "genome-wide" OR "genome wide" OR "genome-wide" OR "GWAS".
+Published GWA studies are identified through a weekly PubMed search. Since 2018 we have employed a machine learning assisted triage system, whereby studies are identified by a convolutional neural network based classifier and subsequently assessed for eligibility by human curators.  The development of this method is described in Lee et. al., 2018 (PMID 30102703).  Prior to 2018 we used a query based method (searching the terms "genome-wide" OR "genome wide" OR "genome-wide" OR "GWAS" in Pubmed).
 
 === Eligibility criteria
 
