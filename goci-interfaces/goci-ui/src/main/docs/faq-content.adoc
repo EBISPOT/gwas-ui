@@ -98,6 +98,10 @@
 
 6. <<faq-D6, How should I cite the diagram?>>
 
+7. <<faq-D7, How do I download the diagram?>>
+
+8. <<faq-D8, Can I download a filtered version of the diagram?>>
+
 === E. Genomic mappings
 
 1. <<faq-E1, How is the genomic annotation for each SNP provided?>>
@@ -372,6 +376,14 @@ The diagram can be moved around the viewing area by clicking on any part of the 
 
 Please see the link:about[About] page for citation guidance.
 
+==== [[faq-D7]]7. How do I download the diagram?
+Download options are listed https://www.ebi.ac.uk/gwas/docs/diagram-downloads[here].
+
+==== [[faq-D8]]8. Can I download a filtered version of the diagram?
+
+The diagram can be filtered by trait to present only a subset of specific associations.  At present we don't have a native function for downloading diagrams filtered by trait.  We suggest taking a screenshot if a high resolution image is not required.
+
+As a workaround a high resolution image can be created by saving the web-displayed image as an .svg (scalable vector graphics format). These instructions are for Firefox, it's slightly different in other browsers. Right click on the filtered diagram, click 'inspect element', in the inspector window hover over the svg element (this starts <svg), right click and 'copy - outer html'.  Paste this text into a text editor and save.  Change the file extension from .txt to .svg.  You will then be able to open the image as an .svg in an image processing program (e.g. Inkscape or Illustrator).  From there you can convert to your preferred format.
 
 == [[E]]E. Genomic mappings
 
