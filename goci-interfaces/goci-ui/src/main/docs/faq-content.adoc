@@ -98,6 +98,10 @@
 
 6. <<faq-D6, How should I cite the diagram?>>
 
+7. <<faq-D7, How do I download the diagram?>>
+
+8. <<faq-D8, Can I download a filtered version of the diagram?>>
+
 === E. Genomic mappings
 
 1. <<faq-E1, How is the genomic annotation for each SNP provided?>>
@@ -139,6 +143,8 @@
 5. <<faq-H5,How should I cite summary statistics downloaded from the GWAS Catalog?>>
 
 6. <<faq-H6,What are harmonised summary statistics?>>
+
+7. <<faq-H7,What are the risks of subject identification associated with sharing of summary statistics?>>
 
 
 '''
@@ -370,6 +376,14 @@ The diagram can be moved around the viewing area by clicking on any part of the 
 
 Please see the link:about[About] page for citation guidance.
 
+==== [[faq-D7]]7. How do I download the diagram?
+Download options are listed https://www.ebi.ac.uk/gwas/docs/diagram-downloads[here].
+
+==== [[faq-D8]]8. Can I download a filtered version of the diagram?
+
+The diagram can be filtered by trait to present only a subset of specific associations.  At present we don't have a native function for downloading diagrams filtered by trait.  We suggest taking a screenshot if a high resolution image is not required.
+
+As a workaround a high resolution image can be created by saving the web-displayed image as an .svg (scalable vector graphics format). These instructions are for Firefox, it's slightly different in other browsers. Right click on the filtered diagram, click 'inspect element', in the inspector window hover over the svg element (this starts <svg), right click and 'copy - outer html'.  Paste this text into a text editor and save.  Change the file extension from .txt to .svg.  You will then be able to open the image as an .svg in an image processing program (e.g. Inkscape or Illustrator).  From there you can convert to your preferred format.
 
 == [[E]]E. Genomic mappings
 
@@ -454,6 +468,10 @@ Users of summary statistics are requested to cite the data as follows: accession
 ==== [[faq-H6]]6. What are standardised/harmonised summary statistics?
 
 Please refer to the documentation https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here].
+
+==== [[faq-H7]]7. What are the risks of subject identification associated with sharing of summary statistics?
+
+Currently the feeling in the community is that the unrestricted sharing of summary statistics holds a great deal of potential benefits, with low risk to participants’ privacy. A study by Homer et al., (PMID:18769715) in 2008 indicated that it was possible to determine if a specific individual participated in a study based on summary-level statistics (including allele frequencies of the study participants) and the genotype information of the individual. However, this would require that an individual had made public their genotype information, and  also participated in a study for which summary-level allele frequencies were available. Since this publication there has been widespread discussion in the scientific community, along with several publications (including Craig et al., 2011, PMID:21921928) on the benefits and risks surrounding sharing of summary statistics.  After considering the risks and benefits the NIH has published guidance supporting open sharing of summary statistics information, including allele frequencies (https://osp.od.nih.gov/2018/11/01/provide-access-gsr/, https://grants.nih.gov/grants/guide/notice-files/NOT-OD-19-023.html).
 
 '''
 
