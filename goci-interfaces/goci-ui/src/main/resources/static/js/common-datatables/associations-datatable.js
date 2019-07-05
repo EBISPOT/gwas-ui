@@ -186,7 +186,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
 
                     // Test if the mapping is on a chromosome:
                     if ( chrom.length < 3 ){
-                        parsedPositions.unshift(chrom + ':' + bpLocation)
+                        parsedPositions.push(chrom + ':' + bpLocation)
                     }
                 })
 
