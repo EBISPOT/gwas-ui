@@ -42,7 +42,7 @@ We initially investigated the inclusion of sequencing-based association studies 
 ==== We are seeking user feedback on how to best represent sequencing-association studies in the Catalog.  
 
 
-==== What meta-data is required by users to interpret sequencing based GWAS?
+==== _What meta-data is required by users to interpret sequencing based GWAS?_
 
 - Please share your thoughts on this link:https://forms.gle/FLez7TgXKmHo6TR4A[form] or email gwas-info@ebi.ac.uk
 
@@ -56,7 +56,7 @@ We initially investigated the inclusion of sequencing-based association studies 
 - Bear in mind, the Catalog is manually curated and we need to balance resources with the usefulness of the data to the user community.  We also need to consider which meta-data are consistently supplied by authors.
     
     
-==== What publications should we include?
+==== _What publications should we include?_
 - Please suggest sequencing-based publications you think should be included in the Catalog link:https://bit.ly/30uxwCi[here].  These will be reviewed and assessed by a Catalog curator.
 
 
