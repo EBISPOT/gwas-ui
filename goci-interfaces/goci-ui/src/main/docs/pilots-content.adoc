@@ -36,6 +36,8 @@ We initially investigated the inclusion of sequencing-based association studies 
 
 
 
+---
+---
 
 ==== We are seeking user feedback on how to best represent sequencing-association studies in the Catalog.  
 
@@ -53,8 +55,14 @@ We initially investigated the inclusion of sequencing-based association studies 
 
 - Bear in mind, the Catalog is manually curated and we need to balance resources with the usefulness of the data to the user community.  We also need to consider which meta-data are consistently supplied by authors.
     
+    
 ==== What publications should we include?
 - Please suggest sequencing-based publications you think should be included in the Catalog link:https://bit.ly/30uxwCi[here].  These will be reviewed and assessed by a Catalog curator.
+
+
+
+---
+---
 
 
 
@@ -64,11 +72,14 @@ A pilot study was performed to assess the feasibility of including sequencing-ba
 
 Ten studies which include sequencing-based association analyses were curated as part of the pilot. Study level and association data are provided in the standard GWAS Catalog download format with additional columns for sequencing specific data.  
 
-These data are available link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/pilot_data/sequencing_pilot_201710[on our FTP server].  Study level and association data are provided in the standard GWAS Catalog download format, with additional fields specific to sequencing studies provided as additional columns (see the README file for further detail).
+These data are available link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/pilot_data/sequencing_pilot_201710/[on our FTP server].  Study level and association data are provided in the standard GWAS Catalog download format, with additional fields specific to sequencing studies provided as additional columns (see the README file for further detail).
 
 Additional study level data fields are: Genotyping technology (discovery/initial), Sequencing platform, Array platform, Sequencing coverage, Number of variants analysed, Genome build, Analysis level, For multiple variants - number of variants per test, Statistical tests used to generate reported p-values, Statistical test used for extracted p-values, Why this test was chosen for extraction, Types of variant included in analysis, P-value threshold stated by author.  Single variant/multi-variant analysis is indicated after the author name.  The absence of either indicates that entry is currently eligible and published in the standard GWAS Catalog.
 
 Additional association level data is provided in the P-VALUE (TEXT) field where 'TEST'=statistical test and 'NUM_VAR'=number of variants analysed.
+
+
+
 
 
 
@@ -102,19 +113,19 @@ To support scaling of curation alternative methods of data acquisition have been
 
 _Author deposition prototype, main page_
 
-image::author_sub_pilot_main.png[Author submission,500,500,align="center"]
+image::author_sub_pilot_main.png[Author submission,400,400,align="center"]
 
 {empty} +
 
 _Author deposition prototype, sample descriptions page_
 
-image::author_sub_samples.jpg[Sample descriptions,500,500,align="center"]
+image::author_sub_samples.jpg[Sample descriptions,400,400,align="center"]
 
 {empty} +
 
 _Author deposition prototype, associations upload page_
 
-image::author_sub_associations.png[Associations,500,500,align="center"]
+image::author_sub_associations.png[Associations,400,400,align="center"]
 
 {empty} +
 
