@@ -6,42 +6,83 @@
 
 We have carried out several pilots to investigate extending Catalog scope and alternative methods of data acquisition with a view to incorporating these into future Catalog improvements. Each of these pilots has been designed to allow us to estimate the feasibility of the approach, resources needed to implement and support this, and obtain feedback from users.
 
-=== Author deposition pilot
 
-To support scaling of curation alternative methods of data acquisition have been explored. The pilot involved:
+=== Sequencing-based association studies
 
-* Designing a prototype deposition system was using online deposition forms (created in Cognito Forms, see figures below) with templates for sample and association results (created in Google Sheets).
-* Emailing 115 authors of 79 selected GWAS publications (53 whole-genome array and 26 targeted array) and inviting them to submit data using the test submission system. The deposition pilot was also advertised on Twitter, which was re-tweeted to over 20,000 followers.
-* We received an uptake of 10% from direct emails, with no uptake from Twitter.
-* Feedback from submitters, along with review of the submitted data, indicated that the format of deposition is easy to understand and allows authors to submit all relevant data with a high level of accuracy and rapidly.
-* Even a small rate of deposition represents a gain for the Catalog as it removes a lengthy paper reading and literature extraction step and the quality of deposited data is high. It should also be noted that retrospective deposition is not our preferred model and reduces take up.
+To ensure we keep up with the most current research, technologies and meet the needs of the user community we are investigating expanding the scope of the Catalog to include sequencing-based association studies. Currently the Catalog only includes studies which use array-based genotyping technologies.
 
-{empty} +
+Sequencing based-association studies differ from array-based studies in a number of ways.  Primarily sequencing allows the genotyping of many more variants, including rare variants.  The statistical power of single variant association tests for rare variants is low unless sample sizes or effect sizes are very large, and the problem of multiple testing is significant.  To address these issues, different statistical methods have been developed, particularly to evaluate aggregate association with multiple variants in a region (e.g. gene).
 
-_Author deposition prototype, main page_
+We initially investigated the inclusion of sequencing-based association studies in 2017. From our investigation we determined that it was not feasible to include sequencing-based association studies at that time. This was primarily because of the wide range of statistical analyses carried out, the lack of community consensus on the optimal methods to use and lack of reporting standards for sequencing studies. We have now performed another review (May 2019) of the literature.  
 
-image::author_sub_pilot_main.png[Author submission,500,500,align="center"]
+==== May 2019 review of sequencing-based association studies:
 
-{empty} +
+- Identification of relevant publications
+* Publications were identified via a number of sources (link:https://wwwdev.ebi.ac.uk/gwas/docs/methods/curation[standard Catalog machine learning search], cohort websites, grant reporting mechanisms, various PubMed and EuropePMC searches, references).
+* Identification of studies is challenging as, unlike array-based GWAS, there is lack of community consensus on language describing these studies, and sequencing data are used in a wide variety of non-relevant analyses.
 
-_Author deposition prototype, sample descriptions page_
+- Determining study eligibility
+* In order to maintain data consistency we initially defined eligibility in line with the current Catalog.  That is population-based association study assaying >100,000 SNPs distributed genome- or exome-wide.  
+* We observed that due to the strict filtering of variants that is common in sequencing-based association studies the number of variants analysed often falls around or below our cut-off of 100,000 variants.  Similarly analyses are often targeted to specific genomic regions.  While most of these analyses are clearly outside the remit of the Catalog there are larger-scale studies that may be of relevance.  Therefore eligibility criteria could be re-assessed in the future.
 
-image::author_sub_samples.jpg[Sample descriptions,500,500,align="center"]
+- There are still low numbers of sequencing association studies.
+* We have identified approximately 75 eligible publications (2012 to mid 2019, May 2019 review).  
+* Eligible publications, as well as a selection of ineligible publications, are listed link:https://bit.ly/30uxwCi[here] with GWAS Catalog curator assessments. The list is a living document and we encourage users to suggest additional publications by adding to it.
 
-{empty} +
-
-_Author deposition prototype, associations upload page_
-
-image::author_sub_associations.png[Associations,500,500,align="center"]
-
-{empty} +
-
-
-Data submitted as part of the author deposition pilot can be found link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/pilot_data/author_submission_201608/[on our FTP server].
+- Observations on eligible studies:
+* The majority of publications perform both multi-variant and single variant analyses; 65% both multi- and single variant, 21% multi-variant only, 15% single variant only (2017-2019).
+* There is increased community consensus on statistical methods, SKAT-O is dominant for multi-variant analyses.
 
 
 
-=== Targeted array pilot
+---
+---
+
+==== We are seeking user feedback on how to best represent sequencing-association studies in the Catalog.  
+
+
+==== _What meta-data is required by users to interpret sequencing based GWAS?_
+
+- Please share your thoughts on this link:https://forms.gle/FLez7TgXKmHo6TR4A[form] or email gwas-info@ebi.ac.uk
+
+- Data elements to consider 
+        * Sequencing platform and coverage
+        * Number of variants per test for multi-variant analysis
+        * Types of variant included in analysis (e.g. missense, predicated LOF)
+        * Statistical test used (how much detail required?)
+        * P-value threshold stated by author
+
+- Bear in mind, the Catalog is manually curated and we need to balance resources with the usefulness of the data to the user community.  We also need to consider which meta-data are consistently supplied by authors.
+    
+    
+==== _What publications should we include?_
+- Please suggest sequencing-based publications you think should be included in the Catalog link:https://bit.ly/30uxwCi[here].  These will be reviewed and assessed by a Catalog curator.
+
+
+
+---
+---
+
+
+
+==== 2017 Sequencing-based association studies pilot:
+
+A pilot study was performed to assess the feasibility of including sequencing-based association studies in the GWAS Catalog.  Literature was reviewed and a sample set of publications were curated.  Users were surveyed regarding which aspects of these studies are important for interpretation.  The outcome of the pilot was that it is not immediately possible to expand the scope of the Catalog to include sequencing-based studies, primarily because of the wide range of additional meta-data required and the varied types of statistical analyses performed.  There was a lack of community consensus on which data elements were required for interpretation, particularly regarding statistical analysis.  
+
+Ten studies which include sequencing-based association analyses were curated as part of the pilot. Study level and association data are provided in the standard GWAS Catalog download format with additional columns for sequencing specific data.  
+
+These data are available link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/pilot_data/sequencing_pilot_201710/[on our FTP server].  Study level and association data are provided in the standard GWAS Catalog download format, with additional fields specific to sequencing studies provided as additional columns (see the README file for further detail).
+
+Additional study level data fields are: Genotyping technology (discovery/initial), Sequencing platform, Array platform, Sequencing coverage, Number of variants analysed, Genome build, Analysis level, For multiple variants - number of variants per test, Statistical tests used to generate reported p-values, Statistical test used for extracted p-values, Why this test was chosen for extraction, Types of variant included in analysis, P-value threshold stated by author.  Single variant/multi-variant analysis is indicated after the author name.  The absence of either indicates that entry is currently eligible and published in the standard GWAS Catalog.
+
+Additional association level data is provided in the P-VALUE (TEXT) field where 'TEST'=statistical test and 'NUM_VAR'=number of variants analysed.
+
+
+
+
+
+
+=== Targeted array pilot (2016)
 
 Feedback from our users has indicated a high demand for targeted array studies to be included in the GWAS Catalog. 
 
@@ -57,19 +98,43 @@ Following on from this, we are currently piloting the inclusion of targeted arra
 In September 2017, Open Targets (www.opentargets.org) requested curation of fifty-five currently out-of-scope GWAS publications for inclusion in the GWAS Catalog.  Moreover, the GWAS Catalog team have preliminarily identified over 150 publications based on targeted or exome array analysis from 2012 to 2017. These will also be curated as part of the inclusion pilot.
 
 
+=== Author deposition pilot (2016)
 
-=== Sequencing-based association studies
+To support scaling of curation alternative methods of data acquisition have been explored. The pilot involved:
 
-To ensure we keep up with the most current research, technologies and meets the needs of the user community we are investigating expanding the scope of the Catalog to include sequencing-based association studies. Currently the Catalog only includes studies which use array-based genotyping technologies.
-Ten studies which include sequencing-based association analyses were curated as part of a pilot on expanding the scope of the NHGRI-EBI GWAS Catalog. Study level and association data are provided in the standard GWAS Catalog download format with additional columns for sequencing specific data.
+* Designing a prototype deposition system was using online deposition forms (created in Cognito Forms, see figures below) with templates for sample and association results (created in Google Sheets).
+* Emailing 115 authors of 79 selected GWAS publications (53 whole-genome array and 26 targeted array) and inviting them to submit data using the test submission system. The deposition pilot was also advertised on Twitter, which was re-tweeted to over 20,000 followers.
+* We received an uptake of 10% from direct emails, with no uptake from Twitter.
+* Feedback from submitters, along with review of the submitted data, indicated that the format of deposition is easy to understand and allows authors to submit all relevant data with a high level of accuracy and rapidly.
+* Even a small rate of deposition represents a gain for the Catalog as it removes a lengthy paper reading and literature extraction step and the quality of deposited data is high. It should also be noted that retrospective deposition is not our preferred model and reduces take up.
 
-Data is available on our FTP server link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/pilot_data/sequencing_pilot_201710/[on our FTP server]
+{empty} +
 
-Study level and association data are provided in the standard GWAS Catalog download format. (gwas_catalog_v1.0.1-studies_r2017-10-09_Sequencing_pilot, gwas_catalog_v1.0.1-associations_r2017-10-09_Sequencing_pilot).
+_Author deposition prototype, main page_
 
-Additional study level data fields, specific to sequencing associations are provided as additional columns in gwas_catalog_v1.0.1-studies_r2017-10-09_Sequencing_pilot.  
-These additional fields are: Genotyping technology (discovery/initial), Sequencing platform, Array platform, Sequencing coverage, Number of variants analysed, Genome build, Analysis level, For multiple variants - number of variants per test, Statistical tests used to generate reported p-values, Statistical test used for extracted p-values, Why this test was chosen for extraction, Types of variant included in analysis, P-value threshold stated by author.
-Single variant/multi-variant analysis is indicated after the author name.  The absence of either indicates that entry is currently eligible and published in the standard GWAS Catalog.
+image::author_sub_pilot_main.png[Author submission,400,400,align="center"]
 
-Additional association level data is provided in the P-VALUE (TEXT) field of gwas_catalog_v1.0.1-associations_r2017-10-09_Sequencing_pilot, where 'TEST'=statistical test and 'NUM_VAR'=number of variants analysed.
+{empty} +
+
+_Author deposition prototype, sample descriptions page_
+
+image::author_sub_samples.jpg[Sample descriptions,400,400,align="center"]
+
+{empty} +
+
+_Author deposition prototype, associations upload page_
+
+image::author_sub_associations.png[Associations,400,400,align="center"]
+
+{empty} +
+
+
+Data submitted as part of the author deposition pilot can be found link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/pilot_data/author_submission_201608/[on our FTP server].
+
+
+
+
+
+
+
 

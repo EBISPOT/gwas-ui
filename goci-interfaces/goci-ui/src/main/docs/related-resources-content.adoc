@@ -1,5 +1,9 @@
 = Training & Related resources
 
+=== In person training workshops
+
+We are presenting an link:https://www.ashg.org/2019meeting/asp/soe/webroot/soe.shtml#?type=Workshops%2FTicketed%20Events["Interactive Invited Workshop: Investigating Genotype-Phenotype Data Using the GWAS Catalog"] at ASHG 2019 on 15th October 2019. Additional details on how you can attend can be found on the link:https://www.ashg.org/2019meeting/[conference website].
+
 === GWAS Catalog training materials
 
 ==== Tour of new search interface
