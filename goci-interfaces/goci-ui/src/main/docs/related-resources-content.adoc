@@ -6,10 +6,6 @@ We are presenting an link:https://www.ashg.org/2019meeting/asp/soe/webroot/soe.s
 
 === GWAS Catalog training materials
 
-==== Tour of new search interface
-
-Take a tour of our new search interface functionality in our https://youtu.be/4FplAQzRfh8[video tutorial].
-
 ==== EBI Train online
 
 Check out link:http://www.ebi.ac.uk/training/online/course/gwas-catalog-exploring-snp-trait-associations[GWAS Catalog - Exploring SNP-trait associations] for an easily accessible interactive tutorial on the full range of features the GWAS Catalog has to offer.
