@@ -163,16 +163,6 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
 
             // Mapped traits
             tmp['mappedTraits'] = setTraitsLink(asso);
-            // var mappedTraits = asso.mappedLabel;
-            // if (mappedTraits) {
-            //     $.each(mappedTraits, function (index, trait) {
-            //         var link = gwasProperties.contextPath + 'efotraits/' + asso.mappedUri[index].split('/').slice(-1)[0]
-            //         mappedTraits[index] = setInternalLinkText(link, trait);
-            //     });
-            //     tmp['mappedTraits'] = mappedTraits.join(', ');
-            // } else {
-            //     tmp['mappedTraits'] = '-';
-            // }
 
             // Adding genomic location to the table (but excluding mappings to patch regions)
             var genomicCoordinate = 'Mapping not available';
