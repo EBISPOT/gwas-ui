@@ -144,7 +144,7 @@ function setTraitsLink(study) {
         efoTraitLinks.push(setExternalLinkText(traitPageLink, label));
     });
 
-    return efoTraitLinks.join(",");
+    return efoTraitLinks.join(", ");
 }
 
 
