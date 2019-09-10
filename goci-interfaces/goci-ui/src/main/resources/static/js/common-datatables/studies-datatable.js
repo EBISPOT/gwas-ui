@@ -209,16 +209,7 @@ function prepareDataForTable(data){
         tmp['reported_trait'] = study.traitName_s;
 
         // Mapped trait:
-        var mappedTraits = study.mappedLabel;
-        if (mappedTraits) {
-            $.each(mappedTraits, function(index, trait) {
-                var link = gwasProperties.contextPath + 'efotraits/' + study.mappedUri[index].split('/').slice(-1)[0];
-                mappedTraits[index] = setInternalLinkText(link, trait);
-            });
-            tmp['mappedTraits'] = mappedTraits.join(', ');
-        } else {
-            tmp['mappedTraits'] = '-';
-        }
+        tmp['mappedTraits'] = setTraitsLink(study);
 
         // Initial sample desc
         var splitDescription = [];

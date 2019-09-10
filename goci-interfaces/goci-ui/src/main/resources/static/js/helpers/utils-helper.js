@@ -110,6 +110,43 @@ function displayArrayAsList(data_array) {
     return data_text;
 }
 
+/*
+The mapped trait links are extracted from efoLink if that is present. If not, mappedLabel and mappedUri is used as
+source of information.
+ */
+function setTraitsLink(study) {
+
+    // A collection of EFO trait labels and the corresponding short links:
+    var efoLabelUriPairs = {};
+
+    // Formatted links to trait pages:
+    var efoTraitLinks = [];
+
+    // Check if the efoUri exists:
+    if ('efoLink' in study){
+        $.each(study.efoLink, function (index, efoLink) {
+            var label = efoLink.split("|")[0];
+            var link = efoLink.split("|")[1];
+            efoLabelUriPairs[label] = link;
+        });
+    }
+    // If efoUri does not exists, use mappedLabel and mappedUri instead
+    else {
+        $.each(study.mappedLabel, function (index, label) {
+            var link = study.mappedUri[index].split("/").pop();
+            efoLabelUriPairs[label] = link;
+        });
+    }
+
+    // Generating links to mapped trait labels:
+    $.each(efoLabelUriPairs, function (label, link) {
+        var traitPageLink = gwasProperties.contextPath + 'efotraits/' + link;
+        efoTraitLinks.push(setExternalLinkText(traitPageLink, label));
+    });
+
+    return efoTraitLinks.join(",");
+}
+
 
 // Display the Ancestry array as a HTML list
 function displayAncestryLinksAsList(data_array) {

@@ -184,7 +184,6 @@ function displaySummaryStudy(data, clearBeforeInsert) {
     $("#study-pubmedid").html(pubmedIdLink);
     $("#study-datepublication").html(study.publicationDate.split('T')[0]);
     if ('authorsList' in study) {
-        console.log(study.authorsList);
         // require toggle-resize.js
         var reduce_text= displayAuthorsListAsList(study.authorsList);
         reduce_text = addShowMoreLink(reduce_text, 500, "...");
@@ -261,21 +260,6 @@ function getGenotypingTech(study) {
     return genotypingTechnologiesList;
 }
 
-
-function setTraitsLink(study) {
-    var mappedTraits="";
-    var mappedTraits = study.mappedLabel;
-    if (mappedTraits) {
-        $.each(mappedTraits, function (index, trait) {
-            var link = gwasProperties.contextPath + 'efotraits/' + study.mappedUri[index].split('/').slice(-1)[0];
-            mappedTraits[index] = setExternalLinkText(link, trait);
-        });
-        mappedTraits = mappedTraits.join(', ');
-    } else {
-        mappedTraits = '-';
-    }
-    return mappedTraits;
-}
 
 function setAncentrySection(study) {
     var pubdate = study.publicationDate.substring(0, 10);
