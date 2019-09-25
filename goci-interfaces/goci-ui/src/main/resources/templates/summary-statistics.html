@@ -98,7 +98,7 @@
                         <p>Summary statistics eligibility, submission information, standards and harmonisation.</p>
                     </div>
                 </a>
-                <a href="https://www.ebi.ac.uk/gwas/summary-statistics/docs/" target="_blank">
+                <a th:href="@{/summary-statistics/docs/}" target="_blank">
                     <div class="col-md-4 toplevel-view">
                         <h2 class="flaticon-source2 color-primary-bold">API</h2>
 
@@ -113,6 +113,29 @@
                     </div>
                 </a>
 
+            </div>
+            <div class="row">
+                <a th:href="@{/gwas/deposition}">
+                    <div class="col-md-4 toplevel-view">
+                        <h2 class="flaticon-upload14 color-primary-bold">Submit</h2>
+
+                        <p>Submit Summary Status to GWAS Catalog</p>
+                    </div>
+                </a>
+                <a th:href="@{/docs/methods/summary-statistics-how-to}">
+                    <div class="col-md-4 toplevel-view">
+                        <h2 class="flaticon-question10 color-primary-bold">How to submit</h2>
+
+                        <p>How to Submit Summary Status to GWAS Catalog</p>
+                    </div>
+                </a>
+                <a th:href="@{/docs/methods/summary-statistics-format}">
+                    <div class="col-md-4 toplevel-view">
+                        <h2 class="flaticon-notes9 color-primary-bold">Summary statistics format</h2>
+
+                        <p>Format for Summary Status Files</p>
+                    </div>
+                </a>
             </div>
 
             <hr/>

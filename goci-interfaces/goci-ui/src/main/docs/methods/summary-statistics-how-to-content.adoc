@@ -1,0 +1,24 @@
+= Logging in to the submission page
+To get started, click LOGIN in the top right corner of the submission page. Here you can log in using your ELIXIR identity, which may be linked to Google, LinkedIn, ORCID or an institutional account.
+
+If you don’t yet have an ELIXIR ID, follow the link to register or find out more.
+
+= Finding a publication
+The GWAS Catalog submission page lists all publications that:
+are already included in the GWAS Catalog, or
+have been identified by curators as eligible for inclusion
+
+You can scroll through the table to look for your publication, or search for it by entering the PubMed ID into the search bar. The table also includes the first author, title and journal to help you identify the correct publication.
+
+= Publication status
+The “status” column shows one of the following values:
+ELIGIBLE
+PUBLISHED
+UNDER_SUBMISSION
+UNDER_SUMMARY_STATISTICS_SUBMISSION
+
++++ <details><summary> +++
+= Section
++++ </summary><div> +++
+This is a bunch of text to display after the section break. This is pretty neat that it works this well.
++++ </div></details> +++
