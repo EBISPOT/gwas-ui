@@ -11,7 +11,7 @@ We have carried out several pilots to investigate extending Catalog scope and al
 
 We are investigating expanding the scope of the Catalog to include sequencing-based association studies. Currently the Catalog only includes studies which use array-based genotyping technologies.
 
-Sequencing based-association studies differ from array-based studies in a number of ways. Sequencing allows the genotyping of many more rare variants. The statistical power of single variant association tests for rare variants is low unless sample sizes or effect sizes are very large, and the problem of multiple testing is significant. To address these issues, different statistical methods have been developed, particularly to evaluate aggregate association with multiple variants in a region (e.g. gene). The input to these analyses are usually a specific sub-set of variants (e.g. predicted loss of function).
+Sequencing based-association studies differ from array-based studies in a number of ways. Sequencing allows the genotyping of many more, particularly rare, variants. The statistical power of single variant association tests for rare variants is low unless sample sizes or effect sizes are very large, and the problem of multiple testing is significant. To address these issues, different statistical methods have been developed, particularly to evaluate aggregate association with multiple variants in a region (e.g. gene). The input to these analyses are usually a specific sub-set of variants (e.g. predicted loss of function).
 
 We initially investigated the inclusion of sequencing-based association studies in 2017 (see below). We have now performed another review (May 2019) of the literature (see below).
 
