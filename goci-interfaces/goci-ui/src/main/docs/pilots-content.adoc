@@ -15,7 +15,7 @@ Sequencing based-association studies differ from array-based studies in a number
 
 We initially investigated the inclusion of sequencing-based association studies in 2017 (see below). We have now performed another review (May 2019) of the literature (see below).
 
-link:https://bit.ly/30uxwCi[SEQUENCING-BASED ASSOCIATION STUDIES] we have identified as potentially eligible for inclusion in the GWAS Catalog. In order to maintain data consistency we are defining eligibility in line with the current Catalog. That is population-based association study assaying >100,000 SNPs distributed genome- or exome-wide. 
+See the list of link:https://bit.ly/30uxwCi[SEQUENCING-BASED ASSOCIATION STUDIES] we have identified as potentially eligible for inclusion in the GWAS Catalog. This list includes curated meta-data (trait, single/multi-variant analyses, whole-genome/whole-exome coverage, variant number, curator comments). In order to maintain data consistency we are defining eligibility in line with the current Catalog. That is population-based association study assaying >100,000 SNPs distributed genome- or exome-wide. 
 
 The GWAS Catalog can now host summary statistics for sequencing-based association studies. If you are an author and have summary statistics to share please contact us (gwas-info@ebi.ac.uk). 
 
@@ -66,6 +66,7 @@ We want to provide you useful, structured meta-data that would allow you to make
 - Observations on eligible studies:
 * The majority of publications perform both multi-variant and single variant analyses; 65% both multi- and single variant, 21% multi-variant only, 15% single variant only (2017-2019).
 * There is increased community consensus on statistical methods, SKAT-O is dominant for multi-variant analyses.
+
 
 
 
