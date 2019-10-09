@@ -44,11 +44,11 @@ The formatted file:
 - Is saved as .tsv
 - Contains mandatory fields in the following combinations: 
 
- a) variant_ID and p-value
- OR
- b) chromosome, base_pair_location and p-value
+  a) variant_ID and p-value
+  OR
+  b) chromosome, base_pair_location and p-value
  
- Additional standard column heading are listed below.
+  Additional standard column headings are listed below.
      
 == Standardised format summary statistics data
 
