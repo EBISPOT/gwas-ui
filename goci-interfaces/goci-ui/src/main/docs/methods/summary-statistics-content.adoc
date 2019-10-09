@@ -36,7 +36,8 @@ For full documentation on the REST API, please see https://www.ebi.ac.uk/gwas/su
 
 == Summary statistics standards and harmonisation
 
-We have proposed a standard format for GWAS summary statistics (Buniello and MacArthur, 2019). To enable users to access data with ease, we provide formatted and harmonised summary statistics files.
+We have proposed a standard format for GWAS summary statistics (Buniello and MacArthur, 2019). 
+To enable users to access data with ease, we provide formatted and harmonised summary statistics files.
 
 The formatted file:
 
