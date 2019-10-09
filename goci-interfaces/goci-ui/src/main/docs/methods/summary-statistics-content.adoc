@@ -45,14 +45,10 @@ The formatted file:
 
    a) variant_ID and p-value 
    OR 
-   b) chromosome, base pair location and p-value
+   b) chromosome, base_pair_location and p-value
    
 Additional standard column headings are listed below:
 
-    'variant_id' = variant ID
-    'p-value' = p-value
-    'chromosome' = chromosome
-    'base_pair_location' = base pair location
     'odds_ratio' = odds ratio
     'ci_lower' = lower 95% confidence interval
     'ci_upper' = upper 95% confidence interval
