@@ -38,10 +38,10 @@ For full documentation on the REST API, please see https://www.ebi.ac.uk/gwas/su
 
 We have proposed a standard format for GWAS summary statistics (Buniello and MacArthur, 2019). To enable users to access data with ease, we provide standard format and harmonised summary statistics files.
 
-The formatted file should:
+The formatted file:
 
-- Be saved as .tsv
-- Contain mandatory fields in the following combinations: 
+- Is saved as .tsv
+- Contains mandatory fields in the following combinations: 
 
    a) variant_ID and p-value 
    OR 
