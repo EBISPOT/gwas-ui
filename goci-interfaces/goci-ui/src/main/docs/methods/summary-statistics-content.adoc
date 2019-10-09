@@ -47,9 +47,7 @@ The formatted file:
    OR 
    b) chromosome, base pair location and p-value
    
-Additional standard column headings are listed below.
-
-Standard format file headings
+Additional standard column headings are listed below:
 
     'variant_id' = variant ID
     'p-value' = p-value
