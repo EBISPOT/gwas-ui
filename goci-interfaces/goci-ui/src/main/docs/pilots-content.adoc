@@ -9,11 +9,45 @@ We have carried out several pilots to investigate extending Catalog scope and al
 
 === Sequencing-based association studies
 
-To ensure we keep up with the most current research, technologies and meet the needs of the user community we are investigating expanding the scope of the Catalog to include sequencing-based association studies. Currently the Catalog only includes studies which use array-based genotyping technologies.
+We are investigating expanding the scope of the Catalog to include sequencing-based association studies. Currently the Catalog only includes studies which use array-based genotyping technologies.
 
-Sequencing based-association studies differ from array-based studies in a number of ways.  Primarily sequencing allows the genotyping of many more variants, including rare variants.  The statistical power of single variant association tests for rare variants is low unless sample sizes or effect sizes are very large, and the problem of multiple testing is significant.  To address these issues, different statistical methods have been developed, particularly to evaluate aggregate association with multiple variants in a region (e.g. gene).
+Sequencing based-association studies differ from array-based studies in a number of ways. Sequencing allows the genotyping of many more, particularly rare, variants. The statistical power of single variant association tests for rare variants is low unless sample sizes or effect sizes are very large, and the problem of multiple testing is significant. To address these issues, different statistical methods have been developed, particularly to evaluate aggregate association with multiple variants in a region (e.g. gene). The input to these analyses are usually a specific sub-set of variants (e.g. predicted loss of function).
 
-We initially investigated the inclusion of sequencing-based association studies in 2017. From our investigation we determined that it was not feasible to include sequencing-based association studies at that time. This was primarily because of the wide range of statistical analyses carried out, the lack of community consensus on the optimal methods to use and lack of reporting standards for sequencing studies. We have now performed another review (May 2019) of the literature.  
+We initially investigated the inclusion of sequencing-based association studies in 2017 (see below). We have now performed another review (May 2019) of the literature (see below).
+
+See the list of link:https://bit.ly/30uxwCi[SEQUENCING-BASED ASSOCIATION STUDIES] we have identified as potentially eligible for inclusion in the GWAS Catalog. This list includes curated meta-data (trait, single/multi-variant analyses, whole-genome/whole-exome coverage, variant number, curator comments). In order to maintain data consistency we are defining eligibility in line with the current Catalog. That is population-based association study assaying >100,000 SNPs distributed genome- or exome-wide. 
+
+The GWAS Catalog can now host summary statistics for sequencing-based association studies. If you are an author and have summary statistics to share please contact us (gwas-info@ebi.ac.uk). 
+
+
+---
+---
+
+==== We are interested in your thoughts about how to represent sequencing-based studies in the GWAS Catalog.  
+
+
+==== _Which analyses should we include?_
+
+- Should we include single-variant analyses? 
+
+- Should we include multi-variant (e.g. gene-based) analyses? 
+        * If so, how much detail would you need on the rules used to         create the sub-set of input variants? (e.g. missense, predicated         LOF)
+        * How much detail do you need on the statistical methods?
+
+We want to provide you useful, structured meta-data that would allow you to make a basic interpretation of the associations, but remember, we’re limited to what authors provide! Also bear in mind, the Catalog is manually curated and we need to balance resources with the usefulness of the data to the user community.
+
+- Please share your thoughts on this link:https://forms.gle/FLez7TgXKmHo6TR4A[form] or email gwas-info@ebi.ac.uk
+
+    
+==== _Which publications should we include?_
+- Please suggest sequencing-based publications you think should be included in the Catalog link:https://bit.ly/30uxwCi[here].  These will be reviewed and assessed by a Catalog curator.
+
+
+
+---
+---
+
+
 
 ==== May 2019 review of sequencing-based association studies:
 
@@ -34,34 +68,6 @@ We initially investigated the inclusion of sequencing-based association studies 
 * There is increased community consensus on statistical methods, SKAT-O is dominant for multi-variant analyses.
 
 
-
----
----
-
-==== We are seeking user feedback on how to best represent sequencing-association studies in the Catalog.  
-
-
-==== _What meta-data is required by users to interpret sequencing based GWAS?_
-
-- Please share your thoughts on this link:https://forms.gle/FLez7TgXKmHo6TR4A[form] or email gwas-info@ebi.ac.uk
-
-- Data elements to consider 
-        * Sequencing platform and coverage
-        * Number of variants per test for multi-variant analysis
-        * Types of variant included in analysis (e.g. missense, predicated LOF)
-        * Statistical test used (how much detail required?)
-        * P-value threshold stated by author
-
-- Bear in mind, the Catalog is manually curated and we need to balance resources with the usefulness of the data to the user community.  We also need to consider which meta-data are consistently supplied by authors.
-    
-    
-==== _What publications should we include?_
-- Please suggest sequencing-based publications you think should be included in the Catalog link:https://bit.ly/30uxwCi[here].  These will be reviewed and assessed by a Catalog curator.
-
-
-
----
----
 
 
 
