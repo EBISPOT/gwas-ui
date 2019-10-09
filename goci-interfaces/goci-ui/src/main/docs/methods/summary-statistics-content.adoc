@@ -48,7 +48,8 @@ The formatted file:
     OR 
     b) chromosome, base_pair_location and p-value
     
-    Addiational standard column headings are listed below.
+    
+   Additional standard column headings are listed below:
      
 == Standardised format summary statistics data
 
