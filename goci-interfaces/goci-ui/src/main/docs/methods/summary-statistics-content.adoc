@@ -49,14 +49,14 @@ The formatted file:
 
 Additional standard column headings are listed below:
 
-    'odds_ratio' = odds ratio
-    'ci_lower' = lower 95% confidence interval
-    'ci_upper' = upper 95% confidence interval
-    'beta' = beta
-    'standard_error' = standard error
-    'effect_allele' = effect allele
-    'other_allele' = other allele
-    'effect_allele_frequency' = effect allele frequency
+     'odds_ratio' = odds ratio
+     'ci_lower' = lower 95% confidence interval
+     'ci_upper' = upper 95% confidence interval
+     'beta' = beta
+     'standard_error' = standard error
+     'effect_allele' = effect allele
+     'other_allele' = other allele
+     'effect_allele_frequency' = effect allele frequency
 
 Note that the headers in the formatted file are not limited to the above headers.
 
