@@ -44,20 +44,38 @@ The formatted file:
 - Is saved as .tsv
 - Contains mandatory fields in the following combinations: 
 
-     a) variant_ID and p-value 
-     OR 
-     b) chromosome, base_pair_location and p-value
+    a) variant_ID and p-value 
+    OR 
+    b) chromosome, base_pair_location and p-value
+     
+== Standardised format summary statistics data
 
-Additional standard column headings are listed below:
+Summary statistics files are formatted by a scientific curator using a semi-automated process. Data are not manipulated but the headers convertered to a consistent format across all summary statistics files.
 
-      'odds_ratio' = odds ratio
-      'ci_lower' = lower 95% confidence interval
-      'ci_upper' = upper 95% confidence interval
-      'beta' = beta
-      'standard_error' = standard error
-      'effect_allele' = effect allele
-      'other_allele' = other allele
-      'effect_allele_frequency' = effect allele frequency
+- Headers will be transformed to the 'standard format'.
+
+- Rows will never be removed.
+
+- Columns may be split, merged, deleted, added or moved.
+
+- Values will be unaltered.
+
+- Blanks will be set to 'NA'
+
+Standard format file headings
+
+ 'variant_id' = variant ID
+ 'p-value' = p-value
+ 'chromosome' = chromosome
+ 'base_pair_location' = base pair location
+ 'odds_ratio' = odds ratio
+ 'ci_lower' = lower 95% confidence interval
+ 'ci_upper' = upper 95% confidence interval
+ 'beta' = beta
+ 'standard_error' = standard error
+ 'effect_allele' = effect allele
+ 'other_allele' = other allele
+ 'effect_allele_frequency' = effect allele frequency
 
 Note that the headers in the formatted file are not limited to the above headers.
 
