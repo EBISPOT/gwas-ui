@@ -84,7 +84,7 @@ Summary statistics files are formatted by a scientific curator using a semi-auto
 Formatted data is accessible on the GWAS Catalog dedicated summary statistics link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site]. Where the formatted files are available, they are nested within the 'harmonised' directory in the study directory.
 
 
-=== Harmonised summary statistics data
+== Harmonised summary statistics data
 
 Formatted files are harmonised using an automated link:https://github.com/EBISPOT/sum-stats-formatter/tree/master/harmonisation[pipeline], which is detailed below. By 'harmonised' we mean that all genomic position data will be reported against the same and latest genome build. Missing chromosome, base pair location and variant ID data that can be inferred, will be. Furthermore, where possible, alleles are also orientated to the forward strand.
 
