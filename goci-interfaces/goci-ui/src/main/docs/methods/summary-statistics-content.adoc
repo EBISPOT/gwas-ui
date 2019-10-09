@@ -13,6 +13,14 @@ Summary statistics must meet a number of criteria to be eligible for inclusion i
 * Must not require agreement to any specific terms and conditions, unless this has been agreed in advance by the author/consortium
 
 
+== Summary statistics availability
+
+We store summary statistics files in two different places, on our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], and in harmonised format in our database.
+
+The FTP site hosts the original files and, when they are processed, a subdirectory called 'harmonised' containing a README file, a standard formatted version of the original file (see below) and a harmonised version of the file (also below). The REST API for the summary statistics database is now available at https://www.ebi.ac.uk/gwas/summary-statistics/api/.
+For full documentation on the REST API, please see https://www.ebi.ac.uk/gwas/summary-statistics/docs/[here].
+
+
 == Summary statistics acquisition
 
 Summary statistics are acquired from a number of different sources:
@@ -27,12 +35,6 @@ If you wish to deposit summary statistics in the GWAS Catalog, please contact us
 We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us.
 Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our eligibility criteria (see below).
 
-== Summary statistics availability
-
-We store summary statistics files in two different places, on our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], and in harmonised format in our database.
-
-The FTP site hosts the original files and, when they are processed, a subdirectory called 'harmonised' containing a README file, a standard formatted version of the original file (see below) and a harmonised version of the file (also below). The REST API for the summary statistics database is now available at https://www.ebi.ac.uk/gwas/summary-statistics/api/.
-For full documentation on the REST API, please see https://www.ebi.ac.uk/gwas/summary-statistics/docs/[here].
 
 == Summary statistics standards
 
