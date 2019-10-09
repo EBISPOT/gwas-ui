@@ -34,12 +34,11 @@ We store summary statistics files in two different places, on our ftp://ftp.ebi.
 The FTP site hosts the original files and, when they are processed, a subdirectory called 'harmonised' containing a README file, a standard formatted version of the original file (see below) and a harmonised version of the file (also below). The REST API for the summary statistics database is now available at https://www.ebi.ac.uk/gwas/summary-statistics/api/.
 For full documentation on the REST API, please see https://www.ebi.ac.uk/gwas/summary-statistics/docs/[here].
 
-== Summary statistics standards and harmonisation
+== Summary statistics standards
 
-We have proposed a standard format for GWAS summary statistics (Buniello and MacArthur, 2019). 
-To enable users to access data with ease, we provide formatted and harmonised summary statistics files.
+We have proposed a standard format for GWAS summary statistics (Buniello and MacArthur, 2019). We encourage authors to provide summary statistics in this standard format. To enable users to access data with ease, we re-format summary statistics files where required.
 
-The formatted file:
+The standard format summary statistics file:
 
 - Is saved as .tsv
 - Contains mandatory fields in the following combinations: 
@@ -49,20 +48,6 @@ The formatted file:
   b) chromosome, base_pair_location and p-value
   
 Additional standard column headings are listed below.
-     
-== Standardised format summary statistics data
-
-Summary statistics files are formatted by a scientific curator using a semi-automated process. Data are not manipulated but the headers convertered to a consistent format across all summary statistics files.
-
-- Headers will be transformed to the 'standard format'.
-
-- Rows will never be removed.
-
-- Columns may be split, merged, deleted, added or moved.
-
-- Values will be unaltered.
-
-- Blanks will be set to 'NA'
 
 Standard format file headings
 
@@ -80,6 +65,21 @@ Standard format file headings
  'effect_allele_frequency' = effect allele frequency
 
 Note that the headers in the formatted file are not limited to the above headers.
+
+
+== Formatted summary statistics data 
+
+Summary statistics files are formatted by a scientific curator using a semi-automated process. Data are not manipulated but the headers convertered to a consistent format across all summary statistics files.
+
+- Headers will be transformed to the 'standard format'.
+
+- Rows will never be removed.
+
+- Columns may be split, merged, deleted, added or moved.
+
+- Values will be unaltered.
+
+- Blanks will be set to 'NA'
 
 Formatted data is accessible on the GWAS Catalog dedicated summary statistics link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site]. Where the formatted files are available, they are nested within the 'harmonised' directory in the study directory.
 
