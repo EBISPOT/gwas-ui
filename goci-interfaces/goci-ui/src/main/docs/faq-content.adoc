@@ -38,6 +38,12 @@
 
 17. <<faq-A17, How can I separate OR from beta in the Associations download?>>
 
+18. <<faq-A18, Is each association in the GWAS Catalog unique?>>
+
+19. <<faq-A19, Are results from sequencing-based association analyses included in the GWAS Catalog?>>
+
+
+
 === B. Searching the GWAS Catalog
 
 1. <<faq-B1, How do I search the GWAS Catalog?>>
@@ -184,11 +190,11 @@ The GWAS Catalog data can be used under the standard terms of use for EBI servic
 
 ==== [[faq-A7]]7. How often are the GWAS Catalog and diagram updated?
 
-New data is added to the GWAS Catalog and diagram on a weekly basis, with new data generally going public every Tuesday. Data releases include all downloadable spreadsheets.
+New data is added to the GWAS Catalog and diagram every three weeks. Data releases include all downloadable spreadsheets.  You can find the date of the most recent data release at the bottom of the Catalog home page.  Summary statistics files are available once curation of the publication is completed, even before the publication is included in our data release.  Therefore, if a publication states that summary statistics are available from the Catalog, and no Catalog entry yet exists, please contact us at gwas-info@ebi.ac.uk and we can give you direct access to the files.
 
 ==== [[faq-A8]]8. A new GWAS paper has just been published. Why is it not in the GWAS Catalog?
 
-Due to the considerable manual curation effort that goes into each publication in the GWAS Catalog, it takes a while for publications to be included in the Catalog after they have been first indexed in PubMed. As the complexity of GWAS publication in terms of study design and statistical analysis of results continues to increase, so does the curation effort required to extract the correct information in line with our extraction guidelines. The GWAS Catalog curation team work as fast as they can to process studies while maintaining the high standard of accuracy our users expect of the Catalog. We are in the process of trialling various approaches to speed up the curation process.
+Due to the considerable manual curation effort that goes into each publication in the GWAS Catalog, it takes a while for publications to be included in the Catalog after they have been first indexed in PubMed.  The GWAS Catalog curation team work as fast as they can to process studies while maintaining the high standard of accuracy our users expect of the Catalog. If your publication of interest is more than a couple of months old, please contact us at gwas-info@ebi.ac.uk to confirm we have identified it and that it is in our curation queue.  We will prioritise publications of particular interest to our users.
 
 ==== [[faq-A9]]9. Where can I find the GWAS Catalog infrastructure code?
 
@@ -237,6 +243,15 @@ Studies looking at copy number variations (CNV) are not part of the remit of the
 It is not currently possible to download the entire Catalog with OR and beta in separate columns. However, betas and ORs can be distinguished as all betas have a unit and direction e.g. “unit increase” or “cm decrease”. In the download, this is included in the "95% CI (TEXT)” column. 
 
 Alternatively, if you download search results directly from the Associations table on the web interface (using the download button to the top right of the table), the file will replicate what you see in the table, with OR and beta in separate columns. 
+
+==== [[faq-A18]]18. Is each association in the GWAS Catalog unique?
+
+Each association in the Catalog comes from a unique analysis. However, certain cohorts are repeatedly analysed in slightly different ways so the same associations may appear multiple times in the Catalog.  Similarly, the association results from component groups of a meta-analysis may be represented in the Catalog, as well as the association results from the meta-analysis itself. Users can check the sample number and ancestry as a clue to “duplicated” analyses, but we encourage users to examine the source publications further for more detail.
+
+==== [[faq-A19]]19. Are results from sequencing-based association analyses included in the GWAS Catalog?
+
+At this time only array-based association analyses are https://www.ebi.ac.uk/gwas/methods/criteria[eligible] but we are investigating expanding the scope to include sequencing-based association studies.  You can read the results of our review of the sequencing-based association literature, see our list of studies and curated metadata, and give us your input on https://www.ebi.ac.uk/gwas/docs/pilots[our pilots page].
+
 
 == [[B]]B. Searching the GWAS Catalog
 
@@ -453,9 +468,11 @@ There are thousands of genome-wide association studies and each study yields ass
 
 Studies with full summary statistics are indicated by an icon in the “Association count” column of the studies table. You can also view a full list of studies with summary statistics files link:https://www.ebi.ac.uk/gwas/downloads/summary-statistics[here] together with links to other summary statistics resources.
 
+Summary statistics files are available once curation of the publication is completed, even before the publication is included in our data release (approximately every three weeks).  Therefore, if a publication states that summary statistics are available from the Catalog, and no Catalog entry yet exists, please contact us at gwas-info@ebi.ac.uk and we can give you direct access to the files.
+
 ==== [[faq-H3]]3. I am an author and would like to deposit my summary statistics in the GWAS Catalog. How do I go about this?
 
-We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also encourage authors to submit their data directly. If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-subs@ebi.ac.uk for instructions on how to access our ftp server.  We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us. Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods[eligibility criteria], and the summary statistics files must reflect the published results, not a sub-set. For example if your study is a genome-wide meta-analysis, we can only include summary statistics for the meta-analysis, not a component thereof. 
+We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also encourage authors to submit their data directly. If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-subs@ebi.ac.uk for instructions on how to access our ftp server.  We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us. Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods[eligibility criteria], and the summary statistics files must reflect published results.
 
 ==== [[faq-H4]]4. How do I access summary statistics?
 

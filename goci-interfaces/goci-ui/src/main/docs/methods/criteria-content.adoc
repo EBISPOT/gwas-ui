@@ -29,6 +29,7 @@ Individual SNP-trait associations identified in eligible studies are included in
 * We are working on expanding the scope of the GWAS Catalog to include studies using large-scale targeted/non-genome-wide arrays, including the Metabochip, Immunochip and Exome arrays. This is currently in a pilot phase where prioritisation of targeted and exome array studies for inclusion in the Catalog is by 1) relevance of the trait analysed 2) user request.
 * Publications containing targeted array studies are indicated in the search results using  a small “target” icon. This icon also appears in the "Studies" table on specific pages, next to the study accession number.
 
-== Extending Catalog scope
+== Extending Catalog scope to include sequencing-based association studies
+We are investigating expanding the scope of the GWAS Catalog to include sequencing-based association studies.  You can read the results of our review of the sequencing-based association literature, see our list of studies and curated metadata, and give us your input on https://www.ebi.ac.uk/gwas/docs/pilots[our pilots projects page].
 
-Pilots to investigate extending Catalog scope and alternative methods of data acquisition are described on our http://www.ebi.ac.uk/gwas/docs/pilots[pilot projects page]. For a full list of publications by the GWAS Catalog team, and other useful background reading, please visit our http://www.ebi.ac.uk/gwas/docs/related-resources[Related Resources page]
+Previous pilots are also described on our http://www.ebi.ac.uk/gwas/docs/pilots[pilot projects page]. For a full list of publications by the GWAS Catalog team, and other useful background reading, please visit our http://www.ebi.ac.uk/gwas/docs/related-resources[Related Resources page]
