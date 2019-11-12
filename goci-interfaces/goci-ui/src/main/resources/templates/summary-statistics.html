@@ -56,7 +56,9 @@
     </ol>
 
     <div>
+<div>
 
+</div>
         <!--
         #####################################
         #  Page specific content goes here  #
@@ -115,7 +117,7 @@
 
             </div>
             <div class="row">
-                <a th:href="@{/deposition}">
+                <a th:href="@{${@environment.getProperty('deposition.ui.uri')}}">
                     <div class="col-md-4 toplevel-view">
                         <h2 class="flaticon-upload14 color-primary-bold">Submit</h2>
 
