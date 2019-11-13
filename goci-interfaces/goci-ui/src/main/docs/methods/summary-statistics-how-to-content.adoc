@@ -6,11 +6,12 @@ If you don’t yet have an ELIXIR ID, follow the link to register or find out mo
 
 = Getting started
 
-== Finding my publication
 +++ <details><summary> +++
 +++ </summary><div> +++
+
+== Finding my publication
+
 On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion. You can search by PubMed ID or Author. Publications matching your search are displayed in the table.
-+++ </div></details> +++
 
 == What if my publication is not in the table?
 
@@ -26,13 +27,18 @@ We endeavour to include all eligible publications available for submission as so
 
 The “Status” column in the search results lets you know what you can submit for a particular publication.
 
-Publications that are OPEN FOR SUBMISSION have been identified by curators and meet the GWAS Catalog’s inclusion criteria, but have not yet been curated. If you are an author of one of these publications we encourage you to submit both summary statistics and supporting metadata [link to section below].
-
 Publications that are OPEN FOR SUMMARY STATISTICS have already been curated and the publication metadata has already been made available on the GWAS Catalog website. In this case, we can provide you with a pre-filled template containing the metadata - you can then submit summary statistics only [link to section below] and let us know which file belongs to each study.
+
+Publications that are OPEN FOR SUBMISSION have been identified by curators and meet the GWAS Catalog’s inclusion criteria, but have not yet been curated. If you are an author of one of these publications we encourage you to submit both summary statistics and supporting metadata [link to section below].
 
 For publications that are CLOSED, we are not currently accepting submissions. This may be because we already have summary statistics for that publication. Or it may already be under submission by another author or by a curator. You may want to check with your co-authors, or contact us at gwas-info@ebi.ac.uk for more information.
 
++++ </div></details> +++
+
 = Preparing summary statistics files
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 == Summary statistics file format and content
 
@@ -41,21 +47,288 @@ Summary statistics are defined as the aggregate p-values and association data fo
 Submitted summary statistics files must conform to our standard file format and content (as published in Buniello and MacArthur, 2019), see also https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics.
 
 Summary statistics file requirements:
-The file must be a .tsv
-Must contain the mandatory fields in the following combinations (*): 
-a) variant_ID and p-value 
-OR 
-b) chromosome, base pair location and p-value (providing that genome build info are recorded in the metadata template).
-The standard column headings are listed below, along with a description of what each column should include and example contents
-When one of the above content is not provided, the column should be filled with NA
-Please note that you may also include additional columns
-To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also submit info on the effect and other alleles. Please see here for more details on our harmonisation pipeline:  https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics
 
-== Table test
+* The file must be a .tsv
+* Must contain the mandatory fields in the following combinations (*): 
+** variant_ID and p-value, *or* 
+** chromosome, base pair location and p-value (providing that genome build info are recorded in the metadata template).
+* The standard column headings are listed below, along with a description of what each column should include and example contents
+* When one of the above content is not provided, the column should be filled with NA
+* Please note that you may also include additional columns
+* To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also submit info on the effect and other alleles. Please see here for more details on our harmonisation pipeline:  https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics
 
-First Header | Second Header
------------- | -------------
-Content from cell 1 | Content from cell 2
-Content in the first column | Content in the second column
+HEADER | DESCRIPTION | EXAMPLE | MANDATORY
+------ | ----------- | ------- | ---------
+variant_id | The rsid of the variant | rs7329174 | yes* | Valid rsID
+p_value | The p-value of the variant/study association | 1E-08 | yes* | numerical value in range 0 to 1
+chromosome | The chromosome that the variant is located in | 13 | yes* | Valid chromosome values are 1-25, X, Y, MT (23, 24, 25 are synonymous with ‘X’, ‘Y’, ‘MT’, respectively)
+base_pair_location | The base pair location that the variant is located in | 40983974 | yes* | integer in range 1 to 999999999
+effect_allele | The effect allele of the variant | G | no | Valid DNA string
+other_allele | The reference allele | A | no | Valid DNA string
+effect_allele_frequency | Frequency of the effect allele in the control population | 0.22 | no | numerical value
+ci_upper | The odds ratio’s confidence interval’s upper range | 1.36 | no | numerical value
+ci_lower | The odds ratio’s confidence interval’s lower range | 1.36 | no | numerical value
+beta | The beta of the variant/study association | (+/-) 0.064 | no | numerical value
+standard_error | The beta’s standard | error | 0.03 | no | numerical value
+
+== README file content
+Each summary statistics file should be accompanied by a readme file containing the following info in a numbered list:
+
+1. Full citation for the publication linked to the submitted summary statistics (in any standard citation style) 
+e.g: Klimentidis YC, Raichlen DA, Bea J, Garcia DO, Wineinger NE, Mandarino LJ, Alexander GE, Chen Z, Going SB (2018) 
+Genome-wide association study of habitual physical activity in over 377,000 UK Biobank participants identifies multiple variants including CADM2 and APOE. International Journal of Obesity. 42: 1161-1176.
+
+2. Clear description of the content presented in additional columns that are not present in our standard format
+e.g.: INFO: imputation quality/certainty metric from IMPUTE2
+
+3. Any other information or comment that can be useful to interpret and store the data under submission (e.g. broader description of the cohort used in the study, QC measures applied) 
+
+Please see here for an example of a good readme file: link to the FTP with example txt file.
+
+== Summary statistics validator
+
+To help you validate your files prior to upload we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/. 
+
++++ </div></details> +++
+
+= Calculating checksums for summary statistics files
+
++++ <details><summary> +++
++++ </summary><div> +++
+
+In order to ensure the integrity of the uploaded summary statistics files before and after the upload, users are required to provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. In case of any problem during the upload, leading to corruption of the data, this checksum will change. So validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
+
+== Calculating on Mac computers
+
+The md5 command line application is installed on Mac computers by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
+
+  $ md5 summary_stats.gzip
+
+The output should look something like this:
+  
+  MD5 (summary_stats.gzip) = 49ea8cf53801c7f1e2f11336fb8a29c8
+
+The md5 checksum is the 32-digit hexadecimal number in the output, after the filename. Copy this number into the corresponding column of the study sheet.
+
+== Calculating on Linux/Unix computers
+
+The md5sum command line application is installed on all Linux/Unix based systems by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
+
+  $ md5sum summary_stats.gzip
+
+The output should look something like this:
+
+  4ab6d4f4db143eed49c248d3ce23cb57  summary_stats.gzip
+
+The md5 checksum is the 32-digit hexadecimal number in the first column of the output, before the file name. Copy this number into the corresponding column of the study sheet.
+
+== Calculating on Windows computers
+
+In Windows, you can use the certutil command line tool to calculate md5 checksums. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
+
+  > certutil -hashfile summary_stats.gzip MD5
+
+The output should look something like this:
+
+  ...
+
+The md5 checksum is the 32-digit hexadecimal number provided by the application. Copy this number into the corresponding column of the study sheet.
+
++++ </div></details> +++
+
+= Submitting summary statistics only
+
++++ <details><summary> +++
++++ </summary><div> +++
+
+== What will I need?
+
+For a publication that is OPEN FOR SUMMARY STATISTICS SUBMISSION, you will need:
+
+* Full validate summary statistics for each GWAS analysis
+* A readme for each summary statistics file
+* The md5 checksum for each summary statistics file
+* Enough information about each GWAS to match it to the corresponding study entry in the pre-filled template
+
+=== Step 1: Create a submission
+
+To start a submission, first click on the PubMed ID to go to the publication details page. This page displays the publication status and lets you know what you can submit (see “What can I submit?”[link] above for more information).
+
+Click “Create Submission”. You will be prompted to log in first, if you haven’t already.
+
+This opens a new Submission page:
+
+* The upper panel provides a summary of the publication, including an FTP location where you can upload your summary statistics.
+* The lower panel shows the details of your submission, including the Submission ID, status and validation reports.
+* The buttons on the left show the actions available to you.
+
+=== Step 2: Upload summary statistics
+
+The Submission page contains a URL for our FTP site, where we have created a folder for your publication. You can upload your summary statistics to this location… <check this>
+
+Alternatively, you can store your summary statistics on your own personal or institutional website, or in a service like Google Drive or Dropbox. You can then provide us with the link so that we can transfer the data (see below).
+
+=== Step 3: Download the submission template
+
+Click “Download template” to get a copy of the submission template. You can save a copy of the template to your computer and complete the spreadsheet offline before uploading it to the submission system. Please download a new template each time you submit a new publication.
+
+For a publication that is OPEN FOR SUMMARY STATISTICS SUBMISSION, we have already curated metadata about each study and sample group in the publication. Therefore, you will only need to match your summary statistics files to the studies we have already created. To help you do this, we have prepared a simplified summary statistics submission template which is pre-filled with the relevant metadata. See below for instructions on completing the spreadsheet.
+
+=== Step 4: Complete the submission spreadsheet (pre-filled metadata)
+
+The pre-filled spreadsheet contains basic meta-data for each study in the publication, including:
+
+Column header | Information provided
+------------- | --------------------
+Study accession | The GWAS Catalog study accession, beginning with “GCST”
+Reported trait | The trait under investigation
+Discovery sample | A description of the discovery sample (including number and ancestry)
+
+If you need more information to identify each study, please look at the relevant publication page on the GWAS Catalog website (add the PubMed ID to https://www.ebi.ac.uk/gwas/), where additional details can be found for each study.
+
+If you think there is a mistake in the pre-filled spreadsheet (e.g. an incorrect number of studies for your publication), please contact gwas-info@ebi.ac.uk.
+
+Click here [link] for an example of a completed template. There are five columns for you to fill in. The highlighted columns are mandatory, while the grey columns are optional, although we encourage you to submit as much information as you can.
+
+Column header | Mandatory/ Optional | Instructions | Select from:
+Summary statistics file | Mandatory | The filename for a summary statistics file on the GWAS Catalog FTP, or full URL including filename for a summary statistics file hosted elsewhere online. Leave blank for any studies without summary statistics. | A valid filename or URL e.g. ftp://ftp.ebi.ac.uk/pub/...
+md5 sum | Mandatory | The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. | A valid md5 checksum (32-digit hexadecimal number) e.g. 49ea8cf53801c7f1e2f11336fb8a29c8
+Readme | Optional | Please enter here the text for the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into all the rows. See below for instructions on what to include in the readme file. | <link to section above>
+Summary statistics assembly | Mandatory | Genome assembly for the summary statistics. Leave blank for any studies without summary statistics. | Please select from: GRCh38, GRCh37, NCBI36, NCBI35, NCBI34
+Cohort(s) | Optional | Comma separated list of cohort(s) represented in the discovery sample. Enter only if the specific named cohorts are used in the analysis. | Free text e.g. UKBB, FINRISK
+Cohort specific reference | Optional | Comma separated list of cohort specific identifier(s) issued to this research study. For example, an ANID issued by UK Biobank. | A valid identifier e.g. ANID 45956
+
+=== Step 5: Upload the submission spreadsheet and submit
+
+Once you have completed the submission spreadsheet, return to the Submission page and click on “Upload template” to select the file from your computer. The spreadsheet then goes through a validation step.
+
+If the file passes validation (submission status VALID), you will see a Submissions Stats message displaying the number of studies detected in the uploaded spreadsheet. You should check to make sure that this number is what you would expect.
+
+If the file fails validation (submission status INVALID), an error message will be displayed.
+
+If there is an error, or an unexpected number in the Submission Stats, please delete your file and check the spreadsheet for mistakes before trying to upload it again.
+
+If the file is valid and everything looks OK, click “Submit” to send your submission to the GWAS Catalog.
+
+A curator will review your submission and make the summary statistics available to the public as soon as possible through the GWAS Catalog website.
+
++++ </div></details> +++
+
+= Submitting summary statistics with metadata
+
++++ <details><summary> +++
++++ </summary><div> +++
+
+== What will I need?
+
+For a publication that is OPEN FOR SUBMISSION, you will need:
+
+* Full validated summary statistics for each GWAS analysis
+* A readme for each summary statistics file
+* The md5 checksum for each summary statistics file
+* Meta-data to assist us in accurately representing your publication, including:
+** Study information, e.g. genotyping details, variant count, traits analysed
+** Sample information, e.g. number of individuals/cases/controls, ancestry, country of recruitment
+
+=== Step 1: Create a submission
+
+To start a submission, first click on the PubMed ID to go to the publication details page. This page displays the publication status and lets you know what you can submit (see “What can I submit?”[link] above for more information).
+
+Click “Create Submission”. You will be prompted to log in first, if you haven’t already.
+
+This opens a new Submission page:
+
+* The upper panel provides a summary of the publication, including an FTP location where you can upload your summary statistics.
+* The lower panel shows the details of your submission, including the Submission ID, status and validation reports.
+* The buttons on the left show the actions available to you.
+
+=== Step 2: Upload summary statistics
+
+The Submission page contains a URL for our FTP site, where we have created a folder for your publication. You can upload your summary statistics to this location… <check this>
+
+Alternatively, you can store your summary statistics on your own personal or institutional website, or in a service like Google Drive or Dropbox. You can then provide us with the link so that we can transfer the data (see below).
+
+=== Step 3: Download the submission template
+
+Click “Download template” to get a copy of the submission template. You can save a copy of the template to your computer and complete the spreadsheet offline before uploading it to the submission system. Please download a new template each time you submit a new publication.
+
+For a publication that is OPEN FOR SUBMISSION, you will need to provide metadata about each study and sample group in the publication. You will also need to tell us which summary statistics file belongs with which study. See below for instructions on completing the spreadsheet.
+
+=== Step 4: Complete the submission spreadsheet (new meta-data)
+
+There are two tabs in the submission spreadsheet, one for studies and one for samples. The highlighted columns are mandatory, while the grey columns are optional, although we encourage you to submit as much information as you can. Each column includes a short description to help you to enter the correct data. Click here [link] for an example of a completed template. More details can be found below.
+
+==== Study tab
+
+In the “study” tab, add one row for each separate GWAS analysis (study) in the publication. For each column, please enter the following information:
+
+Column header | Mandatory/Optional | Instructions | Select from:
+------------- | ------------------ | ------------ | ------------
+Study tag | Mandatory | A unique free-text label for each genome-wide association study in the publication. You can use any string of characters that will help you identify each individual GWAS. | Free text e.g. WHR_unadj
+Genotyping technology | Mandatory | The method used to genotype variants in the discovery stage. | Please select from: Genome-wide genotyping array, Targeted genotyping array, Exome genotyping array, Whole genome sequencing
+Array manufacturer | Optional | Manufacturer of the genotyping array used for the discovery stage. | Free text e.g. Illumina
+Array information | Optional | Additional information about the genotyping array. For example, for targeted arrays, please provide the specific type of array. | Free text e.g. Immunochip 
+Imputation | Mandatory | Were SNPs imputed for the discovery GWAS? | Please select from: Yes, No
+Variant count | Mandatory | The number of variants analysed in the discovery stage (after QC) | An integer e.g. 525000
+Statistical model | Optional | Details of the statistical model used to determine association significance | Free text e.g. recessive model
+Study description | Optional | Additional information about the study | ...
+Reported trait | Mandatory | The trait under investigation | Free text e.g. Reticulocyte count
+Background trait | Optional | Any background trait(s) shared by all individuals in the GWAS (e.g. in both cases and controls) | Free text e.g. Nicotine dependence
+Summary statistics file | Optional | The filename for a summary statistics file on the GWAS Catalog FTP, or full URL including filename for a summary statistics file hosted elsewhere online. Leave blank for any studies without summary statistics. | A valid filename or URL e.g.ftp://ftp.ebi.ac.uk/pub/...
+md5 sum | Optional | md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. | A valid md5 checksum (32-digit hexadecimal number) e.g.49ea8cf53801c7f1e2f11336fb8a29c8
+Readme | Optional | Please enter here the text for the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into all the rows. See below for instructions on what to include in the readme file. <link to section below>
+Summary statistics assembly | Optional | Genome assembly for the summary statistics. Leave blank for any studies without summary statistics. | Please select from: GRCh38, GRCh37, NCBI36, NCBI35, NCBI34
+Cohort(s) | Optional | Comma separated list of cohort(s) represented in the discovery sample | Enter only if the specific named cohorts are used in the analysis | Free text e.g. UKBB /| FINRISK
+Cohort specific reference | Optional | Comma separated list of cohort specific identifier(s) issued to this research study. For example, an ANID issued by UK Biobank. | A valid identifier e.g. ANID 45956
+
+==== Sample tab
+
+The sample tab includes information about the samples included in each GWAS. Each GWAS should be listed separately, and within each GWAS each group of samples should be on a separate row. Examples of sample groups are discovery/replication cohorts, and ancestry categories (e.g. European, East Asian, South Asian). 
+
+For example:
+
+* Your publication includes 2 GWAS analyses for different traits, each with a discovery and a replication stage (2 stages), in individuals with European or East Asian ancestry (2 broad ancestry categories)
+* For each of the 2 GWAS you need to create rows for:
+** discovery/European
+** discovery/East Asian
+** replication/European
+** replication/East Asian, making 8 rows in total.
+
+For each column, please enter the following information:
+
+Column header | Mandatory/Optional | Instructions | Select from:
+Study tag | Mandatory | A unique free-text label for each genome-wide association study in the publication. This should match the study tag that you have provided in the “study” tab. This allows the sample information to be linked to the correct study. You must provide at least one sample row for each study. | Free text e.g. WHR_unadj
+Stage | Mandatory | Stage of the experimental design | Please select from: Discovery, Replication
+Number of individuals | Mandatory | Number of individuals in this group | An integer e.g. 2000
+Number of cases | Optional | Number of cases in this group | An integer e.g. 1000
+Number of controls | Optional | Number of controls in this group | An integer e.g. 1000
+Sample description | Optional | Additional  relevant information required for the interpretation of results. For example: sex (males/females) or age (adults/children). This field can also be used to report phenotypic subgroups, such as in studies of multiple traits (“or” traits) or ordinal variables. You do not need to provide details that are not required to interpret the results. For example, if males and females are analysed together and no sex-specific associations are reported, you do not need to report the number of males and females. | Free text e.g. 1000 males, 1000 females; 1200 major depression cases, 800 bipolar disorder cases; 700 severe cases, 700 moderate cases, 600 mild cases
+Ancestry category | Mandatory | Broad ancestry category that best describes the sample. For more information about each category, please see [link to ancestry documentation?] | Please select from: Aboriginal Australian; African American or Afro-Caribbean; African unspecified; Asian unspecified; Central Asian; Circumpolar peoples; East Asian; European; Greater Middle Eastern (Middle Eastern, North African or Persian); Hispanic or Latin American; Native American; NR; Oceanian; Other; Other admixed ancestry; South Asian; South East Asian; Sub-Saharan African
+Ancestry | Optional | The most detailed ancestry descriptor(s) for the sample | Free text e.g. Han Chinese
+Founder/Genetically isolated population description | Optional | For founder or genetically isolated population, provide  description. If multiple founder/genetically isolated populations are included for the same ancestry category, separate using "/|". For more information about founder/genetically isolated populations, please see [link to ancestry documentation?] | Free text e.g. Korculan (founder/genetic isolate) /| Vis (founder/genetic isolate)
+Country of recruitment | Mandatory | List of country/countries where samples were recruited. | For a complete list of countries, please see [link to CIA Factbook, or other information source???] | e.g. Japan
+
+=== Step 5: Upload the submission spreadsheet and submit
+
+Once you have completed the submission spreadsheet, return to the Submission page and click on “Upload template” to select the file from your computer. The spreadsheet then goes through a validation step. Note that this may take some time. You can leave the page and allow the validation to proceed in the background. You will receive an email when the validation has finished.
+
+If the file passes validation (submission status VALID), you will see a Submission Stats message displaying the number of studies and sample groups detected in the uploaded spreadsheet. You should check to make sure that these numbers are what you would expect.
+
+If the file fails validation (submission status INVALID), an error message will be displayed.
+
+If there is an error, or any unexpected numbers in the Submission Stats, please delete your file and check the spreadsheet for mistakes before trying to upload it again.
+
+If the file is valid and everything looks OK, click “Submit” to send your submission to the GWAS Catalog.
+
+A curator will review your submission and make the meta-data and summary statistics available to the public as soon as possible through the GWAS Catalog website.
+
++++ </div></details> +++
+
+= My Submissions
+
++++ <details><summary> +++
++++ </summary><div> +++
+
+The My Submissions page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
 
 +++ </div></details> +++
