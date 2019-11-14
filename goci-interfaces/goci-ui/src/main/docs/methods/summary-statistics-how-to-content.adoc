@@ -89,16 +89,11 @@ Please see here for an example of a good readme file: link to the FTP with examp
 
 To help you validate your files prior to upload we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/. 
 
-+++ </div></details> +++
-
-= Calculating checksums for summary statistics files
-
-+++ <details><summary> +++
-+++ </summary><div> +++
+== Calculating checksums for summary statistics files
 
 In order to ensure the integrity of the uploaded summary statistics files before and after the upload, users are required to provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. In case of any problem during the upload, leading to corruption of the data, this checksum will change. So validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
 
-== Calculating on Mac computers
+=== Calculating on Mac computers
 
 The md5 command line application is installed on Mac computers by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
 
@@ -110,7 +105,7 @@ The output should look something like this:
 
 The md5 checksum is the 32-digit hexadecimal number in the output, after the filename. Copy this number into the corresponding column of the study sheet.
 
-== Calculating on Linux/Unix computers
+=== Calculating on Linux/Unix computers
 
 The md5sum command line application is installed on all Linux/Unix based systems by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
 
@@ -122,7 +117,7 @@ The output should look something like this:
 
 The md5 checksum is the 32-digit hexadecimal number in the first column of the output, before the file name. Copy this number into the corresponding column of the study sheet.
 
-== Calculating on Windows computers
+=== Calculating on Windows computers
 
 In Windows, you can use the certutil command line tool to calculate md5 checksums. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
 
