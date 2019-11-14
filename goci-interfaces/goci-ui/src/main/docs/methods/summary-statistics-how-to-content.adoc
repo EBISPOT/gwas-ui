@@ -6,12 +6,9 @@ If you don’t yet have an ELIXIR ID, follow the link to register or find out mo
 
 = Getting started
 
-+++ <details><summary> +++
-+++ </summary><div> +++
-
 == Finding my publication
 
-On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion. You can search by PubMed ID or Author. Publications matching your search are displayed in the table.
+On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion. You can search by PubMed ID or Author. Publications matching your search are displayed in thele.
 
 == What if my publication is not in the table?
 
@@ -33,12 +30,7 @@ Publications that are OPEN FOR SUBMISSION have been identified by curators and m
 
 For publications that are CLOSED, we are not currently accepting submissions. This may be because we already have summary statistics for that publication. Or it may already be under submission by another author or by a curator. You may want to check with your co-authors, or contact us at gwas-info@ebi.ac.uk for more information.
 
-+++ </div></details> +++
-
 = Preparing summary statistics files
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 == Summary statistics file format and content
 
@@ -57,19 +49,80 @@ Summary statistics file requirements:
 * Please note that you may also include additional columns
 * To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also submit info on the effect and other alleles. Please see here for more details on our harmonisation pipeline:  https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics
 
-HEADER | DESCRIPTION | EXAMPLE | MANDATORY
------- | ----------- | ------- | ---------
-variant_id | The rsid of the variant | rs7329174 | yes* | Valid rsID
-p_value | The p-value of the variant/study association | 1E-08 | yes* | numerical value in range 0 to 1
-chromosome | The chromosome that the variant is located in | 13 | yes* | Valid chromosome values are 1-25, X, Y, MT (23, 24, 25 are synonymous with ‘X’, ‘Y’, ‘MT’, respectively)
-base_pair_location | The base pair location that the variant is located in | 40983974 | yes* | integer in range 1 to 999999999
-effect_allele | The effect allele of the variant | G | no | Valid DNA string
-other_allele | The reference allele | A | no | Valid DNA string
-effect_allele_frequency | Frequency of the effect allele in the control population | 0.22 | no | numerical value
-ci_upper | The odds ratio’s confidence interval’s upper range | 1.36 | no | numerical value
-ci_lower | The odds ratio’s confidence interval’s lower range | 1.36 | no | numerical value
-beta | The beta of the variant/study association | (+/-) 0.064 | no | numerical value
-standard_error | The beta’s standard | error | 0.03 | no | numerical value
+[%header, cols="4*>,10"]
+|===
+|Header
+|Description
+|Example
+|Mandatory
+|Validation
+
+|variant_id
+|The rsid of the variant
+|`rs7329174`
+|yes*
+|Valid rsID
+
+|p_value
+|The p-value of the variant/study association
+|`1E-08`
+|yes*
+|numerical value in range 0 to 1
+
+|chromosome
+|The chromosome that the variant is located on
+|`13`
+|yes*
+|Valid chromosome values are 1-25, X, Y, MT (23, 24, 25 are synonymous with ‘X’, ‘Y’, ‘MT’, respectively)
+
+|base_pair_location
+|The base pair location of the variant
+|`40983974`
+|yes*
+|integer in range 1 to 999999999
+
+|effect_allele
+|The effect allele of the variant
+|`G`
+|no
+|Valid DNA string
+
+|other_allele
+|The reference allele
+|`A`
+|no
+|Valid DNA string
+
+|effect_allele_frequency
+|Frequency of the effect allele in the control population
+|`0.22`
+|no
+|numerical value
+
+|ci_upper
+|The upper range of the odds ratio confidence interval
+|`1.36`
+|no
+|numerical value
+
+|ci_lower
+|The lower range of the odds ratio confidence interval
+|`1.36`
+|no
+|numerical value
+
+|beta
+|The beta of the variant/study association
+|`(+/-) 0.064`
+|no
+|numerical value
+
+|standard_error
+|The standard error of the beta
+|`0.03`
+|no
+|numerical value
+|===
 
 == README file content
 Each summary statistics file should be accompanied by a readme file containing the following info in a numbered list:
@@ -87,11 +140,11 @@ Please see here for an example of a good readme file: link to the FTP with examp
 
 == Summary statistics validator
 
-To help you validate your files prior to upload we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/. 
+To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/. 
 
 == Calculating checksums for summary statistics files
 
-In order to ensure the integrity of the uploaded summary statistics files before and after the upload, users are required to provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. In case of any problem during the upload, leading to corruption of the data, this checksum will change. So validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
+In order to ensure the integrity of the uploaded summary statistics files before and after the upload, you must provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. If there is any problem during the upload that leads to corruption of the data, this checksum will change. So by validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
 
 === Calculating on Mac computers
 
@@ -129,12 +182,7 @@ The output should look something like this:
 
 The md5 checksum is the 32-digit hexadecimal number provided by the application. Copy this number into the corresponding column of the study sheet.
 
-+++ </div></details> +++
-
 = Submitting summary statistics only
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 == What will I need?
 
@@ -173,11 +221,20 @@ For a publication that is OPEN FOR SUMMARY STATISTICS SUBMISSION, we have alread
 
 The pre-filled spreadsheet contains basic meta-data for each study in the publication, including:
 
-Column header | Information provided
-------------- | --------------------
-Study accession | The GWAS Catalog study accession, beginning with “GCST”
-Reported trait | The trait under investigation
-Discovery sample | A description of the discovery sample (including number and ancestry)
+[%header, cols="1*>,10"]
+|===
+|Column header
+|Information provided
+
+|Study accession
+|The GWAS Catalog study accession, beginning with “GCST”
+
+|Reported trait
+|The trait under investigation
+
+|Discovery sample
+|A description of the discovery sample (including number and ancestry)
+|===
 
 If you need more information to identify each study, please look at the relevant publication page on the GWAS Catalog website (add the PubMed ID to https://www.ebi.ac.uk/gwas/), where additional details can be found for each study.
 
@@ -185,13 +242,48 @@ If you think there is a mistake in the pre-filled spreadsheet (e.g. an incorrect
 
 Click here [link] for an example of a completed template. There are five columns for you to fill in. The highlighted columns are mandatory, while the grey columns are optional, although we encourage you to submit as much information as you can.
 
-Column header | Mandatory/ Optional | Instructions | Select from:
-Summary statistics file | Mandatory | The filename for a summary statistics file on the GWAS Catalog FTP, or full URL including filename for a summary statistics file hosted elsewhere online. Leave blank for any studies without summary statistics. | A valid filename or URL e.g. ftp://ftp.ebi.ac.uk/pub/...
-md5 sum | Mandatory | The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. | A valid md5 checksum (32-digit hexadecimal number) e.g. 49ea8cf53801c7f1e2f11336fb8a29c8
-Readme | Optional | Please enter here the text for the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into all the rows. See below for instructions on what to include in the readme file. | <link to section above>
-Summary statistics assembly | Mandatory | Genome assembly for the summary statistics. Leave blank for any studies without summary statistics. | Please select from: GRCh38, GRCh37, NCBI36, NCBI35, NCBI34
-Cohort(s) | Optional | Comma separated list of cohort(s) represented in the discovery sample. Enter only if the specific named cohorts are used in the analysis. | Free text e.g. UKBB, FINRISK
-Cohort specific reference | Optional | Comma separated list of cohort specific identifier(s) issued to this research study. For example, an ANID issued by UK Biobank. | A valid identifier e.g. ANID 45956
+[%header, cols="3*>,10"]
+|===
+|Column header
+|Mandatory/ Optional
+|Instructions
+|Select from:
+
+|Summary statistics file
+|Mandatory
+|The filename for a summary statistics file on the GWAS Catalog FTP, or full URL including filename for a summary statistics file hosted elsewhere online. Leave blank for any studies without summary statistics.
+|A valid filename or URL, e.g.
+`ftp://ftp.ebi.ac.uk/pub/...`
+
+|md5 sum
+|Mandatory
+|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics.
+|A valid md5 checksum (32-digit hexadecimal number), e.g.
+`49ea8cf53801c7f1e2f11336fb8a29c8`
+
+|Readme
+|Optional
+|Enter the text for the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into all the rows. See [link] for instructions on what to include in the readme file.
+|...
+
+|Summary statistics assembly
+|Mandatory
+|Genome assembly for the summary statistics. Leave blank for any studies without summary statistics.
+|Select from:
+`GRCh38` `GRCh37` `NCBI36` `NCBI35` `NCBI34`
+
+|Cohort(s)
+|Optional
+|List of cohort(s) represented in the discovery sample, separated by pipes (\|). Enter only if the specific named cohorts are used in the analysis.
+|Free text e.g. 
+`UKBB \| FINRISK`
+
+|Cohort specific reference
+|Optional
+|List of cohort specific identifier(s) issued to this research study, separated by pipes (\|). For example, an ANID issued by UK Biobank.
+|A valid identifier e.g.
+`ANID 45956`
+|===
 
 === Step 5: Upload the submission spreadsheet and submit
 
@@ -207,12 +299,7 @@ If the file is valid and everything looks OK, click “Submit” to send your su
 
 A curator will review your submission and make the summary statistics available to the public as soon as possible through the GWAS Catalog website.
 
-+++ </div></details> +++
-
 = Submitting summary statistics with metadata
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 == What will I need?
 
@@ -255,26 +342,96 @@ There are two tabs in the submission spreadsheet, one for studies and one for sa
 
 ==== Study tab
 
-In the “study” tab, add one row for each separate GWAS analysis (study) in the publication. For each column, please enter the following information:
+In the “study” sheet, add one row for each separate GWAS analysis (study) in the publication. For each column, please enter the following information:
 
-Column header | Mandatory/Optional | Instructions | Select from:
-------------- | ------------------ | ------------ | ------------
-Study tag | Mandatory | A unique free-text label for each genome-wide association study in the publication. You can use any string of characters that will help you identify each individual GWAS. | Free text e.g. WHR_unadj
-Genotyping technology | Mandatory | The method used to genotype variants in the discovery stage. | Please select from: Genome-wide genotyping array, Targeted genotyping array, Exome genotyping array, Whole genome sequencing
-Array manufacturer | Optional | Manufacturer of the genotyping array used for the discovery stage. | Free text e.g. Illumina
-Array information | Optional | Additional information about the genotyping array. For example, for targeted arrays, please provide the specific type of array. | Free text e.g. Immunochip 
-Imputation | Mandatory | Were SNPs imputed for the discovery GWAS? | Please select from: Yes, No
-Variant count | Mandatory | The number of variants analysed in the discovery stage (after QC) | An integer e.g. 525000
-Statistical model | Optional | Details of the statistical model used to determine association significance | Free text e.g. recessive model
-Study description | Optional | Additional information about the study | ...
-Reported trait | Mandatory | The trait under investigation | Free text e.g. Reticulocyte count
-Background trait | Optional | Any background trait(s) shared by all individuals in the GWAS (e.g. in both cases and controls) | Free text e.g. Nicotine dependence
-Summary statistics file | Optional | The filename for a summary statistics file on the GWAS Catalog FTP, or full URL including filename for a summary statistics file hosted elsewhere online. Leave blank for any studies without summary statistics. | A valid filename or URL e.g.ftp://ftp.ebi.ac.uk/pub/...
-md5 sum | Optional | md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. | A valid md5 checksum (32-digit hexadecimal number) e.g.49ea8cf53801c7f1e2f11336fb8a29c8
-Readme | Optional | Please enter here the text for the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into all the rows. See below for instructions on what to include in the readme file. <link to section below>
-Summary statistics assembly | Optional | Genome assembly for the summary statistics. Leave blank for any studies without summary statistics. | Please select from: GRCh38, GRCh37, NCBI36, NCBI35, NCBI34
-Cohort(s) | Optional | Comma separated list of cohort(s) represented in the discovery sample | Enter only if the specific named cohorts are used in the analysis | Free text e.g. UKBB /| FINRISK
-Cohort specific reference | Optional | Comma separated list of cohort specific identifier(s) issued to this research study. For example, an ANID issued by UK Biobank. | A valid identifier e.g. ANID 45956
+[%header, cols="3*>,10"]
+|===
+|Column header
+|Mandatory/Optional
+|Instructions
+|Select from:
+
+|Study tag
+|Mandatory
+|A unique free-text label for each genome-wide association study in the publication. You can use any string of characters that will help you identify each individual GWAS.
+|Free text e.g. `WHR_unadj`
+
+|Genotyping technology
+|Mandatory
+|The method used to genotype variants in the discovery stage.
+|Select from: `Genome-wide genotyping array, Targeted genotyping array, Exome genotyping array, Whole genome sequencing
+
+|Array manufacturer
+|Optional
+|Manufacturer of the genotyping array used for the discovery stage.
+|Free text e.g. `Illumina`
+
+|Array information
+|Optional
+|Additional information about the genotyping array. For example, for targeted arrays, please provide the specific type of array.
+|Free text e.g. `Immunochip`
+
+|Imputation
+|Mandatory
+|Were SNPs imputed for the discovery GWAS?
+|Select from: `Yes` `No`
+
+|Variant count
+|Mandatory
+|The number of variants analysed in the discovery stage (after QC)
+|An integer e.g. `525000`
+
+|Statistical model
+|Optional
+|Details of the statistical model used to determine association significance
+|Free text e.g. `recessive model`
+
+|Study description
+|Optional
+|Additional information about the study
+| ...
+
+|Reported trait
+|Mandatory
+|The trait under investigation
+|Free text e.g. `Reticulocyte count`
+
+|Background trait
+|Optional
+|Any background trait(s) shared by all individuals in the GWAS (e.g. in both cases and controls)
+|Free text e.g. `Nicotine dependence`
+
+|Summary statistics file
+|Optional
+|The filename for a summary statistics file on the GWAS Catalog FTP, or full URL including filename for a summary statistics file hosted elsewhere online. Leave blank for any studies without summary statistics.
+|A valid filename or URL e.g. `ftp://ftp.ebi.ac.uk/pub/...`
+
+|md5 sum
+|Optional
+|md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics.
+|A valid md5 checksum (32-digit hexadecimal number) e.g. `49ea8cf53801c7f1e2f11336fb8a29c8`
+
+|Readme
+|Optional
+|Please enter here the text for the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into all the rows. See below for instructions on what to include in the readme file.
+|<link to section above>
+
+|Summary statistics assembly
+|Optional
+|Genome assembly for the summary statistics. Leave blank for any studies without summary statistics.
+|Select from: `GRCh38` `GRCh37` `NCBI36` `NCBI35` `NCBI34`
+
+|Cohort(s)
+|Optional
+|List of cohort(s) represented in the discovery sample
+|Enter only if the specific named cohorts are used in the analysis
+|Free text e.g. `UKBB \| FINRISK`
+
+|Cohort specific reference
+|Optional
+|List of cohort specific identifier(s) issued to this research study. For example, an ANID issued by UK Biobank.
+|A valid identifier e.g. `ANID 45956`
+|===
 
 ==== Sample tab
 
@@ -291,17 +448,85 @@ For example:
 
 For each column, please enter the following information:
 
-Column header | Mandatory/Optional | Instructions | Select from:
-Study tag | Mandatory | A unique free-text label for each genome-wide association study in the publication. This should match the study tag that you have provided in the “study” tab. This allows the sample information to be linked to the correct study. You must provide at least one sample row for each study. | Free text e.g. WHR_unadj
-Stage | Mandatory | Stage of the experimental design | Please select from: Discovery, Replication
-Number of individuals | Mandatory | Number of individuals in this group | An integer e.g. 2000
-Number of cases | Optional | Number of cases in this group | An integer e.g. 1000
-Number of controls | Optional | Number of controls in this group | An integer e.g. 1000
-Sample description | Optional | Additional  relevant information required for the interpretation of results. For example: sex (males/females) or age (adults/children). This field can also be used to report phenotypic subgroups, such as in studies of multiple traits (“or” traits) or ordinal variables. You do not need to provide details that are not required to interpret the results. For example, if males and females are analysed together and no sex-specific associations are reported, you do not need to report the number of males and females. | Free text e.g. 1000 males, 1000 females; 1200 major depression cases, 800 bipolar disorder cases; 700 severe cases, 700 moderate cases, 600 mild cases
-Ancestry category | Mandatory | Broad ancestry category that best describes the sample. For more information about each category, please see [link to ancestry documentation?] | Please select from: Aboriginal Australian; African American or Afro-Caribbean; African unspecified; Asian unspecified; Central Asian; Circumpolar peoples; East Asian; European; Greater Middle Eastern (Middle Eastern, North African or Persian); Hispanic or Latin American; Native American; NR; Oceanian; Other; Other admixed ancestry; South Asian; South East Asian; Sub-Saharan African
-Ancestry | Optional | The most detailed ancestry descriptor(s) for the sample | Free text e.g. Han Chinese
-Founder/Genetically isolated population description | Optional | For founder or genetically isolated population, provide  description. If multiple founder/genetically isolated populations are included for the same ancestry category, separate using "/|". For more information about founder/genetically isolated populations, please see [link to ancestry documentation?] | Free text e.g. Korculan (founder/genetic isolate) /| Vis (founder/genetic isolate)
-Country of recruitment | Mandatory | List of country/countries where samples were recruited. | For a complete list of countries, please see [link to CIA Factbook, or other information source???] | e.g. Japan
+[%header, cols="3*>,10"]
+|===
+|Column header
+|Mandatory/Optional
+|Instructions
+|Select from:
+
+|Study tag
+|Mandatory
+|A unique free-text label for each genome-wide association study in the publication. This should match the study tag that you have provided in the “study” tab. This allows the sample information to be linked to the correct study. You must provide at least one sample row for each study.
+|Free text e.g. `WHR_unadj`
+
+|Stage
+|Mandatory
+|Stage of the experimental design
+|Select from: `discovery` `replication`
+
+|Number of individuals
+|Mandatory
+|Number of individuals in this group
+|An integer e.g. `2000`
+
+|Number of cases
+|Optional
+|Number of cases in this group
+|An integer e.g. `1000`
+
+|Number of controls
+|Optional
+|Number of controls in this group
+|An integer e.g. `1000`
+
+|Sample description
+|Optional
+|Additional  relevant information required for the interpretation of results. For example: sex (males/females) or age (adults/children). This field can also be used to report phenotypic subgroups, such as in studies of multiple traits (“or” traits) or ordinal variables. You do not need to provide details that are not required to interpret the results. For example, if males and females are analysed together and no sex-specific associations are reported, you do not need to report the number of males and females.
+|Free text e.g.
+`1000 males, 1000 females`
+`1200 major depression cases, 800 bipolar disorder cases`
+`700 severe cases, 700 moderate cases, 600 mild cases`
+
+|Ancestry category
+|Mandatory
+|Broad ancestry category that best describes the sample. For more information about each category, please see [link to ancestry documentation?]
+|Select from:
+`Aboriginal Australian`
+`African American or Afro-Caribbean`
+`African unspecified`
+`Asian unspecified`
+`Central Asian`
+`Circumpolar peoples`
+`East Asian`
+`European`
+`Greater Middle Eastern (Middle Eastern, North African or Persian)`
+`Hispanic or Latin American`
+`Native American`
+`NR`
+`Oceanian`
+`Other`
+`Other admixed ancestry`
+`South Asian`
+`South East Asian`
+`Sub-Saharan African`
+
+|Ancestry
+|Optional
+|The most detailed ancestry descriptor(s) for the sample
+|Free text e.g. `Han Chinese`
+
+|Founder/Genetically isolated population description
+|Optional
+|For founder or genetically isolated population, provide  description. If multiple founder/genetically isolated populations are included for the same ancestry category, separate using "\|". For more information about founder/genetically isolated populations, please see [link to ancestry documentation?]
+|Free text e.g. `Korculan (founder/genetic isolate) \| Vis (founder/genetic isolate)`
+
+|Country of recruitment
+|Mandatory
+|List of country/countries where samples were recruited.
+|For a complete list of countries, please see [link to CIA Factbook, or other information source???]
+|e.g. `Japan`
+|===
 
 === Step 5: Upload the submission spreadsheet and submit
 
@@ -316,8 +541,6 @@ If there is an error, or any unexpected numbers in the Submission Stats, please 
 If the file is valid and everything looks OK, click “Submit” to send your submission to the GWAS Catalog.
 
 A curator will review your submission and make the meta-data and summary statistics available to the public as soon as possible through the GWAS Catalog website.
-
-+++ </div></details> +++
 
 = My Submissions
 
