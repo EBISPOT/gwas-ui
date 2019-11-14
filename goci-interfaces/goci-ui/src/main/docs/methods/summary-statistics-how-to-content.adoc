@@ -1,14 +1,16 @@
 = Logging in to the submission page
 
-To get started, click LOGIN in the top right corner of the submission page. Here you can log in using your ELIXIR identity, which may be linked to Google, LinkedIn, ORCID or an institutional account.
-
-If you don’t yet have an ELIXIR ID, follow the link to register or find out more.
+* To get started, click LOGIN in the top right corner of the submission page.
+* Log in using your ELIXIR identity, or follow the link to register. Your ELIXIR identity may be linked to Google, LinkedIn, ORCID or an institutional account.
 
 = Getting started
 
 == Finding my publication
 
-On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion. You can search by PubMed ID or Author. Publications matching your search are displayed in thele.
+On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion. To find your publication:
+
+* You can search for a publication by *PubMed ID* or *first author*.
+* Publications matching your search are displayed in the table.
 
 == What if my publication is not in the table?
 
@@ -18,17 +20,30 @@ A publication will not appear in the table if:
 * it has been missed by our literature search, or
 * curators have reviewed the publication and found that it does not meet our eligibility criteria
 
-We endeavour to include all eligible publications available for submission as soon as possible after they have been indexed in PubMed. However, sometimes there may be delays, and some publications may be missed by our literature search. If you think that we are missing an eligible publication or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
+We endeavour to include all eligible publications available for submission as soon as possible after they have been indexed in PubMed. However, some publications may be missed by our literature search. If you think that we are missing an eligible publication or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
 
 == What can I submit?
 
-The “Status” column in the search results lets you know what you can submit for a particular publication.
+The “Status” column in the search results lets you know what you can submit for a particular publication:
 
-Publications that are OPEN FOR SUMMARY STATISTICS have already been curated and the publication metadata has already been made available on the GWAS Catalog website. In this case, we can provide you with a pre-filled template containing the metadata - you can then submit summary statistics only [link to section below] and let us know which file belongs to each study.
+[%header, cols="2*>,10"]
+|===
+|Status
+|Description
+|What to submit
 
-Publications that are OPEN FOR SUBMISSION have been identified by curators and meet the GWAS Catalog’s inclusion criteria, but have not yet been curated. If you are an author of one of these publications we encourage you to submit both summary statistics and supporting metadata [link to section below].
+|OPEN FOR SUMMARY STATISTICS SUBMISSION
+|The publication has been curated and the publication metadata is available on the GWAS Catalog website, but we don't have summary statistics yet.
+|<<sumstats_only, Summary statistics only>>
 
-For publications that are CLOSED, we are not currently accepting submissions. This may be because we already have summary statistics for that publication. Or it may already be under submission by another author or by a curator. You may want to check with your co-authors, or contact us at gwas-info@ebi.ac.uk for more information.
+|OPEN FOR SUBMISSION
+|The publication has been identified by curators and meets the GWAS Catalog’s inclusion criteria, but has not yet been curated. We don't have metadata or summary statistics yet.
+|<<sumstats_and_metadata, Summary statistics _and_ Study metadata>>
+  
+|CLOSED
+|We are not currently accepting submissions for this publication. We either have the summary statistics already, or the publication is under submission by another author or curator. You may want to check with your co-authors, or contact us at gwas-info@ebi.ac.uk for more information.
+|NA
+|===
 
 = Preparing summary statistics files
 
@@ -36,92 +51,98 @@ For publications that are CLOSED, we are not currently accepting submissions. Th
 
 Summary statistics are defined as the aggregate p-values and association data for every variant analysed in a genome-wide association study (GWAS). They should be provided in one file per GWAS with one row for each variant analysed.
                                                                                                                                                                                                                                                                                                                                                                                                                     
-Submitted summary statistics files must conform to our standard file format and content (as published in Buniello and MacArthur, 2019), see also https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics.
+Submitted summary statistics files must conform to our standard file format and content (as published in [Buniello and MacArthur, 2019]https://doi.org/10.1093/nar/gky1120), see also https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics.
 
 Summary statistics file requirements:
 
-* The file must be a .tsv
-* Must contain the mandatory fields in the following combinations (*): 
-** variant_ID and p-value, *or* 
-** chromosome, base pair location and p-value (providing that genome build info are recorded in the metadata template).
-* The standard column headings are listed below, along with a description of what each column should include and example contents
-* When one of the above content is not provided, the column should be filled with NA
-* Please note that you may also include additional columns
-* To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also submit info on the effect and other alleles. Please see here for more details on our harmonisation pipeline:  https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics
+1. The file must be a .tsv
+2. Standard column headings are listed below, along with a description of what each column should include and example contents
+3. Mandatory fields(*) must be filled in either of the following combinations: 
+  * *variant_ID* and *p-value* _or_
+  * *chromosome*, *base pair location* and *p-value* (for this option you must also provide the genome build in the metadata template, see below)
+4. When one of the manditory columns is not provided, the column should be filled with NA
+5. To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also submit info on the effect and other alleles. Please see here for more details on our harmonisation pipeline:  https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics
+6. You may also include additional columns
 
 [%header, cols="4*>,10"]
 |===
 |Header
 |Description
-|Example
 |Mandatory
 |Validation
+|Example
 
 |variant_id
 |The rsid of the variant
-|`rs7329174`
 |yes*
 |Valid rsID
+|`rs7329174`
 
 |p_value
 |The p-value of the variant/study association
-|`1E-08`
 |yes*
 |numerical value in range 0 to 1
+|`1E-08`
 
 |chromosome
 |The chromosome that the variant is located on
-|`13`
 |yes*
 |Valid chromosome values are 1-25, X, Y, MT (23, 24, 25 are synonymous with ‘X’, ‘Y’, ‘MT’, respectively)
+|`13`
 
 |base_pair_location
 |The base pair location of the variant
-|`40983974`
 |yes*
 |integer in range 1 to 999999999
+|`40983974`
 
 |effect_allele
 |The effect allele of the variant
-|`G`
 |no
 |Valid DNA string
+|`G`
 
 |other_allele
 |The reference allele
-|`A`
 |no
 |Valid DNA string
+|`A`
 
 |effect_allele_frequency
 |Frequency of the effect allele in the control population
+|no
+|numerical value
 |`0.22`
-|no
-|numerical value
 
-|ci_upper
-|The upper range of the odds ratio confidence interval
-|`1.36`
+|odds_ratio
+|The odds ratio of the variant/study association
 |no
 |numerical value
+|`1.50`
 
 |ci_lower
 |The lower range of the odds ratio confidence interval
-|`1.36`
 |no
 |numerical value
+|`1.36`
+
+|ci_upper
+|The upper range of the odds ratio confidence interval
+|no
+|numerical value
+|`1.64`
 
 |beta
 |The beta of the variant/study association
-|`(+/-) 0.064`
 |no
 |numerical value
+|`(+/-) 0.064`
 
 |standard_error
 |The standard error of the beta
-|`0.03`
 |no
 |numerical value
+|`0.03`
 |===
 
 == README file content
@@ -182,7 +203,7 @@ The output should look something like this:
 
 The md5 checksum is the 32-digit hexadecimal number provided by the application. Copy this number into the corresponding column of the study sheet.
 
-= Submitting summary statistics only
+= [[sumstats_only]] Submitting summary statistics only
 
 == What will I need?
 
@@ -242,16 +263,17 @@ If you think there is a mistake in the pre-filled spreadsheet (e.g. an incorrect
 
 Click here [link] for an example of a completed template. There are five columns for you to fill in. The highlighted columns are mandatory, while the grey columns are optional, although we encourage you to submit as much information as you can.
 
-[%header, cols="3*>,10"]
+[%header, cols="4*>,10"]
 |===
-|Column header
-|Mandatory/ Optional
-|Instructions
-|Select from:
+|Header
+|Description
+|Mandatory
+|Validation
+|Example
 
 |Summary statistics file
-|Mandatory
 |The filename for a summary statistics file on the GWAS Catalog FTP, or full URL including filename for a summary statistics file hosted elsewhere online. Leave blank for any studies without summary statistics.
+|no
 |A valid filename or URL, e.g.
 `ftp://ftp.ebi.ac.uk/pub/...`
 
@@ -299,7 +321,7 @@ If the file is valid and everything looks OK, click “Submit” to send your su
 
 A curator will review your submission and make the summary statistics available to the public as soon as possible through the GWAS Catalog website.
 
-= Submitting summary statistics with metadata
+= [[sumstats_and_metadata]] Submitting summary statistics with metadata
 
 == What will I need?
 
@@ -359,7 +381,11 @@ In the “study” sheet, add one row for each separate GWAS analysis (study) in
 |Genotyping technology
 |Mandatory
 |The method used to genotype variants in the discovery stage.
-|Select from: `Genome-wide genotyping array, Targeted genotyping array, Exome genotyping array, Whole genome sequencing
+|Select from:
+ `Genome-wide genotyping array`
+ `Targeted genotyping array`
+ `Exome genotyping array`
+ `Whole genome sequencing`
 
 |Array manufacturer
 |Optional
@@ -423,8 +449,7 @@ In the “study” sheet, add one row for each separate GWAS analysis (study) in
 
 |Cohort(s)
 |Optional
-|List of cohort(s) represented in the discovery sample
-|Enter only if the specific named cohorts are used in the analysis
+|List of cohort(s) represented in the discovery sample. Enter only if the specific named cohorts are used in the analysis
 |Free text e.g. `UKBB \| FINRISK`
 
 |Cohort specific reference
