@@ -422,16 +422,16 @@ In the “study” sheet, add one row for each separate GWAS analysis (study) in
 |`WHR_unadj`
 
 |Genotyping technology
-|The method used to genotype variants in the discovery stage.
+|Method(s) used to genotype variants in the discovery stage. Separate multiple methods by pipes (\|).
 |yes
 |Must match one of the following options
 |Select from: `Genome-wide genotyping array` `Targeted genotyping array` `Exome genotyping array` `Whole genome sequencing`
 
 |Array manufacturer
-|Manufacturer of the genotyping array used for the discovery stage.
+|Manufacturer of the genotyping array used for the discovery stage. Separate multiple manufacturers by pipes (\|).
 |no
-|Free text
-|`Illumina`
+|Must match one of the following options
+|Select from: `Illumina` `Affymetrix` `Perlegen`
 
 |Array information
 |Additional information about the genotyping array. For example, for targeted arrays, please provide the specific type of array.
@@ -476,37 +476,37 @@ In the “study” sheet, add one row for each separate GWAS analysis (study) in
 |`Nicotine dependence`
 
 |Summary statistics file
-|The filename for a summary statistics file on the GWAS Catalog FTP, or full URL including filename for a summary statistics file hosted elsewhere online. Leave blank for any studies without summary statistics.
+|The summary statistics *filename* (for Globus upload) or *full URL and filename* (for a file hosted elsewhere online). Leave blank for any studies without summary statistics.
 |no
 |A valid filename or URL
 |`http://.../my_file_location/summary_stats.tsv`
 
 |md5 sum
-|md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics.
+|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See here for help  calculating checksums[link].
 |no
 |A valid md5 checksum (32-digit hexadecimal number)
 |`49ea8cf53801c7f1e2f11336fb8a29c8`
 
 |Readme
-|Please enter here the text for the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into all the rows. See below for instructions on what to include in the readme file.
+|Text of the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics. See [link] for instructions on what to include in the readme file.
 |no
 |...
-|<link to section above>
+|...
 
 |Summary statistics assembly
 |Genome assembly for the summary statistics. Leave blank for any studies without summary statistics.
 |no
-|Must match one of the following options
+|Must match one of the following options. Leave blank for any studies without summary statistics.
 |Select from: `GRCh38` `GRCh37` `NCBI36` `NCBI35` `NCBI34`
 
 |Cohort(s)
-|List of cohort(s) represented in the discovery sample. Enter only if the specific named cohorts are used in the analysis
+|List of cohort(s) represented in the discovery sample, separated by pipes (\|). Enter only if the specific named cohorts are used in the analysis.
 |no
 |Free text
 |`UKBB \| FINRISK`
 
 |Cohort specific reference
-|List of cohort specific identifier(s) issued to this research study. For example, an ANID issued by UK Biobank.
+|List of cohort specific identifier(s) issued to this research study, separated by pipes (\|). For example, an ANID issued by UK Biobank.
 |no
 |Free text
 |`ANID 45956`
@@ -536,7 +536,7 @@ For each column, please enter the following information:
 |Example
 
 |Study tag
-|A unique free-text label for each genome-wide association study in the publication. This should match the study tag that you have provided in the “study” tab. This allows the sample information to be linked to the correct study. You must provide at least one sample row for each study.
+|A unique free-text label for each genome-wide association study in the publication. This should match the study tag that you have provided in the “study” tab. This will allow the sample information to be linked to the correct study. You must provide at least one sample row for each study.
 |yes
 |Free text
 |`WHR_unadj`
@@ -572,7 +572,7 @@ For each column, please enter the following information:
 |`1000 males, 1000 females` `1200 major depression cases, 800 bipolar disorder cases` `700 severe cases, 700 moderate cases, 600 mild cases`
 
 |Ancestry category
-|Broad ancestry category that best describes the sample. For more information about each category, please see [link to ancestry documentation?]
+|Broad ancestry category that best describes the sample. For more information about each category, please see See https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5815218/table/Tab1/?report=objectonly[Table 1, Morales et al., 2018].
 |yes
 |Must match one of the following options
 |Select from:
@@ -596,22 +596,22 @@ For each column, please enter the following information:
 `Sub-Saharan African`
 
 |Ancestry
-|The most detailed ancestry descriptor(s) for the sample
+|The most detailed ancestry descriptor(s) for the sample. Separate multiple descriptors by pipes (\|).
 |no
 |Free text
 |`Han Chinese`
 
 |Founder/Genetically isolated population description
-|For founder or genetically isolated population, provide  description. If multiple founder/genetically isolated populations are included for the same ancestry category, separate using "\|". For more information about founder/genetically isolated populations, please see [link to ancestry documentation?]
+|For founder or genetically isolated population, provide  description. If multiple founder/genetically isolated populations are included for the same ancestry category, separate using pipes (\|).
 |no
 |Free text
-|`Korculan (founder/genetic isolate) \| Vis (founder/genetic isolate)`
+|`Korculan (founder/genetic isolate)\| Vis(founder/genetic isolate)`
 
 |Country of recruitment
-|List of country/countries where samples were recruited.
+|List of country/countries where samples were recruited, separated by pipes (\|).
 |yes
-|Must match one of the following options
-|e.g. `Japan`. For a complete list of countries, please see [link to CIA Factbook, or other information source???]
+|Country name(s) from https://unstats.un.org/unsd/methodology/m49[The United Nations M49 Standard of Geographic Regions]
+|`Japan\|China`
 |===
 
 === Step 5: Upload the submission spreadsheet and submit
