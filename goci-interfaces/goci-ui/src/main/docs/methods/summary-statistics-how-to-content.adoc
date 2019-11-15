@@ -20,7 +20,7 @@ A publication will not appear in the table if:
 * it has been missed by our literature search, or
 * curators have reviewed the publication and found that it does not meet our eligibility criteria
 
-We endeavour to include all eligible publications available for submission as soon as possible after they have been indexed in PubMed. However, some publications may be missed by our literature search. If you think that we are missing an eligible publication or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
+If you think that we are missing an eligible publication, or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
 
 == What can I submit?
 
@@ -38,7 +38,7 @@ The “Status” column in the search results lets you know what you can submit 
 
 |OPEN FOR SUBMISSION
 |The publication has been identified by curators and meets the GWAS Catalog’s inclusion criteria, but has not yet been curated. We don't have metadata or summary statistics yet.
-|<<sumstats_and_metadata, Summary statistics _and_ Study metadata>>
+|<<sumstats_and_metadata, Summary statistics plus study metadata>>
   
 |CLOSED
 |We are not currently accepting submissions for this publication. We either have the summary statistics already, or the publication is under submission by another author or curator. You may want to check with your co-authors, or contact us at gwas-info@ebi.ac.uk for more information.
@@ -54,18 +54,18 @@ The “Status” column in the search results lets you know what you can submit 
 
 Summary statistics are defined as the aggregate p-values and association data for every variant analysed in a genome-wide association study (GWAS). They should be provided in one file per GWAS with one row for each variant analysed.
                                                                                                                                                                                                                                                                                                                                                                                                                     
-Submitted summary statistics files must conform to our standard file format and content (as published in [Buniello and MacArthur, 2019]https://doi.org/10.1093/nar/gky1120), see also https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics.
+Submitted summary statistics files must conform to our standard file format and content (published in https://doi.org/10.1093/nar/gky1120[Buniello and MacArthur, 2019], further details https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here].
 
 Summary statistics file requirements:
 
-1. The file must be a .tsv
-2. Standard column headings are listed below, along with a description of what each column should include and example contents
-3. Mandatory fields(*) must be filled in either of the following combinations: 
-  * *variant_ID* and *p-value* _or_
-  * *chromosome*, *base pair location* and *p-value* (for this option you must also provide the genome build in the metadata template, see below)
+1. The file must be in .tsv format
+2. Columns must follow the standard headings and data formats listed in the table below
+3. The file must include at least one of the following combinations of mandatory columns(*): 
+  * Option 1: *variant_ID* and *p-value*
+  * Option 2: *chromosome*, *base pair location* and *p-value*  - for this option you must also provide the genome assembly in the submission template
 4. When one of the manditory columns is not provided, the column should be filled with NA
-5. To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also submit info on the effect and other alleles. Please see here for more details on our harmonisation pipeline:  https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics
-6. You may also include additional columns
+5. To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also include *effect_allele* and *other_allele*. See https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here] for more details on our harmonisation pipeline.
+6. You may also include any number of additional columns
 
 [%header, cols="4*>,10"]
 |===
@@ -160,7 +160,7 @@ e.g.: INFO: imputation quality/certainty metric from IMPUTE2
 
 3. Any other information or comment that can be useful to interpret and store the data under submission (e.g. broader description of the cohort used in the study, QC measures applied) 
 
-Please see here for an example of a good readme file: link to the FTP with example txt file.
+Please see <link to the FTP with example txt file>[here] for an example of a good readme file.
 
 == Summary statistics validator
 
@@ -268,25 +268,28 @@ To submit summary statistics, you will need:
 
 * For publications that are already included in the GWAS Catalog, you only need to match your summary statistics files to the study entries we have already created. To help you do this, the summary statistics submission template is pre-filled with basic meta-data for each study in the publication, including:
 
-[%header, cols="1*>,10"]
+[%header, cols="2*>,10"]
 |===
 |Column header
 |Information provided
+|Example
 
 |Study accession
 |The GWAS Catalog study accession, beginning with “GCST”
+|`GCST007280`
 
 |Reported trait
 |The trait under investigation
+|`Reticulocyte count`
 
 |Discovery sample
 |A description of the discovery sample (including number and ancestry)
+|`1,000 European ancestry cases, 1,000 European ancestry controls`
 |===
 
 * If you need more information to identify each study, you can find additional details at the GWAS Catalog website, on the relevant publication page (add the PubMed ID to https://www.ebi.ac.uk/gwas/).
-* If you think there is a mistake in the pre-filled spreadsheet (e.g. an incorrect number of studies for your publication), please contact gwas-info@ebi.ac.uk.
- 
-* Complete the template. There are five columns for you to fill in: the highlighted columns are mandatory, while the grey columns are optional, although we encourage you to submit as much information as you can. See example[link].
+* If you think there is a mistake in the pre-filled spreadsheet (e.g. the wrong number of studies), please contact gwas-info@ebi.ac.uk.
+* Complete the template. There are 7 columns for you to fill in: highlighted columns are mandatory and grey columns are optional, although we encourage you to submit as much information as you can. See example[link].
 
 [%header, cols="4*>,10"]
 |===
@@ -303,10 +306,10 @@ To submit summary statistics, you will need:
 |`WHR_unadj`
 
 |Summary statistics file
-|The summary statistics filename (for Globus upload) or full URL + filename (for a file hosted elsewhere online). Leave blank for any studies without summary statistics.
+|The summary statistics *filename* (for Globus upload) or *full URL and filename* (for a file hosted elsewhere online). Leave blank for any studies without summary statistics.
 |no
 |A valid filename or URL
-|`ftp://ftp.ebi.ac.uk/pub/...`
+|`http://.../my_file_location/summary_stats.tsv`
 
 |md5 sum
 |The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See here for help  calculating checksums[link].
@@ -476,7 +479,7 @@ In the “study” sheet, add one row for each separate GWAS analysis (study) in
 |The filename for a summary statistics file on the GWAS Catalog FTP, or full URL including filename for a summary statistics file hosted elsewhere online. Leave blank for any studies without summary statistics.
 |no
 |A valid filename or URL
-|`ftp://ftp.ebi.ac.uk/pub/...`
+|`http://.../my_file_location/summary_stats.tsv`
 
 |md5 sum
 |md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics.
