@@ -235,7 +235,7 @@ To submit summary statistics, you will need:
 
 === Step 2: Upload summary statistics
 
-==== Option 1: Upload files using Globus (...might need to add screenshots as in Simon's instructions...?)
+==== Option 1: Upload files using Globus
 
 * When you create a submission, you will receive an email from Globus with the URL to your personal directory for uploading summary statistics files. Open the link to access the shared location.
 * First log into globus. You must login using the same email account used to log into the GWAS deposition system. If you logged into GWAS deposition with your ELIXIR account, you can use the same account to log into Globus.
