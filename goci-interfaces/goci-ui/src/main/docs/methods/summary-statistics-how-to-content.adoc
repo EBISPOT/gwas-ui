@@ -2,17 +2,30 @@
 
 == Logging in to the submission page
 
++++ <details><summary> +++
++++ </summary><div> +++
+
 * To get started, click LOGIN in the top right corner of the submission page.
 * Log in using your ELIXIR identity, or follow the link to register. Your ELIXIR identity may be linked to Google, LinkedIn, ORCID or an institutional account.
 
++++ </div></details> +++
+
 == Finding my publication
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion. To find your publication:
 
 * You can search for a publication by *PubMed ID* or *first author*.
 * Publications matching your search are displayed in the table.
 
++++ </div></details> +++
+
 == What if my publication is not in the table?
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 A publication will not appear in the table if:
 
@@ -22,7 +35,12 @@ A publication will not appear in the table if:
 
 If you think that we are missing an eligible publication, or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
 
++++ </div></details> +++
+
 == What can I submit?
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 The “Status” column in the search results lets you know what you can submit for a particular publication:
 
@@ -45,15 +63,17 @@ The “Status” column in the search results lets you know what you can submit 
 |NA
 |===
 
++++ </div></details> +++
+
 = Preparing summary statistics files
+
+== Summary statistics file format and content
 
 +++ <details><summary> +++
 +++ </summary><div> +++
 
-== Summary statistics file format and content
-
 Summary statistics are defined as the aggregate p-values and association data for every variant analysed in a genome-wide association study (GWAS). They should be provided in one file per GWAS with one row for each variant analysed.
-                                                                                                                                                                                                                                                                                                                                                                                                                    
+
 Submitted summary statistics files must conform to our standard file format and content (published in https://doi.org/10.1093/nar/gky1120[Buniello and MacArthur, 2019], further details https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here].
 
 Summary statistics file requirements:
@@ -148,7 +168,13 @@ Summary statistics file requirements:
 |`0.03`
 |===
 
++++ </div></details> +++
+
 == [[readme]] README file content
+
++++ <details><summary> +++
++++ </summary><div> +++
+
 Each summary statistics file should be accompanied by a readme file containing the following info in a numbered list:
 
 1. Full citation for the publication linked to the submitted summary statistics (in any standard citation style) 
@@ -162,15 +188,30 @@ e.g.: INFO: imputation quality/certainty metric from IMPUTE2
 
 Please see <link to the FTP with example txt file>[here] for an example of a good readme file.
 
++++ </div></details> +++
+
 == Summary statistics validator
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/. 
 
++++ </div></details> +++
+
 == [[checksums]] Calculating checksums for summary statistics files
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 In order to ensure the integrity of the uploaded summary statistics files before and after the upload, you must provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. If there is any problem during the upload that leads to corruption of the data, this checksum will change. So by validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
 
++++ </div></details> +++
+
 === Calculating on Mac computers
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 The md5 command line application is installed on Mac computers by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
 
@@ -182,7 +223,12 @@ The output should look something like this:
 
 The md5 checksum is the 32-digit hexadecimal number in the output, after the filename. Copy this number into the corresponding column of the study sheet.
 
++++ </div></details> +++
+
 === Calculating on Linux/Unix computers
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 The md5sum command line application is installed on all Linux/Unix based systems by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
 
@@ -194,7 +240,12 @@ The output should look something like this:
 
 The md5 checksum is the 32-digit hexadecimal number in the first column of the output, before the file name. Copy this number into the corresponding column of the study sheet.
 
++++ </div></details> +++
+
 === Calculating on Windows computers
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 In Windows, you can use the certutil command line tool to calculate md5 checksums. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
 
@@ -210,10 +261,10 @@ The md5 checksum is the 32-digit hexadecimal number provided by the application.
 
 = [[sumstats_only]] Submitting summary statistics only
 
+== What will I need?
+
 +++ <details><summary> +++
 +++ </summary><div> +++
-
-== What will I need?
 
 To submit summary statistics, you will need:
 
@@ -222,7 +273,12 @@ To submit summary statistics, you will need:
 * The md5 checksum for each summary statistics file
 * Enough information about each GWAS to match it to the corresponding study entry in the pre-filled template
 
-=== Step 1: Create a submission
++++ </div></details> +++
+
+== Step 1: Create a submission
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 * Search by *PubMed ID* or *first author* to find your publication.
 * Check that the publication has the status OPEN FOR SUMMARY STATISTICS SUBMISSION
@@ -232,10 +288,15 @@ To submit summary statistics, you will need:
   ** The upper panel gives a summary of the publication.
   ** The lower panel shows the details of your submission, including the Submission ID, status and validation reports.
   ** The buttons on the left show the actions available to you.
+  
++++ </div></details> +++
 
-=== Step 2: Upload summary statistics
+== Step 2: Upload summary statistics
 
-==== Option 1: Upload files using Globus
+=== Option 1: Upload files using Globus
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 * When you create a submission, you will receive an email from Globus with the URL to your personal directory for uploading summary statistics files. Open the link to access the shared location.
 * First log into globus. You must login using the same email account used to log into the GWAS deposition system. If you logged into GWAS deposition with your ELIXIR account, you can use the same account to log into Globus.
@@ -251,20 +312,35 @@ To submit summary statistics, you will need:
   ** Select the collection on the right hand side to change it.
   ** Select “My collection” tab to find the collection you just created for you local computer.
   ** You should now see the the EBI share directory side by side with your own computer’s file system.
-* At this point you can simply drag and drop the summary stats files you want to upload from the right window to the left window. Once done you will get an email notification that the transfer is complete. Note: You do not need to keep your browser window open, the transfer will continue in the background. 
+* At this point you can simply drag and drop the summary stats files you want to upload from the right window to the left window. Once done you will get an email notification that the transfer is complete. Note: You do not need to keep your browser window open, the transfer will continue in the background.
 
-==== Option 2: Upload files to another location
++++ </div></details> +++
+
+=== Option 2: Upload files to another location
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 * Alternatively, you can store your summary statistics on your own personal or institutional website, or in a service like Google Drive or Dropbox.
 * Make a note of the file URL. You will need this for the following step.
 
-=== Step 3: Download the submission template
++++ </div></details> +++
+
+== Step 3: Download the submission template
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 * Return to the Submission page
 * Click “Download template” to get a copy of the submission template. Save the template to your computer to complete offline.
 * We generate a unique template for each publication containing important pre-filled data, so please remember to download a new template each time you submit a new publication.
 
-=== Step 4: Complete the submission spreadsheet (pre-filled metadata)
++++ </div></details> +++
+
+== Step 4: Complete the submission spreadsheet (pre-filled metadata)
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 * For publications that are already included in the GWAS Catalog, you only need to match your summary statistics files to the study entries we have already created. To help you do this, the summary statistics submission template is pre-filled with basic meta-data for each study in the publication, including:
 
@@ -291,7 +367,7 @@ To submit summary statistics, you will need:
 * If you think there is a mistake in the pre-filled spreadsheet (e.g. the wrong number of studies), please contact gwas-info@ebi.ac.uk.
 * Complete the template. There are 7 columns for you to fill in: highlighted columns are mandatory and grey columns are optional, although we encourage you to submit as much information as you can. See example[link].
 
-[%header, cols="4*>,10"]
+[cols="<2,<3,<1,<2,<2", options="header", grid="all", width=100%]
 |===
 |Header
 |Description
@@ -309,16 +385,16 @@ To submit summary statistics, you will need:
 |The summary statistics *filename* (for Globus upload) or *full URL and filename* (for a file hosted elsewhere online). Leave blank for any studies without summary statistics.
 |no
 |A valid filename or URL
-|`http://.../my_file_location/summary_stats.tsv`
+|`http://.../example.tsv`
 
 |md5 sum
-|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See here for help  calculating checksums[link].
+|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See <<checksums,how to calculate checksums>>.
 |no
 |A valid md5 checksum (32-digit hexadecimal number)
 |`49ea8cf53801c7f1e2f11336fb8a29c8`
 
 |Readme
-|Text of the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics. See [link] for instructions on what to include in the readme file.
+|Text of the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics. See <<readme, what to include in the readme>>.
 |no
 |...
 |...
@@ -326,23 +402,39 @@ To submit summary statistics, you will need:
 |Summary statistics assembly
 |Genome assembly for the summary statistics. Leave blank for any studies without summary statistics.
 |no
-|Must match one of the following options. Leave blank for any studies without summary statistics.
-|Select from: `GRCh38` `GRCh37` `NCBI36` `NCBI35` `NCBI34`
+|Must match one of the following options:
+
+`GRCh38`
+
+`GRCh37`
+
+`NCBI36`
+
+`NCBI35`
+
+`NCBI34`
+
+|`GRCh38`
 
 |Cohort(s)
-|List of cohort(s) represented in the discovery sample, separated by pipes (\|). Enter only if the specific named cohorts are used in the analysis.
+|List of cohort(s) represented in the discovery sample, separated by pipes "\|". Enter only if the specific named cohorts are used in the analysis.
 |no
 |Free text
-|`UKBB \| FINRISK`
+|`UKBB\|FINRISK`
 
 |Cohort specific reference
-|List of cohort specific identifier(s) issued to this research study, separated by pipes (\|). For example, an ANID issued by UK Biobank.
+|List of cohort specific identifier(s) issued to this research study, separated by pipes "\|". For example, an ANID issued by UK Biobank.
 |no
 |Free text
-|`ANID 45956`
+|`ANID45956`
 |===
 
-=== Step 5: Upload the submission spreadsheet and submit
++++ </div></details> +++
+
+== Step 5: Upload the submission spreadsheet and submit
+
++++ <details><summary> +++
++++ </summary><div> +++
 
 * When you have completed the submission spreadsheet, return to the Submission page and click “Upload template”.
 * Drag-and-drop the completed template onto the cloud icon, or click the icon to select the file from your computer.
@@ -361,10 +453,10 @@ To submit summary statistics, you will need:
 
 = [[sumstats_and_metadata]] Submitting summary statistics with metadata
 
+== What will I need?
+
 +++ <details><summary> +++
 +++ </summary><div> +++
-
-== What will I need?
 
 To submit summary statistics with metadata, you will need:
 
@@ -375,37 +467,86 @@ To submit summary statistics with metadata, you will need:
 ** Study information, e.g. genotyping details, variant count, traits analysed
 ** Sample information, e.g. number of individuals/cases/controls, ancestry, country of recruitment
 
-=== Step 1: Create a submission
++++ </div></details> +++
 
-To start a submission, first click on the PubMed ID to go to the publication details page. This page displays the publication status and lets you know what you can submit (see “What can I submit?”[link] above for more information).
+== Step 1: Create a submission
 
-Click “Create Submission”. You will be prompted to log in first, if you haven’t already.
++++ <details><summary> +++
++++ </summary><div> +++
 
-This opens a new Submission page:
+* Search by *PubMed ID* or *first author* to find your publication.
+* Check that the publication has the status OPEN FOR SUMMARY STATISTICS SUBMISSION
+* Click on the PubMed ID to go to the publication details page.
+* Click “Create Submission”. You will be prompted to log in, if you haven’t already.
+* You have now created a new Submission:
+  ** The upper panel gives a summary of the publication.
+  ** The lower panel shows the details of your submission, including the Submission ID, status and validation reports.
+  ** The buttons on the left show the actions available to you.
+  
++++ </div></details> +++
 
-* The upper panel provides a summary of the publication, including an FTP location where you can upload your summary statistics.
-* The lower panel shows the details of your submission, including the Submission ID, status and validation reports.
-* The buttons on the left show the actions available to you.
+== Step 2: Upload summary statistics
 
-=== Step 2: Upload summary statistics
+=== Option 1: Upload files using Globus
 
-The Submission page contains a URL for our FTP site, where we have created a folder for your publication. You can upload your summary statistics to this location… <check this>
++++ <details><summary> +++
++++ </summary><div> +++
 
-Alternatively, you can store your summary statistics on your own personal or institutional website, or in a service like Google Drive or Dropbox. You can then provide us with the link so that we can transfer the data (see below).
+* When you create a submission, you will receive an email from Globus with the URL to your personal directory for uploading summary statistics files. Open the link to access the shared location.
+* First log into globus. You must login using the same email account used to log into the GWAS deposition system. If you logged into GWAS deposition with your ELIXIR account, you can use the same account to log into Globus.
+* After a successful login you should be able to view your personal directory for uploading files. 
+* If you are already familiar with Globus and have your summary stats files in an existing collection you can now transfer your files from your collection to this space. 
+* If you want to transfer files from your own personal computer, you will need to install the Globus application.
+  ** Select “Transfer or Sync to…” from the right hand window. 
+  ** The window will split and give you the option to select a collection. Select the option to install the Globus Connect Personal application
+  ** Give your collection a name so you can easily identify it.
+  ** Generate a setup key and keep a note of the number.
+  ** Copy the setup key and install Globus Connect Personal on your computer. When you start Globus Connect on your computer it will ask you to enter the setup key.
+  ** Once Globus Connect Personal is successfully installed and running on your machine. Switch back to the Globus File Manager.
+  ** Select the collection on the right hand side to change it.
+  ** Select “My collection” tab to find the collection you just created for you local computer.
+  ** You should now see the the EBI share directory side by side with your own computer’s file system.
+* At this point you can simply drag and drop the summary stats files you want to upload from the right window to the left window. Once done you will get an email notification that the transfer is complete. Note: You do not need to keep your browser window open, the transfer will continue in the background.
 
-=== Step 3: Download the submission template
++++ </div></details> +++
 
-Click “Download template” to get a copy of the submission template. You can save a copy of the template to your computer and complete the spreadsheet offline before uploading it to the submission system. Please download a new template each time you submit a new publication.
+=== Option 2: Upload files to another location
 
-For a publication that is OPEN FOR SUBMISSION, you will need to provide metadata about each study and sample group in the publication. You will also need to tell us which summary statistics file belongs with which study. See below for instructions on completing the spreadsheet.
++++ <details><summary> +++
++++ </summary><div> +++
 
-=== Step 4: Complete the submission spreadsheet (new meta-data)
+* Alternatively, you can store your summary statistics on your own personal or institutional website, or in a service like Google Drive or Dropbox.
+* Make a note of the file URL. You will need this for the following step.
 
-There are two tabs in the submission spreadsheet, one for studies and one for samples. The highlighted columns are mandatory, while the grey columns are optional, although we encourage you to submit as much information as you can. Each column includes a short description to help you to enter the correct data. Click here [link] for an example of a completed template. More details can be found below.
++++ </div></details> +++
 
-==== Study tab
+== Step 3: Download the submission template
 
-In the “study” sheet, add one row for each separate GWAS analysis (study) in the publication. For each column, please enter the following information:
++++ <details><summary> +++
++++ </summary><div> +++
+
+* Return to the Submission page
+* Click “Download template” to get a copy of the submission template. Save the template to your computer to complete offline.
+* The template may be updated from time to time, so please remember to download a new template each time you submit a new publication.
+
++++ </div></details> +++
+
+== Step 4: Complete the submission spreadsheet (new meta-data)
+
++++ <details><summary> +++
++++ </summary><div> +++
+
+* For publications that are not yet included in the GWAS Catalog, we ask you to submit metadata in addition to the summary statistics files.
+* There are 2 tabs for you to fill in: one for studies and one for samples. Highlighted columns are mandatory and grey columns are optional, although we encourage you to submit as much information as you can. See example[link].
+
++++ </div></details> +++
+
+=== Study tab
+
++++ <details><summary> +++
++++ </summary><div> +++
+
+* In the “study” tab, add one row for each separate GWAS analysis (study) in the publication. For each column, please enter the following information:
 
 [cols="<2,<3,<1,<2,<2", options="header", grid="all", width=100%]
 |===
@@ -542,9 +683,14 @@ In the “study” sheet, add one row for each separate GWAS analysis (study) in
 |`ANID45956`
 |===
 
-==== Sample tab
++++ </div></details> +++
 
-The sample tab includes information about the samples included in each GWAS. Each GWAS should be listed separately, and within each GWAS each group of samples should be on a separate row. Examples of sample groups are discovery/replication cohorts, and ancestry categories (e.g. European, East Asian, South Asian). 
+=== Sample tab
+
++++ <details><summary> +++
++++ </summary><div> +++
+
+* The sample tab includes information about the samples included in each GWAS. Each GWAS should be listed separately, and within each GWAS, each group of samples should be on a separate row. Examples of sample groups are discovery/replication cohorts, and ancestry categories (e.g. European, East Asian, South Asian). 
 
 For example:
 
@@ -555,7 +701,7 @@ For example:
 ** replication/European
 ** replication/East Asian, making 8 rows in total.
 
-For each column, please enter the following information:
+* For each column, please enter the following information:
 
 [cols="<2,<3,<1,<2,<2", options="header", grid="all", width=100%]
 |===
@@ -672,19 +818,25 @@ You should create a new row for each ancestry category. However, you may enter m
 |`Japan\|China`
 |===
 
-=== Step 5: Upload the submission spreadsheet and submit
++++ </div></details> +++
 
-Once you have completed the submission spreadsheet, return to the Submission page and click on “Upload template” to select the file from your computer. The spreadsheet then goes through a validation step. Note that this may take some time. You can leave the page and allow the validation to proceed in the background. You will receive an email when the validation has finished.
+== Step 5: Upload the submission spreadsheet and submit
 
-If the file passes validation (submission status VALID), you will see a Submission Stats message displaying the number of studies and sample groups detected in the uploaded spreadsheet. You should check to make sure that these numbers are what you would expect.
++++ <details><summary> +++
++++ </summary><div> +++
 
-If the file fails validation (submission status INVALID), an error message will be displayed.
-
-If there is an error, or any unexpected numbers in the Submission Stats, please delete your file and check the spreadsheet for mistakes before trying to upload it again.
-
-If the file is valid and everything looks OK, click “Submit” to send your submission to the GWAS Catalog.
-
-A curator will review your submission and make the meta-data and summary statistics available to the public as soon as possible through the GWAS Catalog website.
+* When you have completed the submission spreadsheet, return to the Submission page and click “Upload template”.
+* Drag-and-drop the completed template onto the cloud icon, or click the icon to select the file from your computer.
+* Click "Upload File". The progress bar will tell you when the upload is complete.
+* Click "Start validation". The validation pipeline will first check the uploaded spreadsheet. If this passes, it will go on to check the summary statistics files themselves. This may take some time, so feel free to do something else while you wait. The validation will continue and you will receive an email when it has finished, or if an error is detected.
+* If validation fails, the Submission Report will display TEMPLATE INVALID, as well as list of errors that need to fixed before the submission can be completed.
+  ** Please follow the instructions to fix any errors in the template or in the summary statistics files. Contact gwas-info@ebi.ac.uk if you need help.
+  ** Click "Delete latest file" to remove the invalid template.
+  ** Click "Upload template" to select the corrected template and try again.
+* If validation succeeds, the Submission Report will display TEMPLATE VALID. The Submission Stats field shows the number of studies and sample groups that you have uploaded. Make sure this is correct before proceeding.
+  ** If the number of studies or sample groups is incorrect, please review your template and make any necessary changes, then "Delete latest file" and try again.
+  ** If everything looks OK, click "Submit" to send the submission to the GWAS Catalog. You will be returned to the My Submissions page, where you can see your latest submission at the top, with the status SUBMITTED.
+* A curator will review your submission and make the summary statistics available to the public as soon as possible through the GWAS Catalog website.
 
 +++ </div></details> +++
 
