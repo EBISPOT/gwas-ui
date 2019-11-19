@@ -26,7 +26,7 @@ If you think that we are missing an eligible publication, or if you want to subm
 
 The “Status” column in the search results lets you know what you can submit for a particular publication:
 
-[%header, cols="2*>,10"]
+[cols="<1,<3,<1", options="header", grid="all", width=100%]
 |===
 |Status
 |Description
@@ -67,9 +67,9 @@ Summary statistics file requirements:
 5. To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also include *effect_allele* and *other_allele*. See https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here] for more details on our harmonisation pipeline.
 6. You may also include any number of additional columns
 
-[%header, cols="4*>,10"]
+[cols="<2,<3,<1,<3,<1", options="header", grid="all", width=100%]
 |===
-|Header
+|Column header
 |Description
 |Mandatory
 |Validation
@@ -82,9 +82,9 @@ Summary statistics file requirements:
 |`rs7329174`
 
 |p_value
-|The p-value of the variant/study association
+|The p-value of the variant/trait association
 |yes*
-|numerical value in range 0 to 1
+|Numerical value in range 0 to 1
 |`1E-08`
 
 |chromosome
@@ -96,7 +96,7 @@ Summary statistics file requirements:
 |base_pair_location
 |The base pair location of the variant
 |yes*
-|integer in range 1 to 999999999
+|Integer in range 1 to 999999999
 |`40983974`
 
 |effect_allele
@@ -114,41 +114,41 @@ Summary statistics file requirements:
 |effect_allele_frequency
 |Frequency of the effect allele in the control population
 |no
-|numerical value
+|Numerical value in range 0 to 1
 |`0.22`
 
 |odds_ratio
-|The odds ratio of the variant/study association
+|The odds ratio of the variant/trait association
 |no
-|numerical value
+|Numerical value
 |`1.50`
 
 |ci_lower
 |The lower range of the odds ratio confidence interval
 |no
-|numerical value
+|Numerical value
 |`1.36`
 
 |ci_upper
 |The upper range of the odds ratio confidence interval
 |no
-|numerical value
+|Numerical value
 |`1.64`
 
 |beta
-|The beta of the variant/study association
+|The beta of the variant/trait association
 |no
-|numerical value
-|`(+/-) 0.064`
+|Numerical value (+/-)
+|`-0.064`
 
 |standard_error
 |The standard error of the beta
 |no
-|numerical value
+|Numerical value
 |`0.03`
 |===
 
-== README file content
+== [[readme]] README file content
 Each summary statistics file should be accompanied by a readme file containing the following info in a numbered list:
 
 1. Full citation for the publication linked to the submitted summary statistics (in any standard citation style) 
@@ -166,7 +166,7 @@ Please see <link to the FTP with example txt file>[here] for an example of a goo
 
 To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/. 
 
-== Calculating checksums for summary statistics files
+== [[checksums]] Calculating checksums for summary statistics files
 
 In order to ensure the integrity of the uploaded summary statistics files before and after the upload, you must provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. If there is any problem during the upload that leads to corruption of the data, this checksum will change. So by validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
 
@@ -268,7 +268,7 @@ To submit summary statistics, you will need:
 
 * For publications that are already included in the GWAS Catalog, you only need to match your summary statistics files to the study entries we have already created. To help you do this, the summary statistics submission template is pre-filled with basic meta-data for each study in the publication, including:
 
-[%header, cols="2*>,10"]
+[cols="<2,<5,<3", options="header", grid="all", width=100%]
 |===
 |Column header
 |Information provided
@@ -407,7 +407,7 @@ There are two tabs in the submission spreadsheet, one for studies and one for sa
 
 In the “study” sheet, add one row for each separate GWAS analysis (study) in the publication. For each column, please enter the following information:
 
-[%header, cols="4*>,10"]
+[cols="<2,<3,<1,<2,<2", options="header", grid="all", width=100%]
 |===
 |Header
 |Description
@@ -422,16 +422,31 @@ In the “study” sheet, add one row for each separate GWAS analysis (study) in
 |`WHR_unadj`
 
 |Genotyping technology
-|Method(s) used to genotype variants in the discovery stage. Separate multiple methods by pipes (\|).
+|Method(s) used to genotype variants in the discovery stage. Separate multiple methods by pipes "\|".
 |yes
-|Must match one of the following options
-|Select from: `Genome-wide genotyping array` `Targeted genotyping array` `Exome genotyping array` `Whole genome sequencing`
+|Must match one of the following options:
+
+`Genome-wide genotyping array`
+
+`Targeted genotyping array`
+
+`Exome genotyping array`
+
+`Whole genome sequencing`
+
+|`Genome-wide genotyping array` 
 
 |Array manufacturer
-|Manufacturer of the genotyping array used for the discovery stage. Separate multiple manufacturers by pipes (\|).
+|Manufacturer of the genotyping array used for the discovery stage. Separate multiple manufacturers by pipes "\|".
 |no
-|Must match one of the following options
-|Select from: `Illumina` `Affymetrix` `Perlegen`
+|Must match one of the following options:
+
+`Illumina`
+
+`Affymetrix`
+
+`Perlegen`
+|`Illumina\|Affymetrix`
 
 |Array information
 |Additional information about the genotyping array. For example, for targeted arrays, please provide the specific type of array.
@@ -442,8 +457,12 @@ In the “study” sheet, add one row for each separate GWAS analysis (study) in
 |Imputation
 |Were SNPs imputed for the discovery GWAS?
 |yes
-|Must match one of the following options
-|Select from: `Yes` `No`
+|Must match one of the following options:
+
+`Yes`
+
+`No`
+|`Yes`
 
 |Variant count
 |The number of variants analysed in the discovery stage (after QC)
@@ -460,7 +479,7 @@ In the “study” sheet, add one row for each separate GWAS analysis (study) in
 |Study description
 |Additional information about the study
 |no
-|...
+|Free text
 |...
 
 |Reported trait
@@ -479,16 +498,16 @@ In the “study” sheet, add one row for each separate GWAS analysis (study) in
 |The summary statistics *filename* (for Globus upload) or *full URL and filename* (for a file hosted elsewhere online). Leave blank for any studies without summary statistics.
 |no
 |A valid filename or URL
-|`http://.../my_file_location/summary_stats.tsv`
+|`http://.../example.tsv`
 
 |md5 sum
-|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See here for help  calculating checksums[link].
+|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See <<checksums,how to calculate checksums>>.
 |no
 |A valid md5 checksum (32-digit hexadecimal number)
 |`49ea8cf53801c7f1e2f11336fb8a29c8`
 
 |Readme
-|Text of the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics. See [link] for instructions on what to include in the readme file.
+|Text of the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics. See <<readme, what to include in the readme>>.
 |no
 |...
 |...
@@ -496,20 +515,31 @@ In the “study” sheet, add one row for each separate GWAS analysis (study) in
 |Summary statistics assembly
 |Genome assembly for the summary statistics. Leave blank for any studies without summary statistics.
 |no
-|Must match one of the following options. Leave blank for any studies without summary statistics.
-|Select from: `GRCh38` `GRCh37` `NCBI36` `NCBI35` `NCBI34`
+|Must match one of the following options:
+
+`GRCh38`
+
+`GRCh37`
+
+`NCBI36`
+
+`NCBI35`
+
+`NCBI34`
+
+|`GRCh38`
 
 |Cohort(s)
-|List of cohort(s) represented in the discovery sample, separated by pipes (\|). Enter only if the specific named cohorts are used in the analysis.
+|List of cohort(s) represented in the discovery sample, separated by pipes "\|". Enter only if the specific named cohorts are used in the analysis.
 |no
 |Free text
-|`UKBB \| FINRISK`
+|`UKBB\|FINRISK`
 
 |Cohort specific reference
-|List of cohort specific identifier(s) issued to this research study, separated by pipes (\|). For example, an ANID issued by UK Biobank.
+|List of cohort specific identifier(s) issued to this research study, separated by pipes "\|". For example, an ANID issued by UK Biobank.
 |no
 |Free text
-|`ANID 45956`
+|`ANID45956`
 |===
 
 ==== Sample tab
@@ -527,7 +557,7 @@ For example:
 
 For each column, please enter the following information:
 
-[%header, cols="4*>,10"]
+[cols="<2,<3,<1,<2,<2", options="header", grid="all", width=100%]
 |===
 |Header
 |Description
@@ -544,8 +574,12 @@ For each column, please enter the following information:
 |Stage
 |Stage of the experimental design
 |yes
-|Must match one of the following options
-|Select from: `discovery` `replication`
+|Must match one of the following options:
+
+`discovery`
+
+`replication`
+|`discovery`
 
 |Number of individuals
 |Number of individuals in this group
@@ -566,51 +600,75 @@ For each column, please enter the following information:
 |`1000`
 
 |Sample description
-|Additional  relevant information required for the interpretation of results. For example: sex (males/females) or age (adults/children). This field can also be used to report phenotypic subgroups, such as in studies of multiple traits (“or” traits) or ordinal variables. You do not need to provide details that are not required to interpret the results. For example, if males and females are analysed together and no sex-specific associations are reported, you do not need to report the number of males and females.
+|Additional information required for the interpretation of results, e.g. sex (males/females), age (adults/children), ordinal variables, or multiple traits analysed together ("or" traits).
 |no
 |Free text
-|`1000 males, 1000 females` `1200 major depression cases, 800 bipolar disorder cases` `700 severe cases, 700 moderate cases, 600 mild cases`
+|`1000 males, 1000 females`
+
+`700 severe cases, 700 moderate cases, 600 mild cases`
+
+`1200 major depression cases, 800 bipolar disorder cases`
 
 |Ancestry category
-|Broad ancestry category that best describes the sample. For more information about each category, please see See https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5815218/table/Tab1/?report=objectonly[Table 1, Morales et al., 2018].
+|Broad ancestry category that best describes the sample. For more information about each category, see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5815218/table/Tab1/?report=objectonly[Table 1, Morales et al., 2018].
+
+You should create a new row for each ancestry category. However, you may enter multiple categories in the same row, separated by pipes "\|", only if separate sample numbers are unavailable for each category.
 |yes
-|Must match one of the following options
-|Select from:
+|Must match one of the following options:
+
 `Aboriginal Australian`
+
 `African American or Afro-Caribbean`
+
 `African unspecified`
+
 `Asian unspecified`
+
 `Central Asian`
+
 `Circumpolar peoples`
+
 `East Asian`
+
 `European`
+
 `Greater Middle Eastern (Middle Eastern, North African or Persian)`
+
 `Hispanic or Latin American`
+
 `Native American`
+
 `NR`
+
 `Oceanian`
+
 `Other`
+
 `Other admixed ancestry`
+
 `South Asian`
+
 `South East Asian`
+
 `Sub-Saharan African`
+|`East Asian`
 
 |Ancestry
-|The most detailed ancestry descriptor(s) for the sample. Separate multiple descriptors by pipes (\|).
+|The most detailed ancestry descriptor(s) for the sample. Separate multiple descriptors by pipes "\|".
 |no
 |Free text
 |`Han Chinese`
 
 |Founder/Genetically isolated population description
-|For founder or genetically isolated population, provide  description. If multiple founder/genetically isolated populations are included for the same ancestry category, separate using pipes (\|).
+|For founder or genetically isolated population, provide  description. If multiple founder/genetically isolated populations are included for the same ancestry category, separate using pipes "\|".
 |no
 |Free text
-|`Korculan (founder/genetic isolate)\| Vis(founder/genetic isolate)`
+|`Korculan(founder/genetic isolate)\|Vis(founder/genetic isolate)`
 
 |Country of recruitment
-|List of country/countries where samples were recruited, separated by pipes (\|).
+|List of country/countries where samples were recruited, separated by pipes "\|".
 |yes
-|Country name(s) from https://unstats.un.org/unsd/methodology/m49[The United Nations M49 Standard of Geographic Regions]
+|Must match country name(s) in https://unstats.un.org/unsd/methodology/m49[The United Nations M49 Standard of Geographic Regions]
 |`Japan\|China`
 |===
 
