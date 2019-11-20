@@ -41,7 +41,7 @@ var loadDocumentation = function(pagename, content) {
 
             // Generate breadcrumb title:
             var pathTitle = pathComponent.replace('docs', 'documentation');
-            pathTitle = pathTitle.replace("-", " ");
+            pathTitle = pathTitle.replace(/-/g, " ");
             pathTitle = pathTitle.charAt(0).toUpperCase() + pathTitle.slice(1);
 
             // Adding breadcrumb without and with link:
