@@ -116,7 +116,7 @@ The harmonisation process is the following:
 .. The result of the orientation is the addition of a set of new fields for each record (see below). A harmonisation code is assigned to each record indicating the harmonisation process that was performed (note that currently any processes involving 'Infer strand' are not being used).
 
 . Filtering and QC
-.. Variant ID is set to variant IDs found by step (5).
+.. Variant ID is set to variant IDs found by step (2).
 .. Records without a valid value for variant ID, chromosome, base pair location and p-value are removed.
 
 ==== Table of harmonisation codes
