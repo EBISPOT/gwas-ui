@@ -310,30 +310,35 @@ image::globus_1_login.jpeg[align="center"]
 * If you want to transfer files from your own personal computer, you will need to install the Globus application.
   ** Select “Transfer or Sync to…” from the right hand window.
 
++
 image::globus_2_transfer_sync.jpeg[align="center"]
   
   ** The window will split and give you the option to select a collection.
 
++
 image::globus_3_new_collection.jpeg[align="center"]
 
   ** Select the option to install the Globus Connect Personal application
-  
+
++
 image::globus_4_install_gcp.jpeg[align="center"]
   
   ** Give your collection a name so you can easily identify it.
   ** Generate a setup key and keep a note of the number.
   
++
 image::globus_5_name_collection.jpeg[align="center"]
   
   ** Copy the setup key and install Globus Connect Personal on your computer. When you start Globus Connect on your computer it will ask you to enter the setup key.
   
++
 image::globus_7_install_drag_drop.jpeg[align="center"]
-  
 image::globus_6_setup_key.jpeg[align="center"]
   
   ** Once Globus Connect Personal is successfully installed and running on your machine (it may run in the background, so check for the "g" icon in your toolbar), switch back to the Globus File Manager.
   ** Select the collection on the right hand side to change it.
 
++
 image::globus_8_select_collection.jpeg[align="center"]
 
   ** Select “My collection” tab to find the collection you just created for your local computer.
@@ -521,18 +526,47 @@ To submit summary statistics with metadata, you will need:
 
 * When you create a submission, you will receive an email from Globus with the URL to your personal directory for uploading summary statistics files. Open the link to access the shared location.
 * First log into globus. You must login using the same email account used to log into the GWAS deposition system. If you logged into GWAS deposition with your ELIXIR account, you can use the same account to log into Globus.
-* After a successful login you should be able to view your personal directory for uploading files. 
-* If you are already familiar with Globus and have your summary stats files in an existing collection you can now transfer your files from your collection to this space. 
+
+image::globus_1_login.jpeg[align="center"]
+
+* After a successful login you should be able to view your personal directory for uploading files.
+* If you are already familiar with Globus and have your summary stats files in an existing collection you can now transfer your files from your collection to this space.
 * If you want to transfer files from your own personal computer, you will need to install the Globus application.
-  ** Select “Transfer or Sync to…” from the right hand window. 
-  ** The window will split and give you the option to select a collection. Select the option to install the Globus Connect Personal application
+  ** Select “Transfer or Sync to…” from the right hand window.
+
++
+image::globus_2_transfer_sync.jpeg[align="center"]
+  
+  ** The window will split and give you the option to select a collection.
+
++
+image::globus_3_new_collection.jpeg[align="center"]
+
+  ** Select the option to install the Globus Connect Personal application
+
++
+image::globus_4_install_gcp.jpeg[align="center"]
+  
   ** Give your collection a name so you can easily identify it.
   ** Generate a setup key and keep a note of the number.
+  
++
+image::globus_5_name_collection.jpeg[align="center"]
+  
   ** Copy the setup key and install Globus Connect Personal on your computer. When you start Globus Connect on your computer it will ask you to enter the setup key.
-  ** Once Globus Connect Personal is successfully installed and running on your machine. Switch back to the Globus File Manager.
+  
++
+image::globus_7_install_drag_drop.jpeg[align="center"]
+image::globus_6_setup_key.jpeg[align="center"]
+  
+  ** Once Globus Connect Personal is successfully installed and running on your machine (it may run in the background, so check for the "g" icon in your toolbar), switch back to the Globus File Manager.
   ** Select the collection on the right hand side to change it.
-  ** Select “My collection” tab to find the collection you just created for you local computer.
-  ** You should now see the the EBI share directory side by side with your own computer’s file system.
+
++
+image::globus_8_select_collection.jpeg[align="center"]
+
+  ** Select “My collection” tab to find the collection you just created for your local computer.
+  ** You should now see the EBI shared directory side by side with your own computer’s file system.
 * At this point you can simply drag and drop the summary stats files you want to upload from the right window to the left window. Once done you will get an email notification that the transfer is complete. Note: You do not need to keep your browser window open, the transfer will continue in the background.
 
 +++ </div></details> +++
