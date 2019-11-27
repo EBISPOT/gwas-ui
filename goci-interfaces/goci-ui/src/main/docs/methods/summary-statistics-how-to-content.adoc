@@ -366,6 +366,7 @@ To submit summary statistics, you will need:
 * If you need more information to identify each study, you can find additional details at the GWAS Catalog website, on the relevant publication page (add the PubMed ID to https://www.ebi.ac.uk/gwas/).
 * If you think there is a mistake in the pre-filled spreadsheet (e.g. the wrong number of studies), please contact gwas-info@ebi.ac.uk.
 * Complete the template. There are 7 columns for you to fill in: highlighted columns are mandatory and grey columns are optional, although we encourage you to submit as much information as you can. See example[link].
+* Some cells in Excel may display a "Number Stored as Text" error. Please ignore this, as it will not affect the template validation.
 
 [cols="<2,<3,<1,<2,<2", options="header", grid="all", width=100%]
 |===
@@ -538,6 +539,7 @@ To submit summary statistics with metadata, you will need:
 
 * For publications that are not yet included in the GWAS Catalog, we ask you to submit metadata in addition to the summary statistics files.
 * There are 2 tabs for you to fill in: one for studies and one for samples. Highlighted columns are mandatory and grey columns are optional, although we encourage you to submit as much information as you can. See example[link].
+* Some cells in Excel may display a "Number Stored as Text" error. Please ignore this, as it will not affect the template validation.
 
 +++ </div></details> +++
 
