@@ -10,10 +10,7 @@ Log in using your ELIXIR identity, or follow the link to register. Your ELIXIR i
 
 == Finding my publication
 
-On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion. To find your publication:
-
-* You can search for a publication by *PubMed ID* or *first author*.
-* Publications matching your search are displayed in the table.
+On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion.  You can search for a publication by *PubMed ID* or *first author*. Publications matching your search are displayed in the table.
 
 == What if my publication is not in the table?
 
@@ -29,22 +26,30 @@ If you think that we are missing an eligible publication, or if you want to subm
 
 The “Status” column in the search results lets you know what you can submit for a particular publication:
 
-[cols="<1,<3,<1", options="header", grid="all", width=100%]
+[cols="<2,<1,<6,<1,<2", options="header", grid="all", width=100%]
 |===
 |Status
+|
 |Description
+|
 |What to submit
 
 |OPEN FOR SUMMARY STATISTICS SUBMISSION
+|
 |The publication has been curated and the publication metadata is available on the GWAS Catalog website, but we don't have summary statistics yet.
+|
 |<<sumstats_only, Summary statistics only>>
 
 |OPEN FOR SUBMISSION
+|
 |The publication has been identified by curators and meets the GWAS Catalog’s inclusion criteria, but has not yet been curated. We don't have metadata or summary statistics yet.
+|
 |<<sumstats_and_metadata, Summary statistics plus study metadata>>
   
 |CLOSED
+|
 |We are not currently accepting submissions for this publication. We either have the summary statistics already, or the publication is under submission by another author or curator. You may want to check with your co-authors, or contact us at gwas-info@ebi.ac.uk for more information.
+|
 |NA
 |===
 
@@ -151,22 +156,30 @@ image::globus_8_select_collection.jpeg[align="center"]
 
 * For publications that are already included in the GWAS Catalog, you only need to match your summary statistics files to the study entries we have already created. To help you do this, the summary statistics submission template is pre-filled with basic meta-data for each study in the publication, including:
 
-[cols="<2,<5,<3", options="header", grid="all", width=100%]
+[cols="<4,<1,<10,<1,<6", options="header", grid="all", width=100%]
 |===
 |Column header
+|
 |Information provided
+|
 |Example
 
 |Study accession
+|
 |The GWAS Catalog study accession, beginning with “GCST”
+|
 |`GCST007280`
 
 |Reported trait
+|
 |The trait under investigation
+|
 |`Reticulocyte count`
 
 |Discovery sample
+|
 |A description of the discovery sample (including number and ancestry)
+|
 |`1,000 European ancestry cases, 1,000 European ancestry controls`
 |===
 
@@ -175,41 +188,64 @@ image::globus_8_select_collection.jpeg[align="center"]
 * Complete the template. There are 7 columns for you to fill in: highlighted columns are mandatory and grey columns are optional, although we encourage you to submit as much information as you can. See example[link].
 * Some cells in Excel may display a "Number Stored as Text" error. Please ignore this, as it will not affect the template validation.
 
-[cols="<2,<3,<1,<2,<2", options="header", grid="all", width=100%]
+[cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
 |===
 |Header
+|
 |Description
+|
 |Mandatory
+|
 |Validation
+|
 |Example
 
 |Study tag
+|
 |A unique free-text label for each genome-wide association study in the publication. You can use any string of characters that will help you identify each individual GWAS.
+|
 |yes
+|
 |Free text
+|
 |`WHR_unadj`
 
 |Summary statistics file
+|
 |The summary statistics *filename* (for Globus upload) or *full URL and filename* (for a file hosted elsewhere online). Leave blank for any studies without summary statistics.
+|
 |no
+|
 |A valid filename or URL
+|
 |`http://.../example.tsv`
 
 |md5 sum
+|
 |The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See <<checksums,how to calculate checksums>>.
+|
 |no
+|
 |A valid md5 checksum (32-digit hexadecimal number)
+|
 |`49ea8cf53801c7f1e2f11336fb8a29c8`
 
 |Readme
+|
 |Text of the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics. See <<readme, what to include in the readme>>.
+|
 |no
+|
 |...
+|
 |...
 
 |Summary statistics assembly
+|
 |Genome assembly for the summary statistics. Leave blank for any studies without summary statistics.
+|
 |no
+|
 |Must match one of the following options:
 
 `GRCh38`
@@ -221,19 +257,27 @@ image::globus_8_select_collection.jpeg[align="center"]
 `NCBI35`
 
 `NCBI34`
-
+|
 |`GRCh38`
 
 |Cohort(s)
+|
 |List of cohort(s) represented in the discovery sample, separated by pipes "\|". Enter only if the specific named cohorts are used in the analysis.
+|
 |no
+|
 |Free text
+|
 |`UKBB\|FINRISK`
 
 |Cohort specific reference
+|
 |List of cohort specific identifier(s) issued to this research study, separated by pipes "\|". For example, an ANID issued by UK Biobank.
+|
 |no
+|
 |Free text
+|
 |`ANID45956`
 |===
 
@@ -361,23 +405,34 @@ image::globus_8_select_collection.jpeg[align="center"]
 
 * In the “study” tab, add one row for each separate GWAS analysis (study) in the publication. For each column, please enter the following information:
 
-[cols="<2,<3,<1,<2,<2", options="header", grid="all", width=100%]
+[cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
 |===
 |Header
+|
 |Description
+|
 |Mandatory
+|
 |Validation
+|
 |Example
 
 |Study tag
+|
 |A unique free-text label for each genome-wide association study in the publication. You can use any string of characters that will help you identify each individual GWAS.
+|
 |yes
+|
 |Free text
+|
 |`WHR_unadj`
 
 |Genotyping technology
+|
 |Method(s) used to genotype variants in the discovery stage. Separate multiple methods by pipes "\|".
+|
 |yes
+|
 |Must match one of the following options:
 
 `Genome-wide genotyping array`
@@ -387,12 +442,15 @@ image::globus_8_select_collection.jpeg[align="center"]
 `Exome genotyping array`
 
 `Whole genome sequencing`
-
+|
 |`Genome-wide genotyping array` 
 
 |Array manufacturer
+|
 |Manufacturer of the genotyping array used for the discovery stage. Separate multiple manufacturers by pipes "\|".
+|
 |no
+|
 |Must match one of the following options:
 
 `Illumina`
@@ -400,75 +458,119 @@ image::globus_8_select_collection.jpeg[align="center"]
 `Affymetrix`
 
 `Perlegen`
+|
 |`Illumina\|Affymetrix`
 
 |Array information
+|
 |Additional information about the genotyping array. For example, for targeted arrays, please provide the specific type of array.
+|
 |no
+|
 |Free text
+|
 |`Immunochip`
 
 |Imputation
+|
 |Were SNPs imputed for the discovery GWAS?
+|
 |yes
+|
 |Must match one of the following options:
 
 `Yes`
 
 `No`
+|
 |`Yes`
 
 |Variant count
+|
 |The number of variants analysed in the discovery stage (after QC)
+|
 |yes
+|
 |An integer
+|
 |`525000`
 
 |Statistical model
+|
 |Details of the statistical model used to determine association significance
+|
 |no
+|
 |Free text
+|
 |`recessive model`
 
 |Study description
+|
 |Additional information about the study
+|
 |no
+|
 |Free text
+|
 |...
 
 |Reported trait
+|
 |The trait under investigation
+|
 |yes
+|
 |Free text
+|
 |`Reticulocyte count`
 
 |Background trait
+|
 |Any background trait(s) shared by all individuals in the GWAS (e.g. in both cases and controls)
+|
 |no
+|
 |Free text
+|
 |`Nicotine dependence`
 
 |Summary statistics file
+|
 |The summary statistics *filename* (for Globus upload) or *full URL and filename* (for a file hosted elsewhere online). Leave blank for any studies without summary statistics.
+|
 |no
+|
 |A valid filename or URL
+|
 |`http://.../example.tsv`
 
 |md5 sum
+|
 |The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See <<checksums,how to calculate checksums>>.
+|
 |no
+|
 |A valid md5 checksum (32-digit hexadecimal number)
+|
 |`49ea8cf53801c7f1e2f11336fb8a29c8`
 
 |Readme
+|
 |Text of the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics. See <<readme, what to include in the readme>>.
+|
 |no
+|
 |...
+|
 |...
 
 |Summary statistics assembly
+|
 |Genome assembly for the summary statistics. Leave blank for any studies without summary statistics.
+|
 |no
+|
 |Must match one of the following options:
 
 `GRCh38`
@@ -480,19 +582,27 @@ image::globus_8_select_collection.jpeg[align="center"]
 `NCBI35`
 
 `NCBI34`
-
+|
 |`GRCh38`
 
 |Cohort(s)
+|
 |List of cohort(s) represented in the discovery sample, separated by pipes "\|". Enter only if the specific named cohorts are used in the analysis.
+|
 |no
+|
 |Free text
+|
 |`UKBB\|FINRISK`
 
 |Cohort specific reference
+|
 |List of cohort specific identifier(s) issued to this research study, separated by pipes "\|". For example, an ANID issued by UK Biobank.
+|
 |no
+|
 |Free text
+|
 |`ANID45956`
 |===
 
@@ -511,52 +621,80 @@ For example:
 
 * For each column, please enter the following information:
 
-[cols="<2,<3,<1,<2,<2", options="header", grid="all", width=100%]
+[cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
 |===
 |Header
+|
 |Description
+|
 |Mandatory
+|
 |Validation
+|
 |Example
 
 |Study tag
+|
 |A unique free-text label for each genome-wide association study in the publication. This should match the study tag that you have provided in the “study” tab. This will allow the sample information to be linked to the correct study. You must provide at least one sample row for each study.
+|
 |yes
+|
 |Free text
+|
 |`WHR_unadj`
 
 |Stage
+|
 |Stage of the experimental design
+|
 |yes
+|
 |Must match one of the following options:
 
 `discovery`
 
 `replication`
+|
 |`discovery`
 
 |Number of individuals
+|
 |Number of individuals in this group
+|
 |yes
+|
 |An integer
+|
 |`2000`
 
 |Number of cases
+|
 |Number of cases in this group
+|
 |no
+|
 |An integer
+|
 |`1000`
 
 |Number of controls
+|
 |Number of controls in this group
+|
 |no
+|
 |An integer
+|
 |`1000`
 
 |Sample description
+|
 |Additional information required for the interpretation of results, e.g. sex (males/females), age (adults/children), ordinal variables, or multiple traits analysed together ("or" traits).
+|
 |no
+|
 |Free text
+|
 |`1000 males, 1000 females`
 
 `700 severe cases, 700 moderate cases, 600 mild cases`
@@ -564,10 +702,13 @@ For example:
 `1200 major depression cases, 800 bipolar disorder cases`
 
 |Ancestry category
+|
 |Broad ancestry category that best describes the sample. For more information about each category, see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5815218/table/Tab1/?report=objectonly[Table 1, Morales et al., 2018].
 
 You should create a new row for each ancestry category. However, you may enter multiple categories in the same row, separated by pipes "\|", only if separate sample numbers are unavailable for each category.
+|
 |yes
+|
 |Must match one of the following options:
 
 `Aboriginal Australian`
@@ -605,24 +746,37 @@ You should create a new row for each ancestry category. However, you may enter m
 `South East Asian`
 
 `Sub-Saharan African`
+|
 |`East Asian`
 
 |Ancestry
+|
 |The most detailed ancestry descriptor(s) for the sample. Separate multiple descriptors by pipes "\|".
+|
 |no
+|
 |Free text
+|
 |`Han Chinese`
 
 |Founder/Genetically isolated population description
+|
 |For founder or genetically isolated population, provide  description. If multiple founder/genetically isolated populations are included for the same ancestry category, separate using pipes "\|".
+|
 |no
+|
 |Free text
+|
 |`Korculan(founder/genetic isolate)\|Vis(founder/genetic isolate)`
 
 |Country of recruitment
+|
 |List of country/countries where samples were recruited, separated by pipes "\|".
+|
 |yes
+|
 |Must match country name(s) in https://unstats.un.org/unsd/methodology/m49[The United Nations M49 Standard of Geographic Regions]
+|
 |`Japan\|China`
 |===
 
