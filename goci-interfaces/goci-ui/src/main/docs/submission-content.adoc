@@ -4,30 +4,18 @@
 
 == Logging in to the submission page
 
-+++ <details><summary> +++
-+++ </summary><div> +++
+To get started, click LOGIN in the top right corner of the submission page.
 
-* To get started, click LOGIN in the top right corner of the submission page.
-* Log in using your ELIXIR identity, or follow the link to register. Your ELIXIR identity may be linked to Google, LinkedIn, ORCID or an institutional account.
-
-+++ </div></details> +++
+Log in using your ELIXIR identity, or follow the link to register. Your ELIXIR identity may be linked to Google, LinkedIn, ORCID or an institutional account.
 
 == Finding my publication
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion. To find your publication:
 
 * You can search for a publication by *PubMed ID* or *first author*.
 * Publications matching your search are displayed in the table.
 
-+++ </div></details> +++
-
 == What if my publication is not in the table?
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 A publication will not appear in the table if:
 
@@ -37,12 +25,7 @@ A publication will not appear in the table if:
 
 If you think that we are missing an eligible publication, or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
 
-+++ </div></details> +++
-
 == What can I submit?
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 The “Status” column in the search results lets you know what you can submit for a particular publication:
 
@@ -65,208 +48,12 @@ The “Status” column in the search results lets you know what you can submit 
 |NA
 |===
 
-+++ </div></details> +++
-
-= Preparing summary statistics files
-
-== Summary statistics file format and content
-
-+++ <details><summary> +++
-+++ </summary><div> +++
-
-Summary statistics are defined as the aggregate p-values and association data for every variant analysed in a genome-wide association study (GWAS). They should be provided in one file per GWAS with one row for each variant analysed.
-
-Submitted summary statistics files must conform to our standard file format and content (published in https://doi.org/10.1093/nar/gky1120[Buniello and MacArthur, 2019], further details https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here].
-
-Summary statistics file requirements:
-
-1. The file must be in .tsv format
-2. Columns must follow the standard headings and data formats listed in the table below
-3. The file must include at least one of the following combinations of mandatory columns(*): 
-  * Option 1: *variant_ID* and *p-value*
-  * Option 2: *chromosome*, *base pair location* and *p-value*  - for this option you must also provide the genome assembly in the submission template
-4. When one of the manditory columns is not provided, the column should be filled with NA
-5. To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also include *effect_allele* and *other_allele*. See https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here] for more details on our harmonisation pipeline.
-6. You may also include any number of additional columns
-
-[cols="<2,<3,<1,<3,<1", options="header", grid="all", width=100%]
-|===
-|Column header
-|Description
-|Mandatory
-|Validation
-|Example
-
-|variant_id
-|The rsid of the variant
-|yes*
-|Valid rsID
-|`rs7329174`
-
-|p_value
-|The p-value of the variant/trait association
-|yes*
-|Numerical value in range 0 to 1
-|`1E-08`
-
-|chromosome
-|The chromosome that the variant is located on
-|yes*
-|Valid chromosome values are 1-25, X, Y, MT (23, 24, 25 are synonymous with ‘X’, ‘Y’, ‘MT’, respectively)
-|`13`
-
-|base_pair_location
-|The base pair location of the variant
-|yes*
-|Integer in range 1 to 999999999
-|`40983974`
-
-|effect_allele
-|The effect allele of the variant
-|no
-|Valid DNA string
-|`G`
-
-|other_allele
-|The reference allele
-|no
-|Valid DNA string
-|`A`
-
-|effect_allele_frequency
-|Frequency of the effect allele in the control population
-|no
-|Numerical value in range 0 to 1
-|`0.22`
-
-|odds_ratio
-|The odds ratio of the variant/trait association
-|no
-|Numerical value
-|`1.50`
-
-|ci_lower
-|The lower range of the odds ratio confidence interval
-|no
-|Numerical value
-|`1.36`
-
-|ci_upper
-|The upper range of the odds ratio confidence interval
-|no
-|Numerical value
-|`1.64`
-
-|beta
-|The beta of the variant/trait association
-|no
-|Numerical value (+/-)
-|`-0.064`
-
-|standard_error
-|The standard error of the beta
-|no
-|Numerical value
-|`0.03`
-|===
-
-+++ </div></details> +++
-
-== [[readme]] README file content
-
-+++ <details><summary> +++
-+++ </summary><div> +++
-
-Each summary statistics file should be accompanied by a readme file containing the following info in a numbered list:
-
-1. Full citation for the publication linked to the submitted summary statistics (in any standard citation style) 
-e.g: Klimentidis YC, Raichlen DA, Bea J, Garcia DO, Wineinger NE, Mandarino LJ, Alexander GE, Chen Z, Going SB (2018) 
-Genome-wide association study of habitual physical activity in over 377,000 UK Biobank participants identifies multiple variants including CADM2 and APOE. International Journal of Obesity. 42: 1161-1176.
-
-2. Clear description of the content presented in additional columns that are not present in our standard format
-e.g.: INFO: imputation quality/certainty metric from IMPUTE2
-
-3. Any other information or comment that can be useful to interpret and store the data under submission (e.g. broader description of the cohort used in the study, QC measures applied) 
-
-Please see <link to the FTP with example txt file>[here] for an example of a good readme file.
-
-+++ </div></details> +++
-
-== Summary statistics validator
-
-+++ <details><summary> +++
-+++ </summary><div> +++
-
-To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/. 
-
-+++ </div></details> +++
-
-== [[checksums]] Calculating checksums for summary statistics files
-
-+++ <details><summary> +++
-+++ </summary><div> +++
-
-In order to ensure the integrity of the uploaded summary statistics files before and after the upload, you must provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. If there is any problem during the upload that leads to corruption of the data, this checksum will change. So by validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
-
-+++ </div></details> +++
-
-=== Calculating on Mac computers
-
-+++ <details><summary> +++
-+++ </summary><div> +++
-
-The md5 command line application is installed on Mac computers by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
-
-  $ md5 summary_stats.gzip
-
-The output should look something like this:
-  
-  MD5 (summary_stats.gzip) = 49ea8cf53801c7f1e2f11336fb8a29c8
-
-The md5 checksum is the 32-digit hexadecimal number in the output, after the filename. Copy this number into the corresponding column of the study sheet.
-
-+++ </div></details> +++
-
-=== Calculating on Linux/Unix computers
-
-+++ <details><summary> +++
-+++ </summary><div> +++
-
-The md5sum command line application is installed on all Linux/Unix based systems by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
-
-  $ md5sum summary_stats.gzip
-
-The output should look something like this:
-
-  4ab6d4f4db143eed49c248d3ce23cb57  summary_stats.gzip
-
-The md5 checksum is the 32-digit hexadecimal number in the first column of the output, before the file name. Copy this number into the corresponding column of the study sheet.
-
-+++ </div></details> +++
-
-=== Calculating on Windows computers
-
-+++ <details><summary> +++
-+++ </summary><div> +++
-
-In Windows, you can use the certutil command line tool to calculate md5 checksums. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
-
-  > certutil -hashfile summary_stats.gzip MD5
-
-The output should look something like this:
-
-  ...
-
-The md5 checksum is the 32-digit hexadecimal number provided by the application. Copy this number into the corresponding column of the study sheet.
-
-+++ </div></details> +++
-
 = [[sumstats_only]] Submitting summary statistics only
 
-== What will I need?
-
 +++ <details><summary> +++
 +++ </summary><div> +++
+
+== What will I need?
 
 To submit summary statistics, you will need:
 
@@ -275,12 +62,7 @@ To submit summary statistics, you will need:
 * The md5 checksum for each summary statistics file
 * Enough information about each GWAS to match it to the corresponding study entry in the pre-filled template
 
-+++ </div></details> +++
-
 == Step 1: Create a submission
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 * Search by *PubMed ID* or *first author* to find your publication.
 * Check that the publication has the status OPEN FOR SUMMARY STATISTICS SUBMISSION
@@ -290,15 +72,13 @@ To submit summary statistics, you will need:
   ** The upper panel gives a summary of the publication.
   ** The lower panel shows the details of your submission, including the Submission ID, status and validation reports.
   ** The buttons on the left show the actions available to you.
-  
-+++ </div></details> +++
 
 == Step 2: Upload summary statistics
 
 === Option 1: Upload files using Globus
 
-+++ <details><summary> +++
-+++ </summary><div> +++
++++     <details><summary> +++
++++     </summary><div> +++
 
 * When you create a submission, you will receive an email from Globus with the URL to your personal directory for uploading summary statistics files. Open the link to access the shared location.
 * First log into globus. You must login using the same email account used to log into the GWAS deposition system. If you logged into GWAS deposition with your ELIXIR account, you can use the same account to log into Globus.
@@ -345,33 +125,25 @@ image::globus_8_select_collection.jpeg[align="center"]
   ** You should now see the EBI shared directory side by side with your own computer’s file system.
 * At this point you can simply drag and drop the summary stats files you want to upload from the right window to the left window. Once done you will get an email notification that the transfer is complete. Note: You do not need to keep your browser window open, the transfer will continue in the background.
 
-+++ </div></details> +++
++++     </div></details> +++
 
 === Option 2: Upload files to another location
 
-+++ <details><summary> +++
-+++ </summary><div> +++
++++     <details><summary> +++
++++     </summary><div> +++
 
 * Alternatively, you can store your summary statistics on your own personal or institutional website, or in a service like Google Drive or Dropbox.
 * Make a note of the file URL. You will need this for the following step.
 
-+++ </div></details> +++
++++     </div></details> +++
 
 == Step 3: Download the submission template
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 * Return to the Submission page
 * Click “Download template” to get a copy of the submission template. Save the template to your computer to complete offline.
 * We generate a unique template for each publication containing important pre-filled data, so please remember to download a new template each time you submit a new publication.
 
-+++ </div></details> +++
-
 == Step 4: Complete the submission spreadsheet (pre-filled metadata)
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 * For publications that are already included in the GWAS Catalog, you only need to match your summary statistics files to the study entries we have already created. To help you do this, the summary statistics submission template is pre-filled with basic meta-data for each study in the publication, including:
 
@@ -461,12 +233,7 @@ image::globus_8_select_collection.jpeg[align="center"]
 |`ANID45956`
 |===
 
-+++ </div></details> +++
-
 == Step 5: Upload the submission spreadsheet and submit
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 * When you have completed the submission spreadsheet, return to the Submission page and click “Upload template”.
 * Drag-and-drop the completed template onto the cloud icon, or click the icon to select the file from your computer.
@@ -485,10 +252,10 @@ image::globus_8_select_collection.jpeg[align="center"]
 
 = [[sumstats_and_metadata]] Submitting summary statistics with metadata
 
-== What will I need?
-
 +++ <details><summary> +++
 +++ </summary><div> +++
+
+== What will I need?
 
 To submit summary statistics with metadata, you will need:
 
@@ -499,12 +266,7 @@ To submit summary statistics with metadata, you will need:
 ** Study information, e.g. genotyping details, variant count, traits analysed
 ** Sample information, e.g. number of individuals/cases/controls, ancestry, country of recruitment
 
-+++ </div></details> +++
-
 == Step 1: Create a submission
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 * Search by *PubMed ID* or *first author* to find your publication.
 * Check that the publication has the status OPEN FOR SUMMARY STATISTICS SUBMISSION
@@ -514,15 +276,13 @@ To submit summary statistics with metadata, you will need:
   ** The upper panel gives a summary of the publication.
   ** The lower panel shows the details of your submission, including the Submission ID, status and validation reports.
   ** The buttons on the left show the actions available to you.
-  
-+++ </div></details> +++
 
 == Step 2: Upload summary statistics
 
 === Option 1: Upload files using Globus
 
-+++ <details><summary> +++
-+++ </summary><div> +++
++++     <details><summary> +++
++++     </summary><div> +++
 
 * When you create a submission, you will receive an email from Globus with the URL to your personal directory for uploading summary statistics files. Open the link to access the shared location.
 * First log into globus. You must login using the same email account used to log into the GWAS deposition system. If you logged into GWAS deposition with your ELIXIR account, you can use the same account to log into Globus.
@@ -569,44 +329,31 @@ image::globus_8_select_collection.jpeg[align="center"]
   ** You should now see the EBI shared directory side by side with your own computer’s file system.
 * At this point you can simply drag and drop the summary stats files you want to upload from the right window to the left window. Once done you will get an email notification that the transfer is complete. Note: You do not need to keep your browser window open, the transfer will continue in the background.
 
-+++ </div></details> +++
++++     </div></details> +++
 
 === Option 2: Upload files to another location
 
-+++ <details><summary> +++
-+++ </summary><div> +++
++++     <details><summary> +++
++++     </summary><div> +++
 
 * Alternatively, you can store your summary statistics on your own personal or institutional website, or in a service like Google Drive or Dropbox.
 * Make a note of the file URL. You will need this for the following step.
 
-+++ </div></details> +++
++++     </div></details> +++
 
 == Step 3: Download the submission template
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 * Return to the Submission page
 * Click “Download template” to get a copy of the submission template. Save the template to your computer to complete offline.
 * The template may be updated from time to time, so please remember to download a new template each time you submit a new publication.
 
-+++ </div></details> +++
-
 == Step 4: Complete the submission spreadsheet (new meta-data)
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 * For publications that are not yet included in the GWAS Catalog, we ask you to submit metadata in addition to the summary statistics files.
 * There are 2 tabs for you to fill in: one for studies and one for samples. Highlighted columns are mandatory and grey columns are optional, although we encourage you to submit as much information as you can. See example[link].
 * Some cells in Excel may display a "Number Stored as Text" error. Please ignore this, as it will not affect the template validation.
 
-+++ </div></details> +++
-
 === Study tab
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 * In the “study” tab, add one row for each separate GWAS analysis (study) in the publication. For each column, please enter the following information:
 
@@ -745,12 +492,7 @@ image::globus_8_select_collection.jpeg[align="center"]
 |`ANID45956`
 |===
 
-+++ </div></details> +++
-
 === Sample tab
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 * The sample tab includes information about the samples included in each GWAS. Each GWAS should be listed separately, and within each GWAS, each group of samples should be on a separate row. Examples of sample groups are discovery/replication cohorts, and ancestry categories (e.g. European, East Asian, South Asian). 
 
@@ -880,12 +622,7 @@ You should create a new row for each ancestry category. However, you may enter m
 |`Japan\|China`
 |===
 
-+++ </div></details> +++
-
 == Step 5: Upload the submission spreadsheet and submit
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 * When you have completed the submission spreadsheet, return to the Submission page and click “Upload template”.
 * Drag-and-drop the completed template onto the cloud icon, or click the icon to select the file from your computer.
@@ -904,9 +641,59 @@ You should create a new row for each ancestry category. However, you may enter m
 
 = My Submissions
 
+The My Submissions page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
+
+= [[checksums]] Calculating checksums for summary statistics files
+
+In order to ensure the integrity of the uploaded summary statistics files before and after the upload, you must provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. If there is any problem during the upload that leads to corruption of the data, this checksum will change. So by validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
+
+== Calculating on Mac computers
+
 +++ <details><summary> +++
 +++ </summary><div> +++
 
-The My Submissions page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
+The md5 command line application is installed on Mac computers by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
+
+  $ md5 summary_stats.gzip
+
+The output should look something like this:
+  
+  MD5 (summary_stats.gzip) = 49ea8cf53801c7f1e2f11336fb8a29c8
+
+The md5 checksum is the 32-digit hexadecimal number in the output, after the filename. Copy this number into the corresponding column of the study sheet.
+
++++ </div></details> +++
+
+== Calculating on Linux/Unix computers
+
++++ <details><summary> +++
++++ </summary><div> +++
+
+The md5sum command line application is installed on all Linux/Unix based systems by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
+
+  $ md5sum summary_stats.gzip
+
+The output should look something like this:
+
+  4ab6d4f4db143eed49c248d3ce23cb57  summary_stats.gzip
+
+The md5 checksum is the 32-digit hexadecimal number in the first column of the output, before the file name. Copy this number into the corresponding column of the study sheet.
+
++++ </div></details> +++
+
+== Calculating on Windows computers
+
++++ <details><summary> +++
++++ </summary><div> +++
+
+In Windows, you can use the certutil command line tool to calculate md5 checksums. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
+
+  > certutil -hashfile summary_stats.gzip MD5
+
+The output should look something like this:
+
+  ...
+
+The md5 checksum is the 32-digit hexadecimal number provided by the application. Copy this number into the corresponding column of the study sheet.
 
 +++ </div></details> +++
