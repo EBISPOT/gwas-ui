@@ -48,6 +48,10 @@ The “Status” column in the search results lets you know what you can submit 
 |NA
 |===
 
+= My Submissions
+
+The My Submissions page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
+
 = [[sumstats_only]] Submitting summary statistics only
 
 +++ <details><summary> +++
@@ -638,10 +642,6 @@ You should create a new row for each ancestry category. However, you may enter m
 * A curator will review your submission and make the summary statistics available to the public as soon as possible through the GWAS Catalog website.
 
 +++ </div></details> +++
-
-= My Submissions
-
-The My Submissions page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
 
 = [[checksums]] Calculating checksums for summary statistics files
 
