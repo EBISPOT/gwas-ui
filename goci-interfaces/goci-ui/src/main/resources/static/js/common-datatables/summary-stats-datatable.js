@@ -120,7 +120,7 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
                 field: 'title',
                 title: 'Title',
                 sortable: true,
-                width:"120", //This works when the table is not nested into other tag, for example, in a simple Div
+      //          width:"120", //This works when the table is not nested into other tag, for example, in a simple Div
             },
             {
                 field: 'mappedTraits',
