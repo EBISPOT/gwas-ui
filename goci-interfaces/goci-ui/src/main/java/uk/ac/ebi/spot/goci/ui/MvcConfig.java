@@ -48,6 +48,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/docs/methods/criteria").setViewName("docs-template");
         registry.addViewController("/docs/methods/curation").setViewName("docs-template");
         registry.addViewController("/docs/methods/summary-statistics").setViewName("docs-template");
+        registry.addViewController("/docs/methods/summary-statistics-format").setViewName("docs-template");
 
         registry.addViewController("/docs/ontology").setViewName("docs-template");
         registry.addViewController("/docs/abbreviations").setViewName("docs-template");
@@ -66,6 +67,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
         registry.addViewController("/docs/summary-statistics").setViewName("docs-template");
         registry.addViewController("/docs/summary-statistics-format").setViewName("docs-template");
+        registry.addViewController("/docs/summary-statistics-plus-metadata").setViewName("docs-template");
         registry.addViewController("/docs/submission").setViewName("docs-template");
     }
 }
