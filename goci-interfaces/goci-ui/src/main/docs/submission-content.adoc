@@ -2,6 +2,12 @@
 
 = Getting started
 
+Authors of GWAS publications can now submit full p-value summary statistics using our submission interface through the following steps:
+1. Log in
+2. Find publication
+3. Create a submission
+4. submit
+
 == Logging in to the submission page
 
 To get started, click LOGIN in the top right corner of the submission page.
