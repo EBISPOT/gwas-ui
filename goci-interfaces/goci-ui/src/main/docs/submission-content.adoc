@@ -3,18 +3,19 @@
 = Getting started
 
 Authors of GWAS publications can now submit full p-value summary statistics using our submission interface through the following steps:
-1. Log in
-2. Find publication
-3. Create a submission
-4. submit
 
-== Logging in to the submission page
+*1. Log in
+*2. Find publication
+*3. Create a submission
+*4. submit
+
+== 1. Logging in to the submission page
 
 To get started, click LOGIN in the top right corner of the submission page.
 
 Log in using your ELIXIR identity, or follow the link to register. Your ELIXIR identity may be linked to Google, LinkedIn, ORCID or an institutional account.
 
-== Finding my publication
+== 2. Finding my publication
 
 On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion.  You can search for a publication by *PubMed ID* or *first author*. Publications matching your search are displayed in the table.
 
