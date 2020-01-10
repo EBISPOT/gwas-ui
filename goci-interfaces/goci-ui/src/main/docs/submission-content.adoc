@@ -68,6 +68,10 @@ You can find instructions on how to create submissions of summary statistics onl
 
 == 4. Submit
 
+Once you have completed your submission click "Submit" to send the submission to the GWAS Catalog. You will be returned to the My Submissions page, where you can see your latest submission at the top, with the status SUBMITTED.
+
+A curator will review your submission and make the summary statistics available to the public as soon as possible through the GWAS Catalog website.
+
 = [[sumstats_only]] Submitting summary statistics only
 
 +++ <details><summary> +++
@@ -812,7 +816,7 @@ You should create a new row for each ancestry category. However, you may enter m
 
 == Viewing my Submissions
 
-The "My Submissions" page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
+The My Submissions page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
 
 == [[checksums]] Calculating checksums for summary statistics files
 
