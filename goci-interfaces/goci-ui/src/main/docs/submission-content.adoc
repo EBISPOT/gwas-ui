@@ -64,9 +64,7 @@ The “Status” column in the search results lets you know what you can submit 
 |NA
 |===
 
-= My Submissions
-
-The My Submissions page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
+The instructions on how to create submissions of summary statistics only or sumnmary statistics plus metadata can be found below.
 
 = [[sumstats_only]] Submitting summary statistics only
 
@@ -808,11 +806,17 @@ You should create a new row for each ancestry category. However, you may enter m
 
 +++ </div></details> +++
 
-= [[checksums]] Calculating checksums for summary statistics files
+= Additional Information
+
+== Viewing my Submissions
+
+The My Submissions page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
+
+== [[checksums]] Calculating checksums for summary statistics files
 
 In order to ensure the integrity of the uploaded summary statistics files before and after the upload, you must provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. If there is any problem during the upload that leads to corruption of the data, this checksum will change. So by validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
 
-== Calculating on Mac computers
+=== Calculating on Mac computers
 
 +++ <details><summary> +++
 +++ </summary><div> +++
@@ -846,7 +850,7 @@ The md5 checksum is the 32-digit hexadecimal number in the first column of the o
 
 +++ </div></details> +++
 
-== Calculating on Windows computers
+=== Calculating on Windows computers
 
 +++ <details><summary> +++
 +++ </summary><div> +++
