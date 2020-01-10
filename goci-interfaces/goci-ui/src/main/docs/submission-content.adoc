@@ -66,7 +66,7 @@ The “Status” column in the search results lets you know what you can submit 
 
 The instructions on how to create submissions of summary statistics only or sumnmary statistics plus metadata can be found below.
 
-==== [[sumstats_only]] Submitting summary statistics only
+= [[sumstats_only]] Submitting summary statistics only
 
 +++ <details><summary> +++
 +++ </summary><div> +++
@@ -307,7 +307,7 @@ image::globus_8_select_collection.jpeg[align="center"]
 
 +++ </div></details> +++
 
-==== [[sumstats_and_metadata]] Submitting summary statistics with metadata
+= [[sumstats_and_metadata]] Submitting summary statistics with metadata
 
 +++ <details><summary> +++
 +++ </summary><div> +++
