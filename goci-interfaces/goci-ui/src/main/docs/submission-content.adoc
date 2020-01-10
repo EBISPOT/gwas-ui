@@ -64,7 +64,7 @@ The “Status” column in the search results lets you know what you can submit 
 |NA
 |===
 
-The instructions on how to create submissions of summary statistics only or sumnmary statistics plus metadata can be found below.
+The instructions on how to create submissions of summary statistics only or summary statistics plus metadata can be found below.
 
 = [[sumstats_only]] Submitting summary statistics only
 
@@ -810,7 +810,7 @@ You should create a new row for each ancestry category. However, you may enter m
 
 == Viewing my Submissions
 
-The My Submissions page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
+The "My Submissions" page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
 
 == [[checksums]] Calculating checksums for summary statistics files
 
