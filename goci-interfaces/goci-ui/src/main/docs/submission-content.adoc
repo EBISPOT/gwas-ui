@@ -1,6 +1,6 @@
-:imagesdir: ./images
-
 = Getting started
+
+:imagesdir: ./images
 
 Authors of GWAS publications can now submit full p-value summary statistics using our https://www.ebi.ac.uk/gwas/deposition[submission interface] through the following steps:
 
