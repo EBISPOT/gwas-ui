@@ -64,7 +64,9 @@ The “Status” column in the search results lets you know what you can submit 
 |NA
 |===
 
-The instructions on how to create submissions of summary statistics only or summary statistics plus metadata can be found below.
+You can find instructions on how to create submissions of summary statistics only or summary statistics plus metadata through links in the table above.
+
+== 4. Submit
 
 = [[sumstats_only]] Submitting summary statistics only
 
