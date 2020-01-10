@@ -2,7 +2,7 @@
 
 = Getting started
 
-Authors of GWAS publications can now submit full p-value summary statistics using our submission interface through the following steps:
+Authors of GWAS publications can now submit full p-value summary statistics using our https://www.ebi.ac.uk/gwas/deposition[submission interface] through the following steps:
 
 1. Log in
 2. Find publication
@@ -19,7 +19,7 @@ Log in using your ELIXIR identity, or follow the link to register. Your ELIXIR i
 
 On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion.  You can search for a publication by *PubMed ID* or *first author*. Publications matching your search are displayed in the table.
 
-== What if my publication is not in the table?
+=== What if my publication is not in the table?
 
 A publication will not appear in the table if:
 
@@ -29,7 +29,11 @@ A publication will not appear in the table if:
 
 If you think that we are missing an eligible publication, or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
 
-== What can I submit?
+== 3. Creating a submission
+
+Once you have found your publication on the https://www.ebi.ac.uk/gwas/deposition[submission page] click on the "PubMedID" and then "Create Submission" to create a submission.
+
+=== What can I submit?
 
 The “Status” column in the search results lets you know what you can submit for a particular publication:
 
