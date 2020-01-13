@@ -49,13 +49,13 @@ The “Status” column in the search results lets you know what you can submit 
 |
 |The publication has been curated and the publication metadata is available on the GWAS Catalog website, but we don't have summary statistics yet.
 |
-|link:summary-statistics[Summary statistics only]
+|https://www.ebi.ac.uk/gwas/docs/summary-statistics[Summary statistics only]
 
 |OPEN FOR SUBMISSION
 |
 |The publication has been identified by curators and meets the GWAS Catalog’s inclusion criteria, but has not yet been curated. We don't have metadata or summary statistics yet.
 |
-|link:summary-statistics-plus-metadata[Summary statistics plus study metadata]
+|https://www.ebi.ac.uk/gwas/docs/summary-statistics-plus-metadata[Summary statistics plus study metadata]
   
 |CLOSED
 |
