@@ -98,6 +98,10 @@ Summary statistics file requirements:
 |`0.03`
 |===
 
+== [[validator]] Summary statistics validator
+
+To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/.
+
 == [[readme]] README file content
 
 Each summary statistics file should be accompanied by a readme file containing the following info in a numbered list:
@@ -112,10 +116,6 @@ e.g.: INFO: imputation quality/certainty metric from IMPUTE2
 3. Any other information or comment that can be useful to interpret and store the data under submission (e.g. broader description of the cohort used in the study, QC measures applied) 
 
 Please see <link to the FTP with example txt file>[here] for an example of a good readme file.
-
-== Summary statistics validator
-
-To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/.
 
 == [[checksums]] Summary statistics checksums
 
