@@ -2,14 +2,18 @@
 
 == How to submit
 
-Authors of GWAS publications can now submit full p-value summary statistics using our https://www.ebi.ac.uk/gwas/deposition[submission interface] through the following steps:
+Authors of GWAS publications can now submit full summary statistics following the steps below:
 
 1. <<link-1, Log in>>
 2. <<link-2, Find publication>>
-3. <<link-3, Create a submission>>
-4. <<link-4, Submit>>
+3. <<link-3, Check publication status>>
+4. <<link-4, Set up Globus account for file transfer>>
+4. <<link-4, Create a submission>>
+5. <<link-5, Submit>>
 
 === [[link-1]]1. Log in to the submission page
+
+First, open the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submission page^].
 
 To get started, click LOGIN in the top right corner of the submission page.
 
@@ -17,7 +21,9 @@ Log in using your ELIXIR identity, or follow the link to register. Your ELIXIR i
 
 === [[link-2]]2. Find publication
 
-On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion.  You can search for a publication by *PubMed ID* or *first author*. Publications matching your search are displayed in the table.
+On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion.
+
+You can search for a publication by *PubMed ID* or *first author*. Publications matching your search are displayed in the table.
 
 ==== What if my publication is not in the table?
 
@@ -29,44 +35,44 @@ A publication will not appear in the table if:
 
 If you think that we are missing an eligible publication, or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
 
-=== [[link-3]]3. Create a submission
+=== [[link-3]]3. Check publication status
 
-Once you have found your publication on the https://www.ebi.ac.uk/gwas/deposition[submission page] click on the "PubMedID" and then "Create Submission" to create a submission.
+Once you have found your publication, please take note of the Status. This will tell you which data to submit.
 
-==== What can I submit?
-
-The “Status” column in the search results lets you know what you can submit for a particular publication:
-
-[cols="<2,<1,<6,<1,<2", options="header", grid="all", width=100%]
+[cols="<2,<1,<6", options="header", grid="all", width=100%]
 |===
 |Status
 |
-|Description
-|
-|What to submit
+|Instructions
 
 |OPEN FOR SUMMARY STATISTICS SUBMISSION
 |
-|The publication has been curated and the publication metadata is available on the GWAS Catalog website, but we don't have summary statistics yet.
-|
-|https://www.ebi.ac.uk/gwas/docs/summary-statistics[Summary statistics only]
+|The publication has been curated and the publication metadata is already available on the GWAS Catalog website. Please submit *summary statistics only*.
 
 |OPEN FOR SUBMISSION
 |
-|The publication has been identified by curators and meets the GWAS Catalog’s inclusion criteria, but has not yet been curated. We don't have metadata or summary statistics yet.
-|
-|https://www.ebi.ac.uk/gwas/docs/summary-statistics-plus-metadata[Summary statistics plus study metadata]
+|The publication meets the GWAS Catalog’s inclusion criteria, but has not yet been curated. Please submit *summary statistics plus study metadata*.
   
 |CLOSED
 |
 |We are not currently accepting submissions for this publication. We either have the summary statistics already, or the publication is under submission by another author or curator. You may want to check with your co-authors, or contact us at gwas-info@ebi.ac.uk for more information.
-|
-|NA
 |===
 
-You can find instructions on how to create submissions of summary statistics only or summary statistics plus metadata through links in the table above.
+=== [[link-4]]4. Set up a Globus account
 
-=== [[link-4]]4. Submit
+
+
+=== [[link-5]]5. Create submission
+
+Click on the "PubMedID" for your publication and then click "Create Submission".
+
+Then follow the instructions in the links below to:
+
+1. https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics[Submit summary statistics only^], or
+
+2. https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics-plus-metadata[Submit summary statistics plus study metadata^]
+
+=== [[link-5]]5. Submit
 
 Once you have completed your submission click "Submit" to send the submission to the GWAS Catalog. You will be returned to the My Submissions page, where you can see your latest submission at the top, with the status SUBMITTED.
 
@@ -77,58 +83,3 @@ A curator will review your submission and make the summary statistics available 
 === Viewing my Submissions
 
 The My Submissions page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
-
-=== [[checksums]] Calculating checksums for summary statistics files
-
-In order to ensure the integrity of the uploaded summary statistics files before and after the upload, you must provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. If there is any problem during the upload that leads to corruption of the data, this checksum will change. So by validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
-
-==== Calculating on Mac computers
-
-+++ <details><summary> +++
-+++ </summary><div> +++
-
-The md5 command line application is installed on Mac computers by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
-
-  $ md5 summary_stats.gzip
-
-The output should look something like this:
-  
-  MD5 (summary_stats.gzip) = 49ea8cf53801c7f1e2f11336fb8a29c8
-
-The md5 checksum is the 32-digit hexadecimal number in the output, after the filename. Copy this number into the corresponding column of the study sheet.
-
-+++ </div></details> +++
-
-==== Calculating on Linux/Unix computers
-
-+++ <details><summary> +++
-+++ </summary><div> +++
-
-The md5sum command line application is installed on all Linux/Unix based systems by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
-
-  $ md5sum summary_stats.gzip
-
-The output should look something like this:
-
-  4ab6d4f4db143eed49c248d3ce23cb57  summary_stats.gzip
-
-The md5 checksum is the 32-digit hexadecimal number in the first column of the output, before the file name. Copy this number into the corresponding column of the study sheet.
-
-+++ </div></details> +++
-
-==== Calculating on Windows computers
-
-+++ <details><summary> +++
-+++ </summary><div> +++
-
-In Windows, you can use the certutil command line tool to calculate md5 checksums. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
-
-  > certutil -hashfile summary_stats.gzip MD5
-
-The output should look something like this:
-
-  ...
-
-The md5 checksum is the 32-digit hexadecimal number provided by the application. Copy this number into the corresponding column of the study sheet.
-
-+++ </div></details> +++
