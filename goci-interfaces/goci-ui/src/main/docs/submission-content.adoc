@@ -11,8 +11,7 @@ Authors of GWAS publications can now submit full summary statistics following th
 2. <<link-2, Find publication>>
 3. <<link-3, Check publication status>>
 4. <<link-4, Set up Globus account for file transfer>>
-4. <<link-4, Create a submission>>
-5. <<link-5, Submit>>
+5. <<link-5, Create a submission>>
 
 === [[link-1]]1. Log in to the submission page
 
