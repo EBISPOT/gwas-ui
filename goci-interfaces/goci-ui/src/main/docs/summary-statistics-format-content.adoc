@@ -98,6 +98,10 @@ Summary statistics file requirements:
 |`0.03`
 |===
 
+== [[validator]] Summary statistics validator
+
+To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/.
+
 == [[readme]] README file content
 
 Each summary statistics file should be accompanied by a readme file containing the following info in a numbered list:
@@ -113,6 +117,57 @@ e.g.: INFO: imputation quality/certainty metric from IMPUTE2
 
 Please see <link to the FTP with example txt file>[here] for an example of a good readme file.
 
-== Summary statistics validator
+== [[checksums]] Summary statistics checksums
 
-To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/. 
+In order to ensure the integrity of the uploaded summary statistics files before and after the upload, you must provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. If there is any problem during the upload that leads to corruption of the data, this checksum will change. So by validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
+
+=== Calculating on Mac computers
+
++++ <details><summary> +++
++++ </summary><div> +++
+
+The md5 command line application is installed on Mac computers by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
+
+  $ md5 summary_stats.gzip
+
+The output should look something like this:
+  
+  MD5 (summary_stats.gzip) = 49ea8cf53801c7f1e2f11336fb8a29c8
+
+The md5 checksum is the 32-digit hexadecimal number in the output, after the filename. Copy this number into the corresponding column of the study sheet.
+
++++ </div></details> +++
+
+=== Calculating on Linux/Unix computers
+
++++ <details><summary> +++
++++ </summary><div> +++
+
+The md5sum command line application is installed on all Linux/Unix based systems by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
+
+  $ md5sum summary_stats.gzip
+
+The output should look something like this:
+
+  4ab6d4f4db143eed49c248d3ce23cb57  summary_stats.gzip
+
+The md5 checksum is the 32-digit hexadecimal number in the first column of the output, before the file name. Copy this number into the corresponding column of the study sheet.
+
++++ </div></details> +++
+
+=== Calculating on Windows computers
+
++++ <details><summary> +++
++++ </summary><div> +++
+
+In Windows, you can use the certutil command line tool to calculate md5 checksums. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
+
+  > certutil -hashfile summary_stats.gzip MD5
+
+The output should look something like this:
+
+  ...
+
+The md5 checksum is the 32-digit hexadecimal number provided by the application. Copy this number into the corresponding column of the study sheet.
+
++++ </div></details> +++
