@@ -23,7 +23,7 @@ You should also https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#_check
 
 === [[link-2]]2. Upload summary statistics
 
-Our preferred file transfer system is Globus - see below for full instructions. Alternatively, you can store your summary statistics at another location and provide us with a link.
+We support transfer of summary statistics files using Globus.
 
 ==== Option 1: Upload files using Globus
 
@@ -71,16 +71,6 @@ image::globus_8_select_collection.jpeg[screenshot8, 600, align="center"]
   ** Select “My collection” tab to find the collection you just created for your local computer.
   ** You should now see the EBI shared directory side by side with your own computer’s file system.
 * At this point you can simply drag and drop the summary stats files you want to upload from the right window to the left window. Once done you will get an email notification that the transfer is complete. Note: You do not need to keep your browser window open, the transfer will continue in the background.
-
-+++     </div></details> +++
-
-==== Option 2: Upload files to another location
-
-+++     <details><summary> +++
-+++     </summary><div> +++
-
-* Alternatively, you can store your summary statistics on your own personal or institutional website, or in a service like Google Drive or Dropbox.
-* Make a note of the file URL. You will need this for the following step.
 
 +++     </div></details> +++
 
