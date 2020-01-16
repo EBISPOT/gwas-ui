@@ -10,8 +10,8 @@ To submit *summary statistics only*, please follow the steps below:
 1. <<link-1, Prepare summary statistics>>
 2. <<link-2, Upload summmary statistics>>
 3. <<link-3, Download submission template>>
-4. <<link-4, Complete submission template>>
-5. <<link-5, Upload submission template>>
+4. <<link-4, Complete submission spreadsheet>>
+5. <<link-5, Upload submission spreadsheet>>
 
 === [[link-1]]1. Prepare summary statistics
 
