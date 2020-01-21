@@ -109,7 +109,7 @@ Now complete the rest of the template. There are 7 columns for you to fill in: h
 |
 |A valid filename
 |
-|example.tsv
+|`example.tsv`
 
 |md5 sum
 |
