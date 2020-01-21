@@ -48,7 +48,9 @@ We generate a unique template for each publication containing important pre-fill
 
 === [[link-4]]4. Complete the submission spreadsheet
 
-For publications that are already included in the GWAS Catalog, you only need to match your summary statistics files to the study entries we have already created. To help you do this, the summary statistics submission template is pre-filled with basic meta-data for each study in the publication:
+For publications that are already included in the GWAS Catalog, we provide a partially pre-filled template showing each study (i.e. each GWAS analysis) in the publication. You will need to add details of the corresponding summary statistics file for each study.
+
+There are 10 columns in total; 3 have been filled in for you.
 
 [cols="<4,<1,<10,<1,<6", options="header", grid="all", width=100%]
 |===
@@ -77,7 +79,7 @@ For publications that are already included in the GWAS Catalog, you only need to
 |`1,000 European ancestry cases, 1,000 European ancestry controls`
 |===
 
-Now complete the rest of the template. There are 7 columns for you to fill in: highlighted columns are mandatory and grey columns are optional, although we encourage you to submit as much information as you can.
+There are 7 empty columns for you to fill in. Mandatory columns are highlighted in orange. Grey columns are optional. However, we encourage you to submit as much information as you can.
 
 [cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
 |===
@@ -171,8 +173,6 @@ Now complete the rest of the template. There are 7 columns for you to fill in: h
 |
 |`ANID45956`
 |===
-
-Some cells in Excel may display a "Number Stored as Text" error. Please ignore this, as it will not affect the template validation.
 
 ==== What if I can't tell which study is which?
 
