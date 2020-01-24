@@ -60,6 +60,7 @@ $(document).ready(function() {
         getVariantData(searchTerm);
     }
     getVariantInfoFromEnsembl(searchTerm);
+    displayLDPlot();
 
     $.getJSON(gwasProperties.contextPath+'api/search/stats')
         .done(function(data) {

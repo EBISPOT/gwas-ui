@@ -15,10 +15,10 @@
     <title>GWAS Catalog</title>
 
     <!-- Bootstrap core CSS -->
-    <link  th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
-    <link   th:href="@{/css/bootstrap-table.css}" rel="stylesheet"/>
-    <link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
 
     <!-- Custom styles for this template -->
     <link  th:href="@{/css/jumbotron.css}" rel="stylesheet"/>
@@ -252,7 +252,7 @@
                 </div>
                 <div class="panel-body">
                     <!-- LD plot widget -->
-                    <div class="_ld_graph _widget"></div>
+                    <div class="_ld_graph _widget ensld container"></div>
                 </div>
             </div>
         </div>
@@ -280,11 +280,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-    <script  th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css"
-          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css}"
-          rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css" rel="stylesheet"/>
 
     <!-- Extensions for Column filters -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/extensions/filter-control/bootstrap-table-filter-control.css" />
@@ -321,7 +319,7 @@
     <script src="https://cdn.rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
 
     <script th:src="@{/js/autocomplete-termselect.js}"></script>
-    <script th:src="@{/js/jquery.autocomplete.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.min.js"></script>
     <script th:src="@{/js/helpers/promise-helper.js}"></script>
     <script th:src="@{/js/helpers/utils-helper.js}"></script>
     <script th:src="@{/js/helpers/orcid-helper.js}"></script>
@@ -347,10 +345,11 @@
     <!-- LD widget JavaScript
     ================================================== -->
     <!-- JS for widgets -->
-    <script type="text/javascript" src="https://widgets.ensembl.org/Widgets/core.js"></script>
-
+    <!--    <script type="text/javascript" src="https://widgets.ensembl.org/Widgets/core.js"></script>-->
+    <script type="text/javascript" src="http://test.widgets.ensembl.org/Widgets/core.js"></script>
     <!-- TO BE IMPLEMENTED ON SERVER SIDE -->
-    <link type="text/css" rel="stylesheet" href="https://widgets.ensembl.org/ld_graph.css"/>
+    <!--    <link type="text/css" rel="stylesheet" href="https://widgets.ensembl.org/ld_graph.css"/>-->
+    <link type="text/css" rel="stylesheet" href="http://test.widgets.ensembl.org/ld_graph.css"/>
     <!-- icons http://fortawesome.github.io/Font-Awesome/examples/ -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css"/>
 
