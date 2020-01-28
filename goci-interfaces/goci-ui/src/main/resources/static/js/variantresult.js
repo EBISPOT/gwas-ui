@@ -240,7 +240,6 @@ function getVariantInfo(data) {
     }
     else {
         $("#variant-location").html(location);
-        displayLDPlot();
     }
 
     // Cytogenetic region
