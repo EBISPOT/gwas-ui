@@ -17,7 +17,6 @@ function displayLDPlot() {
                         // "rs1042779"//"rs571247700" //"rs74251916"; //"rs1042779";
                         ID: (window.location.pathname.match(/variants\W(\w+)/) || []).pop(),
                         region_width    : 50,
-                        window_size: 500,
                         region_width_options: ["500", "200","50","25"],
                         population      : '1000GENOMES:phase_3:GBR',
                         population_desc : 'British in England and Scotland (GBR)',
@@ -37,7 +36,7 @@ function displayLDPlot() {
                             anotherTrack     : false       //see example for SNP rs699
                         },
                         panelSize     : {
-                            width       : 750,
+                            width       : 300,
                             tab_height  : 30,
                             padding     : 50
                         },
