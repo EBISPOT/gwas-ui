@@ -7,11 +7,23 @@
 
 Authors of GWAS publications can now submit full summary statistics following the steps below:
 
+Getting started
+
 1. <<link-1, Log in>>
 2. <<link-2, Find publication>>
 3. <<link-3, Check publication status>>
-4. <<link-4, Set up Globus account for file transfer>>
-5. <<link-5, Create a submission>>
+4. <<link-4, Select publication>>
+
+Publication details
+
+1. <<link-5, Create Elixir ID>>
+2. <<link-6, Install Globus Connect Personal>>
+3. <<link-7, Link Elixir account to Globus>>
+4. <<link-8, Format and validate summary statistics>>
+5. <<link-9, Create a submission>>
+
+Submission page
+1. <<link-10, Submit>>
 
 === [[link-1]]1. Log in to the submission page
 
@@ -19,13 +31,13 @@ First, open the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submission pa
 
 To get started, click LOGIN in the top right corner of the submission page.
 
-Log in using your ELIXIR identity, or follow the link to register. Your ELIXIR identity may be linked to Google, LinkedIn, ORCID or an institutional account.
+Log in using an Elixir identity, or follow the link to register. You can register using an existing account e.g. a university, ORCID or Google account.
 
 === [[link-2]]2. Find publication
 
 On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion.
 
-You can search for a publication by *PubMed ID* or *first author*. Publications matching your search are displayed in the table.
+You can search for a publication by *PMID* or *first author*. Publications matching your search are displayed in the table.
 
 ==== What if my publication is not in the table?
 
@@ -33,13 +45,13 @@ A publication will not appear in the table if:
 
 * it has not yet been indexed in PubMed
 * it has been missed by our literature search, or
-* curators have reviewed the publication and found that it does not meet our eligibility criteria
+* it does not meet our eligibility criteria
 
 If you think that we are missing an eligible publication, or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
 
 === [[link-3]]3. Check publication status
 
-Once you have found your publication, please take note of the Status. This will tell you which data to submit.
+The Status of the publication tells you which type of data can be submitted.
 
 [cols="<3,<1,<6", options="header", grid="all", width=100%]
 |===
@@ -60,9 +72,27 @@ Once you have found your publication, please take note of the Status. This will 
 |We are not currently accepting submissions for this publication. We either have the summary statistics already, or the publication is under submission by another author or curator. You may want to check with your co-authors, or contact us at gwas-info@ebi.ac.uk for more information.
 |===
 
-=== [[link-4]]4. Set up Globus account for file transfer
+=== [[link-4]]4. Select publication
 
-In order to transfer your summary statistics files to the GWAS Catalog, you will need to set up a Globus account.
+Once you have found your publication, click on the PMID to open the Publication Details page.
+
+Publication details
+
+1. <<link-5, Create Elixir ID>>
+2. <<link-6, Install Globus Connect Personal>>
+3. <<link-7, Link Elixir account to Globus>>
+4. <<link-8, Format and validate summary statistics>>
+5. <<link-9, Create a submission>>
+
+=== [[link-5]]1. Create Elixir ID
+
+Skip this step if you are already logged in.
+
+=== [[link-6]]2. Install Globus Connect Personal
+
+We are using Globus to enable the transfer your summary statistics files to the GWAS Catalog.
+
+
 
 ==== Step 1: Log in to Globus
 
