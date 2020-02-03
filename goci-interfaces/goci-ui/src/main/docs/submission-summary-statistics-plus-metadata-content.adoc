@@ -7,6 +7,8 @@
 
 For publications that are not yet included in the GWAS Catalog, we ask you to submit metadata in addition to the summary statistics files.
 
+Instructions are provided below. When you have completed the submission form, return to the main submission instructions https://www.ebi.ac.uk/gwas/docs/submission[here].
+
 === Data for you to enter
 
 There are 2 tabs for you to complete:
