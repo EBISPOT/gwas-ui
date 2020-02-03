@@ -35,7 +35,7 @@ For publications that are already included in the GWAS Catalog, we provide a par
 |`1,000 European ancestry cases, 1,000 European ancestry controls`
 |===
 
-=== Data for you to add
+=== Data for you to enter
 
 There are 7 empty columns for you to fill in. Mandatory columns are highlighted in orange. Grey columns are optional. However, we encourage you to submit as much information as you can.
 
