@@ -16,7 +16,7 @@ There are 2 tabs for you to complete:
 
 In each tab, mandatory columns are highlighted in orange. Grey columns are optional. However, we encourage you to submit as much information as you can.
 
-==== Study tab
+=== [[studies]]1. Study tab
 
 In the Study tab, please add one row for each separate GWAS analysis (study) in the publication. 
 
@@ -223,7 +223,7 @@ There are 16 columns for you to fill in:
 |`ANID45956`
 |===
 
-==== Sample tab
+=== [[samples]]2. Sample tab
 
 In the Sample tab, enter information about the samples included in each GWAS.
 
