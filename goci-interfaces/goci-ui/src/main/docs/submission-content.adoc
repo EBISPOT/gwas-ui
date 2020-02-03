@@ -138,12 +138,6 @@ You can then click "Create Submission" to continue.
 
 == [[C]] Uploading data
 
-1. <<link-10, Upload summary statistics>>
-2. <<link-11, Download submission form>>
-3. <<link-12, Fill in submission form>>
-4. <<link-13, Upload submission form>>
-5. <<link-14, Submit>>
-
 After you have created a submission, you will be able to upload your summary statistics and supporting information.
 
 === [[link-10]]1. Upload summary statistics
