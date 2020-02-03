@@ -1,5 +1,9 @@
 = Preparing summary statistics files
 
+== [[validator]] Summary statistics validator
+
+To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/.
+
 == Summary statistics file format and content
 
 Summary statistics are defined as the aggregate p-values and association data for every variant analysed in a genome-wide association study (GWAS). They should be provided in one file per GWAS with one row for each variant analysed.
@@ -97,10 +101,6 @@ Summary statistics file requirements:
 |Numerical value
 |`0.03`
 |===
-
-== [[validator]] Summary statistics validator
-
-To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/.
 
 == [[readme]] README file content
 
