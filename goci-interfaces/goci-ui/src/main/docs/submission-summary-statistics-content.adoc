@@ -4,6 +4,8 @@
 
 For publications that are already included in the GWAS Catalog, we provide a partially pre-filled template showing each study (i.e. each GWAS analysis) in the publication. You will need to add information describing the corresponding summary statistics file for each study.
 
+Instructions are provided below. When you have completed the submission form, return to the main submission instructions https://www.ebi.ac.uk/gwas/docs/submission[here].
+
 === Pre-filled data
 
 3 columns have been filled in for you.
