@@ -2,55 +2,11 @@
 
 == Submitting summary statistics only
 
-:imagesdir: ./images
-:data-uri:
+For publications that are already included in the GWAS Catalog, we provide a partially pre-filled template showing each study (i.e. each GWAS analysis) in the publication. You will need to add information describing the corresponding summary statistics file for each study.
 
-To submit *summary statistics only*, please follow the steps below:
+=== Pre-filled data
 
-1. <<link-1, Prepare summary statistics>>
-2. <<link-2, Upload summmary statistics using Globus>>
-3. <<link-3, Download submission template>>
-4. <<link-4, Complete submission spreadsheet>>
-5. <<link-5, Upload submission spreadsheet>>
-6. <<link-6, Submit>>
-
-=== [[link-1]]1. Prepare summary statistics
-
-First, make sure your summary statistics are prepared according to the https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[standard format]. 
-
-Please also prepare a standard https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#_readme[readme] file for each GWAS analysis.
-
-You should also https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#_checksums[calculate the md5 checksum] for each summary statistics file. You will need this later.
-
-=== [[link-2]]2. Upload summary statistics using Globus
-
-When you create a submission, you will receive an email from Globus with the URL to your personal directory for uploading summary statistics files. Open the link to access the shared location.
-
-After a successful login you should be able to view your personal directory for uploading files to the GWAS Catalog on the left of the screen.
-
-Select “Transfer or Sync to…” from the right hand window.
-
-image::globus_8_select_collection.jpeg[screenshot8, 600, align="center"]
-
-Select the “Your collections” tab to find the collection you created for your local computer.
-
-You should now see the EBI shared directory side by side with your own computer’s file system.
-
-Now you can simply drag and drop the summary stats files you want to upload from the right window to the left window. Note: You do not need to keep your browser window open, the transfer will continue in the background. Once done, you will get an email notification that the transfer is complete.
-
-=== [[link-3]]3. Download the submission template
-
-Return to the GWAS Catalog Submission page.
-
-Click “Download template” to get a copy of the submission template. Save the template to your computer to complete offline.
-
-We generate a unique template for each publication containing important pre-filled data, so please remember to download a new template each time you submit a new publication.
-
-=== [[link-4]]4. Complete the submission spreadsheet
-
-For publications that are already included in the GWAS Catalog, we provide a partially pre-filled template showing each study (i.e. each GWAS analysis) in the publication. You will need to add details of the corresponding summary statistics file for each study.
-
-There are 10 columns in total; 3 have been filled in for you.
+3 columns have been filled in for you.
 
 [cols="<4,<1,<10,<1,<6", options="header", grid="all", width=100%]
 |===
@@ -78,6 +34,8 @@ There are 10 columns in total; 3 have been filled in for you.
 |
 |`1,000 European ancestry cases, 1,000 European ancestry controls`
 |===
+
+=== Data for you to add
 
 There are 7 empty columns for you to fill in. Mandatory columns are highlighted in orange. Grey columns are optional. However, we encourage you to submit as much information as you can.
 
@@ -174,38 +132,12 @@ There are 7 empty columns for you to fill in. Mandatory columns are highlighted 
 |`ANID45956`
 |===
 
+=== Additional information
+
 ==== What if I can't tell which study is which?
 
-If you need more information to identify each study, you can find additional details at the GWAS Catalog website, on the relevant publication page (add the PubMed ID to https://www.ebi.ac.uk/gwas/).
+If you need more information to identify each study, you can find additional details at the GWAS Catalog website, on the relevant publication page (https://www.ebi.ac.uk/gwas/ + the PMID of the publication).
 
 ==== What if the prefilled data is incorrect?
 
 If you think there is a mistake in the pre-filled spreadsheet (e.g. the wrong number of studies), please contact gwas-info@ebi.ac.uk.
-
-=== [[link-5]]5. Upload the submission spreadsheet and submit
-
-When you have completed the submission spreadsheet, return to the GWAS Catalog Submission page and click “Upload template”.
-
-Drag-and-drop the completed template onto the cloud icon, or click the icon to select the file from your computer.
-
-Click "Upload File". The progress bar will tell you when the upload is complete.
-
-Click "Start validation". The validation pipeline will first check the uploaded spreadsheet. If this passes, it will go on to check the summary statistics files themselves. This may take some time - you will receive an email when it has finished, or if an error is detected.
-
-If validation succeeds, the Submission Report will display TEMPLATE VALID. The Submission Stats field shows the number of studies that you have uploaded. Make sure this is correct before proceeding.
-
-  * If the number of studies is incorrect, please review your template and make any necessary changes, then "Delete latest file" and try again.
-
-If validation fails, the Submission Report will display TEMPLATE INVALID, as well as list of errors that need to fixed before the submission can be completed.
-
-  * Please follow the instructions to fix any errors in the template or in the summary statistics files. Contact gwas-info@ebi.ac.uk if you need help.
-  
-  * Click "Delete latest file" to remove the invalid template.
-  
-  * Click "Upload template" to select the corrected template and try again.
-  
-=== [[link-6]]6. Submit
-
-If everything looks OK, click "Submit" to send the submission to the GWAS Catalog. You will be returned to the My Submissions page, where you can see your latest submission at the top, with the status SUBMITTED.
-
-A curator will review your submission and make the summary statistics available to the public as soon as possible through the GWAS Catalog website.
