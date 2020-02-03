@@ -50,6 +50,8 @@ On the GWAS Catalog Submission page, you can find any publication that is includ
 
 You can search for a publication by *PMID* or *first author*. Publications matching your search are displayed in the table.
 
+image::pub_search.png[Publication search results,width=800,align="center"]
+
 ==== What if my publication is not in the table?
 
 A publication will not appear in the table if:
@@ -89,6 +91,10 @@ Once you have found your publication, click on the PMID to open the Publication 
 
 == [[B]] Creating a submission
 
+The Publication Details page gives a brief summary of the publication and a list of prerequisites for submission. You will need to complete each of the items on the checklist before proceeding with the submission.
+
+image::pre_sub_checklist.png[Pre-submission checklist,width=800,align="center"]
+
 === [[link-5]]1. Create Elixir ID
 
 You can tick this box if you have already logged in.
@@ -99,32 +105,21 @@ Otherwise, first follow the https://elixir-europe.org/register[Elixir ID link] a
 
 We use Globus to enable the transfer of summary statistics files to the GWAS Catalog.
 
-First, you will need to download and install the Globus Connect Personal application, which allows Globus to access files from your computer.
+First, you will need to download and install the Globus Connect Personal application, which allows Globus to access files from your computer. Follow the https://www.globus.org/globus-connect-personal[Globus Connect Personal link] and then select the appropriate link for your operating system.
 
-Follow the https://www.globus.org/globus-connect-personal[Globus Connect Personal link] and then select the appropriate link for your operating system.
-
----
-~ add screenshot here ~
-
----
+image::gcp_install.png[Install GCP,width=400,align="center"]
 
 Then follow the *Installation* steps to install and run the application.
 
----
-~ add screenshot here ~
-
----
-
 Take note of the email address associated with your Globus Connect Personal endpoint. You will need this for the next step.
 
----
-~ add screenshot here ~
-
----
+image::globus_email.png[Publication search results,width=800,align="center"]
 
 === [[link-7]]3. Enter registered Globus email
 
 Enter the email address associated with your Globus account. It should be filled automatically, but you can change it if needed.
+
+image::enter_email.png[Enter Globus email,width=800,align="center"]
 
 === [[link-8]]4. Format and validate summary statistics
 
@@ -136,33 +131,31 @@ Please tick each box in the checklist to confirm that the prerequisites have bee
 
 You can then click "Create Submission" to continue.
 
+image::create_sub.png[Create Submission,width=800,align="center"]
+
 == [[C]] Uploading data
 
-After you have created a submission, you will be able to upload your summary statistics and supporting information.
+After you have created a submission, you will be able to upload your summary statistics and supporting information. 
 
 === [[link-10]]1. Upload summary statistics
 
-When you create a submission, a submission folder will be created for you in Globus.
-
-Click on "Upload summary statistics" to go to the Globus File Manager.
+The first step is to upload your summary statistics files. When you create a submission, a folder is created for you. You can transfer your summary statistics to this location using Globus. Click "Upload summary statistics" to go to the Globus File Manager.
 
 The GWAS Catalog submission folder will appear in the left-hand panel, with a Collection name beginning *ebi#gwas#*, followed by the date and some other characters.
 
----
-~ add screenshot here ~
-
----
+image::file_manager.png[Globus File Manager,width=800,align="center"]
 
 In the right-hand panel, click on the Search box and then select your Globus Connect Personal endpoint from the *Your Collections* tab.  This should have the name that you entered when installing Globus Connect Personal in <<link-6, step B2>>.
 
----
-~ add screenshot here ~
+image::search_collection.png[Search for your collection,width=800,align="center"]
 
----
+image::select_collection.png[Select your collection,width=800,align="center"]
 
 You should now see the GWAS Catalog submission folder side by side with your own computer’s file system.
 
 Now you can drag and drop the summary stats files you want to upload from the right window to the left window.
+
+image::drag_and_drop.png[Drag and drop summary statistics,width=800,align="center"]
 
 A message will appear when the files have been transferred. Note that you may not see them in the left window straight away, but they should appear when you click Refresh.
 
@@ -190,7 +183,7 @@ Once you have completed the submission form, save it and click "Upload submissio
 
 Click "Upload file" and then "Start validation".
 
-The validation pipeline first checks the uploaded submission form. If this passes, it goes on to check the summary statistics files themselves. Validation may take some time, but feel free to leave the page - you will receive an email when validation is complete, or if an error is detected, with a link back to this page.
+The validation pipeline first checks the uploaded submission form. If this passes, it goes on to check the summary statistics files themselves. Validation may take some time, but feel free to leave the page - you will receive an email when validation is complete, or if an error is detected, with a link back to the submission page.
 
 The Submission Report displays a brief summary of the uploaded data as well as any errors. You can click "Review submission" to download and check the current submission form, or "Reset" to delete the current form and start again.
 
