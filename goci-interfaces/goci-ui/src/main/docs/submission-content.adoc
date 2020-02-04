@@ -99,13 +99,13 @@ image::pre_sub_checklist.png[Pre-submission checklist,width=800,align="center"]
 
 You can tick this box if you have already logged in.
 
-Otherwise, first follow the https://elixir-europe.org/register[Elixir ID link] and click Register to create an account.
+Otherwise, first follow the https://elixir-europe.org/register[Elixir ID link^] and click Register to create an account.
 
 === [[link-6]]2. Install Globus Connect Personal
 
 We use Globus to enable the transfer of summary statistics files to the GWAS Catalog.
 
-First, you will need to download and install the Globus Connect Personal application, which allows Globus to access files from your computer. Follow the https://www.globus.org/globus-connect-personal[Globus Connect Personal link] and then select the appropriate link for your operating system.
+First, you will need to download and install the Globus Connect Personal application, which allows Globus to access files from your computer. Follow the https://www.globus.org/globus-connect-personal[Globus Connect Personal link^] and then select the appropriate link for your operating system.
 
 image::gcp_install.png[Install GCP,width=400,align="center"]
 
@@ -123,7 +123,7 @@ image::enter_email.png[Enter Globus email,width=800,align="center"]
 
 === [[link-8]]4. Format and validate summary statistics
 
-To avoid errors later, please make sure that your summary statistics files conform to our standard format and content. Follow the https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[Format and validate link] for formatting instructions and to access our offline summary statistics validator.
+To avoid errors later, please make sure that your summary statistics files conform to our standard format and content. Follow the https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[Format and validate link^] for formatting instructions and to access our offline summary statistics validator.
 
 === [[link-9]]5. Create submission
 
@@ -173,7 +173,7 @@ The contents of the form depend on whether the publication is OPEN FOR SUBMISSIO
 
 For help filling in the submission form, follow the link from the submission interface, or select the relevant link below:
 
-1. Instructions for https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics[ summary statistics only^], or
+1. Instructions for https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics[summary statistics only^], or
 
 2. Instructions for https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics-plus-metadata[summary statistics plus study metadata^]
 
