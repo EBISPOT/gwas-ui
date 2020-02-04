@@ -7,7 +7,7 @@
 
 For publications that are not yet included in the GWAS Catalog, we ask you to submit metadata in addition to the summary statistics files.
 
-Instructions are provided below. When you have completed the submission form, return to the main submission instructions https://www.ebi.ac.uk/gwas/docs/submission[here].
+Instructions are provided below. When you have completed the submission form, return to the https://www.ebi.ac.uk/gwas/docs/submission[main submission instructions].
 
 === Data for you to enter
 
@@ -166,7 +166,7 @@ There are 16 columns for you to fill in:
 
 |md5 sum
 |
-|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See <<checksums, how to calculate checksums>>.
+|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums^].
 |
 |no
 |
@@ -182,7 +182,7 @@ There are 16 columns for you to fill in:
 |
 |A standard readme file
 |
-|See <<readme, instructions here>>.
+|See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#readme[readme instructions here^].
 
 |Summary statistics assembly
 |
@@ -324,7 +324,7 @@ There are 10 columns for you to fill in:
 
 |Ancestry category
 |
-|Broad ancestry category that best describes the sample. For more information about each category, see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5815218/table/Tab1/?report=objectonly[Table 1, Morales et al., 2018].
+|Broad ancestry category that best describes the sample. For more information about each category, see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5815218/table/Tab1/?report=objectonly[Table 1, Morales et al., 2018^].
 
 You should create a new row for each ancestry category. However, you may enter multiple categories in the same row, separated by pipes "\|", only if separate sample numbers are unavailable for each category.
 |
@@ -396,7 +396,7 @@ You should create a new row for each ancestry category. However, you may enter m
 |
 |yes
 |
-|Must match country name(s) in https://unstats.un.org/unsd/methodology/m49[The United Nations M49 Standard of Geographic Regions]
+|Must match country name(s) in https://unstats.un.org/unsd/methodology/m49[The United Nations M49 Standard of Geographic Regions^]
 |
 |`Japan\|China`
 |===
