@@ -18,9 +18,9 @@ Authors of GWAS publications can now submit full summary statistics following th
 
 1. <<link-5, Create Elixir ID>>
 2. <<link-6, Install Globus Connect Personal>>
-3. <<link-7, Link Elixir account to Globus>>
+3. <<link-7, Enter registered Globus email>>
 4. <<link-8, Format and validate summary statistics>>
-5. <<link-9, Create a submission>>
+5. <<link-9, Create submission>>
 
 <<C, C. Uploading data>>
 
