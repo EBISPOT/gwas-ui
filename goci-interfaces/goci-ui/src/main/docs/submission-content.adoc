@@ -109,17 +109,23 @@ First, you will need to download and install the Globus Connect Personal applica
 
 image::gcp_install.png[Install GCP,width=400,align="center"]
 
+{empty}
+
 Then follow the *Installation* steps to install and run the application.
 
 Take note of the email address associated with your Globus Connect Personal endpoint. You will need this for the next step.
 
 image::globus_email.png[Publication search results,width=800,align="center"]
 
+{empty}
+
 === [[link-7]]3. Enter registered Globus email
 
 Enter the email address associated with your Globus account. It should be filled automatically, but you can change it if needed.
 
 image::enter_email.png[Enter Globus email,width=800,align="center"]
+
+{empty}
 
 === [[link-8]]4. Format and validate summary statistics
 
@@ -133,6 +139,8 @@ You can then click "Create Submission" to continue.
 
 image::create_sub.png[Create Submission,width=800,align="center"]
 
+{empty}
+
 == [[C]]C. Uploading data
 
 After you have created a submission, you will be able to upload your summary statistics and supporting information. 
@@ -145,17 +153,25 @@ The GWAS Catalog submission folder will appear in the left-hand panel, with a Co
 
 image::file_manager.png[Globus File Manager,width=800,align="center"]
 
+{empty}
+
 In the right-hand panel, click on the Search box and then select your Globus Connect Personal endpoint from the *Your Collections* tab.  This should have the name that you entered when installing Globus Connect Personal in <<link-6, step B2>>.
 
 image::search_collection.png[Search for your collection,width=800,align="center"]
 
+{empty}
+
 image::select_collection.png[Select your collection,width=800,align="center"]
+
+{empty}
 
 You should now see the GWAS Catalog submission folder side by side with your own computer’s file system.
 
 Now you can drag and drop the summary stats files you want to upload from the right window to the left window.
 
 image::drag_and_drop.png[Drag and drop summary statistics,width=800,align="center"]
+
+{empty}
 
 A message will appear when the files have been transferred. Note that you may not see them in the left window straight away, but they should appear when you click Refresh.
 
