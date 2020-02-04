@@ -7,14 +7,14 @@
 
 Authors of GWAS publications can now submit full summary statistics following the steps below:
 
-<<A, Finding your publication>>
+<<A, A. Finding your publication>>
 
 1. <<link-1, Log in>>
 2. <<link-2, Find publication>>
 3. <<link-3, Check publication status>>
 4. <<link-4, Select publication>>
 
-<<B, Creating a submission>>
+<<B, B. Creating a submission>>
 
 1. <<link-5, Create Elixir ID>>
 2. <<link-6, Install Globus Connect Personal>>
@@ -22,7 +22,7 @@ Authors of GWAS publications can now submit full summary statistics following th
 4. <<link-8, Format and validate summary statistics>>
 5. <<link-9, Create a submission>>
 
-<<C, Uploading data>>
+<<C, C. Uploading data>>
 
 1. <<link-10, Upload summary statistics>>
 2. <<link-11, Download submission form>>
@@ -32,7 +32,7 @@ Authors of GWAS publications can now submit full summary statistics following th
 
 <<D, Additional information>>
 
-== [[A]] Finding your publication
+== [[A]]A. Finding your publication
 
 The first step is to find your publication in the GWAS Catalog Submission system.
 
@@ -89,7 +89,7 @@ The Status of the publication tells you which type of data can be submitted.
 
 Once you have found your publication, click on the PMID to open the Publication Details page.
 
-== [[B]] Creating a submission
+== [[B]]B. Creating a submission
 
 The Publication Details page gives a brief summary of the publication and a list of prerequisites for submission. You will need to complete each of the items on the checklist before proceeding with the submission.
 
@@ -133,7 +133,7 @@ You can then click "Create Submission" to continue.
 
 image::create_sub.png[Create Submission,width=800,align="center"]
 
-== [[C]] Uploading data
+== [[C]]C. Uploading data
 
 After you have created a submission, you will be able to upload your summary statistics and supporting information. 
 
