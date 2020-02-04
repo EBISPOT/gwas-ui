@@ -75,7 +75,7 @@ There are 7 empty columns for you to fill in. Mandatory columns are highlighted 
 
 |md5 sum
 |
-|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums].
+|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums^].
 |
 |no
 |
@@ -91,7 +91,7 @@ There are 7 empty columns for you to fill in. Mandatory columns are highlighted 
 |
 |A standard readme file
 |
-|See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#readme[instructions here]. 
+|See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#readme[readme instructions here^]. 
 
 |Summary statistics assembly
 |
