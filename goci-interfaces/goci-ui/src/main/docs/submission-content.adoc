@@ -197,6 +197,8 @@ For help filling in the submission form, follow the link from the submission int
 
 2. Instructions for https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics-plus-metadata[summary statistics plus study metadata^]
 
+<a name="#anchor">
+
 === [[link-13]]4. Upload submission form
 
 Once you have completed the submission form, save it and click "Upload submission form". You can drag and drop the file onto the cloud icon, or click it to select the file from your computer.
