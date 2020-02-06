@@ -6,6 +6,7 @@ For publications that are already included in the GWAS Catalog, we provide a par
 
 Instructions are provided below. When you have completed the submission form, return to the https://www.ebi.ac.uk/gwas/docs/submission#link-13[main submission instructions^].
 
+Testing this link:
 <a href="http://snoopy:9680/gwas/docs/submission#anchor">Test Link</a>
 
 === Pre-filled data
