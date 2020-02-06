@@ -3,7 +3,7 @@
 :imagesdir: ./images
 :data-uri:
 
-== How to submit
+== How to submit summary statistics
 
 Authors of GWAS publications can now submit full summary statistics following the steps below:
 
@@ -42,13 +42,15 @@ First, open the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submission pa
 
 To get started, click LOGIN in the top right corner of the submission page.
 
-Log in using an Elixir identity, or follow the link to register. You can register using an existing account e.g. a university, ORCID or Google account.
+User accounts are managed using the https://elixir-europe.org/services/compute/aai[ELIXIR Authentication and Authorisation Infrastructure], which is shared across multiple life science services. You can create an ELIXIR identity using an existing account, including Google, LinkedIn, ORCID and most academic institutions.
+
+If you already have an ELIXIR identity, click on "ELIXIR LOGIN" to continue, or follow the link to register.
 
 === [[link-2]]2. Find publication
 
 On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion.
 
-You can search for a publication by *PMID* or *first author*. Publications matching your search are displayed in the table.
+You can search for a publication by *PMID* (PubMed identifier) or *first author*. Publications matching your search are displayed in the table.
 
 image::pub_search.png[Publication search results,width=800,align="center"]
 
@@ -63,6 +65,8 @@ A publication will not appear in the table if:
 If you think that we are missing an eligible publication, or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
 
 === [[link-3]]3. Check publication status
+
+Publications listed on the Submission page may be at various stages of curation. For some, we have curated both the metadata (i.e. information about the trait, sample, genotyping and analysis methods) and summary statistics, therefore no further submissions are required. In other cases, one or both of these pieces of information is still missing and therefore open for direct submission by authors through the Submission page.
 
 The Status of the publication tells you which type of data can be submitted.
 
