@@ -3,16 +3,38 @@
 :imagesdir: ./images
 :data-uri:
 
-== How to submit
+== How to submit summary statistics
 
 Authors of GWAS publications can now submit full summary statistics following the steps below:
+
+<<A, A. Finding your publication>>
 
 1. <<link-1, Log in>>
 2. <<link-2, Find publication>>
 3. <<link-3, Check publication status>>
-4. <<link-4, Set up Globus account for file transfer>>
-4. <<link-4, Create a submission>>
-5. <<link-5, Submit>>
+4. <<link-4, Select publication>>
+
+<<B, B. Creating a submission>>
+
+1. <<link-5, Create Elixir ID>>
+2. <<link-6, Install Globus Connect Personal>>
+3. <<link-7, Enter registered Globus email>>
+4. <<link-8, Format and validate summary statistics>>
+5. <<link-9, Create submission>>
+
+<<C, C. Uploading data>>
+
+1. <<link-10, Upload summary statistics>>
+2. <<link-11, Download submission form>>
+3. <<link-12, Fill in submission form>>
+4. <<link-13, Upload submission form>>
+5. <<link-14, Submit>>
+
+<<D, Additional information>>
+
+== [[A]]A. Finding your publication
+
+The first step is to find your publication in the GWAS Catalog Submission system.
 
 === [[link-1]]1. Log in to the submission page
 
@@ -20,13 +42,17 @@ First, open the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submission pa
 
 To get started, click LOGIN in the top right corner of the submission page.
 
-Log in using your ELIXIR identity, or follow the link to register. Your ELIXIR identity may be linked to Google, LinkedIn, ORCID or an institutional account.
+User accounts are managed using the https://elixir-europe.org/services/compute/aai[ELIXIR Authentication and Authorisation Infrastructure], which is shared across multiple life science services. You can create an ELIXIR identity using an existing account, including Google, LinkedIn, ORCID and most academic institutions.
+
+If you already have an ELIXIR identity, click on "ELIXIR LOGIN" to continue, or follow the link to register.
 
 === [[link-2]]2. Find publication
 
 On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion.
 
-You can search for a publication by *PubMed ID* or *first author*. Publications matching your search are displayed in the table.
+You can search for a publication by *PMID* (PubMed identifier) or *first author*. Publications matching your search are displayed in the table.
+
+image::pub_search.png[Publication search results,width=800,align="center"]
 
 ==== What if my publication is not in the table?
 
@@ -34,13 +60,15 @@ A publication will not appear in the table if:
 
 * it has not yet been indexed in PubMed
 * it has been missed by our literature search, or
-* curators have reviewed the publication and found that it does not meet our eligibility criteria
+* it does not meet our eligibility criteria
 
 If you think that we are missing an eligible publication, or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
 
 === [[link-3]]3. Check publication status
 
-Once you have found your publication, please take note of the Status. This will tell you which data to submit.
+Publications listed on the Submission page may be at various stages of curation. For some, we have curated both the metadata (i.e. information about the trait, sample, genotyping and analysis methods) and summary statistics, therefore no further submissions are required. In other cases, one or both of these pieces of information is still missing and therefore open for direct submission by authors through the Submission page.
+
+The Status of the publication tells you which type of data can be submitted.
 
 [cols="<3,<1,<6", options="header", grid="all", width=100%]
 |===
@@ -61,62 +89,135 @@ Once you have found your publication, please take note of the Status. This will 
 |We are not currently accepting submissions for this publication. We either have the summary statistics already, or the publication is under submission by another author or curator. You may want to check with your co-authors, or contact us at gwas-info@ebi.ac.uk for more information.
 |===
 
-=== [[link-4]]4. Set up Globus account for file transfer
+=== [[link-4]]4. Select publication
 
-In order to transfer your summary statistics files to the GWAS Catalog, you will need to set up a Globus account.
+Once you have found your publication, click on the PMID to open the Publication Details page.
 
-==== Step 1: Log in to Globus
+== [[B]]B. Creating a submission
 
-First log into Globus, by going to https://www.globus.org and clicking LOGIN.
+The Publication Details page gives a brief summary of the publication and a list of prerequisites for submission. You will need to complete each of the items on the checklist before proceeding with the submission.
 
-You must log in using the same email account used to log into the GWAS Submission page. For example, if you logged into GWAS Submission with your ELIXIR account, use the same account to log into Globus.
+image::pre_sub_checklist.png[Pre-submission checklist,width=800,align="center"]
 
-image::globus_1_login.jpeg[screenshot1, 600, align="center"]
+=== [[link-5]]1. Create Elixir ID
 
-==== Step 2: Download Globus Connect Personal
+You can tick this box if you have already logged in.
 
-If you want to transfer files from your own personal computer, you will need to install the Globus Connect Personal application. If you are already familiar with Globus and have your summary statistics files in an existing collection, you can skip this step.
+Otherwise, first follow the https://elixir-europe.org/register[Elixir ID link^] and click Register to create an account.
 
-  * Select “Transfer or Sync to…” from the right hand window.
+=== [[link-6]]2. Install Globus Connect Personal
 
-image::globus_2_transfer_sync.jpeg[screenshot2, 600, align="center"]
-  
-  * The window will split and give you the option to select a collection.
+We use Globus to enable the transfer of summary statistics files to the GWAS Catalog.
 
-image::globus_3_new_collection.jpeg[screenshot3, 600, align="center"]
+First, you will need to download and install the Globus Connect Personal application, which allows Globus to access files from your computer. Follow the https://www.globus.org/globus-connect-personal[Globus Connect Personal link^] and then select the appropriate link for your operating system.
 
-  * Select "Install Globus Connect Personal"
+image::gcp_install.png[Install GCP,width=400,align="center"]
 
-image::globus_4_install_gcp.jpeg[screenshot4, 600, align="center"]
-  
-  * Follow the steps on screen:
-  ** Give your collection a name so you can easily identify it
-  ** Generate a setup key and keep a note of the number
-  ** Download & install Globus Connect Personal
-  
-image::globus_5_name_collection.jpeg[screenshot5, 600, align="center"]
+{empty}
 
-image::globus_7_install_drag_drop.jpeg[screenshot6, 300, align="center"]
-  
-  *  When you start Globus Connect Personal on your computer, it will ask you to enter the setup key.
-  
-image::globus_6_setup_key.jpeg[screenshot7, 300, align="center"]
-  
-  * Once Globus Connect Personal is successfully installed, it should run in the background (check for the "g" icon in your toolbar)
-  
-  * Close the Globus File Manager in your browser for now. You will link back to it later.
+Then follow the *Installation* steps to install and run the application.
 
-=== [[link-5]]5. Create submission
+Take note of the email address associated with your Globus Connect Personal endpoint. You will need this for the next step.
 
-Return to the GWAS Catalog Submission page. Click on the "PubMedID" for your publication and then click "Create Submission".
+image::globus_email.png[Publication search results,width=800,align="center"]
 
-Then follow the instructions in the links below to:
+{empty}
 
-1. https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics[Submit summary statistics only^], or
+=== [[link-7]]3. Enter registered Globus email
 
-2. https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics-plus-metadata[Submit summary statistics plus study metadata^]
+Enter the email address associated with your Globus account. It should be filled automatically, but you can change it if needed.
 
-== Additional Information
+image::enter_email.png[Enter Globus email,width=800,align="center"]
+
+{empty}
+
+=== [[link-8]]4. Format and validate summary statistics
+
+To avoid errors later, please make sure that your summary statistics files conform to our standard format and content. Follow the https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[Format and validate link^] for formatting instructions and to access our offline summary statistics validator.
+
+=== [[link-9]]5. Create submission
+
+Please tick each box in the checklist to confirm that the prerequisites have been completed.
+
+You can then click "Create Submission" to continue.
+
+image::create_sub.png[Create Submission,width=800,align="center"]
+
+{empty}
+
+== [[C]]C. Uploading data
+
+After you have created a submission, you will be able to upload your summary statistics and supporting information. 
+
+=== [[link-10]]1. Upload summary statistics
+
+The first step is to upload your summary statistics files. When you create a submission, a folder is created for you. You can transfer your summary statistics to this location using Globus. Click "Upload summary statistics" to go to the Globus File Manager.
+
+The GWAS Catalog submission folder will appear in the left-hand panel, with a Collection name beginning *ebi#gwas#*, followed by the date and some other characters.
+
+image::file_manager.png[Globus File Manager,width=800,align="center"]
+
+{empty}
+
+In the right-hand panel, click on the Search box and then select your Globus Connect Personal endpoint from the *Your Collections* tab.  This should have the name that you entered when installing Globus Connect Personal in <<link-6, step B2>>.
+
+image::search_collection.png[Search for your collection,width=800,align="center"]
+
+{empty}
+
+image::select_collection.png[Select your collection,width=800,align="center"]
+
+{empty}
+
+You should now see the GWAS Catalog submission folder side by side with your own computer’s file system.
+
+Now you can drag and drop the summary stats files you want to upload from the right window to the left window.
+
+image::drag_and_drop.png[Drag and drop summary statistics,width=800,align="center"]
+
+{empty}
+
+A message will appear when the files have been transferred. Note that you may not see them in the left window straight away, but they should appear when you click Refresh.
+
+=== [[link-11]]2. Download submission form
+
+You will now need to provide some additional information to support the summary statistics files.
+
+Return to the Submission page and click "Download submission form" to download an Excel spreadsheet where you can enter this information. Save the form to your computer to complete offline.
+
+Please download a new form each time you submit a new publication, to make sure you have the most correct and up-to-date form for your specific submission.
+
+=== [[link-12]]3. Fill in submission form
+
+The contents of the form depend on whether the publication is OPEN FOR SUBMISSION or OPEN FOR SUMMARY STATISTICS SUBMISSION (see <<link-3, step A3 above>>).
+
+For help filling in the submission form, follow the link from the submission interface, or select the relevant link below:
+
+1. Instructions for https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics[summary statistics only^], or
+
+2. Instructions for https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics-plus-metadata[summary statistics plus study metadata^]
+
+<a name="#anchor">
+
+=== [[link-13]]4. Upload submission form
+
+Once you have completed the submission form, save it and click "Upload submission form". You can drag and drop the file onto the cloud icon, or click it to select the file from your computer.
+
+Click "Upload file" and then "Start validation".
+
+The validation pipeline first checks the uploaded submission form. If this passes, it goes on to check the summary statistics files themselves. Validation may take some time, but feel free to leave the page - you will receive an email when validation is complete, or if an error is detected, with a link back to the submission page.
+
+The Submission Report displays a brief summary of the uploaded data as well as any errors. You can click "Review submission" to download and check the current submission form, or "Reset" to delete the current form and start again.
+
+=== [[link-14]]5. Submit
+
+Once the submission has successfully validated, click "Submit" to complete the submission.
+
+You will be taken to the My Submissions page, where you can see your latest submission at the top, with the status SUBMITTED.
+
+A curator will then review your submission and make the summary statistics available to the public as soon as possible through the GWAS Catalog website.
+
+== [[D]] Additional Information
 
 === Viewing my Submissions
 

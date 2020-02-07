@@ -1,10 +1,14 @@
 = Preparing summary statistics files
 
+== Summary statistics validator
+
+To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate[^].
+
 == Summary statistics file format and content
 
 Summary statistics are defined as the aggregate p-values and association data for every variant analysed in a genome-wide association study (GWAS). They should be provided in one file per GWAS with one row for each variant analysed.
 
-Submitted summary statistics files must conform to our standard file format and content (published in https://doi.org/10.1093/nar/gky1120[Buniello and MacArthur, 2019], further details https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here].
+Submitted summary statistics files must conform to our standard file format and content (published in https://doi.org/10.1093/nar/gky1120[Buniello and MacArthur, 2019^] and described in detail on our https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[summary statistics methods page^]).
 
 Summary statistics file requirements:
 
@@ -14,7 +18,7 @@ Summary statistics file requirements:
   * Option 1: *variant_ID* and *p-value*
   * Option 2: *chromosome*, *base pair location* and *p-value*  - for this option you must also provide the genome assembly in the submission template
 4. When one of the manditory columns is not provided, the column should be filled with NA
-5. To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also include *effect_allele* and *other_allele*. See https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here] for more details on our harmonisation pipeline.
+5. To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also include *effect_allele* and *other_allele*. See https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[summary statistics methods^] for more details on our harmonisation pipeline.
 6. You may also include any number of additional columns
 
 [cols="<2,<3,<1,<3,<1", options="header", grid="all", width=100%]
@@ -98,11 +102,7 @@ Summary statistics file requirements:
 |`0.03`
 |===
 
-== [[validator]] Summary statistics validator
-
-To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate/.
-
-== [[readme]] README file content
+== [[readme]] README content
 
 Each summary statistics file should be accompanied by a readme file containing the following info in a numbered list:
 
@@ -113,9 +113,7 @@ Genome-wide association study of habitual physical activity in over 377,000 UK B
 2. Clear description of the content presented in additional columns that are not present in our standard format
 e.g.: INFO: imputation quality/certainty metric from IMPUTE2
 
-3. Any other information or comment that can be useful to interpret and store the data under submission (e.g. broader description of the cohort used in the study, QC measures applied) 
-
-Please see <link to the FTP with example txt file>[here] for an example of a good readme file.
+3. Any other information or comment that can be useful to interpret and store the data under submission (e.g. broader description of the cohort used in the study, QC measures applied)
 
 == [[checksums]] Summary statistics checksums
 
@@ -166,8 +164,8 @@ In Windows, you can use the certutil command line tool to calculate md5 checksum
 
 The output should look something like this:
 
-  ...
+  > MD5 hash of summary_stats.gzip: d19bbbed9d713f97f487b9ed9ec3f62f
 
-The md5 checksum is the 32-digit hexadecimal number provided by the application. Copy this number into the corresponding column of the study sheet.
+The md5 checksum is the 32-digit hexadecimal number in the output, after the file name. Copy this number into the corresponding column of the study sheet.
 
 +++ </div></details> +++
