@@ -136,25 +136,22 @@
 
 1. <<faq-G1, How do I use the GWAS Catalog REST API?>>
 
-=== H. Summary statistics
+=== H. Summary Statistics
 
 1. <<faq-H1,What are summary statistics?>>
 
 2. <<faq-H2,How do I find out which publications have full summary statistics available?>>
 
-3. <<faq-H3,How do I access summary statistics?>>
+3. <<faq-H3,I am an author and would like to deposit my summary statistics in the GWAS Catalog, how do I go about this?>>
 
-4. <<faq-H4,How should I cite summary statistics downloaded from the GWAS Catalog?>>
+4. <<faq-H4,How do I access summary statistics?>>
 
-5. <<faq-H5,What are harmonised summary statistics?>>
+5. <<faq-H5,How should I cite summary statistics downloaded from the GWAS Catalog?>>
 
-6. <<faq-H6,What are the risks of subject identification associated with sharing of summary statistics?>>
+6. <<faq-H6,What are harmonised summary statistics?>>
 
-=== I. Submitting summary statistics
+7. <<faq-H7,What are the risks of subject identification associated with sharing of summary statistics?>>
 
-1. <<faq-I1,How can I submit summary statistics to the GWAS Catalog?>>
-
-2. <<faq-I2,How should summary statistics be formatted for submission?>>
 
 '''
 == A. General
@@ -461,7 +458,7 @@ Most GWAS Catalog studies include at least two ancestry entries, one for the ini
 The GWAS Catalog REST API is now available for programmatic access to the Catalog. See the http://www.ebi.ac.uk/gwas/rest/docs/api[full technical documentation] here, as well as http://www.ebi.ac.uk/gwas/rest/docs/sample-scripts[usage examples].
 
 
-== [[H]]H. Summary statistics
+== [[H]]H. Summary Statistics
 
 ==== [[faq-H1]]1. What are summary statistics?
 
@@ -473,35 +470,25 @@ Studies with full summary statistics are indicated by an icon in the “Associat
 
 Summary statistics files are available once curation of the publication is completed, even before the publication is included in our data release (approximately every three weeks).  Therefore, if a publication states that summary statistics are available from the Catalog, and no Catalog entry yet exists, please contact us at gwas-info@ebi.ac.uk and we can give you direct access to the files.
 
-==== [[faq-H3]]3. How do I access summary statistics?
+==== [[faq-H3]]3. I am an author and would like to deposit my summary statistics in the GWAS Catalog. How do I go about this?
+
+We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also encourage authors to submit their data directly. If you wish to deposit summary statistics in the GWAS Catalog, please contact us via gwas-subs@ebi.ac.uk for instructions on how to access our ftp server.  We can only include data in the Catalog that has been published in a peer-reviewed journal and indexed in PubMed. We aren’t currently able to provide accession numbers before publication. If you have an accepted publication for which you intend to submit summary statistics to the GWAS Catalog, and need to include a data availability statement in your manuscript, please contact us. Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods[eligibility criteria], and the summary statistics files must reflect published results.
+
+==== [[faq-H4]]4. How do I access summary statistics?
 
 There are two methods. We have developed a dedicated summary statistics database, enabling users with searchable, filterable, harmonised data via  the summary statistics http://www.ebi.ac.uk/gwas/summary-statistics/docs/[REST API]. Alternatively, non-programmatic access to the original, standardised and harmonised data is available on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site].
 
-==== [[faq-H4]]4. How should I cite summary statistics downloaded from the GWAS Catalog?
+==== [[faq-H5]]5. How should I cite summary statistics downloaded from the GWAS Catalog?
 
 Users of summary statistics are requested to cite the data as follows: accession ID of the GWAS Catalog study e.g. “GCST007240”, the GWAS Catalog, and the date the summary statistics were downloaded. If the summary statistics originated from a published GWAS, please also cite the original publication. For example, “Summary statistics were downloaded from the NHGRI-EBI GWAS Catalog (Buniello, MacArthur et al., 2019) for study GCST007240 (Riveros-McKay et al., 2019) downloaded on 01/11/2018”.
 
-==== [[faq-H5]]5. What are standardised/harmonised summary statistics?
+==== [[faq-H6]]6. What are standardised/harmonised summary statistics?
 
 Please refer to the documentation https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[here].
 
-==== [[faq-H6]]6. What are the risks of subject identification associated with sharing of summary statistics?
+==== [[faq-H7]]7. What are the risks of subject identification associated with sharing of summary statistics?
 
 Currently the feeling in the community is that the unrestricted sharing of summary statistics holds a great deal of potential benefits, with low risk to participants’ privacy. A study by Homer et al., (PMID:18769715) in 2008 indicated that it was possible to determine if a specific individual participated in a study based on summary-level statistics (including allele frequencies of the study participants) and the genotype information of the individual. However, this would require that an individual had made public their genotype information, and  also participated in a study for which summary-level allele frequencies were available. Since this publication there has been widespread discussion in the scientific community, along with several publications (including Craig et al., 2011, PMID:21921928) on the benefits and risks surrounding sharing of summary statistics.  After considering the risks and benefits the NIH has published guidance supporting open sharing of summary statistics information, including allele frequencies (https://osp.od.nih.gov/2018/11/01/provide-access-gsr/, https://grants.nih.gov/grants/guide/notice-files/NOT-OD-19-023.html).
-
-== [[I]]I. Submitting summary statistics
-
-==== [[faq-I1]]1. How can I submit summary statistics to the GWAS Catalog?
-
-We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also encourage authors to submit their data directly.
-
-Summary statistics related to published journal articles can be submitted to the GWAS Catalog via the http://www.ebi.ac.uk/gwas/deposition[Submission page]. Detailed instructions can be found in our http://www.ebi.ac.uk/gwas/docs/submission[documentation].
-
-If you would like to submit summary statistics for an article in preparation, or for an unpublished project, please contact gwas-subs@ebi.ac.uk. Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods/criteria[eligibility criteria], and the summary statistics files must reflect published results.
-
-==== [[faq-I2]]2. How should summary statistics be formatted for submission?
-
-Please refer to the https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[documentation] for the standard format and to access our summary statistics validation tool.
 
 '''
 
