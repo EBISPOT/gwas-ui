@@ -9,10 +9,9 @@ Authors of GWAS publications can now submit full summary statistics following th
 
 <<A, A. Finding your publication>>
 
-1. <<link-1, Log in>>
-2. <<link-2, Find publication>>
-3. <<link-3, Check publication status>>
-4. <<link-4, Select publication>>
+1. <<link-1, Find publication>>
+2. <<link-2, Check publication status>>
+3. <<link-3, Select publication>>
 
 <<B, B. Creating a submission>>
 
@@ -34,21 +33,11 @@ Authors of GWAS publications can now submit full summary statistics following th
 
 == [[A]]A. Finding your publication
 
-The first step is to find your publication in the GWAS Catalog Submission system.
+The first step is to find your publication on the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submission page^].
 
-=== [[link-1]]1. Log in to the submission page
+=== [[link-1]]1. Find publication
 
-First, open the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submission page^].
-
-To get started, click LOGIN in the top right corner of the submission page.
-
-User accounts are managed using the https://elixir-europe.org/services/compute/aai[ELIXIR Authentication and Authorisation Infrastructure], which is shared across multiple life science services. You can create an ELIXIR identity using an existing account, including Google, LinkedIn, ORCID and most academic institutions.
-
-If you already have an ELIXIR identity, click on "ELIXIR LOGIN" to continue, or follow the link to register.
-
-=== [[link-2]]2. Find publication
-
-On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion.
+On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion (see https://www.ebi.ac.uk/gwas/docs/methods/criteria[inclusion criteria]).
 
 You can search for a publication by *PMID* (PubMed identifier) or *first author*. Publications matching your search are displayed in the table.
 
@@ -60,11 +49,11 @@ A publication will not appear in the table if:
 
 * it has not yet been indexed in PubMed
 * it has been missed by our literature search, or
-* it does not meet our eligibility criteria
+* it does not meet our https://www.ebi.ac.uk/gwas/docs/methods/criteria[inclusion criteria]
 
 If you think that we are missing an eligible publication, or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
 
-=== [[link-3]]3. Check publication status
+=== [[link-2]]2. Check publication status
 
 Publications listed on the Submission page may be at various stages of curation. For some, we have curated both the metadata (i.e. information about the trait, sample, genotyping and analysis methods) and summary statistics, therefore no further submissions are required. In other cases, one or both of these pieces of information is still missing and therefore open for direct submission by authors through the Submission page.
 
@@ -89,7 +78,7 @@ The Status of the publication tells you which type of data can be submitted.
 |We are not currently accepting submissions for this publication. We either have the summary statistics already, or the publication is under submission by another author or curator. You may want to check with your co-authors, or contact us at gwas-info@ebi.ac.uk for more information.
 |===
 
-=== [[link-4]]4. Select publication
+=== [[link-3]]3. Select publication
 
 Once you have found your publication, click on the PMID to open the Publication Details page.
 
@@ -101,9 +90,11 @@ image::pre_sub_checklist.png[Pre-submission checklist,width=800,align="center"]
 
 === [[link-5]]1. Create Elixir ID
 
-You can tick this box if you have already logged in.
+In order to create a submission, you will need to create an account and log in. User accounts are managed using the ELIXIR Authentication and Authorisation Infrastructure, which is shared across multiple life science services. You can find https://elixir-europe.org/services/compute/aai[more information about ELIXIR here]. 
 
-Otherwise, first follow the https://elixir-europe.org/register[Elixir ID link^] and click Register to create an account.
+First, create an ELIXIR identity if you do not already have one: follow the https://elixir-europe.org/register[Elixir ID link^] and click Register. You can create an ELIXIR identity using an existing account, including Google, LinkedIn, ORCID and most academic institutions.
+
+Second, using your ELIXIR identity, click on "ELIXIR LOGIN" on the GWAS Catalog Submission page to continue.
 
 === [[link-6]]2. Install Globus Connect Personal
 
@@ -151,9 +142,15 @@ After you have created a submission, you will be able to upload your summary sta
 
 === [[link-10]]1. Upload summary statistics
 
-The first step is to upload your summary statistics files. When you create a submission, a folder is created for you. You can transfer your summary statistics to this location using Globus. Click "Upload summary statistics" to go to the Globus File Manager.
+The first step is to upload your summary statistics files. When you create a submission, a folder is created for you. You can transfer your summary statistics to this location using Globus.
 
-The GWAS Catalog submission folder will appear in the left-hand panel, with a Collection name beginning *ebi#gwas#*, followed by the date and some other characters.
+On the Submission Details page, click "Upload summary statistics" to open the Globus File Manager in a new tab.
+
+image::upload_sum_stats.png[Upload summary statistics,width=300,align="center"]
+
+{empty}
+
+In the Globus File Manager, the GWAS Catalog submission folder will appear in the left-hand panel. It will have a Collection name beginning *ebi#gwas#*, followed by the creation date and some additional characters.
 
 image::file_manager.png[Globus File Manager,width=800,align="center"]
 
@@ -177,7 +174,7 @@ image::drag_and_drop.png[Drag and drop summary statistics,width=800,align="cente
 
 {empty}
 
-A message will appear when the files have been transferred. Note that you may not see them in the left window straight away, but they should appear when you click Refresh.
+A message will appear when the transfer request has successfully started. Large files may take some time to transfer, but you do not need to wait until it is finished - the transfer will continue in the background while you complete the rest of your submission.
 
 === [[link-11]]2. Download submission form
 
@@ -185,19 +182,17 @@ You will now need to provide some additional information to support the summary 
 
 Return to the Submission page and click "Download submission form" to download an Excel spreadsheet where you can enter this information. Save the form to your computer to complete offline.
 
-Please download a new form each time you submit a new publication, to make sure you have the most correct and up-to-date form for your specific submission.
+Please download a new form each time you create a new submission for a publication, to make sure you have the most correct and up-to-date form for your specific submission.
 
 === [[link-12]]3. Fill in submission form
 
-The contents of the form depend on whether the publication is OPEN FOR SUBMISSION or OPEN FOR SUMMARY STATISTICS SUBMISSION (see <<link-3, step A3 above>>).
+The information that you need to enter into the submission form depends on whether the publication is OPEN FOR SUBMISSION or OPEN FOR SUMMARY STATISTICS SUBMISSION (see <<link-2, step A2 above>>).
 
 For help filling in the submission form, follow the link from the submission interface, or select the relevant link below:
 
 1. Instructions for https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics[summary statistics only^], or
 
 2. Instructions for https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics-plus-metadata[summary statistics plus study metadata^]
-
-<a name="#anchor">
 
 === [[link-13]]4. Upload submission form
 
@@ -207,7 +202,7 @@ Click "Upload file" and then "Start validation".
 
 The validation pipeline first checks the uploaded submission form. If this passes, it goes on to check the summary statistics files themselves. Validation may take some time, but feel free to leave the page - you will receive an email when validation is complete, or if an error is detected, with a link back to the submission page.
 
-The Submission Report displays a brief summary of the uploaded data as well as any errors. You can click "Review submission" to download and check the current submission form, or "Reset" to delete the current form and start again.
+The Submission Report displays a brief summary of the uploaded data as well as any errors. You can click "Review submission" to download and check the current submission form, or "Reset" to delete that submission form and start again.
 
 === [[link-14]]5. Submit
 
@@ -219,6 +214,6 @@ A curator will then review your submission and make the summary statistics avail
 
 == [[D]] Additional Information
 
-=== Viewing my Submissions
+=== Viewing My Submissions
 
-The My Submissions page displays all of your submissions. You can view old submissions or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
+The My Submissions page displays all of your submissions. You can view your previous submissions for all publications or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
