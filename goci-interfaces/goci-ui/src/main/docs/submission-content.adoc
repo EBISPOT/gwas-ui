@@ -182,6 +182,10 @@ You will now need to provide some additional information to support the summary 
 
 Return to the Submission page and click "Download submission form" to download an Excel spreadsheet where you can enter this information. Save the form to your computer to complete offline.
 
+image::download_form.png[Download submission form,width=300,align="center"]
+
+{empty}
+
 Please download a new form each time you create a new submission for a publication, to make sure you have the most correct and up-to-date form for your specific submission.
 
 === [[link-12]]3. Fill in submission form
@@ -196,17 +200,31 @@ For help filling in the submission form, follow the link from the submission int
 
 === [[link-13]]4. Upload submission form
 
-Once you have completed the submission form, save it and click "Upload submission form". You can drag and drop the file onto the cloud icon, or click it to select the file from your computer.
+Once you have completed the submission form, save it and click "Upload submission form".
 
-Click "Upload file" and then "Start validation".
+image::upload_form.png[Upload submission form,width=300,align="center"]
+
+{empty}
+
+You can drag and drop the file onto the cloud icon, or click it to select the file from your computer. Click "Upload file" and then "Start validation".
+
+image::upload_file.png[Upload file,width=600,align="center"]
+
+image::start_validation.png[Start validation,width=500,align="center"]
+
+{empty}
 
 The validation pipeline first checks the uploaded submission form. If this passes, it goes on to check the summary statistics files themselves. Validation may take some time, but feel free to leave the page - you will receive an email when validation is complete, or if an error is detected, with a link back to the submission page.
 
 The Submission Report displays a brief summary of the uploaded data as well as any errors. You can click "Review submission" to download and check the current submission form, or "Reset" to delete that submission form and start again.
 
+image::review_reset.png[Review or reset,width=300,align="center"]
+
 === [[link-14]]5. Submit
 
 Once the submission has successfully validated, click "Submit" to complete the submission.
+
+image::submit.png[Submit,width=300,align="center"]
 
 You will be taken to the My Submissions page, where you can see your latest submission at the top, with the status SUBMITTED.
 
