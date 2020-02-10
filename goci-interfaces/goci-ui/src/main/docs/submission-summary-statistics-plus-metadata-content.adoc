@@ -11,7 +11,7 @@ Instructions are provided below. When you have completed the submission form, re
 
 === Data for you to enter
 
-There are 2 tabs for you to complete:
+There are 2 tabs in the submission form for you to complete:
 
 1. <<studies, Studies>>
 2. <<samples, Samples>>
