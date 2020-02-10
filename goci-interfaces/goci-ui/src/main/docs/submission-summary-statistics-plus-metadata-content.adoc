@@ -237,7 +237,7 @@ For example, if your publication includes 2 GWAS analyses for different traits (
 
 The screenshot below shows how this should look in the sample tab (note some columns are hidden to make the example clearer):
 
-image::sample_tab_example.png[Sample tab example,width=800,align="center"]
+image::sample_tab_example.png[Sample tab example,width=600,align="center"]
 
 {empty}
 
