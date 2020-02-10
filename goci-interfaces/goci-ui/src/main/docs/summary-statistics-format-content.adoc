@@ -1,10 +1,17 @@
 = Preparing summary statistics files
 
-== Summary statistics validator
+This page includes information about preparing and validating summary statistics files, including:
+
+* <<validator, Summary statistics validator>>
+* <<format, Summary statistics file format and content>>
+* <<readme, README content>>
+* <<checksums, Summary statistics checksums>>
+
+== [[validator]]Summary statistics validator
 
 To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate[^].
 
-== Summary statistics file format and content
+== [[format]]Summary statistics file format and content
 
 Summary statistics are defined as the aggregate p-values and association data for every variant analysed in a genome-wide association study (GWAS). They should be provided in one file per GWAS with one row for each variant analysed.
 
@@ -102,9 +109,9 @@ Summary statistics file requirements:
 |`0.03`
 |===
 
-== [[readme]] README content
+== [[readme]]README content
 
-Each summary statistics file should be accompanied by a readme file containing the following info in a numbered list:
+Each summary statistics file should be accompanied by a readme file containing the following information in a numbered list:
 
 1. Full citation for the publication linked to the submitted summary statistics (in any standard citation style) 
 e.g: Klimentidis YC, Raichlen DA, Bea J, Garcia DO, Wineinger NE, Mandarino LJ, Alexander GE, Chen Z, Going SB (2018) 
@@ -115,14 +122,11 @@ e.g.: INFO: imputation quality/certainty metric from IMPUTE2
 
 3. Any other information or comment that can be useful to interpret and store the data under submission (e.g. broader description of the cohort used in the study, QC measures applied)
 
-== [[checksums]] Summary statistics checksums
+== [[checksums]]Summary statistics checksums
 
 In order to ensure the integrity of the uploaded summary statistics files before and after the upload, you must provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. If there is any problem during the upload that leads to corruption of the data, this checksum will change. So by validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
 
 === Calculating on Mac computers
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 The md5 command line application is installed on Mac computers by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
 
@@ -134,12 +138,7 @@ The output should look something like this:
 
 The md5 checksum is the 32-digit hexadecimal number in the output, after the filename. Copy this number into the corresponding column of the study sheet.
 
-+++ </div></details> +++
-
 === Calculating on Linux/Unix computers
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 The md5sum command line application is installed on all Linux/Unix based systems by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
 
@@ -151,12 +150,7 @@ The output should look something like this:
 
 The md5 checksum is the 32-digit hexadecimal number in the first column of the output, before the file name. Copy this number into the corresponding column of the study sheet.
 
-+++ </div></details> +++
-
 === Calculating on Windows computers
-
-+++ <details><summary> +++
-+++ </summary><div> +++
 
 In Windows, you can use the certutil command line tool to calculate md5 checksums. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
 
@@ -167,5 +161,3 @@ The output should look something like this:
   > MD5 hash of summary_stats.gzip: d19bbbed9d713f97f487b9ed9ec3f62f
 
 The md5 checksum is the 32-digit hexadecimal number in the output, after the file name. Copy this number into the corresponding column of the study sheet.
-
-+++ </div></details> +++
