@@ -198,6 +198,9 @@
 .navbar-bottom-banner-3 {
     height: 8px;
 }
+.main-banner{
+    border-radius: 1em;
+}
 
 .gwas-circle {
     float: left;
