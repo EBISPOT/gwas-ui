@@ -1,9 +1,5 @@
 = Training & Related resources
 
-=== In person training workshops
-
-We are presenting an link:https://www.ashg.org/2019meeting/asp/soe/webroot/soe.shtml#?type=Workshops%2FTicketed%20Events["Interactive Invited Workshop: Investigating Genotype-Phenotype Data Using the GWAS Catalog"] at ASHG 2019 on 15th October 2019. Additional details on how you can attend can be found on the link:https://www.ashg.org/2019meeting/[conference website].
-
 === GWAS Catalog training materials
 
 ==== EBI Train online
@@ -16,13 +12,11 @@ Training materials from workshops held by the GWAS Catalog team are available on
 
 ==== GWAS webinars & blog posts
 
-A 2017 link:http://www.ebi.ac.uk/training/online/course/nhgri-ebi-gwas-catalog-curated-resource-snp-trait-associations[webinar] on GWAS design and use of the GWAS Catalog, hosted by the GWAS Catalog Team. It covers topics such as Catalog content, data availability and access, search capability and interoperability with other resources.
-
-A 2013 http://www.genome.gov/27554296[webinar] hosted by the NHGRI Division of Genomic Medicine, to highlight the utility and impact of the GWAS Catalog.
+A 2019 http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new-gwas-catalog/[blog post] describing the collaboration between the GWAS Catalog and Open Targets.
 
 A 10th Anniversary (2018) http://www.ensembl.info/2018/06/28/ten-years-of-the-gwas-catalog-past-present-and-future/[blog post] highlighting the links between the GWAS Catalog and Ensembl.
 
-A http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new-gwas-catalog/[blog post] describing the collaboration between the GWAS Catalog and Open Targets.
+A 2013 http://www.genome.gov/27554296[webinar] hosted by the NHGRI Division of Genomic Medicine, to highlight the utility and impact of the GWAS Catalog.
  
 === Publications
 
