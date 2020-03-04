@@ -18,7 +18,9 @@
 // var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
 
 var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
-var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
+// var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
+var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
+
 var global_ols_api = 'https://www.ebi.ac.uk/ols/api/';
 var global_ols = 'https://www.ebi.ac.uk/ols/';
 var global_ols_seach_api =  global_ols_api + 'search';
@@ -185,6 +187,7 @@ removeEFO = function(efoid) {
  * add checkkbox to indicate the descendants
  */
 addToCart = function(tagID, efoid, additionalLabel, initLoad) {
+    console.log("** EFOID Cart: ", efoid, " Other vars: ", tagID, additionalLabel)
     var isMain = isMainEFO(efoid);
 
     var colour, colourLabelInit, colourLabel;
@@ -440,12 +443,18 @@ updatePage = function(initLoad=false) {
         return sequence.then(() => {
             return efoInfo;
         }).then(function(efoInfo) {
-            return addToCart('#cart', efoInfo.short_form,  `${efoInfo.label} [${efoInfo.short_form}]`, initLoad).then(() =>{
+            console.log("** Update Cart box 1: ", efoInfo)
+
+            var shortForm = efoInfo.short_form  || efoInfo.shortForm;
+            var trait =  efoInfo.label || efoInfo.trait;
+
+            // return addToCart('#cart', efoInfo.shortForm,  `${efoInfo.trait} [${efoInfo.shortForm}]`, initLoad).then(() =>{
+            return addToCart('#cart', shortForm,  `${trait} [${shortForm}]`, initLoad).then(() =>{
                 return efoInfo;
             })
         });
     }, Promise.resolve()).catch((err) => {
-        console.warning(`Error when updating cart! ${err}`);
+        console.warn(`Error when updating cart! ${err}`);
     })
 
     //******************************
@@ -454,8 +463,10 @@ updatePage = function(initLoad=false) {
     if (initLoad){
         //display efo trait information when data is ready
         displayEFOLabel();
+        console.log("** Main EFO: ", mainEFO)
+
         OLS.getEFOInfo(mainEFO).then(displayEfoTraitInfo).catch((err) => {
-            console.warning(`Error loading efo info from OLS. ${err}`);
+            console.warn(`Error loading efo info from OLS. ${err}`);
         }).then(() => {
             hideLoadingOverLay('#summary-panel-loading')
         })
@@ -496,7 +507,7 @@ updatePage = function(initLoad=false) {
         })
         return all_descendants;
     }).catch(function(err) {
-        console.warning(`Error when trying to find all descendants with error messgae. ${err}`);
+        console.warn(`Error when trying to find all descendants with error messgae. ${err}`);
     })
 
 
@@ -509,8 +520,9 @@ updatePage = function(initLoad=false) {
     parent_with_all_child_trait_ids.push(mainEFO);
     OLS.getHierarchicalDescendants(getMainEFO()).then((childTerms) => {
         $.each(childTerms, function (index, term) {
+            console.log("** Child term: ", term)
             sub_traits.push(term.label);
-            parent_with_all_child_trait_ids.push(term.short_form);
+            parent_with_all_child_trait_ids.push(term.short_form); // Correct short_form
         });
         $("#efo-child-trait-label").html(longContentList(
         "gwas_child_traits_div", sub_traits.sort(), 'child traits'));
@@ -535,15 +547,15 @@ updatePage = function(initLoad=false) {
                 return sequence.then(() => {return efoInfo;}).then((efoInfo)=>{
                     var target_efos;
                     //do we include descendant for this term
-                    if(isDescendantRequired(efoInfo.short_form)){
+                    if(isDescendantRequired(efoInfo.shortForm)){
                         //self and decendants
-                        target_efos = OLS.getHierarchicalDescendants(efoInfo.short_form).then((descendants) => {
+                        target_efos = OLS.getHierarchicalDescendants(efoInfo.shortForm).then((descendants) => {
                             //adding self
-                            return Object.keys(descendants).concat(efoInfo.short_form);
+                            return Object.keys(descendants).concat(efoInfo.shortForm);
                         })
                     }else{
                         //only self
-                        target_efos = Promise.resolve([efoInfo.short_form]);
+                        target_efos = Promise.resolve([efoInfo.shortForm]);
                     }
 
 
@@ -551,13 +563,13 @@ updatePage = function(initLoad=false) {
 
                     //update the cart box badge number when data is ready
                     target_efos.then(filterAvailableEFOs).then(function(efos){
-                        $('#' + 'selected_btn_' + efoInfo.short_form + '_nos').attr('text', Object.keys(findStudiesForEFOs(efos)).length)
-                        $('#' + 'selected_btn_' + efoInfo.short_form + '_nos').html(Object.keys(findStudiesForEFOs(efos)).length)
-                        $('#' + 'selected_btn_' + efoInfo.short_form + '_noa').attr('text', Object.keys(findAssociationForEFOs(efos)).length)
-                        $('#' + 'selected_btn_' + efoInfo.short_form + '_noa').html(Object.keys(findAssociationForEFOs(efos)).length)
+                        $('#' + 'selected_btn_' + efoInfo.shortForm + '_nos').attr('text', Object.keys(findStudiesForEFOs(efos)).length)
+                        $('#' + 'selected_btn_' + efoInfo.shortForm + '_nos').html(Object.keys(findStudiesForEFOs(efos)).length)
+                        $('#' + 'selected_btn_' + efoInfo.shortForm + '_noa').attr('text', Object.keys(findAssociationForEFOs(efos)).length)
+                        $('#' + 'selected_btn_' + efoInfo.shortForm + '_noa').html(Object.keys(findAssociationForEFOs(efos)).length)
                         //work out what association is included (self or self+descendants), this is used for highlighting the plot.
-                        $('#' + 'selected_btn_' + efoInfo.short_form + '_noa').data('associations', findAssociationForEFOs(efos))
-                        $('#' + 'selected_btn_' + efoInfo.short_form + '_noa').data('efos', efos)
+                        $('#' + 'selected_btn_' + efoInfo.shortForm + '_noa').data('associations', findAssociationForEFOs(efos))
+                        $('#' + 'selected_btn_' + efoInfo.shortForm + '_noa').data('efos', efos)
                     });
                 })
             },Promise.resolve())
@@ -878,7 +890,7 @@ initOLS_TreeWiget = function(initTerm,showSibblings=false,olsontology='efo'){
             // }else{
             //     console.debug('not comfirmed');
             // }
-            var clicked = node.node.original.iri;
+            var clicked = node.node.original.uri;
             var efoid = clicked.split('/').slice(-1)[0];
             addEFO({[efoid]:clicked});
         },
@@ -916,7 +928,7 @@ initOLS_AutocompleteWiget = function(){
  */
 displayEFOLabel = function(){
     OLS.getEFOInfo(getMainEFO()).then((efoInfo)=>{
-        $('#top-panel-trait-label').html(efoInfo.label);
+        $('#top-panel-trait-label').html(efoInfo.trait);
     })
 }
 
@@ -1008,10 +1020,26 @@ displayOXO = function(){
  * @param efotraitId
  */
 displayEfoTraitInfo = function(efoinfo) {
-    var efotrait_link = efoinfo.iri;
-    var efotrait_id = efoinfo.short_form;
+    // var efotrait_link = efoinfo.iri;
+    var efotrait_link = efoinfo.uri;
+
+    var efotrait_id;
+    if (efoinfo.short_form) {
+        efotrait_id = efoinfo.short_form;
+    } else {
+        efotrait_id = efoinfo.shortForm;
+    }
+
     var synonym = efoinfo.synonyms;
-    var efotrait_label = efoinfo.label;
+
+    var efotrait_label;
+    if (efoinfo.label) {
+        efotrait_label = efoinfo.label;
+    } else {
+        efotrait_label = efoinfo.trait;
+    }
+
+
     addDataToTag(global_efo_info_tag_id, efoinfo, 'mainEFOInfo');
     // $("#efotrait-description").html(displayArrayAsList(efoinfo.description)); // Display as bulleted list
     $("#efotrait-description").html(displayArrayAsParagraph(
@@ -1071,7 +1099,7 @@ generateDownloadContentForCart = function(){
 
     var rows = Promise.all(list_unique.map(OLS.getEFOInfo)).then((efoinfos) => {
         return efoinfos.map((efoinfo)=>{
-            return [efoinfo.short_form,efoinfo.ontology_name,efoinfo.iri].join(colSep)
+            return [efoinfo.shortForm,efoinfo.ontology_name,efoinfo.uri].join(colSep)
         })
     })
 
@@ -1326,12 +1354,14 @@ var OLS = {
         }
 
         var dataPromise = getDataFromTag(global_efo_info_tag_id, 'ontologyInfo');
+
         if (dataPromise == undefined) {
             //lazy load
             dataPromise = promiseGetRESTFUL(global_ols_restful_api_ontology,
                                             {'size': 1000}).then(_parseOntologies).catch(function(err) {
                 console.error('Error when loading ontology info! ' + err);
             })
+
             //cache data
             $(global_efo_info_tag_id).data('ontologyInfo',dataPromise);
         }else{
@@ -1416,6 +1446,7 @@ var OLS = {
      * @example OLS.getOntologyByShortForm('EFO_0000400')
      */
     getOntologyByShortForm : function(shortForm){
+        console.log("** getOntologyByShortForm: ", shortForm)
         var prefix = shortForm.split('_')[0];
         var id = shortForm.split('_')[1];
         p = OLS.getOntologyIdByPrefix(prefix);
@@ -1493,7 +1524,53 @@ var OLS = {
     },
 
     /**
-     * Query OLS for efo term information.
+     * Query OLS for efo term information. Used to
+     * get EFO information for child terms.
+     * Lazy load.
+     * @param efoid
+     * @returns {Promise}
+     * @example OLS.getEFOInfo('EFO_0000400')
+     */
+    getEFOInfoFromOLS : function(efoid){
+        var queryEFOInfo = function(efoid){
+            return OLS.getOLSLinkAPI(efoid).then(function(url){
+                return promiseGet(url).then(JSON.parse).then(function(response) {
+                    console.log("** getEFOInfoFromOLS Response: ", response, "\n Using URL: ", url)
+                    var tmp = {};
+                    tmp[efoid] = response;
+                    console.log("** TMP: ", tmp)
+                    return tmp;
+                }).catch(function(err){
+                    console.debug('error when loading efo info for ' + efoid + '. ' + err);
+                })
+
+            })
+        }
+
+        var dataPromise = getPromiseFromTag(global_efo_info_tag_id, 'efoInfo');
+
+        return dataPromise.then(function(data) {
+            if ($.inArray(efoid, Object.keys(data)) == -1) {
+                //efo info is not currently loaded
+                console.log('Loading efoInfo for ' + efoid)
+                dataPromise = queryEFOInfo(efoid);
+                return dataPromise.then(function(data){
+                    //add to tag
+                    addPromiseToTag(global_efo_info_tag_id, dataPromise,'efoInfo');
+                    return data[efoid];
+                })
+            }else {
+                //efo colour is has been loaded perviously
+                console.debug('Loading efoInfo from cache for ' + efoid);
+                return data[efoid]
+            }
+        })
+    },
+
+    /**
+     * Query GWAS REST API for EFO term information
+     * to account for differences in GWAS data release
+     * and release of new versions of EFO.
      * Lazy load.
      * @param efoid
      * @returns {Promise}
@@ -1502,21 +1579,29 @@ var OLS = {
     getEFOInfo : function(efoid){
         var queryEFOInfo = function(efoid){
             return OLS.getOLSLinkAPI(efoid).then(function(url){
-                return promiseGet(url).then(JSON.parse).then(function(response) {
+                console.log("** getEFOInfo URL 1: ", url)
+                var gwas_url = `https://www.ebi.ac.uk/gwas/rest/api/efoTraits/${efoid}`
+                console.log("** getEFOInfo URL 2: ", gwas_url)
+
+                return promiseGet(gwas_url).then(JSON.parse).then(function(response) {
+                    console.log("** getEFOInfo Response: ", response, "\n Using URL: ", gwas_url)
                     var tmp = {};
                     tmp[efoid] = response;
+                    console.log("** TMP: ", tmp)
                     return tmp;
                 }).catch(function(err){
                     console.debug('error when loading efo info for ' + efoid + '. ' + err);
                 })
+
             })
         }
 
         var dataPromise = getPromiseFromTag(global_efo_info_tag_id, 'efoInfo');
+
         return dataPromise.then(function(data) {
             if ($.inArray(efoid, Object.keys(data)) == -1) {
                 //efo info is not currently loaded
-                // console.log('Loading efoInfo for ' + efoid)
+                console.log('Loading efoInfo for ' + efoid)
                 dataPromise = queryEFOInfo(efoid);
                 return dataPromise.then(function(data){
                     //add to tag
@@ -1539,11 +1624,15 @@ var OLS = {
      * @example OLS.getOLSLinkAPI('EFO_0000400')
      */
     getOLSLinkAPI : function(efoid){
+        console.log("** getOLSLinkAPI efoid: ", efoid)
         var ont = OLS.getOntologyByShortForm(efoid);
+        console.log("** getOLSLinkAPI ont: ", ont)
         var iri = OLS.getIriByShortForm(efoid);
+        console.log("** getIriByShortForm iri: ", iri)
         return Promise.all([ont,iri]).then(function(arrayPromise) {
             var url = global_ols_api + 'ontologies/' + arrayPromise[0] + '/terms/' +
                     encodeURIComponent(encodeURIComponent(arrayPromise[1]));
+            console.log("** getOLSLinkAPI URL:  ", url)
             return url
         })
     },
@@ -1573,9 +1662,12 @@ var OLS = {
      * @example OLS.getHierarchicalDescendants('EFO_0000400')
      */
     getHierarchicalDescendants : function(efoid){
+        console.log("** Called getHierarchicalDescendants with EFO ID: ", efoid)
         var parseResponse = function(response){
+            console.log("** getHierarchicalDescendants Response: ", response)
             var terms = {};
             response.terms.forEach(function(d, i) {
+                console.log("** getHierarchicalDescendants Terms: ", d)
                 terms[d.short_form] = d;
             })
             var tmp = {}
@@ -1583,8 +1675,11 @@ var OLS = {
             return tmp;
         }
         var queryDescendant = function(efoid){
-            var efoinfo = OLS.getEFOInfo(efoid)
+            // TODO: This needs to use OLS URL to find children
+            // var efoinfo = OLS.getEFOInfo(efoid)
+            var efoinfo = OLS.getEFOInfoFromOLS(efoid)
             return efoinfo.then(function(response){
+                console.log("** queryDescendant Response: ", response)
                 if (response.has_children) {
                     return promiseGetRESTFUL(response._links.hierarchicalDescendants.href,{'size':1000})
                             .then(parseResponse);
@@ -2034,6 +2129,7 @@ getAllSelected = function(){
     return Promise.all(whichDescendant().map(OLS.getHierarchicalDescendants)).then((descendants) => {
         descendants.forEach((terms) => {
             Object.keys(terms).forEach( (term) => {
+                console.log("** getAllSelected Terms: ", terms)
                 all_descendants[term] = terms[term];
             })
         })
