@@ -187,7 +187,6 @@ removeEFO = function(efoid) {
  * add checkkbox to indicate the descendants
  */
 addToCart = function(tagID, efoid, additionalLabel, initLoad) {
-    console.log("** EFOID Cart: ", efoid, " Other vars: ", tagID, additionalLabel)
     var isMain = isMainEFO(efoid);
 
     var colour, colourLabelInit, colourLabel;
@@ -443,8 +442,6 @@ updatePage = function(initLoad=false) {
         return sequence.then(() => {
             return efoInfo;
         }).then(function(efoInfo) {
-            console.log("** Update Cart box 1: ", efoInfo)
-
             var shortForm = efoInfo.short_form  || efoInfo.shortForm;
             var trait =  efoInfo.label || efoInfo.trait;
 
@@ -463,7 +460,6 @@ updatePage = function(initLoad=false) {
     if (initLoad){
         //display efo trait information when data is ready
         displayEFOLabel();
-        console.log("** Main EFO: ", mainEFO)
 
         OLS.getEFOInfo(mainEFO).then(displayEfoTraitInfo).catch((err) => {
             console.warn(`Error loading efo info from OLS. ${err}`);
@@ -520,7 +516,6 @@ updatePage = function(initLoad=false) {
     parent_with_all_child_trait_ids.push(mainEFO);
     OLS.getHierarchicalDescendants(getMainEFO()).then((childTerms) => {
         $.each(childTerms, function (index, term) {
-            console.log("** Child term: ", term)
             sub_traits.push(term.label);
             parent_with_all_child_trait_ids.push(term.short_form); // Correct short_form
         });
@@ -1020,17 +1015,12 @@ displayOXO = function(){
  * @param efotraitId
  */
 displayEfoTraitInfo = function(efoinfo) {
-    // var efotrait_link = efoinfo.iri;
-    var efotrait_link = efoinfo.uri;
-
     var efotrait_id;
     if (efoinfo.short_form) {
         efotrait_id = efoinfo.short_form;
     } else {
         efotrait_id = efoinfo.shortForm;
     }
-
-    var synonym = efoinfo.synonyms;
 
     var efotrait_label;
     if (efoinfo.label) {
@@ -1041,25 +1031,15 @@ displayEfoTraitInfo = function(efoinfo) {
 
 
     addDataToTag(global_efo_info_tag_id, efoinfo, 'mainEFOInfo');
-    // $("#efotrait-description").html(displayArrayAsList(efoinfo.description)); // Display as bulleted list
-    $("#efotrait-description").html(displayArrayAsParagraph(
-        'gwas_efotrait_description_div', efoinfo.description));  // TW
 
     $("#efotrait-id").html(efotrait_id);
     $("#efotrait-label").html(efotrait_label);
     // $("#efotrait-label").html(createPopover(efotrait_label,
     //                                         'description',
     //                                         displayArrayAsList(efoinfo.description)));
-    if (synonym) {
-        if (synonym.length > list_min) {
-            $("#efotrait-synonym").html(longContentList("gwas_efotrait_synonym_div",
-                                                        synonym.sort(),
-                                                        'synonyms'));
-        }
-        else {
-            $("#efotrait-synonym").html(synonym.join(", "));
-        }
-    }
+
+    var efoShortFormId = efoinfo.shortForm;
+    OLS.getEFOAttributesFromOLS(efoShortFormId); // synonyms and description
 }
 
 
@@ -1418,6 +1398,36 @@ var OLS = {
     },
 
     /**
+     * Helper method to get EFO term attribtutes from OLS.
+     * @param efo_short_form
+     * @returns {[]}
+     */
+    getEFOAttributesFromOLS : function(efo_short_form_id) {
+        var url = `https://www.ebi.ac.uk/ols/api/ontologies/efo/terms/http%253A%252F%252Fwww.ebi.ac.uk%252Fefo%252F${efo_short_form_id}`
+        return promiseGet(url).then(JSON.parse).then(function(response) {
+            var efoSynonyms = response["synonyms"];
+            var description = response["description"];
+
+            if (efoSynonyms) {
+                if (efoSynonyms.length > list_min) {
+                    $("#efotrait-synonym").html(longContentList("gwas_efotrait_synonym_div",
+                        efoSynonyms.sort(),
+                        'synonyms'));
+                }
+                else {
+                    $("#efotrait-synonym").html(efoSynonyms.join(", "));
+                }
+            }
+            if (description) {
+                $("#efotrait-description").html(displayArrayAsParagraph(
+                    'gwas_efotrait_description_div', description));
+            }
+        }).catch(function(err){
+            console.debug('Error finding term in OLS: ', err);
+        })
+    },
+
+    /**
      * Get ontology term iri from short form. The iri looks like this:
      * http://www.ebi.ac.uk/efo/EFO_0000400
      * Lazy load.
@@ -1446,7 +1456,6 @@ var OLS = {
      * @example OLS.getOntologyByShortForm('EFO_0000400')
      */
     getOntologyByShortForm : function(shortForm){
-        console.log("** getOntologyByShortForm: ", shortForm)
         var prefix = shortForm.split('_')[0];
         var id = shortForm.split('_')[1];
         p = OLS.getOntologyIdByPrefix(prefix);
@@ -1535,10 +1544,8 @@ var OLS = {
         var queryEFOInfo = function(efoid){
             return OLS.getOLSLinkAPI(efoid).then(function(url){
                 return promiseGet(url).then(JSON.parse).then(function(response) {
-                    console.log("** getEFOInfoFromOLS Response: ", response, "\n Using URL: ", url)
                     var tmp = {};
                     tmp[efoid] = response;
-                    console.log("** TMP: ", tmp)
                     return tmp;
                 }).catch(function(err){
                     console.debug('error when loading efo info for ' + efoid + '. ' + err);
@@ -1552,12 +1559,14 @@ var OLS = {
         return dataPromise.then(function(data) {
             if ($.inArray(efoid, Object.keys(data)) == -1) {
                 //efo info is not currently loaded
-                console.log('Loading efoInfo for ' + efoid)
+                // console.log('Loading efoInfo for ' + efoid)
                 dataPromise = queryEFOInfo(efoid);
                 return dataPromise.then(function(data){
                     //add to tag
                     addPromiseToTag(global_efo_info_tag_id, dataPromise,'efoInfo');
                     return data[efoid];
+                }).catch(function(err){
+                    console.warn(`Error retrieving EFO term from OLS: ${err}`);
                 })
             }else {
                 //efo colour is has been loaded perviously
@@ -1579,15 +1588,12 @@ var OLS = {
     getEFOInfo : function(efoid){
         var queryEFOInfo = function(efoid){
             return OLS.getOLSLinkAPI(efoid).then(function(url){
-                console.log("** getEFOInfo URL 1: ", url)
+                // Use GWAS REST API to get basic EFO term information
                 var gwas_url = `https://www.ebi.ac.uk/gwas/rest/api/efoTraits/${efoid}`
-                console.log("** getEFOInfo URL 2: ", gwas_url)
 
                 return promiseGet(gwas_url).then(JSON.parse).then(function(response) {
-                    console.log("** getEFOInfo Response: ", response, "\n Using URL: ", gwas_url)
                     var tmp = {};
                     tmp[efoid] = response;
-                    console.log("** TMP: ", tmp)
                     return tmp;
                 }).catch(function(err){
                     console.debug('error when loading efo info for ' + efoid + '. ' + err);
@@ -1624,15 +1630,11 @@ var OLS = {
      * @example OLS.getOLSLinkAPI('EFO_0000400')
      */
     getOLSLinkAPI : function(efoid){
-        console.log("** getOLSLinkAPI efoid: ", efoid)
         var ont = OLS.getOntologyByShortForm(efoid);
-        console.log("** getOLSLinkAPI ont: ", ont)
         var iri = OLS.getIriByShortForm(efoid);
-        console.log("** getIriByShortForm iri: ", iri)
         return Promise.all([ont,iri]).then(function(arrayPromise) {
             var url = global_ols_api + 'ontologies/' + arrayPromise[0] + '/terms/' +
                     encodeURIComponent(encodeURIComponent(arrayPromise[1]));
-            console.log("** getOLSLinkAPI URL:  ", url)
             return url
         })
     },
@@ -1662,12 +1664,9 @@ var OLS = {
      * @example OLS.getHierarchicalDescendants('EFO_0000400')
      */
     getHierarchicalDescendants : function(efoid){
-        console.log("** Called getHierarchicalDescendants with EFO ID: ", efoid)
         var parseResponse = function(response){
-            console.log("** getHierarchicalDescendants Response: ", response)
             var terms = {};
             response.terms.forEach(function(d, i) {
-                console.log("** getHierarchicalDescendants Terms: ", d)
                 terms[d.short_form] = d;
             })
             var tmp = {}
@@ -1675,17 +1674,14 @@ var OLS = {
             return tmp;
         }
         var queryDescendant = function(efoid){
-            // TODO: This needs to use OLS URL to find children
-            // var efoinfo = OLS.getEFOInfo(efoid)
             var efoinfo = OLS.getEFOInfoFromOLS(efoid)
             return efoinfo.then(function(response){
-                console.log("** queryDescendant Response: ", response)
                 if (response.has_children) {
                     return promiseGetRESTFUL(response._links.hierarchicalDescendants.href,{'size':1000})
                             .then(parseResponse);
                 }
                 else {
-                    console.debug('no descendant found for ' + efoid);
+                    // console.debug('no descendant found for ' + efoid);
                     return new Promise(function(resolve, reject) {
                         var tmp = {};
                         tmp[efoid] = {};
@@ -2129,7 +2125,6 @@ getAllSelected = function(){
     return Promise.all(whichDescendant().map(OLS.getHierarchicalDescendants)).then((descendants) => {
         descendants.forEach((terms) => {
             Object.keys(terms).forEach( (term) => {
-                console.log("** getAllSelected Terms: ", terms)
                 all_descendants[term] = terms[term];
             })
         })
