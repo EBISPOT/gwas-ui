@@ -1,0 +1,409 @@
+= Submitting summary statistics plus metadata
+
+== Submitting summary statistics plus metadata
+
+:imagesdir: ./images
+:data-uri:
+
+For publications that are not yet included in the GWAS Catalog, we ask you to submit metadata in addition to the summary statistics files.
+
+Instructions are provided below. When you have completed the submission form, return to the https://www.ebi.ac.uk/gwas/docs/submission[main submission instructions^].
+
+=== Data for you to enter
+
+There are 2 tabs in the submission form for you to complete:
+
+1. <<studies, Studies>>
+2. <<samples, Samples>>
+
+In each tab, mandatory columns are highlighted in orange. Grey columns are optional. However, we encourage you to submit as much information as you can.
+
+=== [[studies]]1. Study tab
+
+In the Study tab, please add one row for each separate GWAS analysis (study) in the publication. 
+
+There are 16 columns for you to fill in:
+
+[cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
+|===
+|Header
+|
+|Description
+|
+|Mandatory
+|
+|Validation
+|
+|Example
+
+|Study tag
+|
+|A unique free-text label for each genome-wide association study in the publication. You can use any string of characters that will help you identify each individual GWAS.
+|
+|yes
+|
+|Free text
+|
+|`WHR_unadj`
+
+|Genotyping technology
+|
+|Method(s) used to genotype variants in the discovery stage. Separate multiple methods by pipes "\|".
+|
+|yes
+|
+|Must match one of the following options:
+
+`Genome-wide genotyping array`
+
+`Targeted genotyping array`
+
+`Exome genotyping array`
+
+`Whole genome sequencing`
+|
+|`Genome-wide genotyping array` 
+
+|Array manufacturer
+|
+|Manufacturer of the genotyping array used for the discovery stage. Separate multiple manufacturers by pipes "\|".
+|
+|no
+|
+|Must match one of the following options:
+
+`Illumina`
+
+`Affymetrix`
+
+`Perlegen`
+|
+|`Illumina\|Affymetrix`
+
+|Array information
+|
+|Additional information about the genotyping array. For example, for targeted arrays, please provide the specific type of array.
+|
+|no
+|
+|Free text
+|
+|`Immunochip`
+
+|Imputation
+|
+|Were SNPs imputed for the discovery GWAS?
+|
+|yes
+|
+|Must match one of the following options:
+
+`Yes`
+
+`No`
+|
+|`Yes`
+
+|Variant count
+|
+|The number of variants analysed in the discovery stage (after QC)
+|
+|yes
+|
+|An integer
+|
+|`525000`
+
+|Statistical model
+|
+|Details of the statistical model used to determine association significance
+|
+|no
+|
+|Free text
+|
+|`recessive model`
+
+|Study description
+|
+|Additional information about the study
+|
+|no
+|
+|Free text
+|
+|...
+
+|Reported trait
+|
+|The trait under investigation
+|
+|yes
+|
+|Free text
+|
+|`Reticulocyte count`
+
+|Background trait
+|
+|Any background trait(s) shared by all individuals in the GWAS (e.g. in both cases and controls)
+|
+|no
+|
+|Free text
+|
+|`Nicotine dependence`
+
+|Summary statistics file
+|
+|The name of the summary statistics file uploaded via Globus. Leave blank for any studies without summary statistics.
+|
+|no
+|
+|A valid filename
+|
+|`example.tsv`
+
+|md5 sum
+|
+|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums^].
+|
+|no
+|
+|A valid md5 checksum (32-digit hexadecimal number)
+|
+|`49ea8cf53801c7f1e2f11336fb8a29c8`
+
+|Readme
+|
+|Text of the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics.
+|
+|no
+|
+|A standard readme file
+|
+|See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#readme[readme instructions here^].
+
+|Summary statistics assembly
+|
+|Genome assembly for the summary statistics. Leave blank for any studies without summary statistics.
+|
+|no
+|
+|Must match one of the following options:
+
+`GRCh38`
+
+`GRCh37`
+
+`NCBI36`
+
+`NCBI35`
+
+`NCBI34`
+|
+|`GRCh38`
+
+|Cohort(s)
+|
+|List of cohort(s) represented in the discovery sample, separated by pipes "\|". Enter only if the specific named cohorts are used in the analysis.
+|
+|no
+|
+|Free text
+|
+|`UKBB\|FINRISK`
+
+|Cohort specific reference
+|
+|List of cohort specific identifier(s) issued to this research study, separated by pipes "\|". For example, an ANID issued by UK Biobank.
+|
+|no
+|
+|Free text
+|
+|`ANID45956`
+|===
+
+=== [[samples]]2. Sample tab
+
+In the Sample tab, enter information about the samples included in each GWAS.
+
+Each GWAS should be listed separately, within each GWAS, each group of samples should be on a separate row. Examples of sample groups are discovery/replication cohorts, and ancestry categories (e.g. European, East Asian, South Asian).
+
+For example, if your publication includes 2 GWAS analyses for different traits (i.e. 2 studies), each with a discovery and a replication stage (2 stages), in individuals with European or East Asian ancestry (2 broad ancestry categories), then you will need to create:
+
+* 2 studies x 2 stages x 2 ancestry categories = *8 rows in total*
+
+The screenshot below shows how this should look in the sample tab (note some columns are hidden to make the example clearer):
+
+image::sample_tab_example.png[Sample tab example,width=600,align="center"]
+
+{empty}
+
+There are 10 columns for you to fill in:
+
+[cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
+|===
+|Header
+|
+|Description
+|
+|Mandatory
+|
+|Validation
+|
+|Example
+
+|Study tag
+|
+|A unique free-text label for each genome-wide association study in the publication. This should match the study tag that you have provided in the “study” tab. This will allow the sample information to be linked to the correct study. You must provide at least one sample row for each study.
+|
+|yes
+|
+|Free text
+|
+|`WHR_unadj`
+
+|Stage
+|
+|Stage of the experimental design
+|
+|yes
+|
+|Must match one of the following options:
+
+`discovery`
+
+`replication`
+|
+|`discovery`
+
+|Number of individuals
+|
+|Number of individuals in this group
+|
+|yes
+|
+|An integer
+|
+|`2000`
+
+|Number of cases
+|
+|Number of cases in this group
+|
+|no
+|
+|An integer
+|
+|`1000`
+
+|Number of controls
+|
+|Number of controls in this group
+|
+|no
+|
+|An integer
+|
+|`1000`
+
+|Sample description
+|
+|Additional information required for the interpretation of results, e.g. sex (males/females), age (adults/children), ordinal variables, or multiple traits analysed together ("or" traits).
+|
+|no
+|
+|Free text
+|
+|`1000 males, 1000 females`
+
+`700 severe cases, 700 moderate cases, 600 mild cases`
+
+`1200 major depression cases, 800 bipolar disorder cases`
+
+|Ancestry category
+|
+|Broad ancestry category that best describes the sample. For more information about each category, see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5815218/table/Tab1/?report=objectonly[Table 1, Morales et al., 2018^].
+
+You should create a new row for each ancestry category. However, you may enter multiple categories in the same row, separated by pipes "\|", only if separate sample numbers are unavailable for each category.
+
+If it is not possible to assign an ancestry category to a group of samples, enter 'NR' (Not Reported).
+|
+|yes
+|
+|Must match one of the following options:
+
+`Aboriginal Australian`
+
+`African American or Afro-Caribbean`
+
+`African unspecified`
+
+`Asian unspecified`
+
+`Central Asian`
+
+`Circumpolar peoples`
+
+`East Asian`
+
+`European`
+
+`Greater Middle Eastern (Middle Eastern, North African or Persian)`
+
+`Hispanic or Latin American`
+
+`Native American`
+
+`NR`
+
+`Oceanian`
+
+`Other`
+
+`Other admixed ancestry`
+
+`South Asian`
+
+`South East Asian`
+
+`Sub-Saharan African`
+|
+|`East Asian`
+
+|Ancestry
+|
+|The most detailed ancestry descriptor(s) for the sample. Separate multiple descriptors by pipes "\|".
+|
+|no
+|
+|Free text
+|
+|`Han Chinese`
+
+|Founder/Genetically isolated population description
+|
+|For founder or genetically isolated population, provide  description. If multiple founder/genetically isolated populations are included for the same ancestry category, separate using pipes "\|".
+|
+|no
+|
+|Free text
+|
+|`Korculan(founder/genetic isolate)\|Vis(founder/genetic isolate)`
+
+|Country of recruitment
+|
+|List of country/countries where samples were recruited, separated by pipes "\|".
+|
+|yes
+|
+|Must match country name(s) in https://unstats.un.org/unsd/methodology/m49[The United Nations M49 Standard of Geographic Regions^]
+|
+|`Japan\|China`
+|===
+
+=== Additional information
+
+Some cells in Excel may display a "Number Stored as Text" error. Please ignore this, as it will not affect the template validation.

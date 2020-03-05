@@ -16,14 +16,11 @@
     <title>GWAS Catalog</title>
 
     <!-- Bootstrap core CSS -->
-    <link  th:href="@{/css/bootstrap.min.css}"
-          rel="stylesheet"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"
           rel="stylesheet"/>
-    <link   th:href="@{/css/bootstrap-table.css}"
-          rel="stylesheet"/>
-    <link th:href="@{/css/bootstrap-theme.min.css}"
-          rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
 
     <!-- Custom styles for this template -->
     <link  th:href="@{/css/jumbotron.css}" rel="stylesheet"/>
@@ -80,11 +77,6 @@
         </div>
 
         <div class="container-fluid" id="lower_container">
-            <div class="row welcome-container col-md-9" id="welcome-container">
-                <!--h4><a href="search/most-recent">View the most recent studies in the Catalog</a> or <a
-                        href="search/traits">browse the full list of available traits</a></h4-->
-
-            </div>
 
             <div class="row search-results-container" id="search-results-container" style="display: none">
                 <div class="col-md-3 tight-to-side" id="filter-bar">
@@ -106,15 +98,21 @@
                                     <!--<a href="#study" class="list-group-item" id="study-facet">-->
                                         <!--<span class="badge">0</span>Studies-->
                                     <!--</a>-->
-                                    <a href="#publication" class="list-group-item" id="publication-facet">
+                                    <span class="list-group-item" id="publication-facet">
                                         <span class="badge">0</span><div class="badge" style="float:left;background-color:yellowgreen">P</div>Publications
-                                    </a>
-                                    <a href="#variant" class="list-group-item" id="variant-facet">
+                                    </span>
+                                    <span class="list-group-item" id="variant-facet">
                                         <span class="badge">0</span><div class="badge" style="float:left;background-color:darkmagenta">V</div>Variants
-                                    </a>
-                                    <a href="#trait" class="list-group-item" id="trait-facet">
+                                    </span>
+                                    <span class="list-group-item" id="trait-facet">
                                         <span class="badge">0</span><div class="badge" style="float:left; background-color:#ffac1b">T</div>Traits
-                                    </a>
+                                    </span>
+                                    <span class="list-group-item" id="gene-facet">
+                                        <span class="badge">0</span><div class="badge" style="float:left; background-color:firebrick">G</div>Genes
+                                    </span>
+                                    <span class="list-group-item" id="region-facet">
+                                        <span class="badge">0</span><div class="badge" style="float:left; background-color:cornflowerblue">R</div>Region
+                                    </span>
                                 </div>
                             </div>
 
@@ -184,7 +182,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script th:src="@{/js/bootstrap-datepicker.js}"></script>
 
 <!-- Jquery validate for form validation-->
@@ -212,7 +210,7 @@
 <script th:src="@{/js/traitlist.js}"></script>
 <script th:src="@{/js/solrtrait.js}"></script>
 <script th:src="@{/js/autocomplete-termselect.js}"></script>
-<script th:src="@{/js/jquery.autocomplete.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.min.js"></script>
 
 
 <!-- Google analytics

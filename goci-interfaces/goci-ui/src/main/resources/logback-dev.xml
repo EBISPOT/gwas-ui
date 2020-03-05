@@ -23,7 +23,7 @@
 
 
 
-    <root level="DEBUG">
-        <appender-ref ref="FILE" />
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
     </root>
 </configuration> 

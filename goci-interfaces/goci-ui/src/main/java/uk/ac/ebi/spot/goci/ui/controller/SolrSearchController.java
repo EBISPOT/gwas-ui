@@ -19,14 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.exception.IllegalParameterCombinationException;
 import uk.ac.ebi.spot.goci.ui.service.JsonProcessingService;
+import uk.ac.ebi.spot.goci.ui.service.JsonStreamingProcessorService;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -60,6 +56,7 @@ public class SolrSearchController {
     @CrossOrigin
     public void doSolrSearch(
             @RequestParam("q") String query,
+            @RequestParam(value = "generalTextQuery", required=false, defaultValue = "false") boolean generalTextQuery,
             @RequestParam(value = "jsonp", required = false, defaultValue = "false") boolean useJsonp,
             @RequestParam(value = "callback", required = false) String callbackFunction,
             @RequestParam(value = "max", required = false, defaultValue = "1000") int maxResults,
@@ -74,10 +71,19 @@ public class SolrSearchController {
         else {
             addRowsAndPage(solrSearchBuilder, maxResults, page);
         }
+
+        if (generalTextQuery) {
+            addQueryFilter(solrSearchBuilder);
+        }
         addQuery(solrSearchBuilder, query);
 
         // dispatch search
         dispatchSearch(solrSearchBuilder.toString(), response.getOutputStream());
+    }
+
+    // Use queryFilter to return match to term synonym higher in the result list
+    private void addQueryFilter(StringBuilder solrSearchBuilder) {
+        solrSearchBuilder.append("&defType=dismax&qf=title%5E2.0+synonyms%5E20.0+parent%5E2.0+text%5E1.0");
     }
 
 
@@ -922,7 +928,7 @@ public class SolrSearchController {
             @RequestParam(value = "group.limit", required = false, defaultValue = "100") int groupLimit,
             @RequestParam(value = "group.field", required = false, defaultValue = "resourcename") String groupField,
             @RequestParam(value = "facet.field", required = false, defaultValue = "resourcename") String facetField,
-            @RequestParam(value = "hl.fl", required = false, defaultValue = "shortForm,efoLink") String hlFl,
+            @RequestParam(value = "hl.fl", required = false, defaultValue = "shortForm,efoLink,mappedUri") String hlFl,
             @RequestParam(value = "hl.snippets", required = false, defaultValue = "1") int hlSnippets,
             @RequestParam(value = "fl", required = false, defaultValue = "") String fl,
             @RequestParam(value = "raw", required = false, defaultValue = "") String raw,
@@ -1192,28 +1198,35 @@ public class SolrSearchController {
             HttpEntity entity = response.getEntity();
 
             BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
+            PrintWriter outputWriter = new PrintWriter(outputStream);
 
-            String output;
-            while ((output = br.readLine()) != null) {
-
-                JsonProcessingService jsonProcessor = new JsonProcessingService(output, efo, facet, ancestry);
-                file = jsonProcessor.processJson();
-
-            }
-
-            EntityUtils.consume(entity);
+            JsonStreamingProcessorService jsonProcessor =
+                    new JsonStreamingProcessorService(br, efo, facet, ancestry, new BufferedWriter(outputWriter));
+            jsonProcessor.processJson();
+            outputWriter.flush();
+            outputWriter.close();
         }
-        if (file == null) {
-
-            //TO DO throw exception here and add error handler
-            file =
-                    "Some error occurred during your request. Please try again or contact the GWAS Catalog team for assistance";
-        }
-
-        PrintWriter outputWriter = new PrintWriter(outputStream);
-
-        outputWriter.write(file);
-        outputWriter.flush();
+//            String output;
+//            while ((output = br.readLine()) != null) {
+//
+//                JsonProcessingService jsonProcessor = new JsonProcessingService(output, efo, facet, ancestry);
+//                file = jsonProcessor.processJson();
+//
+//            }
+//
+//            EntityUtils.consume(entity);
+//        }
+//        if (file == null) {
+//
+//            //TO DO throw exception here and add error handler
+//            file =
+//                    "Some error occurred during your request. Please try again or contact the GWAS Catalog team for assistance";
+//        }
+//
+//        PrintWriter outputWriter = new PrintWriter(outputStream);
+//
+//        outputWriter.write(file);
+//        outputWriter.flush();
     }
 
     // From Tburdett algorithm. Extract the traitName from the association and study.

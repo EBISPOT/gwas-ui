@@ -4,6 +4,14 @@
 
 <body th:fragment="page_footer">
 
+<script>
+    (function() {
+        if (document.querySelector('#search-box') === null) {
+            document.getElementById("header-searchbar").style.display = "block";
+        }
+    })();
+</script>
+
 <footer class="footer background-color-primary-accent">
     <!--<div class="footer-banner background-color-primary"></div>-->
     <div class="container">

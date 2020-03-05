@@ -1,9 +1,7 @@
-= Downloading the GWAS Catalog
-
 == Downloading the GWAS Catalog
 
 
-[width="60%",options="header",cols="2,1,2,1", frame="all", grid="cols", halign = "center"]
+[width="80%",options="header",cols="4,2,4,2", frame="all", grid="cols", halign = "center"]
 |===
 |Description | Download Link |Format  | Column header descriptions
 

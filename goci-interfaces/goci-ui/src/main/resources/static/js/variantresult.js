@@ -12,12 +12,10 @@ var EPMC = "http://www.europepmc.org/abstract/MED/";
 var OLS  = "https://www.ebi.ac.uk/ols/search?q=";
 var ENSVAR = "https://www.ensembl.org/Homo_sapiens/Variation/";
 var DBSNP  = "http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?rs=";
-var UCSC   = "https://genome.ucsc.edu/cgi-bin/hgTracks?hgFind.matches=";
+var UCSC  = "https://genome.ucsc.edu/cgi-bin/hgTracks?hgFind.matches=";
 var ENS_SHARE_LINK = 'Variant_specific_location_link/97NKbgkp09vPRy1xXwnqG1x6KGgQ8s7S';
 var CONTEXT_RANGE = 500;
-var global_raw = 'fq:resourcename:association or resourcename:study'
-var list_min = 5;
-var pageRowLimit=5;
+
 
 /**
  * Make solr query.
@@ -30,11 +28,10 @@ var pageRowLimit=5;
 function getDataSolr(main, initLoad=false) {
     
     var searchQuery = main;
-    
-    console.log("Solr research request received for " + searchQuery);
+
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
         {
-            'q': searchQuery,
+            'q': 'rsId: "' + searchQuery + '" OR association_rsId : "' + searchQuery + '"',
             'max': 99999,
             'group.limit': 99999,
             'group.field': 'resourcename',
@@ -47,10 +44,8 @@ function getDataSolr(main, initLoad=false) {
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         //processSolrData(data, initLoad);
         processVariantData(data,searchQuery);
-        console.log("Solr research done for " + searchQuery);
         return data;
     }).catch(function(err) {
-        console.error('Error when searching solr for' + searchQuery + '. ' + err);
         throw(err);
     })
     
@@ -61,17 +56,31 @@ function getDataSolr(main, initLoad=false) {
 $(document).ready(function() {
 
     var searchTerm = $('#query').text();
-    console.log("Loading search module!");
-    console.log("rsID: "+searchTerm);
     if (searchTerm != '') {
-        console.log("Start search for the variant "+searchTerm);
         getVariantData(searchTerm);
     }
     getVariantInfoFromEnsembl(searchTerm);
+    displayLDPlot();
+
+    $.getJSON(gwasProperties.contextPath+'api/search/stats')
+        .done(function(data) {
+            setGenomeStats(data);
+        }).fail(function () {
+            $('#genome-build-stats').text("GWAS Catalog data is currently mapped to unknown - unable to get data");
+    });
 });
 
+function setGenomeStats(data) {
+    try {
+        $('#genome-build-stats').text("GWAS Catalog data is currently mapped to " +
+            "Genome Assembly "+data.genebuild+" and dbSNP Build"+data.dbsnpbuild);
+    }
+    catch (ex) {
+        $('#genome-build-stats').text("GWAS Catalog data is currently mapped to unknown - unable to process data");
+    }
+}
+
 function getVariantData(rsId) {
-    console.log("Solr research request received for " + rsId);
     setState(SearchState.LOADING);
     /*$.getJSON('../api/search/association',
               {
@@ -84,11 +93,11 @@ function getVariantData(rsId) {
               });
     */
     var solrPromise = getDataSolr(rsId, false);
-    console.log("Solr research done for " + rsId);
 }
 
 // Parse the Solr results and display the data on the HTML page
 function processVariantData(data,rsId) {
+
     // Check if Solr returns some results
     if (data.grouped.resourcename.groups.length == 0) {
         $('#lower_container').html("<h2>The variant <em>"+rsId+"</em> cannot be found in the GWAS Catalog database</h2>");
@@ -118,11 +127,11 @@ function processVariantData(data,rsId) {
         // External links panel
         getLinkButtons(data_association.docs,rsId);
 
+        displayDatatableTraits(data_association.docs, rsId);
         displayDatatableAssociations(data_association.docs);
         displayDatatableStudies(data_study.docs);
-        checkSummaryStatsDatabase(data_study.docs);
-        //downloads link : utils-helper.js
-        setDownloadLink(rsId);
+
+        setDownloadLink("rsId:" + rsId);
     }
     $('[data-toggle="tooltip"]').tooltip();
 }
@@ -150,28 +159,49 @@ function getSolrProperty(data, property) {
 }
 
 
-function getVariantInfo(data,rsId) {
-    var valid_index = getSolrProperty(data,'context');
-    var data_sample = data[valid_index];
+function getVariantInfo(data) {
 
-    if (data_sample.chromLocation) {
-        var location = data_sample.chromLocation[0];
-    }
+    // Retrieve variant info from the slim solr:
+    var rsId = $('#query').text();
+    var slimSolrData = getSlimSolrData(rsId);
+    var location = slimSolrData.position;
+    var consequence = slimSolrData.consequence;
+    var region = slimSolrData.region;
+    var mappedGenes = slimSolrData.mappedGenes;
 
-    if (data_sample.region) {
-        var region = data_sample.region[0];
-    }
-
-    if (data_sample.context) {
-        var func = data_sample.context[0];
-    }
-
+    // The following information is parsed from the fat solr:
     var genes_mapped = [];
     var genes_mapped_url = [];
     var traits_reported = [];
     var traits_reported_url = [];
     var all_mapped_traits = [];
+
     $.each(data, function (index, doc) {
+        // Mapped genes
+        if (doc.hasOwnProperty('mappedGenes')) {
+            var gene_list = [];
+            $.each(doc.ensemblMappedGenes, function(index, gene) {
+                // check if "gene" contains multiple values, e.g. ["GCKR; GCKR"]
+                if (gene.indexOf(";") > 0) {
+                    gene_list = gene.split("; ");
+
+                    $.each(gene_list, function(index, split_gene) {
+                        if (jQuery.inArray(split_gene, genes_mapped) == -1) {
+                            genes_mapped.push(split_gene);
+                        }
+                    });
+                }
+                else {
+                    if (jQuery.inArray(gene, genes_mapped) == -1) {
+                        genes_mapped.push(gene);
+                        // remove link
+                        // genes_mapped_url.push(setQueryUrl(gene));
+                        genes_mapped_url.push(gene);
+                    }
+                }
+            });
+        }
+
         // Mapped genes
         if (doc.hasOwnProperty('entrezMappedGenes')) {
             var gene_list = [];
@@ -196,105 +226,67 @@ function getVariantInfo(data,rsId) {
                 }
             });
         }
+        genes_mapped_url.sort();
 
-        // Mapped Traits
-        var mapped_traits = doc.mappedLabel;
-        if (doc.mappedLabel) {
-            $.each(mapped_traits, function(index, mapped_trait) {
-                var link = gwasProperties.contextPath + 'efotraits/' + doc.mappedUri[index].split('/').slice(-1)[0];
-                mapped_traits[index] = setInternalLinkText(link, mapped_trait);
-                // add unique traits only
-                if (jQuery.inArray(mapped_traits[index], all_mapped_traits) == -1) {
-                    all_mapped_traits.push(mapped_traits[index]);
-                }
-            });
-        }
-        // sort multi-word traits in alphabetical order
-        all_mapped_traits.sort(function(a,b) {
-            // extract trait label from URL
-            var a_first_word_index = parseInt(a.indexOf(">")) + 1;
-            var a_last_word_index = a.indexOf("</a>");
-            var a_words = a.slice(a_first_word_index, a_last_word_index).toLowerCase();
-
-            var b_first_word_index = parseInt(b.indexOf(">")) + 1;
-            var b_last_word_index = b.indexOf("</a>");
-            var b_words = b.slice(b_first_word_index, b_last_word_index).toLowerCase();
-
-            // find shortest trait label
-            var shortest_trait_label;
-            if (a_words.split(' ').length < b_words.split(' ').length) {
-                shortest_trait_label = a_words.split(' ').length;
-            } else {
-                shortest_trait_label = b_words.split(' ').length;
-            }
-
-            // find word index in trait label to compare for alphabetical ordering, some traits
-            // start with the same word, e.g. coronary artery disease vs. coronary heart disease
-            for (var i = 0; i < shortest_trait_label; i++) {
-                if (a_words.split(' ')[i] == b_words.split(' ')[i]) {
-                    continue;
-                }
-                else {
-                    break;
-                }
-            }
-
-            if (a_words.split(' ')[i] < b_words.split(' ')[i]) {
-                return -1;
-            }
-            if (a_words.split(' ')[i] > b_words.split(' ')[i]) {
-                return 1;
-            }
-            return 0;
-        });
-        $("#traits").html(all_mapped_traits.join(', '));
-
-        // Reported traits
-        var traits = [];
-        if (doc.traitName) {
-            $.each(doc.traitName, function(index, trait) {
-                if (jQuery.inArray(trait, traits_reported) == -1) {
-                    traits_reported.push(trait);
-                    // remove link
-                    // traits_reported_url.push(setQueryUrl(trait));
-                    traits_reported_url.push(trait);
-                }
-            });
-        }
     });
-    genes_mapped_url.sort();
-    traits_reported_url.sort();
-
-    // Reported Traits display
-    if (traits_reported.length <= list_min) {
-        $("#variant-traits").html(traits_reported_url.join(', '));
-    }
-    else {
-        $("#variant-traits").html(longContentList("gwas_traits_div", traits_reported_url, 'traits'));
-    }
 
     // Location
-    if (jQuery.type(location) == 'undefined') {
+    if (location == 'NA:NA') {
         $("#variant-location").html('Variant does not map to the genome');
+        $("._ld_graph").html('Variant does not map to the genome');
+        region = '-';
+        consequence = '-';
+        mappedGenes = ['-']
     }
     else {
         $("#variant-location").html(location);
     }
 
     // Cytogenetic region
-    $("#variant-region").html(region);
+    var regionLink = $("<a></a>").attr("href", gwasProperties.contextPath + 'regions/' + region).append(region);
+    $("#variant-region").html(regionLink);
 
     // Most severe consequence
-    if (func) {
-        $("#variant-class").html(variationClassLabel(func));
-    }
+    $("#variant-class").html(consequence);
 
     // Mapped genes
-    if (genes_mapped_url.length != 0) {
-        $("#variant-mapped-genes").html(genes_mapped_url.join(', '));
+    if (mappedGenes.length != 0 && mappedGenes[0] != '-') {
+        mappedGeneLinks = [];
+        for ( gene of mappedGenes ){
+            var link = gwasProperties.contextPath + 'genes/' + gene
+            mappedGeneLinks.push(`<a href="${link}">${gene}</a>`);
+
+        }
+        $("#variant-mapped-genes").html(mappedGeneLinks.join(', '));
     }
 
     $("#variant-summary-content").html(getSummary(data));
+}
+
+// To overcome the inconsistencies in the fat solr, we retrieve variant data from the slim solr
+function getSlimSolrData(rsID) {
+    var returnData = {
+        'position' : '-',
+        'region': '-',
+        'consequence' : '-',
+        'mappedGenes' : []
+    }
+    $.ajax({
+        url: '../api/search',
+        data : {'q': "rsID:\"" + rsID + '\" AND resourcename:variant'},
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        success: function(data){
+            // Parse returned JSON;
+            var doc = data.response.docs[0];
+            returnData.position = doc.description.split("|")[0];
+            returnData.region = doc.region;
+            returnData.consequence = doc.consequence;
+            returnData.mappedGenes = doc.description.split("|")[3].split(",")
+        }
+    });
+    return returnData;
 }
 
 
@@ -492,13 +484,10 @@ function toggle_and_scroll (id) {
 function getVariantInfoFromEnsembl(rsId) {
     $.getJSON('https://rest.ensembl.org/variation/human/'+rsId+'?content-type=application/json')
             .done(function(data) {
-                console.log(data);
                 processVariantInfoFromEnsembl(rsId,data);
             })
             .fail(function() {
-                console.log('Call failed')
             });
-    console.log("Ensembl REST query done to retrieve variant information");
 }
 
 function processVariantInfoFromEnsembl(rsId, data) {
@@ -534,8 +523,6 @@ function setState(state) {
     var loading = $('#loading');
     var noresults = $('#noResults');
     var results = $('#results');
-    console.log("Search state update...");
-    console.log(state);
     switch (state.value) {
         case 0:
             loading.show();
@@ -553,7 +540,6 @@ function setState(state) {
             results.show();
             break;
         default:
-            console.log("Unknown search state; redirecting to search page");
             window.location = "variant";
     }
 }

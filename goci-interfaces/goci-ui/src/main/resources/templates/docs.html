@@ -16,11 +16,11 @@
     <title>GWAS Catalog</title>
 
     <!-- Bootstrap core CSS -->
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"
           rel="stylesheet"/>
-    <link th:href="@{/css/bootstrap-table.css}" rel="stylesheet"/>
-    <link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.5.0/bootstrap-table.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
 
     <!-- Custom styles for this template -->
     <link th:href="@{/css/jumbotron.css}" rel="stylesheet"/>
@@ -81,6 +81,8 @@
                 <p>A list of resources related to the GWAS Catalog, including training materials and workshop slides.</p>
             </div>
         </a>
+    </div>
+    <div class="row">
         <a th:href="@{/docs/ontology}">
             <div class="col-md-4 toplevel-view">
                 <h2 class="flaticon-owl3 color-primary-bold">Ontology</h2>
@@ -104,6 +106,31 @@
             </div>
         </a>
     </div>
+    <div class="row">
+        <div class="row">
+            <a th:href="@{/docs/submission}">
+                <div class="col-md-4 toplevel-view">
+                    <h2 class="flaticon-notes9 color-primary-bold">Submission Documentation</h2>
+
+                    <p>Instructions on how to submit summary statistics to the GWAS Catalog.</p>
+                </div>
+            </a>
+            <a th:href="@{/docs/ancestry}">
+                <div class="col-md-4 toplevel-view">
+                    <h2 class="flaticon-group12 color-primary-bold">Ancestry Documentation</h2>
+
+                    <p>An introduction to our ancestry curation process.</p>
+                </div>
+            </a>
+            <a th:href="@{/summary-statistics}">
+                <div class="col-md-4 toplevel-view">
+                    <h2 class="flaticon-statistics color-primary-bold">Summary Statistics Documentation</h2>
+
+                    <p>Documentation and access to full summary statistics for GWAS Catalog studies where available.</p>
+                </div>
+            </a>
+        </div>
+    </div>
 
     <hr/>
 
@@ -119,7 +146,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script th:src="@{/js/ie10-viewport-bug-workaround.js}"></script>
 
@@ -127,7 +154,7 @@
 ================================================== -->
 <script th:src="@{/js/goci-ui.js}"></script>
 <script th:src="@{/js/autocomplete-termselect.js}"></script>
-<script th:src="@{/js/jquery.autocomplete.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.min.js"></script>
 
 <!-- Google analytics
 ================================================== -->

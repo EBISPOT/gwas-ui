@@ -1,23 +1,5 @@
 /** DRY. From Xin original code. We must refactor all these 'action'result.js in a common way! */
 
-var global_fl;
-var global_raw;
-
-global_fl = 'pubmedId,title,author_s,orcid_s,publication,publicationDate,catalogPublishDate,authorsList,' +
-    'initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,' +
-    'ancestryLinks,' + 'fullPvalueSet,' + 'genotypingTechnologies,' + 'authorAscii_s,' +
-    'association_rsId,' + //size per study
-    'traitName,mappedLabel,mappedUri,traitUri,shortForm,' +
-    'label,' + 'efoLink,parent,id,resourcename,';
-global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,snpInteraction,multiSnpHaplotype,rsId,strongestAllele,context,region,entrezMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,chromosomePosition,chromLocation,positionLinks,author_s,publication,publicationDate,catalogPublishDate,publicationLink,accessionId,initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,numberOfIndividuals,traitName_s,mappedLabel,mappedUri,traitUri,shortForm,labelda,synonym,efoLink,id,resourcename,range,orPerCopyNum,betaNum,betaUnit,betaDirection'
-global_raw = 'fq:resourcename:association or resourcename:study'
-
-
-/**
- * Other global setting
- */
-var pageRowLimit=5;
-
 $(document).ready(() => {
 
 //jump to the top of the page
@@ -66,7 +48,8 @@ updatePage = function(initLoad=false) {
     }
     showLoadingOverLay('#study-table-loading');
     showLoadingOverLay('#association-table-loading');
-    
+    showLoadingOverLay('#efotrait-table-loading');
+
     var main = getTextToSearch('#query');
     
     //******************************
@@ -107,7 +90,7 @@ function getDataSolr(main, initLoad=false) {
         },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
         // Check if Solr returns some results
         if (data.grouped.resourcename.groups.length == 0) {
-            $('#lower_container').html("<h2>The PubmedId <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
+            $('#lower_container').html("<h2>Publication with Pubmed ID <em>"+main+"</em> cannot be found in the GWAS Catalog.</h2>");
         }
         else {
             processSolrData(data, initLoad);
@@ -185,15 +168,8 @@ function processSolrData(data, initLoad=false) {
     //update association/study table
     displayDatatableAssociations(data_association.docs);
     displayDatatableStudies(data_study.docs, PAGE_TYPE);
-    checkSummaryStatsDatabase(data_study.docs);
     displaySummaryPublication(data_study.docs);
-    
-    //work out highlight study
-    //var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
-    //displayHighlightedStudy(highlightedStudy);
-    //display summary information like 'EFO trait first reported in GWAS Catalog in 2007, 5 studies report this efotrait'
-    //getSummary(findStudiesForEFO(getMainEFO()));
-    
+
 })
 
 }

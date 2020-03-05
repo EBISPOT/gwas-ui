@@ -1,3 +1,22 @@
+/*
+The following variables are used by all dedicated pages:
+ */
+var global_fl;
+var global_raw;
+
+// This is the global variable storing solr fields:
+global_fl = 'accessionId,ancestralGroups,ancestryLinks,associationCount,association_rsId,authorAscii_s,author_s,authorsList,' +
+    'betaDirection,betaNum,betaUnit,catalogPublishDate,chromLocation,chromosomeName,chromosomePosition,context,' +
+    'countriesOfRecruitment,currentSnp,efoLink,ensemblMappedGenes,fullPvalueSet,genotypingTechnologies,id,initialSampleDescription,' +
+    'label,labelda,mappedLabel,mappedUri,merged,multiSnpHaplotype,numberOfIndividuals,orPerCopyNum,orcid_s,pValueExponent,' +
+    'pValueMantissa,parent,positionLinks,publication,publicationDate,publicationLink,pubmedId,qualifier,range,region,' +
+    'replicateSampleDescription,reportedGene,resourcename,riskFrequency,rsId,shortForm,snpInteraction,strongestAllele,studyId,' +
+    'synonym,title,traitName,traitName_s,traitUri,platform';
+global_raw = 'fq:resourcename:association or resourcename:study';
+
+// Number of rows displayed on the datatables
+pageRowLimit = 5;
+
 /** DRY. From Xin original code. Helper to share between modules! */
 /**
  * Display an overlay spinner on a tag
@@ -91,6 +110,43 @@ function displayArrayAsList(data_array) {
     return data_text;
 }
 
+/*
+The mapped trait links are extracted from efoLink if that is present. If not, mappedLabel and mappedUri is used as
+source of information.
+ */
+function setTraitsLink(study) {
+
+    // A collection of EFO trait labels and the corresponding short links:
+    var efoLabelUriPairs = {};
+
+    // Formatted links to trait pages:
+    var efoTraitLinks = [];
+
+    // Check if the efoUri exists:
+    if ('efoLink' in study){
+        $.each(study.efoLink, function (index, efoLink) {
+            var label = efoLink.split("|")[0];
+            var link = efoLink.split("|")[1];
+            efoLabelUriPairs[label] = link;
+        });
+    }
+    // If efoUri does not exists, use mappedLabel and mappedUri instead
+    else {
+        $.each(study.mappedLabel, function (index, label) {
+            var link = study.mappedUri[index].split("/").pop();
+            efoLabelUriPairs[label] = link;
+        });
+    }
+
+    // Generating links to mapped trait labels:
+    $.each(efoLabelUriPairs, function (label, link) {
+        var traitPageLink = gwasProperties.contextPath + 'efotraits/' + link;
+        efoTraitLinks.push(setExternalLinkText(traitPageLink, label));
+    });
+
+    return efoTraitLinks.join(", ");
+}
+
 
 // Display the Ancestry array as a HTML list
 function displayAncestryLinksAsList(data_array) {
@@ -98,20 +154,23 @@ function displayAncestryLinksAsList(data_array) {
     var replicate_data_text = '';
 
     if (data_array) {
+        // Curation protocol: if there is one set of ancestry it will be initial/discovery
+        // study is not eligible without initial/discovery stage whereas replication stage is optional
         if (data_array.length == 1) {
             var initial;
-            var replicate;
+
+            var initial_list = $('<ul/>');
+            initial_list.css('padding-left', '0px');
+
 
             if (data_array[0].startsWith('initial')) {
                 initial = data_array[0].split('|');
-                initial = initial[4]+' '+initial[3];
+                initial = initial[4] + ' ' + initial[3];
+                initial_list.append(newItem(initial))
             }
-            else {
-                replicate = data_array[0].split('|');
-                replicate = replicate[4]+' '+replicate[3];
-            }
-            initial_data_text = initial;
-            replicate_data_text = replicate;
+
+            initial_data_text = initial_list;
+            replicate_data_text = "-";
         }
         else if (data_array.length > 1) {
             var initial_list = $('<ul/>');
@@ -120,26 +179,31 @@ function displayAncestryLinksAsList(data_array) {
             var replicate_list = $('<ul/>');
             replicate_list.css('padding-left', '0px');
 
+            var replicate_count = 0;
+
             for (var i = 0; i < data_array.length; i++) {
                 var initial;
                 var replicate;
                 if (data_array[i].startsWith('initial')) {
                     // Example data: initial|NR|U.S.|Hispanic or Latin American|6499|NA
                     initial = data_array[i].split('|');
-                    initial = initial[4]+' '+initial[3];
+                    initial = initial[4] + ' ' + initial[3];
                     initial_list.append(newItem(initial))
                 }
                 else {
+                    replicate_count++;
                     replicate = data_array[i].split('|');
-                    replicate = replicate[4]+' '+replicate[3];
+                    replicate = replicate[4] + ' ' + replicate[3];
                     replicate_list.append(newItem(replicate))
                 }
             }
             initial_data_text = initial_list;
+            if (replicate_count == 0) {
+                replicate_list = "-";
+            }
             replicate_data_text = replicate_list;
         }
     }
-    // return [initial_data_text, replicate_data_text];
     return {initial_data_text: initial_data_text, replicate_data_text: replicate_data_text};
 }
 
@@ -224,4 +288,5 @@ function setTraitDownloadLink(queryParam) {
  */
 $('#download_doc_page').click(() => {
     window.open("https://www.ebi.ac.uk/gwas/docs/file-downloads", '_blank');
-});
+})
+

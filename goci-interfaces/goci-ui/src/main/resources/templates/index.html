@@ -16,11 +16,11 @@
     <title>GWAS Catalog</title>
 
     <!-- Bootstrap core CSS -->
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"
           rel="stylesheet"/>
-    <link th:href="@{/css/bootstrap-table.css}" rel="stylesheet"/>
-    <link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.5.0/bootstrap-table.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
 
     <!-- Custom styles for this template -->
     <link th:href="@{/css/jumbotron.css}" rel="stylesheet"/>
@@ -50,33 +50,36 @@
 <div th:include="fragments/header :: jumbotron"></div>
 
 <div class="container">
-    <div class="row" style="text-align: center">
-            <p></p>
 
-        <a href="https://youtu.be/4FplAQzRfh8" target="_blank"><h2 class="color-primary-bold">Take a tour of the NEW search interface...</h2></a>
-
+    <!-- This spaces is reserved for banners occasionally displayed on the main website -->
+    <div class="row background-color-complementary-accent main-banner" style="text-align: center">
+        <h2 class="text-muted">NEW! We can now accept direct submissions of summary statistics for
+            published
+            GWAS through our new <a href="https://www.ebi.ac.uk/gwas/deposition">submission page!</a> See the
+            <a href="http://www.ebi.ac.uk/gwas/docs/submission">documentation</a> for detailed instructions.</h2>
     </div>
+
+
     <div class="row">
-        <a th:href="@{/search}">
-            <div class="col-md-4 toplevel-view">
-                <h2 class="flaticon-search11 color-primary-bold">Search</h2>
-
-                <p>Search the Catalog in a number of ways, including by trait, SNP identifier, publication, gene and genomic location. </p>
-            </div>
-        </a>
-        <a th:href="@{/diagram}">
-            <div class="col-md-4 toplevel-view">
-                <h2 class="flaticon-image11 color-primary-bold">Diagram</h2>
-
-                <p>Explore an interactive visualisation of all SNP-trait associations with genome-wide significance
-                   (p&le;5 x10<sup>-8</sup>). </p>
-            </div>
-        </a>
         <a th:href="@{/downloads}">
             <div class="col-md-4 toplevel-view">
                 <h2 class="flaticon-mailbox2 color-primary-bold">Download</h2>
 
                 <p>Download a full copy of the GWAS Catalog in spreadsheet format as well as current and older versions of the GWAS diagram in SVG format.</p>
+            </div>
+        </a>
+        <a th:href="@{/summary-statistics}">
+            <div class="col-md-4 toplevel-view">
+                <h2 class="flaticon-statistics color-primary-bold">Summary statistics</h2>
+
+                <p>Documentation and access to full summary statistics for GWAS Catalog studies where available.</p>
+            </div>
+        </a>
+        <a th:href="@{/deposition}">
+            <div class="col-md-4 toplevel-view">
+                <h2 class="flaticon-upload14 color-primary-bold">Submit </h2>
+
+                <p>Submit summary statistics to GWAS Catalog.</p>
             </div>
         </a>
     </div>
@@ -89,11 +92,12 @@
                 <p>Including FAQs, our curation process, training materials, related resources, a list of abbreviations and API documentation.</p>
             </div>
         </a>
-        <a th:href="@{/summary-statistics}">
+        <a th:href="@{/diagram}">
             <div class="col-md-4 toplevel-view">
-                <h2 class="flaticon-statistics color-primary-bold">Summary statistics</h2>
+                <h2 class="flaticon-image11 color-primary-bold">Diagram</h2>
 
-                <p>Documentation and access to full summary statistics for GWAS Catalog studies where available.</p>
+                <p>Explore an interactive visualisation of all SNP-trait associations with genome-wide significance
+                    (p&le;5 x10<sup>-8</sup>). </p>
             </div>
         </a>
         <a th:href="@{/ancestry}">
@@ -106,7 +110,7 @@
     </div>
 
     <div class="row" style="text-align: center" id="homepageStats">
-       <p> As of <span id="lastUpdateDate"></span>, the GWAS Catalog contains <span id="studyCount"></span> publications and <span id="associationCount"></span> unique SNP-trait associations.<br/> GWAS Catalog data is currently mapped to Genome Assembly <span id="genomeAssembly"></span> and dbSNP Build <span id="dbSNP"></span>.</p>
+       <p> As of <span id="lastUpdateDate"></span>, the GWAS Catalog contains <span id="studyCount"></span> publications and <span id="associationCount"></span> associations.<br/> GWAS Catalog data is currently mapped to Genome Assembly <span id="genomeAssembly"></span> and dbSNP Build <span id="dbSNP"></span>.</p>
     </div>
 
     <div class="row" style="text-align: center">
@@ -134,14 +138,14 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://platform.twitter.com/widgets.js"></script>
+<script async="true" src="https://platform.twitter.com/widgets.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script th:src="@{/js/ie10-viewport-bug-workaround.js}"></script>
 <script th:src="@{/js/autocomplete-termselect.js}"></script>
-<script th:src="@{/js/jquery.autocomplete.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.min.js"></script>
 
 
 

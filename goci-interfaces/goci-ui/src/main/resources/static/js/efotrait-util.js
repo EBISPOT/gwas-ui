@@ -15,9 +15,10 @@
  * http://es6-features.org/#ObjectPropertyAssignment //merge object
  */
 
-var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
-var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
+// var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
 
+var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
+var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
 var global_ols_api = 'https://www.ebi.ac.uk/ols/api/';
 var global_ols = 'https://www.ebi.ac.uk/ols/';
 var global_ols_seach_api =  global_ols_api + 'search';
@@ -27,33 +28,10 @@ var global_efo_info_tag_id = '#efo-info';
 var global_epmc_api = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search';
 var global_oxo_api = 'https://www.ebi.ac.uk/spot/oxo/api/';
 
-var global_solr_url = 'http://localhost:8983/solr/gwas/select';
-var global_solr_slim_url = 'http://localhost:8983/solr/gwas_slim/select';
-
 // Global variable to store a list of a parent and it's
 // child EFO Ids to use as a query parameter to download
 // all child trait association data
 var global_parent_with_all_child_trait_ids = [];
-
-/**
- * This is to optimize solr query, only keep the fields/resources we need
- */
-var global_fl;
-var global_raw;
-
-global_fl = 'pubmedId,title,author_s,publication,publicationDate,catalogPublishDate,' +
-        'initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,' +
-        'ancestryLinks,' + 'fullPvalueSet,' + 'genotypingTechnologies,' + 'authorAscii_s,' +
-        'traitName,mappedLabel,mappedUri,traitUri,shortForm,' +
-        'association_rsId,' + //size per study
-        'label,' + 'efoLink,parent,id,resourcename,';
-global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,snpInteraction,multiSnpHaplotype,rsId,'+
-    'strongestAllele,context,region,entrezMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,'+
-    'chromosomePosition,chromLocation,positionLinks,author_s,publication,publicationDate,catalogPublishDate,'+
-    'publicationLink,accessionId,initialSampleDescription,replicateSampleDescription,ancestralGroups,'+
-    'countriesOfRecruitment,numberOfIndividuals,traitName_s,mappedLabel,mappedUri,traitUri,shortForm,labelda,'+
-    'synonym,efoLink,id,resourcename,range,orPerCopyNum,betaNum,betaUnit,betaDirection'
-global_raw = 'fq:resourcename:association or resourcename:study'
 
 /**
  * global variable storing solr query result.
@@ -71,87 +49,6 @@ var data_highlighting={}
 var pageRowLimit=5;
 
 //*************************** registering button clicking event *************************
-
-/**
- * toggle checkAll/uncheck All for the cart item checkbox.
- */
-$('#btn-cart-toggle-check-cbs').click(() =>{
-    if($('.cart-item-cb:input:checked').length != $('.cart-item-cb:input').length){
-        //not everthing checked, check everthing
-        // $('#btn-cart-toggle-check-cbs > span').removeClass('glyphicon-check').addClass('glyphicon-unchecked')
-        $('.cart-item-cb:input').attr('checked','checked')
-        addDataToTag(global_efo_info_tag_id, getCurrentSelected(), 'whichDescendant')
-        addEFO({});
-    }else{
-        //uncheck everything
-        // $('#btn-cart-toggle-check-cbs > span').removeClass('glyphicon-unchecked').addClass('glyphicon-check')
-        $('.cart-item-cb:input').removeAttr('checked');
-        var tmp = getDataFromTag(global_efo_info_tag_id,'whichDescendant');
-        Object.keys(tmp).map((id) => {
-            delete tmp[id];
-        })
-        addEFO({});
-    }
-
-});
-
-/**
- * Trigger the download of the current cart.
- */
-$('#btn-cart-action-download').click(() =>{
-    generateDownloadContentForCart().then((content) => {
-        download(content,'term_list.txt')
-    })
-});
-
-/**
- * Trigger the remove of highlight from locus plot.
- * This button is currently removed since it is not really important.
- * The function is kept for future reference.
- */
-$('#btn-clear-highlight').click(() => {
-    $('.highlightable').removeClass("highlight");
-    reloadLocusZoom('#plot', data_association);
-});
-
-/**
- * toggle remove/add associations that annotated to efos which are currently not in the cart
- */
-$('#cb-remove-nonunique-association').change(function() {
-    updatePage()
-})
-
-
-/**
- * Trigger the remove of all cart items except the mainEFO.
- * This is functionally similar to reload the page, but instead, keep all the cache data.
- * This button is currently removed since it is not really important.
- * The function is kept for future reference.
- */
-$('#btn-clear-cart').click(() => {
-    var selected = getDataFromTag(global_efo_info_tag_id, 'selectedEfos')
-    var mainEFO = getMainEFO();
-    Object.keys(selected).map((key)=>{
-        if(key != mainEFO)
-            removeDataFromTag(global_efo_info_tag_id,'selectedEfos',key)
-    })
-
-    whichDescendant().map((key) => {
-        removeDataFromTag(global_efo_info_tag_id, 'whichDescendant', key)
-    })
-    addEFO({});
-});
-
-
-/**
- * Trigger the action to add all related terms to the cart.
- */
-$('#btn-query-include-related-terms').click(() => {
-    OLS.getRelatedTerms(getMainEFO()).then((relatedTerms) => {
-        addEFO(relatedTerms);
-    });
-});
-
 
 /**
  * Linkout to ols page of the main EFO term
@@ -176,57 +73,11 @@ $('#ot-link').click(() => {
     window.open("https://www.targetvalidation.org/disease/" + getMainEFO() , '_blank');
 });
 
-
-
 /**
- * Checkbox to toggle always include all descendants.
- * When uncheck, the newly added efo term will be added to the cart without any descendants.
- * The users can latter add the descendant by clicking the checkbox in front of the cart item.
- * When checked, descendant will always be included for newly added efo terms.
+ *  The page actually statrs loading from here.
+ *
+ *
  */
-$("#cb-query-include-descendants").change(() => {
-    if(isAlwaysDescendant()){
-        // $('#btn-cart-toggle-check-cbs > span').removeClass('glyphicon-check').addClass('glyphicon-unchecked')
-        addEFO({},false,$("#cb-query-include-descendants").is(":checked"));
-    }else{
-        $('.cart-item-cb').removeAttr("disabled");
-        $('#btn-cart-toggle-check-cbs').removeAttr("disabled");
-    }
-});
-
-
-//we add the options to hide associations that have multiple efo annotations.
-// $('#btn-filter-association-by-efo-number').click(() => {
-//
-//     if($('#btn-filter-association-by-efo-number > span').hasClass('glyphicon-minus')){
-//         //remove association which have multiple efos
-//         $('#btn-filter-association-by-efo-number > span').removeClass('glyphicon-minus').addClass('glyphicon-plus')
-//         var multipleEFOAssociation = {}
-//         data_association.docs.forEach((d, i) => {
-//             if (d.numberEFO > 1){
-//                 multipleEFOAssociation[d.id]=d.numberEFO;
-//             }
-//         })
-//         reloadLocusZoom('#plot', data_association, undefined,undefined, Object.keys(multipleEFOAssociation));
-//     }else{
-//         //replot, adding back the association which have multiple efos
-//         $('#btn-filter-association-by-efo-number > span').removeClass('glyphicon-plus').addClass('glyphicon-minus')
-//         reloadLocusZoom('#plot', data_association);
-//
-//     }
-// });
-
-
-
-
-/**
- * Copy the sharable link to clipboard.
- */
-new Clipboard('#sharable_link_btn', {
-    text: function (trigger) {
-        return $('#sharable_link').val();
-    }
-});
 
 $(document).ready(() => {
     //jump to the top of the page
@@ -245,7 +96,7 @@ $(document).ready(() => {
             {
                 'q': searchQuery
             },'application/octet-stream').then(function(result) {
-            console.log(result); // "Stuff worked!"
+
             var disposition=result.getResponseHeader('Content-Disposition');
             var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
             var matches = filenameRegex.exec(disposition);
@@ -285,35 +136,10 @@ $(document).ready(() => {
     });
     
     var searchTerm = getMainEFO();
-    var included = $('#included').text();
-    if (included != '') {
-        searchTerm = searchTerm + ',' + included;
-    }
+    var elements = {};
+    elements[searchTerm] = searchTerm;
 
-    var checked = $('#checked').text();
-    if (checked != '') {
-        if(checked != "true"){
-
-            $('#cb-query-include-descendants').attr('checked','checked')
-        }else{
-            checked.split(',').map((efoid) => {
-                addDataToTag(global_efo_info_tag_id, {[efoid]:true}, 'whichDescendant')
-            })
-        }
-        searchTerm = searchTerm + ',' + included;
-    }
-
-    // console.log("Loading search module!");
-    if (searchTerm != '') {
-        // console.log("Start search for the efotrait " + searchTerm);
-        var elements = {};
-        searchTerm.split(',').forEach((term) => {
-                                          elements[term] = term;
-                                      }
-        )
-        //first load
-        addEFO(elements, true);
-    }
+    addEFO(elements, true);
 });
 
 
@@ -329,21 +155,8 @@ $(document).ready(() => {
  */
 addEFO = function(data={}, initLoad=false) {
 
-    //If this is the first load, check ever efo id is valid
-    if(initLoad){
-        Promise.all(Object.keys(data).map(OLS.getEFOInfo)).catch((err)=>{
-            $('#lower_container').html("<h2>Invalid EFO id.</h2>");
-            return ''
-        })
-    }
-
-
     //add these terms to seleted
-    var selected = addDataToTag(global_efo_info_tag_id, data, 'selectedEfos')
-
-    // Promise.all(Object.keys(data).map(OLS.getHierarchicalDescendants)).then(() => {
-    //     console.log('finish loading descendants!')
-    // })
+    var selected = addDataToTag(global_efo_info_tag_id, data, 'selectedEfos');
 
     //load all available efo terms in the GWAS Catalog(has at least one annotation)
     //save in the global_efo_info_tag_id tag with key 'availableEFOs'
@@ -393,49 +206,6 @@ addToCart = function(tagID, efoid, additionalLabel, initLoad) {
         var container = $(tagID);
         generateSelectedItemCheckBox(efoid,tagID, initLoad);
 
-
-        // TW - Comment out all below
-        //cart item
-        // var item = $('<a />', {
-        //     class: 'list-group-item highlightable cart-item col-xs-11',
-        //     title: 'Click to highlight'
-        // }).appendTo(container);
-
-        //colour badge for category
-        // $('<span />', { class: 'badge cart-item-category-badge', text: colourLabelInit, title:colourLabel})
-        //         .css({'background-color' :colour})
-        //         .appendTo(item);
-
-        //Add a 'x' to item than can be remove from cart, this will be all terms except the mainEFO
-        // if (!isMain) {
-        //     var span = $('<span />', {id: 'selected_btn_' + efoid, class: 'badge', text: '  X  '}).appendTo(item);
-        //     span.on("click", function(e) {
-        //         removeEFO(efoid);
-        //     });
-        // }
-
-        // This will add badge at the end of each cart item, showing the number of association/study linked.
-        // This will be init probably before the association/study data is available, thus generating badges with
-        // '-' as value at the beginning. The badge will be update when the data is available.
-        // $('<span />', { id: 'selected_btn_' + efoid + '_nos' ,class: 'badge cart-item-number-badge', text: '-' , title:'Number of study'}).appendTo(item);
-        // $('<span />', { id: 'selected_btn_' + efoid + '_noa', class: 'badge cart-item-number-badge', text: '-' , title:'Number of association'}).appendTo(item);
-
-
-        //to highlight associations only for this term
-        // item.click(() => {
-        //     //TOGGLE HIGHLIGHT
-        //     if(item.hasClass("highlight")){
-        //         item.removeClass("highlight");
-        //         reloadLocusZoom('#plot', data_association)
-        //     }else{
-        //         $('.highlightable.highlight').removeClass("highlight");
-        //         item.addClass("highlight");
-        //         var highlightAssociations = $('#selected_btn_' + efoid + '_noa').data('associations')
-        //         reloadLocusZoom('#plot', data_association, Object.keys(highlightAssociations),efoid);
-        //     }
-        // })
-
-        // item.append(additionalLabel)
     })
 }
 
@@ -678,7 +448,6 @@ updatePage = function(initLoad=false) {
         console.warning(`Error when updating cart! ${err}`);
     })
 
-
     //******************************
     // update efo information panel
     //******************************
@@ -849,51 +618,6 @@ function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false
     //xintodo need a post endpoint for this
     // http://localhost:8280/gwas/api/search/efotrait?&q=EFO_0000400,EFO_0000400&max=9999&group.limit=9999&group.field=resourcename&facet.field=resourcename&hl.fl=shortForm,efoLink&hl.snippets=100
     return Promise.all([p1, p2]).then(() => {
-        // console.log("Solr research request received for " + searchQuery);
-        //xintodo optmize the query, use fl to return less field.
-        //Cross origin not enable in solr
-        // return promiseGet(global_solr_url,
-        //             {
-        //                 'wt' : 'json',
-        //                 'q': searchQuery,
-        //                 'max': 99999,
-        //                 group : true,
-        //                 'group.limit': 99999,
-        //                 'group.field': 'resourcename',
-        //                 hl:true,
-        //                 'hl.fl': 'shortForm,efoLink',
-        //                 'hl.simple.post' : '</b>',
-        //                 'hl.simple.pre' : '<b>',
-        //                 'hl.snippets': 100,
-        //                 facet : true,
-        //                 'facet.field': 'resourcename',
-        //
-        //             },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
-        //     processSolrData(data, initLoad);
-        //     console.log("Solr research done for " + searchQuery);
-        //     return data;
-        // }).catch(function(err) {
-        //     console.error('Error when seaching solr for' + searchQuery + '. ' + err);
-        //     throw(err);
-        // })
-        // var link = window.location.pathname.split('/gwas/')[0]+'/gwas/'
-        // return promiseGet( window.location.pathname.split('/gwas/')[0]+'/gwas/' + 'api/search/efotrait',
-        //                   {
-        //                       'q': searchQuery,
-        //                       'max': 99999,
-        //                       'group.limit': 99999,
-        //                       'group.field': 'resourcename',
-        //                       'facet.field': 'resourcename',
-        //                       'hl.fl': 'shortForm,efoLink',
-        //                       'hl.snippets': 100
-        //                   }).then(JSON.parse).then(function(data) {
-        //     processSolrData(data, initLoad);
-        //     console.log("Solr research done for " + searchQuery);
-        //     return data;
-        // }).catch(function(err) {
-        //     console.error('Error when searching solr for' + searchQuery + '. ' + err);
-        //     throw(err);
-        // })
         return promisePost( gwasProperties.contextPath+'api/search/advancefilter',
                           {
                               'q': searchQuery,
@@ -901,15 +625,18 @@ function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false
                               'group.limit': 99999,
                               'group.field': 'resourcename',
                               'facet.field': 'resourcename',
-                              'hl.fl': 'shortForm,efoLink',
+                              'hl.fl': 'shortForm,efoLink,mappedUri',
                               'hl.snippets': 100,
                               'fl' : global_fl == undefined ? '*':global_fl,
                               // 'fq' : global_fq == undefined ? '*:*':global_fq,
                               'raw' : global_raw == undefined ? '' : global_raw,
                           },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
-            processSolrData(data, initLoad);
-            // console.log("Solr research done for " + searchQuery);
-            return data;
+            if( data.grouped.resourcename.groups.length == 0 ){
+                $('#lower_container').html("<h2>The EFO trait <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
+            } else{
+                processSolrData(data, initLoad);
+                return data;
+            }
         }).catch(function(err) {
             console.error('Error when searching solr for' + searchQuery + '. ' + err);
             throw(err);
@@ -923,10 +650,7 @@ function getEfoTraitDataSolr(mainEFO, additionalEFO, descendants, initLoad=false
  * @param {Boolean} initLoad
  */
 function processSolrData(data, initLoad=false) {
-//        if (data.grouped.resourcename.matches == 0) {
-//            $('#lower_container').html("<h2>The efotrait <em>" + getMainEFO() +
-//                                       "</em> cannot be found in the GWAS Catalog database</h2>");
-//        }
+
     var isInCatalog=true;
     if (data.grouped.resourcename.matches == 0) {
         isInCatalog = false
@@ -964,7 +688,7 @@ function processSolrData(data, initLoad=false) {
 
 
     remove.then(()=>{
-        //If no solr return, generate a fake empty array so tables/plot are empty
+        // If no solr return, generate a fake empty array so tables/plot are empty
         if(!isInCatalog) {
             data_association.docs = []
             data_study.docs = []
@@ -972,8 +696,7 @@ function processSolrData(data, initLoad=false) {
 
         //update association/study table
         displayDatatableAssociations(data_association.docs);
-        displayDatatableStudies(data_study.docs);
-        checkSummaryStatsDatabase(data_study.docs);
+        displayDatatableStudies(data_study.docs, );
 
         //work out highlight study
         var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
@@ -985,69 +708,43 @@ function processSolrData(data, initLoad=false) {
 
         // GOCI_CM_TW_Integration_Plot_no_association
         if ('docs' in data_association) {
-            //we add preferEFO for each association, generate the association data for popup of data points in the locus plot.
+            // we add preferEFO for each association, generate the association data for popup of data points in the locus plot.
             var allUniqueEFO = {}
             data_association.docs.forEach((d, i) => {
                 d.preferedEFO = findHighlightEFOForAssociation(d.id, data_highlighting)[0];
-            d.numberEFO = findAllEFOsforAssociation(d.id, data_association).length;
-            allUniqueEFO[d.preferedEFO] = 1;
-            //add any string data that will be use in the locus plot popover
-            d.popoverHTML = buildLocusPlotPopoverHTML(d);
-        })
+                d.numberEFO = findAllEFOsforAssociation(d.id, data_association).length;
+                allUniqueEFO[d.preferedEFO] = 1;
+                //add any string data that will be use in the locus plot popover
+                d.popoverHTML = buildLocusPlotPopoverHTML(d);
+            });
     
             //get all ancestries of all associations
             var allAncestries = {};
             data_association.docs.map((d) => {
-                if(d.ancestralGroups != undefined
-        )
-            {
-                d.ancestralGroups.map((a) => {
-                    if(allAncestries[a] == undefined
-            )
-                allAncestries[a] = [];
-                allAncestries[a].push(d.id);
-            })
-            }
-        })
+                if(d.ancestralGroups != undefined){
+                    d.ancestralGroups.map((a) => {
+                    if(allAncestries[a] == undefined)
+                    allAncestries[a] = [];
+                    allAncestries[a].push(d.id)})
+                }
+            });
     
             prepareAncestryFilter(allAncestries);
-    
-    
-            //wwwdev.ebi.ac.uk/gwas/labs/rest/api/parentMapping/EFO_0000400
-            //Load colour for unique efo
-            var allColorLoaded = []
-            Object.keys(allUniqueEFO).forEach((efo) => {
-                allColorLoaded.push(getColourForEFO(efo).then((response) => {
-                allUniqueEFO[efo] = response;
-            return response;
-        }))
-            ;
-        })
-    
-            //When all colour are received, replot
-            Promise.all(allColorLoaded).then(() => {
-                //assign colour to associations for plot
-                console.debug(`Finish loading color from ${global_color_url}`);
-            console.debug(allUniqueEFO);
-            data_association.docs.forEach(function (d, i) {
-                d.preferedColor = allUniqueEFO[d.preferedEFO].colour;
-                d.preferedParentUri = allUniqueEFO[d.preferedEFO].parentUri;
-                d.preferedParentLabel = allUniqueEFO[d.preferedEFO].parent;
-                d.category = allUniqueEFO[d.preferedEFO].parent;
-            })
-        }
-        ).
-            catch((err) => {
+
+            // Getting color for the main EFO and add to ALL associations.
+            getColourForEFO(getMainEFO()).then((response) => {
+                data_association.docs.forEach(function (d, i) {
+                    d.preferedColor = response.colour;
+                    d.preferedParentUri = response.parentUri;
+                    d.preferedParentLabel = response.parent;
+                    d.category = response.parent;
+                })
+            }).catch((err) => {
                 console.warn(`Error loading colour for Locus zoom plot from ${global_color_url}. ${err}. Using default colour.`)
-            //xintodo create a default colour to plot, if the colour query fail
-        }).
-            then(() => {
-                //replot
-                reloadLocusZoom('#plot', data_association
-        )
-            ;
-        })
-            ;
+            }).then(() => {
+                reloadLocusZoom('#plot', data_association);
+            });
+
         } else {
             $("#plot").html('<span>No Associations for this EFO Trait</span>');
             hideLoadingOverLay("#locus-plot-row-loading");
@@ -1089,9 +786,11 @@ function processSolrSlimData(data) {
         reportedTraits = data.reportedTrait;
     });
 
+    if (reportedTraits) {
     $("#reported-traits").html(longContentList("gwas_reported_traits_div",
         reportedTraits.sort(),
         'reported traits'));
+    }
 }
 
 
@@ -1110,7 +809,6 @@ removeAssociationWithNonSelectedEFO = function() {
                     }).length == 0) {
                 return true
             }
-            // console.log(`remove ${association_doc.id}!`);
             return false
         })
     })
@@ -1156,120 +854,6 @@ addRelatedTermCheckBox = () => {
     })
 }
 
-/**
- * init a network using ols-graph at the <#ontology_vis> tag.
- * The network shows the mainEFO with all the realted EFOs.
- * @param {String} mainEFO
- */
-// TW - Removed to remove JS error message, not all data used/available
-// initOLS_GraphWiget = function(mainEFO) {
-//     var mainEFOLink = OLS.getOLSLinkAPI(mainEFO).then((termFullLink) => {
-//         return termFullLink + '/graph';
-//     })
-//
-//     var mainEFOIri = OLS.getIriByShortForm(mainEFO)
-//
-//     var tmpnetworkOptions = {
-//         webservice: {
-// //            URL: "http://www.ebi.ac.uk/ols/api/ontologies/cmpo/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_33839/graph",
-//             OLSschema: false
-//         },
-//         displayOptions: {showButtonBox: true, showInfoWindow: false, showLegend: true},
-//         callbacks: {
-//             onSelectNode: function(params) {
-//                 console.debug(params);
-//             },
-//             onDoubleClick: function(params) {
-//                 console.debug(params);
-//                 var node = params.nodes[0];
-//                 var efoid = node.split('/').slice(-1)[0];
-//                 addEFO({[efoid]:node});
-//             },
-//             onSelectEdge: function(params) {
-//                 console.debug(params);
-//             },
-//             onClick: function(params) {
-//                 console.debug(params);
-//             }
-//         }
-//     }
-//     var visoptions = {
-//         physics: {
-//             forceAtlas2Based: {
-//                 gravitationalConstant: -50,
-//                 centralGravity: 0.01,
-//                 springConstant: 0.08,
-//                 springLength: 100,
-//                 damping: 0.4,
-//                 avoidOverlap: 0
-//             },
-//         },
-//         layout: {
-//             hierarchical: false
-//         },
-//         nodes: {
-//             borderWidth: 4,
-//             shape: 'ellipse'
-//         },
-//         edges: {
-//             arrows: {middle: {enabled: true}},
-//             dashes: true,
-//         },
-//     }
-//
-//     var term = "Can be whatever at the moment - if you chose OLSschema false"
-//     var app = require("ols-graphview");
-//     var instance = new app();
-//
-//     var reasonForRelatedEFO = {};
-//     //prepare the network, insert terms of interests
-//     mainEFOLink.then(function(mainLink) {
-//         tmpnetworkOptions['webservice']['URL'] = mainLink;
-//         instance.visstart("ontology_vis", term, tmpnetworkOptions, visoptions);
-//
-//         OLS.getRelatedTerms(getMainEFO()).then((terms) => {
-//             //find out why this term is 'related', from its logical_description
-//             Object.keys(terms).forEach((relatedTerm) => {
-//                 var d = terms[relatedTerm];
-//                 reasonForRelatedEFO[d.obo_id] = d.logical_description;
-//             })
-//
-//             return Object.keys(terms).map(OLS.getOLSLinkAPI).reduce((sequence, termOLSLinkPromise) => {
-//                 return sequence.then(() => {
-//                     return termOLSLinkPromise;
-//                 }).then(function(termOLSLink) {
-//                     //for each related term, add it to the graph
-//                     instance.fetchNewGraphData(termOLSLink + '/graph');
-//                 })
-//             }, Promise.resolve())
-//         })
-//     }).then(() => {
-//         var x = instance.getGraphDataset()
-//         var net=instance.getNetwork()
-//         console.debug(net)
-//
-//         //change mainEFO node shape to hightlight related terms
-//         mainEFOIri.then((iri) => {
-//             //Thi is to make sure the setting apply AFTER the nodes are loaded.
-//             net.once("stabilized", (params) => {
-//                 //http://visjs.org/docs/data/dataset.html
-//                 var defaultAttribute = x["nodes"].get(iri)
-//                 defaultAttribute.color.border = 'blue';
-//                 x["nodes"].update(defaultAttribute);
-//
-//                 //add why to the title of node
-//                 $.each(reasonForRelatedEFO, (efoid, reason) => {
-//                     OLS.getIriByShortForm(efoid).then( (iri) => {
-//                         x["nodes"].update({id: iri, title: reason});
-//                     })
-//                 })
-//             })
-//         })
-//     }).catch((err) => {
-//         console.error('Error when plotting related terms.' + err);
-//         throw(err);
-//     })
-// }
 
 
 /**
@@ -1318,11 +902,7 @@ initOLS_AutocompleteWiget = function(){
     var instance = new app();
     options = {
         action: function(relativePath, suggestion_ontology, type, iri) {
-            // console.log("In overwritten function")
-            // console.log("Relative Path: " + relativePath)
-            // console.log("Suggested Ontology: " + suggestion_ontology)
-            // console.log("Type (optional): " + type)
-            // console.log("iri (optional): " + iri)
+
             var efoid = 'EFO_' + iri.split("EFO_")[1];
             //xintodo auto load
             addEFO({[efoid]:efoid});
@@ -1352,18 +932,9 @@ displayHighlightedStudy = function(highlightedStudy) {
     var link = gwasProperties.contextPath + 'studies/' + highlightedStudy.accessionId;
     $('#efotrait-highlighted-study-accessionId').html(setInternalLinkText(link, highlightedStudy.accessionId));
 
-    // $('#efotrait-highlighted-st udy-initialSampleDescription').html(highlightedStudy.initialSampleDescription);
-    // $('#efotrait-highlighted-study-replicateSampleDescription').html(highlightedStudy.replicateSampleDescription);
-    // $("#efotrait-highlighted-study-all").html(longContent("efotrait-highlighted-study-all_div",
-    //                                                       JSON.stringify(highlightedStudy),'all'));
-
     EPMC.getByPumbedId(highlightedStudy.pubmedId).then((data) => {
         var paperDetail = data.resultList.result[0];
-        // $("#efotrait-highlighted-study-abstract").html(longContent("efotrait-highlighted-study-abstract_div",
-        //                                                            paperDetail.abstractText,''));
-        // $('#efotrait-highlighted-study-abstract').html(createPopover('detail',
-        //                                                              'abstract',
-        //                                                              paperDetail.abstractText));
+
         $('#efotrait-highlighted-study-abstract').html(EPMC.searchResult.abstractText(data));
         return paperDetail;
     }).catch((err) => {
@@ -1757,7 +1328,6 @@ var OLS = {
         var dataPromise = getDataFromTag(global_efo_info_tag_id, 'ontologyInfo');
         if (dataPromise == undefined) {
             //lazy load
-            // console.log('Loading Ontology Info...')
             dataPromise = promiseGetRESTFUL(global_ols_restful_api_ontology,
                                             {'size': 1000}).then(_parseOntologies).catch(function(err) {
                 console.error('Error when loading ontology info! ' + err);
@@ -2108,19 +1678,6 @@ var EPMC = {
  * @returns {Promise} - json result.
  */
 getColourForEFO = function(efoid) {
-    // return new Promise(function(resolve){
-    //     resolve({
-    //                 uri: "-",
-    //                 trait: "-",
-    //                 parentUri: "-",
-    //                 parent: "?",
-    //                 colour: "#808080",
-    //                 colourLabel: "?",
-    //                 message: null
-    //             })
-    // });
-
-
     var queryColour = function(efoid){
         console.debug('Loading Colour...')
         return promiseGet(global_color_url + efoid).then(JSON.parse).then(function(response) {
@@ -2134,7 +1691,6 @@ getColourForEFO = function(efoid) {
 
     return dataPromise.then(function(data) {
         if ($.inArray(efoid, Object.keys(data)) == -1) {
-            //efo colour is not currently loaded
             console.debug('Loading Colour...')
             dataPromise = queryColour(efoid);
             return dataPromise.then(function(data){
@@ -2335,7 +1891,6 @@ addDataToTag = function(tagID, hash, key, overwriteWarning) {
     else {
         $(tagID).data(result)
     }
-
     return result;
 }
 
@@ -2535,19 +2090,23 @@ findStudiesForEFO = function(efoid) {
         return studies;
     Object.keys(data_highlighting).forEach(function(key) {
         if (/^study/.test(key)) {
-            data_highlighting[key].efoLink.forEach(function(highlightedefo) {
-                if (highlightedefo.match(/<b>(\w*_\d*)<\/b>/)[1] == efoid) {
-                    studies[key] = efoid;
-                }
-            });
+            if (data_highlighting[key].mappedUri != undefined) {
+                data_highlighting[key].mappedUri.forEach(function (highlightedefo) {
+                    if (highlightedefo.match(/<b>(\w*_\d*)<\/b>/)[1] == efoid) {
+                        studies[key] = efoid;
+                    }
+                });
+            }
         }
     })
 
-    $.each(data_study.docs, function(index, value) {
-        if ($.inArray(value.id, Object.keys(studies)) != -1) {
-            studies[value.id] = value;
-        }
-    })
+    if (data_study.docs != undefined) {
+        $.each(data_study.docs, function (index, value) {
+            if ($.inArray(value.id, Object.keys(studies)) != -1) {
+                studies[value.id] = value;
+            }
+        });
+    }
     return studies;
 }
 
@@ -2597,19 +2156,23 @@ findStudiesForEFOs = function(efoids){
         return studies;
     Object.keys(data_highlighting).forEach(function(key) {
         if (/^study/.test(key)) {
-            data_highlighting[key].efoLink.forEach(function(highlightedefo) {
-                if (efoids.indexOf(highlightedefo.match(/<b>(\w*_\d*)<\/b>/)[1]) != -1) {
-                    studies[key] = key;
-                }
-            });
+            if (data_highlighting[key].mappedUri != undefined) {
+                data_highlighting[key].mappedUri.forEach(function (highlightedefo) {
+                    if (efoids.indexOf(highlightedefo.match(/<b>(\w*_\d*)<\/b>/)[1]) != -1) {
+                        studies[key] = key;
+                    }
+                });
+            }
         }
     })
 
-    $.each(data_study.docs, function(index, value) {
-        if ($.inArray(value.id, Object.keys(studies)) != -1) {
-            studies[value.id] = value;
-        }
-    })
+    if (data_study.docs != undefined) {
+        $.each(data_study.docs, function (index, value) {
+            if ($.inArray(value.id, Object.keys(studies)) != -1) {
+                studies[value.id] = value;
+            }
+        });
+    }
     return studies;
 }
 
@@ -2627,11 +2190,13 @@ findAssociationForEFOs = function(efoids){
         return associations;
     Object.keys(data_highlighting).forEach(function(key) {
         if (/^association/.test(key)) {
-            data_highlighting[key].efoLink.forEach(function(highlightedefo) {
-                if (efoids.indexOf(highlightedefo.match(/<b>(\w*_\d*)<\/b>/)[1]) != -1) {
-                    associations[key] = key;
-                }
-            });
+            if (data_highlighting[key].mappedUri != undefined) {
+                data_highlighting[key].mappedUri.forEach(function (highlightedefo) {
+                    if (efoids.indexOf(highlightedefo.match(/<b>(\w*_\d*)<\/b>/)[1]) != -1) {
+                        associations[key] = key;
+                    }
+                });
+            }
         }
     })
     if ('docs' in data_association) {
@@ -2657,9 +2222,9 @@ var findAllEFOsforAssociation = function(association_id,data_association) {
     var association_doc = data_association.docs.filter((association) => {
         return association.id == association_id
     })
-    if(association_doc.length >0){
+    if(association_doc.length >0 && association_doc[0].efoLink != undefined){
         //"C-reactive protein measurement|EFO_0004458|http://www.ebi.ac.uk/efo/EFO_0004458"
-        return association_doc[0].efoLink.map((efoLink)=>{
+        return association_doc[0].efoLink.map((efoLink) => {
             return efoLink.split('|')[1]
         })
     }else{
@@ -2697,9 +2262,12 @@ var findAllEFOsforAssociation = function(association_id,data_association) {
  * @private
  */
 findHighlightEFOForAssociation = function(association_id,solr_highlighting) {
-    var terms = solr_highlighting[association_id].shortForm;
-    return terms.map((termHighlighted) => {
-        return termHighlighted.match(/<b>(\w*_\d*)<\/b>/)[1];
+    var terms = solr_highlighting[association_id].mappedUri[0].split("/")[4]+"b>";
+    var new_terms = [];
+    new_terms.push(terms);
+
+    return new_terms.map((termHighlighted) => {
+        return termHighlighted.match(/<b>(\w*_\d*)<\/b>/);
     })
 }
 
@@ -2829,7 +2397,7 @@ buildLocusPlotPopoverHTML = function(association){
     text.append(_addNameValuePairHTML('Variant and risk allele', association.strongestAllele));
     text.append(_addNameValuePairHTML('Location',association.chromLocation));
     text.append(_addNameValuePairHTML('P-value',association.pValueMantissa+' x 10'+"<sup>"+association.pValueExponent+"</sup>"));
-    text.append(_addNameValuePairHTML('Mapped gene(s)',association.entrezMappedGenes));
+    text.append(_addNameValuePairHTML('Mapped gene(s)',association.ensemblMappedGenes));
     text.append(_addNameValuePairHTML('Reported trait', association.traitName_s));
     text.append(_addNameValuePairHTML('Trait(s)', association.mappedLabel.toString()));
     text.append(_addNameValuePairHTML('Study accession', association.accessionId));

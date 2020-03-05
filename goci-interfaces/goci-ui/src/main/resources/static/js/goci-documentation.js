@@ -11,7 +11,7 @@ $(document).ready(function() {
     page = path.substr(index+6);
     url= gwasProperties.contextPath+"docs/content/"+page+"-content.html";
     console.log("Documentation should be loaded from " + url + "...");
-    
+
     // load the page content
     $.get(url, loadDocumentation(page, content)).fail(console.log("Failed to get content from " + url));
 });
@@ -19,53 +19,47 @@ $(document).ready(function() {
 var loadDocumentation = function(pagename, content) {
     console.log("Attempting to load documentation...");
     return function(data, textStatus, jqXHR) {
-        // set breadcrumb
-        var displayName = pagename.replace(/(^| )(\w)/g, function(x) {
-            return x.toUpperCase();
-        });
+        /*
+        The process of the generation of the breadcrumbs is a non-trivial issue, as the URL structure does not
+        follow the website page hierarchy. Therefore we have to implement logic to interpret the context based on the URL.
+         */
 
-        displayName = displayName.replace("-", " ");
-
-        // if (displayName.toLowerCase() == "about") {
-        //     $("#help-item").removeClass("active");
-        //     $("#downloads-item").removeClass("active");
-        //     $("#about-item").addClass("active");
-        //     $("#downloads-crumb").hide();
-        //     $("#docs-crumb").show();
-        // }
-        //
-        // else
-        if (displayName.toLowerCase() == "downloads" || displayName.toLowerCase() == "file downloads" || displayName.toLowerCase() == "diagram downloads" || displayName.toLowerCase() == "summary statistics" ) {
-            // $("#about-item").removeClass("active");
-            $("#documentation-item").removeClass("active");
-            $("#downloads-item").addClass("active");
-            $("#docs-crumb").hide();
-            $("#downloads-crumb").show();
-
+        // Extracting component names from URL:
+        var pathName = window.location.pathname;
+        pathName = pathName.replace('/gwas/',''); // Removing home link
+        if (pathName.match('download')){
+            pathName = pathName.replace('docs', 'downloads'); // Changing downloads when required.
         }
-        else {
-            // $("#about-item").removeClass("active");
-            $("#downloads-item").removeClass("active");
-            $("#documentation-item").addClass("active");
-            $("#docs-crumb").show();
-            $("#downloads-crumb").hide();
+        var pathComponents = pathName.split('/');
+
+        // Looping through all URL components and generate the breadcrumb component
+        var URL = gwasProperties.contextPath; // The path will be extended by each component when generating the link
+        for ( var i = 0; i < pathComponents.length; i++ ){
+
+            // Selecting component:
+            var pathComponent = pathComponents[i];
+
+            // Generate breadcrumb title:
+            var pathTitle = pathComponent.replace('docs', 'documentation');
+            pathTitle = pathTitle.replace(/-/g, " ");
+            pathTitle = pathTitle.charAt(0).toUpperCase() + pathTitle.slice(1);
+
+            // Adding breadcrumb without and with link:
+            if ( i + 1 == pathComponents.length ){
+                $("#breadcrumb ol").append(`<li>${pathTitle}</li>`);
+            }
+            else{
+                URL = URL + "/" + pathComponent;
+                $("#breadcrumb ol").append(`<li><a href="${URL}">${pathTitle}</a></li>`);
+            }
         }
-        $("#current-page").text(displayName);
 
-
-
-        console.log("Updated breadcrumb (" + displayName + ")");
-        // load the data content
-        console.log("Updating " + content + "...");
-        //console.log(data);
         content.html(data);
 
         $.getJSON(gwasProperties.contextPath+'api/search/stats')
-                .done(function(stats) {
-                          setBuilds(stats);
-                      });
-
-        console.log("Done!");
+            .done(function(stats) {
+                setBuilds(stats);
+            });
 
     }
 

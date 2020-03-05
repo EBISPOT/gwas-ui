@@ -31,6 +31,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/variants").setViewName("variants");
         registry.addViewController("/publications").setViewName("publications");
         registry.addViewController("/studies").setViewName("studies");
+        registry.addViewController("/genes").setViewName("genes");
+        registry.addViewController("/regions").setViewName("regions");
         // These pages must be removed. TODO
         //registry.addViewController("/publication-fake").setViewName("study-disambig");
         //registry.addViewController("/study-fake").setViewName("study-page-fake");
@@ -46,6 +48,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/docs/methods/criteria").setViewName("docs-template");
         registry.addViewController("/docs/methods/curation").setViewName("docs-template");
         registry.addViewController("/docs/methods/summary-statistics").setViewName("docs-template");
+        registry.addViewController("/docs/methods/summary-statistics-format").setViewName("docs-template");
 
         registry.addViewController("/docs/ontology").setViewName("docs-template");
         registry.addViewController("/docs/abbreviations").setViewName("docs-template");
@@ -62,5 +65,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/docs/ancestry-data").setViewName("docs-template");
         registry.addViewController("/docs/ancestry-recommendation").setViewName("docs-template");
 
+        registry.addViewController("/docs/submission-summary-statistics").setViewName("docs-template");
+        registry.addViewController("/docs/summary-statistics-format").setViewName("docs-template");
+        registry.addViewController("/docs/submission-summary-statistics-plus-metadata").setViewName("docs-template");
+        registry.addViewController("/docs/submission").setViewName("docs-template");
     }
 }

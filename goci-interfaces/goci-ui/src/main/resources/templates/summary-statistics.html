@@ -16,10 +16,10 @@
     <title>GWAS Catalog</title>
 
     <!-- Bootstrap core CSS -->
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
-    <link th:href="@{/css/bootstrap-table.css}" rel="stylesheet"/>
-    <link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.5.0/bootstrap-table.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
 
     <!-- Custom styles for this template -->
     <link th:href="@{/css/jumbotron.css}" rel="stylesheet"/>
@@ -51,12 +51,14 @@
 <div class="container-fluid tight-to-top">
     <ol class="breadcrumb background-color-complementary-accent">
         <li><a th:href="@{/home}">Home</a></li>
-        <li><a th:href="@{/downloads}">Downloads</a></li>
+        <li><a th:href="@{/docs}">Documentation</a></li>
         <li class="active">Summary statistics</li>
     </ol>
 
     <div>
+<div>
 
+</div>
         <!--
         #####################################
         #  Page specific content goes here  #
@@ -98,7 +100,7 @@
                         <p>Summary statistics eligibility, submission information, standards and harmonisation.</p>
                     </div>
                 </a>
-                <a href="https://www.ebi.ac.uk/gwas/summary-statistics/docs/" target="_blank">
+                <a th:href="@{/summary-statistics/docs/}" target="_blank">
                     <div class="col-md-4 toplevel-view">
                         <h2 class="flaticon-source2 color-primary-bold">API</h2>
 
@@ -114,6 +116,29 @@
                 </a>
 
             </div>
+<!--            <div class="row">-->
+<!--                <a th:href="@{${@environment.getProperty('deposition.ui.uri')}}">-->
+<!--                    <div class="col-md-4 toplevel-view">-->
+<!--                        <h2 class="flaticon-upload14 color-primary-bold">Submit</h2>-->
+
+<!--                        <p>Submit Summary Statistics to GWAS Catalog with our Deposition App</p>-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--                <a th:href="@{/docs/submission}">-->
+<!--                    <div class="col-md-4 toplevel-view">-->
+<!--                        <h2 class="flaticon-question10 color-primary-bold">How to submit</h2>-->
+
+<!--                        <p>How to Submit Summary Status to GWAS Catalog</p>-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--                <a th:href="@{/docs/summary-statistics-format}">-->
+<!--                    <div class="col-md-4 toplevel-view">-->
+<!--                        <h2 class="flaticon-notes9 color-primary-bold">Summary statistics format</h2>-->
+
+<!--                        <p>Format for Summary Status Files</p>-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--            </div>-->
 
             <hr/>
         </div>
@@ -136,7 +161,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
 <script  th:src="@{/js/bootstrap-datepicker.js}"></script>
-<script  th:src="@{/js/bootstrap.min.js}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.js"></script>

@@ -1,0 +1,145 @@
+= Submitting summary statistics only
+
+== Submitting summary statistics only
+
+For publications that are already included in the GWAS Catalog, we provide a partially pre-filled submission form showing each study (i.e. each GWAS analysis) in the publication. You will need to add information describing the corresponding summary statistics file for each study.
+
+Instructions are provided below. When you have completed the submission form, return to the https://www.ebi.ac.uk/gwas/docs/submission#link-13[main submission instructions^].
+
+=== Pre-filled data
+
+Three columns have been filled in for you.
+
+[cols="<4,<1,<10,<1,<6", options="header", grid="all", width=100%]
+|===
+|Column header
+|
+|Information provided
+|
+|Example
+
+|Study accession
+|
+|The GWAS Catalog study accession, beginning with “GCST”
+|
+|`GCST007280`
+
+|Reported trait
+|
+|The trait under investigation
+|
+|`Reticulocyte count`
+
+|Discovery sample
+|
+|A description of the discovery sample (including number and ancestry)
+|
+|`1,000 European ancestry cases, 1,000 European ancestry controls`
+|===
+
+=== Data for you to enter
+
+There are 7 empty columns for you to fill in. Mandatory columns are highlighted in orange in the submission form. Grey columns are optional. However, we encourage you to submit as much information as you can.
+
+[cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
+|===
+|Header
+|
+|Description
+|
+|Mandatory
+|
+|Validation
+|
+|Example
+
+|Study tag
+|
+|A unique free-text label for each genome-wide association study in the publication. You can use any string of characters that will help you identify each individual GWAS.
+|
+|yes
+|
+|Free text
+|
+|`WHR_unadj`
+
+|Summary statistics file
+|
+|The name of the summary statistics file uploaded via Globus. Leave blank for any studies without summary statistics.
+|
+|no
+|
+|A valid filename
+|
+|`example.tsv`
+
+|md5 sum
+|
+|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums here^].
+|
+|no
+|
+|A valid md5 checksum (32-digit hexadecimal number)
+|
+|`49ea8cf53801c7f1e2f11336fb8a29c8`
+
+|Readme
+|
+|Text of the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics.
+|
+|no
+|
+|A standard readme file
+|
+|See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#readme[readme instructions here^]. 
+
+|Summary statistics assembly
+|
+|Genome assembly for the summary statistics. Leave blank for any studies without summary statistics.
+|
+|no
+|
+|Must match one of the following options:
+
+`GRCh38`
+
+`GRCh37`
+
+`NCBI36`
+
+`NCBI35`
+
+`NCBI34`
+|
+|`GRCh38`
+
+|Cohort(s)
+|
+|List of any named cohort(s) represented in the discovery sample, separated by pipes "\|". Enter only if the specific named cohorts are used in the analysis.
+|
+|no
+|
+|Free text
+|
+|`UKBB\|FINRISK`
+
+|Cohort specific reference
+|
+|List of any cohort specific identifier(s) issued to this research study, separated by pipes "\|". For example, an ANID issued by UK Biobank. Please include the name of the cohort as a prefix.
+|
+|no
+|
+|Free text
+|
+|`UKBB_ANID45956`
+|===
+
+=== Additional information
+
+==== What if I can't tell which study is which?
+
+If you need more information to identify each study, you can find additional details at the GWAS Catalog website, on the relevant publication page (https://www.ebi.ac.uk/gwas/ + the PMID of the publication).
+
+==== What if the prefilled data is incorrect?
+
+If you think there is a mistake in the pre-filled spreadsheet (e.g. the wrong number of studies), please contact gwas-info@ebi.ac.uk.

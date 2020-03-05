@@ -45,7 +45,7 @@ public class JsonProcessingService {
         }
         else if(includeAncestry){
             header =
-                    "STUDY ACCCESSION\tPUBMEDID\tFIRST AUTHOR\tDATE\tINITIAL SAMPLE DESCRIPTION\tREPLICATION SAMPLE DESCRIPTION\tSTAGE\tNUMBER OF INDIVDUALS\tBROAD ANCESTRAL CATEGORY\tCOUNTRY OF ORIGIN\tCOUNTRY OF RECRUITMENT\tADDITONAL ANCESTRY DESCRIPTION";
+                    "STUDY ACCESSION\tPUBMEDID\tFIRST AUTHOR\tDATE\tINITIAL SAMPLE DESCRIPTION\tREPLICATION SAMPLE DESCRIPTION\tSTAGE\tNUMBER OF INDIVDUALS\tBROAD ANCESTRAL CATEGORY\tCOUNTRY OF ORIGIN\tCOUNTRY OF RECRUITMENT\tADDITONAL ANCESTRY DESCRIPTION";
         }
         else{
             header =
@@ -570,10 +570,10 @@ public class JsonProcessingService {
 
     private String getMapGene(JsonNode doc) {
         String genes = "";
-        if (doc.get("entrezMappedGenes") != null) {
+        if (doc.get("ensemblMappedGenes") != null) {
             int it = 0;
 
-            for(JsonNode m : doc.get("entrezMappedGenes")) {
+            for(JsonNode m : doc.get("ensemblMappedGenes")) {
                 if (it > 0) {
                     genes = genes.concat(", ");
                 }
@@ -796,9 +796,9 @@ public class JsonProcessingService {
         List<String> actuallyMapped = new ArrayList<>();
         List<String> processed = new ArrayList<>();
 
-        if (doc.get("entrezMappedGenes") != null) {
+        if (doc.get("ensemblMappedGenes") != null) {
 
-            for(JsonNode m : doc.get("entrezMappedGenes")) {
+            for(JsonNode m : doc.get("ensemblMappedGenes")) {
                actuallyMapped.add(m.asText().trim());
             }
         }
@@ -808,8 +808,8 @@ public class JsonProcessingService {
         MappedGene downstream = new MappedGene();
         MappedGene ingene = new MappedGene();
 
-        if (doc.get("entrezMappedGeneLinks") != null) {
-            for (JsonNode geneLink : doc.get("entrezMappedGeneLinks")) {
+        if (doc.get("ensemblMappedGeneLinks") != null) {
+            for (JsonNode geneLink : doc.get("ensemblMappedGeneLinks")) {
                 String[] data = geneLink.asText().trim().split("\\|");
 
                 String gene = data[0];

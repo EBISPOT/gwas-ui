@@ -3,7 +3,7 @@
  */
 
 // var resources = ['study', 'association', 'diseasetrait'];
-var resources = ['study', 'variant', 'trait', 'publication'];
+var resources = ['study', 'variant', 'trait', 'publication', 'gene', 'region'];
 
 function applyFacet() {
     var searchTerm = $("#search-box").val();
@@ -14,6 +14,7 @@ function applyFacet() {
         console.log("Searching: " + searchTerm + " with facet: " + facet + "...");
         $('#facet').text(facet);
         $('#' + facet + "-facet").addClass('selected');
+
         //solrFacet(searchTerm, facet);
         processFacet(facet)
     }
@@ -21,17 +22,6 @@ function applyFacet() {
         clearFacetting();
     }
 }
-
-//function solrFacet(queryTerm, facet){
-//    console.log("Solr research request received for " + queryTerm + " and facet " + facet);
-//    var searchTerm = 'text:"'.concat(queryTerm).concat('"');
-//    var url = 'api/search/' + facet;
-//    $.getJSON(url, {'q': searchTerm, 'max' : 100000})
-//            .done(function(data) {
-//                          console.log(data);
-//                          processFacet(data);
-//                      });
-//}
 
 function clearFacetting() {
     $('#facet').text("");

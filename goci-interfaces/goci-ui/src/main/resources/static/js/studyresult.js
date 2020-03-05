@@ -1,27 +1,5 @@
 /** DRY. From Xin original code. We must refactor all these 'action'result.js in a common way! */
 
-var global_fl;
-var global_raw;
-
-global_fl = 'pubmedId,title,author_s,orcid_s,publication,publicationDate,catalogPublishDate,authorsList,' +
-    'initialSampleDescription,replicateSampleDescription,ancestralGroups,countriesOfRecruitment,' +
-    'ancestryLinks,genotypingTechnologies,platform,fullPvalueSet,authorAscii_s,' +
-    'traitName,mappedLabel,mappedUri,traitUri,shortForm,' +
-    'label,' + 'efoLink,parent,id,resourcename,';
-global_fl = global_fl + 'riskFrequency,qualifier,pValueMantissa,pValueExponent,snpInteraction,multiSnpHaplotype,rsId,'+
-    'strongestAllele,context,region,entrezMappedGenes,reportedGene,merged,currentSnp,studyId,chromosomeName,'+
-    'chromosomePosition,chromLocation,positionLinks,author_s,publication,publicationDate,catalogPublishDate,'+
-    'publicationLink,accessionId,initialSampleDescription,replicateSampleDescription,ancestralGroups,'+
-    'countriesOfRecruitment,numberOfIndividuals,traitName_s,mappedLabel,mappedUri,traitUri,shortForm,labelda,'+
-    'synonym,efoLink,id,resourcename,range,orPerCopyNum,betaNum,betaUnit,betaDirection'
-global_raw = 'fq:resourcename:association or resourcename:study'
-
-
-/**
- * Other global setting
- */
-var pageRowLimit = 5;
-
 $(document).ready(() => {
 
 //jump to the top of the page
@@ -92,11 +70,11 @@ function getDataSolr(main, initLoad = false) {
     // or just reload the tables(adding another efo term)
     
     var searchQuery = main;
-    console.log("Solr research request received for " + searchQuery);
+
     //Please use the contextPath !
     var URLService = gwasProperties.contextPath+'api/search/advancefilter';
     return promisePost(URLService, {
-        'q': searchQuery,
+        'q': "accessionId:" + searchQuery,
         'max': 99999,
         'group.limit': 99999,
         'group.field': 'resourcename',
@@ -114,14 +92,13 @@ function getDataSolr(main, initLoad = false) {
         else {
            processSolrData(data, initLoad);
            //downloads link : utils-helper.js
-           setDownloadLink(searchQuery);
-           displayDatatableAssociations(data_association.docs);
+           setDownloadLink("accessionId:" + searchQuery);
+           displayDatatableAssociations(data_association.docs, cleanBeforeInsert = false);
            displaySummaryStudy(data_study.docs);
-           console.log("Solr research done for " + searchQuery);
            return data;
         }
     }).catch(function(err) {
-        console.error('Error when seaching solr for' + searchQuery + '. ' + err);
+        console.error('Error when seaching solr for ' + searchQuery + '. ' + err);
         throw (err);
     })
 }
@@ -207,7 +184,6 @@ function displaySummaryStudy(data, clearBeforeInsert) {
     $("#study-pubmedid").html(pubmedIdLink);
     $("#study-datepublication").html(study.publicationDate.split('T')[0]);
     if ('authorsList' in study) {
-        console.log(study.authorsList);
         // require toggle-resize.js
         var reduce_text= displayAuthorsListAsList(study.authorsList);
         reduce_text = addShowMoreLink(reduce_text, 500, "...");
@@ -284,21 +260,6 @@ function getGenotypingTech(study) {
     return genotypingTechnologiesList;
 }
 
-
-function setTraitsLink(study) {
-    var mappedTraits="";
-    var mappedTraits = study.mappedLabel;
-    if (mappedTraits) {
-        $.each(mappedTraits, function (index, trait) {
-            var link = gwasProperties.contextPath + 'efotraits/' + study.mappedUri[index].split('/').slice(-1)[0];
-            mappedTraits[index] = setExternalLinkText(link, trait);
-        });
-        mappedTraits = mappedTraits.join(', ');
-    } else {
-        mappedTraits = '-';
-    }
-    return mappedTraits;
-}
 
 function setAncentrySection(study) {
     var pubdate = study.publicationDate.substring(0, 10);

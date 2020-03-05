@@ -15,10 +15,10 @@
     <title>GWAS Catalog</title>
 
     <!-- Bootstrap core CSS -->
-    <link  th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
-    <link   th:href="@{/css/bootstrap-table.css}" rel="stylesheet"/>
-    <link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
 
     <!-- Custom styles for this template -->
     <link  th:href="@{/css/jumbotron.css}" rel="stylesheet"/>
@@ -113,19 +113,19 @@
                             </div>
                             <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="variant-mapped-genes">-</div>
                         </div>
-                        <div class="clearfix" id="traits-label">
-                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                <span class="item-left-bold">Trait(s)</span>
-                            </div>
-                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="traits">-</div>
-                        </div>
-                        <div class="clearfix" id="variant-traits-label">
-                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                <span>Reported trait(s)</span>
-                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Detailed study-level trait descriptions associated with this variant, taking into account the study design"></span>
-                            </div>
-                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="variant-traits">-</div>
-                        </div>
+                        <!--<div class="clearfix" id="traits-label">-->
+                            <!--<div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">-->
+                                <!--<span class="item-left-bold">Trait(s)</span>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="traits">-</div>-->
+                        <!--</div>-->
+                        <!--<div class="clearfix" id="variant-traits-label">-->
+                            <!--<div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">-->
+                                <!--<span>Reported trait(s)</span>-->
+                                <!--<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Detailed study-level trait descriptions associated with this variant, taking into account the study design"></span>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="variant-traits">-</div>-->
+                        <!--</div>-->
                     </div>
 
                     <!-- Ensembl data -->
@@ -191,6 +191,10 @@
                         </div>
                     </div>
                 </div>
+                <div id="bottom-summary">
+                    <span class="glyphicon glyphicon-info-sign" style="padding-right:2px"></span>
+                    <span id="genome-build-stats"></span>
+                </div>
             </div>
         </div>
 
@@ -203,6 +207,9 @@
                 </button>
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#study_panel')">
                     <span class="study_label">Studies</span><span class="study_count badge" style="background-color: #398A96;margin-left:10px"></span>
+                </button>
+                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#efotrait_panel')">
+                    <span class="efotrait_label">Traits</span><span class="efotrait_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#ld_panel')">
                     <span>Linkage disequilibrium (LD)</span>
@@ -224,6 +231,10 @@
             <div th:include="fragments/study-datatable :: studies_datatable"></div>
         </div>
 
+        <div class="row search-results-container" >
+            <div th:include="fragments/efotrait-datatable :: efotraits_datatable"></div>
+        </div>
+
 
 
         <!-- Linkage disequilibrium -->
@@ -241,7 +252,7 @@
                 </div>
                 <div class="panel-body">
                     <!-- LD plot widget -->
-                    <div class="_ld_graph _widget"></div>
+                    <div class="_ld_graph _widget ensld container"></div>
                 </div>
             </div>
         </div>
@@ -269,11 +280,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-    <script  th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css"
-          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css}"
-          rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css" rel="stylesheet"/>
 
     <!-- Extensions for Column filters -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/extensions/filter-control/bootstrap-table-filter-control.css" />
@@ -307,13 +316,16 @@
     <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
     <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/export/bootstrap-table-export.js"></script>
     <script src="https://cdn.rawgit.com/wenzhixin/09e218c884f4f380b68a/raw/5d258d2f78225a4ac1a72d54a34cc7976d630df1/jquery.base64.js"></script>
-    <script src="https://cdn.rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js"></script>
+    <script src="https://cdn.rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
 
+    <script th:src="@{/js/autocomplete-termselect.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.min.js"></script>
     <script th:src="@{/js/helpers/promise-helper.js}"></script>
     <script th:src="@{/js/helpers/utils-helper.js}"></script>
     <script th:src="@{/js/helpers/orcid-helper.js}"></script>
     <script th:src="@{/js/common-datatables/associations-datatable.js}"></script>
     <script th:src="@{/js/common-datatables/studies-datatable.js}"></script>
+    <script th:src="@{/js/common-datatables/efotraits-datatable.js}"></script>
 
     <script th:src="@{/js/variantresult.js}"></script>
 
@@ -332,70 +344,19 @@
     <!-- LD widget JavaScript
     ================================================== -->
     <!-- JS for widgets -->
+    <!--    <script type="text/javascript" src="https://widgets.ensembl.org/Widgets/core.js"></script>-->
     <script type="text/javascript" src="https://widgets.ensembl.org/Widgets/core.js"></script>
-
     <!-- TO BE IMPLEMENTED ON SERVER SIDE -->
+    <!--    <link type="text/css" rel="stylesheet" href="https://widgets.ensembl.org/ld_graph.css"/>-->
     <link type="text/css" rel="stylesheet" href="https://widgets.ensembl.org/ld_graph.css"/>
     <!-- icons http://fortawesome.github.io/Font-Awesome/examples/ -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css"/>
 
     <!--this come last to make sure trait page specific style is not overwritten by othe css.-->
     <link rel="stylesheet" th:href="@{/css/goci-efotrait-page.css}"/>
+    <link rel="stylesheet" th:href="@{/css/ontology-autocomplete.css}"/>
 
-    <script type="text/javascript">
-        try {
-            Ensembl.newWidget(
-                function() {
-                    return {
-                        container: '._ld_graph',
-                        widgetType: Ensembl.widgets.LDPlot
-                    }
-                },
-
-                function() {
-                    return {
-                        configuration: {
-                            ID: (window.location.pathname.match(/variants\W(\w+)/) || []).pop(),
-                            window_size: 50,
-                            population: '1000GENOMES:phase_3:GBR',
-                            svgSize: {
-                                width: 850,
-                                height: 400,
-                                padding: 50
-                            },
-                            panelSize: {
-                                width: 850,
-                                tab_height: 30,
-                                padding: 50
-                            },
-                            legend: {
-                                color_by: "gwas"
-                            },
-                            help : {
-                                population : { help_link: "//www.internationalgenome.org/faq/which-populations-are-part-your-study" },
-                                ld  :        { help_link: "//www.ensembl.org/Help/View?id=279" }
-                            },
-                            download : {
-                                enable : 1,
-                                download_icon_class : '<span class="glyphicon glyphicon-download-alt" style="margin-right:7px"></span>', //replace this with the correct one from gwas
-                                download_text : "Download LD Data"
-                            },
-                            filters: {
-                                selected_filters: [],
-                                parameter: "r2",   //"r2" or "d_prime"
-                                sign_fix: 1, //no dropdown for above or below
-                                parameter_sign: "above",
-                                parameter_thr: "0.8"
-                            }
-                        }
-                    };
-            });
-        }
-        catch(err) {
-            $("._ld_graph").html('<div class="alert alert-danger" role="alert"><h4 class="has-warning">The LD widget is not available</h4><div>'+err+'</div></div>');
-        }
-    </script>
-    <!-- JS for widgets ends -->
+    <script th:src="@{/js/plugins/ensembl-ldplot-widget.js}"></script>
 </div>
 
 </body>
