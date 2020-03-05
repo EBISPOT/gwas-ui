@@ -138,6 +138,9 @@ For more information on how we use these resources, see our link:https://www.ebi
 |https://pharos.nih.gov/idg/index[Pharos]
 |Pharos is the user interface to the Knowledge Management Center (KMC) for the Illuminating the Druggable Genome (IDG) program
 
+|https://gwasdiversitymonitor.com[GWAS Diversity Monitor]
+|Interactive dashboard monitoring the diversity of participants across all published GWAS|
+
 |===
 // end::b-col-indv[]
 
