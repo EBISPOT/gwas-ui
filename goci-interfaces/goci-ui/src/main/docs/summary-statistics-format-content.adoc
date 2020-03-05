@@ -111,7 +111,7 @@ Summary statistics file requirements:
 
 == [[readme]]README content
 
-Each summary statistics file should be accompanied by a readme file containing the following information in a numbered list:
+Each summary statistics file should be accompanied by readme text in a standard format. This should be copied into the submission form that you will be able to access during the submission process. Please do not upload a separate readme file.  The readme text should contain the following information in a numbered list:
 
 1. Full citation for the publication linked to the submitted summary statistics (in any standard citation style) 
 e.g: Klimentidis YC, Raichlen DA, Bea J, Garcia DO, Wineinger NE, Mandarino LJ, Alexander GE, Chen Z, Going SB (2018) 
