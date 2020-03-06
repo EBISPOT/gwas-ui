@@ -443,8 +443,8 @@ updatePage = function(initLoad=false) {
         return sequence.then(() => {
             return efoInfo;
         }).then(function(efoInfo) {
-            var shortForm = efoInfo.short_form  || efoInfo.shortForm;
-            var trait =  efoInfo.label || efoInfo.trait;
+            var shortForm = efoInfo.shortForm;
+            var trait =  efoInfo.trait;
 
             // return addToCart('#cart', efoInfo.shortForm,  `${efoInfo.trait} [${efoInfo.shortForm}]`, initLoad).then(() =>{
             return addToCart('#cart', shortForm,  `${trait} [${shortForm}]`, initLoad).then(() =>{
@@ -1614,6 +1614,8 @@ var OLS = {
                     //add to tag
                     addPromiseToTag(global_efo_info_tag_id,dataPromise,'efoInfo');
                     return data[efoid];
+                }).catch(function(err){
+                    console.warn(`Error retrieving EFO term from OLS: ${err}`);
                 })
             }else {
                 //efo colour is has been loaded perviously
