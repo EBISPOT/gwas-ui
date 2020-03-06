@@ -19,8 +19,8 @@ var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
 // var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
 var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
 
-// var global_gwas_trait_api = 'https://www.ebi.ac.uk/gwas/rest/api/efoTraits/';
-var global_gwas_trait_api = `${gwasProperties.host}${gwasProperties.GWAS_REST_API}/efoTraits/`;
+var global_gwas_trait_api = 'https://www.ebi.ac.uk/gwas/rest/api/efoTraits/';
+// var global_gwas_trait_api = `${gwasProperties.host}${gwasProperties.GWAS_REST_API}/efoTraits/`;
 
 var global_ols_api = 'https://www.ebi.ac.uk/ols/api/';
 var global_ols = 'https://www.ebi.ac.uk/ols/';
@@ -443,8 +443,8 @@ updatePage = function(initLoad=false) {
         return sequence.then(() => {
             return efoInfo;
         }).then(function(efoInfo) {
-            var shortForm = efoInfo.shortForm;
-            var trait =  efoInfo.trait;
+            var shortForm = efoInfo.short_form  || efoInfo.shortForm;
+            var trait =  efoInfo.label || efoInfo.trait;
 
             // return addToCart('#cart', efoInfo.shortForm,  `${efoInfo.trait} [${efoInfo.shortForm}]`, initLoad).then(() =>{
             return addToCart('#cart', shortForm,  `${trait} [${shortForm}]`, initLoad).then(() =>{
@@ -1591,8 +1591,10 @@ var OLS = {
             return OLS.getOLSLinkAPI(efoid).then(function(url){
                 // Use GWAS REST API to get basic EFO term information
                 var gwas_trait_url = `${global_gwas_trait_api}${efoid}`;
+                console.log("** GWAS Trait URL: ", gwas_trait_url);
 
                 return promiseGet(gwas_trait_url).then(JSON.parse).then(function(response) {
+                    console.log("** Response: ", response);
                     var tmp = {};
                     tmp[efoid] = response;
                     return tmp;
