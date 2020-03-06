@@ -15,11 +15,11 @@
  * http://es6-features.org/#ObjectPropertyAssignment //merge object
  */
 
-// var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
-
 var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
 // var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
 var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
+
+var global_gwas_trait_api = 'https://www.ebi.ac.uk/gwas/rest/api/efoTraits/';
 
 var global_ols_api = 'https://www.ebi.ac.uk/ols/api/';
 var global_ols = 'https://www.ebi.ac.uk/ols/';
@@ -1578,8 +1578,8 @@ var OLS = {
 
     /**
      * Query GWAS REST API for EFO term information
-     * to account for differences in GWAS data release
-     * and release of new versions of EFO.
+     * to account for different release dates for GWAS
+     * data release and new versions of EFO.
      * Lazy load.
      * @param efoid
      * @returns {Promise}
@@ -1589,9 +1589,9 @@ var OLS = {
         var queryEFOInfo = function(efoid){
             return OLS.getOLSLinkAPI(efoid).then(function(url){
                 // Use GWAS REST API to get basic EFO term information
-                var gwas_url = `https://www.ebi.ac.uk/gwas/rest/api/efoTraits/${efoid}`
+                var gwas_trait_url = `${global_gwas_trait_api}${efoid}`;
 
-                return promiseGet(gwas_url).then(JSON.parse).then(function(response) {
+                return promiseGet(gwas_trait_url).then(JSON.parse).then(function(response) {
                     var tmp = {};
                     tmp[efoid] = response;
                     return tmp;
