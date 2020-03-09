@@ -19,8 +19,8 @@ var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
 // var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
 var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
 
-var global_gwas_trait_api = 'https://www.ebi.ac.uk/gwas/rest/api/efoTraits/';
-// var global_gwas_trait_api = `${gwasProperties.host}${gwasProperties.GWAS_REST_API}/efoTraits/`;
+// var global_gwas_trait_api = 'https://www.ebi.ac.uk/gwas/rest/api/efoTraits/';
+var global_gwas_trait_api = `${gwasProperties.GWAS_REST_API}/efoTraits/`;
 
 var global_ols_api = 'https://www.ebi.ac.uk/ols/api/';
 var global_ols = 'https://www.ebi.ac.uk/ols/';
