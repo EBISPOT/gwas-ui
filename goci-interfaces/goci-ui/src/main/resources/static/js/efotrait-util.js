@@ -19,8 +19,10 @@ var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
 // var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
 var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
 
-// var global_gwas_trait_api = 'https://www.ebi.ac.uk/gwas/rest/api/efoTraits/';
 var global_gwas_trait_api = `${gwasProperties.GWAS_REST_API}/efoTraits/`;
+if (gwasProperties.host.includes('localhost')) {
+    global_gwas_trait_api = 'https://www.ebi.ac.uk/gwas/rest/api/efoTraits/';
+}
 
 var global_ols_api = 'https://www.ebi.ac.uk/ols/api/';
 var global_ols = 'https://www.ebi.ac.uk/ols/';
@@ -1591,10 +1593,8 @@ var OLS = {
             return OLS.getOLSLinkAPI(efoid).then(function(url){
                 // Use GWAS REST API to get basic EFO term information
                 var gwas_trait_url = `${global_gwas_trait_api}${efoid}`;
-                console.log("** GWAS Trait URL: ", gwas_trait_url);
 
                 return promiseGet(gwas_trait_url).then(JSON.parse).then(function(response) {
-                    console.log("** Response: ", response);
                     var tmp = {};
                     tmp[efoid] = response;
                     return tmp;
