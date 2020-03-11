@@ -6315,8 +6315,9 @@ LocusZoom.Legend.prototype.render = function(){
                     line_height = Math.max(line_height, (2*radius) + padding);
                 }
                 // Draw the legend element label
+                var legend_label = (element.label !== 'null') ? element.label : 'No category available'
                 selector.append("text").attr("text-anchor", "left").attr("class", "lz-label")
-                    .attr("x", label_x).attr("y", label_y).style({"font-size": label_size}).text(element.label);
+                    .attr("x", label_x).attr("y", label_y).style({"font-size": label_size}).text(legend_label);
                 // Position the legend element group based on legend layout orientation
                 var bcr = selector.node().getBoundingClientRect();
                 if (this.layout.orientation == "vertical"){
