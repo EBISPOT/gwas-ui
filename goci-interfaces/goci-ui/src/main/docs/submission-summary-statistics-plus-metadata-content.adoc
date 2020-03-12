@@ -156,9 +156,9 @@ There are 16 columns for you to fill in:
 
 |Summary statistics file
 |
-|The name of the summary statistics file uploaded via Globus. Leave blank for any studies without summary statistics.
+|The name of the summary statistics file uploaded via Globus. Must be entered for at least one study. Enter "NR" for any studies without summary statistics.
 |
-|no
+|yes
 |
 |A valid filename
 |
@@ -166,9 +166,9 @@ There are 16 columns for you to fill in:
 
 |md5 sum
 |
-|The md5 checksum of the summary statistics file. Leave blank for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums^].
+|The md5 checksum of the summary statistics file. Must be entered for at least one study. Enter "NR" for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums here^].
 |
-|no
+|yes
 |
 |A valid md5 checksum (32-digit hexadecimal number)
 |
@@ -176,7 +176,7 @@ There are 16 columns for you to fill in:
 
 |Readme
 |
-|Text of the readme file that accompanies your analysis. If the same readme file applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics.
+|The readme text that accompanies your analysis. Please copy the text into this cell, rather than uploading a separate readme file. If the same readme applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics.
 |
 |no
 |
@@ -186,9 +186,9 @@ There are 16 columns for you to fill in:
 
 |Summary statistics assembly
 |
-|Genome assembly for the summary statistics. Leave blank for any studies without summary statistics.
+|Genome assembly for the summary statistics. Must be entered for at least one study. Enter "NR" for any studies without summary statistics.
 |
-|no
+|yes
 |
 |Must match one of the following options:
 
