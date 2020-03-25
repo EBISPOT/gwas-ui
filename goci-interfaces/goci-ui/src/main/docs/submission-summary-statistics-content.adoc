@@ -10,7 +10,7 @@ Instructions are provided below. When you have completed the submission form, re
 
 Three columns have been filled in for you.
 
-Please note, the pre-filled form should contain one row for each GWAS analysis in your publication, including one row for each set of summary statistics (i.e. each set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite. If there are not enough rows to represent all of the GWAS analyses in your publication and/or the number of uploaded summary statistics, please contact gwas-subs@ebi.ac.uk for assistance.
+Please note, the pre-filled form should contain one row for each GWAS analysis in your publication, including one row for each set of summary statistics (i.e. each full set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite. If there are not enough rows to represent all of the GWAS analyses in your publication and/or the number of uploaded summary statistics, please contact gwas-subs@ebi.ac.uk for assistance.
 
 [cols="<4,<1,<10,<1,<6", options="header", grid="all", width=100%]
 |===
