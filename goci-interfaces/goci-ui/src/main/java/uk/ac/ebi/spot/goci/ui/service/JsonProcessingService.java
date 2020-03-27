@@ -157,7 +157,7 @@ public class JsonProcessingService {
             line.append("\t");
             line.append(getGenotypingTechonologies(doc));
         }
-
+        line = new StringBuilder(line.toString().replaceAll("\n", "").replaceAll("\r", ""));
         line.append("\r\n");
         
     }
@@ -248,6 +248,7 @@ public class JsonProcessingService {
         line.append(description);
         line.append("\t");
 
+        line = new StringBuilder(line.toString().replaceAll("\n", "").replaceAll("\r", ""));
         line.append("\r\n");
     }
 
@@ -419,6 +420,7 @@ public class JsonProcessingService {
             line.append(getGenotypingTechonologies(doc));
         }
 
+        line = new StringBuilder(line.toString().replaceAll("\n", "").replaceAll("\r", ""));
         line.append("\r\n");
     
     }

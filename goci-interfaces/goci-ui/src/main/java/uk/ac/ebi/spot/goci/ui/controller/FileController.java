@@ -13,12 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,6 +58,12 @@ public class FileController {
     @Value("${summary.stats.file}")
     private Resource summaryStatsFile;
 
+    @Value("${download.unpublished.studies}")
+    private Resource unpublishedStudiesFileDownload;
+
+    @Value("${download.unpublished.ancestries}")
+    private Resource unpublishedAncestriesFileDownload;
+
 //    @Value("${download.ensemblmapping}")
 //    private Resource ensemblMappingFileDownload;
 
@@ -78,19 +79,41 @@ public class FileController {
 
 
             String fileName = "gwas_catalog_v1.0-associations_e".concat(ensemblbuild).concat("_r").concat(releasedate).concat(".tsv");
-            response.setContentType("text/tsv");
-            response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
+            buildDownload(fileName, fullFileDownload.getInputStream(), response);
+        }
+        else {
+            throw new FileNotFoundException();
+        }
+    }
 
-            InputStream inputStream = null;
-            inputStream = fullFileDownload.getInputStream();
+    @RequestMapping(value = "api/search/downloads/unpublished_studies",
+            method = RequestMethod.GET)
+    public void getUnpublishedStudiesDownload(HttpServletResponse response) throws IOException {
+        if (unpublishedStudiesFileDownload.exists() && catalogStatsFile.exists()) {
 
-            OutputStream outputStream;
-            outputStream = response.getOutputStream();
+            Properties properties = new Properties();
+            properties.load(catalogStatsFile.getInputStream());
+            String releasedate = properties.getProperty("releasedate");
 
-            IOUtils.copy(inputStream, outputStream);
-            inputStream.close();
-            outputStream.close();
+            String fileName = "gwas_catalog_v1.0-unpublished_studies_r".concat(releasedate).concat(".tsv");
+            buildDownload(fileName, unpublishedStudiesFileDownload.getInputStream(), response);
+        }
+        else {
+            throw new FileNotFoundException();
+        }
+    }
 
+    @RequestMapping(value = "api/search/downloads/unpublished_ancestries",
+            method = RequestMethod.GET)
+    public void getUnpublishedAncestriesDownload(HttpServletResponse response) throws IOException {
+        if (unpublishedAncestriesFileDownload.exists() && catalogStatsFile.exists()) {
+
+            Properties properties = new Properties();
+            properties.load(catalogStatsFile.getInputStream());
+            String releasedate = properties.getProperty("releasedate");
+
+            String fileName = "gwas_catalog_v1.0-unpublished_ancestries_r".concat(releasedate).concat(".tsv");
+            buildDownload(fileName, unpublishedAncestriesFileDownload.getInputStream(), response);
         }
         else {
             throw new FileNotFoundException();
@@ -107,19 +130,7 @@ public class FileController {
             String releasedate = properties.getProperty("releasedate");
 
             String fileName = "gwas_catalog_v1.0-studies_r".concat(releasedate).concat(".tsv");
-            response.setContentType("text/tsv");
-            response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
-
-            InputStream inputStream = null;
-            inputStream = studiesFileDownload.getInputStream();
-
-            OutputStream outputStream;
-            outputStream = response.getOutputStream();
-
-            IOUtils.copy(inputStream, outputStream);
-            inputStream.close();
-            outputStream.close();
-
+            buildDownload(fileName, studiesFileDownload.getInputStream(), response);
         }
         else {
             throw new FileNotFoundException();
@@ -139,19 +150,7 @@ public class FileController {
             String ensemblbuild = properties.getProperty("ensemblbuild");
 
             String fileName = "gwas_catalog_v1.0.2-associations_e".concat(ensemblbuild).concat("_r").concat(releasedate).concat(".tsv");
-            response.setContentType("text/tsv");
-            response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
-
-            InputStream inputStream = null;
-            inputStream = alternativeFileDownload.getInputStream();
-
-            OutputStream outputStream;
-            outputStream = response.getOutputStream();
-
-            IOUtils.copy(inputStream, outputStream);
-            inputStream.close();
-            outputStream.close();
-
+            buildDownload(fileName, alternativeFileDownload.getInputStream(), response);
         }
         else {
             throw new FileNotFoundException();
@@ -169,19 +168,7 @@ public class FileController {
 
 
             String fileName = "gwas_catalog_v1.0.2-studies_r".concat(releasedate).concat(".tsv");
-            response.setContentType("text/tsv");
-            response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
-
-            InputStream inputStream = null;
-            inputStream = alternativeStudiesDownload.getInputStream();
-
-            OutputStream outputStream;
-            outputStream = response.getOutputStream();
-
-            IOUtils.copy(inputStream, outputStream);
-            inputStream.close();
-            outputStream.close();
-
+            buildDownload(fileName, alternativeStudiesDownload.getInputStream(), response);
         }
         else {
             throw new FileNotFoundException();
@@ -199,19 +186,7 @@ public class FileController {
 
 
             String fileName = "gwas_catalog_trait-mappings_r".concat(releasedate).concat(".tsv");
-            response.setContentType("text/tsv");
-            response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
-
-            InputStream inputStream = null;
-            inputStream = efoMappingsDownload.getInputStream();
-
-            OutputStream outputStream;
-            outputStream = response.getOutputStream();
-
-            IOUtils.copy(inputStream, outputStream);
-            inputStream.close();
-            outputStream.close();
-
+            buildDownload(fileName, efoMappingsDownload.getInputStream(), response);
         }
         else {
             throw new FileNotFoundException();
@@ -232,7 +207,7 @@ public class FileController {
             OutputStream outputStream;
             outputStream = response.getOutputStream();
 
-            IOUtils.copy(inputStream, outputStream);
+            IOUtils.copy(new BufferedInputStream(inputStream), new BufferedOutputStream(outputStream));
             inputStream.close();
             outputStream.close();
 
@@ -291,12 +266,13 @@ public class FileController {
 
         try {
             if(summaryStatsFile.exists()){
-                InputStream in = summaryStatsFile.getInputStream();
+                InputStream in = new BufferedInputStream(summaryStatsFile.getInputStream());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     resources.add(line);
                 }
+                in.close();
                 reader.close();
                 response.put("resources", resources);
             }
@@ -320,18 +296,7 @@ public class FileController {
             String releasedate = properties.getProperty("releasedate");
 
             String fileName = "gwas_catalog-ancestry_r".concat(releasedate).concat(".tsv");
-            response.setContentType("text/tsv");
-            response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
-
-            InputStream inputStream = null;
-            inputStream = ancestryFileDownload.getInputStream();
-
-            OutputStream outputStream;
-            outputStream = response.getOutputStream();
-
-            IOUtils.copy(inputStream, outputStream);
-            inputStream.close();
-            outputStream.close();
+            buildDownload(fileName, ancestryFileDownload.getInputStream(), response);
 
         }
         else {
@@ -343,5 +308,19 @@ public class FileController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "File not found for download")
     @ExceptionHandler(FileNotFoundException.class)
     public void FileNotFoundException(FileNotFoundException fileNotFoundException) {
+    }
+
+    private void buildDownload(String fileName, InputStream inputStream, HttpServletResponse response)
+            throws IOException {
+        response.setContentType("text/tsv");
+        response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
+
+        OutputStream outputStream;
+        outputStream = response.getOutputStream();
+
+        IOUtils.copy(new BufferedInputStream(inputStream), new BufferedOutputStream(outputStream));
+        inputStream.close();
+        outputStream.close();
+
     }
 }
