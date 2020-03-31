@@ -20,7 +20,7 @@ In each tab, mandatory columns are highlighted in orange. Grey columns are optio
 
 === [[studies]]1. Study tab
 
-In the Study tab, please add one row for each separate GWAS analysis (study) in the publication. 
+In the Study tab, please add one row for each separate GWAS analysis (study) in the publication. In particular, please make sure that there is one row for each set of summary statistics (i.e. each full set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite.
 
 There are 16 columns for you to fill in:
 
