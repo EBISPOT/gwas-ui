@@ -38,12 +38,13 @@
 |link:../api/search/downloads/ancestry[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_ancestry_download[ Click to view]
-|===
 
 |All ancestries *v1.0.3 - with unpublished ancestries
 |link:../api/search/downloads/unpublished_ancestries[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_ancestry_download_1_0_3[ Click to view]
+
+|===
 
 
 File name conventions:
