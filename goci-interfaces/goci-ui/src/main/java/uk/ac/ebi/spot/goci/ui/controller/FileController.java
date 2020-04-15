@@ -59,9 +59,6 @@ public class FileController {
     @Value("${summary.stats.file}")
     private Resource summaryStatsFile;
 
-    @Value("${summary.stats.fullpvalue.file}")
-    private Resource summaryStatsFullPValueFile;
-
     @Value("${download.unpublished.studies}")
     private Resource unpublishedStudiesFileDownload;
 
@@ -84,22 +81,6 @@ public class FileController {
 
             String fileName = "gwas_catalog_v1.0-associations_e".concat(ensemblbuild).concat("_r").concat(releasedate).concat(".tsv");
             buildDownload(fileName, fullFileDownload.getInputStream(), response);
-        }
-        else {
-            throw new FileNotFoundException();
-        }
-    }
-
-    @RequestMapping(value = "api/downloads/fullpvalue",
-            method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void getFullPValueStudiesDownload(HttpServletResponse response) throws IOException {
-        String responseString = null;
-        if (summaryStatsFullPValueFile.exists()) {
-            byte[] bytes = Files.readAllBytes(summaryStatsFullPValueFile.getFile().toPath());
-            IOUtils.copy(new BufferedInputStream(new ByteArrayInputStream(bytes)),
-                    new BufferedOutputStream(response.getOutputStream()));
-//            buildJsonDownload(summaryStatsFullPValueFile.getInputStream(), response);
-            responseString = new String(bytes);
         }
         else {
             throw new FileNotFoundException();
