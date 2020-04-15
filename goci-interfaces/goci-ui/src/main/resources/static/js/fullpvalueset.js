@@ -69,7 +69,7 @@ function loadStudiesList(summaryStatsStudyAccessions) {
 
 function loadUnpublishedStudiesList() {
 
-    $.getJSON('/api/studies/unpublished', {})
+    $.getJSON('/gwsa/rest/api/studies/unpublished', {})
         .done(function(data) {
             displayDatatableUnpublishedSummaryStats(data);
         });
