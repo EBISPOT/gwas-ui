@@ -130,23 +130,41 @@ _Added: 24 April 2018_
 === File headers for unpublished studies
 
 STUDY ACCESSION: Accession ID allocated to a GWAS Catalog study
+
 FIRST AUTHOR:
+
 STAGE:
+
 NUMBER OF INDIVDUALS:
+
 BROAD ANCESTRAL CATEGORY:
+
 COUNTRY OF RECRUITMENT:
+
 ADDITONAL ANCESTRY DESCRIPTION:
+
 Founder/Genetically isolated population:
+
 Number of cases:
+
 Number of controls:
+
 Sample description:
+
 DOI:
+
 DATE ADDED TO CATALOG:
+
 JOURNAL:
+
 STUDY:
+
 DISEASE/TRAIT:
+
 PLATFORM [SNPS PASSING QC]:
+
 GENOTYPING TECHNOLOGY:
+
 Statistical model:
 
 _Added: 24 April 2020_
