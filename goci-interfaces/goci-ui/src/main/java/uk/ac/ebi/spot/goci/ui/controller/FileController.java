@@ -65,9 +65,6 @@ public class FileController {
     @Value("${download.unpublished.studies}")
     private Resource unpublishedStudiesFileDownload;
 
-    @Value("${download.unpublished.ancestries}")
-    private Resource unpublishedAncestriesFileDownload;
-
 //    @Value("${download.ensemblmapping}")
 //    private Resource ensemblMappingFileDownload;
 
@@ -117,23 +114,6 @@ public class FileController {
 
             String fileName = "gwas_catalog_v1.0-unpublished_studies_r".concat(releasedate).concat(".tsv");
             buildDownload(fileName, unpublishedStudiesFileDownload.getInputStream(), response);
-        }
-        else {
-            throw new FileNotFoundException();
-        }
-    }
-
-    @RequestMapping(value = "api/search/downloads/unpublished_ancestries",
-            method = RequestMethod.GET)
-    public void getUnpublishedAncestriesDownload(HttpServletResponse response) throws IOException {
-        if (unpublishedAncestriesFileDownload.exists() && catalogStatsFile.exists()) {
-
-            Properties properties = new Properties();
-            properties.load(catalogStatsFile.getInputStream());
-            String releasedate = properties.getProperty("releasedate");
-
-            String fileName = "gwas_catalog_v1.0-unpublished_ancestries_r".concat(releasedate).concat(".tsv");
-            buildDownload(fileName, unpublishedAncestriesFileDownload.getInputStream(), response);
         }
         else {
             throw new FileNotFoundException();

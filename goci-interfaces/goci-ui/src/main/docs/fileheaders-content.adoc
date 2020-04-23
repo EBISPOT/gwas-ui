@@ -17,6 +17,8 @@ Data in the GWAS Catalog is currently mapped to genome assembly <span id="genome
 
 <<File headers for ancestry download>>
 
+<<File headers for unpublished studies>>
+
 *Available in associations download files
 
 +Available in studies download files
@@ -122,6 +124,32 @@ As for version 1.0.1 plus
 GENOTYPING_TECHNOLOGY^*^ ^+^: Genotyping technology/ies used in this study, with additional array information (ex. Immunochip or Exome array) in brackets.
 
 _Added: 24 April 2018_
+
+'''
+
+=== File headers for unpublished studies
+
+STUDY ACCESSION: Accession ID allocated to a GWAS Catalog study
+FIRST AUTHOR:
+STAGE:
+NUMBER OF INDIVDUALS:
+BROAD ANCESTRAL CATEGORY:
+COUNTRY OF RECRUITMENT:
+ADDITONAL ANCESTRY DESCRIPTION:
+Founder/Genetically isolated population:
+Number of cases:
+Number of controls:
+Sample description:
+DOI:
+DATE ADDED TO CATALOG:
+JOURNAL:
+STUDY:
+DISEASE/TRAIT:
+PLATFORM [SNPS PASSING QC]:
+GENOTYPING TECHNOLOGY:
+Statistical model:
+
+_Added: 24 April 2020_
 
 '''
 
