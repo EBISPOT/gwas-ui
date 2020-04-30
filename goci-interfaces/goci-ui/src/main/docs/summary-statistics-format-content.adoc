@@ -22,8 +22,8 @@ Summary statistics file requirements:
 1. The file must be in .tsv format
 2. Columns must follow the standard headings and data formats listed in the table below
 3. The file must include at least one of the following combinations of mandatory columns(*): 
-  * Option 1: *variant_ID* and *p-value*
-  * Option 2: *chromosome*, *base pair location* and *p-value*  - for this option you must also provide the genome assembly in the submission template
+  * Option 1: *variant_ID* and *p_value*
+  * Option 2: *chromosome*, *base_pair_location* and *p_value*  - for this option you must also provide the genome assembly in the submission template
 4. When one of the manditory columns is not provided, the column should be filled with NA
 5. To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also include *effect_allele* and *other_allele*. See https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[summary statistics methods^] for more details on our harmonisation pipeline.
 6. You may also include any number of additional columns
