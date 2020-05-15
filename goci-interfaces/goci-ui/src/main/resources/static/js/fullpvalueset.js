@@ -10,7 +10,7 @@ $(document).ready(function() {
     if (window.location.pathname.indexOf('/downloads/summary-statistics') != -1 && $('#pvalue-sets-table-body').children().length == 0) {
         console.log("About to load all studies with full p-value sets");
         $("#downloads-item").addClass("active");
-
+        loadUnpublishedStudiesList();
         getAllSummaryStatsStudies();
 
         loadResourcesList();
@@ -37,7 +37,7 @@ function getAllSummaryStatsStudies () {
     }).catch(function (err) {
         console.error('Error getting Summary Stats data:' + err);
     }).then(function () {
-        loadStudiesList(summaryStatsStudyAccessions);
+        //loadStudiesList(summaryStatsStudyAccessions);
     });
 
 }
@@ -67,36 +67,44 @@ function loadStudiesList(summaryStatsStudyAccessions) {
             });
 }
 
+function loadUnpublishedStudiesList() {
 
-function displayStudies(data) {
-
-    var documents = data.response.docs;
-    console.log("Got a bunch of docs" + documents.length);
-
-
-    if (data.responseHeader.params.fq == "resourcename:study" ||
-            $.inArray("resourcename:study", data.responseHeader.params.fq) != -1) {
-        console.log("Processing studies");
-        var table = $('#pvalue-sets-table-body').empty();
-
-        for (var j = 0; j < documents.length; j++) {
-            try {
-                var doc = documents[j];
-                processStudyDoc(doc, table);
-            }
-            catch (ex) {
-                console.log("Failure to process document " + ex);
-            }
-        }
-    }
-
-    $('#loadingStudies').hide();
-    $('#pvalueSetDisplay').show();
-
-    $('#query').text('fullPvalueSet:true');
+    $.getJSON('http://localhost:8081/api/studies/unpublished', {})
+        .done(function(data) {
+            displayDatatableUnpublishedSummaryStats(data);
+        });
+}
 
 
-};
+// function displayStudies(data) {
+//
+//     var documents = data.response.docs;
+//     console.log("Got a bunch of docs" + documents.length);
+//
+//
+//     if (data.responseHeader.params.fq == "resourcename:study" ||
+//             $.inArray("resourcename:study", data.responseHeader.params.fq) != -1) {
+//         console.log("Processing studies");
+//         var table = $('#pvalue-sets-table-body').empty();
+//
+//         for (var j = 0; j < documents.length; j++) {
+//             try {
+//                 var doc = documents[j];
+//                 processStudyDoc(doc, table);
+//             }
+//             catch (ex) {
+//                 console.log("Failure to process document " + ex);
+//             }
+//         }
+//     }
+//
+//     $('#loadingStudies').hide();
+//     $('#pvalueSetDisplay').show();
+//
+//     $('#query').text('fullPvalueSet:true');
+//
+//
+// };
 
 function processStudyDoc(study, table) {
 
@@ -116,11 +124,18 @@ function processStudyDoc(study, table) {
 
     row.append($("<td>").html(study.associationCount));
 
-    var a = (study.authorAscii_s).replace(/\s/g,"");
-    var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
-    var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(dir).concat("' target='_blank'>Click for summary statistics</a>");
+    if((study.accessionId).indexOf("GCST9") != -1){
+        var dir = "".concat("_").concat(study.accessionId);
+        var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(dir).concat("' target='_blank'>Click for summary statistics</a>");
 
-    row.append($("<td>").html(ftplink));
+        row.append($("<td>").html(ftplink));
+    }else{
+        var a = (study.authorAscii_s).replace(/\s/g,"");
+        var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
+        var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(dir).concat("' target='_blank'>Click for summary statistics</a>");
+
+        row.append($("<td>").html(ftplink));
+    }
 
     table.append(row);
 

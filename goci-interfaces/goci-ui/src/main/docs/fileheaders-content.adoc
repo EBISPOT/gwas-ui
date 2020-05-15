@@ -17,6 +17,8 @@ Data in the GWAS Catalog is currently mapped to genome assembly <span id="genome
 
 <<File headers for ancestry download>>
 
+<<File headers for unpublished studies>>
+
 *Available in associations download files
 
 +Available in studies download files
@@ -152,4 +154,100 @@ COUNTRY OF RECRUITMENT: Country of recruitment of the individuals in the sample
 ADDITONAL ANCESTRY DESCRIPTION: Any additional ancestry descriptors relevant to the sample description
 
 _Added: 16 September 2016_
+
+=== File headers for unpublished studies
+
+DATE ADDED TO CATALOG
+
+PUBMEDID
+
+FIRST AUTHOR
+
+DATE
+
+JOURNAL
+
+LINK
+
+STUDY
+
+DISEASE/TRAIT
+
+INITIAL SAMPLE SIZE
+
+REPLICATION SAMPLE SIZE
+
+PLATFORM [SNPS PASSING QC]
+
+ASSOCIATION COUNT
+
+MAPPED_TRAIT
+
+MAPPED_TRAIT_URI
+
+STUDY
+
+ACCESSION
+
+GENOTYPING TECHNOLOGY
+
+SUMMARY STATS LOCATION
+
+SUBMISSION DATE
+
+STATISTICAL MODEL
+
+BACKGROUND TRAIT
+
+MAPPED BACKGROUND TRAIT
+
+MAPPED BACKGROUND TRAIT URI
+
+_Added: 15 May 2020_
+
+'''
+
+=== File headers for unpublished ancestries
+
+STUDY ACCESSION
+
+PUBMEDID
+
+FIRST AUTHOR
+
+DATE
+
+INITIAL SAMPLE DESCRIPTION
+
+REPLICATION SAMPLE DESCRIPTION
+
+STAGE
+
+NUMBER OF INDIVIDUALS
+
+BROAD ANCESTRAL CATEGORY
+
+COUNTRY OF ORIGIN
+
+COUNTRY OF RECRUITMENT
+
+ADDITIONAL ANCESTRY DESCRIPTION
+
+ANCESTRY DESCRIPTOR
+
+FOUNDER/GENETICALLY ISOLATED POPULATION
+
+NUMBER OF CASES
+
+NUMBER OF CONTROLS
+
+SAMPLE DESCRIPTION
+
+COHORT(S)
+
+COHORT-SPECIFIC REFERENCE
+
+_Added: 15 May 2020_
+
+'''
 

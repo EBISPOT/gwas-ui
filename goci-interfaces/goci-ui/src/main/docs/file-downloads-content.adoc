@@ -1,7 +1,8 @@
 == Downloading the GWAS Catalog
 
 
-[width="80%",options="header",cols="4,2,4,2", frame="all", grid="cols", halign = "center"]
+
+[width="80%",options="header",cols="4,2,2,2", halign = "center", role="table table-hover"]
 |===
 |Description | Download Link |Format  | Column header descriptions
 
@@ -10,30 +11,45 @@
 |tab separated file
 |link:fileheaders[ Click to view]
 
-
 |All associations *v1.0.2 - with added ontology annotations, GWAS Catalog study accession numbers and genotyping technology*
 |link:../api/search/downloads/alternative[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_catalog_version_1_0_1[ Click to view]
-
 
 |All studies  *v1.0*
 |link:../api/search/downloads/studies[ Click to download]
 |tab separated file
 |link:fileheaders[ Click to view]
 
-
 |All studies *v1.0.2 - with added ontology annotations, GWAS Catalog study accession numbers and genotyping technology*
 |link:../api/search/downloads/studies_alternative[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_catalog_version_1_0_1[ Click to view]
 
-
 |All ancestry data _(link:faq#faq-F1[see FAQ F1 for more details])_
 |link:../api/search/downloads/ancestry[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_ancestry_download[ Click to view]
+
 |===
+'''
+
+[width="80%",options="header",cols="4,2,2,2", halign = "center", role="table table-hover"]
+|===
+|Description | Download Link |Format  | Column header descriptions
+
+|All unpublished studies *v1.0.3 - unpublished studies, new format*
+|link:../api/search/downloads/unpublished_studies[ Click to download]
+|tab separated file
+|link:fileheaders#_file_headers_for_unpublished_studies[ Click to view]
+
+|All unpublished ancestries *v1.0.3 - unpublished ancestries, new format*
+|link:../api/search/downloads/unpublished_ancestries[ Click to download]
+|tab separated file
+|link:fileheaders#_file_headers_for_unpublished_ancestries[ Click to view]
+
+|===
+'''
 
 
 File name conventions:
@@ -41,6 +57,7 @@ File name conventions:
 * v1.0 indicates the columns originally proposed by the NCBI
 * v1.0.1 indicates the addition of ontology annotations, GWAS Catalog study accession numbers and other new columns (dismissed from 1 May 2018) 
 * v1.0.2 indicates the addition of ontology annotations, GWAS Catalog study accession numbers and other new columns such as genotyping technology
+* v1.0.3 indicates the addition of unpublished data and additional trait information
 * eXX indicates the Ensembl release version that the data is mapped to
 * rYYYY-MM-DD indicates the date on which the GWAS Catalog was released
 
