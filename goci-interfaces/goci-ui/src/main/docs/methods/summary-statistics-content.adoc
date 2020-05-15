@@ -1,5 +1,7 @@
 = Summary statistics
 
+This page includes general documentation about the summary statistics we host in the GWAS Catalog. For instructions on submitting summary statistics please see our https://www.ebi.ac.uk/gwas/docs/submission[submission documentation].
+
 == Summary statistics eligibility
 
 The GWAS Catalog now hosts summary statistics files (aggregate p-values and association data for every variant analysed in a study) when available, in addition to curated associations.
