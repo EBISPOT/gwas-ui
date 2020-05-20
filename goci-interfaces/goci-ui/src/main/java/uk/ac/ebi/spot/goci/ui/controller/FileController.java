@@ -132,7 +132,7 @@ public class FileController {
             properties.load(catalogStatsFile.getInputStream());
             String releasedate = properties.getProperty("releasedate");
 
-            String fileName = "gwas-catalog-unpublished-studies-r".concat(releasedate).concat("-v1.0.3.tsv");
+            String fileName = "gwas-catalog-unpublished-ancestries-r".concat(releasedate).concat("-v1.0.3.tsv");
             buildDownload(fileName, unpublishedAncestriesFileDownload.getInputStream(), response);
         }
         else {
