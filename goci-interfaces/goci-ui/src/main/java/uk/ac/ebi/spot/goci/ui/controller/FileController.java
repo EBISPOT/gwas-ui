@@ -1,5 +1,6 @@
 package uk.ac.ebi.spot.goci.ui.controller;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.CharBuffer;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -115,8 +117,12 @@ public class FileController {
             properties.load(catalogStatsFile.getInputStream());
             String releasedate = properties.getProperty("releasedate");
 
-            String fileName = "gwas-catalog-unpublished-studies-r".concat(releasedate).concat("-v1.0.3.tsv");
-            buildDownload(fileName, unpublishedStudiesFileDownload.getInputStream(), response);
+            Files.copy(unpublishedStudiesFileDownload.getFile().toPath(), response.getOutputStream());
+            List<String> lines = Files.readAllLines(unpublishedStudiesFileDownload.getFile().toPath());
+            String fileName = "gwas-catalog-unpublished-studies-v1.0.3a-r".concat(releasedate).concat(".tsv");
+            response.setContentType("text/tsv");
+            response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
+            response.setStatus(HttpStatus.OK.value());
         }
         else {
             throw new FileNotFoundException();
@@ -132,8 +138,13 @@ public class FileController {
             properties.load(catalogStatsFile.getInputStream());
             String releasedate = properties.getProperty("releasedate");
 
-            String fileName = "gwas-catalog-unpublished-ancestries-r".concat(releasedate).concat("-v1.0.3.tsv");
-            buildDownload(fileName, unpublishedAncestriesFileDownload.getInputStream(), response);
+            Files.copy(unpublishedAncestriesFileDownload.getFile().toPath(), response.getOutputStream());
+            List<String> lines = Files.readAllLines(unpublishedAncestriesFileDownload.getFile().toPath());
+            String fileName = "gwas-catalog-unpublished-ancestries-v1.0.3-r".concat(releasedate).concat(".tsv");
+
+            response.setContentType("text/tsv");
+            response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
+            response.setStatus(HttpStatus.OK.value());
         }
         else {
             throw new FileNotFoundException();
@@ -339,8 +350,9 @@ public class FileController {
         outputStream = response.getOutputStream();
 
         IOUtils.copy(new BufferedInputStream(inputStream), new BufferedOutputStream(outputStream));
+        outputStream.flush();
         inputStream.close();
-        outputStream.close();
-
+//        outputStream.close();
+        response.setStatus(HttpStatus.OK.value());
     }
 }
