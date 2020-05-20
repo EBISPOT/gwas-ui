@@ -59,9 +59,9 @@ public class FileController {
     @Value("${summary.stats.file}")
     private Resource summaryStatsFile;
 
-    @Value("${summary.stats.fullpvalue.file}")
-    private Resource summaryStatsFullPValueFile;
-
+//    @Value("${summary.stats.fullpvalue.file}")
+//    private Resource summaryStatsFullPValueFile;
+//
     @Value("${download.unpublished.studies}")
     private Resource unpublishedStudiesFileDownload;
 
@@ -90,21 +90,21 @@ public class FileController {
         }
     }
 
-    @RequestMapping(value = "api/downloads/fullpvalue",
-            method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void getFullPValueStudiesDownload(HttpServletResponse response) throws IOException {
-        String responseString = null;
-        if (summaryStatsFullPValueFile.exists()) {
-            byte[] bytes = Files.readAllBytes(summaryStatsFullPValueFile.getFile().toPath());
-            IOUtils.copy(new BufferedInputStream(new ByteArrayInputStream(bytes)),
-                    new BufferedOutputStream(response.getOutputStream()));
-//            buildJsonDownload(summaryStatsFullPValueFile.getInputStream(), response);
-            responseString = new String(bytes);
-        }
-        else {
-            throw new FileNotFoundException();
-        }
-    }
+//    @RequestMapping(value = "api/downloads/fullpvalue",
+//            method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public void getFullPValueStudiesDownload(HttpServletResponse response) throws IOException {
+//        String responseString = null;
+//        if (summaryStatsFullPValueFile.exists()) {
+//            byte[] bytes = Files.readAllBytes(summaryStatsFullPValueFile.getFile().toPath());
+//            IOUtils.copy(new BufferedInputStream(new ByteArrayInputStream(bytes)),
+//                    new BufferedOutputStream(response.getOutputStream()));
+////            buildJsonDownload(summaryStatsFullPValueFile.getInputStream(), response);
+//            responseString = new String(bytes);
+//        }
+//        else {
+//            throw new FileNotFoundException();
+//        }
+//    }
 
     @RequestMapping(value = "api/search/downloads/unpublished_studies",
             method = RequestMethod.GET)
