@@ -47,6 +47,13 @@ public class JsonProcessingService {
             header =
                     "STUDY ACCESSION\tPUBMEDID\tFIRST AUTHOR\tDATE\tINITIAL SAMPLE DESCRIPTION\tREPLICATION SAMPLE DESCRIPTION\tSTAGE\tNUMBER OF INDIVDUALS\tBROAD ANCESTRAL CATEGORY\tCOUNTRY OF ORIGIN\tCOUNTRY OF RECRUITMENT\tADDITONAL ANCESTRY DESCRIPTION";
         }
+        else if(type.equals("unpublished_study")){
+            header =
+                    "DATE ADDED TO CATALOG\tPUBMED ID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tPLATFORM [SNPS PASSING QC]\tASSOCIATION COUNT\tMAPPED_TRAIT\tMAPPED_TRAIT_URI\tSTUDY ACCESSION\tGENOTYPING TECHNOLOGY\tSUMMARY STATS LOCATION\tSUBMISSION DATE\tSTATISTICAL MODEL\tBACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT URI";
+        }else if(type.equals("unpublished_ancestry")){
+            header =
+                    "STUDY ACCESSION\tPUBMED ID\tFIRST AUTHOR\tDATE\tINITIAL SAMPLE DESCRIPTION\tREPLICATION SAMPLE DESCRIPTION\tSTAGE\tNUMBER OF INDIVIDUALS\tBROAD ANCESTRAL CATEGORY\tCOUNTRY OF ORIGIN\tCOUNTRY OF RECRUITMENT\tADDITIONAL ANCESTRY DESCRIPTION\tANCESTRY DESCRIPTOR\tFOUNDER/GENETICALLY ISOLATED POPULATION\tNUMBER OF CASES\tNUMBER OF CONTROLS\tSAMPLE DESCRIPTION\tCOHORT(S)\tCOHORT-SPECIFIC REFERENCE";
+        }
         else{
             header =
                     "DATE ADDED TO CATALOG\tPUBMEDID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tREGION\tCHR_ID\tCHR_POS\tREPORTED GENE(S)\tMAPPED_GENE\tUPSTREAM_GENE_ID\tDOWNSTREAM_GENE_ID\tSNP_GENE_IDS\tUPSTREAM_GENE_DISTANCE\tDOWNSTREAM_GENE_DISTANCE\tSTRONGEST SNP-RISK ALLELE\tSNPS\tMERGED\tSNP_ID_CURRENT\tCONTEXT\tINTERGENIC\tRISK ALLELE FREQUENCY\tP-VALUE\tPVALUE_MLOG\tP-VALUE (TEXT)\tOR or BETA\t95% CI (TEXT)\tPLATFORM [SNPS PASSING QC]\tCNV";
@@ -77,10 +84,17 @@ public class JsonProcessingService {
 
                 if(doc.get("ancestryLinks") != null){
                     for(JsonNode a : doc.get("ancestryLinks")){
-                        processAncestryJson(line, doc, a);
+                        if(type.equals("unpublished_ancestry")){
+                            processAncestryJson(line, doc, a, true);
+                        }else {
+                            processAncestryJson(line, doc, a);
+                        }
                     }
                 }
 
+            }
+            else if(type.equals("unpublished_study")){
+                processStudyJson(line, doc, true);
             }
             else {
                 processAssociationJson(line, doc);
@@ -92,8 +106,12 @@ public class JsonProcessingService {
 
 
     }
-    
+
     public void processStudyJson(StringBuilder line, JsonNode doc) throws IOException{
+        processStudyJson(line, doc, false);
+    }
+
+        public void processStudyJson(StringBuilder line, JsonNode doc, boolean newFormat) throws IOException{
 
         line.append(getDate(doc));
         line.append("\t");
@@ -157,12 +175,23 @@ public class JsonProcessingService {
             line.append("\t");
             line.append(getGenotypingTechonologies(doc));
         }
+        if(newFormat){
+            line.append("\t").append(getSummaryStatsLocation(doc));
+            line.append("\t").append(getSubmissionDate(doc));
+            line.append("\t").append(getStatisticalModel(doc));
+            line.append("\t").append(getBackgroundTrait(doc));
+            line.append("\t").append(getMappedBackgroundTrait(doc));
+            line.append("\t").append(getMappedBackgroundTraitUri(doc));
+        }
         line = new StringBuilder(line.toString().replaceAll("\n", "").replaceAll("\r", ""));
         line.append("\r\n");
         
     }
-
     public void processAncestryJson(StringBuilder line, JsonNode doc, JsonNode ancestryRow) throws IOException {
+        processAncestryJson(line, doc, ancestryRow, false);
+    }
+
+    public void processAncestryJson(StringBuilder line, JsonNode doc, JsonNode ancestryRow, boolean newFormat) throws IOException {
 
         String pubmedid = getPubmedId(doc);
 
@@ -246,13 +275,22 @@ public class JsonProcessingService {
             }
         }
         line.append(description);
-        line.append("\t");
+//        line.append("\t");
+
+        if(newFormat){
+            line.append('\t').append(getFounder(doc));
+            line.append('\t').append(getCases(doc));
+            line.append('\t').append(getControls(doc));
+            line.append('\t').append(getSampleDescription(doc));
+            line.append('\t').append(getCohort(doc));
+            line.append('\t').append(getCohortReference(doc));
+        }
 
         line = new StringBuilder(line.toString().replaceAll("\n", "").replaceAll("\r", ""));
         line.append("\r\n");
     }
 
-    public void processAssociationJson(StringBuilder line, JsonNode doc) throws IOException {
+        public void processAssociationJson(StringBuilder line, JsonNode doc) throws IOException {
         setMultiSnpHaplotype(doc.get("multiSnpHaplotype").asBoolean());
         setSnpInteraction(doc.get("snpInteraction").asBoolean());
 
@@ -942,6 +980,52 @@ public class JsonProcessingService {
 
     public boolean isMultiSnpHaplotype() {
         return isMultiSnpHaplotype;
+    }
+
+    private String getSummaryStatsLocation(JsonNode doc){
+        return getNodeValue(doc, "summary_stats_location");
+    }
+    private String getSubmissionDate(JsonNode doc){
+        return getNodeValue(doc, "submission_date");
+    }
+    private String getStatisticalModel(JsonNode doc){
+        return getNodeValue(doc, "statistical_model");
+    }
+    private String getBackgroundTrait(JsonNode doc){
+        return getNodeValue(doc, "background_trait");
+    }
+    private String getMappedBackgroundTrait(JsonNode doc){
+        return getNodeValue(doc, "mapped_background_trait");
+    }
+    private String getMappedBackgroundTraitUri(JsonNode doc){
+        return getNodeValue(doc, "mapped_background_trait_uri");
+    }
+
+    private String getFounder(JsonNode doc){
+        return getNodeValue(doc, "founder_genetically_isolated_population");
+    }
+    private String getCases(JsonNode doc){
+        return getNodeValue(doc, "cases");
+    }
+    private String getControls(JsonNode doc){
+        return getNodeValue(doc, "controls");
+    }
+    private String getSampleDescription(JsonNode doc){
+        return getNodeValue(doc, "sampleDescription");
+    }
+    private String getCohort(JsonNode doc){
+        return getNodeValue(doc, "cohort");
+    }
+    private String getCohortReference(JsonNode doc){
+        return getNodeValue(doc, "cohort_specific_reference");
+    }
+
+    private String getNodeValue(JsonNode doc, String key){
+        return doc.get(key).asText("");
+    }
+
+    private String getNodeValue(JsonNode doc, String key, String defaultValue){
+        return doc.get(key).asText(defaultValue);
     }
 
     public void setMultiSnpHaplotype(boolean multiSnpHaplotype) {

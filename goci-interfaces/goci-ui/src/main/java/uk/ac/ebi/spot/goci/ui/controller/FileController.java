@@ -70,9 +70,31 @@ public class FileController {
     @Value("${download.unpublished.ancestries}")
     private Resource unpublishedAncestriesFileDownload;
 
+    @Value("${download.new_format.studies}")
+    private Resource newStudiesFileDownload;
+
+    @Value("${download.new_format.ancestries}")
+    private Resource newAncestriesFileDownload;
+
 //    @Value("${download.ensemblmapping}")
 //    private Resource ensemblMappingFileDownload;
 
+    enum PropertyTypes {
+        RELEASE_DATE("releasedate"),
+        ENSEMBL_BUILD("ensemblbuild");
+        public final String label;
+        private PropertyTypes(String label){
+            this.label = label;
+        }
+    }
+    private String getProperty(PropertyTypes property) throws IOException {
+        if (catalogStatsFile.exists()) {
+            Properties properties = new Properties();
+            properties.load(catalogStatsFile.getInputStream());
+            return properties.getProperty(property.label);
+        }
+        return null;
+    }
     @RequestMapping(value = "api/search/downloads/full",
                     method = RequestMethod.GET)
     public void getFullDownload(HttpServletResponse response) throws IOException {
@@ -85,7 +107,7 @@ public class FileController {
 
 
             String fileName = "gwas_catalog_v1.0-associations_e".concat(ensemblbuild).concat("_r").concat(releasedate).concat(".tsv");
-            buildDownload(fileName, fullFileDownload.getInputStream(), response);
+            buildDownload(fileName, fullFileDownload, response);
         }
         else {
             throw new FileNotFoundException();
@@ -113,16 +135,9 @@ public class FileController {
     public void getUnpublishedStudiesDownload(HttpServletResponse response) throws IOException {
         if (unpublishedStudiesFileDownload.exists() && catalogStatsFile.exists()) {
 
-            Properties properties = new Properties();
-            properties.load(catalogStatsFile.getInputStream());
-            String releasedate = properties.getProperty("releasedate");
-
-            Files.copy(unpublishedStudiesFileDownload.getFile().toPath(), response.getOutputStream());
-            List<String> lines = Files.readAllLines(unpublishedStudiesFileDownload.getFile().toPath());
-            String fileName = "gwas-catalog-unpublished-studies-v1.0.3a-r".concat(releasedate).concat(".tsv");
-            response.setContentType("text/tsv");
-            response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
-            response.setStatus(HttpStatus.OK.value());
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
+            String fileName = "gwas-catalog-v1.0.3-unpublished-studies-r".concat(releasedate).concat(".tsv");
+            buildDownload(fileName, unpublishedStudiesFileDownload, response);
         }
         else {
             throw new FileNotFoundException();
@@ -134,17 +149,37 @@ public class FileController {
     public void getUnpublishedAncestriesDownload(HttpServletResponse response) throws IOException {
         if (unpublishedAncestriesFileDownload.exists() && catalogStatsFile.exists()) {
 
-            Properties properties = new Properties();
-            properties.load(catalogStatsFile.getInputStream());
-            String releasedate = properties.getProperty("releasedate");
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
+            String fileName = "gwas-catalog-v1.0.3-unpublished-ancestries-r".concat(releasedate).concat(".tsv");
+            buildDownload(fileName, unpublishedAncestriesFileDownload, response);
+        }
+        else {
+            throw new FileNotFoundException();
+        }
+    }
 
-            Files.copy(unpublishedAncestriesFileDownload.getFile().toPath(), response.getOutputStream());
-            List<String> lines = Files.readAllLines(unpublishedAncestriesFileDownload.getFile().toPath());
-            String fileName = "gwas-catalog-unpublished-ancestries-v1.0.3-r".concat(releasedate).concat(".tsv");
+    @RequestMapping(value = "api/search/downloads/studies_new",
+            method = RequestMethod.GET)
+    public void getNewStudiesDownload(HttpServletResponse response) throws IOException {
+        if (newStudiesFileDownload.exists() && catalogStatsFile.exists()) {
 
-            response.setContentType("text/tsv");
-            response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
-            response.setStatus(HttpStatus.OK.value());
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
+            String fileName = "gwas-catalog-v1.0.3-studies-r".concat(releasedate).concat(".tsv");
+            buildDownload(fileName, newStudiesFileDownload, response);
+        }
+        else {
+            throw new FileNotFoundException();
+        }
+    }
+
+    @RequestMapping(value = "api/search/downloads/ancestries_new",
+            method = RequestMethod.GET)
+    public void getNewAncestriesDownload(HttpServletResponse response) throws IOException {
+        if (newAncestriesFileDownload.exists() && catalogStatsFile.exists()) {
+
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
+            String fileName = "gwas-catalog-v1.0.3-ancestries-r".concat(releasedate).concat(".tsv");
+            buildDownload(fileName, newAncestriesFileDownload, response);
         }
         else {
             throw new FileNotFoundException();
@@ -156,12 +191,9 @@ public class FileController {
     public void getStudiesDownload(HttpServletResponse response) throws IOException {
         if (studiesFileDownload.exists() && catalogStatsFile.exists()) {
 
-            Properties properties = new Properties();
-            properties.load(catalogStatsFile.getInputStream());
-            String releasedate = properties.getProperty("releasedate");
-
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
             String fileName = "gwas_catalog_v1.0-studies_r".concat(releasedate).concat(".tsv");
-            buildDownload(fileName, studiesFileDownload.getInputStream(), response);
+            buildDownload(fileName, studiesFileDownload, response);
         }
         else {
             throw new FileNotFoundException();
@@ -181,7 +213,7 @@ public class FileController {
             String ensemblbuild = properties.getProperty("ensemblbuild");
 
             String fileName = "gwas_catalog_v1.0.2-associations_e".concat(ensemblbuild).concat("_r").concat(releasedate).concat(".tsv");
-            buildDownload(fileName, alternativeFileDownload.getInputStream(), response);
+            buildDownload(fileName, alternativeFileDownload, response);
         }
         else {
             throw new FileNotFoundException();
@@ -192,14 +224,10 @@ public class FileController {
                     method = RequestMethod.GET)
     public void getAlternativeStudiesDownload(HttpServletResponse response) throws IOException {
         if (alternativeStudiesDownload.exists() && catalogStatsFile.exists()) {
-
-            Properties properties = new Properties();
-            properties.load(catalogStatsFile.getInputStream());
-            String releasedate = properties.getProperty("releasedate");
-
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
 
             String fileName = "gwas_catalog_v1.0.2-studies_r".concat(releasedate).concat(".tsv");
-            buildDownload(fileName, alternativeStudiesDownload.getInputStream(), response);
+            buildDownload(fileName, alternativeStudiesDownload, response);
         }
         else {
             throw new FileNotFoundException();
@@ -210,14 +238,10 @@ public class FileController {
                     method = RequestMethod.GET)
     public void getTraitMappingsDownload(HttpServletResponse response) throws IOException {
         if (efoMappingsDownload.exists() && catalogStatsFile.exists()) {
-
-            Properties properties = new Properties();
-            properties.load(catalogStatsFile.getInputStream());
-            String releasedate = properties.getProperty("releasedate");
-
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
 
             String fileName = "gwas_catalog_trait-mappings_r".concat(releasedate).concat(".tsv");
-            buildDownload(fileName, efoMappingsDownload.getInputStream(), response);
+            buildDownload(fileName, efoMappingsDownload, response);
         }
         else {
             throw new FileNotFoundException();
@@ -231,17 +255,7 @@ public class FileController {
     public void getFullNcbiDownload(HttpServletResponse response) throws IOException {
 
         if (fullFileDownloadNcbi.exists()) {
-
-            InputStream inputStream = null;
-            inputStream = fullFileDownload.getInputStream();
-
-            OutputStream outputStream;
-            outputStream = response.getOutputStream();
-
-            IOUtils.copy(new BufferedInputStream(inputStream), new BufferedOutputStream(outputStream));
-            inputStream.close();
-            outputStream.close();
-
+            Files.copy(fullFileDownloadNcbi.getFile().toPath(), new BufferedOutputStream(response.getOutputStream()));
         }
         else {
             throw new FileNotFoundException();
@@ -297,14 +311,15 @@ public class FileController {
 
         try {
             if(summaryStatsFile.exists()){
-                InputStream in = new BufferedInputStream(summaryStatsFile.getInputStream());
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    resources.add(line);
-                }
-                in.close();
-                reader.close();
+                resources = Files.readAllLines(summaryStatsFile.getFile().toPath());
+//                InputStream in = new BufferedInputStream(summaryStatsFile.getInputStream());
+//                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+//                String line;
+//                while ((line = reader.readLine()) != null) {
+//                    resources.add(line);
+//                }
+//                in.close();
+//                reader.close();
                 response.put("resources", resources);
             }
         }
@@ -321,13 +336,10 @@ public class FileController {
                     method = RequestMethod.GET)
     public void getAncestryDownload(HttpServletResponse response) throws IOException {
         if (ancestryFileDownload.exists() && catalogStatsFile.exists()) {
-
-            Properties properties = new Properties();
-            properties.load(catalogStatsFile.getInputStream());
-            String releasedate = properties.getProperty("releasedate");
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
 
             String fileName = "gwas_catalog-ancestry_r".concat(releasedate).concat(".tsv");
-            buildDownload(fileName, ancestryFileDownload.getInputStream(), response);
+            buildDownload(fileName, ancestryFileDownload, response);
 
         }
         else {
@@ -353,6 +365,13 @@ public class FileController {
         outputStream.flush();
         inputStream.close();
 //        outputStream.close();
+        response.setStatus(HttpStatus.OK.value());
+    }
+
+    private void buildDownload(String fileName, Resource inputFile, HttpServletResponse response) throws IOException {
+        response.setContentType("text/tsv");
+        response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
+        Files.copy(inputFile.getFile().toPath(), new BufferedOutputStream(response.getOutputStream()));
         response.setStatus(HttpStatus.OK.value());
     }
 }
