@@ -111,12 +111,6 @@ displayEFOInfo = function() {
         $("#efotrait-id").html(efoInfo.shortForm);
     });
 
-    // Get data from Solr slim for term fields
-    getTraitDataSolrSlim(efoId);
-
-    // Get data from OLS for term fields
-    getEFOAttributesFromOLS(efoId);
-
     // Get EFO child traits data from OLS
     const allTermLabels = [], allTermIds = [];
     const olsParam = `?id=${efoId}&size=500`;
@@ -131,8 +125,15 @@ displayEFOInfo = function() {
         testMethod(allIds);
     });
 
+    // Get data from Solr slim for term fields
+    getTraitDataSolrSlim(efoId);
+
+    // Get data from OLS for term fields
+    getEFOAttributesFromOLS(efoId);
+
     // Get EFO term mappings
-    displayOXO();
+    getTermMappings(efoId);
+
 };
 
 testMethod = function(all) {
@@ -294,197 +295,32 @@ getChildTraits = async function(efoId, olsHierarchicalDescendantsUrl, allTermLab
 
 
 /**
- * Get term mappings from OXO
+ * Query OXO to get term mappings.
+ * @param efoId
  */
-displayOXO = function() {
-    getOXO(getMainEFO()).then((data) => {
-        console.log("** MD:", data)
+getTermMappings = function(efoId) {
+    return promiseGet(global_oxo_api + 'mappings',
+        { 'fromId': efoId.replace('_',':'),}
+    ).then(JSON.parse).then(function(data) {
+        let mappedTerms = data._embedded.mappings.reduce((filtered, term) => {
+            const termCurie = term.toTerm.curie;
 
-        var container = $('#btn-oxo-expand');
-        var totalMapping = parseInt(data.page.totalElements);
-        var xrefs = [];
-        var xrefs_mesh = []
-        if(totalMapping > 0){
-            xrefs = data._embedded.mappings.map((xref) => {
-                return xref.toTerm.curie
-            })
-
-            xrefs_mesh = xrefs.filter((xref_id) => {
-                return xref_id.startsWith("MeSH")
-            });
-        }
-
-        // remove duplicate Ids and sort
-        var uniqueXrefs = Array.from(new Set(xrefs));
-        uniqueXrefs = uniqueXrefs.sort();
-
-        // remove parent EFO ID from XRef list
-        var parentEFOIndex = uniqueXrefs.indexOf(getMainEFO().replace('_',':'));
-        uniqueXrefs.splice(parentEFOIndex, 1);
-
-        // update totalMapping count
-        totalMapping = uniqueXrefs.length;
-
-        if(totalMapping > 0) {
-            $('#oxo-list').append(displayArrayAsList(uniqueXrefs))
-        }
-
-
-
-        //we want to show a mesh here
-        if(totalMapping > 0){
-            if(xrefs_mesh.length > 0){
-                var xref_mesh = xrefs_mesh[0];
-                container.html(`<!--<b> ${xref_mesh} </b> and <b>${totalMapping}</b>  more ontology Xrefs--> `);
-                // container.html(`${xref_mesh} ...`);
-                container.html(`<span style="padding-right: 8px;"> <b> ${totalMapping} </b> mappings </span>`);
-            }else{
-                container.html(`<span style="padding-right: 8px;"> <b> ${totalMapping} </b> mappings </span>`);
+            if (!(termCurie.startsWith('MeSH'))) {
+                if (!(filtered.includes(termCurie))) {
+                    filtered.push(termCurie);
+                }
             }
-            container.append(showHideDiv('oxo-graph'));
+            return filtered;
+        }, []);
 
-        }else{
-            container.html(`No ontology mappings found.`);
-        }
-
-        $('#button-oxo-graph').click(() => {
-            //To redraw the oxo graph so that it is center to the div
-            drawGraph(getMainEFO().replace('_',':'),1);
-        });
-    })
-};
-
-
-
-/**
- * Query oxo for cross reference of an given term.
- * Note, oxo uses 'EFO:0000400' instead of 'EFO_0000400'.
- * Lazy load.
- * @param {String} efoid
- * @returns {Promise}
- */
-getOXO = function(efoid){
-    var queryOXO = function(efoid){
-        return promiseGet(global_oxo_api + 'mappings',
-            {
-                'fromId': efoid.replace('_',':'),
-            }
-        ).then(JSON.parse).then(function(data){
-            var tmp = {}
-            tmp[efoid] = data;
-            return tmp;
-        });
-    }
-
-
-    var dataPromise = getPromiseFromTag(global_efo_info_tag_id, 'efo2OXO');
-    return dataPromise.then(function(data) {
-        if ($.inArray(efoid, Object.keys(data)) == -1) {
-            //efo info is not currently loaded
-            // console.log('Loading oxo for ' + efoid)
-            dataPromise = queryOXO(efoid);
-            return dataPromise.then(function(data){
-                //add to tag
-                addPromiseToTag(global_efo_info_tag_id,dataPromise,'efo2OXO');
-                return data[efoid];
-            })
-        }else {
-            //efo colour is has been loaded perviously
-            // console.debug('Loading oxo from cache for ' + efoid);
-            return data[efoid]
+        if (mappedTerms.length > 0) {
+            $("#efotrait-oxo-mappings").html(longContentList(
+                "gwas_efotrait_oxo_mappings_div", mappedTerms.sort(), 'mapped terms')
+            );
         }
     })
 };
 
-
-
-
-/**
- * query a promise from a tag's data attribute with a key. The data attribute contains a hash.
- * If the hash key exist, the promise is returned, otherwise, a new empty resolved promise is returned.
- * @param String tagID - the html tag used to store the data, with the '#'
- * @param String key - the has key for promise
- * @return Promise
- * @example getPromiseFromTag('#efoInfo','key')
- */
-getPromiseFromTag = function(tagID,key){
-    // initInfoTag(tagID);
-    var dataPromise =  getDataFromTag(tagID,key)
-    if (dataPromise == undefined) {
-        dataPromise = new Promise(function(resolve){
-            resolve({});
-        })
-    }
-    return dataPromise;
-};
-
-
-/**
- * Add a promise to a tag's data attribute. The data attribute contains a hash.
- * If the hash key exist, the new promise data is merged to the old one.
- * @param String tagID - the html tag used to store the data, with the '#'
- * @param Promise promise - the promise, fullfilled or pending
- * @param String key - the has key for Promise
- * @param Boolean overwriteWarning - Default value is false. if true, print log to idicate overwritting.
- * @return {Promise} - Promise containing merged data
- * @example addPromiseToTag('#efoInfo',promise,'key',false)
- */
-addPromiseToTag = function(tagID, promise, key, overwriteWarning=false) {
-    // initInfoTag(tagID);
-
-    var oldPromise = $(tagID).data(key) || new Promise(function(resolve){
-        resolve({})
-    });
-
-
-    var result;
-    var p = Promise.all([oldPromise,promise]).then(function(arrayPromise){
-        oldData = arrayPromise[0]
-        newData = arrayPromise[1]
-
-        if(overwriteWarning){
-            var overlap = Object.keys(oldData).filter(function(n) {
-                return Object.keys(newData).indexOf(n) > -1;
-            });
-            if (overlap.length > 0) {
-                overlap.forEach(function(d) {
-                    // console.log(d + 'will be overwritten.')
-                })
-            }
-        }
-        result = $.extend({}, oldData, newData)
-        return result;
-    });
-
-
-    p.then(function(){
-        $(tagID).data(key,p);
-        console.debug('adding promise to ' + key + ' tag ' + tagID);
-    })
-    return p;
-};
-
-
-/**
- * query data from a tag's data attribute with a key. The data attribute contains a hash.
- * If the hash key exist, the date is returned, otherwise, a new empty hash is returned.
- * @param String tagID - the html tag used to store the data, with the '#'
- * @param String key - the has key for promise
- * @return {}
- * @example getDataFromTag('#efoInfo','key')
- */
-getDataFromTag = function(tagID, key) {
-    // initInfoTag(tagID);
-    key = key || ''
-    var data = $(tagID).data();
-    if (key == '')
-        return data
-    if (Object.keys(data).indexOf(key) == -1){
-        // console.warn('The requested data with key ' + key + ' to ' + tagID + ' does not exist!');
-        return undefined;
-    }
-    return data[key]
-}
 
 
 
