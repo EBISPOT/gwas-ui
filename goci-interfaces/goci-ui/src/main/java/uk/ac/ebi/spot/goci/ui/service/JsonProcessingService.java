@@ -47,10 +47,10 @@ public class JsonProcessingService {
             header =
                     "STUDY ACCESSION\tPUBMEDID\tFIRST AUTHOR\tDATE\tINITIAL SAMPLE DESCRIPTION\tREPLICATION SAMPLE DESCRIPTION\tSTAGE\tNUMBER OF INDIVDUALS\tBROAD ANCESTRAL CATEGORY\tCOUNTRY OF ORIGIN\tCOUNTRY OF RECRUITMENT\tADDITONAL ANCESTRY DESCRIPTION";
         }
-        else if(type.equals("unpublished_study")){
+        else if(type.equals("study_new_format")){
             header =
                     "DATE ADDED TO CATALOG\tPUBMED ID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tPLATFORM [SNPS PASSING QC]\tASSOCIATION COUNT\tMAPPED_TRAIT\tMAPPED_TRAIT_URI\tSTUDY ACCESSION\tGENOTYPING TECHNOLOGY\tSUMMARY STATS LOCATION\tSUBMISSION DATE\tSTATISTICAL MODEL\tBACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT URI";
-        }else if(type.equals("unpublished_ancestry")){
+        }else if(type.equals("ancestry_new_format")){
             header =
                     "STUDY ACCESSION\tPUBMED ID\tFIRST AUTHOR\tDATE\tINITIAL SAMPLE DESCRIPTION\tREPLICATION SAMPLE DESCRIPTION\tSTAGE\tNUMBER OF INDIVIDUALS\tBROAD ANCESTRAL CATEGORY\tCOUNTRY OF ORIGIN\tCOUNTRY OF RECRUITMENT\tADDITIONAL ANCESTRY DESCRIPTION\tANCESTRY DESCRIPTOR\tFOUNDER/GENETICALLY ISOLATED POPULATION\tNUMBER OF CASES\tNUMBER OF CONTROLS\tSAMPLE DESCRIPTION\tCOHORT(S)\tCOHORT-SPECIFIC REFERENCE";
         }
@@ -84,7 +84,7 @@ public class JsonProcessingService {
 
                 if(doc.get("ancestryLinks") != null){
                     for(JsonNode a : doc.get("ancestryLinks")){
-                        if(type.equals("unpublished_ancestry")){
+                        if(type.equals("ancestry_new_format")){
                             processAncestryJson(line, doc, a, true);
                         }else {
                             processAncestryJson(line, doc, a);
@@ -93,7 +93,7 @@ public class JsonProcessingService {
                 }
 
             }
-            else if(type.equals("unpublished_study")){
+            else if(type.equals("study_new_format")){
                 processStudyJson(line, doc, true);
             }
             else {
@@ -1021,7 +1021,7 @@ public class JsonProcessingService {
     }
 
     private String getNodeValue(JsonNode doc, String key){
-        return doc.get(key).asText("");
+        return doc.has(key) ? doc.get(key).asText("") : "";
     }
 
     private String getNodeValue(JsonNode doc, String key, String defaultValue){
