@@ -123,41 +123,20 @@
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-synonym">-</div>
                         </div>
-
+                        
                         <!-- EFO Term Mappings -->
                         <div class="clearfix">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
                                 <span>Mapped terms</span>
                                 <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
                                       title="Equivalent trait IDs in other ontologies">
                                 </span>
                             </div>
-
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                <div id="btn-oxo-expand">-
-                                    <!--<a class="btn btn-default" id="btn-toggle-oxo"-->
-                                    <!--type="button"-->
-                                    <!--data-toggle="collapse"-->
-                                    <!--data-target="#oxo-graph"-->
-                                    <!--aria-expanded="false">-->
-                                    <!--+-->
-                                    <!--</a>-->
-                                </div>
-                                <!--oxo graph-->
-                                <!--<div class="clearfix collapse col-xs-2 col-md-2 col-xs-2 col-xs-2" id="oxo-graph">-->
-                                <div class="clearfix collapse" id="oxo-graph">
-                                    <div  class="panel-body">
-                                        <div id="oxo-div" >
-                                            <div id="oxo-list"></div>
-                                            <!--<div>-->
-                                            <!--<div id="oxo-vis"></div>-->
-                                            <!--</div>-->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-oxo-mappings">-</div>
                         </div>
+
                     </div>
+
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top: 15px; padding-left: 15px; padding-right: 15px;">
                         <div class="btn-group-vertical pull-right" id="panel-links">
@@ -529,7 +508,14 @@
 <script th:src="@{/js/common-datatables/associations-datatable.js}"></script>
 <script th:src="@{/js/autocomplete-termselect.js}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.min.js"></script>
-<script th:src="@{/js/efotrait-util.js}"></script>
+
+
+<!-- PROD TRAIT PAGE -->
+<!--<script th:src="@{/js/efotrait-util.js}"></script>-->
+
+<!-- TEST NEW TRAIT PAGE -->
+<script th:src="@{/js/efotrait-util-updated.js}"></script>
+
 
 <!--this come last to make sure trait page specific style is not overwritten by othe css.-->
 <link rel="stylesheet" th:href="@{/css/goci-efotrait-page.css}"/>
