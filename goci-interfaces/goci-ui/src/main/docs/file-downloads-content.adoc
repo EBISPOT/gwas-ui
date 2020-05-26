@@ -37,7 +37,7 @@
 |link:fileheaders#_file_headers_for_ancestry_download[ Click to view]
 
 |All ancestry data *v1.0.3 - with added fields to match unpublished downloads (see below)* _(link:faq#faq-F2[see FAQ F2 for more details])_
-|link:../api/search/downloads/ancestry_new[ Click to download]
+|link:../api/search/downloads/ancestries_new[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_unpublished_ancestries[ Click to view]
 

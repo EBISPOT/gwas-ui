@@ -369,9 +369,12 @@ public class FileController {
     }
 
     private void buildDownload(String fileName, Resource inputFile, HttpServletResponse response) throws IOException {
+        OutputStream output = new BufferedOutputStream(response.getOutputStream());
         response.setContentType("text/tsv");
         response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
-        Files.copy(inputFile.getFile().toPath(), new BufferedOutputStream(response.getOutputStream()));
+        Files.copy(inputFile.getFile().toPath(), output);
         response.setStatus(HttpStatus.OK.value());
+        output.flush();
+        output.close();
     }
 }
