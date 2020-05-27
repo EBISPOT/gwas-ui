@@ -69,7 +69,7 @@ function loadStudiesList(summaryStatsStudyAccessions) {
 
 function loadUnpublishedStudiesList() {
 
-    $.getJSON('/gwas/rest/api/studies/unpublished', {})
+    $.getJSON('../api/studies/unpublished', {})
         .done(function(data) {
             displayDatatableUnpublishedSummaryStats(data);
         });
@@ -124,11 +124,18 @@ function processStudyDoc(study, table) {
 
     row.append($("<td>").html(study.associationCount));
 
-    var a = (study.authorAscii_s).replace(/\s/g,"");
-    var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
-    var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(dir).concat("' target='_blank'>Click for summary statistics</a>");
+    if((study.accessionId).indexOf("GCST9") != -1){
+        var dir = "".concat("_").concat(study.accessionId);
+        var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(dir).concat("' target='_blank'>Click for summary statistics</a>");
 
-    row.append($("<td>").html(ftplink));
+        row.append($("<td>").html(ftplink));
+    }else{
+        var a = (study.authorAscii_s).replace(/\s/g,"");
+        var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
+        var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(dir).concat("' target='_blank'>Click for summary statistics</a>");
+
+        row.append($("<td>").html(ftplink));
+    }
 
     table.append(row);
 

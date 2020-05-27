@@ -17,6 +17,10 @@ Data in the GWAS Catalog is currently mapped to genome assembly <span id="genome
 
 <<File headers for ancestry download>>
 
+<<File headers for unpublished studies>>
+
+<<File headers for unpublished ancestries>>
+
 *Available in associations download files
 
 +Available in studies download files
@@ -152,4 +156,99 @@ COUNTRY OF RECRUITMENT: Country of recruitment of the individuals in the sample
 ADDITONAL ANCESTRY DESCRIPTION: Any additional ancestry descriptors relevant to the sample description
 
 _Added: 16 September 2016_
+
+=== File headers for unpublished studies
+
+DATE ADDED TO CATALOG	Not used
+
+PUBMED ID	Not used
+
+FIRST AUTHOR	Last name and initials of first author
+
+DATE	Not used
+
+JOURNAL	Not used
+
+LINK	URL of the manuscript the GWAS is included in
+
+STUDY	Title of manuscript the GWAS is included in
+
+DISEASE/TRAIT	Disease or trait examined in the GWAS
+
+INITIAL SAMPLE SIZE	Not used
+
+REPLICATION SAMPLE SIZE	Not used
+
+PLATFORM [SNPS PASSING QC]	Genotyping platform manufacturer and number of SNPs tested in the analysis; also includes imputation of SNPs, where applicable
+
+ASSOCIATION COUNT	Not used
+
+MAPPED_TRAIT	Not used
+
+MAPPED_TRAIT_URI	Not used
+
+STUDY ACCESSION	GWAS Catalog Accession ID
+
+GENOTYPING TECHNOLOGY	Genotyping technology/ies used in this study, with additional array information (eg. Immunochip or Exome array) in brackets.
+
+BACKGROUND TRAIT	Any background trait(s) shared by all individuals in the GWAS
+
+MAPPED BACKGROUND TRAIT	Not used
+
+MAPPED BACKGROUND TRAIT URI	Not used
+
+SUMMARY STATS LOCATION	The location of the summary statistics file
+
+SUBMISSION DATE	The date the GWAS was submitted to the Catalog
+
+STATISTICAL MODEL	Details of the statistical model used to determine association significance
+
+
+_Added: 15 May 2020_
+
+'''
+
+=== File headers for unpublished ancestries
+
+STUDY ACCESSION	GWAS Catalog Accession ID
+
+PUBMED ID	not used
+
+FIRST AUTHOR	Last name and initials of first author
+
+DATE	not used
+
+INITIAL SAMPLE DESCRIPTION	?
+
+REPLICATION SAMPLE DESCRIPTION	not used
+
+STAGE	not used/filled with initial for all
+
+NUMBER OF INDIVIDUALS	Number of individuals in this sample
+
+BROAD ANCESTRAL CATEGORY	Broad ancestral category to which the individuals in the sample belong
+
+COUNTRY OF ORIGIN	not used
+
+COUNTRY OF RECRUITMENT	Country of recruitment of the individuals in the sample
+
+ADDITIONAL ANCESTRY DESCRIPTION	Any additional ancestry descriptors relevant to the sample description
+
+ANCESTRY DESCRIPTOR	The most detailed ancestry descriptor(s) for the sample.
+
+FOUNDER/GENETICALLY ISOLATED POPULATION	Description of a founder or genetically isolated population
+
+NUMBER OF CASES	The number of cases in this broad ancestry group
+
+NUMBER OF CONTROLS	The number of controls in this broad ancestry group
+
+SAMPLE DESCRIPTION	Additional sample information required for the interpretation of result
+
+COHORT(S)	List of cohort(s) represented in the discovery sample
+
+COHORT-SPECIFIC REFERENCE	List of cohort specific identifier(s) issued to this research study
+
+_Added: 15 May 2020_
+
+'''
 

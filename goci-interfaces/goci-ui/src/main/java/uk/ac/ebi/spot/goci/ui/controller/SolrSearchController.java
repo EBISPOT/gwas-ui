@@ -1011,7 +1011,11 @@ public class SolrSearchController {
         int maxResults = 1000000;
         int page = 1;
 
-        addFilterQuery(solrSearchBuilder, "resourcename", facet);
+        if(facet.contains("_new_format")){
+            addFilterQuery(solrSearchBuilder, "resourcename", "study");
+        }else {
+            addFilterQuery(solrSearchBuilder, "resourcename", facet);
+        }
         addRowsAndPage(solrSearchBuilder, maxResults, page);
 
         if (pval != "") {
@@ -1082,6 +1086,10 @@ public class SolrSearchController {
             else{
                 if(efo){
                     fileName = "gwas_catalog_v1.0.2-".concat(facet).concat("-downloaded_").concat(now).concat(".tsv");
+                }else if(facet.equals("study_new_format")){
+                    fileName = "gwas_catalog_v1.0.3-study-downloaded_".concat(now).concat(".tsv");
+                }else if(facet.equals("ancestry_new_format")){
+                    fileName = "gwas_catalog_v1.0.3-ancestry-downloaded_".concat(now).concat(".tsv");
                 }
                 else {
                     fileName = "gwas_catalog_v1.0-".concat(facet).concat("-downloaded_").concat(now).concat(".tsv");
