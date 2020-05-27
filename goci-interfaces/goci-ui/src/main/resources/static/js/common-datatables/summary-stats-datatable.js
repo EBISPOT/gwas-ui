@@ -1,4 +1,91 @@
-/** First refactoring action: common js - DRY. From Xin original code
+function displayDatatableUnpublishedSummaryStats(data) {
+    var filename = buildFileName('list_gwas_unpublished_summary_statistics_');
+
+    $.each(data, (index, summary_stats) => {
+        var tmp = {};
+        var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(summary_stats.file);
+        var ftplink = "<a href='" + ftpPath.concat("' target='_blank'>") + "Download</a>";
+        summary_stats['path'] = ftplink;
+        summary_stats['author'] = summary_stats['body_of_work'][0]['first_author']
+        summary_stats['pubmed_id'] = summary_stats['body_of_work'][0]['pubmed_id']
+        summary_stats['journal'] = summary_stats['body_of_work'][0]['journal']
+        summary_stats['title'] = summary_stats['body_of_work'][0]['title']
+        summary_stats['publication_date'] = summary_stats['body_of_work'][0]['publication_date']
+    });
+    $('#summary-stats-unpublished-table').bootstrapTable('removeAll');
+    $('#summary-stats-unpublished-table').bootstrapTable({
+        exportDataType: 'all',
+        exportOptions: {
+            fileName: filename
+        },
+        columns: [
+            {
+                field: 'author',
+                title: 'First Author',
+                sortable: true
+            },
+            {
+                field: 'pubmed_id',
+                title: 'PubMed ID',
+                sortable: true
+            },
+            {
+                field: 'accession',
+                title: 'Study accession',
+                sortable: true
+            },
+            {
+                field: 'publication_date',
+                title: 'Publication date',
+                sortable: true
+            },
+            {
+                field: 'journal',
+                title: 'Journal',
+                sortable: true
+            },{
+                field: 'title',
+                title: 'Title',
+                sortable: true,
+                //          width:"120", //This works when the table is not nested into other tag, for example, in a simple Div
+            },
+            {
+                field: 'trait',
+                title: 'Reported trait',
+                sortable: true
+            },
+            {
+                field: 'path',
+                title: 'FTP Path',
+                visible: true
+            }
+        ],
+        data: data,
+
+    });
+    $('#summary-stats-unpublished-table').bootstrapTable('load',data);
+    if(data.length>5){
+        $('#summary-stats-unpublished-table').bootstrapTable('refreshOptions',{showRefresh: true,pagination:true,pageSize: pageRowLimit, pageList: [5,10,25,50,100,'All']})
+    }
+    // Add custom tooltip text for button
+    $('.keep-open').attr('title','Add/Remove Columns');
+    hideLoadingOverLay('#summary-stats-table-loading');
+
+}
+function buildFileName(base) {
+    // get current date
+    var d = new Date();
+    var curr_date = d.getDate();
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var curr_month = monthNames[d.getMonth()];
+    var curr_year = d.getFullYear();
+    var date = (curr_date + "_" + curr_month + "_" + curr_year);
+
+    var filename = base+date;
+    return filename;
+}
+    /** First refactoring action: common js - DRY. From Xin original code
  *  Datatable action to rendering summary stats panel.
  *  SAB 2018. MVP.
  * */
@@ -76,16 +163,7 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     
     });
 
-    // get current date
-    var d = new Date();
-    var curr_date = d.getDate();
-    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    var curr_month = monthNames[d.getMonth()];
-    var curr_year = d.getFullYear();
-    var date = (curr_date + "_" + curr_month + "_" + curr_year);
- 
-    var filename = 'list_gwas_summary_statistics_'+date;
+    var filename = buildFileName('list_gwas_summary_statistics_');
     $('#summary-stats-table').bootstrapTable({
         exportDataType: 'all',
         exportOptions: {
