@@ -27,8 +27,13 @@ $(document).ready(function() {
 
 function getAllSummaryStatsStudies () {
     $('#loadingStudies').show();
-    
-    var sumStatsUrl = 'https://www.ebi.ac.uk/gwas/summary-statistics/api/study_list';
+
+    if(gwasProperties.IS_DEV == true){
+        var sumStatsUrl = gwasProperties.DEV_SUM_STATS_SERVICE + 'study_list';
+    }else{
+        var sumStatsUrl = gwasProperties.SUM_STATS_SERVICE + 'study_list';
+    }
+
 
     var summaryStatsStudyAccessions = [];
     return promiseGet(sumStatsUrl,
@@ -37,7 +42,7 @@ function getAllSummaryStatsStudies () {
     }).catch(function (err) {
         console.error('Error getting Summary Stats data:' + err);
     }).then(function () {
-        //loadStudiesList(summaryStatsStudyAccessions);
+        loadStudiesList(summaryStatsStudyAccessions);
     });
 
 }
