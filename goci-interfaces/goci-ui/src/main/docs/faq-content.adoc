@@ -42,6 +42,8 @@
 
 19. <<faq-A19, Are results from sequencing-based association analyses included in the GWAS Catalog?>>
 
+20. <<faq-A20, How does the GWAS Catalog represent extremely small p-values?>>
+
 
 
 === B. Searching the GWAS Catalog
@@ -254,6 +256,10 @@ Each association in the Catalog comes from a unique analysis. However, certain c
 ==== [[faq-A19]]19. Are results from sequencing-based association analyses included in the GWAS Catalog?
 
 At this time only array-based association analyses are https://www.ebi.ac.uk/gwas/methods/criteria[eligible] but we are investigating expanding the scope to include sequencing-based association studies.  You can read the results of our review of the sequencing-based association literature, see our list of studies and curated metadata, and give us your input on https://www.ebi.ac.uk/gwas/docs/pilots[our pilots page].
+
+==== [[faq-A20]]20. How does the GWAS Catalog represent extremely small p-values?
+
+Some publications may report a GWAS association p-value of 0+E00 due to the limits of methods or analysis software to compute very small numbers (p<1x10-300). Where authors are unable to provide the precise p-value we will extract 1e-300 as the maximum p-value. However it should be noted that the true p-value may be much smaller. 
 
 
 == [[B]]B. Searching the GWAS Catalog
@@ -512,4 +518,4 @@ Email us at gwas-info@ebi.ac.uk.
 
 '''
 
-_Last updated: 24 September 2018_
+_Last updated: 28 May 2020_

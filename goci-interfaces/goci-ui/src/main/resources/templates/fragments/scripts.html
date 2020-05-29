@@ -28,9 +28,12 @@
             EnsemblURL : "http://ensembl.org/Homo_sapiens/",
             OpenTargetsURL : "https://www.targetvalidation.org/target/",
             EntrezURL : "https://www.ncbi.nlm.nih.gov/gene/",
-            OMIMURL : 'https://www.omim.org/entry/'
+            OMIMURL : 'https://www.omim.org/entry/',
+            DEV_SUM_STATS_SERVICE : 'https://wwwdev.ebi.ac.uk/gwas/summary-statistics/api/',
+            SUM_STATS_SERVICE : 'https://www.ebi.ac.uk/gwas/summary-statistics/api/',
+            IS_DEV : host != 'www.ebi.ac.uk'
         };
-//        console.log(gwasProperties);
+        //console.log(gwasProperties);
         /*
                 function imageExists(url, callback) {
                     var img = new Image();
