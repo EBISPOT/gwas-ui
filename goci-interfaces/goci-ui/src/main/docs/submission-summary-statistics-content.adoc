@@ -57,7 +57,7 @@ There are 7 empty columns for you to fill in. Mandatory columns are highlighted 
 
 |Study tag
 |
-|A unique free-text label for each genome-wide association study in the publication. You can use any string of characters that will help you identify each individual GWAS.
+|Each genome-wide association study in the submission must have a unique free-text label. You can use any string of characters that will help you identify each individual GWAS.
 |
 |yes
 |
@@ -87,7 +87,7 @@ There are 7 empty columns for you to fill in. Mandatory columns are highlighted 
 
 |Readme
 |
-|The readme text that accompanies your analysis. Please copy the text into this cell, rather than uploading a separate readme file. If the same readme applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics.
+|The readme text that accompanies your analysis. Please copy the text into this cell, rather than uploading a separate readme file. If the same readme applies to all studies in the submission, please copy the text into each row. Leave blank for any studies without summary statistics.
 |
 |no
 |
@@ -144,4 +144,4 @@ If you need more information to identify each study, you can find additional det
 
 ==== What if the prefilled data is incorrect?
 
-If you think there is a mistake in the pre-filled spreadsheet (e.g. the wrong number of studies), please contact gwas-info@ebi.ac.uk.
+If you think there is a mistake in the pre-filled spreadsheet (e.g. the wrong number of studies), please contact gwas-subs@ebi.ac.uk.
