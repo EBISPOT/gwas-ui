@@ -76,7 +76,8 @@ The Status of the publication tells you which type of data can be submitted.
 
 Once you have found your publication, click on the PMID to open the Details page.
 
-A publication will not appear in the table if
+A publication will not appear in the table if:
+
 * it has not yet been indexed in PubMed
 * it has been missed by our literature search, or
 * we have determined that it does not meet our https://www.ebi.ac.uk/gwas/docs/methods/criteria[inclusion criteria]
