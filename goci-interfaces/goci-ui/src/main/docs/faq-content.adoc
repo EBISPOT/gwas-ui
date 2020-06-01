@@ -211,7 +211,7 @@ A *publication* refers to an article published in a scientific journal. We use e
 
 ==== [[faq-A11]]11. How do I find out the accession number for my study of interest?
 
-Each separate study in the GWAS Catalog has an accession number beginning with “GCST”. Study accessions are visible at the top of each “Study” page and in the “Studies” and “Associations” data tables on other pages.  Accession numbers are included in the v1.0.1 spreadsheets for associations and studies as well the ancestry spreadsheets. Accession numbers are not provided in the v1.0 spreadsheets as these are legacy formats provided only to support backwards compatibility with the old NHGRI spreadsheet.
+Each separate study in the GWAS Catalog has an accession number beginning with “GCST”. Study accessions are visible at the top of each “Study” page and in the “Studies” and “Associations” data tables on other pages.  Accession numbers are included in the v1.0.2 and v1.0.3 spreadsheets for associations and studies as well the ancestry spreadsheets. Accession numbers are not provided in the v1.0 spreadsheets as these are legacy formats provided only to support backwards compatibility with the old NHGRI spreadsheet.
 
 ==== [[faq-A12]]12. What is the difference between a trait and a reported trait?
 
@@ -475,9 +475,9 @@ There are thousands of genome-wide association studies and each study yields ass
 
 ==== [[faq-H2]]2. How do I find out which publications have full summary statistics available?
 
-Studies with full summary statistics are indicated by an icon in the “Association count” column of the studies table. You can also view a full list of studies with summary statistics files link:https://www.ebi.ac.uk/gwas/downloads/summary-statistics[here] together with links to other summary statistics resources.
+Published studies with full summary statistics are indicated by an icon in the “Association count” column of the studies table in the search interface. You can view a full list of studies with summary statistics files (published and pre-published/unpublished) link:https://www.ebi.ac.uk/gwas/downloads/summary-statistics[here] together with links to other summary statistics resources.
 
-Summary statistics files are available once curation of the publication is completed, even before the publication is included in our data release (approximately every three weeks).  Therefore, if a publication states that summary statistics are available from the Catalog, and no Catalog entry yet exists, please contact us at gwas-info@ebi.ac.uk and we can give you direct access to the files.
+Summary statistics files are available as soon as possible, even before the publication is included in our data release (approximately every three weeks).  Therefore, if a manuscript states that summary statistics are available from the Catalog and you cannot find them in the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[list of studies with summary statistics files] please contact us at gwas-info@ebi.ac.uk and we can give you direct access to the files.
 
 ==== [[faq-H3]]3. How do I access summary statistics?
 
