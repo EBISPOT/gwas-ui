@@ -291,8 +291,8 @@ public class JsonProcessingService {
     }
 
         public void processAssociationJson(StringBuilder line, JsonNode doc) throws IOException {
-        setMultiSnpHaplotype(doc.get("multiSnpHaplotype").asBoolean());
-        setSnpInteraction(doc.get("snpInteraction").asBoolean());
+        setMultiSnpHaplotype(getBoolean(doc,"multiSnpHaplotype"));
+        setSnpInteraction(getBoolean(doc, "snpInteraction"));
 
         line.append(getDate(doc));
         line.append("\t");
@@ -697,7 +697,6 @@ public class JsonProcessingService {
         return location;
     }
 
-
     private String getRepSample(JsonNode doc) {
         String sampleDesc;
         if (doc.get("replicateSampleDescription") != null) {
@@ -1026,6 +1025,10 @@ public class JsonProcessingService {
 
     private String getNodeValue(JsonNode doc, String key, String defaultValue){
         return doc.get(key).asText(defaultValue);
+    }
+
+    private Boolean getBoolean(JsonNode doc, String key){
+        return doc.has(key) ? doc.get(key).asBoolean() : false;
     }
 
     public void setMultiSnpHaplotype(boolean multiSnpHaplotype) {
