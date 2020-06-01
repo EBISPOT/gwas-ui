@@ -481,7 +481,7 @@ Summary statistics files are available as soon as possible, even before the publ
 
 ==== [[faq-H3]]3. How do I access summary statistics?
 
-There are two methods. We have developed a dedicated summary statistics database, enabling users with searchable, filterable, harmonised data via  the summary statistics http://www.ebi.ac.uk/gwas/summary-statistics/docs/[REST API]. Alternatively, non-programmatic access to the original, standardised and harmonised data is available on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site].
+There are two methods. We have developed a dedicated summary statistics database, enabling users with searchable, filterable, harmonised data via  the summary statistics http://www.ebi.ac.uk/gwas/summary-statistics/docs/[REST API]. Alternatively, non-programmatic access to the original, standardised and harmonised data is available on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] (which can be accessed via links in the https://www.ebi.ac.uk/gwas/search?query=[search interface] or the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[list of studies with summary statistics files]).
 
 ==== [[faq-H4]]4. How should I cite summary statistics downloaded from the GWAS Catalog?
 
@@ -499,11 +499,9 @@ Currently the feeling in the community is that the unrestricted sharing of summa
 
 ==== [[faq-I1]]1. How can I submit summary statistics to the GWAS Catalog?
 
-We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also encourage authors to submit their data directly.
+We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also accept submissions of summary statistics for both published and pre-published/unpublished GWAS. We encourage authors to submit their data directly through our https://www.ebi.ac.uk/gwas/deposition[submission page]. Detailed instructions can be found in our http://www.ebi.ac.uk/gwas/docs/submission[documentation].
 
-Summary statistics related to published journal articles can be submitted to the GWAS Catalog via the http://www.ebi.ac.uk/gwas/deposition[Submission page]. Detailed instructions can be found in our http://www.ebi.ac.uk/gwas/docs/submission[documentation].
-
-If you would like to submit summary statistics for an article in preparation, or for an unpublished project, please contact gwas-subs@ebi.ac.uk. Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods/criteria[eligibility criteria], and the summary statistics files must reflect published results.
+Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods/criteria[eligibility criteria], and the summary statistics files must reflect published results.
 
 ==== [[faq-I2]]2. How should summary statistics be formatted for submission?
 
