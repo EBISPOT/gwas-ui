@@ -195,7 +195,7 @@ The GWAS Catalog data can be used under the standard terms of use for EBI servic
 
 ==== [[faq-A7]]7. How often are the GWAS Catalog and diagram updated?
 
-New data is added to the GWAS Catalog and diagram every three weeks. Data releases include all downloadable spreadsheets.  You can find the date of the most recent data release at the bottom of the Catalog home page.  Summary statistics files are made available as soon as possible, even before the study is included in our data release.  Therefore, if a manuscript states that summary statistics are available from the Catalog, and no Catalog entry yet exists, please contact us at gwas-info@ebi.ac.uk and we can give you direct access to the files.
+New data is added to the GWAS Catalog and diagram every three weeks. Data releases include all downloadable spreadsheets.  You can find the date of the most recent data release at the bottom of the Catalog home page.  Summary statistics files are made available as soon as possible, even before the study is included in our data release.  Therefore, if a manuscript states that summary statistics are available from the Catalog and you cannot find them in the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[list of studies with summary statistics files] please contact us at gwas-info@ebi.ac.uk and we can give you direct access to the files.
 
 ==== [[faq-A8]]8. A new GWAS paper has just been published. Why is it not in the GWAS Catalog?
 
