@@ -163,7 +163,9 @@
 
 ==== [[faq-A1]]1. How can I access GWAS Catalog data?
 
-In autumn 2018, we updated the GWAS Catalog search interface. Previously all Catalog data was displayed on a single page, with tables for “Studies”, “Associations” and “Catalog traits”. We have now created separate pages for each *publication*, *study*, *trait*, *variant* and *gene* in the Catalog so that each of these can be explored individually. To get started, search for any text you wish in the search bar, then select a specific page for more information. See <<B,Searching in the GWAS Catalog below>> for further tips on how to find specific types of information, or see the https://youtu.be/4FplAQzRfh8[introductory video].
+GWAS Catalog data from published studies is available through our https://www.ebi.ac.uk/gwas/search?query=[search interface]. Separate pages are available for each *publication*, *study*, *trait*, *variant* and *gene* in the Catalog so that each of these can be explored individually. To get started, search for any text you wish in the search bar, then select a specific page for more information. See <<B,Searching in the GWAS Catalog below>> for further tips on how to find specific types of information, or see the https://youtu.be/4FplAQzRfh8[introductory video]. 
+
+Summary statistics files are available to download from our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] via links from the study in the https://www.ebi.ac.uk/gwas/search?query=[search interface] or our designated https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page]. Harmonised summary statistics are also available from our summary statistics database via https://www.ebi.ac.uk/gwas/summary-statistics/docs/[API]. 
 
 GWAS Catalog data can be downloaded in spreadsheet form. To download full association and study data, see our link:file-downloads[file downloads] page. You can also download specific association data sets from each “Publication”, “Study”, “Trait”, “Variant” and "Gene" page using the “Download Catalog data” button.
 
@@ -171,7 +173,7 @@ The GWAS Catalog <<D,diagram>> presents a graphical view of the GWAS Catalog dat
 
 We also provide REST API access to the GWAS Catalog data. See <<G,Programmatic access below>> for more information.
 
-From 2017, the GWAS Catalog started hosting summary statistics files in addition to curated associations. See <<H,Summary statistics below>> for more information.
+From 2020, the GWAS Catalog started accepting submissions for pre-published and unpublished GWAS. Unpublished GWAS data is available through separate studies and ancestry https://www.ebi.ac.uk/gwas/downloads[downloads]. SNP-trait associations are not available for pre-published and unpublished GWAS as these studies have not been curated.
 
 ==== [[faq-A2]]2. Why did the Catalog move from the NHGRI to the EBI?
 
