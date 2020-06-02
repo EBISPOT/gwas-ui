@@ -61,7 +61,7 @@ function parseSumStats (data) {
 function loadStudiesList(summaryStatsStudyAccessions) {
     var searchTerm = 'fullPvalueSet:true';
 
-    $.getJSON( gwasProperties.GWAS_REST_API + '/search/summaryStatistics', {
+    $.getJSON('../api/search/summaryStatistics', {
                 'q': searchTerm,
                 'max': 2000,
                 'fl': 'author,publicationDate,pubmedId,publication,title,traitName,associationCount,author_s,accessionId',
