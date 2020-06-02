@@ -61,7 +61,7 @@ function parseSumStats (data) {
 function loadStudiesList(summaryStatsStudyAccessions) {
     var searchTerm = 'fullPvalueSet:true';
 
-    $.getJSON('../api/search/summaryStatistics', {
+    $.getJSON( gwasProperties.GWAS_REST_API + '/search/summaryStatistics', {
                 'q': searchTerm,
                 'max': 2000,
                 'fl': 'author,publicationDate,pubmedId,publication,title,traitName,associationCount,author_s,accessionId',
@@ -74,7 +74,7 @@ function loadStudiesList(summaryStatsStudyAccessions) {
 
 function loadUnpublishedStudiesList() {
 
-    $.getJSON('../api/studies/unpublished', {})
+    $.getJSON(gwasProperties.GWAS_REST_API + '/studies/unpublished', {})
         .done(function(data) {
             displayDatatableUnpublishedSummaryStats(data);
         });
