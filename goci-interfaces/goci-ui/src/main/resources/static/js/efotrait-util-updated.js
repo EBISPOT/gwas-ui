@@ -668,7 +668,8 @@ function processSolrData(data, initLoad=false) {
 
         //work out highlight study
         var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
-        if(initLoad && highlightedStudy!= undefined){
+        // if(initLoad && highlightedStudy!= undefined){
+        if(highlightedStudy!= undefined){
             displayHighlightedStudy(highlightedStudy);
             //display summary information like 'EFO trait first reported in GWAS Catalog in 2007, 5 studies report this efotrait'
             getSummary(findStudiesForEFO(getMainEFO()));
@@ -760,9 +761,8 @@ displayHighlightedStudy = function() {
 findHighlightedStudiesForEFO = function(efoid) {
     var studies = findStudiesForEFO(efoid);
     var sorted_index = studySorting.sortByInitialSampleSize(studies);
-    // return studies[sorted_index[sorted_index.length - 1]];
-    // console.log("** findHighlightedStudiesForEFO: ", efoid, "\n-- Studies: ", studies, "\n-- Sorted index: ", sorted_index);
 
+    console.log("** HS: ", studies[sorted_index[0]]);
     return studies[sorted_index[0]];
 };
 
@@ -870,6 +870,42 @@ var studySorting = {
             return parseInt(sampleSize[b]) - parseInt(sampleSize[a])
         });
         return keysSorted;
+    },
+};
+
+
+var EPMC = {
+    /**
+     * Query PMC for paper info. PMC uses their own id, but can optionally accept pubmed id.
+     * @param {String} pubmed_id
+     * @returns {Promise}
+     * @example EPMC.getFromEPMC('')
+     */
+    getByPumbedId : function(pubmed_id){
+        return promiseGet(global_epmc_api,
+            {
+                'query': 'ext_id:'+pubmed_id + '%20src:med',
+                'resulttype' :  'core',
+                'format' : 'json'
+            }).then(JSON.parse);
+    },
+
+    searchResult : {
+        paper : function(EPMCresult){
+            return EPMCresult.resultList.result[0];
+        },
+        citedByCount : function(EPMCresult){
+            return EPMC.searchResult.paper(EPMCresult).citedByCount;
+        },
+        firstPublicationDate : function(EPMCresult){
+            return EPMC.searchResult.paper(EPMCresult).firstPublicationDate;
+        },
+        journalInfo : function(EPMCresult){
+            return EPMC.searchResult.paper(EPMCresult).journalInfo;
+        },
+        abstractText : function(EPMCresult){
+            return EPMC.searchResult.paper(EPMCresult).abstractText;
+        },
     },
 };
 
