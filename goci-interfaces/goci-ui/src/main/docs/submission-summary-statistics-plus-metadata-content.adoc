@@ -5,7 +5,7 @@
 :imagesdir: ./images
 :data-uri:
 
-For publications that are not yet included in the GWAS Catalog, we ask you to submit metadata in addition to the summary statistics files.
+For publications that are not yet included in the GWAS Catalog, or for pre-publication submissions, we ask you to submit metadata in addition to the summary statistics files.
 
 Instructions are provided below. When you have completed the submission form, return to the https://www.ebi.ac.uk/gwas/docs/submission[main submission instructions^].
 
@@ -20,7 +20,7 @@ In each tab, mandatory columns are highlighted in orange. Grey columns are optio
 
 === [[studies]]1. Study tab
 
-In the Study tab, please add one row for each separate GWAS analysis (study) in the publication. In particular, please make sure that there is one row for each set of summary statistics (i.e. each full set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite.
+In the Study tab, please add one row for each separate GWAS analysis (study) in the submission. In particular, please make sure that there is one row for each set of summary statistics (i.e. each full set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite.
 
 There are 16 columns for you to fill in:
 
@@ -38,7 +38,7 @@ There are 16 columns for you to fill in:
 
 |Study tag
 |
-|A unique free-text label for each genome-wide association study in the publication. You can use any string of characters that will help you identify each individual GWAS.
+|Each genome-wide association study in the submission must have a unique free-text label. You can use any string of characters that will help you identify each individual GWAS.
 |
 |yes
 |
@@ -176,7 +176,7 @@ There are 16 columns for you to fill in:
 
 |Readme
 |
-|The readme text that accompanies your analysis. Please copy the text into this cell, rather than uploading a separate readme file. If the same readme applies to all studies in the publication, please copy the text into each row. Leave blank for any studies without summary statistics.
+|The readme text that accompanies your analysis. Please copy the text into this cell, rather than uploading a separate readme file. If the same readme applies to all studies in the submission, please copy the text into each row. Leave blank for any studies without summary statistics.
 |
 |no
 |
@@ -231,7 +231,7 @@ In the Sample tab, enter information about the samples included in each GWAS.
 
 Each GWAS should be listed separately, within each GWAS, each group of samples should be on a separate row. Examples of sample groups are discovery/replication cohorts, and ancestry categories (e.g. European, East Asian, South Asian).
 
-For example, if your publication includes 2 GWAS analyses for different traits (i.e. 2 studies), each with a discovery and a replication stage (2 stages), in individuals with European or East Asian ancestry (2 broad ancestry categories), then you will need to create:
+For example, if your submission includes 2 GWAS analyses for different traits (i.e. 2 studies), each with a discovery and a replication stage (2 stages), in individuals with European or East Asian ancestry (2 broad ancestry categories), then you will need to create:
 
 * 2 studies x 2 stages x 2 ancestry categories = *8 rows in total*
 
@@ -257,7 +257,7 @@ There are 10 columns for you to fill in:
 
 |Study tag
 |
-|A unique free-text label for each genome-wide association study in the publication. This should match the study tag that you have provided in the “study” tab. This will allow the sample information to be linked to the correct study. You must provide at least one sample row for each study.
+|A unique free-text label for each genome-wide association study in the submission. This should match the study tag that you have provided in the “study” tab. This will allow the sample information to be linked to the correct study. You must provide at least one sample row for each study.
 |
 |yes
 |

@@ -115,7 +115,7 @@ Each summary statistics file should be accompanied by readme text in a standard 
 
 1. Full citation for the publication linked to the submitted summary statistics (in any standard citation style) 
 e.g: Klimentidis YC, Raichlen DA, Bea J, Garcia DO, Wineinger NE, Mandarino LJ, Alexander GE, Chen Z, Going SB (2018) 
-Genome-wide association study of habitual physical activity in over 377,000 UK Biobank participants identifies multiple variants including CADM2 and APOE. International Journal of Obesity. 42: 1161-1176.
+Genome-wide association study of habitual physical activity in over 377,000 UK Biobank participants identifies multiple variants including CADM2 and APOE. International Journal of Obesity. 42: 1161-1176. (If your submission is not for a published article, you may use whatever citation is most appropriate).
 
 2. Clear description of the content presented in additional columns that are not present in our standard format
 e.g.: INFO: imputation quality/certainty metric from IMPUTE2

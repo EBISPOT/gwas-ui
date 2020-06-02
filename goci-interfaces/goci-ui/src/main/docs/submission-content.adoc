@@ -5,13 +5,13 @@
 
 == How to submit summary statistics
 
-Authors of GWAS publications can now submit full summary statistics following the steps below:
+The GWAS Catalog accepts summary statistics for both published and unpublished human genome-wide association studies. To submit summary statistics to the Catalog, please follow the steps below:
 
-<<A, A. Finding your publication>>
+<<A, A. Preparing for submission>>
 
-1. <<link-1, Find publication>>
-2. <<link-2, Check publication status>>
-3. <<link-3, Select publication>>
+1. <<link-1, Submission homepage>>
+2. <<link-2, Format and validate summary statistics>>
+3. <<link-3, Publication/project metadata>>
 
 <<B, B. Creating a submission>>
 
@@ -31,31 +31,27 @@ Authors of GWAS publications can now submit full summary statistics following th
 
 <<D, Additional information>>
 
-== [[A]]A. Finding your publication
+== [[A]]A. Preparing for submission
 
-The first step is to find your publication on the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submission page^].
+=== [[link-1]]Submission homepage
 
-=== [[link-1]]1. Find publication
+Start by going to the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submission homepage^].
 
-On the GWAS Catalog Submission page, you can find any publication that is included in the GWAS Catalog, or that has been identified by curators as eligible for inclusion (see https://www.ebi.ac.uk/gwas/docs/methods/criteria[inclusion criteria]).
+=== [[link-2]]Format and validate summary statistics
 
-You can search for a publication by *PMID* (PubMed identifier) or *first author*. Publications matching your search are displayed in the table.
+Before submitting, please make sure that your summary statistics files conform to our standard format. This will make your summary statistics interoperable with other datasets and help others to make use of your results. Click https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[here for instructions and to download our validator tool].
+
+=== [[link-3]]Submission questionnaire
+
+Next, please provide some metadata about the broader body of work to which your summary statistics submission relates. For example, your submission might be linked to a publication or to an unpublished manuscript, or you may wish to submit summary statistics for GWAS experiments that are not currently written up in a manuscript format.
+
+Click the "Get started" button from the Submission homepage and then follow the questionnaire to find the appropriate scenario.
+
+==== Publications indexed in PubMed
+
+GWAS publications that are indexed in PubMed should have already been identified by curators as eligible for inclusion in the GWAS Catalog. In this case, simply search for your publication by *PMID* (PubMed identifier) or *first author*. Publications matching your search are displayed in the table. 
 
 image::pub_search.png[Publication search results,width=800,align="center"]
-
-==== What if my publication is not in the table?
-
-A publication will not appear in the table if:
-
-* it has not yet been indexed in PubMed
-* it has been missed by our literature search, or
-* it does not meet our https://www.ebi.ac.uk/gwas/docs/methods/criteria[inclusion criteria]
-
-If you think that we are missing an eligible publication, or if you want to submit data that is not yet published, please contact us at gwas-info@ebi.ac.uk to request an eligibility review.
-
-=== [[link-2]]2. Check publication status
-
-Publications listed on the Submission page may be at various stages of curation. For some, we have curated both the metadata (i.e. information about the trait, sample, genotyping and analysis methods) and summary statistics, therefore no further submissions are required. In other cases, one or both of these pieces of information is still missing and therefore open for direct submission by authors through the Submission page.
 
 The Status of the publication tells you which type of data can be submitted.
 
@@ -75,16 +71,26 @@ The Status of the publication tells you which type of data can be submitted.
   
 |CLOSED
 |
-|We are not currently accepting submissions for this publication. We either have the summary statistics already, or the publication is under submission by another author or curator. You may want to check with your co-authors, or contact us at gwas-info@ebi.ac.uk for more information.
+|We are not currently accepting submissions for this publication. We either have the summary statistics already, or the publication is under submission by another author or curator. You may want to check with your co-authors, or contact us at gwas-subs@ebi.ac.uk for more information.
 |===
 
-=== [[link-3]]3. Select publication
+Once you have found your publication, click on the PMID to open the Details page.
 
-Once you have found your publication, click on the PMID to open the Publication Details page.
+A publication will not appear in the table if:
+
+* it has not yet been indexed in PubMed
+* it has been missed by our literature search, or
+* we have determined that it does not meet our https://www.ebi.ac.uk/gwas/docs/methods/criteria[inclusion criteria]
+
+If you think that we are missing an eligible publication, please contact us at gwas-subs@ebi.ac.uk.
+
+==== Other scenarios
+
+For all other scenarios, please complete the form to provide metadata about your manuscript or other body of work. Click "Submit" to continue to the Details page.
 
 == [[B]]B. Creating a submission
 
-The Publication Details page gives a brief summary of the publication and a list of prerequisites for submission. You will need to complete each of the items on the checklist before proceeding with the submission.
+The Details page gives a brief summary of the publication (or other body of work) and a list of prerequisites for submission. You will need to complete each of the items on the checklist before proceeding with the submission.
 
 image::pre_sub_checklist.png[Pre-submission checklist,width=800,align="center"]
 
@@ -190,8 +196,6 @@ Please download a new form each time you create a new submission for a publicati
 
 === [[link-12]]3. Fill in submission form
 
-The information that you need to enter into the submission form depends on whether the publication is OPEN FOR SUBMISSION or OPEN FOR SUMMARY STATISTICS SUBMISSION (see <<link-2, step A2 above>>).
-
 For help filling in the submission form, follow the link from the submission interface, or select the relevant link below:
 
 1. Instructions for https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics[summary statistics only^], or
@@ -234,4 +238,8 @@ A curator will then review your submission and make the summary statistics avail
 
 === Viewing My Submissions
 
-The My Submissions page displays all of your submissions. You can view your previous submissions for all publications or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.
+The My Submissions page displays all of your submissions.
+
+The "Incomplete Submissions" tab shows any submissions for unpublished studies, where you have not yet finished entering the manuscript or project information. Click on the GCP ID to finish the form and start submitting your data.
+
+The "Active Submissions" tab shows all of your submissions that are currently in progress. Here you can view your previous submissions for all publications or review and return to active submissions at any time. The table can be searched by PubMed ID or Submission ID.

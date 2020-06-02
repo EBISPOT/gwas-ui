@@ -44,6 +44,8 @@
 |===
 '''
 
+=== Unpublished GWAS
+
 [width="80%",options="header",cols="4,2,2,2", halign = "center", role="table table-hover"]
 |===
 |Description | Download Link |Format  | Column header descriptions

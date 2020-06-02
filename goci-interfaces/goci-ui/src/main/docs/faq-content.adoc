@@ -163,15 +163,15 @@
 
 ==== [[faq-A1]]1. How can I access GWAS Catalog data?
 
-In autumn 2018, we updated the GWAS Catalog search interface. Previously all Catalog data was displayed on a single page, with tables for “Studies”, “Associations” and “Catalog traits”. We have now created separate pages for each *publication*, *study*, *trait*, *variant* and *gene* in the Catalog so that each of these can be explored individually. To get started, search for any text you wish in the search bar, then select a specific page for more information. See <<B,Searching in the GWAS Catalog below>> for further tips on how to find specific types of information, or see the https://youtu.be/4FplAQzRfh8[introductory video].
+GWAS Catalog data from published studies is available through our https://www.ebi.ac.uk/gwas/search?query=[search interface]. Separate pages are available for each *publication*, *study*, *trait*, *variant* and *gene* in the Catalog so that each of these can be explored individually. To get started, search for any text you wish in the search bar, then select a specific page for more information. See <<B,Searching in the GWAS Catalog below>> for further tips on how to find specific types of information, or see the https://youtu.be/4FplAQzRfh8[introductory video]. GWAS Catalog data can also be downloaded in spreadsheet form. To download full association and study data, see our link:file-downloads[file downloads] page. You can also download specific association data sets from each “Publication”, “Study”, “Trait”, “Variant” and "Gene" page using the “Download Catalog data” button.
 
-GWAS Catalog data can be downloaded in spreadsheet form. To download full association and study data, see our link:file-downloads[file downloads] page. You can also download specific association data sets from each “Publication”, “Study”, “Trait”, “Variant” and "Gene" page using the “Download Catalog data” button.
+Summary statistics files are available to download from our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] via links from the study in the https://www.ebi.ac.uk/gwas/search?query=[search interface] or our designated https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page]. Harmonised summary statistics are also available from our summary statistics database via https://www.ebi.ac.uk/gwas/summary-statistics/docs/[API]. 
 
 The GWAS Catalog <<D,diagram>> presents a graphical view of the GWAS Catalog data.
 
 We also provide REST API access to the GWAS Catalog data. See <<G,Programmatic access below>> for more information.
 
-From 2017, the GWAS Catalog started hosting summary statistics files in addition to curated associations. See <<H,Summary statistics below>> for more information.
+From 2020, the GWAS Catalog started accepting submissions for pre-published and unpublished GWAS. Unpublished GWAS data is available through separate https://www.ebi.ac.uk/gwas/downloads[downloads]. SNP-trait associations are not available for pre-published and unpublished GWAS as these studies have not been curated yet.
 
 ==== [[faq-A2]]2. Why did the Catalog move from the NHGRI to the EBI?
 
@@ -195,7 +195,7 @@ The GWAS Catalog data can be used under the standard terms of use for EBI servic
 
 ==== [[faq-A7]]7. How often are the GWAS Catalog and diagram updated?
 
-New data is added to the GWAS Catalog and diagram every three weeks. Data releases include all downloadable spreadsheets.  You can find the date of the most recent data release at the bottom of the Catalog home page.  Summary statistics files are available once curation of the publication is completed, even before the publication is included in our data release.  Therefore, if a publication states that summary statistics are available from the Catalog, and no Catalog entry yet exists, please contact us at gwas-info@ebi.ac.uk and we can give you direct access to the files.
+New data is added to the GWAS Catalog and diagram every three weeks. Data releases include all downloadable spreadsheets.  You can find the date of the most recent data release at the bottom of the Catalog home page.  Summary statistics files are made available as soon as possible, even before the study is included in our data release.  Therefore, if a manuscript states that summary statistics are available from the Catalog and you cannot find them in the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[list of studies with summary statistics files] please contact us at gwas-info@ebi.ac.uk and we can give you direct access to the files.
 
 ==== [[faq-A8]]8. A new GWAS paper has just been published. Why is it not in the GWAS Catalog?
 
@@ -211,7 +211,7 @@ A *publication* refers to an article published in a scientific journal. We use e
 
 ==== [[faq-A11]]11. How do I find out the accession number for my study of interest?
 
-Each separate study in the GWAS Catalog has an accession number beginning with “GCST”. Study accessions are visible at the top of each “Study” page and in the “Studies” and “Associations” data tables on other pages.  Accession numbers are included in the v1.0.1 spreadsheets for associations and studies as well the ancestry spreadsheets. Accession numbers are not provided in the v1.0 spreadsheets as these are legacy formats provided only to support backwards compatibility with the old NHGRI spreadsheet.
+Each separate study in the GWAS Catalog has an accession number beginning with “GCST”. Study accessions are visible at the top of each “Study” page and in the “Studies” and “Associations” data tables on other pages.  Accession numbers are included in the v1.0.2 and v1.0.3 spreadsheets for associations and studies as well the ancestry spreadsheets. Accession numbers are not provided in the v1.0 spreadsheets as these are legacy formats provided only to support backwards compatibility with the old NHGRI spreadsheet.
 
 ==== [[faq-A12]]12. What is the difference between a trait and a reported trait?
 
@@ -475,13 +475,13 @@ There are thousands of genome-wide association studies and each study yields ass
 
 ==== [[faq-H2]]2. How do I find out which publications have full summary statistics available?
 
-Studies with full summary statistics are indicated by an icon in the “Association count” column of the studies table. You can also view a full list of studies with summary statistics files link:https://www.ebi.ac.uk/gwas/downloads/summary-statistics[here] together with links to other summary statistics resources.
+Published studies with full summary statistics are indicated by an icon in the “Association count” column of the studies table in the search interface. You can view a full list of studies with summary statistics files (published and pre-published/unpublished) link:https://www.ebi.ac.uk/gwas/downloads/summary-statistics[here] together with links to other summary statistics resources.
 
-Summary statistics files are available once curation of the publication is completed, even before the publication is included in our data release (approximately every three weeks).  Therefore, if a publication states that summary statistics are available from the Catalog, and no Catalog entry yet exists, please contact us at gwas-info@ebi.ac.uk and we can give you direct access to the files.
+Summary statistics files are available as soon as possible, even before the publication is included in our data release (approximately every three weeks).  Therefore, if a manuscript states that summary statistics are available from the Catalog and you cannot find them in the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[list of studies with summary statistics files] please contact us at gwas-info@ebi.ac.uk and we can give you direct access to the files.
 
 ==== [[faq-H3]]3. How do I access summary statistics?
 
-There are two methods. We have developed a dedicated summary statistics database, enabling users with searchable, filterable, harmonised data via  the summary statistics http://www.ebi.ac.uk/gwas/summary-statistics/docs/[REST API]. Alternatively, non-programmatic access to the original, standardised and harmonised data is available on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site].
+There are two methods. We have developed a dedicated summary statistics database, enabling users with searchable, filterable, harmonised data via  the summary statistics http://www.ebi.ac.uk/gwas/summary-statistics/docs/[REST API]. Alternatively, non-programmatic access to the original, standardised and harmonised data is available on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] (which can be accessed via links in the https://www.ebi.ac.uk/gwas/search?query=[search interface] or the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[list of studies with summary statistics files]).
 
 ==== [[faq-H4]]4. How should I cite summary statistics downloaded from the GWAS Catalog?
 
@@ -499,11 +499,9 @@ Currently the feeling in the community is that the unrestricted sharing of summa
 
 ==== [[faq-I1]]1. How can I submit summary statistics to the GWAS Catalog?
 
-We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also encourage authors to submit their data directly.
+We currently extract summary statistics files from publications where they are made freely available either as Supplementary files or via a web link. We also accept submissions of summary statistics for both published and pre-published/unpublished GWAS. We encourage authors to submit their data directly through our https://www.ebi.ac.uk/gwas/deposition[submission page]. Detailed instructions can be found in our http://www.ebi.ac.uk/gwas/docs/submission[documentation].
 
-Summary statistics related to published journal articles can be submitted to the GWAS Catalog via the http://www.ebi.ac.uk/gwas/deposition[Submission page]. Detailed instructions can be found in our http://www.ebi.ac.uk/gwas/docs/submission[documentation].
-
-If you would like to submit summary statistics for an article in preparation, or for an unpublished project, please contact gwas-subs@ebi.ac.uk. Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods/criteria[eligibility criteria], and the summary statistics files must reflect published results.
+Note that for summary statistics to be made available through the GWAS Catalog, your study must fulfil our link:methods/criteria[eligibility criteria], and the summary statistics files must reflect published results.
 
 ==== [[faq-I2]]2. How should summary statistics be formatted for submission?
 
