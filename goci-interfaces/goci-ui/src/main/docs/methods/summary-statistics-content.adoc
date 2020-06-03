@@ -32,7 +32,7 @@ Summary statistics are acquired from a number of different sources:
 * Identified via a consortium or author website
 * Submitted to the GWAS Catalog by an author
 
-We encourage authors to submit summary statistics to the GWAS Catalog. Summary statistics for published GWAS can be submitted directly via the http://www.ebi.ac.uk/gwas/deposition[Submission page]. If you would like to submit summary statistics for an article in preparation, or for an unpublished project, please contact gwas-subs@ebi.ac.uk for more information.
+We encourage authors to submit summary statistics to the GWAS Catalog. Summary statistics for published and pre-published/unpublished GWAS can be submitted directly via the http://www.ebi.ac.uk/gwas/deposition[Submission page].
 
 == Summary statistics standards
 
