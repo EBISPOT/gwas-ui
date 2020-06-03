@@ -1,274 +1,236 @@
 == Valid Country Codes
 
-[width="80%", role="table table-hover"]
+[width="50%", role="table table-hover"]
 |===
-|Africa
-
-|Algeria
-|Angola
-|Benin
-|Botswana
-|Burkina Faso
-|Burundi
-|Cameroon
-|Cape Verde
-|Central African Republic
-|Chad
-|Comoros
-|Congo
-|Côte d'Ivoire
-|Democratic Republic of the Congo
-|Djibouti
-|Egypt
-|Equatorial Guinea
-|Eritrea
-|Ethiopia
-|Gabon
-|Gambia
-|Ghana
-|Guinea
-|Guinea-Bissau
-|Kenya
-|Lesotho
-|Liberia
-|Libyan Arab Jamahiriya
-|Madagascar
-|Malawi
-|Mali
-|Mauretania
-|Mauritius
-|Mayotte
-|Morocco
-|Mozambique
-|Namibia
-|Niger
-|Nigeria
-|Rwanda
-|Réunion
-|Senegal
-|Seychelles
-|Sierra Leone
-|Somalia
-|South Africa
-|St. Helena
-|Sudan
-|Swaziland
-|São Tomé and Príncipe
-|Togo
-|Tunisia
-|Uganda
-|United Republic of Tanzania
-|Western Sahara
-|Zambia
-|Zimbabwe
-|===
-
-[width="80%", role="table table-hover"]
-|===
-|Asia
-
 |Afghanistan
+|Albania
+|Algeria
+|American Samoa
+|Andorra
+|Angola
+|Anguilla
+|Antigua and Barbuda
+|Argentina
 |Armenia
+|Australia
+|Austria
 |Azerbaijan
+|Bahamas
 |Bahrain
 |Bangladesh
+|Barbados
+|Belarus
+|Belgium
+|Belize
+|Benin
+|Bermuda
 |Bhutan
+|Bolivia
+|Bosnia and Herzegovina
+|Botswana
+|Brazil
+|British Virgin Islands
 |Brunei Darussalam
+|Bulgaria
+|Burkina Faso
+|Burundi
 |Cambodia
+|Cameroon
+|Canada
+|Cape Verde
+|Cayman Islands
+|Central African Republic
+|Chad
+|Channel Islands
+|Chile
 |China
 |China, Hong Kong SAR
 |China, Macao SAR
+|Colombia
+|Comoros
+|Congo
+|Cook Islands
+|Costa Rica
+|Croatia
+|Cuba
 |Cyprus
+|Cyprus
+|Czech Republic
+|Côte d'Ivoire
 |Democratic People's Republic of Korea
+|Democratic Republic of the Congo
+|Denmark
+|Djibouti
+|Dominica
+|Dominican Republic
+|Ecuador
+|Egypt
+|El Salvador
+|Equatorial Guinea
+|Eritrea
+|Estonia
+|Ethiopia
+|Faeroe Islands
+|Falkland Islands (Malvinas)
+|Fiji
+|Finland
+|France
+|French Guiana
+|French Polynesia
+|Gabon
+|Gambia
 |Georgia
+|Germany
+|Ghana
+|Gibraltar
+|Greece
+|Greenland
+|Grenada
+|Guadeloupe
+|Guam
+|Guatemala
+|Guinea
+|Guinea-Bissau
+|Guyana
+|Haiti
+|Holy See
+|Honduras
+|Hungary
+|Iceland
 |India
 |Indonesia
 |Iran (Islamic Republic of)
 |Iraq
+|Isle of Man
 |Israel
+|Italy
+|Jamaica
 |Japan
 |Jordan
 |Kazakhstan
+|Kenya
+|Kiribati
 |Kuwait
 |Kyrgyzstan
 |Lao People's Democratic Republic
-|Lebanon
-|Malaysia
-|Maldives
-|Mongolia
-|Myanmar
-|Nepal
-|Occupied Palestinian Territory
-|Oman
-|Pakistan
-|Philippines
-|Qatar
-|Republic of Korea
-|Saudi Arabia
-|Singapore
-|Sri Lanka
-|Taiwan
-|Tajikistan
-|Thailand
-|Timor-Leste
-|Turkey
-|Turkmenistan
-|United Arab Emirates
-|Uzbekistan
-|Viet Nam
-|Yemen
-|===
-
-[width="80%", role="table table-hover"]
-|===
-|Europe
-
-|Albania
-|Andorra
-|Austria
-|Belarus
-|Belgium
-|Bosnia and Herzegovina
-|Bulgaria
-|Channel Islands
-|Croatia
-|Cyprus
-|Czech Republic
-|Denmark
-|Estonia
-|Faeroe Islands
-|Finland
-|France
-|Germany
-|Gibraltar
-|Greece
-|Holy See
-|Hungary
-|Iceland
-|Isle of Man
-|Italy
 |Latvia
+|Lebanon
+|Lesotho
+|Liberia
+|Libyan Arab Jamahiriya
 |Liechtenstein
 |Lithuania
 |Luxembourg
+|Madagascar
+|Malawi
+|Malaysia
+|Maldives
+|Mali
 |Malta
+|Marshall Islands
+|Martinique
+|Mauretania
+|Mauritius
+|Mayotte
+|Mexico
+|Micronesia (Federated States of)
 |Monaco
+|Mongolia
 |Montenegro
+|Montserrat
+|Morocco
+|Mozambique
+|Myanmar
+|NR
+|Namibia
+|Nauru
+|Nepal
 |Netherlands
+|Netherlands Antilles
+|New Caledonia
+|New Zealand
+|Nicaragua
+|Niger
+|Nigeria
+|Niue
+|Norfolk Island
 |Norway
+|Occupied Palestinian Territory
+|Oman
+|Pakistan
+|Palau
+|Panama
+|Papua New Guinea
+|Paraguay
+|Peru
+|Philippines
+|Pitcairn
 |Poland
 |Portugal
+|Puerto Rico
+|Qatar
 |Republic of Ireland
+|Republic of Korea
 |Republic of Moldova
 |Romania
 |Russian Federation
-|San Marino
-|Serbia
-|Slovakia
-|Slovenia
-|Spain
-|Sweden
-|Switzerland
-|The former Yugoslav Republic of Macedonia
-|U.K.
-|Ukraine
-|===
-
-[width="80%", role="table table-hover"]
-|===
-|Latin America and the Caribbean
-
-|Anguilla
-|Antigua and Barbuda
-|Argentina
-|Bahamas
-|Barbados
-|Belize
-|Bolivia
-|Brazil
-|British Virgin Islands
-|Cayman Islands
-|Chile
-|Colombia
-|Costa Rica
-|Cuba
-|Dominica
-|Dominican Republic
-|Ecuador
-|El Salvador
-|Falkland Islands (Malvinas)
-|French Guiana
-|Grenada
-|Guadeloupe
-|Guatemala
-|Guyana
-|Haiti
-|Honduras
-|Jamaica
-|Martinique
-|Mexico
-|Montserrat
-|Netherlands Antilles
-|Nicaragua
-|Panama
-|Paraguay
-|Peru
-|Puerto Rico
+|Rwanda
+|Réunion
 |Saint Kitts and Nevis
 |Saint Lucia
 |Saint Vincent and the Grenadines
-|Suriname
-|Trinidad and Tobago
-|Turks and Caicos Islands
-|U.S. Virgin Islands
-|Uruguay
-|Venezuela
-|===
-
-[width="80%", role="table table-hover"]
-|===
-|NR
-
-|NR
-|===
-
-[width="80%", role="table table-hover"]
-|===
-|Northern America
-
-|Bermuda
-|Canada
-|Greenland
 |Saint-Pierre-et-Miquelon
-|U.S.
-|===
-
-[width="80%", role="table table-hover"]
-|===
-|Oceania
-
-|American Samoa
-|Australia
-|Cook Islands
-|Fiji
-|French Polynesia
-|Guam
-|Kiribati
-|Marshall Islands
-|Micronesia (Federated States of)
-|Nauru
-|New Caledonia
-|New Zealand
-|Niue
-|Norfolk Island
-|Palau
-|Papua New Guinea
-|Pitcairn
 |Samoa
+|San Marino
+|Saudi Arabia
+|Senegal
+|Serbia
+|Seychelles
+|Sierra Leone
+|Singapore
+|Slovakia
+|Slovenia
 |Solomon Islands
+|Somalia
+|South Africa
+|Spain
+|Sri Lanka
+|St. Helena
+|Sudan
+|Suriname
+|Swaziland
+|Sweden
+|Switzerland
+|São Tomé and Príncipe
+|Taiwan
+|Tajikistan
+|Thailand
+|The former Yugoslav Republic of Macedonia
+|Timor-Leste
+|Togo
 |Tokelau
 |Tonga
+|Trinidad and Tobago
+|Tunisia
+|Turkey
+|Turkmenistan
+|Turks and Caicos Islands
 |Tuvalu
+|U.K.
+|U.S.
+|U.S. Virgin Islands
+|Uganda
+|Ukraine
+|United Arab Emirates
+|United Republic of Tanzania
+|Uruguay
+|Uzbekistan
 |Vanuatu
+|Venezuela
+|Viet Nam
 |Wallis and Futuna Islands
+|Western Sahara
+|Yemen
+|Zambia
+|Zimbabwe
 |===

@@ -25,18 +25,18 @@ function displayDatatableUnpublishedSummaryStats(data) {
                 sortable: true
             },
             {
-                field: 'pubmed_id',
-                title: 'PubMed ID',
+                field: 'date_submitted',
+                title: 'Date Submitted',
                 sortable: true
             },
             {
                 field: 'accession',
-                title: 'Study accession',
+                title: 'Study Accession',
                 sortable: true
             },
             {
                 field: 'publication_date',
-                title: 'Publication date',
+                title: 'Publication Date',
                 sortable: true
             },
             {
@@ -107,9 +107,8 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
         summary_stats_ids.push(summary_stats_id);
         tmp['accessionId'] = '<a href="'+gwasProperties.contextPath+'studies/'+summary_stats_id+'">'+summary_stats_id+'</a>';
         tmp['author'] = summary_stats.author_s;
-        tmp['pubmedId'] = summary_stats.pubmedId;
         tmp['title'] = summary_stats.title;
-        tmp['journal'] = summary_stats.publication;
+        tmp['date_submitted'] = summary_stats.date_submitted;
     // Publication date
     var p_date = summary_stats.publicationDate;
     var publi = p_date.split('T')[0];
