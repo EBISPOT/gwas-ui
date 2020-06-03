@@ -123,7 +123,7 @@
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-synonym">-</div>
                         </div>
-                        
+
                         <!-- EFO Term Mappings -->
                         <div class="clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
@@ -198,10 +198,11 @@
                     </div>
 
                     <!-- Highlighted Study button here -->
-                    <div class="panel-body col-xs-2">
+                    <div class="panel-body col-xs-2" id="highlighted-study-section-loading">
                         <div>
                             <a class="btn btn-default"
                                type="button"
+                               id="highlighted-study-button"
                                data-toggle="collapse"
                                data-target="#highlight-study-panel-loading"
                                aria-expanded="false"
@@ -286,14 +287,17 @@
                                 onclick="toggle_and_scroll('#locus_panel')">
                             <span class="locus_label">LocusZoom</span>
                         </button>
-                        <!-- hidden form used to generate download association data for traits -->
+
+
+                        <!-- Hidden form used to generate download association data for traits -->
                         <form name="form1" id="form1" style="display: none">
-                            Trait Association download data: <input id="queryInput" type="text" name="q" value=""/>
-                            <input id="storeSelectedCB" type="text" value="1"/>
+                            Trait Association download data:
+                            <input id="queryInput" type="text" name="q" value=""/>
                         </form>
                         <button type="submit" class="btn btn-default pull-right" style="margin-right:10px;font-weight:bold" id="download_data" form="form1" value="Submit" th:disabled="true">
                             <span>Download Catalog data</span><span class="glyphicon glyphicon-download-alt" style="color:#398A96;margin-left:10px"></span>
                         </button>
+
 
                         <!-- Alternative button to display for large file downloads  -->
                         <button id="download_doc_page"
@@ -310,12 +314,24 @@
                     </div>
                 </div>
 
-
+                <!-- ORIGINAL -->
                 <!-- Use "cart" to add/remove EFO child terms -->
-                <div class="row" id="cart-loading" style="margin-top:0px">
-                    <div id="cart" class="panel clearfix item-left">
+<!--                <div class="row" id="cart-loading" style="margin-top:0px">-->
+<!--                    <div id="cart" class="panel clearfix item-left">-->
+<!--                    </div>-->
+<!--                </div>-->
+
+
+                <!-- NEW - Use checkbox to toggle add/remove child trait data -->
+                <div id="toggle-data-display-section">
+                    <div>
+                        <input type="checkbox" id="toggle-data-display" th:checked="true" onclick="toggleDataDisplay()"/>
+                        <label>Include child trait data</label>
                     </div>
+                    <p id="text" style="display:none">Results for ... rows loaded</p>
                 </div>
+
+
 
 
                 <div class="row search-results-container" >

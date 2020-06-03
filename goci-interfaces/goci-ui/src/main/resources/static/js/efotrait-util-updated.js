@@ -140,7 +140,7 @@ hideLoadingOverLay = function(tagID){
  * Show loading overlay for panels dependent on data from Fat Solr.
  */
 showGroupedPanelLoadingOverlay = function() {
-    // showLoadingOverLay('#highlight-study-panel-loading');
+    showLoadingOverLay('#download_data');
     showLoadingOverLay('#toggle-data-display-section');
     showLoadingOverLay('#association-table-loading');
     showLoadingOverLay('#study-table-loading');
@@ -151,7 +151,7 @@ showGroupedPanelLoadingOverlay = function() {
  * Hide loading overlay for panels dependent on data from Fat Solr.
  */
 hideGroupedPanelLoadingOverlay = function() {
-    // hideLoadingOverLay('#highlight-study-panel-loading');
+    hideLoadingOverLay('#download_data');
     hideLoadingOverLay('#toggle-data-display-section');
     hideLoadingOverLay('#association-table-loading');
     hideLoadingOverLay('#study-table-loading');
@@ -193,6 +193,9 @@ displayEFOInfo = function(initCBState) {
 
     // Get EFO term mappings from OXO
     getTermMappings(efoId);
+
+    // TEST - Set-up Hidden form
+    getDownloadCatalogData();
 
 
     // Add handle to checkbox to later determine isChecked status and whether to display child trait data
@@ -244,31 +247,107 @@ displayEFOInfo = function(initCBState) {
                 hideGroupedPanelLoadingOverlay();
             });
 
+            // Get data for "Download Catalog data" button
+            setTraitDownloadLink(filteredTraitIds);
 
-            // Change data display based on checkbox state to show/hide child trait data
+
+            // Change data display and download data file content
+            // based on checkbox state to show/hide child trait data
             myCheckbox.addEventListener('change', e => {
                 showGroupedPanelLoadingOverlay();
 
                 if (e.target.checked) {
+                    // Display data for mainEFO and child terms
                     console.log("** Checkbox is CHECKED!");
 
                     let displayData = getEfoTraitDataSolr(filteredTraitIds);
                     Promise.resolve(displayData).then(function() {
                         hideGroupedPanelLoadingOverlay();
                     });
+
+                    // Get data for "Download Catalog data" button for mainEFO and child terms
+                    setTraitDownloadLink(filteredTraitIds);
                 } else {
+                    // Display data for mainEFO only
                     console.log("** Checkbox is NOT checked");
 
                     let displayData = getEfoTraitDataSolr(efoId);
                     Promise.resolve(displayData).then(function() {
                         hideGroupedPanelLoadingOverlay();
                     });
+
+                    // Get data for "Download Catalog data" button for mainEFO
+                    setTraitDownloadLink([efoId]);
                 }
             });
-
         });
     });
 };
+
+
+/**
+ * Query Fat Solr to get data to download from "Download Catalog data" button.
+ */
+getDownloadCatalogData = function() {
+    $("#form1").submit(function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        // Disable download button while file is actively being downloaded
+        $('#download_data').prop('disabled', true);
+
+        // Use the values from the hidden form on the trait page, the value is set with "setTraitDownloadLink"
+        const searchQuery = $("#queryInput").val();
+
+        // Query Fat Solr using SolrSearchController
+        return promisePost( gwasProperties.contextPath + '/api/search/downloads',
+            {
+                'q': searchQuery
+            },'application/octet-stream').then(function(result) {
+
+            const disposition=result.getResponseHeader('Content-Disposition');
+            const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+            const matches = filenameRegex.exec(disposition);
+            let fileDownload = 'gwas-association-downloaded_2018-10-12-EFO.tsv';
+            if (matches != null && matches[1]) {
+                fileDownload = matches[1].replace(/['"]/g, '');
+            }
+            const download_file= new File([result.response], fileDownload, { type: 'text/tsv' });
+            if (typeof window.navigator.msSaveBlob !== 'undefined') {
+                // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
+                window.navigator.msSaveBlob(download_file, filename);
+            } else {
+                const URL = window.URL || window.webkitURL;
+                const downloadUrl = URL.createObjectURL(download_file);
+
+                if (fileDownload) {
+                    // use HTML5 a[download] attribute to specify filename
+                    const a = document.createElement("a");
+                    // safari doesn't support this yet
+                    if (typeof a.download === 'undefined') {
+                        window.location = downloadUrl;
+                    } else {
+                        a.href = downloadUrl;
+                        a.download = fileDownload;
+                        document.body.appendChild(a);
+                        a.click();
+                    }
+                } else {
+                    window.location = downloadUrl;
+                }
+            }
+            // Re-enable button after data file download is complete
+            $('#download_data').prop('disabled', false);
+        }).catch(function(err) {
+            console.error('Error downloading file: ' + err);
+            throw(err);
+        })
+    });
+};
+
+
+
+
 
 
 /**
@@ -280,10 +359,7 @@ displayEFOInfo = function(initCBState) {
  * @example filterAvailableEFOs(['EFO_0000400','EFO_1234567'])
  */
 filterAvailableEFOs = function(efoTermsToFilter) {
-    // console.log("** TEST efoTermsToFilter: ", efoTermsToFilter);
-
     return getAvailableEFOs(efoTermsToFilter).then(function(availableEFOs){
-        // console.log("** TEST All EFOs with trait data: ", availableEFOs);
         if(availableEFOs)
             return efoTermsToFilter.filter(function(n) {
                 return Object.keys(availableEFOs).indexOf(n) !== -1;
@@ -296,18 +372,10 @@ filterAvailableEFOs = function(efoTermsToFilter) {
  * @return Promise
  * @example http://localhost:8280/gwas/api/search/efotrait?&q=*:*&fq=resourcename:efotrait&group.limit=99999&fl=shortForm
  */
-getAvailableEFOs=function(){
-    console.log("** Called getAvailableEFOs...");
-
+getAvailableEFOs = function() {
     var dataPromise = getDataFromTag(global_efo_info_tag_id,'availableEFOs');
 
-
-    if(dataPromise == undefined){
-        //lazy load
-        // console.log('Loading all available EFOs in Gwas Catalog...')
-        //xintodo refactor this to use post
-        console.log("** getAvailableEFOs URL: ", window.location.pathname.split('/efotraits/')[0] + '/api/search/advancefilter');
-
+    if (dataPromise == undefined) {
         dataPromise =  promisePost(window.location.pathname.split('/efotraits/')[0] + '/api/search/advancefilter', {
             'q': '*:*',
             'fq': 'resourcename:efotrait',
@@ -328,9 +396,6 @@ getAvailableEFOs=function(){
                     tmp[doc.shortForm[0]] = doc;
                 }
             });
-
-            console.log("** TEST getAvailableEFOs - tmp: ", tmp);
-
             return tmp;
         }).catch(function(err){
             console.error('Error when loading all available EFOs! ' + err);
@@ -341,7 +406,6 @@ getAvailableEFOs=function(){
 
     }else{
         console.debug('Loading all available EFOs from cache.')
-        console.log("** dataPromise cache: ", dataPromise);
     }
     return dataPromise;
 };
@@ -356,10 +420,7 @@ getAllEFOTraits = async function(efoTraitUrl, allEFOIDs, allEFOLabels){
     let allShortForm = [];
     let allTraitLabels = [];
 
-    // return promiseGet(global_gwas_trait_api).then(JSON.parse).then(function (response) {
     await promiseGet(efoTraitUrl).then(JSON.parse).then(function (response) {
-        // console.log("** TEST getAllEFOTraits: ", response._embedded.efoTraits);
-
         $.each(response._embedded.efoTraits, function (index, term) {
             allShortForm.push(term.shortForm);
             allTraitLabels.push(term.trait);
@@ -367,9 +428,8 @@ getAllEFOTraits = async function(efoTraitUrl, allEFOIDs, allEFOLabels){
 
         // Store all child term IDs
         allEFOIDs.push(...allShortForm);
-        // console.log("** TEST getAllEFOTraits allEFOIDs-LEN: ", allEFOIDs.length);
+
         allEFOLabels.push(...allTraitLabels);
-        // console.log("** TEST getAllEFOTraits allEFOLabels-LEN: ", allEFOLabels.length);
 
         // Page through all results
         const nextPage = response._links.next.href;
@@ -394,10 +454,8 @@ getAllEFOTraits = async function(efoTraitUrl, allEFOIDs, allEFOLabels){
  */
 getEFOInfo = function (efoId) {
     var gwas_trait_url = `${global_gwas_trait_api}${efoId}`;
-    // console.log("GWAS REST API URL: ", gwas_trait_url)
 
     return promiseGet(gwas_trait_url).then(JSON.parse).then(function (response) {
-        // console.log("** TEST getEFOInfo: ", response)
         return response;
     }).catch(function (err) {
         console.debug('Error getting info for: ' + efoId + '. ' + err);
@@ -421,7 +479,6 @@ getTraitDataSolrSlim = function (efoId) {
             'wt':'json',
             'dataType': 'jsonp',
         }, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
-            // console.log("** Slim Data: ", data.response.docs)
         processSolrSlimData(data);
         return data;
     }).catch(function (err) {
@@ -512,10 +569,6 @@ getChildTraits = async function(efoId, olsHierarchicalDescendantsUrl, allTermIds
             // Store all child term IDs and labels
             Object.assign(allChildTermObj, childTermObj);
 
-
-            // TODO: Work on download file
-            // prepareDownloadData(parent_with_all_child_trait_ids);
-
             // Page through all results from OLS getHierarchichalDescendents endpoint
             const nextPage = response._links.next.href;
 
@@ -570,18 +623,7 @@ getTermMappings = function(efoId) {
  * @returns {Promise}
  */
 function getEfoTraitDataSolr(mainEFO) {
-
     let searchQuery = mainEFO;
-    // console.log("** getEfoTraitDataSolr URL: ", gwasProperties.contextPath+'api/search/advancefilter');
-
-    // Debug information
-    if (typeof searchQuery === 'string') {
-        console.log("** getEfoTraitDataSolr searchQuery-LEN: ", 1);
-        // console.log("** getEfoTraitDataSolr searchQuery value: ", searchQuery);
-    } else {
-        console.log("** getEfoTraitDataSolr searchQuery-LEN: ", searchQuery.length);
-        // console.log("** getEfoTraitDataSolr searchQuery values: ", searchQuery);
-    }
 
     return Promise.all([searchQuery]).then(() => {
         return promisePost( gwasProperties.contextPath+'api/search/advancefilter',
@@ -730,7 +772,6 @@ function processSolrData(data, initLoad=false) {
  */
 displayHighlightedStudy = function() {
     var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
-    console.log("** highlightedStudy: ", highlightedStudy);
 
     $('#efotrait-highlighted-study-title').html(highlightedStudy.title);
     $('#efotrait-highlighted-study-author').html(highlightedStudy.author_s +' (PMID:'+highlightedStudy.pubmedId+')');
@@ -762,7 +803,6 @@ findHighlightedStudiesForEFO = function(efoid) {
     var studies = findStudiesForEFO(efoid);
     var sorted_index = studySorting.sortByInitialSampleSize(studies);
 
-    console.log("** HS: ", studies[sorted_index[0]]);
     return studies[sorted_index[0]];
 };
 
@@ -775,7 +815,6 @@ findHighlightedStudiesForEFO = function(efoid) {
  */
 findStudiesForEFO = function(efoid) {
     var studies = {};
-    // console.log("** findStudiesForEFO:", data_highlighting);
 
     if(data_highlighting==undefined)
         return studies;
@@ -1056,7 +1095,7 @@ getColourForEFO = function(efoid) {
                 return data[efoid];
             })
         }else {
-            //efo colour is has been loaded perviously
+            //efo colour is has been loaded previously
             console.debug('Loading Colour from cache.')
             return data[efoid]
         }

@@ -265,7 +265,14 @@ function setDownloadLink(query) {
     
 }
 
-
+/**
+ * Add EFO ID query list to hidden form input in "efotrait-page.html".
+ * This query list is then used to generate the data for the "Download Catalog data"
+ * button when it is clicked. If the query list contains more than 300 EFO IDs
+ * then a button with a link to the GWAS Catalog Download page is displayed.
+ *
+ * @param queryParam
+ */
 function setTraitDownloadLink(queryParam) {
     if (queryParam.length >= 300) {
         $('#download_data').prop('disabled', true);
