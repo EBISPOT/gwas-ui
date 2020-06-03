@@ -399,7 +399,7 @@ If it is not possible to assign an ancestry category to a group of samples, ente
 |
 |yes
 |
-|Must match country name(s) in https://unstats.un.org/unsd/methodology/m49[The United Nations M49 Standard of Geographic Regions^]
+|Please copy country names exactly as written in https://www.ebi.ac.uk/gwas/docs/countries[this list^].
 |
 |`Japan\|China`
 |===
