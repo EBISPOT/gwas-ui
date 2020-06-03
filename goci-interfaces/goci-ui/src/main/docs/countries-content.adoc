@@ -1,0 +1,274 @@
+== Valid Country Codes
+
+[width="80%", role="table table-hover"]
+|===
+|Africa
+
+|Algeria
+|Angola
+|Benin
+|Botswana
+|Burkina Faso
+|Burundi
+|Cameroon
+|Cape Verde
+|Central African Republic
+|Chad
+|Comoros
+|Congo
+|Côte d'Ivoire
+|Democratic Republic of the Congo
+|Djibouti
+|Egypt
+|Equatorial Guinea
+|Eritrea
+|Ethiopia
+|Gabon
+|Gambia
+|Ghana
+|Guinea
+|Guinea-Bissau
+|Kenya
+|Lesotho
+|Liberia
+|Libyan Arab Jamahiriya
+|Madagascar
+|Malawi
+|Mali
+|Mauretania
+|Mauritius
+|Mayotte
+|Morocco
+|Mozambique
+|Namibia
+|Niger
+|Nigeria
+|Rwanda
+|Réunion
+|Senegal
+|Seychelles
+|Sierra Leone
+|Somalia
+|South Africa
+|St. Helena
+|Sudan
+|Swaziland
+|São Tomé and Príncipe
+|Togo
+|Tunisia
+|Uganda
+|United Republic of Tanzania
+|Western Sahara
+|Zambia
+|Zimbabwe
+|===
+
+[width="80%", role="table table-hover"]
+|===
+|Asia
+
+|Afghanistan
+|Armenia
+|Azerbaijan
+|Bahrain
+|Bangladesh
+|Bhutan
+|Brunei Darussalam
+|Cambodia
+|China
+|China, Hong Kong SAR
+|China, Macao SAR
+|Cyprus
+|Democratic People's Republic of Korea
+|Georgia
+|India
+|Indonesia
+|Iran (Islamic Republic of)
+|Iraq
+|Israel
+|Japan
+|Jordan
+|Kazakhstan
+|Kuwait
+|Kyrgyzstan
+|Lao People's Democratic Republic
+|Lebanon
+|Malaysia
+|Maldives
+|Mongolia
+|Myanmar
+|Nepal
+|Occupied Palestinian Territory
+|Oman
+|Pakistan
+|Philippines
+|Qatar
+|Republic of Korea
+|Saudi Arabia
+|Singapore
+|Sri Lanka
+|Taiwan
+|Tajikistan
+|Thailand
+|Timor-Leste
+|Turkey
+|Turkmenistan
+|United Arab Emirates
+|Uzbekistan
+|Viet Nam
+|Yemen
+|===
+
+[width="80%", role="table table-hover"]
+|===
+|Europe
+
+|Albania
+|Andorra
+|Austria
+|Belarus
+|Belgium
+|Bosnia and Herzegovina
+|Bulgaria
+|Channel Islands
+|Croatia
+|Cyprus
+|Czech Republic
+|Denmark
+|Estonia
+|Faeroe Islands
+|Finland
+|France
+|Germany
+|Gibraltar
+|Greece
+|Holy See
+|Hungary
+|Iceland
+|Isle of Man
+|Italy
+|Latvia
+|Liechtenstein
+|Lithuania
+|Luxembourg
+|Malta
+|Monaco
+|Montenegro
+|Netherlands
+|Norway
+|Poland
+|Portugal
+|Republic of Ireland
+|Republic of Moldova
+|Romania
+|Russian Federation
+|San Marino
+|Serbia
+|Slovakia
+|Slovenia
+|Spain
+|Sweden
+|Switzerland
+|The former Yugoslav Republic of Macedonia
+|U.K.
+|Ukraine
+|===
+
+[width="80%", role="table table-hover"]
+|===
+|Latin America and the Caribbean
+
+|Anguilla
+|Antigua and Barbuda
+|Argentina
+|Bahamas
+|Barbados
+|Belize
+|Bolivia
+|Brazil
+|British Virgin Islands
+|Cayman Islands
+|Chile
+|Colombia
+|Costa Rica
+|Cuba
+|Dominica
+|Dominican Republic
+|Ecuador
+|El Salvador
+|Falkland Islands (Malvinas)
+|French Guiana
+|Grenada
+|Guadeloupe
+|Guatemala
+|Guyana
+|Haiti
+|Honduras
+|Jamaica
+|Martinique
+|Mexico
+|Montserrat
+|Netherlands Antilles
+|Nicaragua
+|Panama
+|Paraguay
+|Peru
+|Puerto Rico
+|Saint Kitts and Nevis
+|Saint Lucia
+|Saint Vincent and the Grenadines
+|Suriname
+|Trinidad and Tobago
+|Turks and Caicos Islands
+|U.S. Virgin Islands
+|Uruguay
+|Venezuela
+|===
+
+[width="80%", role="table table-hover"]
+|===
+|NR
+
+|NR
+|===
+
+[width="80%", role="table table-hover"]
+|===
+|Northern America
+
+|Bermuda
+|Canada
+|Greenland
+|Saint-Pierre-et-Miquelon
+|U.S.
+|===
+
+[width="80%", role="table table-hover"]
+|===
+|Oceania
+
+|American Samoa
+|Australia
+|Cook Islands
+|Fiji
+|French Polynesia
+|Guam
+|Kiribati
+|Marshall Islands
+|Micronesia (Federated States of)
+|Nauru
+|New Caledonia
+|New Zealand
+|Niue
+|Norfolk Island
+|Palau
+|Papua New Guinea
+|Pitcairn
+|Samoa
+|Solomon Islands
+|Tokelau
+|Tonga
+|Tuvalu
+|Vanuatu
+|Wallis and Futuna Islands
+|===
