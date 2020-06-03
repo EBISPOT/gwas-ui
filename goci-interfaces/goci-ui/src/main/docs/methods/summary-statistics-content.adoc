@@ -69,7 +69,7 @@ Note that the headers in the formatted file are not limited to the above headers
 
 == Formatted summary statistics data 
 
-Summary statistics files are formatted by a scientific curator using a semi-automated process. Data are not manipulated but the headers convertered to a consistent format across all summary statistics files.
+Summary statistics files are formatted by a scientific curator using a semi-automated process. Data are not manipulated but the headers converted to a consistent format across all summary statistics files.
 
 - Headers will be transformed to the 'standard format'.
 
