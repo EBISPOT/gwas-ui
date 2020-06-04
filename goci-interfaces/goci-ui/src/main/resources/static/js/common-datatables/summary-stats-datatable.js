@@ -11,6 +11,7 @@ function displayDatatableUnpublishedSummaryStats(data) {
         summary_stats['journal'] = summary_stats['body_of_work'][0]['journal']
         summary_stats['title'] = summary_stats['body_of_work'][0]['title']
         summary_stats['publication_date'] = summary_stats['body_of_work'][0]['publication_date']
+        summary_stats['date_submitted'] = summary_stats['createdDate']
     });
     $('#summary-stats-unpublished-table').bootstrapTable('removeAll');
     $('#summary-stats-unpublished-table').bootstrapTable({
@@ -107,8 +108,9 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
         summary_stats_ids.push(summary_stats_id);
         tmp['accessionId'] = '<a href="'+gwasProperties.contextPath+'studies/'+summary_stats_id+'">'+summary_stats_id+'</a>';
         tmp['author'] = summary_stats.author_s;
+        tmp['pubmedId'] = summary_stats.pubmedId;
         tmp['title'] = summary_stats.title;
-        tmp['date_submitted'] = summary_stats.date_submitted;
+        tmp['journal'] = summary_stats.publication;
     // Publication date
     var p_date = summary_stats.publicationDate;
     var publi = p_date.split('T')[0];
