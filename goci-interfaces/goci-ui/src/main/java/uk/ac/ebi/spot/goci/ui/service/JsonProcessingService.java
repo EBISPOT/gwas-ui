@@ -183,7 +183,6 @@ public class JsonProcessingService {
             line.append("\t").append(getMappedBackgroundTrait(doc));
             line.append("\t").append(getMappedBackgroundTraitUri(doc));
         }
-        line = new StringBuilder(line.toString().replaceAll("\n", "").replaceAll("\r", ""));
         line.append("\r\n");
         
     }
@@ -286,7 +285,6 @@ public class JsonProcessingService {
             line.append('\t').append(getCohortReference(doc));
         }
 
-        line = new StringBuilder(line.toString().replaceAll("\n", "").replaceAll("\r", ""));
         line.append("\r\n");
     }
 
@@ -458,7 +456,6 @@ public class JsonProcessingService {
             line.append(getGenotypingTechonologies(doc));
         }
 
-        line = new StringBuilder(line.toString().replaceAll("\n", "").replaceAll("\r", ""));
         line.append("\r\n");
     
     }
