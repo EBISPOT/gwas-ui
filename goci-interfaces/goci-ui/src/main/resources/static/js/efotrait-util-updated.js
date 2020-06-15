@@ -74,8 +74,6 @@ $('#ot-link').click(() => {
  * Page is ready to run methods
  */
 $(document).ready(() => {
-    console.log("** EFO TEST TRAIT PAGE LOADED **");
-
     // Get trait information
     const initialCBState = true;
     displayEFOInfo(initialCBState);
@@ -97,7 +95,6 @@ toggleDataDisplay = function () {
     } else {
         text.style.display = "none";
     }
-    console.log("** CheckBox State-1: ", checkBox.checked);
 };
 
 
@@ -258,8 +255,6 @@ displayEFOInfo = function(initCBState) {
 
                 if (e.target.checked) {
                     // Display data for mainEFO and child terms
-                    console.log("** Checkbox is CHECKED!");
-
                     let displayData = getEfoTraitDataSolr(filteredTraitIds);
                     Promise.resolve(displayData).then(function() {
                         hideGroupedPanelLoadingOverlay();
@@ -269,8 +264,6 @@ displayEFOInfo = function(initCBState) {
                     setTraitDownloadLink(filteredTraitIds);
                 } else {
                     // Display data for mainEFO only
-                    console.log("** Checkbox is NOT checked");
-
                     let displayData = getEfoTraitDataSolr(efoId);
                     Promise.resolve(displayData).then(function() {
                         hideGroupedPanelLoadingOverlay();
