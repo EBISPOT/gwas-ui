@@ -584,21 +584,23 @@ getTermMappings = function(efoId) {
     return promiseGet(global_oxo_api + 'mappings',
         { 'fromId': efoId.replace('_',':'),}
     ).then(JSON.parse).then(function(data) {
-        let mappedTerms = data._embedded.mappings.reduce((filtered, term) => {
-            const termCurie = term.toTerm.curie;
+        if (data._embedded && data._embedded.mappgings) {
+            let mappedTerms = data._embedded.mappings.reduce((filtered, term) => {
+                const termCurie = term.toTerm.curie;
 
-            if (!(termCurie.startsWith('MeSH'))) {
-                if (!(filtered.includes(termCurie))) {
-                    filtered.push(termCurie);
+                if (!(termCurie.startsWith('MeSH'))) {
+                    if (!(filtered.includes(termCurie))) {
+                        filtered.push(termCurie);
+                    }
                 }
-            }
-            return filtered;
-        }, []);
+                return filtered;
+            }, []);
 
-        if (mappedTerms.length > 0) {
-            $("#efotrait-oxo-mappings").html(longContentList(
-                "gwas_efotrait_oxo_mappings_div", mappedTerms.sort(), 'mapped terms')
-            );
+            if (mappedTerms.length > 0) {
+                $("#efotrait-oxo-mappings").html(longContentList(
+                    "gwas_efotrait_oxo_mappings_div", mappedTerms.sort(), 'mapped terms')
+                );
+            }
         }
     })
 };
