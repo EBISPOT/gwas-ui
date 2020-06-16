@@ -169,7 +169,7 @@ getMainEFO = function() {
  */
 displayEFOInfo = function(initCBState) {
     showLoadingOverLay('#summary-panel-loading');
-    showLoadingOverLay('#highlighted-study-section-loading');
+    showLoadingOverLay('#highlighted-study-button');
     showGroupedPanelLoadingOverlay();
 
     const efoId = getMainEFO();
@@ -240,7 +240,7 @@ displayEFOInfo = function(initCBState) {
             // Get data from Fat Solr for filteredTraits list with mainEFO in the list
             let displayData = getEfoTraitDataSolr(filteredTraitIds);
             Promise.resolve(displayData).then(function() {
-                hideLoadingOverLay('#highlighted-study-section-loading');
+                hideLoadingOverLay('#highlighted-study-button');
                 hideGroupedPanelLoadingOverlay();
             });
 
