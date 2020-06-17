@@ -11,7 +11,9 @@ function displayDatatableUnpublishedSummaryStats(data) {
         summary_stats['journal'] = summary_stats['body_of_work'][0]['journal']
         summary_stats['title'] = summary_stats['body_of_work'][0]['title']
         summary_stats['publication_date'] = summary_stats['body_of_work'][0]['publication_date']
-        summary_stats['date_submitted'] = summary_stats['createdDate']
+        var d = new Date(summary_stats['createdDate']).toISOString();
+        summary_stats['date_submitted'] = d.split('T')[0];
+
     });
     $('#summary-stats-unpublished-table').bootstrapTable('removeAll');
     $('#summary-stats-unpublished-table').bootstrapTable({
