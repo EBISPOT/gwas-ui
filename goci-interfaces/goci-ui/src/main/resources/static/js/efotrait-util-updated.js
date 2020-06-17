@@ -12,22 +12,13 @@ if (gwasProperties.host.includes('localhost')) {
     global_gwas_trait_api = 'https://www.ebi.ac.uk/gwas/rest/api/efoTraits/';
 }
 
-var global_ols_api = 'https://www.ebi.ac.uk/ols/api/';
-var global_ols = 'https://www.ebi.ac.uk/ols/';
 var global_ols_efo_term = 'https://www.ebi.ac.uk/ols/ontologies/efo/terms?iri=';
-var global_ols_seach_api =  global_ols_api + 'search';
-var global_ols_restful_api_ontology =  global_ols_api + 'ontologies';
 var global_ols_api_efo_terms = 'https://www.ebi.ac.uk/ols/api/ontologies/efo/terms/';
 var global_ols_efo_hierarchical_descendents = 'https://www.ebi.ac.uk/ols/api/ontologies/efo/hierarchicalDescendants';
 
 var global_efo_info_tag_id = '#efo-info';
 var global_epmc_api = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search';
 var global_oxo_api = 'https://www.ebi.ac.uk/spot/oxo/api/';
-
-// Global variable to store a list of a parent and it's
-// child EFO Ids to use as a query parameter to download
-// all child trait association data
-var global_parent_with_all_child_trait_ids = [];
 
 /**
  * global variable storing solr query result.
@@ -93,7 +84,8 @@ toggleDataDisplay = function () {
     if (checkBox.checked == true){
         text.style.display = "block";
     } else {
-        text.style.display = "none";
+        // text.style.display = "none";
+        text.style.display = "block";
     }
 };
 
@@ -131,6 +123,20 @@ showLoadingOverLay = function(tagID){
  */
 hideLoadingOverLay = function(tagID){
     return $(tagID).LoadingOverlay("hide", true);
+};
+
+/**
+ * Display trait count loading message
+ * @param traitCount
+ */
+displayTraitCountLoading = function(traitCount, isDisplayed) {
+    let loadingMessage = "Getting data for " + traitCount + " trait(s)";
+    if (isDisplayed) {
+        $("#trait_cnt_loaded").html(loadingMessage).fadeIn(500);
+    }
+    else {
+        $("#trait_cnt_loaded").html(loadingMessage).fadeOut(200);
+    }
 };
 
 /**
@@ -237,11 +243,16 @@ displayEFOInfo = function(initCBState) {
             // Add mainEFO to filtered Trait Id list before query to Fat Solr
             filteredTraitIds.push(efoId);
 
+            // Show status message for traitCount used to get data
+            displayTraitCountLoading(filteredTraitIds.length, true);
+
             // Get data from Fat Solr for filteredTraits list with mainEFO in the list
             let displayData = getEfoTraitDataSolr(filteredTraitIds);
             Promise.resolve(displayData).then(function() {
                 hideLoadingOverLay('#highlighted-study-button');
                 hideGroupedPanelLoadingOverlay();
+                // Hide status message for traitCount used to get data
+                displayTraitCountLoading(filteredTraitIds.length, false);
             });
 
             // Get data for "Download Catalog data" button
@@ -254,19 +265,29 @@ displayEFOInfo = function(initCBState) {
                 showGroupedPanelLoadingOverlay();
 
                 if (e.target.checked) {
+                    // Show status message for traitCount used to get data
+                    displayTraitCountLoading(filteredTraitIds.length, true);
+
                     // Display data for mainEFO and child terms
                     let displayData = getEfoTraitDataSolr(filteredTraitIds);
                     Promise.resolve(displayData).then(function() {
                         hideGroupedPanelLoadingOverlay();
+                        // Hide status message for traitCount used to get data
+                        displayTraitCountLoading(filteredTraitIds.length, false);
                     });
 
                     // Get data for "Download Catalog data" button for mainEFO and child terms
                     setTraitDownloadLink(filteredTraitIds);
                 } else {
+                    // Show status message for traitCount used to get data
+                    displayTraitCountLoading([efoId].length, true);
+
                     // Display data for mainEFO only
                     let displayData = getEfoTraitDataSolr(efoId);
                     Promise.resolve(displayData).then(function() {
                         hideGroupedPanelLoadingOverlay();
+                        // Hide status message for traitCount used to get data
+                        displayTraitCountLoading([efoId].length, false);
                     });
 
                     // Get data for "Download Catalog data" button for mainEFO
