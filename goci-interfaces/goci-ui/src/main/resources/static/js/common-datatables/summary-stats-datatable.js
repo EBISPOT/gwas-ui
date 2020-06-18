@@ -36,7 +36,7 @@ function displayDatatableUnpublishedSummaryStats(data) {
                 sortable: true
             },
             {
-                field: 'accession',
+                field: 'study_accession',
                 title: 'Study Accession',
                 sortable: true
             },
