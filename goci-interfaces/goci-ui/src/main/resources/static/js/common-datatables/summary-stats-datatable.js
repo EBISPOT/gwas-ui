@@ -1,3 +1,8 @@
+/**
+ * Display table of pre/unpublished studies with summary stats
+ * @param data
+ */
+
 function displayDatatableUnpublishedSummaryStats(data) {
     var filename = buildFileName('list_gwas_unpublished_summary_statistics_');
 
@@ -6,11 +11,11 @@ function displayDatatableUnpublishedSummaryStats(data) {
         var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(summary_stats.file);
         var ftplink = "<a href='" + ftpPath.concat("' target='_blank'>") + "Download</a>";
         summary_stats['path'] = ftplink;
-        summary_stats['author'] = summary_stats['body_of_work'][0]['first_author']
-        summary_stats['pubmed_id'] = summary_stats['body_of_work'][0]['pubmed_id']
-        summary_stats['journal'] = summary_stats['body_of_work'][0]['journal']
-        summary_stats['title'] = summary_stats['body_of_work'][0]['title']
-        summary_stats['publication_date'] = summary_stats['body_of_work'][0]['publication_date']
+        summary_stats['author'] = summary_stats['body_of_work'][0]['first_author'];
+        summary_stats['pubmed_id'] = summary_stats['body_of_work'][0]['pubmed_id'];
+        summary_stats['journal'] = summary_stats['body_of_work'][0]['journal'];
+        summary_stats['title'] = summary_stats['body_of_work'][0]['title'];
+        summary_stats['publication_date'] = summary_stats['body_of_work'][0]['publication_date'];
         var d = new Date(summary_stats['createdDate']).toISOString();
         summary_stats['date_submitted'] = d.split('T')[0];
 
