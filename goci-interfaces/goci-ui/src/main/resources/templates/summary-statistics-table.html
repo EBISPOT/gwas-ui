@@ -73,21 +73,21 @@
             <div class="row">
                 <h2 style="color: black">Studies with available summary statistics</h2>
                 <p>
-                   The GWAS Catalog now hosts full p-value summary statistics for eligible studies. If you are an
-                    author and have summary statistics you would like to submit to the GWAS Catalog please visit our
-                    <a href="https://www.ebi.ac.uk/gwas/deposition">submission page</a>.
-                   Users can access summary statistics from the Catalog <a href="ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/">FTP site</a> or via the summary statistics REST API. For information on summary statistics and the REST API please read 
-                   the <a href="https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics">documentation</a>.
-                </p>
+                    Users can access all summary statistics from the Catalog <a href="ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/">FTP site</a>,
+                    which is updated nightly following submission. They can also be accessed in the tables below (separate tables for the published and
+                    unpublished summary statistics). Metadata associated with summary statistics can be downloaded from <a href="https://www.ebi.ac.uk/gwas/docs/file-downloads">Downloads</a>.
 
+                </p>
                 <p>
+                    If you are an author and have summary statistics you would like to submit to the GWAS Catalog please visit our <a href="https://www.ebi.ac.uk/gwas/deposition">submission page</a>.
                     These data are made available through <a href="https://www.ebi.ac.uk/about/terms-of-use" target="_blank">EMBL-EBI’s standard terms of use</a>.
                 </p>
-
-
+                <p>
+                    For information on summary statistics and the summary statistics REST API please read the <a href="https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics">documentation</a>.
+                </p>
             </div>
 
-            <h3>List of studies with summary statistics</h3>
+            <h3>List of published studies with summary statistics</h3>
             <div class="row" id="loadingStudies" style="display: none">
                 <div class="col-md-offset-4">
                     <button class="btn btn-lg">
@@ -102,7 +102,7 @@
                 <div th:include="fragments/summary-stats-datatable :: summary_stats_datatable"></div>
             </div>
 
-            <h3>List of unpublished studies with summary statistics</h3>
+            <h3>List of prepublished/unpublished studies with summary statistics</h3>
             <div class="row">
                 <!-- Unpublished Summary Stats table -->
                 <div
