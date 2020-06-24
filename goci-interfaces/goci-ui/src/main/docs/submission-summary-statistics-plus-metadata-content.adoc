@@ -116,13 +116,13 @@ There are 16 columns for you to fill in:
 
 |Statistical model
 |
-|Details of the statistical model used to determine association significance
+|A brief description of the statistical model used to determine association significance. Important to distinguish studies that would otherwise appear identical (e.g. the same trait analysed using additive, dominant and recessive models).
 |
 |no
 |
 |Free text
 |
-|`recessive model`
+|`additive model`
 
 |Study description
 |
