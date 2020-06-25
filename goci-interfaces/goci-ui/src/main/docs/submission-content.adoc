@@ -180,7 +180,7 @@ image::drag_and_drop.png[Drag and drop summary statistics,width=800,align="cente
 
 {empty}
 
-A message will appear when the transfer request has successfully started. Large files may take some time to transfer, but you do not need to wait until it is finished - the transfer will continue in the background while you complete the rest of your submission.
+A message will appear when the transfer request has successfully started. Large files may take some time to transfer, but you do not need to wait until this is finished - the transfer will continue in the background while you proceed with the next step. You do however need to wait for confirmation of file transfer before clicking "Submit submission form" (step 3).
 
 === [[link-11]]2. Download submission form
 
