@@ -206,7 +206,7 @@ For help filling in the submission form, follow the link from the submission int
 
 Once you have completed the submission form, save it and click "Submit submission form".
 
-image::upload_form.png[Upload submission form,width=300,align="center"]
+image::submit_form.png[Submit submission form,width=300,align="center"]
 
 {empty}
 
