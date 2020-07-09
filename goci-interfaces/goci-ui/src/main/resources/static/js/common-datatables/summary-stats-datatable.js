@@ -11,9 +11,21 @@ function displayDatatableUnpublishedSummaryStats(data) {
         var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(summary_stats.file);
         var ftplink = "<a href='" + ftpPath.concat("' target='_blank'>") + "Download</a>";
         summary_stats['path'] = ftplink;
-        summary_stats['author'] = summary_stats['body_of_work'][0]['first_author'];
-        summary_stats['pubmed_id'] = summary_stats['body_of_work'][0]['pubmed_id'];
-        summary_stats['title'] = summary_stats['body_of_work'][0]['title'];
+        // Account for cases where the body_of_work is empty
+        if (summary_stats['body_of_work'] === undefined || summary_stats['body_of_work'].length == 0 ) {
+            summary_stats['author'] = 'NA';
+            summary_stats['pubmed_id'] = 'NA';
+            summary_stats['title'] = 'NA';
+        } else {
+            // Account for cases where the first author value is null
+            if ('first_author' in summary_stats['body_of_work'][0]) {
+                summary_stats['author'] = summary_stats['body_of_work'][0]['first_author'];
+            } else {
+                summary_stats['author'] = 'NA';
+            }
+            summary_stats['pubmed_id'] = summary_stats['body_of_work'][0]['pubmed_id'];
+            summary_stats['title'] = summary_stats['body_of_work'][0]['title'];
+        }
         var d = new Date(summary_stats['createdDate']).toISOString();
         summary_stats['date_submitted'] = d.split('T')[0];
 
