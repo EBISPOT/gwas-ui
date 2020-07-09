@@ -220,6 +220,7 @@ function displaySummaryStudy(data, clearBeforeInsert) {
     
     $("#pubmedid_button").attr('onclick', "window.open('" + gwasProperties.NCBI_URL + study.pubmedId + "',    '_blank')");
     $("#europepmc_button").attr('onclick',     "window.open('"+gwasProperties.EPMC_URL+study.pubmedId+"',    '_blank')");
+    $("#pgs_button").attr('onclick',     "window.open('"+gwasProperties.PGS_URL+study.accessionId+"',    '_blank')");
     
     hideLoadingOverLay('#summary-panel-loading');
     
