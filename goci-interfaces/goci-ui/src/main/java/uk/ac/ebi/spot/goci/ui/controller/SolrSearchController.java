@@ -1084,7 +1084,7 @@ public class SolrSearchController {
                 fileName = "gwas-downloaded_".concat(now).concat("-selectedTraits.tsv");
             }
             else{
-                if(efo){
+                if(efo && (!facet.equals("study_new_format"))){
                     fileName = "gwas_catalog_v1.0.2-".concat(facet).concat("-downloaded_").concat(now).concat(".tsv");
                 }else if(facet.equals("study_new_format")){
                     fileName = "gwas_catalog_v1.0.3-study-downloaded_".concat(now).concat(".tsv");
@@ -1119,8 +1119,6 @@ public class SolrSearchController {
         System.out.println("** query: "+solrSearchBuilder);
 
         dispatchDownloadSearch(searchString, response.getOutputStream(), efo, facet, ancestry);
-
-
     }
 
 
