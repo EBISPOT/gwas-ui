@@ -79,6 +79,14 @@ $('#ot-link').click(() => {
 });
 
 /**
+ * Linkout to PGS Catalog page for the main EFO term
+ */
+$('#pgs-link').click(() => {
+    window.open("https://www.pgscatalog.org/trait/" + getMainEFO() , '_blank');
+});
+
+
+/**
  *  The page actually statrs loading from here.
  *
  *
