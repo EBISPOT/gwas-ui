@@ -236,18 +236,22 @@ function checkFullPValueStatus(data) {
 function getPgsPublicationId(pmid) {
     return promiseGet(gwasProperties.PGS_Publication_REST_URL+pmid, {}, false)
         .then(JSON.parse).then(function(data) {
-            parsePgsResult(data)
+            parsePgsPublicationResult(data)
     }).catch(function (err) {
         throw(err);
     })
 }
 
-function parsePgsResult(data) {
+function parsePgsPublicationResult(data) {
+    let x = document.getElementById("pgs_publication_button_div");
+
     if (data.results[0]) {
         if ('id' in data.results[0]) {
-            $("#pgs_button").attr('onclick', "window.open('" + gwasProperties.PGS_Publication_URL + data.results[0].id + "', '_blank')");
+            x.style.display = "block";
+            $("#pgs_publication_button").attr('onclick', "window.open('" + gwasProperties.PGS_Publication_URL + data.results[0].id + "', '_blank')");
         }
     } else {
-        $("#pgs_button").attr('onclick', "window.open('"+gwasProperties.PGS_Publication_URL+""+"', '_blank')");
+        x.style.display = "none";
+        $("#pgs_publication_button").attr('onclick', "window.open('"+gwasProperties.PGS_Publication_URL+""+"', '_blank')");
     }
 }
