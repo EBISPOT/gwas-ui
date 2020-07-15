@@ -943,7 +943,6 @@ public class SolrSearchController {
             addFilterQuery(solrSearchBuilder,searchConfiguration.getDefaultFacet(),fq.split(":")[1]);
         }
         addRowsAndPage(solrSearchBuilder, maxResults, page);
-        //        addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "efotrait");
         addQuery(solrSearchBuilder, query);
         addGrouping(solrSearchBuilder, groupField, groupLimit);
         addFacet(solrSearchBuilder, facetField);
@@ -954,11 +953,6 @@ public class SolrSearchController {
 
 
         if (fl != "") {
-//            HashSet<String> fieldList  = new HashSet<>();
-//            fieldList.add("a");
-//            Arrays.asList(fl.split(","));
-//            HashSet<String> fieldList = new HashSet<String>(Arrays.asList(fl.split(",")));
-//            addReturnFields(solrSearchBuilder,fieldList);
             solrSearchBuilder.append("&fl=").append(URLEncoder.encode(fl, "UTF-8"));
         }
 
@@ -966,8 +960,6 @@ public class SolrSearchController {
             solrSearchBuilder.append("&").append(URLEncoder.encode(raw, "UTF-8"));
         }
 
-        //xintodo commend out when live
-        // dispatch search
         dispatchSearch(solrSearchBuilder.toString(), response.getOutputStream());
     }
 

@@ -1901,7 +1901,6 @@ getAvailableEFOs=function(){
                     tmp[doc.shortForm[0]] = doc;
                 }
             });
-
             return tmp;
         }).catch(function(err){
             console.error('Error when loading all available EFOs! ' + err);
