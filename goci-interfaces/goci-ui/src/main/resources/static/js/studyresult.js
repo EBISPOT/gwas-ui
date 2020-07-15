@@ -220,10 +220,31 @@ function displaySummaryStudy(data, clearBeforeInsert) {
     
     $("#pubmedid_button").attr('onclick', "window.open('" + gwasProperties.NCBI_URL + study.pubmedId + "',    '_blank')");
     $("#europepmc_button").attr('onclick',     "window.open('"+gwasProperties.EPMC_URL+study.pubmedId+"',    '_blank')");
-    $("#pgs_study_button").attr('onclick',     "window.open('"+gwasProperties.PGS_Study_URL+study.accessionId+"',    '_blank')");
-    
+    isStudyInPGS(study.accessionId);
     hideLoadingOverLay('#summary-panel-loading');
     
+}
+
+/**
+ * Query PGS Catalog to check if there is a matching Study page
+ * @param {String} accessionId
+ */
+function isStudyInPGS(accessionId) {
+    return promiseGet(gwasProperties.PGS_Study_REST_URL+accessionId, {}, false)
+        .then(JSON.parse).then(function(data) {
+            parsePgsStudyResult(data, accessionId)
+        }).catch(function (err) {
+            throw(err);
+        })
+}
+
+function parsePgsStudyResult(data, accessionId) {
+    let x = document.getElementById("pgs_study_button_div");
+
+    if (data.length !== 0) {
+        x.style.display = "block";
+        $("#pgs_study_button").attr('onclick', "window.open('"+gwasProperties.PGS_Study_URL+accessionId+"',    '_blank')");
+    }
 }
 
 function getGenotypingTech(study) {
