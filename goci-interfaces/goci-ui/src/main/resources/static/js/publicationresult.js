@@ -209,6 +209,9 @@ function displaySummaryPublication(data,clearBeforeInsert) {
     $("#europepmc_button").attr('onclick',     "window.open('"+gwasProperties.EPMC_URL+publication.pubmedId+"',    '_blank')");
     
     hideLoadingOverLay('#summary-panel-loading');
+
+    // Get PGS Catalog Publication page identifier
+    getPgsPublicationId(publication.pubmedId);
     
 }
 
@@ -223,4 +226,32 @@ function checkFullPValueStatus(data) {
         }
     }
     return summaryStatsIcon;
+}
+
+
+/**
+ * Query PGS Catalog to find matching Publication page
+ * @param {String} pmid
+ */
+function getPgsPublicationId(pmid) {
+    return promiseGet(gwasProperties.PGS_Publication_REST_URL+pmid, {}, false)
+        .then(JSON.parse).then(function(data) {
+            parsePgsPublicationResult(data)
+    }).catch(function (err) {
+        throw(err);
+    })
+}
+
+function parsePgsPublicationResult(data) {
+    let x = document.getElementById("pgs_publication_button_div");
+
+    if (data.results[0]) {
+        if ('id' in data.results[0]) {
+            x.style.display = "block";
+            $("#pgs_publication_button").attr('onclick', "window.open('" + gwasProperties.PGS_Publication_URL + data.results[0].id + "', '_blank')");
+        }
+    } else {
+        x.style.display = "none";
+        $("#pgs_publication_button").attr('onclick', "window.open('"+gwasProperties.PGS_Publication_URL+""+"', '_blank')");
+    }
 }

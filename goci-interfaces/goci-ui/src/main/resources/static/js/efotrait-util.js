@@ -79,6 +79,28 @@ $('#ot-link').click(() => {
 });
 
 /**
+ * Query PGS Catalog to find matching Trait page
+ */
+function isTraitInPGS() {
+    return promiseGet(gwasProperties.PGS_Trait_REST_URL+getMainEFO(), {}, false)
+        .then(JSON.parse).then(function(data) {
+            parsePgsTraitResult(data)
+        }).catch(function (err) {
+            throw(err);
+        })
+}
+
+function parsePgsTraitResult(data) {
+    let x = document.getElementById("pgs-trait-link-div");
+
+    if (data.id) {
+        x.style.display = "block";
+        $("#pgs-trait-link").attr('onclick', "window.open('" + gwasProperties.PGS_Trait_URL + data.id + "', '_blank')");
+    }
+}
+
+
+/**
  *  The page actually statrs loading from here.
  *
  *
@@ -145,6 +167,8 @@ $(document).ready(() => {
     elements[searchTerm] = searchTerm;
 
     addEFO(elements, true);
+
+    isTraitInPGS();
 });
 
 
@@ -1877,7 +1901,6 @@ getAvailableEFOs=function(){
                     tmp[doc.shortForm[0]] = doc;
                 }
             });
-
             return tmp;
         }).catch(function(err){
             console.error('Error when loading all available EFOs! ' + err);
