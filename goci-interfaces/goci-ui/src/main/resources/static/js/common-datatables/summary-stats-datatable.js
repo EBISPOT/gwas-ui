@@ -148,7 +148,7 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     }
     
     tmp['nr_associations'] = nr_association.toString();
-    var a = (summary_stats.authorAscii_s).replace(/\s/g,"");
+    var a = (summary_stats.authorAscii_s).replace(/\s/g,"").replace(/\'/g, '&#39;');
     var dir = a.concat("_").concat(summary_stats.pubmedId).concat("_").concat(summary_stats.accessionId);
 
     // Data Access
