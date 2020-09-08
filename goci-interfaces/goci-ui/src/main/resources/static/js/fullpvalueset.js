@@ -63,9 +63,9 @@ function loadStudiesList(summaryStatsStudyAccessions) {
 
     $.getJSON('../api/search/summaryStatistics', {
                 'q': searchTerm,
-                'max': 2000,
-                'fl': 'author,publicationDate,pubmedId,publication,title,traitName,associationCount,author_s,accessionId',
-            })
+                'max': 10000,
+                'fl': 'accessionId,author_s,authorAscii_s,pubmedId,title,publication,publicationDate,mappedLabel,mappedUri,traitName_s,associationCount'
+    })
             .done(function(data) {
                 displayDatatableSummaryStats(data, summaryStatsStudyAccessions);
                 $('#loadingStudies').hide();

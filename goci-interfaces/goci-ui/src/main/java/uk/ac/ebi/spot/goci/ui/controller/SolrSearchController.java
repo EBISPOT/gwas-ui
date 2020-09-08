@@ -424,6 +424,7 @@ public class SolrSearchController {
             @RequestParam(value = "max", required = false, defaultValue = "10") int maxResults,
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             @RequestParam(value = "sort", required = false) String sort,
+            @RequestParam(value = "fl", required = false) String fieldList,
             HttpServletResponse response) throws IOException {
         StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
@@ -432,6 +433,7 @@ public class SolrSearchController {
         }
         addRowsAndPage(solrSearchBuilder, maxResults, page);
         addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "study");
+        solrSearchBuilder.append("&fl=").append(fieldList);
         addQuery(solrSearchBuilder, query);
 
         if (sort != null) {
