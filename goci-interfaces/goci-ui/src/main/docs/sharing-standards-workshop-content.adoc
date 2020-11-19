@@ -1,6 +1,6 @@
 = Sharing and standards workshop
 
-With the aim of increasing the availability, quality and utility of GWAS SumStats, the NHGRI-EBI GWAS Catalog organised a community workshop to address the standards, infrastructure and incentives required to promote and enable broader sharing. The workshop was held via webinar in June 2020 and brought together representatives from the broad stakeholder space, including users of summary statistics, data generators, methods and tools developers, cohort representatives, resource providers, funders and Journal editors.
+With the aim of increasing the availability, quality and utility of GWAS summary statistics, the NHGRI-EBI GWAS Catalog organised a community workshop to address the standards, infrastructure and incentives required to promote and enable broader sharing. The workshop was held via webinar in June 2020 and brought together representatives from the broad stakeholder space, including users of summary statistics, data generators, methods and tools developers, cohort representatives, resource providers, funders and Journal editors.
 
 Workshop materials, including pre-workshop survey responses, videos of each session and workshop outputs can be accessed below.
 
@@ -8,23 +8,23 @@ Workshop materials, including pre-workshop survey responses, videos of each sess
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop briefing document.pdf[Workshop briefing document]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/[Workshop agenda]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop agenda.pdf[Workshop agenda]
 
-link:[Workshop attendees]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop attendees.xlsx[Workshop attendees]
 
 == Workshop sessions
 
 == Supporting material
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/[]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Pre-workshop survey responses.xlsx[Pre-workshop survey responses]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/[]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Analysis of publications from 2019 and 2020 where the summary statistics could not be shared by the GWAS Catalog because of barriers.pdf[Analysis of publications from 2019 and 2020 where the summary statistics could not be shared by the GWAS Catalog because of barriers ]
 
 == Workshop outputs
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/[]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR indicators for GWAS data.pdf[FAIR indicators for GWAS data]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/[]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Proposed metadata standard reporting elements.pdf[Proposed metadata standard reporting elements]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/[]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Post workshop working groups with aims.pdf[Post workshop working groups with aims]
 
