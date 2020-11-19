@@ -6,9 +6,9 @@ Workshop materials, including pre-workshop survey responses, videos of each sess
 
 == Workshop organisation
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop briefing document.pdf[Workshop briefing document]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_briefing_document.pdf[Workshop briefing document]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop agenda.pdf[Workshop agenda]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_agenda.pdf[Workshop agenda]
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop attendees.xlsx[Workshop attendees]
 
