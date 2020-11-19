@@ -67,7 +67,7 @@ Summary statistics file requirements:
 |`G`
 
 |other_allele
-|The reference allele
+|The non-effect allele
 |no
 |Valid DNA string
 |`A`

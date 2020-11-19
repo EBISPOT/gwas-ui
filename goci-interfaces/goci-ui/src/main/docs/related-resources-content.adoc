@@ -117,11 +117,17 @@ For more information on how we use these resources, see our link:https://www.ebi
 |http://www.phenoscanner.medschl.cam.ac.uk/phenoscanner[Phenoscanner]
 |Tool to facilitate “phenome scans”, the cross-referencing of genetic variants with a broad range of phenotypes, using a range of data sources including GWAS, eQTL and metabolite data
 
+|https://github.com/ramiromagno/gwasrapidd[gwasrapidd]
+|an R package to query, download and wrangle GWAS Catalog data
+
 |https://phgkb.cdc.gov/PHGKB/hNHome.action[HuGE Navigator]
 |Knowledge base in human genome epidemiology, including information on population prevalence of genetic variants, gene-disease associations, gene-gene and gene- environment interactions
 
 |http://www.ncbi.nlm.nih.gov/gap/PheGenIUCSC[Phenotype-Genotype Integrator]
 |Merges GWAS Catalog Data with other NCBI databases to facilitate prioritisation of GWAS hits for follow-up
+
+|http://www.pgscatalog.org/[PGS Catalog]
+|An open database of polygenic scores and the relevant metadata required for accurate application and evaluation
 
 |http://targetvalidation.org[Open Targets Platform]
 |Platform for the identification of drug targets using multiple data types including GWAS

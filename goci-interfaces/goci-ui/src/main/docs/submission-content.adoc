@@ -26,8 +26,8 @@ The GWAS Catalog accepts summary statistics for both published and unpublished h
 1. <<link-10, Upload summary statistics>>
 2. <<link-11, Download submission form>>
 3. <<link-12, Fill in submission form>>
-4. <<link-13, Upload submission form>>
-5. <<link-14, Submit>>
+4. <<link-13, Submit submission form>>
+5. <<link-14, After submission>>
 
 <<D, Additional information>>
 
@@ -39,7 +39,7 @@ Start by going to the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submiss
 
 === [[link-2]]Format and validate summary statistics
 
-Before submitting, please make sure that your summary statistics files conform to our standard format. This will make your summary statistics interoperable with other datasets and help others to make use of your results. Click https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[here for instructions and to download our validator tool].
+Before submitting, you must ensure that your summary statistics files conform to our standard format, which makes your summary statistics interoperable with other datasets and helps others to make use of them. Click https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[here for instructions and to download our validator tool]. We strongly recommend running the validator offline prior to upload, especially for large datasets.
 
 === [[link-3]]Submission questionnaire
 
@@ -130,7 +130,7 @@ image::enter_email.png[Enter Globus email,width=800,align="center"]
 
 === [[link-8]]4. Format and validate summary statistics
 
-To avoid errors later, please make sure that your summary statistics files conform to our standard format and content. Follow the https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[Format and validate link^] for formatting instructions and to access our offline summary statistics validator.
+Please confirm that your summary statistics files conform to our standard format and content, otherwise your submission will fail validation. If you haven’t already done so, follow the https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[Format and validate link^] for formatting instructions and to access our offline summary statistics validator.
 
 === [[link-9]]5. Create submission
 
@@ -180,7 +180,7 @@ image::drag_and_drop.png[Drag and drop summary statistics,width=800,align="cente
 
 {empty}
 
-A message will appear when the transfer request has successfully started. Large files may take some time to transfer, but you do not need to wait until it is finished - the transfer will continue in the background while you complete the rest of your submission.
+A message will appear when the transfer request has successfully started. Large files may take some time to transfer, but you do not need to wait until this is finished - the transfer will continue in the background while you proceed with the next step. You do however need to wait for confirmation of file transfer before clicking "Submit submission form" (step 3).
 
 === [[link-11]]2. Download submission form
 
@@ -202,11 +202,11 @@ For help filling in the submission form, follow the link from the submission int
 
 2. Instructions for https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics-plus-metadata[summary statistics plus study metadata^]
 
-=== [[link-13]]4. Upload submission form
+=== [[link-13]]4. Submit submission form
 
-Once you have completed the submission form, save it and click "Upload submission form".
+Once you have completed the submission form, save it and click "Submit submission form".
 
-image::upload_form.png[Upload submission form,width=300,align="center"]
+image::submit_form.png[Submit submission form,width=300,align="center"]
 
 {empty}
 
@@ -218,21 +218,21 @@ image::start_validation.png[Start validation,width=500,align="center"]
 
 {empty}
 
-The validation pipeline first checks the uploaded submission form. If this passes, it goes on to check the summary statistics files themselves. Validation may take some time, but feel free to leave the page - you will receive an email when validation is complete, or if an error is detected, with a link back to the submission page.
+The validation pipeline first checks the uploaded submission form. If this passes, it goes on to check the summary statistics files themselves. Validation may take some time, but feel free to leave the page.
 
-The Submission Report displays a brief summary of the uploaded data as well as any errors. You can click "Review submission" to download and check the current submission form, or "Reset" to delete that submission form and start again.
+If the uploaded form and summary statistics pass validation, these will be automatically submitted. You will receive an email when validation is complete, with a list of accession number for the submitted studies.
+
+If validation fails, you will receive an email listing the errors detected and a link back to the submission page. There you can click "Review submission" to download and edit the current submission form, and click "Reset" to delete the submission form and start again.
 
 image::review_reset.png[Review or reset,width=300,align="center"]
 
-=== [[link-14]]5. Submit
+=== [[link-14]]5. After submission
 
-Once the submission has successfully validated, click "Submit" to complete the submission.
+After submission, you will be taken to the My Submissions page (see below), where you can see your latest submission, now with the status SUBMITTED.
 
-image::submit.png[Submit,width=300,align="center"]
+For submissions associated with a published manuscript, a curator will then review your submission and make the summary statistics available to the public as soon as possible through the GWAS Catalog website. We will let you know when these are available.
 
-You will be taken to the My Submissions page, where you can see your latest submission at the top, with the status SUBMITTED.
-
-A curator will then review your submission and make the summary statistics available to the public as soon as possible through the GWAS Catalog website.
+For unpublished data submissions, or those associated with a preprint, each summary statistics file will be made available via direct link on our ftp server within 48 hours, or at the end of your embargo if you have requested one. The direct links take the format ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCSTXXXXXXXX. Following our biweekly data release, the studies will also be listed in the summary statistics download area https://www.ebi.ac.uk/gwas/downloads/summary-statistics and associated metadata will be available to download via https://www.ebi.ac.uk/gwas/docs/file-downloads.
 
 == [[D]] Additional Information
 

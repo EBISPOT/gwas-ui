@@ -84,6 +84,10 @@ All ancestry data, including Country of Recruitment and Additional information, 
 
 The following publications include analysis of the GWAS Catalog ancestry data.
 
+_Mills MC and Rahal C._ +
+https://www.nature.com/articles/s41588-020-0580-y[The GWAS Diversity Monitor tracks diversity by disease in real time] +
+Nature Genetics. 2020, 52, 242-243. + 
+
 _Morales et al._ +
 http://rdcu.be/G6Fv[A standardized framework for representation of ancestry data in genomics studies, with application to the NHGRI-EBI GWAS Catalog] +
 Genome Biology (2018) 19:21 +
@@ -101,3 +105,5 @@ Trends Genet. 2009, 25, 489–494. +
 link:https://unstats.un.org/unsd/methodology/m49/[The United Nations M49 Standard of Geographic Regions]
 
 link:https://www.cia.gov/library/publications/resources/the-world-factbook/index.html[The World Factbook] 
+
+link:https://gwasdiversitymonitor.com[The GWAS Diversity Monitor]
