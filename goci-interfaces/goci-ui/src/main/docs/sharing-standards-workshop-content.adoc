@@ -6,8 +6,6 @@ Workshop materials, including pre-workshop survey responses, videos of each sess
 
 == Workshop organisation
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/releases/latest/gwas-diagram.owl[owl]
-
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop briefing document.pdf[Workshop briefing document]
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop agenda.pdf[Workshop agenda]
@@ -15,6 +13,22 @@ link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop attendees.xlsx[Workshop attendees]
 
 == Videos of workshop sessions
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Introduction and keynote.mp4[Introduction and keynote]
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data content.mp4[Data content]
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR.mp4[FAIR]
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Incentivisation of sharing.mp4[Incentivisation of sharing]
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Infrastructure requirements.mp4[Infrastructure requirements]
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data update cycle.mp4[Data update cycle]
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Forward look.mp4[Forward Look]
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Discussion and summary.mp4[Discussion and summary]
 
 == Supporting material
 
