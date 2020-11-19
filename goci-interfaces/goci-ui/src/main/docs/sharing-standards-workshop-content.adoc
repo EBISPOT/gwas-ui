@@ -38,6 +38,8 @@ link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Analysis_
 
 == Workshop outputs
 
+link:https://unstats.un.org/unsd/methodology/m49/[The United Nations M49 Standard of Geographic Regions]
+
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR_indicators_for_GWAS_data.pdf[FAIR indicators for GWAS data]
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Proposed_metadata_standard_reporting_elements.pdf[Proposed metadata standard reporting elements]
