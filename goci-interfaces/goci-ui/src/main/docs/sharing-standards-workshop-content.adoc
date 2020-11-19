@@ -14,21 +14,21 @@ link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_
 
 == Videos of workshop sessions
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Introduction_and_keynote.mp4[Introduction and keynote]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Introduction_and_keynote.mp4[Introduction and keynote] chaired by Helen Parkinson, keynote by Teri Manolio on "The history and future of the GWAS Catalog"
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_content.mp4[Data content]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_content.mp4[Data content] chaired by Inês Barroso
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR.mp4[FAIR]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR.mp4[FAIR] chaired by Robert Carroll
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Incentivisation_of_sharing.mp4[Incentivisation of sharing]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Incentivisation_of_sharing.mp4[Incentivisation of sharing] chaired by Orli Bahcall
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Infrastructure_requirements.mp4[Infrastructure requirements]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Infrastructure_requirements.mp4[Infrastructure requirements] chaired by Michael Inouye
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_update_cycle.mp4[Data update cycle]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_update_cycle.mp4[Data update cycle] chaired by Raymond Walters
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Forward_look.mp4[Forward Look]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Forward_look.mp4[Forward Look] chaired by Stephen Rich
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Discussion_and_summary.mp4[Discussion and summary]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Discussion_and_summary.mp4[Discussion and summary] chaired by Helen Parkinson
 
 == Supporting material
 
