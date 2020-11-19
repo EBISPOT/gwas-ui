@@ -10,37 +10,37 @@ link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_agenda.pdf[Workshop agenda]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop attendees.xlsx[Workshop attendees]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_attendees.xlsx[Workshop attendees]
 
 == Videos of workshop sessions
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Introduction and keynote.mp4[Introduction and keynote]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Introduction_and_keynote.mp4[Introduction and keynote]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data content.mp4[Data content]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_content.mp4[Data content]
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR.mp4[FAIR]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Incentivisation of sharing.mp4[Incentivisation of sharing]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Incentivisation_of_sharing.mp4[Incentivisation of sharing]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Infrastructure requirements.mp4[Infrastructure requirements]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Infrastructure_requirements.mp4[Infrastructure requirements]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data update cycle.mp4[Data update cycle]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_update_cycle.mp4[Data update cycle]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Forward look.mp4[Forward Look]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Forward_look.mp4[Forward Look]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Discussion and summary.mp4[Discussion and summary]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Discussion_and_summary.mp4[Discussion and summary]
 
 == Supporting material
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Pre-workshop survey responses.xlsx[Pre-workshop survey responses]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Pre-workshop_survey_responses.xlsx[Pre-workshop survey responses]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Analysis of publications from 2019 and 2020 where the summary statistics could not be shared by the GWAS Catalog because of barriers.pdf[Analysis of publications from 2019 and 2020 where the summary statistics could not be shared by the GWAS Catalog because of barriers ]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Analysis_of_publications_from_2019_and_2020_where_the_summary_statistics_could_not_be_shared_by_the_GWAS_Catalog_because_of_barriers.pdf[Analysis of publications from 2019 and 2020 where the summary statistics could not be shared by the GWAS Catalog because of barriers ]
 
 == Workshop outputs
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR indicators for GWAS data.pdf[FAIR indicators for GWAS data]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR_indicators_for_GWAS_data.pdf[FAIR indicators for GWAS data]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Proposed metadata standard reporting elements.pdf[Proposed metadata standard reporting elements]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Proposed_metadata_standard_reporting_elements.pdf[Proposed metadata standard reporting elements]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Post workshop working groups with aims.pdf[Post workshop working groups with aims]
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Post_workshop_working_groups_with_aims.pdf[Post workshop working groups with aims]
 
