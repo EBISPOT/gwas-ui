@@ -219,11 +219,13 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
                 title: 'Reported trait',
                 sortable: true
             },
-            {
-                field: 'nr_associations',
-                title: 'Association count',
-                sortable: true
-            },
+
+    /** Commented as part of #256 Removing the "association count" column from the sumstats availability **/
+//            {
+//                field: 'nr_associations',
+//                title: 'Association count',
+//                sortable: true
+//            },
             {
                 field: 'link',
                 title: 'Data access',
