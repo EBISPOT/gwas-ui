@@ -200,22 +200,19 @@ function displaySummaryStudy(data, clearBeforeInsert) {
     setAncentrySection(study);
     var fullpvalset = study.fullPvalueSet;
     if(fullpvalset == 1) {
-        
-        var a = (study.authorAscii_s).replace(/\s/g,"");
-        var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
-        
-        var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
-            .concat(dir).concat("' target='_blank'>");
-        
-        linkFullPValue = ftplink.concat("FTP Download<span class='glyphicon glyphicon-signal clickable context-help'" +
-            " data-toggle='tooltip'" +
-            "data-original-title='Click for summary statistics' style='font-size: 12px'></span></a>");
-    
+
+        let linkText = "FTP Download<span class='glyphicon glyphicon-signal clickable context-help' " +
+            "data-toggle='tooltip' data-original-title='Click for summary statistics' style='font-size: 12px'></span>";
+
+        var authorDetails = (study.authorAscii_s).replace(/\s/g,"");
+        let dir = `${authorDetails}_${study.pubmedId}_${study.accessionId}`;
+        let FTP_BASE_URL = gwasProperties.FTP_PATH_PREFIX;
+        let linkFullPValue = `<a href="${FTP_BASE_URL}${dir}" target="_blank"> ${linkText} </a>`;
+
         $("#study-summary-stats").html(linkFullPValue);
         var summaryStatData = getSummaryStatsInfo(study.accessionId,$("#study-summary-stats"));
-       
-        
-        
+
+
     }
     
     $("#pubmedid_button").attr('onclick', "window.open('" + gwasProperties.NCBI_URL + study.pubmedId + "',    '_blank')");
