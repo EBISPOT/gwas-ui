@@ -63,6 +63,22 @@ function displayDatatableUnpublishedSummaryStats(data) {
                 title: 'Reported trait',
                 sortable: true
             },
+            /** Added for Goci-184 Summary stats Colums addition **/
+            {
+                field: 'study_tag',
+                title: 'Study Tag',
+                sortable: true
+            },
+            {
+                field: 'ancestry_category',
+                title: 'Ancestry Category',
+                sortable: true
+            },
+            {
+                field: 'sample_size',
+                title: 'No of Individuals',
+                sortable: true
+            },
             {
                 field: 'path',
                 title: 'FTP Path',
