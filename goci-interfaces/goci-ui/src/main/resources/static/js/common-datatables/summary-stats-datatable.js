@@ -70,12 +70,12 @@ function displayDatatableUnpublishedSummaryStats(data) {
                 sortable: true
             },
             {
-                field: 'ancestry_category',
+                field: 'unpublishedAncestries[\'ancestry_category\']',
                 title: 'Ancestry Category',
                 sortable: true
             },
             {
-                field: 'sample_size',
+                field: 'unpublishedAncestries[\'sample_size\']',
                 title: 'No of Individuals',
                 sortable: true
             },
