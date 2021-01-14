@@ -26,6 +26,15 @@ function displayDatatableUnpublishedSummaryStats(data) {
             summary_stats['pubmed_id'] = summary_stats['body_of_work'][0]['pubmed_id'];
             summary_stats['title'] = summary_stats['body_of_work'][0]['title'];
         }
+        /** Added for Goci-184 Summary stats Colums addition **/
+        if (summary_stats['unpublishedAncestries'] === undefined || summary_stats['unpublishedAncestries'].length == 0 ) {
+            summary_stats['ancestry_category'] = 'NA';
+            summary_stats['sample_size'] = 'NA';
+        } else {
+            summary_stats['ancestry_category'] = summary_stats['unpublishedAncestries'][0]['ancestry_category'];
+            summary_stats['sample_size'] = summary_stats['unpublishedAncestries'][0]['sample_size'];
+        }
+
         var d = new Date(summary_stats['createdDate']).toISOString();
         summary_stats['date_submitted'] = d.split('T')[0];
 
@@ -70,12 +79,12 @@ function displayDatatableUnpublishedSummaryStats(data) {
                 sortable: true
             },
             {
-                field: 'unpublishedAncestries[\'ancestry_category\']',
+                field: 'ancestry_category',
                 title: 'Ancestry Category',
                 sortable: true
             },
             {
-                field: 'unpublishedAncestries[\'sample_size\']',
+                field: 'sample_size',
                 title: 'No of Individuals',
                 sortable: true
             },
