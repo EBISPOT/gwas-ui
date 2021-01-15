@@ -74,11 +74,6 @@ function displayDatatableUnpublishedSummaryStats(data) {
             },
             /** Added for Goci-184 Summary stats Colums addition **/
             {
-                field: 'study_tag',
-                title: 'Study Tag',
-                sortable: true
-            },
-            {
                 field: 'ancestry_category',
                 title: 'Ancestry Category',
                 sortable: true
