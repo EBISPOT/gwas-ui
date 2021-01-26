@@ -9,6 +9,6 @@ env:
 addons:
   sonarcloud:
     organization: "gwas-ebi"
-    
+
 script:
 - mvn clean verify sonar:sonar -Dmaven.test.failure.ignore=true -Dmaven.test.error.ignore=true -Dsonar.login=0566d66d0cfe16cd2cb8ba02db7fcd0b6d1e7ee6
