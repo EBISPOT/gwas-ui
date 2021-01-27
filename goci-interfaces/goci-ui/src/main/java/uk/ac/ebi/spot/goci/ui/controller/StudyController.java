@@ -29,7 +29,6 @@ public class StudyController {
         return "studies";
     }
 
-
     @RequestMapping(value = "/studies/{accessionId}", produces = MediaType.TEXT_HTML_VALUE)
     public String search(Model model,
                          @PathVariable(required = false) String accessionId,
@@ -43,5 +42,4 @@ public class StudyController {
         model.addAttribute("result", studyResult);
         return "study-page";
     }
-
 }
