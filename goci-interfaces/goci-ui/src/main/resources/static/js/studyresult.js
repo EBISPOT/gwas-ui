@@ -76,9 +76,7 @@ function getDataSolr(main, initLoad = false) {
         // Check if Solr returns some results
         if (data.grouped.resourcename.groups.length == 0) {
             document.querySelector('#lower_container').remove();
-            alert(searchQuery);
             displayUnpublishedStudySummary(searchQuery);
-           // $('#lower_container').html("<h2>The study accession <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
         } else {
             document.querySelector('#unpublished-container').remove();
             processSolrData(data, initLoad);
@@ -142,11 +140,14 @@ function processSolrData(data, initLoad = false) {
 }
 
 function displayUnpublishedStudySummary(accession) {
-    let  baseUrl = gwasProperties.SNOOPY_REST_API //'http://localhost:8080/api/';
+    let baseUrl = gwasProperties.SNOOPY_REST_API //'http://localhost:8080/api/';
     let URI = `${baseUrl}/unpublished-studies/search/query?accession=${accession}`;
     httpRequest = HttpRequestEngine.requestWithoutBody(URI, 'GET');
     HttpRequestEngine.fetchRequest(httpRequest).then((data) => {
         console.log(data);
+        let ancestryCategory  = data.unpublishedAncestries[0].ancestry_category;
+        let sampleSize  = data.unpublishedAncestries[0].sample_size;
+
         $("#first-author").html(data.body_of_work[0].first_author);
         $("#corresponding-author").html(data.body_of_work[0].first_author); //TODO: PUT CORRESPONDING AUTHOR
         $("#full-sum-stats").attr("href", `${gwasProperties.FTP_PATH_PREFIX}${accession}`);
@@ -158,8 +159,13 @@ function displayUnpublishedStudySummary(accession) {
         $("#platform-snp").html('');
         $("#preprint-doi").attr('href', data.body_of_work[0].doi);
         $("#discovery-sample-desc").html(data.unpublishedAncestries[0].sample_description);
-        $("#discovery-ancestry").html(data.unpublishedAncestries[0].ancestry_category);
-    });
+        $("#discovery-ancestry").html(`${sampleSize} ${ancestryCategory}`);
+    })
+        .catch(error => {
+            $('#unpublished-container').html("<h2>The study accession <em>"+accession+"</em> cannot be found in the GWAS Catalog database</h2>");
+        });
+
+
     hideLoadingOverLay('#summary-panel-loading');
 }
 
