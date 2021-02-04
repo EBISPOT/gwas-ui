@@ -13,7 +13,7 @@ class HttpRequestEngine {
             })
             .then((data) => data)
             .catch(error => {
-                UI.launchToastNotification(error);
+
             });
     }
 
