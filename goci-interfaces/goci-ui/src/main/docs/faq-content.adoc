@@ -44,6 +44,7 @@
 
 20. <<faq-A20, How does the GWAS Catalog represent extremely small p-values?>>
 
+21. <<faq-A21, Does the GWAS Catalog include data that isn't associated with a journal publication?>>
 
 
 === B. Searching the GWAS Catalog
@@ -171,7 +172,7 @@ The GWAS Catalog <<D,diagram>> presents a graphical view of the GWAS Catalog dat
 
 We also provide REST API access to the GWAS Catalog data. See <<G,Programmatic access below>> for more information.
 
-From 2020, the GWAS Catalog started accepting submissions for pre-published and unpublished GWAS. Unpublished GWAS metadata is available through separate https://www.ebi.ac.uk/gwas/downloads[downloads], while summary statistics are available via our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] and https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page]. SNP-trait associations are not available for pre-published and unpublished GWAS as these studies have not been curated yet.
+From 2020, the GWAS Catalog started accepting submissions for pre-published and unpublished GWAS. For more information, see <<faq-A21,Does the GWAS Catalog include data that isn't associated with a journal publication?>>
 
 ==== [[faq-A2]]2. Why did the Catalog move from the NHGRI to the EBI?
 
@@ -260,6 +261,11 @@ At this time only array-based association analyses are https://www.ebi.ac.uk/gwa
 ==== [[faq-A20]]20. How does the GWAS Catalog represent extremely small p-values?
 
 Some publications may report a GWAS association p-value of 0+E00 due to the limits of methods or analysis software to compute very small numbers (p<1x10-300). Where authors are unable to provide the precise p-value we will extract 1e-300 as the maximum p-value. However it should be noted that the true p-value may be much smaller. 
+
+
+==== [[faq-A21]]21. <<faq-A21, Does the GWAS Catalog include data that isn't associated with a PubMed-indexed journal publication?>>
+
+From 2020, the GWAS Catalog started accepting submissions for unpublished GWAS (including pre-published GWAS ie data associated with a pre-print or article in press). Unpublished GWAS metadata is available via the study pages for each accession number and in more detail in the unpublished  https://www.ebi.ac.uk/gwas/downloads[download files]. Unpublished summary statistics are available via our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] and https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page] page as well as via the study pages. Unpublished data is made available exactly as submitted by authors and has not been reviewed by our curators. Upon publication it is curated, annotated, extended to include top associations and incorporated into our main database. 
 
 
 == [[B]]B. Searching the GWAS Catalog
