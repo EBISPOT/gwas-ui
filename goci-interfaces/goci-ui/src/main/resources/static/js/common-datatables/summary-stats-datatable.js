@@ -8,6 +8,7 @@ function displayDatatableUnpublishedSummaryStats(data) {
 
     $.each(data, (index, summary_stats) => {
         var tmp = {};
+        var ftpDir = getDirectoryBin()
         var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(summary_stats.file);
         var ftplink = "<a href='" + ftpPath.concat("' target='_blank'>") + "Download</a>";
         summary_stats['path'] = ftplink;
@@ -170,13 +171,15 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     tmp['nr_associations'] = nr_association.toString();
     var a = (summary_stats.authorAscii_s).replace(/\s/g,"").replace(/\'/g, '&#39;');
     var dir = a.concat("_").concat(summary_stats.pubmedId).concat("_").concat(summary_stats.accessionId);
-
+    var dir_name = getDirectoryBin(summary_stats.accessionId);
     // Data Access
-    var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(dir);
+    var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(dir_name).concat('/').concat(dir);
 
     var ftplink = "<a href='"+ftpPath.concat("' target='_blank'>");
 
     var linkFullPValue = ftplink.concat("FTP Download</a>");
+
+
 
     if ($.inArray(summary_stats_id, summaryStatsStudyAccessions) != -1) {
         var apiLink = "&nbsp;&nbsp;or&nbsp;&nbsp;<a href='http://www.ebi.ac.uk/gwas/summary-statistics/docs' target='_blank'>API access</a>";
@@ -268,6 +271,14 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     // Add custom tooltip text for button
     $('.keep-open').attr('title','Add/Remove Columns');
     hideLoadingOverLay('#summary-stats-table-loading');
+}
+
+function getDirectoryBin(gcstId){
+    const gcst = gcstId.substring(gcstId.indexOf("GCST")+4);
+    const lowerRange = (Math.floor(parseInt(gcst)/1000))*1000+1;
+    const upperRange = ((Math.floor(parseInt(gcst)/1000))+1)*1000;
+    const range = 'GCST'+lowerRange.toString().padStart(6, '0')+'-GCST'+upperRange.toString().padStart(6, '0');
+    return range
 }
 
 
