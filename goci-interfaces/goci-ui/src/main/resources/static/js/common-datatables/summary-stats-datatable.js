@@ -6,10 +6,11 @@
 function displayDatatableUnpublishedSummaryStats(data) {
     var filename = buildFileName('list_gwas_unpublished_summary_statistics_');
 
-    $.each(data, (index, summary_stats) => {
-        var tmp = {};
-        var ftpDir = getDirectoryBin(summary_stats.study_accession);
+    $.each(data, (index, summary_stats) => {var tmp = {};
+
+        const ftpDir = getDirectoryBin(summary_stats.study_accession);
         var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(ftpDir).concat('/').concat(summary_stats.file);
+
         var ftplink = "<a href='" + ftpPath.concat("' target='_blank'>") + "Download</a>";
         summary_stats['path'] = ftplink;
         // Account for cases where the body_of_work is empty
@@ -273,7 +274,9 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     hideLoadingOverLay('#summary-stats-table-loading');
 }
 
+
 // GOCI-197 FTP Link Restructuring
+
 function getDirectoryBin(gcstId){
     const gcst = gcstId.substring(gcstId.indexOf("GCST")+4);
     const lowerRange = (Math.floor(parseInt(gcst)/1000))*1000+1;
