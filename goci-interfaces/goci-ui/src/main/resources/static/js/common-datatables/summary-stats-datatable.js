@@ -8,7 +8,8 @@ function displayDatatableUnpublishedSummaryStats(data) {
 
     $.each(data, (index, summary_stats) => {
         var tmp = {};
-        var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(summary_stats.file);
+        var ftpDir = getDirectoryBin(summary_stats.study_accession);
+        var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(ftpDir).concat('/').concat(summary_stats.file);
         var ftplink = "<a href='" + ftpPath.concat("' target='_blank'>") + "Download</a>";
         summary_stats['path'] = ftplink;
         // Account for cases where the body_of_work is empty
@@ -128,7 +129,7 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     //by default, we clean the table before inserting data
     var summary_stats_ids = [];
     $('#summary-stats-table').bootstrapTable('removeAll');
-    
+
     var data_json = []
     $.each(data.response.docs, (index, summary_stats) => {
         var tmp={};
@@ -149,7 +150,7 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     // tmp['catalog_publish_date'] = cp_date;
 
     tmp['reported_trait'] = summary_stats.traitName_s;
-    
+
     var mappedTraits = summary_stats.mappedLabel;
     if (mappedTraits) {
         $.each(mappedTraits, function (index, trait) {
@@ -166,17 +167,19 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
         var arraysize= summary_stats.association_rsId;
         nr_association = arraysize.length;
     }
-    
+
     tmp['nr_associations'] = nr_association.toString();
     var a = (summary_stats.authorAscii_s).replace(/\s/g,"").replace(/\'/g, '&#39;');
     var dir = a.concat("_").concat(summary_stats.pubmedId).concat("_").concat(summary_stats.accessionId);
-
+    var dir_name = getDirectoryBin(summary_stats.accessionId);
     // Data Access
-    var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(dir);
+    var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(dir_name).concat('/').concat(dir);
 
     var ftplink = "<a href='"+ftpPath.concat("' target='_blank'>");
 
     var linkFullPValue = ftplink.concat("FTP Download</a>");
+
+
 
     if ($.inArray(summary_stats_id, summaryStatsStudyAccessions) != -1) {
         var apiLink = "&nbsp;&nbsp;or&nbsp;&nbsp;<a href='http://www.ebi.ac.uk/gwas/summary-statistics/docs' target='_blank'>API access</a>";
@@ -189,7 +192,7 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     tmp['ftpPath'] = ftpPath;
 
     data_json.push(tmp);
-    
+
     });
 
     var filename = buildFileName('list_gwas_summary_statistics_');
@@ -258,9 +261,9 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
             }
         ],
         data: data_json,
-        
+
     });
-    
+
     $('#summary-stats-table').bootstrapTable('load',data_json);
     if(data_json.length>5){
         $('#summary-stats-table').bootstrapTable('refreshOptions',{showRefresh: true,pagination:true,pageSize: pageRowLimit, pageList: [5,10,25,50,100,'All']})
@@ -268,6 +271,15 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     // Add custom tooltip text for button
     $('.keep-open').attr('title','Add/Remove Columns');
     hideLoadingOverLay('#summary-stats-table-loading');
+}
+
+// GOCI-197 FTP Link Restructuring
+function getDirectoryBin(gcstId){
+    const gcst = gcstId.substring(gcstId.indexOf("GCST")+4);
+    const lowerRange = (Math.floor(parseInt(gcst)/1000))*1000+1;
+    const upperRange = ((Math.floor(parseInt(gcst)/1000))+1)*1000;
+    const range = 'GCST'+lowerRange.toString().padStart(6, '0')+'-GCST'+upperRange.toString().padStart(6, '0');
+    return range
 }
 
 
