@@ -142,6 +142,7 @@ function processSolrData(data, initLoad = false) {
 function displayUnpublishedStudySummary(accession) {
     let baseUrl = gwasProperties.SNOOPY_REST_API //'http://localhost:8080/api/';
     let URI = `${baseUrl}/unpublished-studies/search/query?accession=${accession}`;
+    const ftpdir = getDirectoryBin(accession);
     httpRequest = HttpRequestEngine.requestWithoutBody(URI, 'GET');
     HttpRequestEngine.fetchRequest(httpRequest).then((data) => {
         console.log(data);
@@ -150,7 +151,7 @@ function displayUnpublishedStudySummary(accession) {
 
         $("#first-author").html(data.body_of_work[0].first_author);
         $("#corresponding-author").html(data.body_of_work[0].first_author); //TODO: PUT CORRESPONDING AUTHOR
-        $("#full-sum-stats").attr("href", `${gwasProperties.FTP_PATH_PREFIX}${accession}`);
+        $("#full-sum-stats").attr("href", `${gwasProperties.FTP_PATH_PREFIX}${ftpdir}/${accession}`);
         $("#reported-trait").html(data.trait);
         $("#title").html(data.body_of_work[0].title);
         $("#genotyping-tech").html(data.genotyping_technology);
@@ -206,8 +207,9 @@ function displaySummaryStudy(data, clearBeforeInsert) {
 
         var authorDetails = (study.authorAscii_s).replace(/\s/g, "");
         let dir = `${authorDetails}_${study.pubmedId}_${study.accessionId}`;
+        const ftpDir = getDirectoryBin(study.accessionId);
         let FTP_BASE_URL = gwasProperties.FTP_PATH_PREFIX;
-        let linkFullPValue = `<a href="${FTP_BASE_URL}${dir}" target="_blank"> ${linkText} </a>`;
+        let linkFullPValue = `<a href="${FTP_BASE_URL}${ftpDir}/${study.accessionId}" target="_blank"> ${linkText} </a>`;
 
         $("#study-summary-stats").html(linkFullPValue);
         var summaryStatData = getSummaryStatsInfo(study.accessionId, $("#study-summary-stats"));
@@ -441,5 +443,13 @@ function setAncentrySection(study) {
     }
 }
 
+// GOCI-197 FTP Link Restructuring
 
+function getDirectoryBin(gcstId){
+    const gcst = gcstId.substring(gcstId.indexOf("GCST")+4);
+    const lowerRange = (Math.floor(parseInt(gcst)/1000))*1000+1;
+    const upperRange = ((Math.floor(parseInt(gcst)/1000))+1)*1000;
+    const range = 'GCST'+lowerRange.toString().padStart(6, '0')+'-GCST'+upperRange.toString().padStart(6, '0');
+    return range
+}
 

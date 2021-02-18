@@ -172,7 +172,7 @@ function prepareDataForTable(data){
             var a = (study.authorAscii_s).replace(/\s/g, "");
             const ftpdir = getDirectoryBin(study.accessionId);
             var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
-            var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(ftpdir).concat('/').concat(dir).concat("' target='_blank'</a>");
+            var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(ftpdir).concat('/').concat(study.accessionId).concat("' target='_blank'</a>");
             linkFullPValue = ftplink.concat("FTP Download");
         }
 

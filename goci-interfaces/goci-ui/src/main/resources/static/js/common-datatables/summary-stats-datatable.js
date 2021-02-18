@@ -174,7 +174,7 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     var dir = a.concat("_").concat(summary_stats.pubmedId).concat("_").concat(summary_stats.accessionId);
     var dir_name = getDirectoryBin(summary_stats.accessionId);
     // Data Access
-    var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(dir_name).concat('/').concat(dir);
+    var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(dir_name).concat('/').concat(summary_stats.accessionId);
 
     var ftplink = "<a href='"+ftpPath.concat("' target='_blank'>");
 
