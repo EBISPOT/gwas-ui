@@ -13,17 +13,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.util.*;
 
-/**
- * Created by emma on 24/02/15.
- *
- * @author emma
- *         <p>
- *         Controller used to handle download of files and generation of stats
- */
 @Controller
 public class FileController {
 
-    // These parameters are read from application.properties file
     @Value("${download.full}")
     private Resource fullFileDownload;
 
@@ -51,9 +43,6 @@ public class FileController {
     @Value("${summary.stats.file}")
     private Resource summaryStatsFile;
 
-//    @Value("${summary.stats.fullpvalue.file}")
-//    private Resource summaryStatsFullPValueFile;
-//
     @Value("${download.unpublished.studies}")
     private Resource unpublishedStudiesFileDownload;
 
@@ -65,9 +54,6 @@ public class FileController {
 
     @Value("${download.new_format.ancestries}")
     private Resource newAncestriesFileDownload;
-
-//    @Value("${download.ensemblmapping}")
-//    private Resource ensemblMappingFileDownload;
 
     enum PropertyTypes {
         RELEASE_DATE("releasedate"),
@@ -85,8 +71,7 @@ public class FileController {
         }
         return null;
     }
-    @RequestMapping(value = "api/search/downloads/full",
-                    method = RequestMethod.GET)
+    @GetMapping(value = "api/search/downloads/full")
     public void getFullDownload(HttpServletResponse response) throws IOException {
         if (fullFileDownload.exists() && catalogStatsFile.exists()) {
 
@@ -104,24 +89,7 @@ public class FileController {
         }
     }
 
-//    @RequestMapping(value = "api/downloads/fullpvalue",
-//            method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public void getFullPValueStudiesDownload(HttpServletResponse response) throws IOException {
-//        String responseString = null;
-//        if (summaryStatsFullPValueFile.exists()) {
-//            byte[] bytes = Files.readAllBytes(summaryStatsFullPValueFile.getFile().toPath());
-//            IOUtils.copy(new BufferedInputStream(new ByteArrayInputStream(bytes)),
-//                    new BufferedOutputStream(response.getOutputStream()));
-////            buildJsonDownload(summaryStatsFullPValueFile.getInputStream(), response);
-//            responseString = new String(bytes);
-//        }
-//        else {
-//            throw new FileNotFoundException();
-//        }
-//    }
-
-    @RequestMapping(value = "api/search/downloads/unpublished_studies",
-            method = RequestMethod.GET)
+    @GetMapping(value = "api/search/downloads/unpublished_studies")
     public void getUnpublishedStudiesDownload(HttpServletResponse response) throws IOException {
         if (unpublishedStudiesFileDownload.exists() && catalogStatsFile.exists()) {
 
@@ -134,8 +102,7 @@ public class FileController {
         }
     }
 
-    @RequestMapping(value = "api/search/downloads/unpublished_ancestries",
-            method = RequestMethod.GET)
+    @GetMapping(value = "api/search/downloads/unpublished_ancestries")
     public void getUnpublishedAncestriesDownload(HttpServletResponse response) throws IOException {
         if (unpublishedAncestriesFileDownload.exists() && catalogStatsFile.exists()) {
 
@@ -148,8 +115,7 @@ public class FileController {
         }
     }
 
-    @RequestMapping(value = "api/search/downloads/studies_new",
-            method = RequestMethod.GET)
+    @GetMapping(value = "api/search/downloads/studies_new")
     public void getNewStudiesDownload(HttpServletResponse response) throws IOException {
         if (newStudiesFileDownload.exists() && catalogStatsFile.exists()) {
 
@@ -161,9 +127,8 @@ public class FileController {
             throw new FileNotFoundException();
         }
     }
-
-    @RequestMapping(value = "api/search/downloads/ancestries_new",
-            method = RequestMethod.GET)
+    
+    @GetMapping(value = "api/search/downloads/ancestries_new")
     public void getNewAncestriesDownload(HttpServletResponse response) throws IOException {
         if (newAncestriesFileDownload.exists() && catalogStatsFile.exists()) {
 
@@ -176,8 +141,7 @@ public class FileController {
         }
     }
 
-    @RequestMapping(value = "api/search/downloads/studies",
-                    method = RequestMethod.GET)
+    @GetMapping(value = "api/search/downloads/studies")
     public void getStudiesDownload(HttpServletResponse response) throws IOException {
         if (studiesFileDownload.exists() && catalogStatsFile.exists()) {
 
@@ -191,8 +155,7 @@ public class FileController {
     }
 
 
-    @RequestMapping(value = "api/search/downloads/alternative",
-                    method = RequestMethod.GET,
+    @GetMapping(value = "api/search/downloads/alternative",
                     produces = MediaType.TEXT_PLAIN_VALUE)
     public void getAlternativeDownload(HttpServletResponse response) throws IOException {
         if (alternativeFileDownload.exists() && catalogStatsFile.exists()) {
@@ -210,8 +173,7 @@ public class FileController {
         }
     }
 
-    @RequestMapping(value = "api/search/downloads/studies_alternative",
-                    method = RequestMethod.GET)
+    @GetMapping(value = "api/search/downloads/studies_alternative")
     public void getAlternativeStudiesDownload(HttpServletResponse response) throws IOException {
         if (alternativeStudiesDownload.exists() && catalogStatsFile.exists()) {
             String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
@@ -224,8 +186,7 @@ public class FileController {
         }
     }
 
-    @RequestMapping(value = "api/search/downloads/trait_mappings",
-                    method = RequestMethod.GET)
+    @GetMapping(value = "api/search/downloads/trait_mappings")
     public void getTraitMappingsDownload(HttpServletResponse response) throws IOException {
         if (efoMappingsDownload.exists() && catalogStatsFile.exists()) {
             String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
@@ -239,8 +200,7 @@ public class FileController {
     }
 
 
-    @RequestMapping(value = "api/search/downloads/full_NCBI",
-                    method = RequestMethod.GET,
+    @GetMapping(value = "api/search/downloads/full_NCBI",
                     produces = MediaType.TEXT_PLAIN_VALUE)
     public void getFullNcbiDownload(HttpServletResponse response) throws IOException {
 
@@ -253,7 +213,7 @@ public class FileController {
 
     }
 
-    @RequestMapping(value = "api/search/stats", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(value = "api/search/stats", produces = "application/json")
     public @ResponseBody
     Map<String, Object> getCatalogStats() {
         Map<String, Object> response = new HashMap<>();
@@ -294,7 +254,7 @@ public class FileController {
         return response;
     }
 
-    @RequestMapping(value = "api/search/summaryStatsResources", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(value = "api/search/summaryStatsResources", produces = "application/json")
     public @ResponseBody
     Map<String, Object> getSummaryStatsResources() {
         Map<String, Object> response = new HashMap<>();
@@ -304,14 +264,6 @@ public class FileController {
         try {
             if(summaryStatsFile.exists()){
                 resources = Files.readAllLines(summaryStatsFile.getFile().toPath());
-//                InputStream in = new BufferedInputStream(summaryStatsFile.getInputStream());
-//                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-//                String line;
-//                while ((line = reader.readLine()) != null) {
-//                    resources.add(line);
-//                }
-//                in.close();
-//                reader.close();
                 response.put("resources", resources);
             }
         }
@@ -323,9 +275,7 @@ public class FileController {
         return response;
     }
 
-
-    @RequestMapping(value = "api/search/downloads/ancestry",
-                    method = RequestMethod.GET)
+    @GetMapping(value = "api/search/downloads/ancestry")
     public void getAncestryDownload(HttpServletResponse response) throws IOException {
         if (ancestryFileDownload.exists() && catalogStatsFile.exists()) {
             String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
@@ -337,27 +287,6 @@ public class FileController {
         else {
             throw new FileNotFoundException();
         }
-    }
-
-
-    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "File not found for download")
-    @ExceptionHandler(FileNotFoundException.class)
-    public void FileNotFoundException(FileNotFoundException fileNotFoundException) {
-    }
-
-    private void buildDownload(String fileName, InputStream inputStream, HttpServletResponse response)
-            throws IOException {
-        response.setContentType("text/tsv");
-        response.setHeader("Content-Disposition", "attachement; filename=" + fileName);
-
-        OutputStream outputStream;
-        outputStream = response.getOutputStream();
-
-        IOUtils.copy(new BufferedInputStream(inputStream), new BufferedOutputStream(outputStream));
-        outputStream.flush();
-        inputStream.close();
-//        outputStream.close();
-        response.setStatus(HttpStatus.OK.value());
     }
 
     private void buildDownload(String fileName, Resource inputFile, HttpServletResponse response) throws IOException {

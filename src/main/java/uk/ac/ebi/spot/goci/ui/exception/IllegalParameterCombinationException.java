@@ -1,11 +1,5 @@
 package uk.ac.ebi.spot.goci.ui.exception;
 
-/**
- * Javadocs go here!
- *
- * @author Tony Burdett
- * @date 01/02/15
- */
 public class IllegalParameterCombinationException extends RuntimeException {
     public IllegalParameterCombinationException() {
     }

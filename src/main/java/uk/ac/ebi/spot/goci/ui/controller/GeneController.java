@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import uk.ac.ebi.spot.goci.model.GeneResult;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 
-/**
- * Created by Daniel on 10/11/2018.
- * Based on the variant controller
- */
 @Controller
 public class GeneController {
 
@@ -24,11 +20,6 @@ public class GeneController {
     public GeneController(SearchConfiguration searchConfiguration) {
         this.searchConfiguration = searchConfiguration;
     }
-
-    //@RequestMapping(value = "genes", produces = MediaType.TEXT_HTML_VALUE)
-    //public String search() {
-    //    return "genes";
-    //}
 
     @RequestMapping(value = "/genes/{geneId:.+}", produces = MediaType.TEXT_HTML_VALUE)
     public String search(Model model,
