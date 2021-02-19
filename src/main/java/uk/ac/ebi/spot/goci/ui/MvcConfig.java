@@ -1,11 +1,5 @@
 package uk.ac.ebi.spot.goci.ui;
 
-/**
- * Created by emma on 24/11/14.
- * <p>
- * Configuration class for configuring Spring MVC in the application.
- */
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -24,7 +18,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/search/traits").setViewName("traitlist");
         registry.addViewController("/summary-statistics").setViewName("summary-statistics");
         registry.addViewController("/downloads/summary-statistics").setViewName("summary-statistics-table");
-        //registry.addRedirectViewController("/search/most-recent", "/search?query=*&filter=recent");
+
         registry.addViewController("/snp").setViewName("snp-page");
         registry.addViewController("/ancestry").setViewName("ancestry");
         registry.addViewController("/anniversary").setViewName("anniversary");
@@ -33,10 +27,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/studies").setViewName("studies");
         registry.addViewController("/genes").setViewName("genes");
         registry.addViewController("/regions").setViewName("regions");
-        // These pages must be removed. TODO
-        //registry.addViewController("/publication-fake").setViewName("study-disambig");
-        //registry.addViewController("/study-fake").setViewName("study-page-fake");
-        //registry.addViewController("/empty").setViewName("empty");
         // dynamically generated docs pages
         registry.addViewController("/docs").setViewName("docs");
         registry.addViewController("/docs/about").setViewName("docs-template");

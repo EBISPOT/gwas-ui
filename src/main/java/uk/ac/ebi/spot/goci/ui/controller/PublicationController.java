@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import uk.ac.ebi.spot.goci.model.PublicationResult;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 
-/**
- * Created by Cinzia on 15/11/2017.
- * Publication page for THOR/Orcid project
- */
 @Controller
 public class PublicationController {
 

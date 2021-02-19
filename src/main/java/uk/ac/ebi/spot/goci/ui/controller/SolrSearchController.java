@@ -29,13 +29,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 
-
-/**
- * Javadocs go here!
- *
- * @author Tony Burdett
- * @date 31/01/15
- */
 @Controller
 public class SolrSearchController {
     private SearchConfiguration searchConfiguration;
@@ -47,11 +40,9 @@ public class SolrSearchController {
         this.searchConfiguration = searchConfiguration;
     }
 
-
     protected Logger getLog() {
         return log;
     }
-
 
     @RequestMapping(value = "api/search", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin
@@ -334,13 +325,11 @@ public class SolrSearchController {
             getLog().debug(orRange);
 
             addFilterQuery(solrSearchBuilder, "orPerCopyNum", orRange);
-//            addFilterQuery(solrSearchBuilder, "orType", "true");
         }
         if (betaRange != "") {
             getLog().debug(betaRange);
 
             addFilterQuery(solrSearchBuilder, "betaNum", betaRange);
-//            addFilterQuery(solrSearchBuilder, "orType", "false");
         }
         if (dateRange != "") {
             getLog().debug(dateRange);
@@ -919,7 +908,6 @@ public class SolrSearchController {
 
     // Renamed the method. It is a generic and useful method.
     // Todo: change the name of the method. doEfoSorlSearch.
-    // Use SOLR FAT! SOLR FAT!
     @RequestMapping(value = "api/search/advancefilter", produces = MediaType.APPLICATION_JSON_VALUE,method = {RequestMethod.GET, RequestMethod.POST})
     public void doEfoSolrSearch(
             @RequestParam("q") String query,

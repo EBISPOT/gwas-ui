@@ -10,9 +10,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by dwelter on 24/02/15.
- */
 public class JsonProcessingService {
 
     private String json;

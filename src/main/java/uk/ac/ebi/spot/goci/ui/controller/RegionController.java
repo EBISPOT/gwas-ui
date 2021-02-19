@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import uk.ac.ebi.spot.goci.model.RegionResult;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 
-/**
- * Created by Daniel on 12/06/2018.
- * Based on the variant controller
- */
 @Controller
 public class RegionController {
 

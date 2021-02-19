@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import uk.ac.ebi.spot.goci.model.SnpResult;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 
-/**
- * Created by laurent on 12/01/15.
- */
-
 @Controller
 public class SNPController {
 
