@@ -8,7 +8,8 @@ function displayDatatableUnpublishedSummaryStats(data) {
 
     $.each(data, (index, summary_stats) => {
         var tmp = {};
-        var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(summary_stats.file);
+        const ftpDir = getDirectoryBin(summary_stats.study_accession);
+        var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(ftpDir).concat('/').concat(summary_stats.file);
         var ftplink = "<a href='" + ftpPath.concat("' target='_blank'>") + "Download</a>";
         summary_stats['path'] = ftplink;
         // Account for cases where the body_of_work is empty
@@ -150,9 +151,11 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     tmp['nr_associations'] = nr_association.toString();
     var a = (summary_stats.authorAscii_s).replace(/\s/g,"").replace(/\'/g, '&#39;');
     var dir = a.concat("_").concat(summary_stats.pubmedId).concat("_").concat(summary_stats.accessionId);
+    var dir_name = getDirectoryBin(summary_stats.accessionId);
 
     // Data Access
-    var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(dir);
+
+    var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(dir_name).concat('/').concat(summary_stats.accessionId);
 
     var ftplink = "<a href='"+ftpPath.concat("' target='_blank'>");
 
@@ -249,3 +252,10 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
 }
 
 
+function getDirectoryBin(gcstId){
+    const gcst = gcstId.substring(gcstId.indexOf("GCST")+4);
+    const lowerRange = (Math.floor(parseInt(gcst)/1000))*1000+1;
+    const upperRange = ((Math.floor(parseInt(gcst)/1000))+1)*1000;
+    const range = 'GCST'+lowerRange.toString().padStart(6, '0')+'-GCST'+upperRange.toString().padStart(6, '0');
+    return range
+}

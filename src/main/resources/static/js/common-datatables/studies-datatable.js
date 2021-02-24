@@ -170,8 +170,10 @@ function prepareDataForTable(data){
         var linkFullPValue = "NA";
         if (study.fullPvalueSet == 1) {
             var a = (study.authorAscii_s).replace(/\s/g, "");
+            const ftpdir = getDirectoryBin(study.accessionId);
             var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
-            var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(dir).concat("' target='_blank'</a>");
+            var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(ftpdir).concat('/').concat(study.accessionId).concat("' target='_blank'</a>");
+            //var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/".concat(dir).concat("' target='_blank'</a>");
             linkFullPValue = ftplink.concat("FTP Download");
         }
 
@@ -283,3 +285,11 @@ function getLoadedStudies() {
     });
     return result;
 };
+
+function getDirectoryBin(gcstId){
+    const gcst = gcstId.substring(gcstId.indexOf("GCST")+4);
+    const lowerRange = (Math.floor(parseInt(gcst)/1000))*1000+1;
+    const upperRange = ((Math.floor(parseInt(gcst)/1000))+1)*1000;
+    const range = 'GCST'+lowerRange.toString().padStart(6, '0')+'-GCST'+upperRange.toString().padStart(6, '0');
+    return range
+}
