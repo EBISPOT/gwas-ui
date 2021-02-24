@@ -304,7 +304,7 @@ Example:
 
 ==== Replication samples
 
-If your study includes replication samples that have not be analysed genome-wide, these should be added as additional rows, again separated by ancestry category.
+If your study design includes replication samples that have not be analysed genome-wide, these should be added as additional rows, again separated by ancestry category.
 
 Example:
 [cols="<4,<1,<4,<1,<4,<1,<1,<1,<4,<1,<1", options="header", grid="all", width=100%]
