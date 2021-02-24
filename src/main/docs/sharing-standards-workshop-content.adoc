@@ -1,5 +1,7 @@
 = Sharing and standards workshop
 
+== Sharing and standards workshop
+
 With the aim of increasing the availability, quality and utility of GWAS summary statistics, the NHGRI-EBI GWAS Catalog organised a community workshop to address the standards, infrastructure and incentives required to promote and enable broader sharing. The workshop was held via webinar in June 2020 and brought together representatives from the broad stakeholder space, including users of summary statistics, data generators, methods and tools developers, cohort representatives, resource providers, funders and Journal editors.
 
 Workshop materials, including pre-workshop survey responses, videos of each session and workshop outputs can be accessed below.
