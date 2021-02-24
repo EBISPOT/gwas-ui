@@ -13,7 +13,7 @@
     <groupId>uk.ac.ebi.spot.goci</groupId>
 
     <artifactId>goci-ui</artifactId>
-    <version>3.2.91</version>
+    <version>3.3.0</version>
     <packaging>war</packaging>
 
     <name>GOCI Search Interface</name>
