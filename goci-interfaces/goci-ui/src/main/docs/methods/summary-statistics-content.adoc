@@ -17,10 +17,31 @@ Summary statistics must meet a number of criteria to be eligible for inclusion i
 
 == Summary statistics availability
 
-We store summary statistics files in two different places, on our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], and in harmonised format in our database.
+We store summary statistics files in two different places, on our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], and in harmonised format in our database. 
 
 The FTP site hosts the original files and, when they are processed, a subdirectory called 'harmonised' containing a README file, a standard formatted version of the original file (see below) and a harmonised version of the file (also below). The REST API for the summary statistics database is now available at https://www.ebi.ac.uk/gwas/summary-statistics/api/.
 For full documentation on the REST API, please see https://www.ebi.ac.uk/gwas/summary-statistics/docs/[here].
+
+=== Important note about FTP
+In order to support the growing number of summary statistics, we have changed the structure of the summary statistics FTP directory.
+
+==== What is not changing?
+
+The path to summary statistics parent directory remains the same 'ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/'.
+All existing child paths remain the same - but these will be retired in 6 months time (see "Please note" below).
+
+==== What is new?
+
+Every summary statistics file is now available at a new path based on the GCST accession ID. Summary statistics that were previously available at '/gwas/summary_statistics/SmithJ_3333333_GCST123456/' are now also available at '/gwas/summary_statistics/GCST123001-GCST124000/GCST123456/'. The new directory is named using only the GCST accession ID, omitting the author name and pmid. In addition, the directory 'GCST123456/' is nested inside '/gwas/summary_statistics/GCST123001-GCST124000/'. This parent directory holds up to 1000 GCSTs, and will only contain those GCSTs that are within the range given. We will add these range of a thousand bins as they necessary when new GCSTs need housing.
+
+==== What to do?
+
+If you access summary statistics from our website, all the links have been updated, so you don't need to do anything differently.
+If you navigate/trawl/write scripts against the summary statistics directory, please be aware of these changes and update your workflow as soon as possible if the changes affect you.
+
+Please note: The old-style directories will be removed in six months (1st Sept 2021) i.e. any summary statistics directories under ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/ that is NOT in a range of a thousand bin (e.g. GCST000001-GCST001000) will be removed.
+
+Many thanks and please contact us know if you have any concerns.
 
 
 == Summary statistics acquisition
