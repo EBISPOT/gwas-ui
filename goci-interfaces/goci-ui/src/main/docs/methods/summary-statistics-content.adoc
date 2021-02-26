@@ -42,7 +42,7 @@ If you navigate/trawl/write scripts against the summary statistics directory, pl
 
 Please note: The old-style directories will be removed on 1st Sept 2021 i.e. any summary statistics directories under ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/ that is NOT in a range of a thousand bin (e.g. GCST000001-GCST001000) will be removed.
 
-Many thanks and please contact us know if you have any concerns.
+Many thanks and please contact us at gwas-info@ebi.ac.uk if you have any concerns.
 
 
 == Summary statistics acquisition
