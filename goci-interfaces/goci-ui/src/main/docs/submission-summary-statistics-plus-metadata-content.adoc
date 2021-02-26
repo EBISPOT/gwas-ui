@@ -235,7 +235,7 @@ There are 16 columns for you to fill in:
 
 In the Sample tab, enter information about the samples included in each GWAS. Please create a new row for each GWAS and for each broad ancestry category within each GWAS. See the Column Instructions below for the list of standardised ancestry categories used by the GWAS Catalog.
 
-Example:
+For example, for 2 studies on different traits, analysed in 2 ancestry categories, create 2 x 2 = 4 rows:
 [cols="<4,<1,<4,<1,<4,<1,<1,<1,<4,<1,<1", options="header", grid="all", width=100%]
 |===
 |Study tag
@@ -301,12 +301,11 @@ Example:
 |===
 
 {empty}
+Samples that contributed to the genome-wide analysis reported in your summary statistics should be annotated as “discovery” samples in the Stage column.
 
-==== Replication samples
+Your study design may have also included replication samples that were not analysed genome-wide, and therefore do not directly relate to your submitted summary statistics. However, information about these samples will eventually be included in the curated GWAS Catalog entry for your studies, so providing details at this stage will be of great help to our curators. You can add replication samples as additional rows, again separated by ancestry category, with “replication” in the Stage column. 
 
-If your study design includes replication samples that have not be analysed genome-wide, these should be added as additional rows, again separated by ancestry category.
-
-Example:
+For example, for a single study in 2 ancestry groups, with 2 stages (discovery and replication), create 2 x 2 = 4 rows:
 [cols="<4,<1,<4,<1,<4,<1,<1,<1,<4,<1,<1", options="header", grid="all", width=100%]
 |===
 |Study tag
