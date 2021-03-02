@@ -1,0 +1,48 @@
+= Sharing and standards workshop
+
+== Sharing and standards workshop
+
+With the aim of increasing the availability, quality and utility of GWAS summary statistics, the NHGRI-EBI GWAS Catalog organised a community workshop to address the standards, infrastructure and incentives required to promote and enable broader sharing. The workshop was held via webinar in June 2020 and brought together representatives from the broad stakeholder space, including users of summary statistics, data generators, methods and tools developers, cohort representatives, resource providers, funders and Journal editors.
+
+Workshop materials, including pre-workshop survey responses, videos of each session and workshop outputs can be accessed below.
+
+== Workshop organisation
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_briefing_document.pdf[Workshop briefing document]
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_agenda.pdf[Workshop agenda]
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_attendees.xlsx[Workshop attendees]
+
+== Videos of workshop sessions
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Introduction_and_keynote.mp4[Introduction and keynote] chaired by Helen Parkinson, keynote by Teri Manolio on "The history and future of the GWAS Catalog"
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_content.mp4[Data content] chaired by Inês Barroso
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR.mp4[FAIR] chaired by Robert Carroll
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Incentivisation_of_sharing.mp4[Incentivisation of sharing] chaired by Orli Bahcall
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Infrastructure_requirements.mp4[Infrastructure requirements] chaired by Michael Inouye
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_update_cycle.mp4[Data update cycle] chaired by Raymond Walters
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Forward_look.mp4[Forward Look] chaired by Stephen Rich
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Discussion_and_summary.mp4[Discussion and summary] chaired by Helen Parkinson
+
+== Supporting material
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Pre-workshop_survey_responses.xlsx[Pre-workshop survey responses]
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Analysis_of_publications_from_2019_and_2020_where_the_summary_statistics_could_not_be_shared_by_the_GWAS_Catalog_because_of_barriers.pdf[Analysis of publications from 2019 and 2020 where the summary statistics could not be shared by the GWAS Catalog because of barriers ]
+
+== Workshop outputs
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR_indicators_for_GWAS_data.pdf[FAIR indicators for GWAS data]
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Proposed_metadata_standard_reporting_elements.pdf[Proposed metadata standard reporting elements]
+
+link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Post_workshop_working_groups_with_aims.pdf[Post workshop working groups with aims]
+
