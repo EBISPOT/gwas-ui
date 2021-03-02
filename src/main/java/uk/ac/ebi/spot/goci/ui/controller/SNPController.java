@@ -24,9 +24,10 @@ public class SNPController {
         this.searchConfiguration = searchConfiguration;
     }
 
-    @RequestMapping(value = "/variants/{rsId}", produces = MediaType.TEXT_HTML_VALUE) String search(Model model,
-                                                                                               @PathVariable String rsId,
-                                                                                               @RequestParam(required = false) String filter) {
+    @RequestMapping(value = "/variants/{rsId}", produces = MediaType.TEXT_HTML_VALUE)
+    String search(Model model,
+                  @PathVariable String rsId,
+                  @RequestParam(required = false) String filter) {
 
         SnpResult result = new SnpResult();
         result.setQuery(rsId);

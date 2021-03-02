@@ -13,12 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.exception.IllegalParameterCombinationException;
-import uk.ac.ebi.spot.goci.ui.service.JsonProcessingService;
 import uk.ac.ebi.spot.goci.ui.service.JsonStreamingProcessorService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +24,10 @@ import java.io.*;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
 
 
 /**
@@ -919,7 +920,7 @@ public class SolrSearchController {
     // Renamed the method. It is a generic and useful method.
     // Todo: change the name of the method. doEfoSorlSearch.
     // Use SOLR FAT! SOLR FAT!
-    @RequestMapping(value = "api/search/advancefilter", produces = MediaType.APPLICATION_JSON_VALUE,method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "api/search/advancefilter", produces = MediaType.APPLICATION_JSON_VALUE,method = {RequestMethod.GET, RequestMethod.POST})
     public void doEfoSolrSearch(
             @RequestParam("q") String query,
             @RequestParam(value = "jsonp", required = false, defaultValue = "false") boolean useJsonp,
@@ -1117,7 +1118,7 @@ public class SolrSearchController {
 
 
     @RequestMapping(value = "api/search/downloads", method = RequestMethod.POST)
-    @ResponseStatus(value=HttpStatus.OK)
+    @ResponseStatus(value= HttpStatus.OK)
     @ResponseBody
     public void testDownloadData(@RequestBody String query, HttpServletResponse response) throws IOException {
 
@@ -1135,7 +1136,7 @@ public class SolrSearchController {
         String[] splitQuery;
         splitQuery = query.split("q=");
         String newString= splitQuery[1];
-        newString = URLEncoder.encode(newString,"UTF-8");
+        newString = URLEncoder.encode(newString, "UTF-8");
         newString=newString.replace("%252C", ",");
         query = newString;
 
