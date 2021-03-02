@@ -75,10 +75,12 @@ function getDataSolr(main, initLoad = false) {
     }, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
         // Check if Solr returns some results
         if (data.grouped.resourcename.groups.length == 0) {
-            document.querySelector('#lower_container').remove();
+            showLoadingOverLay('#unpublished-summary-panel-loading');
+            $('#unpublished-container').css('display', 'block');
             displayUnpublishedStudySummary(searchQuery);
         } else {
-            document.querySelector('#unpublished-container').remove();
+            showLoadingOverLay('#summary-panel-loading');
+            $('#lower_container').css('display', 'block');
             processSolrData(data, initLoad);
             setDownloadLink("accessionId:" + searchQuery);
             displayDatatableAssociations(data_association.docs, cleanBeforeInsert = false);
@@ -140,14 +142,14 @@ function processSolrData(data, initLoad = false) {
 }
 
 function displayUnpublishedStudySummary(accession) {
-    let baseUrl = gwasProperties.SNOOPY_REST_API //'http://localhost:8080/api/';
+    let baseUrl = gwasProperties.GWAS_REST_API //'http://localhost:8080/api/';
     let URI = `${baseUrl}/unpublished-studies/search/query?accession=${accession}`;
     const ftpdir = getDirectoryBin(accession);
     httpRequest = HttpRequestEngine.requestWithoutBody(URI, 'GET');
     HttpRequestEngine.fetchRequest(httpRequest).then((data) => {
         console.log(data);
-        let ancestryCategory  = data.unpublishedAncestries[0].ancestry_category;
-        let sampleSize  = data.unpublishedAncestries[0].sample_size;
+        let ancestryCategory = data.unpublishedAncestries[0].ancestry_category;
+        let sampleSize = data.unpublishedAncestries[0].sample_size;
 
         $("#first-author").html(data.body_of_work[0].first_author);
         $("#corresponding-author").html(data.body_of_work[0].first_author); //TODO: PUT CORRESPONDING AUTHOR
@@ -161,13 +163,11 @@ function displayUnpublishedStudySummary(accession) {
         $("#preprint-doi").attr('href', data.body_of_work[0].doi);
         $("#discovery-sample-desc").html(data.unpublishedAncestries[0].sample_description);
         $("#discovery-ancestry").html(`${sampleSize} ${ancestryCategory}`);
-    })
-        .catch(error => {
-            $('#unpublished-container').html("<h2>The study accession <em>"+accession+"</em> cannot be found in the GWAS Catalog database</h2>");
-        });
+        hideLoadingOverLay('#unpublished-summary-panel-loading');
+    }).catch(error => {
+        $('#unpublished-container').html("<h2>The study accession <em>" + accession + "</em> cannot be found in the GWAS Catalog database</h2>");
+    });
 
-
-    hideLoadingOverLay('#summary-panel-loading');
 }
 
 function displaySummaryStudy(data, clearBeforeInsert) {
@@ -445,11 +445,11 @@ function setAncentrySection(study) {
 
 // GOCI-197 FTP Link Restructuring
 
-function getDirectoryBin(gcstId){
-    const gcst = gcstId.substring(gcstId.indexOf("GCST")+4);
-    const lowerRange = (Math.floor(parseInt(gcst)/1000))*1000+1;
-    const upperRange = ((Math.floor(parseInt(gcst)/1000))+1)*1000;
-    const range = 'GCST'+lowerRange.toString().padStart(6, '0')+'-GCST'+upperRange.toString().padStart(6, '0');
+function getDirectoryBin(gcstId) {
+    const gcst = gcstId.substring(gcstId.indexOf("GCST") + 4);
+    const lowerRange = (Math.floor(parseInt(gcst) / 1000)) * 1000 + 1;
+    const upperRange = ((Math.floor(parseInt(gcst) / 1000)) + 1) * 1000;
+    const range = 'GCST' + lowerRange.toString().padStart(6, '0') + '-GCST' + upperRange.toString().padStart(6, '0');
     return range
 }
 
