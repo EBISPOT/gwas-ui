@@ -20,7 +20,11 @@ In each tab, mandatory columns are highlighted in orange. Grey columns are optio
 
 === [[studies]]1. Study tab
 
+==== Overview
+
 In the Study tab, please add one row for each separate GWAS analysis (study) in the submission. In particular, please make sure that there is one row for each set of summary statistics (i.e. each full set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite.
+
+==== Column instructions
 
 There are 16 columns for you to fill in:
 
@@ -227,19 +231,145 @@ There are 16 columns for you to fill in:
 
 === [[samples]]2. Sample tab
 
-In the Sample tab, enter information about the samples included in each GWAS.
+==== Overview
 
-Each GWAS should be listed separately, within each GWAS, each group of samples should be on a separate row. Examples of sample groups are discovery/replication cohorts, and ancestry categories (e.g. European, East Asian, South Asian).
+In the Sample tab, enter information about the samples included in each GWAS. Please create a new row for each GWAS and for each broad ancestry category within each GWAS. See the Column Instructions below for the list of standardised ancestry categories used by the GWAS Catalog.
 
-For example, if your submission includes 2 GWAS analyses for different traits (i.e. 2 studies), each with a discovery and a replication stage (2 stages), in individuals with European or East Asian ancestry (2 broad ancestry categories), then you will need to create:
+For example, for 2 studies on different traits, analysed in 2 ancestry categories, create 2 x 2 = 4 rows:
+[cols="<4,<1,<4,<1,<4,<1,<1,<1,<4,<1,<1", options="header", grid="all", width=100%]
+|===
+|Study tag
+|
+|Stage
+|
+|Number of individuals
+|
+|...
+|
+|Ancestry category
+|
+|...
 
-* 2 studies x 2 stages x 2 ancestry categories = *8 rows in total*
+|s1_LDL
+|
+|discovery
+|
+|500
+|
+|...
+|
+|East Asian
+|
+|...
 
-The screenshot below shows how this should look in the sample tab (note some columns are hidden to make the example clearer):
+|s1_LDL
+|
+|discovery
+|
+|500
+|
+|...
+|
+|Sub-Saharan African
+|
+|...
 
-image::sample_tab_example.png[Sample tab example,width=600,align="center"]
+|s2_HDL
+|
+|discovery
+|
+|500
+|
+|...
+|
+|East Asian
+|
+|...
+
+|s2_HDL
+|
+|discovery
+|
+|500
+|
+|...
+|
+|Sub-Saharan African
+|
+|...
+|
+|===
 
 {empty}
+Samples that contributed to the genome-wide analysis reported in your summary statistics should be annotated as “discovery” samples in the Stage column.
+
+Your study design may have also included replication samples that were not analysed genome-wide, and therefore do not directly relate to your submitted summary statistics. However, information about these samples will eventually be included in the curated GWAS Catalog entry for your studies, so providing details at this stage will be of great help to our curators. You can add replication samples as additional rows, again separated by ancestry category, with “replication” in the Stage column. 
+
+For example, for a single study in 2 ancestry groups, with 2 stages (discovery and replication), create 2 x 2 = 4 rows:
+[cols="<4,<1,<4,<1,<4,<1,<1,<1,<4,<1,<1", options="header", grid="all", width=100%]
+|===
+|Study tag
+|
+|Stage
+|
+|Number of individuals
+|
+|...
+|
+|Ancestry category
+|
+|...
+
+|s1_LDL
+|
+|discovery
+|
+|500
+|
+|...
+|
+|East Asian
+|
+|...
+
+|s1_LDL
+|
+|discovery
+|
+|500
+|
+|...
+|
+|Sub-Saharan African
+|
+|...
+
+|s1_LDL
+|
+|replication
+|
+|200
+|
+|...
+|
+|East Asian
+|
+|...
+
+|s1_LDL
+|
+|replication
+|
+|200
+|
+|...
+|
+|Sub-Saharan African
+|
+|...
+|===
+
+==== Column Instructions
 
 There are 10 columns for you to fill in:
 
@@ -312,6 +442,8 @@ There are 10 columns for you to fill in:
 |Sample description
 |
 |Additional information required for the interpretation of results, e.g. sex (males/females), age (adults/children), ordinal variables, or multiple traits analysed together ("or" traits).
+
+Please do not enter ancestry information in this column (see other columns below).
 |
 |no
 |
