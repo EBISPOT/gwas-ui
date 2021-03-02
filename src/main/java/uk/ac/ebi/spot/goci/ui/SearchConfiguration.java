@@ -2,7 +2,7 @@ package uk.ac.ebi.spot.goci.ui;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.web.support.ErrorPageFilter;
+import org.springframework.boot.web.servlet.support.ErrorPageFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -18,11 +18,13 @@ import java.net.URL;
 @Component
 public class SearchConfiguration {
     // GWAS Solr FAT
-    @NotNull @Value("${search.server}")
+    @NotNull
+    @Value("${search.server}")
     private URL fatServerSource;
 
     //GWAS Search Interface v.2: using Solr Slim
-    @NotNull @Value("${search.server.slim}")
+    @NotNull
+    @Value("${search.server.slim}")
     private URL slimServerSource;
 
     @Value("${search.defaultFacet}")

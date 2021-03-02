@@ -5,8 +5,6 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.io.*;
 
@@ -105,7 +103,7 @@ public class JsonStreamingProcessorService {
             BufferedWriter output = new BufferedWriter(new FileWriter("out.txt"));
 
             JsonStreamingProcessorService processorService = new JsonStreamingProcessorService(input, true,
-                    "association", false, output);
+                                                                                               "association", false, output);
             processorService.processJson();
 //            JsonProcessingService oldProcessor = new JsonProcessingService(input.readLine(), true,
 //                    "association", false);

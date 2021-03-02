@@ -6,11 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -107,11 +103,11 @@ public class JsonProcessingService {
 
     }
 
-    public void processStudyJson(StringBuilder line, JsonNode doc) throws IOException{
+    public void processStudyJson(StringBuilder line, JsonNode doc) throws IOException {
         processStudyJson(line, doc, false);
     }
 
-        public void processStudyJson(StringBuilder line, JsonNode doc, boolean newFormat) throws IOException{
+        public void processStudyJson(StringBuilder line, JsonNode doc, boolean newFormat) throws IOException {
 
         line.append(getDate(doc));
         line.append("\t");
@@ -796,7 +792,7 @@ public class JsonProcessingService {
         return date;
     }
 
-    private Map<String,String> getMergedCurrent(JsonNode doc) {
+    private Map<String, String> getMergedCurrent(JsonNode doc) {
         String merged;
         String currentSnp;
         Map<String, String> mergedSnps = new HashMap<>();
