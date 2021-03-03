@@ -156,7 +156,7 @@ function displayUnpublishedStudySummary(accession) {
         $("#reported-trait").html(data.trait);
         $("#title").html(data.body_of_work[0].title);
         $("#genotyping-tech").html(data.genotyping_technology);
-        $("#date-submitted").html(data.createdDate);
+        $("#date-submitted").html(new Date(data.createdDate).toDateString());
         $("#trait").html(data.efo_trait);
         $("#platform-snp").html('');
         $("#preprint-doi").attr('href', data.body_of_work[0].doi);
