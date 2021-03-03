@@ -40,6 +40,9 @@ function displayDatatableUnpublishedSummaryStats(data) {
         var d = new Date(summary_stats['createdDate']).toISOString();
         summary_stats['date_submitted'] = d.split('T')[0];
 
+        let studyAccession = summary_stats['study_accession'];
+        summary_stats['study_accession'] = '<a href="'+gwasProperties.contextPath+'studies/'+studyAccession+'">'+studyAccession+'</a>';
+
     });
     $('#summary-stats-unpublished-table').bootstrapTable('removeAll');
     $('#summary-stats-unpublished-table').bootstrapTable({

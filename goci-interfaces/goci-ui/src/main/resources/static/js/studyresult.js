@@ -76,11 +76,10 @@ function getDataSolr(main, initLoad = false) {
         // Check if Solr returns some results
         if (data.grouped.resourcename.groups.length == 0) {
             showLoadingOverLay('#unpublished-summary-panel-loading');
+            $('#lower_container').css('display', 'none');
             $('#unpublished-container').css('display', 'block');
             displayUnpublishedStudySummary(searchQuery);
         } else {
-            showLoadingOverLay('#summary-panel-loading');
-            $('#lower_container').css('display', 'block');
             processSolrData(data, initLoad);
             setDownloadLink("accessionId:" + searchQuery);
             displayDatatableAssociations(data_association.docs, cleanBeforeInsert = false);
@@ -157,7 +156,7 @@ function displayUnpublishedStudySummary(accession) {
         $("#reported-trait").html(data.trait);
         $("#title").html(data.body_of_work[0].title);
         $("#genotyping-tech").html(data.genotyping_technology);
-        $("#date-submitted").html(data.createdDate);
+        $("#date-submitted").html(new Date(data.createdDate).toDateString());
         $("#trait").html(data.efo_trait);
         $("#platform-snp").html('');
         $("#preprint-doi").attr('href', data.body_of_work[0].doi);
