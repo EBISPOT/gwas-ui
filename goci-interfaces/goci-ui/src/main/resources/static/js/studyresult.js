@@ -76,11 +76,10 @@ function getDataSolr(main, initLoad = false) {
         // Check if Solr returns some results
         if (data.grouped.resourcename.groups.length == 0) {
             showLoadingOverLay('#unpublished-summary-panel-loading');
+            $('#lower_container').css('display', 'none');
             $('#unpublished-container').css('display', 'block');
             displayUnpublishedStudySummary(searchQuery);
         } else {
-            showLoadingOverLay('#summary-panel-loading');
-            $('#lower_container').css('display', 'block');
             processSolrData(data, initLoad);
             setDownloadLink("accessionId:" + searchQuery);
             displayDatatableAssociations(data_association.docs, cleanBeforeInsert = false);
