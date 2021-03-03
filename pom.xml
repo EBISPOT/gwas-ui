@@ -6,7 +6,7 @@
 
     <groupId>uk.ac.ebi.spot</groupId>
     <artifactId>gwas-ui</artifactId>
-    <version>3.3.1</version>
+    <version>3.3.2</version>
 
     <packaging>pom</packaging>
     <name>GWAS UI</name>
