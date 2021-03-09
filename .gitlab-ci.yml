@@ -2,7 +2,7 @@ image: java:latest
 
 stages:
   - build
-  - deploy
+  - deploy-dev1
 
 maven-build:
   image: maven:3-jdk-8
@@ -15,8 +15,8 @@ maven-build:
       - gwas-ui.jar
     expire_in: 1 day
 
-deploy:
-  stage: deploy
+deploy-dev1:
+  stage: deploy-dev1
   image: alpine
   before_script:
     - apk add openssh-client
@@ -30,4 +30,6 @@ deploy:
       "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
       "cd /homes/spotbot; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS < /dev/null > /homes/spotbot/logs/gwas-ui.out 2>&1 &"
+  only:
+    - march-2021-refactoring
 
