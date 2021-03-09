@@ -30,6 +30,4 @@ deploy:
       "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
       "cd /homes/spotbot; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS < /dev/null > /homes/spotbot/logs/gwas-ui.out 2>&1 &"
-  only:
-    - march-2021-refactoring
 
