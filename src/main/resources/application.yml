@@ -1,0 +1,70 @@
+#===========================================COMPULSORY PROGRAM ARGUMENTS======================================#
+datadir:
+solrserver:
+virtusoserver:
+#===========================================COMPULSORY PROGRAM ARGUMENTS======================================#
+
+server:
+  port: 9581
+  servlet:
+    context-path: /gwas
+
+spring:
+  data:
+    rest:
+      basePath: /api
+  jmx:
+    enabled: false
+
+search:
+  defaultFacet: resourcename
+  server: ${solrserver}/solr/gwas
+  server.slim: ${solrserver}/solr/gwas_slim
+
+efo:
+  location: https://www.ebi.ac.uk/efo/efo.owl
+
+lode:
+  sparqlendpoint:
+    url: ${virtusoserver}/sparql
+
+logging:
+  config: classpath:logback-prod.xml
+
+ols:
+  efo:
+    terms: /api/ontologies/efo/terms
+  fullIri: ?iri=
+  server: https://www.ebi.ac.uk/ols
+  shortForm: ?short_form=
+
+pussycat:
+  session:
+    strategy: JOIN
+
+cache:
+  directory: ${datadir}/svg_cache
+
+download:
+  NCBI: ${datadir}/downloads/gwas-catalog-ncbi.txt
+  alternative: ${datadir}/downloads/gwas-catalog-download-alternative.txt
+  ancestry: ${datadir}/downloads/gwas-catalog-ancestry-download.txt
+  efoMappings: ${datadir}/downloads/gwas-efo-trait-mappings.txt
+  ensemblmapping: ${datadir}/downloads/gwas-catalog-download-ensembl.txt
+  full: ${datadir}/downloads/gwas-catalog-download.txt
+  new_format:
+    ancestries: ${datadir}/downloads/gwas-catalog-download-ancestries-v1.0.3.txt
+    studies: ${datadir}/downloads/gwas-catalog-download-studies-v1.0.3.txt
+  studies: ${datadir}/downloads/gwas-catalog-studies-download.txt
+  studiesAlternative: ${datadir}/downloads/gwas-catalog-studies-download-alternative.txt
+  unpublished:
+    ancestries: ${datadir}/downloads/gwas-catalog-unpublished-ancestries-v1.0.3.tsv
+    studies: ${datadir}/downloads/gwas-catalog-unpublished-studies-v1.0.3.tsv
+
+summary:
+  stats:
+    file: ${datadir}/downloads/summary-stats-resources.txt
+
+catalog:
+  stats:
+    file: ${datadir}/downloads/gwas-catalog-stats.txt
