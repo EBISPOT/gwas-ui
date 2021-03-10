@@ -5,16 +5,15 @@ virtusoserver:
 #===========================================COMPULSORY PROGRAM ARGUMENTS======================================#
 
 server:
-  port: 9581
+  port: 8080
   servlet:
     context-path: /gwas
 
 spring:
-  data:
-    rest:
-      basePath: /api
   jmx:
     enabled: false
+  profiles:
+    active:
 
 search:
   defaultFacet: resourcename
@@ -52,11 +51,11 @@ download:
   efoMappings: ${datadir}/downloads/gwas-efo-trait-mappings.txt
   ensemblmapping: ${datadir}/downloads/gwas-catalog-download-ensembl.txt
   full: ${datadir}/downloads/gwas-catalog-download.txt
+  studies: ${datadir}/downloads/gwas-catalog-studies-download.txt
+  studiesAlternative: ${datadir}/downloads/gwas-catalog-studies-download-alternative.txt
   new_format:
     ancestries: ${datadir}/downloads/gwas-catalog-download-ancestries-v1.0.3.txt
     studies: ${datadir}/downloads/gwas-catalog-download-studies-v1.0.3.txt
-  studies: ${datadir}/downloads/gwas-catalog-studies-download.txt
-  studiesAlternative: ${datadir}/downloads/gwas-catalog-studies-download-alternative.txt
   unpublished:
     ancestries: ${datadir}/downloads/gwas-catalog-unpublished-ancestries-v1.0.3.tsv
     studies: ${datadir}/downloads/gwas-catalog-unpublished-studies-v1.0.3.tsv
