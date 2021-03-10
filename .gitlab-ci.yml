@@ -2,7 +2,11 @@ image: java:latest
 
 stages:
   - build
-  - deploy-dev2
+  - deploy-snoopy-dev1
+  - deploy-snoopy-dev2
+  - deploy-snoopy-test
+  - deploy-snoopy-preparation
+  - deploy-wwwdev-staging
 
 maven-build:
   image: maven:3-jdk-8
@@ -16,7 +20,7 @@ maven-build:
     expire_in: 1 day
 
 deploy-dev1:
-  stage: deploy-dev1
+  stage: deploy-snoopy-dev1
   image: alpine
   before_script:
     - apk add openssh-client
@@ -25,17 +29,17 @@ deploy-dev1:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SNOOPY_SERVER:$DEV1_APP_DIRECTORY
+    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SNOOPY_SERVER:$APP_DIRECTORY_DEV1
     - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
       "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
-      "cd $DEV1_APP_DIRECTORY; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=dev2 < /dev/null > $DEV1_APP_DIRECTORY/logs/gwas-ui.out 2>&1 &"
+      "cd $APP_DIRECTORY_DEV1; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=dev2 < /dev/null > $APP_DIRECTORY_DEV1/logs/gwas-ui.out 2>&1 &"
   only:
     - march-2021-refactoring
 
 
 deploy-dev2:
-  stage: deploy-dev2
+  stage: deploy-snoopy-dev2
   image: alpine
   before_script:
     - apk add openssh-client
@@ -44,10 +48,55 @@ deploy-dev2:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SNOOPY_SERVER:$DEV2_APP_DIRECTORY
+    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SNOOPY_SERVER:$APP_DIRECTORY_DEV2
     - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
       "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
-      "cd $DEV2_APP_DIRECTORY; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=dev2 < /dev/null > $DEV2_APP_DIRECTORY/logs/gwas-ui.out 2>&1 &"
+      "cd $APP_DIRECTORY_DEV2; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=dev2 < /dev/null > $APP_DIRECTORY_DEV2/logs/gwas-ui.out 2>&1 &"
   only:
     - dev
+
+
+deploy-snoopy-test:
+  stage: deploy-snoopy-test
+  image: alpine
+  before_script:
+    - apk add openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SNOOPY_SERVER:$APP_DIRECTORY_TEST
+    - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+    - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
+      "cd $APP_DIRECTORY_TEST; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=test < /dev/null > $APP_DIRECTORY_TEST/logs/gwas-ui.out 2>&1 &"
+  only:
+    - master
+
+
+
+deploy-snoopy-preparation:
+  stage: deploy-snoopy-preparation
+  image: alpine
+  before_script:
+    - apk add openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SNOOPY_SERVER:$APP_DIRECTORY_PREPARATION
+    - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+    - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
+      "cd $APP_DIRECTORY_PREPARATION; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=preparation < /dev/null > $APP_DIRECTORY_PREPARATION/logs/gwas-ui.out 2>&1 &"
+  only:
+    - master
+
+
+
+
+
+
