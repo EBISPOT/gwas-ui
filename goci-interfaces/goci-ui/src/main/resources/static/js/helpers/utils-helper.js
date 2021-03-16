@@ -11,7 +11,7 @@ global_fl = 'accessionId,ancestralGroups,ancestryLinks,associationCount,associat
     'label,labelda,mappedLabel,mappedUri,merged,multiSnpHaplotype,numberOfIndividuals,orPerCopyNum,orcid_s,pValueExponent,' +
     'pValueMantissa,parent,positionLinks,publication,publicationDate,publicationLink,pubmedId,qualifier,range,region,' +
     'replicateSampleDescription,reportedGene,resourcename,riskFrequency,rsId,shortForm,snpInteraction,strongestAllele,studyId,' +
-    'synonym,title,traitName,traitName_s,traitUri,platform';
+    'synonym,title,traitName,traitName_s,traitUri,platform,agreedToCc0';
 global_raw = 'fq:resourcename:association or resourcename:study';
 
 // Number of rows displayed on the datatables

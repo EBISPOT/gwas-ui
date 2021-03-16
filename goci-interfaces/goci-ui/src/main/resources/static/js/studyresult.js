@@ -161,6 +161,8 @@ function displayUnpublishedStudySummary(accession) {
         $("#preprint-doi").attr('href', data.body_of_work[0].doi);
         $("#discovery-sample-desc").html(data.unpublishedAncestries[0].sample_description);
         $("#discovery-ancestry").html(`${sampleSize} ${ancestryCategory}`);
+        if (data.agreedToCc0) $("#license").html(`<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank"> CC0 </a>`)
+        else $("#license").html(`<a href="https://www.ebi.ac.uk/about/terms-of-use/" target="_blank"> Terms of use </a>`)
     })
         .catch(error => {
             $('#unpublished-container').html("<h2>The study accession <em>"+accession+"</em> cannot be found in the GWAS Catalog database</h2>");
@@ -198,6 +200,8 @@ function displaySummaryStudy(data, clearBeforeInsert) {
     $("#study-genotyping-tech").html(genotyping);
     $("#study-genotyping-platform").html(study.platform);
     $("#study-sample-description").html(study.initialSampleDescription);
+    if (study.agreedToCc0) $("#study-license").html(`<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank"> CC0 </a>`)
+    else $("#study-license").html(`<a href="https://www.ebi.ac.uk/about/terms-of-use/" target="_blank"> Terms of use </a>`)
     setAncentrySection(study);
     var fullpvalset = study.fullPvalueSet;
     if (fullpvalset == 1) {
