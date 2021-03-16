@@ -530,4 +530,4 @@ Email us at gwas-info@ebi.ac.uk.
 
 '''
 
-_Last updated: 28 May 2020_
+_Last updated: 16 March 2021_
