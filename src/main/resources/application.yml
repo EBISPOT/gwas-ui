@@ -27,9 +27,6 @@ lode:
   sparqlendpoint:
     url: ${virtusoserver}/sparql
 
-logging:
-  config: classpath:logback-prod.xml
-
 ols:
   efo:
     terms: /api/ontologies/efo/terms
