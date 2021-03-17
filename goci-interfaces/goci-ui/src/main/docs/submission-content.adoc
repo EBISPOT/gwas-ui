@@ -125,7 +125,7 @@ image::globus_email.png[Publication search results,width=800,align="center"]
 
 Enter the email address associated with your Globus account. It should be filled automatically, but you can change it if needed.
 
-image::enter_email.png[Enter Globus email,width=800,align="center"]
+image::enter_email2.png[Enter Globus email,width=800,align="center"]
 
 {empty}
 
