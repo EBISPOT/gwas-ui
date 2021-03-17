@@ -19,15 +19,16 @@ The GWAS Catalog accepts summary statistics for both published and unpublished h
 2. <<link-6, Install Globus Connect Personal>>
 3. <<link-7, Enter registered Globus email>>
 4. <<link-8, Format and validate summary statistics>>
-5. <<link-9, Create submission>>
+5. <<link-9, License agreement>>
+6. <<link-10, Create submission>>
 
 <<C, C. Uploading data>>
 
-1. <<link-10, Upload summary statistics>>
-2. <<link-11, Download submission form>>
-3. <<link-12, Fill in submission form>>
-4. <<link-13, Submit submission form>>
-5. <<link-14, After submission>>
+1. <<link-11, Upload summary statistics>>
+2. <<link-12, Download submission form>>
+3. <<link-13, Fill in submission form>>
+4. <<link-14, Submit submission form>>
+5. <<link-15, After submission>>
 
 <<D, Additional information>>
 
@@ -132,7 +133,12 @@ image::enter_email.png[Enter Globus email,width=800,align="center"]
 
 Please confirm that your summary statistics files conform to our standard format and content, otherwise your submission will fail validation. If you haven’t already done so, follow the https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[Format and validate link^] for formatting instructions and to access our offline summary statistics validator.
 
-=== [[link-9]]5. Create submission
+=== [[link-9]]5. License agreement
+
+From March 2021, we are asking all submitters to agree to share their data under the terms of https://creativecommons.org/publicdomain/zero/1.0[CC0]. This dedicates your data to the public domain, allowing downstream users to consume the data without restriction. This unambiguous declaration of free and open access is required for some downstream uses, e.g. to meet the data sharing requirements of certain journals, and maximise the utility of your data to the research community. Data submitted prior to March 2021 is made available under the EBI standard https://www.ebi.ac.uk/about/terms-of-use[terms of use]. Whilst these terms do not themselves impose any restrictions on downstream use, the application of CC0 license removes any ambiguity. We advise consumers of data hosted by the GWAS Catalog to note the license terms of individual datasets, if applicable to their specific use case. Please ensure that the original data are cited whenever they are used in a publication.
+If you have any questions or concerns about licensing, please contact us via gwas-info@ebi.ac.uk.
+
+=== [[link-10]]6. Create submission
 
 Please tick each box in the checklist to confirm that the prerequisites have been completed.
 
@@ -146,7 +152,7 @@ image::create_sub.png[Create Submission,width=800,align="center"]
 
 After you have created a submission, you will be able to upload your summary statistics and supporting information. 
 
-=== [[link-10]]1. Upload summary statistics
+=== [[link-11]]1. Upload summary statistics
 
 The first step is to upload your summary statistics files. When you create a submission, a folder is created for you. You can transfer your summary statistics to this location using Globus.
 
@@ -182,7 +188,7 @@ image::drag_and_drop.png[Drag and drop summary statistics,width=800,align="cente
 
 A message will appear when the transfer request has successfully started. Large files may take some time to transfer, but you do not need to wait until this is finished - the transfer will continue in the background while you proceed with the next step. You do however need to wait for confirmation of file transfer before clicking "Submit submission form" (step 3).
 
-=== [[link-11]]2. Download submission form
+=== [[link-12]]2. Download submission form
 
 You will now need to provide some additional information to support the summary statistics files.
 
@@ -194,7 +200,7 @@ image::download_form.png[Download submission form,width=300,align="center"]
 
 Please download a new form each time you create a new submission for a publication, to make sure you have the most correct and up-to-date form for your specific submission.
 
-=== [[link-12]]3. Fill in submission form
+=== [[link-13]]3. Fill in submission form
 
 For help filling in the submission form, follow the link from the submission interface, or select the relevant link below:
 
@@ -202,7 +208,7 @@ For help filling in the submission form, follow the link from the submission int
 
 2. Instructions for https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics-plus-metadata[summary statistics plus study metadata^]
 
-=== [[link-13]]4. Submit submission form
+=== [[link-14]]4. Submit submission form
 
 Once you have completed the submission form, save it and click "Submit submission form".
 
@@ -226,7 +232,7 @@ If validation fails, you will receive an email listing the errors detected and a
 
 image::review_reset.png[Review or reset,width=300,align="center"]
 
-=== [[link-14]]5. After submission
+=== [[link-15]]5. After submission
 
 After submission, you will be taken to the My Submissions page (see below), where you can see your latest submission, now with the status SUBMITTED.
 
