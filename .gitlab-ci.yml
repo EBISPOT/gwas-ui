@@ -29,11 +29,11 @@ deploy-dev1:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SNOOPY_SERVER:$APP_DIRECTORY_DEV1
-    - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
+    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_DEV1
+    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
       "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
-    - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
-      "cd $APP_DIRECTORY_DEV1; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=dev1 > /dev/null 2>&1 &"
+    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
+      "cd $APP_DIR_DEV1; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=dev1 > /dev/null 2>&1 &"
   only:
     - march-2021-refactoring
 
@@ -48,11 +48,11 @@ deploy-dev2:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SNOOPY_SERVER:$APP_DIRECTORY_DEV2
-      - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
+    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_DEV2
+      - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
       "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
-    - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
-      "cd $APP_DIRECTORY_DEV2; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=dev2 > /dev/null 2>&1 &"
+    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
+      "cd $APP_DIR_DEV2; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=dev2 > /dev/null 2>&1 &"
   only:
     - dev
 
@@ -67,11 +67,11 @@ deploy-snoopy-test:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SNOOPY_SERVER:$APP_DIRECTORY_TEST
-    - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
+    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_TEST
+    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
       "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
-    - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
-      "cd $APP_DIRECTORY_TEST; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=test > /dev/null 2>&1 &"
+    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
+      "cd $APP_DIR_TEST; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=test > /dev/null 2>&1 &"
   only:
     - master
 
@@ -87,11 +87,11 @@ deploy-snoopy-preparation:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SNOOPY_SERVER:$APP_DIRECTORY_PREPARATION
-    - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
+    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_PREPARATION
+    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
       "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
-    - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
-      "cd $APP_DIRECTORY_PREPARATION; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=preparation > /dev/null 2>&1 &"
+    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
+      "cd $APP_DIR_PREPARATION; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=preparation > /dev/null 2>&1 &"
   only:
     - master
 
@@ -106,10 +106,10 @@ deploy-wwwdev-staging:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - scp -o StrictHostKeyChecking=no gwas-ui.jar $WWWDEV_STAGING_SERVER:$APP_DIR_NOAH
-    #- ssh -o StrictHostKeyChecking=no $WWWDEV_STAGING_SERVER
-    #  "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
-    - ssh -o StrictHostKeyChecking=no $WWWDEV_STAGING_SERVER
+    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_WWWDEV_STAGING:$APP_DIR_NOAH
+    - ssh -o StrictHostKeyChecking=no $SERVER_WWWDEV_STAGING
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+    - ssh -o StrictHostKeyChecking=no $SERVER_WWWDEV_STAGING
       "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=staging > /dev/null 2>&1 &"
   #when: manual
   only:
