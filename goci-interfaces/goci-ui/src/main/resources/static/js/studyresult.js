@@ -146,7 +146,6 @@ function displayUnpublishedStudySummary(accession) {
     const ftpdir = getDirectoryBin(accession);
     httpRequest = HttpRequestEngine.requestWithoutBody(URI, 'GET');
     HttpRequestEngine.fetchRequest(httpRequest).then((data) => {
-        console.log(data);
         let ancestryCategory = data.unpublishedAncestries[0].ancestry_category;
         let sampleSize = data.unpublishedAncestries[0].sample_size;
 
@@ -162,7 +161,7 @@ function displayUnpublishedStudySummary(accession) {
         $("#preprint-doi").attr('href', data.body_of_work[0].doi);
         $("#discovery-sample-desc").html(data.unpublishedAncestries[0].sample_description);
         $("#discovery-ancestry").html(`${sampleSize} ${ancestryCategory}`);
-        if (data.agreedToCc0) $("#license").html(`<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank"> CC0 </a>`)
+        if (data.agreed_to_cc0) $("#license").html(`<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank"> CC0 </a>`)
         else $("#license").html(`<a href="https://www.ebi.ac.uk/about/terms-of-use/" target="_blank"> Terms of use </a>`)
         hideLoadingOverLay('#unpublished-summary-panel-loading');
     }).catch(error => {
