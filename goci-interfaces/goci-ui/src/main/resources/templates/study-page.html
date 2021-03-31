@@ -7,7 +7,8 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="The NHGRI-EBI GWAS Catalog: a curated collection of all published genome-wide association studies, produced by a collaboration between EMBL-EBI and NHGRI"/>
+    <meta name="description"
+          content="The NHGRI-EBI GWAS Catalog: a curated collection of all published genome-wide association studies, produced by a collaboration between EMBL-EBI and NHGRI"/>
     <meta name="keywords" content="GWAS Catalog, GWAS, NHGRI, EBI, EMBL-EBI, SPOT"/>
     <meta name="author" content="Tony Burdett, Emma Hastings, Dani Welter, SPOT, EMBL-EBI, NHGRI"/>
     <link rel="icon" th:href="@{/images/favicon.ico}"/>
@@ -16,7 +17,8 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
-    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"
+          rel="stylesheet"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.5.0/bootstrap-table.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
 
@@ -24,7 +26,7 @@
     <link th:href="@{/css/jumbotron.css}" rel="stylesheet"/>
     <link th:href="@{/css/sticky-footer-navbar.css}" rel="stylesheet"/>
     <link th:href="@{/css/gwas-icons.css}" rel="stylesheet"/>
-    <link th:href="@{/css/targetarray.css}" rel="stylesheet" />
+    <link th:href="@{/css/targetarray.css}" rel="stylesheet"/>
 
     <!-- Additional styling on top of bootstrap -->
     <link rel="stylesheet" th:href="@{/css/goci-ui.css}"/>
@@ -56,7 +58,6 @@
 </div>
 
 
-
 <div class="container-fluid" style="padding-top: 30px">
 
     <ol class="breadcrumb background-color-complementary-accent">
@@ -76,10 +77,184 @@
     </div>
 
 
-    <div class="container-fluid" id="unpublished-container">
+    <div class="container-fluid" id="lower_container">
+
+        <!-- Summary panel -->
+        <div class="row" style="margin-top:10px">
+            <div id="summary-info" class="panel panel-default" style="padding-left:0px">
+                <div class="panel-heading background-color-primary-accent">
+                    <h3 class="panel-title">Study information</h3>
+                </div>
+                <div class="clearfix" id="summary-panel-loading">
+                    <div class="panel-body col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <div class="clearfix">
+
+                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                <span class="item-left-bold">Reported trait</span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-reported-trait">-</div>
+                        </div>
+                        <div class="clearfix">
+
+                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                <span class="item-left-bold">                            Genotyping technology</span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-genotyping-tech">-</div>
+                        </div>
+                        <div class="clearfix">
+
+                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                <span class="item-left-bold">Discovery sample description</span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-sample-description">-</div>
+
+                        </div>
+                        <div class="clearfix">
+
+                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                <span class="item-left-bold">Discovery ancestry (country of recruitment)</span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-ancestry">-</div>
+
+                        </div>
+                        <div class="clearfix">
+
+                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                <span class="item-left-bold">PubMed ID</span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-pubmedid">-</div>
+
+                        </div>
+                        <div class="clearfix">
+
+                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
+                                <span class="item-left-bold">First author</span>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-author">-</div>
+
+                        </div>
+                    </div>
+
+                    <!--  data -->
+                    <div class="panel-body col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="clearfix">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
+                                <span class="item-left-bold">Trait(s)</span>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-traits">-</div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
+                                <span class="item-left-bold">Platform [SNPs passing QC]</span>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-genotyping-platform">-</div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
+                                <span class="item-left-bold">Replication sample description</span>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-sample-replication">-</div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
+                                <span class="item-left-bold">Replication ancestry (country of recruitment)</span>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-ancestry-replication">-</div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
+                                <span class="item-left-bold">Journal</span>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-journal">-</div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
+                                <span>Publication date</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                      title="Journal publication date YYYY-MM-DD"></span>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-datepublication">-</div>
+                        </div>
+                    </div>
+
+                    <div id="panel-links" class="panel-body col-lg-2 col-md-3 col-sm-3 col-xs-3">
+                        <div style="margin-bottom: 0.6em">
+                            <button type="button" class="btn btn-default btn-sm" id="pubmedid_button">View in
+                                <b>PubMed</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
+                        </div>
+                        <div style="margin-bottom: 0.6em">
+                            <button type="button" class="btn btn-default btn-sm" id="europepmc_button">View in <b>Europe
+                                PMC</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
+                        </div>
+                        <div id="pgs_study_button_div" style="margin-bottom: 0.6em; display: none">
+                            <button type="button" class="btn btn-default btn-sm" id="pgs_study_button">View in <b>PGS
+                                Catalog</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix" id="authorsList-panel-loading">
+                    <div class="panel-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 item-left">
+                                <span class="item-left-bold">Full Summary Statistics</span>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="study-summary-stats">-</div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 item-left">
+                                <span class="item-left-bold">Terms/Licence</span>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="study-license">-</div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
+                                <span class="item-left-bold">Title</span>
+                            </div>
+                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" id="study-title">-</div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
+                                <span class="item-left-bold">Authors</span>
+                            </div>
+                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                <span id="study-authors-list">-</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- List the available tables -->
+        <div class="row" style="margin-top:0px">
+            <div id="table-list" class="panel clearfix" style="padding-left:0px;box-shadow:none">
+                <span style="margin-right:10px;font-weight:bold">Available data:</span>
+                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold"
+                        onclick="toggle_and_scroll('#association_panel')">
+                    <span class="association_label">Associations</span><span class="association_count badge"
+                                                                             style="background-color: #398A96;margin-left:10px"></span>
+                </button>
+                <button type="button" class="btn btn-default pull-right" style="margin-right:10px;font-weight:bold"
+                        id="download_data">
+                    <span>Download Catalog data</span><span class="glyphicon glyphicon-download-alt"
+                                                            style="color:#398A96;margin-left:10px"></span>
+                </button>
+            </div>
+        </div>
+
+
+        <div class="row search-results-container">
+            <!-- Associations table -->
+            <div th:include="fragments/association-datatable :: associations_datatable"></div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid" id="unpublished-container" style="display: none;">
         <!-- Unpublished Studies Summary panel -->
         <div class="row" style="margin-top:10px">
-            <div id="unpublished-summary-info" class="panel panel-default"  style="padding-left:0px">
+            <div id="unpublished-summary-info" class="panel panel-default" style="padding-left:0px">
                 <div class="panel-heading background-color-primary-accent">
                     <h3 class="panel-title">Study information</h3>
                 </div>
@@ -88,8 +263,9 @@
 
                         <div class="clearfix">
                             <div class="col-lg-12 col-md-12 item-left">
-                                <h4>The study is  not yet associated with a peer-reviewed publication. Click
-                                    <a href="#" target="_blank">here</a>  for more information </h4>
+                                <h4>The study is not yet associated with a peer-reviewed publication. Click
+                                    <a href="https://www.ebi.ac.uk/gwas/docs/faq#faq-A1" target="_blank">here</a> for
+                                    more information </h4>
                             </div>
                         </div>
 
@@ -97,7 +273,7 @@
                             <div class="col-lg-3 col-md-3 item-left">
                                 <span class="item-left-bold">First author</span>
                             </div>
-                            <div class="col-lg-3 col-md-3" id="first-author">  </div>
+                            <div class="col-lg-3 col-md-3" id="first-author"></div>
 
                             <div class="col-lg-3 col-md-3">
                                 <span class="item-left-bold"> Preprint DOI</span>
@@ -111,12 +287,12 @@
                             <div class="col-lg-3 col-md-3 item-left">
                                 <span class="item-left-bold">Corresponding author</span>
                             </div>
-                            <div class="col-lg-3 col-md-3" id="corresponding-author">  </div>
+                            <div class="col-lg-3 col-md-3" id="corresponding-author"></div>
 
                             <div class="col-lg-3 col-md-3">
                                 <span class="item-left-bold">Date submitted to Catalog</span>
                             </div>
-                            <div class="col-lg-3 col-md-3" id="date-submitted">  </div>
+                            <div class="col-lg-3 col-md-3" id="date-submitted"></div>
                         </div>
 
                         <div class="clearfix">
@@ -130,228 +306,58 @@
                                           style='font-size: 12px'></span>
                                 </a>
                             </div>
+
+                            <div class="col-lg-3 col-md-3">
+                                <span class="item-left-bold">Terms/License</span>
+                            </div>
+                            <div class="col-lg-3 col-md-3" id="license">-</div>
                         </div>
 
                         <div class="clearfix">
                             <div class="col-lg-3 col-md-3 item-left">
                                 <span class="item-left-bold"> Title </span>
                             </div>
-                            <div class="col-lg-9 col-md-9" id="title">  </div>
+                            <div class="col-lg-9 col-md-9" id="title"></div>
                         </div>
 
                         <div class="clearfix">
                             <div class="col-lg-3 col-md-3 item-left">
                                 <span class="item-left-bold">Reported trait </span>
                             </div>
-                            <div class="col-lg-3 col-md-3" id="reported-trait">  </div>
+                            <div class="col-lg-3 col-md-3" id="reported-trait"></div>
 
                             <div class="col-lg-3 col-md-3">
                                 <span class="item-left-bold"> Trait(s) </span>
                             </div>
-                            <div class="col-lg-3 col-md-3" id="trait">  </div>
+                            <div class="col-lg-3 col-md-3" id="trait"></div>
                         </div>
 
                         <div class="clearfix">
                             <div class="col-lg-3 col-md-3 item-left">
                                 <span class="item-left-bold"> Genotyping technology </span>
                             </div>
-                            <div class="col-lg-3 col-md-3" id="genotyping-tech">  </div>
+                            <div class="col-lg-3 col-md-3" id="genotyping-tech"></div>
 
                             <div class="col-lg-3 col-md-3">
                                 <span class="item-left-bold"> Platform (SNPs passing QC) </span>
                             </div>
-                            <div class="col-lg-3 col-md-3" id="platform-snp">  </div>
+                            <div class="col-lg-3 col-md-3" id="platform-snp"></div>
                         </div>
 
                         <div class="clearfix">
                             <div class="col-lg-3 col-md-3 item-left">
-                                <span class="item-left-bold"> Discovery sample description </span>
+                                <span class="item-left-bold"> Sample description </span>
                             </div>
-                            <div class="col-lg-9 col-md-9" id="discovery-sample-desc">  </div>
-                        </div>
-
-                        <div class="clearfix">
-                            <div class="col-lg-3 col-md-3 item-left">
-                                <span class="item-left-bold"> Discovery ancestry (country of recruitment) </span>
-                            </div>
-                            <div class="col-lg-9 col-md-9" id="discovery-ancestry">  </div>
+                            <div class="col-lg-9 col-md-9" id="discovery-ancestry"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-
-        <div class="container-fluid" id="lower_container">
-
-            <!-- Summary panel -->
-            <div class="row" style="margin-top:10px">
-                <div id="summary-info" class="panel panel-default"  style="padding-left:0px">
-                    <div class="panel-heading background-color-primary-accent">
-                        <h3 class="panel-title">Study information</h3>
-                    </div>
-                    <div class="clearfix" id="summary-panel-loading">
-                        <div class="panel-body col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <div class="clearfix">
-
-                                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                    <span class="item-left-bold">Reported trait</span>
-                                </div>
-                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-reported-trait">-</div>
-                            </div>
-                            <div class="clearfix">
-
-                                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                    <span class="item-left-bold">                            Genotyping technology</span>
-                                </div>
-                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-genotyping-tech">-</div>
-                            </div>
-                            <div class="clearfix">
-
-                                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                    <span class="item-left-bold">Discovery sample description</span>
-                                </div>
-                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-sample-description">-</div>
-
-                            </div>
-                            <div class="clearfix">
-
-                                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                    <span class="item-left-bold">Discovery ancestry (country of recruitment)</span>
-                                </div>
-                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-ancestry">-</div>
-
-                            </div>
-                            <div class="clearfix">
-
-                                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                    <span class="item-left-bold">PubMed ID</span>
-                                </div>
-                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-pubmedid">-</div>
-
-                            </div>
-                            <div class="clearfix">
-
-                                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-5 item-left">
-                                    <span class="item-left-bold">First author</span>
-                                </div>
-                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" id="study-author">-</div>
-
-                            </div>
-                        </div>
-
-                        <!--  data -->
-                        <div class="panel-body col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <div class="clearfix">
-                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
-                                    <span class="item-left-bold">Trait(s)</span>
-                                </div>
-                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-traits">-</div>
-                            </div>
-                            <div class="clearfix">
-                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
-                                    <span class="item-left-bold">Platform [SNPs passing QC]</span>
-                                </div>
-                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-genotyping-platform">-</div>
-                            </div>
-                            <div class="clearfix">
-                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
-                                    <span class="item-left-bold">Replication sample description</span>
-                                </div>
-                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-sample-replication">-</div>
-                            </div>
-                            <div class="clearfix">
-                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
-                                    <span class="item-left-bold">Replication ancestry (country of recruitment)</span>
-                                </div>
-                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-ancestry-replication">-</div>
-                            </div>
-                            <div class="clearfix">
-                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
-                                    <span class="item-left-bold">Journal</span>
-                                </div>
-                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-journal">-</div>
-                            </div>
-                            <div class="clearfix">
-                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 item-left">
-                                    <span>Publication date</span>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Journal publication date YYYY-MM-DD"></span>
-                                </div>
-                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8" id="study-datepublication">-</div>
-                            </div>
-                        </div>
-
-                        <div id="panel-links" class="panel-body col-lg-2 col-md-3 col-sm-3 col-xs-3">
-                            <div style="margin-bottom: 0.6em">
-                                <button type="button" class="btn btn-default btn-sm" id="pubmedid_button">View in <b>PubMed</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
-                            </div>
-                            <div style="margin-bottom: 0.6em">
-                                <button type="button" class="btn btn-default btn-sm" id="europepmc_button">View in <b>Europe PMC</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
-                            </div>
-                            <div id="pgs_study_button_div" style="margin-bottom: 0.6em; display: none">
-                                <button type="button" class="btn btn-default btn-sm" id="pgs_study_button">View in <b>PGS Catalog</b><span class="glyphicon glyphicon-new-window external-link"></span></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="clearfix" id="authorsList-panel-loading">
-                        <div class="panel-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="clearfix">
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
-                                    <span class="item-left-bold">Full Summary Statistics</span>
-                                </div>
-                                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" id="study-summary-stats">-</div>
-                            </div>
-                            <div class="clearfix">
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
-                                    <span class="item-left-bold">Title</span>
-                                </div>
-                                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" id="study-title">-</div>
-                            </div>
-                            <div class="clearfix">
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 item-left">
-                                    <span class="item-left-bold">Authors</span>
-                                </div>
-                                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                                    <span id="study-authors-list">-</span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        <!-- List the available tables -->
-        <div class="row" style="margin-top:0px">
-            <div id="table-list" class="panel clearfix" style="padding-left:0px;box-shadow:none">
-                <span style="margin-right:10px;font-weight:bold">Available data:</span>
-                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#association_panel')">
-                    <span class="association_label">Associations</span><span class="association_count badge" style="background-color: #398A96;margin-left:10px"></span>
-                </button>
-                <button type="button" class="btn btn-default pull-right" style="margin-right:10px;font-weight:bold" id="download_data">
-                    <span>Download Catalog data</span><span class="glyphicon glyphicon-download-alt" style="color:#398A96;margin-left:10px"></span>
-                </button>
-            </div>
-        </div>
-
-
-
-        <div class="row search-results-container">
-            <!-- Associations table -->
-            <div th:include="fragments/association-datatable :: associations_datatable"></div>
-        </div>
-    </div>
-
 
     <!--Include footer-->
     <div th:include="fragments/footer :: page_footer"></div>
-
 
 
     <!-- Bootstrap core JavaScript
@@ -364,10 +370,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css" rel="stylesheet"/>
 
     <!-- Extensions for Column filters -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/extensions/filter-control/bootstrap-table-filter-control.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/extensions/filter-control/bootstrap-table-filter-control.css"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter/bootstrap-table-filter.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
@@ -409,10 +416,10 @@
     <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
 
     <!--bootstrap-table-flat-json-->
-<!--    <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/flat-json/bootstrap-table-flat-json.js"></script>-->
-<!--    <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>-->
-<!--    <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/export/bootstrap-table-export.js"></script>-->
-<!--    <script src="https://cdn.rawgit.com/wenzhixin/09e218c884f4f380b68a/raw/5d258d2f78225a4ac1a72d54a34cc7976d630df1/jquery.base64.js"></script>-->
+    <!--    <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/flat-json/bootstrap-table-flat-json.js"></script>-->
+    <!--    <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>-->
+    <!--    <script src="https://cdn.rawgit.com/wenzhixin/bootstrap-table/develop/dist/extensions/export/bootstrap-table-export.js"></script>-->
+    <!--    <script src="https://cdn.rawgit.com/wenzhixin/09e218c884f4f380b68a/raw/5d258d2f78225a4ac1a72d54a34cc7976d630df1/jquery.base64.js"></script>-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/extensions/export/bootstrap-table-export.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.18/tableExport.js"></script>
 
@@ -424,10 +431,17 @@
     <!-- Google analytics
     ================================================== -->
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-60195133-1', 'auto');
         ga('send', 'pageview');

@@ -73,10 +73,11 @@ function loadStudiesList(summaryStatsStudyAccessions) {
 }
 
 function loadUnpublishedStudiesList() {
-
+    $('#loadingUnpublishedStudies').show();
     $.getJSON(gwasProperties.GWAS_REST_API + '/studies/unpublished', {})
         .done(function(data) {
             displayDatatableUnpublishedSummaryStats(data);
+            $('#loadingUnpublishedStudies').hide();
         });
 }
 
