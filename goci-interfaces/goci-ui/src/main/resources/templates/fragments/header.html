@@ -67,6 +67,12 @@
                     </a>
                 </li>
 
+                <li>
+                    <a th:href="@{/deposition}">
+                        Submit
+                    </a>
+                </li>
+
                 <li id="downloads-item" th:classappend="${#httpServletRequest.getServletPath() == '/downloads' ? 'active':''}" class="hidden-sm">
                     <a th:href="@{/downloads}">
                         Download

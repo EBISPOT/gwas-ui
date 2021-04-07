@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var content = $("#docs-content");
 
     // read the window location to set the breadcrumb
@@ -16,9 +16,9 @@ $(document).ready(function() {
     $.get(url, loadDocumentation(page, content)).fail(console.log("Failed to get content from " + url));
 });
 
-var loadDocumentation = function(pagename, content) {
+var loadDocumentation = function (pagename, content) {
     console.log("Attempting to load documentation...");
-    return function(data, textStatus, jqXHR) {
+    return function (data, textStatus, jqXHR) {
         /*
         The process of the generation of the breadcrumbs is a non-trivial issue, as the URL structure does not
         follow the website page hierarchy. Therefore we have to implement logic to interpret the context based on the URL.
@@ -26,15 +26,15 @@ var loadDocumentation = function(pagename, content) {
 
         // Extracting component names from URL:
         var pathName = window.location.pathname;
-        pathName = pathName.replace('/gwas/',''); // Removing home link
-        if (pathName.match('download')){
+        pathName = pathName.replace('/gwas/', ''); // Removing home link
+        if (pathName.match('download')) {
             pathName = pathName.replace('docs', 'downloads'); // Changing downloads when required.
         }
         var pathComponents = pathName.split('/');
 
         // Looping through all URL components and generate the breadcrumb component
         var URL = gwasProperties.contextPath; // The path will be extended by each component when generating the link
-        for ( var i = 0; i < pathComponents.length; i++ ){
+        for (var i = 0; i < pathComponents.length; i++) {
 
             // Selecting component:
             var pathComponent = pathComponents[i];
@@ -45,10 +45,9 @@ var loadDocumentation = function(pagename, content) {
             pathTitle = pathTitle.charAt(0).toUpperCase() + pathTitle.slice(1);
 
             // Adding breadcrumb without and with link:
-            if ( i + 1 == pathComponents.length ){
+            if (i + 1 == pathComponents.length) {
                 $("#breadcrumb ol").append(`<li>${pathTitle}</li>`);
-            }
-            else{
+            } else {
                 URL = URL + "/" + pathComponent;
                 $("#breadcrumb ol").append(`<li><a href="${URL}">${pathTitle}</a></li>`);
             }
@@ -60,6 +59,15 @@ var loadDocumentation = function(pagename, content) {
             .done(function(stats) {
                 setBuilds(stats);
             });
+
+        if (window.location.hash) {
+            setTimeout(function () {
+                    $("html, body").animate({
+                        scrollTop: $(window.location.hash).position().top - 100
+                    })
+                }, 200
+            )
+        }
 
     }
 
