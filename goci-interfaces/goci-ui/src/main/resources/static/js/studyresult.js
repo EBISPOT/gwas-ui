@@ -157,8 +157,13 @@ function displayUnpublishedStudySummary(accession) {
         $("#genotyping-tech").html(data.genotyping_technology);
         $("#date-submitted").html(new Date(data.createdDate).toDateString());
         $("#trait").html(data.efo_trait);
-        $("#platform-snp").html('');
-        $("#preprint-doi").attr('href', data.body_of_work[0].doi);
+        var imputation = data.imputation ? ' (imputed)' : '';
+        $("#platform-snp").html(data.array_manufacturer + ' [' + data.variant_count + ']' + imputation)
+        if (data.body_of_work[0].doi != null) {
+            var preprintLink = '<a href="' + data.body_of_work[0].doi + '" target="_blank"> View Preprint </a>'
+            $("#preprint-doi").html(preprintLink)
+        }
+        else $("#preprint-doi").html('NA')
         $("#discovery-sample-desc").html(data.unpublishedAncestries[0].sample_description);
         $("#discovery-ancestry").html(`${sampleSize} ${ancestryCategory}`);
         if (data.agreed_to_cc0) $("#license").html(`<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank"> CC0 </a>`)
