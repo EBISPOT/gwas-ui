@@ -158,7 +158,7 @@ function displayUnpublishedStudySummary(accession) {
         $("#date-submitted").html(new Date(data.createdDate).toDateString());
         $("#trait").html(data.efo_trait);
         var imputation = data.imputation ? ' (imputed)' : '';
-        $("#platform-snp").html(data.array_manufacturer + ' [' + data.variant_count + ']' + imputation);
+        $("#platform-snp").html(`${data.array_manufacturer != null ? data.array_manufacturer : 'NR'}` + ' [' + data.variant_count + ']' + imputation);
         if (data.body_of_work[0].doi != null) {
             $("#preprint-doi").html(`<a href="${data.body_of_work[0].doi}" target="_blank"> View Preprint </a>`);
         }
