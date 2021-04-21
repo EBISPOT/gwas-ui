@@ -18,19 +18,35 @@ link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Introduction_and_keynote.mp4[Introduction and keynote] chaired by Helen Parkinson, keynote by Teri Manolio on "The history and future of the GWAS Catalog"
 
+video::lpyv9_YlFCI[youtube,width=628,height=345]
+
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_content.mp4[Data content] chaired by Inês Barroso
+
+video::_duEjmUiNRI[youtube,width=628,height=345]
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR.mp4[FAIR] chaired by Robert Carroll
 
+video::q5fxogGdjO4[youtube,width=628,height=345]
+
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Incentivisation_of_sharing.mp4[Incentivisation of sharing] chaired by Orli Bahcall
+
+video::TypR3gJtBh4[youtube,width=628,height=345]
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Infrastructure_requirements.mp4[Infrastructure requirements] chaired by Michael Inouye
 
+video::WI9N5J36KEY[youtube,width=628,height=345]
+
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_update_cycle.mp4[Data update cycle] chaired by Raymond Walters
+
+video::dNqRQOQrx7M[youtube,width=628,height=345]
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Forward_look.mp4[Forward Look] chaired by Stephen Rich
 
+video::cxpxkuR61EU[youtube,width=628,height=345]
+
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Discussion_and_summary.mp4[Discussion and summary] chaired by Helen Parkinson
+
+video::q3aIPsogpO0[youtube,width=628,height=345]
 
 == Supporting material
 
