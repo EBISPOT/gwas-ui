@@ -18,11 +18,11 @@ link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Introduction_and_keynote.mp4[Introduction and keynote] chaired by Helen Parkinson, keynote by Teri Manolio on "The history and future of the GWAS Catalog"
 
-video::lpyv9_YlFCI[youtube,width=628,height=345]
+video::_duEjmUiNRI[youtube,width=628,height=345]
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_content.mp4[Data content] chaired by Inês Barroso
 
-video::_duEjmUiNRI[youtube,width=628,height=345]
+video::lpyv9_YlFCI[youtube,width=628,height=345]
 
 link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR.mp4[FAIR] chaired by Robert Carroll
 
