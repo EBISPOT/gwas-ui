@@ -6,6 +6,8 @@
 
 Check out link:http://www.ebi.ac.uk/training/online/course/gwas-catalog-exploring-snp-trait-associations[GWAS Catalog - Exploring SNP-trait associations] for an easily accessible interactive tutorial on the full range of features the GWAS Catalog has to offer.
 
+Watch our recorded webinar https://www.ebi.ac.uk/training/events/submitting-your-genome-wide-association-study-data-gwas-catalog/[Submitting your genome wide association study data to the GWAS Catalog] (2021) for a detailed walkthrough of our summary statistics submission system.
+
 ==== Workshop materials
 
 Training materials from workshops held by the GWAS Catalog team are available on link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/training_materials/[our FTP server]. If you would like to make use of these slides, please cite the GWAS Catalog as detailed on the link:about[About] page.
