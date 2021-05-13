@@ -36,7 +36,7 @@ Lee K et al, 2018 link:https://journals.plos.org/ploscompbiol/article?id=10.1371
 
 Morales et al, 2017 link:http://rdcu.be/G6Fv[A standardized framework for representation of ancestry data in genomics studies, with application to the NHGRI-EBI GWAS Catalog] Genome Biology, 19:21.
 
-MacArthur et al, 2017. link:https://academic.oup.com/nar/article/45/D1/D896/2605751[The new NHGRI-EBI Catalog of published genome-wide association studies (GWAS Catalog)]. Nucleic Acids Research, Vol. 45 (Database issue): D896-D901.
+MacArthur et al, 2017 link:https://academic.oup.com/nar/article/45/D1/D896/2605751[The new NHGRI-EBI Catalog of published genome-wide association studies (GWAS Catalog)]. Nucleic Acids Research, Vol. 45 (Database issue): D896-D901.
 
 Welter D et al, 2014 link:https://academic.oup.com/nar/article/42/D1/D1001/1062755[The NHGRI GWAS Catalog, a curated resource of SNP-trait associations]. Nucleic Acids Research, Vol. 42 (Database issue): D1001-D1006.
 
