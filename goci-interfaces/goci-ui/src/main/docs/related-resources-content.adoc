@@ -16,7 +16,7 @@ Training materials from workshops held by the GWAS Catalog team are available on
 
 https://www.ebi.ac.uk/training/events/submitting-your-genome-wide-association-study-data-gwas-catalog/[Submitting your genome wide association study data to the GWAS Catalog]: a webinar providing a step-by-step guide to the summary statistics submission process to the GWAS Catalog.
 
-A 2021 http://blog.opentargets.org/2021/03/11/open-sharing-of-cancer-summary-statistics/[open-sharing-of-cancer-summary-statistics] calling for more freely available cancer GWAS summary statistics.
+http://blog.opentargets.org/2021/03/11/open-sharing-of-cancer-summary-statistics/[Open sharing of cancer GWAS summary statistics] a blog post calling for more freely available cancer GWAS summary statistics.
 
 A 2020 https://www.ebi.ac.uk/training/events/investigating-genotype-phenotype-data-using-gwas-catalog/[webinar] providing an overwiew on how to access the GWAS Catalog data.
 
