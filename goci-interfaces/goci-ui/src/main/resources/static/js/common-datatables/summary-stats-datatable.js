@@ -8,6 +8,7 @@ function displayDatatableUnpublishedSummaryStats(data) {
 
     $.each(data, (index, summary_stats) => {var tmp = {};
 
+        var cc0_label = '';
         const ftpDir = getDirectoryBin(summary_stats.study_accession);
         var ftpPath = gwasProperties.FTP_PATH_PREFIX.concat(ftpDir).concat('/').concat(summary_stats.file);
 
@@ -36,6 +37,12 @@ function displayDatatableUnpublishedSummaryStats(data) {
             summary_stats['ancestry_category'] = summary_stats['unpublishedAncestries'][0]['ancestry_category'];
             summary_stats['sample_size'] = summary_stats['unpublishedAncestries'][0]['sample_size'];
         }
+
+        if(summary_stats.agreed_to_cc0)
+            cc0_label = 'CC0';
+        else
+            cc0_label = 'EBI terms of use';
+        summary_stats['agreed_to_cc0'] = cc0_label;
 
         var d = new Date(summary_stats['createdDate']).toISOString();
         summary_stats['date_submitted'] = d.split('T')[0];
@@ -92,6 +99,11 @@ function displayDatatableUnpublishedSummaryStats(data) {
                 field: 'path',
                 title: 'FTP Path',
                 visible: true
+            },
+            {
+                field: 'agreed_to_cc0',
+                title: 'Usage License',
+                visible: false
             }
         ],
         data: data,
@@ -137,6 +149,7 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     var data_json = []
     $.each(data.response.docs, (index, summary_stats) => {
         var tmp={};
+        var cc0_label =  '';
     var summary_stats_id = summary_stats.accessionId;
         summary_stats_ids.push(summary_stats_id);
         tmp['accessionId'] = '<a href="'+gwasProperties.contextPath+'studies/'+summary_stats_id+'">'+summary_stats_id+'</a>';
@@ -144,7 +157,14 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
         tmp['pubmedId'] = summary_stats.pubmedId;
         tmp['title'] = summary_stats.title;
         tmp['journal'] = summary_stats.publication;
-    // Publication date
+
+
+        if(summary_stats.agreedToCc0)
+            cc0_label = 'CC0';
+        else
+            cc0_label = 'EBI terms of use';
+        tmp['agreedToCc0'] = cc0_label;
+        // Publication date
     var p_date = summary_stats.publicationDate;
     var publi = p_date.split('T')[0];
     tmp['publication_date'] = publi;
@@ -261,6 +281,11 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
             {
                 field: 'ftpPath',
                 title: 'FTP Path',
+                visible: false
+            },
+            {
+                field: 'agreedToCc0',
+                title: 'Usage License',
                 visible: false
             }
         ],
