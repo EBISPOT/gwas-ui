@@ -164,6 +164,9 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             // Mapped traits
             tmp['mappedTraits'] = setTraitsLink(asso);
 
+            // Mapped backgound traits
+            tmp['mappedBkgTraits'] = setBackgroundTraitsLink(asso);
+
             // Adding genomic location to the table (but excluding mappings to patch regions)
             var genomicCoordinate = 'Mapping not available';
             if (asso.positionLinks){
@@ -266,6 +269,11 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         }, {
             field: 'mappedTraits',
             title: 'Trait(s)',
+            sortable: true,
+            filterControl: 'input'
+        }, {
+            field: 'mappedBkgTraits',
+            title: 'Background trait(s)',
             sortable: true,
             filterControl: 'input'
         }, {

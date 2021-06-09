@@ -168,6 +168,7 @@ displayTraitCountLoading = function(traitCount, isDisplayed) {
 showGroupedPanelLoadingOverlay = function() {
     showLoadingOverLay('#download_data');
     showLoadingOverLay('#toggle-data-display-section');
+    showLoadingOverLay('#include-bgs-section');
     showLoadingOverLay('#association-table-loading');
     showLoadingOverLay('#study-table-loading');
     showLoadingOverLay('#locus-plot-row-loading');
@@ -179,6 +180,7 @@ showGroupedPanelLoadingOverlay = function() {
 hideGroupedPanelLoadingOverlay = function() {
     hideLoadingOverLay('#download_data');
     hideLoadingOverLay('#toggle-data-display-section');
+    hideLoadingOverLay('#include-bgs-section');
     hideLoadingOverLay('#association-table-loading');
     hideLoadingOverLay('#study-table-loading');
     hideLoadingOverLay('#locus-plot-row-loading');
@@ -226,6 +228,7 @@ displayEFOInfo = function(initCBState) {
 
     // Add handle to checkbox to later determine isChecked status and whether to display child trait data
     let myCheckbox = document.getElementById('toggle-data-display');
+    let isBkgTraitsCheckboxChecked = true;
 
 
     // Get EFO child traits data from OLS to (1) display in term info panel and (2) use for data tables and download file data generation
@@ -270,7 +273,7 @@ displayEFOInfo = function(initCBState) {
             displayTraitCountLoading(filteredTraitIds.length, true);
 
             // Get data from Fat Solr for filteredTraits list with mainEFO in the list
-            let displayData = getEfoTraitDataSolr(filteredTraitIds);
+            let displayData = getEfoTraitDataSolr(filteredTraitIds, isBkgTraitsCheckboxChecked);
             Promise.resolve(displayData).then(function() {
                 hideLoadingOverLay('#highlighted-study-button');
                 hideGroupedPanelLoadingOverlay();
@@ -292,7 +295,7 @@ displayEFOInfo = function(initCBState) {
                     displayTraitCountLoading(filteredTraitIds.length, true);
 
                     // Display data for mainEFO and child terms
-                    let displayData = getEfoTraitDataSolr(filteredTraitIds);
+                    let displayData = getEfoTraitDataSolr(filteredTraitIds, isBkgTraitsCheckboxChecked);
                     Promise.resolve(displayData).then(function() {
                         hideGroupedPanelLoadingOverlay();
                         // Hide status message for traitCount used to get data
@@ -306,7 +309,7 @@ displayEFOInfo = function(initCBState) {
                     displayTraitCountLoading([efoId].length, true);
 
                     // Display data for mainEFO only
-                    let displayData = getEfoTraitDataSolr(efoId);
+                    let displayData = getEfoTraitDataSolr(efoId, isBkgTraitsCheckboxChecked);
                     Promise.resolve(displayData).then(function() {
                         hideGroupedPanelLoadingOverlay();
                         // Hide status message for traitCount used to get data
@@ -317,6 +320,15 @@ displayEFOInfo = function(initCBState) {
                     setTraitDownloadLink([efoId]);
                 }
             });
+
+            document.getElementById('include-bg-traits').addEventListener('change', () => {
+                showGroupedPanelLoadingOverlay();
+                isBkgTraitsCheckboxChecked = !isBkgTraitsCheckboxChecked;
+                let displayData = getEfoTraitDataSolr(getMainEFO(), isBkgTraitsCheckboxChecked);
+                Promise.resolve(displayData).then(function () {
+                    hideGroupedPanelLoadingOverlay();
+                });
+            })
         });
     });
 };
@@ -656,13 +668,14 @@ getTermMappings = function(efoId) {
 /**
  * Query Fat Solr for data for Associations and Studies data tables.
  * @param {String} mainEFO
- * @param {[]String} additionalEFO
- * @param {[]String} descendants
- * @param {Boolean} initLoad
+ * @param {Boolean} includeBkgTraits
  * @returns {Promise}
  */
-function getEfoTraitDataSolr(mainEFO) {
+function getEfoTraitDataSolr(mainEFO, includeBkgTraits) {
     let searchQuery = mainEFO;
+    if (!includeBkgTraits) {
+        searchQuery = `shortForm: ${mainEFO} OR efoLink: ${mainEFO} OR mappedUri: ${mainEFO}`
+    }
 
     return Promise.all([searchQuery]).then(() => {
         return promisePost( gwasProperties.contextPath+'api/search/advancefilter',
@@ -672,13 +685,13 @@ function getEfoTraitDataSolr(mainEFO) {
                 'group.limit': 99999,
                 'group.field': 'resourcename',
                 'facet.field': 'resourcename',
-                'hl.fl': 'shortForm,efoLink,mappedUri',
+                'hl.fl': 'shortForm,efoLink,mappedUri,mappedBkgUri',
                 'hl.snippets': 100,
                 'fl' : global_fl == undefined ? '*':global_fl,
                 // 'fq' : global_fq == undefined ? '*:*':global_fq,
                 'raw' : global_raw == undefined ? '' : global_raw,
             },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
-            if( data.grouped.resourcename.groups.length == 0 ){
+            if( data.grouped.resourcename.groups.length === 0 && includeBkgTraits){
                 $('#lower_container').html("<h2>The EFO trait <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
             } else{
                 // processSolrData(data, initLoad);
@@ -708,7 +721,8 @@ function processSolrData(data, initLoad=false) {
     //data_efo, data_study, data_association, data_diseasetrait;
     data_facet = data.facet_counts.facet_fields.resourcename;
     data_highlighting = data.highlighting;
-
+    data_association = [];
+    data_study = [];
     $.each(data.grouped.resourcename.groups, (index, group) => {
         switch (group.groupValue) {
             case "efotrait":
