@@ -38,7 +38,7 @@ function displayDatatableUnpublishedSummaryStats(data) {
             summary_stats['sample_size'] = summary_stats['unpublishedAncestries'][0]['sample_size'];
         }
 
-        if(summary_stats.agreed_to_cc0 == true)
+        if(summary_stats.agreed_to_cc0)
             cc0_label = 'CC0';
         else
             cc0_label = 'EBI terms of use';
@@ -159,7 +159,7 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
         tmp['journal'] = summary_stats.publication;
 
 
-        if(summary_stats.agreedToCc0 == true)
+        if(summary_stats.agreedToCc0)
             cc0_label = 'CC0';
         else
             cc0_label = 'EBI terms of use';
