@@ -185,7 +185,7 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
         });
         tmp['mappedTraits'] = mappedTraits.join(', ');
     } else {
-        tmp['mappedTraits'] = '-';  
+        tmp['mappedTraits'] = '-';
     }
     // Number Associations
     var nr_association = 0;
