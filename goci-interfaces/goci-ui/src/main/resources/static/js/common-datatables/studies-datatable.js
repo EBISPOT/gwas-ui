@@ -84,6 +84,11 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert = true) {
             title: 'Trait(s)',
             sortable: true,
             filterControl: 'input'
+        },{
+            field: 'mappedBkgTraits',
+            title: 'Background trait(s)',
+            sortable: true,
+            filterControl: 'input'
         }, {
             field: 'initial_sample_text',
             title: 'Discovery sample description',
@@ -211,6 +216,9 @@ function prepareDataForTable(data){
 
         // Mapped trait:
         tmp['mappedTraits'] = setTraitsLink(study);
+
+        // Mapped background trait:
+        tmp['mappedBkgTraits'] = setBackgroundTraitsLink(study);
 
         // Initial sample desc
         var splitDescription = [];

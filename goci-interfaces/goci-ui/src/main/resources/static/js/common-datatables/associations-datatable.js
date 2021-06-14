@@ -164,7 +164,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             // Mapped traits
             tmp['mappedTraits'] = setTraitsLink(asso);
 
-            // Mapped backgound traits
+            // Mapped background traits
             tmp['mappedBkgTraits'] = setBackgroundTraitsLink(asso);
 
             // Adding genomic location to the table (but excluding mappings to patch regions)
