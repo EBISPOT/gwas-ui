@@ -685,7 +685,8 @@ function getEfoTraitDataSolr(mainEFO, includeBkgTraits) {
                 'group.limit': 99999,
                 'group.field': 'resourcename',
                 'facet.field': 'resourcename',
-                'hl.fl': 'shortForm,efoLink,mappedUri,mappedBkgUri',
+                'hl.fl': 'shortForm,efoLink,mappedUri',
+
                 'hl.snippets': 100,
                 'fl' : global_fl == undefined ? '*':global_fl,
                 // 'fq' : global_fq == undefined ? '*:*':global_fq,
@@ -775,9 +776,9 @@ function processSolrData(data, initLoad=false) {
             // we add preferEFO for each association, generate the association data for popup of data points in the locus plot.
             var allUniqueEFO = {}
             data_association.docs.forEach((d, i) => {
-                d.preferedEFO = findHighlightEFOForAssociation(d.id, data_highlighting)[0];
+                // d.preferedEFO = findHighlightEFOForAssociation(d.id, data_highlighting)[0];
                 d.numberEFO = findAllEFOsforAssociation(d.id, data_association).length;
-                allUniqueEFO[d.preferedEFO] = 1;
+                // allUniqueEFO[d.preferedEFO] = 1;
                 //add any string data that will be use in the locus plot popover
                 d.popoverHTML = buildLocusPlotPopoverHTML(d);
             });
