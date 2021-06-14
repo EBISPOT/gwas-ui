@@ -39,9 +39,10 @@ function displayDatatableUnpublishedSummaryStats(data) {
         }
 
         if(summary_stats.agreed_to_cc0)
-            cc0_label = 'CC0';
+            cc0_label = '<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a>';
         else
-            cc0_label = 'EBI terms of use';
+            cc0_label = '<a href="https://www.ebi.ac.uk/about/terms-of-use" target="_blank">\n' +
+                'EMBL-EBI’s standard terms of use</a>';
         summary_stats['agreed_to_cc0'] = cc0_label;
 
         var d = new Date(summary_stats['createdDate']).toISOString();
@@ -160,9 +161,10 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
 
 
         if(summary_stats.agreedToCc0)
-            cc0_label = 'CC0';
+            cc0_label = '<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a>';
         else
-            cc0_label = 'EBI terms of use';
+            cc0_label = '<a href="https://www.ebi.ac.uk/about/terms-of-use" target="_blank">\n' +
+                'EMBL-EBI’s standard terms of use</a>';
         tmp['agreedToCc0'] = cc0_label;
         // Publication date
     var p_date = summary_stats.publicationDate;
