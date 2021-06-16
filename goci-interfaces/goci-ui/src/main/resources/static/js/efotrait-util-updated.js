@@ -283,7 +283,7 @@ displayEFOInfo = function(initCBState) {
 
             // Get data for "Download Catalog data" button
             setTraitDownloadLink(filteredTraitIds);
-
+            let traitsToDisplay = filteredTraitIds;
 
             // Change data display and download data file content
             // based on checkbox state to show/hide child trait data
@@ -296,6 +296,7 @@ displayEFOInfo = function(initCBState) {
 
                     // Display data for mainEFO and child terms
                     let displayData = getEfoTraitDataSolr(filteredTraitIds, isBkgTraitsCheckboxChecked);
+                    traitsToDisplay = filteredTraitIds;
                     Promise.resolve(displayData).then(function() {
                         hideGroupedPanelLoadingOverlay();
                         // Hide status message for traitCount used to get data
@@ -307,7 +308,7 @@ displayEFOInfo = function(initCBState) {
                 } else {
                     // Show status message for traitCount used to get data
                     displayTraitCountLoading([efoId].length, true);
-
+                    traitsToDisplay = efoId;
                     // Display data for mainEFO only
                     let displayData = getEfoTraitDataSolr(efoId, isBkgTraitsCheckboxChecked);
                     Promise.resolve(displayData).then(function() {
@@ -324,7 +325,7 @@ displayEFOInfo = function(initCBState) {
             document.getElementById('include-bg-traits').addEventListener('change', () => {
                 showGroupedPanelLoadingOverlay();
                 isBkgTraitsCheckboxChecked = !isBkgTraitsCheckboxChecked;
-                let displayData = getEfoTraitDataSolr(getMainEFO(), isBkgTraitsCheckboxChecked);
+                let displayData = getEfoTraitDataSolr(traitsToDisplay, isBkgTraitsCheckboxChecked);
                 Promise.resolve(displayData).then(function () {
                     hideGroupedPanelLoadingOverlay();
                 });
