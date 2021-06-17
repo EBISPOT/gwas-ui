@@ -228,7 +228,7 @@ displayEFOInfo = function(initCBState) {
 
     // Add handle to checkbox to later determine isChecked status and whether to display child trait data
     let myCheckbox = document.getElementById('toggle-data-display');
-    let isBkgTraitsCheckboxChecked = true;
+    let isBkgTraitsCheckboxChecked = false;
 
 
     // Get EFO child traits data from OLS to (1) display in term info panel and (2) use for data tables and download file data generation
