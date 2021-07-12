@@ -10,12 +10,8 @@
     </parent>
     <groupId>uk.ac.ebi.spot</groupId>
     <artifactId>gwas-ui</artifactId>
-<<<<<<< HEAD
-    <version>3.3.2</version>
-
-=======
     <version>3.3.5</version>
->>>>>>> 9c652ea94260ab8048ec4eff240e1b98c317d0bf
+
 
     <name>GOCI Search Interface</name>
     <description>
