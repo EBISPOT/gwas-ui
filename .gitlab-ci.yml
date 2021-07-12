@@ -7,6 +7,10 @@ stages:
   - deploy-snoopy-test
   - deploy-snoopy-preparation
   - deploy-wwwdev-staging
+  - deploy-ves-pg-7e-prod
+  - deploy-ves-pg-7f-prod
+  - deploy-ves-oy-7e-fallback
+  - deploy-ves-oy-7f-fallback
 
 maven-build:
   image: maven:3-jdk-8
@@ -23,11 +27,7 @@ deploy-dev1:
   stage: deploy-snoopy-dev1
   image: alpine
   before_script:
-    - apk add openssh-client
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
+    - bash ci/add_ssh.sh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_DEV1
     - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
@@ -42,14 +42,10 @@ deploy-dev2:
   stage: deploy-snoopy-dev2
   image: alpine
   before_script:
-    - apk add openssh-client
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
+    - bash ci/add_ssh.sh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_DEV2
-      - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
+    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
       "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
       "cd $APP_DIR_DEV2; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=dev2 > /dev/null 2>&1 &"
@@ -61,11 +57,7 @@ deploy-snoopy-test:
   stage: deploy-snoopy-test
   image: alpine
   before_script:
-    - apk add openssh-client
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
+    - bash ci/add_ssh.sh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_TEST
     - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
@@ -81,11 +73,7 @@ deploy-snoopy-preparation:
   stage: deploy-snoopy-preparation
   image: alpine
   before_script:
-    - apk add openssh-client
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
+    - bash ci/add_ssh.sh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_PREPARATION
     - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
@@ -100,17 +88,71 @@ deploy-wwwdev-staging:
   stage: deploy-wwwdev-staging
   image: alpine
   before_script:
-    - apk add openssh-client
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
+    - bash ci/add_ssh.shh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_WWWDEV_STAGING:$APP_DIR_NOAH
     - ssh -o StrictHostKeyChecking=no $SERVER_WWWDEV_STAGING
       "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_WWWDEV_STAGING
       "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=staging > /dev/null 2>&1 &"
-  #when: manual
+  when: manual
   only:
-    - march-2021-refactoring
+    - master
+
+
+deploy-ves-pg-7e-prod:
+  stage: deploy-ves-pg-7e-prod
+  image: alpine
+  before_script:
+    - bash ci/add_ssh.sh
+  script:
+    - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+    - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
+      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=prod > /dev/null 2>&1 &"
+  when: manual
+  only:
+    - master
+
+
+deploy-ves-pg-7f-prod:
+  stage: deploy-ves-pg-7f-prod
+  image: alpine
+  before_script:
+    - bash ci/add_ssh.sh
+  script:
+    - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7F_PROD
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+    - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7F_PROD
+      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=prod > /dev/null 2>&1 &"
+  when: manual
+  only:
+    - master
+
+deploy-ves-oy-7e-fallback:
+  stage: deploy-ves-oy-7e-fallback
+  image: alpine
+  before_script:
+    - bash ci/add_ssh.sh
+  script:
+    - ssh -o StrictHostKeyChecking=no $SERVER_VESOY7E_FALLBACK
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+    - ssh -o StrictHostKeyChecking=no $SERVER_VESOY7E_FALLBACK
+      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=prod > /dev/null 2>&1 &"
+  when: manual
+  only:
+    - master
+
+deploy-ves-oy-7f-fallback:
+  stage: deploy-ves-oy-7f-fallback
+  image: alpine
+  before_script:
+    - bash ci/add_ssh.sh
+  script:
+    - ssh -o StrictHostKeyChecking=no $SERVER_VESOY7F_FALLBACK
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+    - ssh -o StrictHostKeyChecking=no $SERVER_VESOY7F_FALLBACK
+      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=prod > /dev/null 2>&1 &"
+  when: manual
+  only:
+    - master
