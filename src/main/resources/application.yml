@@ -13,7 +13,9 @@ spring:
   jmx:
     enabled: false
   profiles:
-    active:
+    active: local
+
+
 
 search:
   defaultFacet: resourcename

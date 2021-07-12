@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/main/docs/related-resources-content.adoc
 = Training & Related resources
 
 === GWAS Catalog training materials
@@ -157,3 +158,172 @@ Summary statistics are available via the https://www.ebi.ac.uk/gwas/downloads/su
 === Related projects
 
 link:http://www.bristol.ac.uk/integrative-epidemiology/news/2016/data-mine.html[DATA MINE public art project]
+=======
+= Training & Related resources
+
+=== GWAS Catalog training materials
+
+==== EBI Train online
+
+Check out link:http://www.ebi.ac.uk/training/online/course/gwas-catalog-exploring-snp-trait-associations[GWAS Catalog - Exploring SNP-trait associations] for an easily accessible interactive tutorial on the full range of features the GWAS Catalog has to offer.
+
+Watch our recorded webinar https://www.ebi.ac.uk/training/events/submitting-your-genome-wide-association-study-data-gwas-catalog/[Submitting your genome wide association study data to the GWAS Catalog] (2021) for a detailed walkthrough of our summary statistics submission system.
+
+==== Workshop materials
+
+Training materials from workshops held by the GWAS Catalog team are available on link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/training_materials/[our FTP server]. If you would like to make use of these slides, please cite the GWAS Catalog as detailed on the link:about[About] page.
+
+==== GWAS webinars & blog posts
+
+https://www.ebi.ac.uk/training/events/submitting-your-genome-wide-association-study-data-gwas-catalog/[Submitting your genome wide association study data to the GWAS Catalog]: a webinar providing a step-by-step guide to the summary statistics submission process to the GWAS Catalog.
+
+http://blog.opentargets.org/2021/03/11/open-sharing-of-cancer-summary-statistics/[Sharing is caring: why we need more freely available cancer GWAS summary statistics]: a blog post calling for more freely available cancer GWAS summary statistics.
+
+https://www.ebi.ac.uk/training/events/investigating-genotype-phenotype-data-using-gwas-catalog/[Investigating genotype/phenotype data using the GWAS Catalog]: a webinar providing an overwiew on how to access the GWAS Catalog data.
+
+10th Anniversary (2018) http://www.ensembl.info/2018/06/28/ten-years-of-the-gwas-catalog-past-present-and-future/[blog post] highlighting the links between the GWAS Catalog and Ensembl.
+
+http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new-gwas-catalog/[Everything you need to know about the new GWAS Catalog]: a blog post describing the collaboration between the GWAS Catalog and Open Targets.
+ 
+=== Publications
+
+==== GWAS Catalog publications
+
+Lambert et al, 2021 https://www.nature.com/articles/s41588-021-00783-5/[The Polygenic Score Catalog as an open database for reproducibility and systematic evaluation]. Nature Genetics volume 53, pages420–425(2021).
+  
+Buniello, MacArthur et al, 2019 link:https://academic.oup.com/nar/article/47/D1/D1005/5184712[The NHGRI-EBI GWAS Catalog of published genome-wide association studies, targeted arrays and summary statistics 2019]. Nucleic Acids Research, 2019, Vol. 47 (Database issue): D1005-D1012.
+
+Lee K et al, 2018 link:https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006390[Scaling up data curation using deep learning: An application to literature triage in genomic variation resources].  PLoS Computational Biology 14(8):e1006390.
+
+Morales et al, 2017 link:http://rdcu.be/G6Fv[A standardized framework for representation of ancestry data in genomics studies, with application to the NHGRI-EBI GWAS Catalog]. Genome Biology, 19:21.
+
+MacArthur et al, 2017 link:https://academic.oup.com/nar/article/45/D1/D896/2605751[The new NHGRI-EBI Catalog of published genome-wide association studies (GWAS Catalog)]. Nucleic Acids Research, Vol. 45 (Database issue): D896-D901.
+
+Welter D et al, 2014 link:https://academic.oup.com/nar/article/42/D1/D1001/1062755[The NHGRI GWAS Catalog, a curated resource of SNP-trait associations]. Nucleic Acids Research, Vol. 42 (Database issue): D1001-D1006.
+
+Hindorff LA, et al 2009 link:http://www.genome.gov/Pages/About/OD/NewsAndFeatures/PNASGWASOnlineCatalog.pdf[Potential etiologic and functional implications of genome-wide association loci for human diseases and traits]. Proc. Natl. Acad. Sci. USA, 2009, 106, 9362–9367.
+
+==== Other background reading
+
+link:https://www.yourgenome.org/stories/genome-wide-association-studies[A beginners guide to GWAS]
+
+link:http://ontogenesis.knowledgeblog.org/66[What is an Ontology?]
+
+Visscher et al, 2017 link:http://www.sciencedirect.com/science/article/pii/S0002929717302409?via%3Dihub[10 Years of GWAS Discovery: Biology, Function and Translation] AJHG Volume 101, Issue 1, 6 July 2017, Pages 5-22
+
+Manolio, 2010 link:http://www.nejm.org/doi/full/10.1056/NEJMra0905980[Genomewide Association Studies and assessment of the risk of disease] NEJM 363:166-176
+
+
+
+=== Resources used within the GWAS Catalog
+
+For more information on how we use these resources, see our link:https://www.ebi.ac.uk/gwas/docs/methods[Methods page].
+
+// tag::b-col-indv[]
+[cols="1,2"]
+|===
+
+|link:https://www.ebi.ac.uk/efo/[Experimental Factor Ontology] (EFO)
+|The ontology used for trait mapping in the GWAS Catalog
+
+|link:http://www.ensembl.org/[Ensembl Genome Browser]
+|Genome browser and data for vertebrate genomes, used in our variant mapping pipeline. Ensembl annotates genes, computes multiple alignments, predicts regulatory function and collects disease data
+
+|link:https://www.ncbi.nlm.nih.gov/pubmed[PubMed]
+|Literature search and citation annotation
+
+|link:http://europepmc.org/[EuropePMC]
+|Literature search and citation annotation
+
+|link:https://www.cia.gov/library/publications/the-world-factbook/geos/lg.html[CIA Factbook]
+|A rich source of population demographic data, used by curators
+
+|link:https://www.ncbi.nlm.nih.gov/[NCBI]
+|Data used for variant mapping in older versions of the Catalog
+
+|===
+// end::b-col-indv[]
+
+
+=== Genome and phenome resources
+
+// tag::b-col-indv[]
+[cols="1,2"]
+|===
+
+|link:http://www.internationalgenome.org/[1000 Genomes]
+|The largest public reference catalogue of worldwide human variation and genotype data
+
+|http://www.hapmap.org/[International HapMap Project]
+|The first public catalogue of human variation data, now superseded by 1000Genomes
+
+|http://genome.ucsc.edu/cgi-bin/hgGateway[UCSC Genome Browser]
+|Genome browser to interactively visualize genomic data
+
+|link:http://www.phenxtoolkit.org/[PhenX toolkit]
+|Consensus measures of Phenotypes and eXposures
+
+|http://www.ncbi.nlm.nih.gov/projects/SNP/[dbSNP]
+|Database of human single nucleotide polymorphisms
+
+|https://www.ncbi.nlm.nih.gov/[National Centre for Biotechnology Information]
+|Provides wide range of resources including Entrez gene, GenBank, PubMed and ClinVar
+
+|===
+// end::b-col-indv[]
+
+
+=== Useful tools & data services
+
+
+// tag::b-col-indv[]
+[cols="1,2"]
+|===
+
+|https://www.ensembl.org/info/docs/tools/vep/index.html[Variant Effect Predictor] (VEP)
+|Determines the effect of variants (SNPs, insertions, deletions, CNVs or structural variants) on genes, transcripts, and protein sequence, as well as regulatory regions
+
+|http://www.phenoscanner.medschl.cam.ac.uk/phenoscanner[Phenoscanner]
+|Tool to facilitate “phenome scans”, the cross-referencing of genetic variants with a broad range of phenotypes, using a range of data sources including GWAS, eQTL and metabolite data
+
+|https://github.com/ramiromagno/gwasrapidd[gwasrapidd]
+|an R package to query, download and wrangle GWAS Catalog data
+
+|https://phgkb.cdc.gov/PHGKB/hNHome.action[HuGE Navigator]
+|Knowledge base in human genome epidemiology, including information on population prevalence of genetic variants, gene-disease associations, gene-gene and gene- environment interactions
+
+|http://www.ncbi.nlm.nih.gov/gap/PheGenIUCSC[Phenotype-Genotype Integrator]
+|Merges GWAS Catalog Data with other NCBI databases to facilitate prioritisation of GWAS hits for follow-up
+
+|http://www.pgscatalog.org/[PGS Catalog]
+|An open database of polygenic scores and the relevant metadata required for accurate application and evaluation
+
+|http://targetvalidation.org[Open Targets Platform]
+|Platform for the identification of drug targets using multiple data types including GWAS
+
+|link:http://locuszoom.org/[LocusZoom]
+|A suite of software for creating regional association plots from GWAS data
+
+|https://bio.tools/?page=1&q=GWAS%20study&sort=score&ord=desc[Elixir Tools and Data Services Registry]
+|A registry of GWAS-related resources and tools
+
+|https://omictools.com/search?q=GWAS[OMICStools]
+|Searchable database of GWAS and other bioinformatics tools
+
+|https://pharos.nih.gov/idg/index[Pharos]
+|Pharos is the user interface to the Knowledge Management Center (KMC) for the Illuminating the Druggable Genome (IDG) program
+
+|https://gwasdiversitymonitor.com[GWAS Diversity Monitor]
+|Interactive dashboard monitoring the diversity of participants across all published GWAS|
+
+|===
+// end::b-col-indv[]
+
+=== Sources of summary statistics
+
+Summary statistics are available via the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[GWAS Catalog] where possible. Find additional sources of summary statistics https://www.ebi.ac.uk/gwas/downloads/summary-statistics[here].
+
+=== Related projects
+
+link:http://www.bristol.ac.uk/integrative-epidemiology/news/2016/data-mine.html[DATA MINE public art project]
+>>>>>>> 9c652ea94260ab8048ec4eff240e1b98c317d0bf:goci-interfaces/goci-ui/src/main/docs/related-resources-content.adoc
