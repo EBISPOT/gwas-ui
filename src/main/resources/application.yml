@@ -1,7 +1,7 @@
 #===========================================COMPULSORY PROGRAM ARGUMENTS======================================#
-datadir:
-solrserver:
-virtusoserver:
+datadir: file:///nfs/public/rw/gwas/latest
+solrserver: http://ves-oy-7f.ebi.ac.uk:8983
+virtusoserver: http://ves-oy-7f.ebi.ac.uk:8191
 #===========================================COMPULSORY PROGRAM ARGUMENTS======================================#
 
 server:
