@@ -34,8 +34,8 @@ deploy-dev1:
     - chmod 700 ~/.ssh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_DEV1
-    #- ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
-   #   "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SNOOPY_SERVER
       "cd $APP_DIR_DEV1; nohup java -jar gwas-ui.jar --spring.profiles.active=dev1 > /dev/null 2>&1 &"
     #- ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
