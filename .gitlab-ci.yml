@@ -54,8 +54,8 @@ deploy-dev2:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - scp -t -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_DEV2
-    - ssh -t -o StrictHostKeyChecking=no $SERVER_SNOOPY
+    - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_DEV2
+    - ssh -o StrictHostKeyChecking=no -t $SERVER_SNOOPY
       "cd $APP_DIR_DEV2; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=dev2 > /dev/null 2>&1 &"
   only:
     - march-2021-refactoring
