@@ -41,7 +41,7 @@ deploy-dev1:
     #- ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
       #"cd $APP_DIR_DEV1; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=dev1 < /dev/null > $APP_DIR_DEV1/logs/gwas-ui.out 2>&1 &"
   only:
-    - march-2021-refactoring
+    - dev
 
 
 deploy-dev2:
@@ -60,7 +60,7 @@ deploy-dev2:
     - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
       "cd $APP_DIR_DEV2; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=dev2 > /dev/null 2>&1 &"
   only:
-    - dev
+    - march-2021-refactoring
 
 
 deploy-snoopy-test:
