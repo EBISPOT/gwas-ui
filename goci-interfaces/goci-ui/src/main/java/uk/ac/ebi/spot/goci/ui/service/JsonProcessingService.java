@@ -180,8 +180,9 @@ public class JsonProcessingService {
             line.append("\t").append(getSubmissionDate(doc));
             line.append("\t").append(getStatisticalModel(doc));
             line.append("\t").append(getBackgroundTrait(doc));
-            line.append("\t").append(getMappedBackgroundTrait(doc));
-            line.append("\t").append(getMappedBackgroundTraitUri(doc));
+            Map<String, String> bkgTraits = getBackgroundEfoTraits(doc);
+            line.append("\t").append(bkgTraits.get("labels"));
+            line.append("\t").append(bkgTraits.get("uris"));
         }
         line.append("\r\n");
         
@@ -937,6 +938,36 @@ public class JsonProcessingService {
         traits.put("trait", trait);
         traits.put("uri", uri);
 
+        return traits;
+    }
+
+    private Map<String, String> getBackgroundEfoTraits(JsonNode doc) {
+
+        Map<String, String> traits = new HashMap<>();
+        String labels = "";
+        String uris = "";
+        if (doc.get("mappedBkgLabel") != null) {
+            for (JsonNode label: doc.get("mappedBkgLabel")) {
+                if (labels.isEmpty()) {
+                    labels = label.asText();
+                }
+                else {
+                    labels = labels.concat(", ").concat(label.asText());
+                }
+            }
+        }
+        if (doc.get("mappedBkgUri") != null) {
+            for (JsonNode uri: doc.get("mappedBkgUri")) {
+                if (uris.isEmpty()) {
+                    uris = uri.asText();
+                }
+                else {
+                    uris = uris.concat(", ").concat(uri.asText());
+                }
+            }
+        }
+        traits.put("labels", labels);
+        traits.put("uris", uris);
         return traits;
     }
 
