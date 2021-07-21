@@ -466,6 +466,10 @@ a > .toplevel-view {
     display: inline-block;
 }
 
+.letter-circle-study {
+    background-color: deeppink;
+}
+
 .letter-circle-variant {
     background-color: darkmagenta;
 }
