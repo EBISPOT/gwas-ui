@@ -35,6 +35,10 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert = true) {
     var pub_date_help = '<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" ' +
         'data-container="body" title="Journal publication date YYYY-MM-DD"></span>'
 
+    var bkg_trait_help = '<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" ' +
+        'data-container="body" title="A trait that is not directly analysed in the GWAS, but is shared by all study ' +
+        'participants as a common characteristic."></span>'
+
     // Generate filename for the downloaded file:
     var filename = getFilename('studies');
 
@@ -86,7 +90,7 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert = true) {
             filterControl: 'input'
         },{
             field: 'mappedBkgTraits',
-            title: 'Background trait(s)',
+            title: 'Background trait(s) ' + bkg_trait_help,
             sortable: true,
             filterControl: 'input'
         }, {

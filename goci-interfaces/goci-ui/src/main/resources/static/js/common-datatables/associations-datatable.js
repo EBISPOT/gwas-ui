@@ -215,6 +215,10 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
     // generate filename:
     var filename = getFilename('associations');
 
+    var bkg_trait_help = '<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" ' +
+        'data-container="body" title="A trait that is not directly analysed in the GWAS, but is shared by all study ' +
+        'participants as a common characteristic."></span>'
+
     $('#association-table').bootstrapTable({
         exportDataType: 'all',
         exportOptions: {
@@ -273,7 +277,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             filterControl: 'input'
         }, {
             field: 'mappedBkgTraits',
-            title: 'Background trait(s)',
+            title: 'Background trait(s) ' + bkg_trait_help,
             sortable: true,
             filterControl: 'input'
         }, {
