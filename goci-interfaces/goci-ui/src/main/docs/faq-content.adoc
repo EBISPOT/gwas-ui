@@ -28,24 +28,25 @@
 
 12. <<faq-A12, What is the difference between a trait and a reported trait?>>
 
-13. <<faq-A13, How do I identify interaction studies in the GWAS Catalog?>>
+13. <<faq-A13, What is a background trait?>>
 
-14. <<faq-A14, How do I identify targeted and exome array studies in the download?>>
+14. <<faq-A14, How do I identify interaction studies in the GWAS Catalog?>>
 
-15. <<faq-A15, Why are only certain targeted or exome array studies available in the GWAS Catalog?>>
+15. <<faq-A15, How do I identify targeted and exome array studies in the download?>>
 
-16. <<faq-A16, Does the GWAS Catalog include CNV studies?>>
+16. <<faq-A16, Why are only certain targeted or exome array studies available in the GWAS Catalog?>>
 
-17. <<faq-A17, How can I separate OR from beta in the Associations download?>>
+17. <<faq-A17, Does the GWAS Catalog include CNV studies?>>
 
-18. <<faq-A18, Is each association in the GWAS Catalog unique?>>
+18. <<faq-A18, How can I separate OR from beta in the Associations download?>>
 
-19. <<faq-A19, Are results from sequencing-based association analyses included in the GWAS Catalog?>>
+19. <<faq-A19, Is each association in the GWAS Catalog unique?>>
 
-20. <<faq-A20, How does the GWAS Catalog represent extremely small p-values?>>
+20. <<faq-A20, Are results from sequencing-based association analyses included in the GWAS Catalog?>>
 
-21. <<faq-A21, Does the GWAS Catalog include data that isn't associated with a journal publication?>>
+21. <<faq-A21, How does the GWAS Catalog represent extremely small p-values?>>
 
+22. <<faq-A22, Does the GWAS Catalog include data that isn't associated with a journal publication?>>
 
 === B. Searching the GWAS Catalog
 
@@ -220,9 +221,15 @@ Each separate study in the GWAS Catalog has an accession number beginning with �
 
 We assign each study in the Catalog one or more standardised *trait* terms from the http://www.ebi.ac.uk/efo[Experimental Factor Ontology] to represent the disease, phenotype, measurement or drug response under investigation. For more information about how ontologies are used in the Catalog, see our link:ontology[ontology] page. Each trait has its own page in the Catalog, where you can see all of the relevant studies, and any variants associated with the trait.
 
-In addition, each study has a *reported trait*, based on the authors’ description of the phenotype analysed. The reported trait takes the study design into account and is useful for understanding the specific details of the phenotype, especially in complex studies that include background traits, SNP-by-environment interactions etc.
+In addition, each study has a *reported trait*, based on the authors’ description of the phenotype analysed. The reported trait takes the study design into account and is useful for understanding the specific details of the phenotype, especially in complex studies that include SNP-by-environment interactions etc.
 
-==== [[faq-A13]]13. How do I identify interaction studies in the GWAS Catalog?
+==== [[faq-A13]]13. What is a background trait?
+
+A background trait is a characteristic that is shared by all participants in a study, but is not directly tested in the association analysis. For example, a study of "Allergic rhinitis in asthma" compares cases (individuals with allergic rhinitis) vs controls (individuals without allergic rhinitis), where all samples (both cases and controls) have asthma. The aim of this study would be to identify variants associated with allergic rhinitis - the *main trait* under investigation. Asthma in this example is a *background trait*: the study wouldn't be able to identify variants associated with asthma, but the fact that all participants have asthma may provide important context to the allergic rhinitis associations that are reported. Therefore we display both *main* and *background* traits, clearly labelled as such, in the GWAS Catalog.
+
+See <<faq-B12, FAQ B(iii)-5>> for more information about how background traits are displayed in the GWAS Catalog.
+
+==== [[faq-A14]]14. How do I identify interaction studies in the GWAS Catalog?
 
 The GWAS Catalog contains SNP-by-SNP and SNP-by-environment interaction studies as long as the SNPs analysed meet our link:methods/criteria[criteria] of being genome-wide. For both types of study, the term “interaction” is included in the reported trait.
 
@@ -232,40 +239,40 @@ To identify interaction studies, go to the “Trait” page for either the main 
 
 You can also search for “interaction” in the download spreadsheet.
 
-==== [[faq-A14]]14. How do I identify targeted and exome array studies in the GWAS Catalog??
+==== [[faq-A15]]15. How do I identify targeted and exome array studies in the GWAS Catalog??
 
 Targeted/exome array studies included in the Catalog are indicated by a small “target” icon. This icon appears in the search results next to any publication that includes a targeted array study. It is also displayed in the “Studies” table (on the “Publication”, “Trait”, “Variant” or "Gene" page), in the “Study accession” column.  
 
 Targeted/exome array studies are identifiable in the download file from the presence of an extra column displaying the field “Genotyping technology (additional array information)”, as described in https://www.ebi.ac.uk/gwas/docs/file-downloads[our download section].
 
-==== [[faq-A15]]15. Why are only certain targeted or exome array studies available in the GWAS Catalog?
+==== [[faq-A16]]16. Why are only certain targeted or exome array studies available in the GWAS Catalog?
 
 We are working on expanding the scope of the GWAS Catalog to include large-scale targeted/non-genome-wide arrays, including the Metabochip, Immunochip and Exome array. Feedback from our users has indicated a high demand for studies of this type to be included in the Catalog. This is currently in a pilot phase where prioritisation of targeted and exome array studies for inclusion in the Catalog is by 1) relevance of the trait analysed 2) user request. 
 
-==== [[faq-A16]]16. Does the GWAS Catalog include CNV studies?
+==== [[faq-A17]]17. Does the GWAS Catalog include CNV studies?
 
 Studies looking at copy number variations (CNV) are not part of the remit of the GWAS Catalog. Historically, a couple of CNV studies had been included in the Catalog but these have now been removed. As the Catalog no longer contains any CNV studies, the decision was made to also eliminate the CNV flag from the search results for studies. The corresponding column is still available in the downloadable full Catalog spreadsheet to preserve backwards compatibility with previous spreadsheet versions.
 
-==== [[faq-A17]]17. How can I separate OR from beta in the associations download?
+==== [[faq-A18]]18. How can I separate OR from beta in the associations download?
 
 It is not currently possible to download the entire Catalog with OR and beta in separate columns. However, betas and ORs can be distinguished as all betas have a unit and direction e.g. “unit increase” or “cm decrease”. In the download, this is included in the "95% CI (TEXT)” column. 
 
 Alternatively, if you download search results directly from the Associations table on the web interface (using the download button to the top right of the table), the file will replicate what you see in the table, with OR and beta in separate columns. 
 
-==== [[faq-A18]]18. Is each association in the GWAS Catalog unique?
+==== [[faq-A19]]19. Is each association in the GWAS Catalog unique?
 
 Each association in the Catalog comes from a unique analysis. However, certain cohorts are repeatedly analysed in slightly different ways so the same associations may appear multiple times in the Catalog.  Similarly, the association results from component groups of a meta-analysis may be represented in the Catalog, as well as the association results from the meta-analysis itself. Users can check the sample number and ancestry as a clue to “duplicated” analyses, but we encourage users to examine the source publications further for more detail.
 
-==== [[faq-A19]]19. Are results from sequencing-based association analyses included in the GWAS Catalog?
+==== [[faq-A20]]20. Are results from sequencing-based association analyses included in the GWAS Catalog?
 
 We welcome user submissions of summary statistics for sequencing-based association analyses, so some sequencing-based associations will appear in the Catalog. However, our full manual curation process is only routinely applied to array-based association analyses at the current time. We are investigating expanding the scope to include more sequencing-based association studies.  You can read the results of our review of the sequencing-based association literature, see our list of studies and curated metadata, and give us your input on https://www.ebi.ac.uk/gwas/docs/pilots[our pilots page].
 
-==== [[faq-A20]]20. How does the GWAS Catalog represent extremely small p-values?
+==== [[faq-A21]]21. How does the GWAS Catalog represent extremely small p-values?
 
 Some publications may report a GWAS association p-value of 0+E00 due to the limits of methods or analysis software to compute very small numbers (p<1x10-300). Where authors are unable to provide the precise p-value we will extract 1e-300 as the maximum p-value. However it should be noted that the true p-value may be much smaller. 
 
 
-==== [[faq-A21]]21. Does the GWAS Catalog include data that isn't associated with a PubMed-indexed journal publication?
+==== [[faq-A22]]22. Does the GWAS Catalog include data that isn't associated with a PubMed-indexed journal publication?
 
 From 2020, the GWAS Catalog started accepting submissions for unpublished GWAS (including pre-published GWAS i.e. data associated with a pre-print or article in press). Unpublished GWAS metadata is available via the study pages for each accession number and in more detail in the unpublished  https://www.ebi.ac.uk/gwas/downloads[download files]. Unpublished summary statistics are available via our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] and https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page] page as well as via the study pages. Unpublished data is made available exactly as submitted by authors and has not been reviewed by our curators. Upon publication it is curated, annotated, extended to include top associations and incorporated into our main database. 
 
@@ -326,7 +333,7 @@ Sometimes it may not be immediately obvious why your search has returned a parti
 
 In addition to exact string matches and synonyms for your search term, the search results may also include more specific child terms of a trait that matches your search. This can be useful, for example, if you want to look for subtypes of a particular disease, e.g. searching for “thyroid disease” returns the traits “Hashimoto’s thyroiditis” and “Graves disease”, both types of thyroid disease. Hierarchical relationships between traits are based on the Experimental Factor Ontology (EFO). For more information about how ontologies are used in the Catalog, see our link:ontology[ontology] page.
 
-The search results may also contain traits that have been studied together with your trait of interest in some way, for example in a GWAS for multiple traits or for a compound trait. For example, searching for “asthma” also returns the trait “response to bronchodilator”. This is because the GWAS Catalog includes a study on response to bronchodilator in a sample of people who all have asthma. See <<faq-B11, FAQ B(iii)-4>> to find out how more complicated phenotypes are represented in the Catalog.
+The search results may also contain traits that have been studied together with your trait of interest in some way, for example in a GWAS for multiple traits or for a compound trait. For example, searching for “asthma” also returns the trait “response to bronchodilator”. This is because the GWAS Catalog includes a study on response to bronchodilator in a sample of people who all have asthma. See <<faq-B11, FAQ B(iii)-4>> and <<faq-B12, -5>> to find out how more complicated phenotypes are represented in the Catalog.
 
 You may also find a publication in the search results, if the publication title contains your trait of interest.
 
@@ -334,25 +341,35 @@ You may also find a publication in the search results, if the publication title 
 
 Some studies are mapped to more than one trait, usually because those studies involve a more complex definition of the phenotype under investigation. Currently, the best way to understand the relationship between multiple traits in the same study is to look at the *reported trait*, which is based on the phenotype description used in the original paper. 
 
-Where a study includes cases and controls all sharing a background trait, this is indicated by the use of the word “in” in the reported trait. For example, if drug responders with bipolar disorder were compared to drug non-responders with bipolar disorder, the reported trait would be "drug response in bipolar disorder”. The study would be mapped to two traits from the ontology: “drug response” and “bipolar disorder”.
-
 Where a study has combined groups of individuals with different traits in the same analysis, this is indicated by the use of the word “or” in the reported trait. For example, if individuals with bipolar disorder and individuals with schizophrenia were compared to controls in the same analysis, the reported trait would be "bipolar disorder or schizophrenia”. The study would be mapped to two traits from the ontology: “bipolar disorder” and “schizophrenia”.
 
 Where a study includes individuals each having multiple traits, this is indicated by the word “and” in the reported trait. For example, if individuals diagnosed with bipolar disorder who show binge-eating behaviour were compared to controls, the reported trait would be “bipolar disorder and binge eating”. The study would be mapped to two traits from the ontology: “bipolar disorder” and “binge eating”.
 
-==== [[faq-B12]]5. Why did my search return no results even though I am sure there used to be a trait like this in the Catalog?
+==== [[faq-B12]]5. How are background traits represented in the Catalog?
+
+A background trait is a characteristic that is shared by all participants in a study, but is not directly tested in the association analysis. See <<faq-A13, FAQ A13>> for a more detailed introduction to background traits. 
+
+Since July 2021, we present http://www.ebi.ac.uk/efo[Experimental Factor Ontology] terms for any *background traits* in a separate field to the main *trait*. This can be seen on every Study page, as well as in each Studies and Associations data table. Previously, both traits were displayed but they were not as straightforward for users to distinguish. The *reported trait* continues to include both components in a single description, usually written as "[main trait] _in_ [background trait]", e.g. "Allergic rhinitis _in_ asthma". For more on the difference between *traits* and *reported traits* see <<faq-A12, FAQ A12 above>>.
+
+The Trait page, by default, only displays studies and associations where the currently-viewed trait is the main trait of interest in the GWAS. If you would like to also include studies and associations where that trait is a background trait, please check the "Include background traits data" box above the data tables. This option will also update the association plot at the bottom of the page to include background trait data.
+
+In the full https://www.ebi.ac.uk/gwas/docs/file-downloads[GWAS Catalog spreadsheet downloads], the background trait is only included in the most recent version (v1.0.3), under the MAPPED BACKGROUND TRAIT and MAPPED BACKGROUND TRAIT URI columns. Earlier versions of the spreadsheet include only the main trait.
+
+Note that the GWAS Catalog API currently returns only main traits, however we hope to include an option to access studies and associations by background trait in the future.
+
+==== [[faq-B13]]6. Why did my search return no results even though I am sure there used to be a trait like this in the Catalog?
 
 Our search functionality searches for exact text string matches, so if you accidentally type "beast cancer" instead of "breast cancer", you will not get any results. Equally, "metabolic disorder" won't return any results while "metabolic disease" will return a lot. The search bar provides an autocomplete function that will suggest possible search terms as you type. Alternatively, try varying your search term or searching for your term in http://www.ebi.ac.uk/efo[EFO] to get an idea of what other terms might be available.
 
 === B(iv). Searching by study
 
-==== [[faq-B13]]6. Can I search for a study?
+==== [[faq-B14]]1. Can I search for a study?
 
 Individual studies within a particular publication are not currently displayed in the search results. To find a study, search for a publication, trait or variant and then go to the “Studies” table to click through to the linked studies.
 
 If you already know the accession number of a particular study (beginning with “GCST”), you can search for this on the homepage to return the publication containing that study.
 
-==== [[faq-B14]]7. How can I search for targeted and exome array studies and associations?
+==== [[faq-B15]]2. How can I search for targeted and exome array studies and associations?
 
 You can enter the genotyping technology of your interest in the search bar, e.g. “targeted genotyping array”, “exome genotyping array”. This will return any publication that uses that specific genotyping technology.
 
