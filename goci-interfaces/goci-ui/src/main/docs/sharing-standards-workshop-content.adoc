@@ -8,57 +8,57 @@ Workshop materials, including pre-workshop survey responses, videos of each sess
 
 == Workshop organisation
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_briefing_document.pdf[Workshop briefing document]
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_briefing_document.pdf[Workshop briefing document]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_agenda.pdf[Workshop agenda]
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_agenda.pdf[Workshop agenda]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_attendees.xlsx[Workshop attendees]
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Workshop_attendees.xlsx[Workshop attendees]
 
 == Videos of workshop sessions
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Introduction_and_keynote.mp4[Introduction and keynote] chaired by Helen Parkinson, keynote by Teri Manolio on "The history and future of the GWAS Catalog"
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Introduction_and_keynote.mp4[Introduction and keynote] chaired by Helen Parkinson, keynote by Teri Manolio on "The history and future of the GWAS Catalog"
 
 video::_duEjmUiNRI[youtube,width=628,height=345]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_content.mp4[Data content] chaired by Inês Barroso
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_content.mp4[Data content] chaired by Inês Barroso
 
 video::lpyv9_YlFCI[youtube,width=628,height=345]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR.mp4[FAIR] chaired by Robert Carroll
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR.mp4[FAIR] chaired by Robert Carroll
 
 video::q5fxogGdjO4[youtube,width=628,height=345]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Incentivisation_of_sharing.mp4[Incentivisation of sharing] chaired by Orli Bahcall
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Incentivisation_of_sharing.mp4[Incentivisation of sharing] chaired by Orli Bahcall
 
 video::TypR3gJtBh4[youtube,width=628,height=345]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Infrastructure_requirements.mp4[Infrastructure requirements] chaired by Michael Inouye
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Infrastructure_requirements.mp4[Infrastructure requirements] chaired by Michael Inouye
 
 video::WI9N5J36KEY[youtube,width=628,height=345]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_update_cycle.mp4[Data update cycle] chaired by Raymond Walters
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Data_update_cycle.mp4[Data update cycle] chaired by Raymond Walters
 
 video::dNqRQOQrx7M[youtube,width=628,height=345]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Forward_look.mp4[Forward Look] chaired by Stephen Rich
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Forward_look.mp4[Forward Look] chaired by Stephen Rich
 
 video::cxpxkuR61EU[youtube,width=628,height=345]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Discussion_and_summary.mp4[Discussion and summary] chaired by Helen Parkinson
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Discussion_and_summary.mp4[Discussion and summary] chaired by Helen Parkinson
 
 video::q3aIPsogpO0[youtube,width=628,height=345]
 
 == Supporting material
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Pre-workshop_survey_responses.xlsx[Pre-workshop survey responses]
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Pre-workshop_survey_responses.xlsx[Pre-workshop survey responses]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Analysis_of_publications_from_2019_and_2020_where_the_summary_statistics_could_not_be_shared_by_the_GWAS_Catalog_because_of_barriers.pdf[Analysis of publications from 2019 and 2020 where the summary statistics could not be shared by the GWAS Catalog because of barriers ]
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Analysis_of_publications_from_2019_and_2020_where_the_summary_statistics_could_not_be_shared_by_the_GWAS_Catalog_because_of_barriers.pdf[Analysis of publications from 2019 and 2020 where the summary statistics could not be shared by the GWAS Catalog because of barriers ]
 
 == Workshop outputs
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR_indicators_for_GWAS_data.pdf[FAIR indicators for GWAS data]
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/FAIR_indicators_for_GWAS_data.pdf[FAIR indicators for GWAS data]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Proposed_metadata_standard_reporting_elements.pdf[Proposed metadata standard reporting elements]
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Proposed_metadata_standard_reporting_elements.pdf[Proposed metadata standard reporting elements]
 
-link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Post_workshop_working_groups_with_aims.pdf[Post workshop working groups with aims]
+link:http://ftp.ebi.ac.uk/pub/databases/gwas/sharing_standards_workshop/Post_workshop_working_groups_with_aims.pdf[Post workshop working groups with aims]
 
