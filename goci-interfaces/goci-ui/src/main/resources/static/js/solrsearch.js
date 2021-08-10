@@ -584,11 +584,6 @@ function processData(data) {
     var documents = data.response.docs;
     var resourceCounts = data.facet_counts.facet_fields.resourcename;
 
-    if (!searchTerm.toUpperCase().startsWith('GCST')) {
-        documents = documents.filter(doc => doc.resourcename !== 'study');
-        resourceCounts[resourceCounts.indexOf('study') + 1] = 0;
-    }
-
     // Test if the query is a region, if so, adding to the returned data:
     documents = testForRegion.test(searchTerm, documents)
 
