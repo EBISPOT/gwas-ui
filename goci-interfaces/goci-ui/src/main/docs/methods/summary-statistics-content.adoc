@@ -44,6 +44,9 @@ Please note: The old-style directories will be removed on 1st Sept 2021 i.e. any
 
 Many thanks and please contact us at gwas-info@ebi.ac.uk if you have any concerns.
 
+== Sharing and standards workshop
+
+In June 2020, the GWAS Catalog organised a community workshop to address the standards, infrastructure and incentives required to promote and enable broader sharing of GWAS summary statistics. https://www.ebi.ac.uk/gwas/docs/sharing-standards-workshop[Workshop materials] are available.
 
 == Summary statistics acquisition
 

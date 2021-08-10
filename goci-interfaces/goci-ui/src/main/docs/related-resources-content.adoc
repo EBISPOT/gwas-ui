@@ -52,7 +52,9 @@ Visscher et al, 2017 link:http://www.sciencedirect.com/science/article/pii/S0002
 
 Manolio, 2010 link:http://www.nejm.org/doi/full/10.1056/NEJMra0905980[Genomewide Association Studies and assessment of the risk of disease] NEJM 363:166-176
 
+=== Sharing and standards workshop
 
+https://www.ebi.ac.uk/gwas/docs/sharing-standards-workshop[Workshop] held in June 2020 to address the standards, infrastructure and incentives required to promote and enable broader sharing of GWAS summary statistics.
 
 === Resources used within the GWAS Catalog
 
