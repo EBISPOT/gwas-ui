@@ -8,7 +8,7 @@ var global_raw;
 global_fl = 'accessionId,ancestralGroups,ancestryLinks,associationCount,association_rsId,authorAscii_s,author_s,authorsList,' +
     'betaDirection,betaNum,betaUnit,catalogPublishDate,chromLocation,chromosomeName,chromosomePosition,context,' +
     'countriesOfRecruitment,currentSnp,efoLink,ensemblMappedGenes,fullPvalueSet,genotypingTechnologies,id,initialSampleDescription,' +
-    'label,labelda,mappedLabel,mappedUri,merged,multiSnpHaplotype,numberOfIndividuals,orPerCopyNum,orcid_s,pValueExponent,' +
+    'label,labelda,mappedLabel,mappedUri,mappedBkgLabel,mappedBkgUri,merged,multiSnpHaplotype,numberOfIndividuals,orPerCopyNum,orcid_s,pValueExponent,' +
     'pValueMantissa,parent,positionLinks,publication,publicationDate,publicationLink,pubmedId,qualifier,range,region,' +
     'replicateSampleDescription,reportedGene,resourcename,riskFrequency,rsId,shortForm,snpInteraction,strongestAllele,studyId,' +
     'synonym,title,traitName,traitName_s,traitUri,platform,agreedToCc0';
@@ -145,6 +145,22 @@ function setTraitsLink(study) {
     });
 
     return efoTraitLinks.join(", ");
+}
+
+function setBackgroundTraitsLink(study) {
+    var efoLabelUriPairs = {};
+    var efoTraitLinks = [];
+    if ('mappedBkgLabel' in study) {
+        $.each(study.mappedBkgLabel, function (index, label) {
+            efoLabelUriPairs[label] = study.mappedBkgUri[index].split("/").pop();
+        });
+        $.each(efoLabelUriPairs, function (label, link) {
+            var traitPageLink = gwasProperties.contextPath + 'efotraits/' + link;
+            efoTraitLinks.push(setExternalLinkText(traitPageLink, label));
+        });
+        return efoTraitLinks.join(", ");
+    }
+    return "-"
 }
 
 

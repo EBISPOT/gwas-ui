@@ -197,6 +197,7 @@ function displaySummaryStudy(data, clearBeforeInsert) {
     $("#study-reported-trait").html(study.traitName);
     var traitsList = setTraitsLink(study);
     $("#study-traits").html(traitsList);
+    $("#study-background-traits").html(setBackgroundTraitsLink(study));
 
     var genotyping = getGenotypingTech(study);
     $("#study-genotyping-tech").html(genotyping);
