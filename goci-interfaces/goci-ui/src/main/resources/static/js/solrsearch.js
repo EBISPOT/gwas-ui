@@ -115,7 +115,7 @@ function solrSearch(queryTerm) {
             })
             .done(function(data) {
                 // Adding required fields to the returned dataset:
-                data['facet_counts'] = { 'facet_fields' : { 'resourcename' : ['publication', 20, 'variant', 0, 'gene', 0, 'trait', 0, 'study', 0] }}
+                data['facet_counts'] = { 'facet_fields' : { 'resourcename' : ['publication', 20, 'variant', 0, 'gene', 0, 'trait', 0] }}
 
                 console.log(data);
                 processData(data);
@@ -182,10 +182,6 @@ var drawSnippets = (function () {
             var prototype = generateSnippet(doc.resourcename);
 
             switch(doc.resourcename) {
-                case 'study':
-                    prototype = study(prototype, doc)
-                    break;
-
                 case 'publication':
                     prototype = publication(prototype, doc);
                     break;
@@ -294,38 +290,6 @@ var drawSnippets = (function () {
     //     }
     //     return html;
     // };
-
-    // Updating snippet fields for studies:
-    var study = function(table, doc) {
-
-        // Update title:
-        table.find('a').text(doc.accessionId);
-
-        // Update publication URL:
-        table.find('a').attr('href',gwasProperties.contextPath+"studies/"+doc.accessionId);
-
-        // Update description:
-        table.find('p.descriptionSearch').text(doc.title);
-
-        // Defining full p-value set array icon:
-        var linkFullPValue = "<span class='glyphicon glyphicon-signal context-help' " +
-            "style='font-size: 20px' data-toggle='tooltip' data-placement='bottom' " +
-            "data-original-title='Full summary statistics available'></span>";
-
-        // Adding icons:
-        if (doc.fullPvalueSet == 1 || true) /*true is temporary*/{
-            table.find('h3#iconCell').append(linkFullPValue+"&nbsp;&nbsp");
-        }
-
-        // This is also temporary to validate UI
-        doc.associationCount = 30;
-
-        // Adding stats:
-        table = addStats(doc, table)
-
-        return(table);
-
-    }
 
     // Updating snippet fields for publications:
     var publication = function(table, doc){
