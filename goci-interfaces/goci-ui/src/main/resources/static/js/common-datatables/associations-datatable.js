@@ -164,6 +164,9 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
             // Mapped traits
             tmp['mappedTraits'] = setTraitsLink(asso);
 
+            // Mapped background traits
+            tmp['mappedBkgTraits'] = setBackgroundTraitsLink(asso);
+
             // Adding genomic location to the table (but excluding mappings to patch regions)
             var genomicCoordinate = 'Mapping not available';
             if (asso.positionLinks){
@@ -211,6 +214,10 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
     }
     // generate filename:
     var filename = getFilename('associations');
+
+    var bkg_trait_help = '<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" ' +
+        'data-container="body" title="A trait that is not directly analysed in the GWAS, but is shared by all study ' +
+        'participants as a common characteristic."></span>'
 
     $('#association-table').bootstrapTable({
         exportDataType: 'all',
@@ -266,6 +273,11 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
         }, {
             field: 'mappedTraits',
             title: 'Trait(s)',
+            sortable: true,
+            filterControl: 'input'
+        }, {
+            field: 'mappedBkgTraits',
+            title: 'Background trait(s) ' + bkg_trait_help,
             sortable: true,
             filterControl: 'input'
         }, {
