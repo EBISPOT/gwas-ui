@@ -313,12 +313,9 @@ var drawSnippets = (function () {
             "data-original-title='Full summary statistics available'></span>";
 
         // Adding icons:
-        if (doc.fullPvalueSet == 1 || true) /*true is temporary*/{
+        if (doc.fullPvalueSet === true) {
             table.find('h3#iconCell').append(linkFullPValue+"&nbsp;&nbsp");
         }
-
-        // This is also temporary to validate UI
-        doc.associationCount = 30;
 
         // Adding stats:
         table = addStats(doc, table)
