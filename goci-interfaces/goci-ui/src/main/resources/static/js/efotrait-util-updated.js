@@ -641,7 +641,7 @@ getTermMappings = function(efoId) {
     return promiseGet(global_oxo_api + 'mappings',
         { 'fromId': efoId.replace('_',':'),}
     ).then(JSON.parse).then(function(data) {
-        if (data._embedded && data._embedded.mappgings) {
+        if (data._embedded && data._embedded.mappings) {
             let mappedTerms = data._embedded.mappings.reduce((filtered, term) => {
                 const termCurie = term.toTerm.curie;
 
