@@ -55,10 +55,12 @@ deploy-dev2:
     - chmod 700 ~/.ssh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_DEV2
+    #- ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
+    #  "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'dev2' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
       "cd $APP_DIR_DEV2; nohup java -jar gwas-ui.jar --spring.profiles.active=dev2 > /dev/null 2>&1 &"
   only:
-    - dev
+    - march-2021-refactoring
 
 
 deploy-snoopy-test:
@@ -72,12 +74,12 @@ deploy-snoopy-test:
     - chmod 700 ~/.ssh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_TEST
-    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
-      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+    #- ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
+    #  "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'test' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
       "cd $APP_DIR_TEST; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=test > /dev/null 2>&1 &"
   only:
-    - dev
+    - march-2021-refactoring
 
 
 
@@ -92,12 +94,12 @@ deploy-snoopy-preparation:
     - chmod 700 ~/.ssh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_PREPARATION
-    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
-      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+    #- ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
+     # "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'preparation' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
       "cd $APP_DIR_PREPARATION; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=preparation > /dev/null 2>&1 &"
   only:
-    - master
+    - march-2021-refactoring
 
 
 deploy-wwwdev-staging:
