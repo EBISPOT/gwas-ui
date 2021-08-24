@@ -55,8 +55,8 @@ deploy-dev2:
     - chmod 700 ~/.ssh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_DEV2
-    #- ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
-    #  "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'dev2' | grep -v 'grep' | awk '{print \$2}');"
+    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'dev2' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
       "cd $APP_DIR_DEV2; nohup java -jar gwas-ui.jar --spring.profiles.active=dev2 > /dev/null 2>&1 &"
   only:
@@ -74,10 +74,10 @@ deploy-snoopy-test:
     - chmod 700 ~/.ssh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_TEST
-    #- ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
-    #  "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'test' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
-      "cd $APP_DIR_TEST; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=test > /dev/null 2>&1 &"
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'test' | grep -v 'grep' | awk '{print \$2}');"
+    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
+      "cd $APP_DIR_TEST; nohup java -jar gwas-ui.jar --spring.profiles.active=test > /dev/null 2>&1 &"
   only:
     - march-2021-refactoring
 
@@ -94,10 +94,10 @@ deploy-snoopy-preparation:
     - chmod 700 ~/.ssh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_SNOOPY:$APP_DIR_PREPARATION
-    #- ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
-     # "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'preparation' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
-      "cd $APP_DIR_PREPARATION; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=preparation > /dev/null 2>&1 &"
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'preparation' | grep -v 'grep' | awk '{print \$2}');"
+    - ssh -o StrictHostKeyChecking=no $SERVER_SNOOPY
+      "cd $APP_DIR_PREPARATION; nohup java -jar gwas-ui.jar --spring.profiles.active=preparation > /dev/null 2>&1 &"
   only:
     - march-2021-refactoring
 
@@ -113,13 +113,13 @@ deploy-wwwdev-staging:
     - chmod 700 ~/.ssh
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_WWWDEV_STAGING:$APP_DIR_NOAH
+    #- ssh -o StrictHostKeyChecking=no $SERVER_WWWDEV_STAGING
+    #  "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'staging' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_WWWDEV_STAGING
-      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
-    - ssh -o StrictHostKeyChecking=no $SERVER_WWWDEV_STAGING
-      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=staging > /dev/null 2>&1 &"
+      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar --spring.profiles.active=staging > /dev/null 2>&1 &"
   when: manual
   only:
-    - master
+    - march-2021-refactoring
 
 
 deploy-ves-pg-7e-prod:
@@ -132,13 +132,13 @@ deploy-ves-pg-7e-prod:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
+    #- ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
+     # "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'prod' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
-      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
-    - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
-      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=prod > /dev/null 2>&1 &"
+      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar --solrserver=http://${SERVER_VESPG7E_PROD}:8983 --virtusoserver=http://${SERVER_VESPG7E_PROD}:8191 --spring.profiles.active=prod > /dev/null 2>&1 &"
   when: manual
   only:
-    - master
+    - march-2021-refactoring
 
 
 deploy-ves-pg-7f-prod:
@@ -152,9 +152,9 @@ deploy-ves-pg-7f-prod:
     - chmod 700 ~/.ssh
   script:
     - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7F_PROD
-      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'prod' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7F_PROD
-      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=prod > /dev/null 2>&1 &"
+      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar --solrserver=http://${SERVER_VESPG7F_PROD}:8983 --virtusoserver=http://${SERVER_VESPG7F_PROD}:8191 --spring.profiles.active=prod > /dev/null 2>&1 &"
   when: manual
   only:
     - master
@@ -170,9 +170,9 @@ deploy-ves-oy-7e-fallback:
     - chmod 700 ~/.ssh
   script:
     - ssh -o StrictHostKeyChecking=no $SERVER_VESOY7E_FALLBACK
-      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'prod' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_VESOY7E_FALLBACK
-      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=prod > /dev/null 2>&1 &"
+      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar --solrserver=http://${SERVER_VESOY7E_FALLBACK}:8983 --virtusoserver=http://${SERVER_VESOY7E_FALLBACK}:8191 --spring.profiles.active=prod > /dev/null 2>&1 &"
   when: manual
   only:
     - master
@@ -188,9 +188,9 @@ deploy-ves-oy-7f-fallback:
     - chmod 700 ~/.ssh
   script:
     - ssh -o StrictHostKeyChecking=no $SERVER_VESOY7F_FALLBACK
-      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep -v 'grep' | awk '{print \$2}');"
+      "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'prod' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_VESOY7F_FALLBACK
-      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar $PROGRAM_ARGUMENTS --spring.profiles.active=prod > /dev/null 2>&1 &"
+      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar --solrserver=http://${SERVER_VESOY7F_FALLBACK}:8983 --virtusoserver=http://${SERVER_VESOY7F_FALLBACK}:8191  --spring.profiles.active=prod > /dev/null 2>&1 &"
   when: manual
   only:
     - master

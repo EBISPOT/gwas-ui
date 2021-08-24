@@ -1,0 +1,6 @@
+server:
+  port: 9781
+
+datadir: file:///nfs/spot/data/test
+solrserver:
+virtusoserver:
