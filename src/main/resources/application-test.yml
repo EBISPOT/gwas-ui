@@ -1,2 +1,6 @@
 server:
-  port: 8081
+  port: 8183
+
+datadir: file:///nfs/spot/data/test
+solrserver: http://snoopy.ebi.ac.uk:8984
+virtusoserver: http://garfield.ebi.ac.uk:8191

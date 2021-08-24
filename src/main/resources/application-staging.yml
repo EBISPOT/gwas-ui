@@ -1,2 +1,7 @@
 server:
-  port: 8082
+  port: 8182
+
+
+datadir: file:///nfs/public/ro/gwas
+solrserver: http://ves-hx-7f:8983
+virtusoserver: http://ves-hx-7f:8191
