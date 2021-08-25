@@ -1,6 +1,6 @@
 server:
   port: 9781
 
-datadir: file:///nfs/spot/data/test
+datadir: file:///nfs/public/rw/gwas/latest
 solrserver:
 virtusoserver:
