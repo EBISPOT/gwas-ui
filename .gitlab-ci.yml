@@ -114,7 +114,7 @@ deploy-wwwdev-staging:
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_EBI_CLI:$APP_DIR_PROD
     - ssh -o StrictHostKeyChecking=no $SERVER_EBI_CLI
-      "sudo -u spo_adm cp $APP_DIR_PROD/gwas-ui.jar /nfs/public/ro/gwas/interfaces/search/gwas-ui.jar"
+      "cp $APP_DIR_PROD/gwas-ui.jar /nfs/public/ro/gwas/interfaces/search/gwas-ui.jar"
     #  "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'staging' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_WWWDEV_STAGING
       "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar --spring.profiles.active=staging > /dev/null 2>&1 &"
