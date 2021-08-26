@@ -117,7 +117,7 @@ deploy-wwwdev-staging:
       "sudo -u spo_adm cp $APP_DIR_PROD/gwas-ui.jar /nfs/public/ro/gwas/interfaces/search/gwas-ui.jar"
     #  "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'staging' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_WWWDEV_STAGING
-      "cd $APP_DIR_NOAH; nohup java -jar gwas-ui.jar --spring.profiles.active=staging > /dev/null 2>&1 &"
+      "cd $EXEC_DIR_STAGING; nohup java -jar $APP_DIR_NOAH/gwas-ui.jar --spring.profiles.active=staging > /dev/null 2>&1 &"
   when: manual
   only:
     - march-2021-refactoring
