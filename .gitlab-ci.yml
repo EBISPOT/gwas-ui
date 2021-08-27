@@ -141,7 +141,7 @@ deploy-ves-pg-7e-prod:
     #- ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
      # "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'prod' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
-      "cd $EXEC_DIR_VESPG7E; nohup java -jar $APP_DIR_NOAH/gwas-ui.jar --solrserver=http://${SERVER_VESPG7E_PROD}:8983 --virtusoserver=http://${SERVER_VESPG7E_PROD}:8191 --spring.profiles.active=prod > /dev/null 2>&1 &"
+      "cd $EXEC_DIR_VESPG7E; nohup java -jar $APP_DIR_NOAH/gwas-ui.jar --spring.profiles.active=prod --solrserver=http://${SERVER_VESPG7E_PROD}:8983 --virtusoserver=http://${SERVER_VESPG7E_PROD}:8191 > /dev/null 2>&1 &"
   when: manual
   only:
     - march-2021-refactoring
