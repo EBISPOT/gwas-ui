@@ -137,11 +137,12 @@ deploy-ves-pg-7e-prod:
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_EBI_CLI:$APP_DIR_PROD
     - ssh -o StrictHostKeyChecking=no $SERVER_EBI_CLI
-        "sudo -u spo_adm cp $APP_DIR_PROD/gwas-ui.jar $APP_DIR_NOAH/gwas-ui-refactored.jar"
+        "sudo -u spo_adm cp $APP_DIR_PROD/gwas-ui.jar $APP_DIR_NOAH/gwas-ui.jar;
+          sudo -u spo_adm sync-project -w gwas"
     #- ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
      # "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'prod' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
-      "cd $EXEC_DIR_VESPG7E; nohup java -jar $APP_DIR_NOAH/gwas-ui-refactored.jar --spring.profiles.active=prod --solrserver=http://${SERVER_VESPG7E_PROD}:8983 --virtusoserver=http://${SERVER_VESPG7E_PROD}:8191 > /dev/null 2>&1 &"
+      "cd $EXEC_DIR_VESPG7E; nohup java -jar $APP_DIR_NOAH/gwas-ui.jar --spring.profiles.active=prod --solrserver=http://${SERVER_VESPG7E_PROD}:8983 --virtusoserver=http://${SERVER_VESPG7E_PROD}:8191 > /dev/null 2>&1 &"
   when: manual
   only:
     - march-2021-refactoring
