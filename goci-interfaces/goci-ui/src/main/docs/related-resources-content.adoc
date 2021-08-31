@@ -44,9 +44,11 @@ Hindorff LA, et al 2009 link:http://www.genome.gov/Pages/About/OD/NewsAndFeature
 
 ==== Other background reading
 
-link:https://www.yourgenome.org/stories/genome-wide-association-studies[A beginners guide to GWAS]
+Uffelmann et al, 2021 https://www.nature.com/articles/s43586-021-00056-9[Genome-wide association studies]. Nat Rev Methods Primers 1, 59.
 
-link:http://ontogenesis.knowledgeblog.org/66[What is an Ontology?]
+link:https://www.yourgenome.org/stories/genome-wide-association-studies[A beginners guide to GWAS] (2016)
+
+link:http://ontogenesis.knowledgeblog.org/66[What is an Ontology?] (2010)
 
 Visscher et al, 2017 link:http://www.sciencedirect.com/science/article/pii/S0002929717302409?via%3Dihub[10 Years of GWAS Discovery: Biology, Function and Translation] AJHG Volume 101, Issue 1, 6 July 2017, Pages 5-22
 
