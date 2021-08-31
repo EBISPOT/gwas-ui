@@ -138,9 +138,10 @@ deploy-ves-pg-7e-prod:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_EBI_CLI:$APP_DIR_PROD
     - ssh -o StrictHostKeyChecking=no $SERVER_EBI_CLI
         "sudo -u spo_adm cp $APP_DIR_PROD/gwas-ui.jar $APP_DIR_NOAH/gwas-ui.jar;
-          sudo -u spo_adm sync-project -w gwas"
-    #- ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
-     # "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'prod' | grep -v 'grep' | awk '{print \$2}');"
+        sudo -u spo_adm sync-project -w gwas;
+        sudo -u spo_adm ssh ves-pg-7e /nfs/public/ro/gwas/sw/update_data_link.sh"
+    - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
+     "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'prod' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
       "cd $EXEC_DIR_VESPG7E; nohup java -jar $APP_DIR_NOAH/gwas-ui.jar --spring.profiles.active=prod --solrserver=http://${SERVER_VESPG7E_PROD}:8983 --virtusoserver=http://${SERVER_VESPG7E_PROD}:8191 > /dev/null 2>&1 &"
   when: manual
@@ -160,7 +161,9 @@ deploy-ves-pg-7f-prod:
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_EBI_CLI:$APP_DIR_PROD
     - ssh -o StrictHostKeyChecking=no $SERVER_EBI_CLI
-      "sudo -u spo_adm cp $APP_DIR_PROD/gwas-ui.jar $APP_DIR_NOAH/gwas-ui-refactored.jar"
+      "sudo -u spo_adm cp $APP_DIR_PROD/gwas-ui.jar $APP_DIR_NOAH/gwas-ui.jar;
+      sudo -u spo_adm sync-project -w gwas;
+      sudo -u spo_adm ssh ves-pg-7f /nfs/public/ro/gwas/sw/update_data_link.sh"
     - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7F_PROD
       "cd $EXEC_DIR_VESPG7F; nohup java -jar $APP_DIR_NOAH/gwas-ui.jar --solrserver=http://${SERVER_VESPG7F_PROD}:8983 --virtusoserver=http://${SERVER_VESPG7F_PROD}:8191 --spring.profiles.active=prod > /dev/null 2>&1 &"
   when: manual
@@ -179,9 +182,11 @@ deploy-ves-oy-7e-fallback:
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_EBI_CLI:$APP_DIR_PROD
     - ssh -o StrictHostKeyChecking=no $SERVER_EBI_CLI
-      "sudo -u spo_adm cp $APP_DIR_PROD/gwas-ui.jar $APP_DIR_NOAH/gwas-ui.jar"
+      "sudo -u spo_adm cp $APP_DIR_PROD/gwas-ui.jar $APP_DIR_NOAH/gwas-ui.jar;
+      sudo -u spo_adm sync-project -w gwas;
+      sudo -u spo_adm ssh ves-oy-7e /nfs/public/ro/gwas/sw/update_data_link.sh"
     - ssh -o StrictHostKeyChecking=no $SERVER_VESOY7E_FALLBACK
-      "cd $EXEC_DIR_VESOY7E; nohup java -jar $APP_DIR_NOAH/gwas-ui.jar --solrserver=http://${SERVER_VESOY7E_FALLBACK}:8983 --virtusoserver=http://${SERVER_VESOY7E_FALLBACK}:8191 --spring.profiles.active=prod > /dev/null 2>&1 &"
+      "cd $EXEC_DIR_VESOY7E; nohup java -jar $APP_DIR_NOAH/gwas-ui.jar --solrserver=http://${SERVER_VESOY7E_FALLBACK}:8983 --virtusoserver=http://${SERVER_VESOY7E_FALLBACK}:8191 --spring.profiles.active=fallback > /dev/null 2>&1 &"
   when: manual
   only:
     - march-2021-refactoring
@@ -198,9 +203,11 @@ deploy-ves-oy-7f-fallback:
   script:
     - scp -o StrictHostKeyChecking=no gwas-ui.jar $SERVER_EBI_CLI:$APP_DIR_PROD
     - ssh -o StrictHostKeyChecking=no $SERVER_EBI_CLI
-      "sudo -u spo_adm cp $APP_DIR_PROD/gwas-ui.jar $APP_DIR_NOAH/gwas-ui.jar"
+      "sudo -u spo_adm cp $APP_DIR_PROD/gwas-ui.jar $APP_DIR_NOAH/gwas-ui.jar;
+      sudo -u spo_adm sync-project -w gwas;
+      sudo -u spo_adm ssh ves-oy-7f /nfs/public/ro/gwas/sw/update_data_link.sh"
     - ssh -o StrictHostKeyChecking=no $SERVER_VESOY7F_FALLBACK
-      "cd $EXEC_DIR_VESOY7F; nohup java -jar $APP_DIR_NOAH/gwas-ui.jar --solrserver=http://${SERVER_VESOY7F_FALLBACK}:8983 --virtusoserver=http://${SERVER_VESOY7F_FALLBACK}:8191  --spring.profiles.active=prod > /dev/null 2>&1 &"
+      "cd $EXEC_DIR_VESOY7F; nohup java -jar $APP_DIR_NOAH/gwas-ui.jar --solrserver=http://${SERVER_VESOY7F_FALLBACK}:8983 --virtusoserver=http://${SERVER_VESOY7F_FALLBACK}:8191  --spring.profiles.active=fallback > /dev/null 2>&1 &"
   when: manual
   only:
     - march-2021-refactoring
