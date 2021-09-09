@@ -10,6 +10,8 @@ Accurate mapping of reported traits to EFO terms facilitates searching, visualis
 EFO is freely available in OWL format from http://www.ebi.ac.uk/efo[the EFO website] and can be browsed in http://www.ebi.ac.uk/ols/ontologies/efo[the Ontology Lookup Service].
 Mappings of all GWAS Catalog reported traits to EFO terms are now available through link:../docs/file-downloads[our downloads page], along with the GWAS Catalog ontology schema and data knowledgebase.
 
+Interoperability with other ontologies can be achieved using the https://www.ebi.ac.uk/spot/oxo[Ontology Cross Reference Service]. Use the service to upload ontology IDs from the GWAS Catalog's https://www.ebi.ac.uk/gwas/docs/file-downloads[download files].
+
 For an introduction on why we think mapping to ontologies is important, check out http://drjamesmalone.blogspot.co.uk/2012/06/common-ontology-questions-1-what-is-it.html[this blog post] by EFO editor James Malone.
 
 You can find more information on our work so far in our recent http://nar.oxfordjournals.org/content/42/D1/D1001.full[Nucleic Acids Research paper].
