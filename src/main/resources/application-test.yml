@@ -1,5 +1,5 @@
 server:
-  port: 8183
+  port: 9981
 
 datadir: file:///nfs/spot/data/test
 solrserver: http://snoopy.ebi.ac.uk:8984

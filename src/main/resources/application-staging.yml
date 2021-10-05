@@ -1,5 +1,5 @@
 server:
-  port: 8182
+  port: 8181
 
 
 datadir: file:///nfs/public/ro/gwas
