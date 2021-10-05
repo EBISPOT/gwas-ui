@@ -140,8 +140,8 @@ deploy-ves-pg-7e-prod:
         "sudo -u spo_adm cp $APP_DIR_PROD/gwas-ui.jar $APP_DIR_NOAH/gwas-ui.jar;
         sudo -u spo_adm sync-project -w gwas;
         sudo -u spo_adm ssh ves-pg-7e /nfs/public/ro/gwas/sw/update_data_link.sh"
-    - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
-     "kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'prod' | grep -v 'grep' | awk '{print \$2}');"
+   # - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
+     #"kill -9 \$(ps aux | grep 'gwas-ui.jar' | grep 'prod' | grep -v 'grep' | awk '{print \$2}');"
     - ssh -o StrictHostKeyChecking=no $SERVER_VESPG7E_PROD
       "cd $EXEC_DIR_VESPG7E; nohup java -jar $APP_DIR_NOAH/gwas-ui.jar --spring.profiles.active=prod --solrserver=http://${SERVER_VES_PG_7E}:8983 --virtusoserver=http://${SERVER_VES_PG_7E}:8191 > /dev/null 2>&1 &"
   when: manual
