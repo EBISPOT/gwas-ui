@@ -536,3 +536,7 @@ a > .toplevel-view {
     color: white;
     outline: none;
 }
+
+.mg-t-15{
+    margin-top: 15px;
+}
