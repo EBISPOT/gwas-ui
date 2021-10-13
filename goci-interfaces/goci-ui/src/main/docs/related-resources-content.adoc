@@ -27,6 +27,9 @@ http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new
 === Publications
 
 ==== GWAS Catalog publications
+MacArthur et al, 2021 https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00004-5[Workshop proceedings: GWAS Catalog standards and sharing]. Cell Genomics Vol. 1, Issue 1, 100004.
+
+McMahon et al, 2021 https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00005-7[Sequencing-based genome-wide association studies reporting standards]. Cell Genomics Vol. 1, issue 1, 100005.
 
 Lambert et al, 2021 https://www.nature.com/articles/s41588-021-00783-5/[The Polygenic Score Catalog as an open database for reproducibility and systematic evaluation]. Nature Genetics volume 53, pages420–425(2021).
   
