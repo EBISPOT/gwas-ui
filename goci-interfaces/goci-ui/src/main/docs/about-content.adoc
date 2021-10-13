@@ -57,6 +57,8 @@ The NHGRI-EBI GWAS Catalog and all its contents are available under the general 
 
 All code for the GWAS Catalog infrastructure can be found in https://github.com/EBISPOT/goci[our Github repository]. The code is freely available under http://www.apache.org/licenses/LICENSE-2.0[the Apache version 2.0 license]
 
+The GWAS Catalog adheres to the FAIR indicators of Findability, Accessibility, Interoperability, and Reusability, described in more detail in https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00004-5[MacArthur et al, Workshop proceedings: GWAS Catalog standards and sharing, Cell Genomics (2021)] and registered on https://fairsharing.org/FAIRsharing.blUMRx[fairsharing.org].
+
 == Privacy policy
 
 The General Data Protection Regulation (GDPR) will apply in the UK from 25 May 2018. It will replace the 1998 Data Protection Act and introduce new rules on privacy notices, as well as processing and safeguarding personal data.
