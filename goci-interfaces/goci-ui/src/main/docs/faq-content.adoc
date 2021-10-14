@@ -265,7 +265,7 @@ Each association in the Catalog comes from a unique analysis. However, certain c
 
 ==== [[faq-A20]]20. Are results from sequencing-based association analyses included in the GWAS Catalog?
 
-We welcome user submissions of summary statistics for sequencing-based association analyses, so some sequencing-based associations will appear in the Catalog. However, our full manual curation process is only routinely applied to array-based association analyses at the current time. We are investigating expanding the scope to include more sequencing-based association studies.  You can read the results of our review of the sequencing-based association literature, see our list of studies and curated metadata, and give us your input on https://www.ebi.ac.uk/gwas/docs/pilots[our pilots page].
+We welcome user submissions of summary statistics for sequencing-based association analyses, so some sequencing-based associations will appear in the Catalog. However, our full manual curation process is only routinely applied to array-based association analyses at the current time. We are investigating expanding the scope to include more sequencing-based association studies.  You can read the results of our review of the sequencing-based association literature in https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00005-7[McMahon et al, Sequencing-based genome-wide association studies reporting standards, Cell Genomics (2021)], and see our list of studies and curated metadata or give us your input on https://www.ebi.ac.uk/gwas/docs/pilots[our pilots page].
 
 ==== [[faq-A21]]21. How does the GWAS Catalog represent extremely small p-values?
 
