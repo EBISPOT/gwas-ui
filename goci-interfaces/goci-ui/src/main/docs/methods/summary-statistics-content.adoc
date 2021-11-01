@@ -111,7 +111,7 @@ Formatted data is accessible on the GWAS Catalog dedicated summary statistics li
 
 == Harmonised summary statistics data
 
-Formatted files are harmonised using an automated link:https://github.com/EBISPOT/sum-stats-formatter/tree/master/harmonisation[pipeline], which is detailed below. By 'harmonised' we mean that all genomic position data will be reported against the same and latest genome build. Missing chromosome, base pair location and variant ID data that can be inferred, will be. Furthermore, where possible, alleles are also orientated to the forward strand.
+Formatted files are harmonised using an automated link:https://github.com/EBISPOT/gwas-sumstats-harmoniser[pipeline], which is detailed below. By 'harmonised' we mean that all genomic position data will be reported against the same and latest genome build. Missing chromosome, base pair location and variant ID data that can be inferred, will be. Furthermore, where possible, alleles are also orientated to the forward strand.
 
 The harmonisation process is the following:
 
