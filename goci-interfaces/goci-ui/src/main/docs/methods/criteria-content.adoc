@@ -44,7 +44,7 @@ We are working on expanding the scope of the GWAS Catalog to include studies usi
 
 Publications containing targeted array studies are indicated in the search results using  a small “target” icon. This icon also appears in the "Studies" table on specific pages, next to the study accession number.
 
-We welcome submissions of summary statistics for targeted and exome array studies with >100,000 variants.
+We welcome https://www.ebi.ac.uk/gwas/docs/submission[submissions of summary statistics] for targeted and exome array studies with >100,000 variants.
 
 == Pilot projects
 
