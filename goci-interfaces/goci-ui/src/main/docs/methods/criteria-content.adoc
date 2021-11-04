@@ -2,21 +2,27 @@
 
 == Genome-wide association studies
 
-Studies and associations are eligible for inclusion in the GWAS Catalog if they meet the following criteria:
+Studies are eligible for inclusion in the GWAS Catalog if they meet the following criteria:
 
 * Include a primary GWAS analysis, defined as array-based genotyping and analysis of 100,000+ pre-QC SNPs selected to tag variation across the genome and without regard to gene content.
 * GWAS data from published studies which are incorporated into new GWAS analyses are eligible, provided they meet the other criteria.
 * Studies imputing sequencing data to genotyping arrays are eligible as long as the arrays include sufficient genome-wide coverage so that the post-imputation analysis meets the definition of a GWAS analysis, as described above.
 
-Studies and associations are excluded if:
+Studies are excluded if:
 
 * The study was published in a language other than English.
 * SNPs assayed or analysed were limited to those in candidate genes.
 * The study uses customized gene-based arrays without a clearly described GWAS backbone, including those selected to replicate published GWAS findings (e.g., Metabochip, Immunochip, etc.).
 * Samples were assayed to measure somatic variation (e.g., in tumor samples).
-* The study does not include any new GWAS data. Studies with available summary statistics, however, are an exception to this role and automatically fulfil our eligibility criteria. 
+* The study does not include any new GWAS data. Studies with available summary statistics, however, are an exception to this rule and automatically fulfil our eligibility criteria. 
 
-Individual SNP-trait associations identified in eligible studies are included in the Catalog if they meet the following criteria:
+=== Summary statistics
+
+Full summary statistics may be submitted directly by authors (see https://www.ebi.ac.uk/gwas/docs/submission[submission instructions]) or obtained by our curators from external sources. See eligibility criteria for https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[summary statistics here].
+
+=== Top associations
+
+We also report individual SNP-trait associations identified in eligible studies if they meet the following criteria:
 
 * Statistical significance (SNP-trait p-value <1.0 x 10^-5^) in the overall (initial GWAS + replication) population.
 * If a study does not report a combined p-value, the p-value and effect size from the largest sample size will be reported as long as the initial and replication samples each show an association of p < 1.0 x 10^-5^.
@@ -24,14 +30,22 @@ Individual SNP-trait associations identified in eligible studies are included in
 * SNP-trait associations that are described as previously known at the time of publication and are statistically significant in the GWAS sample, but are not attempted for replication, are reported.
 * The most significant SNP from each independent locus is extracted.
 
+== Sequencing-based association studies
+
+The GWAS Catalog now includes sequencing-based association studies. You can read the results of our https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00005-7[review of the sequencing-based association literature here]. 
+
+We welcome https://www.ebi.ac.uk/gwas/docs/submission[submissions of summary statistics] for sequencing-based association studies, although we are not routinely curating full metadata and top associations as yet.
+
+From 2022, sequencing-based association studies will be fully integrated into the Catalog.
+
 == Targeted and Exome array studies
 
-* We are working on expanding the scope of the GWAS Catalog to include studies using large-scale targeted/non-genome-wide arrays, including the Metabochip, Immunochip and Exome arrays. This is currently in a pilot phase where prioritisation of targeted and exome array studies for inclusion in the Catalog is by 1) relevance of the trait analysed 2) user request.
-* Publications containing targeted array studies are indicated in the search results using  a small “target” icon. This icon also appears in the "Studies" table on specific pages, next to the study accession number.
-* We welcome submissions of summary statistics for targeted and exome array studies with >100,000 variants.
+We are working on expanding the scope of the GWAS Catalog to include studies using large-scale targeted/non-genome-wide arrays, including the Metabochip, Immunochip and Exome arrays. This is currently in a pilot phase where prioritisation of targeted and exome array studies for inclusion in the Catalog is by 1) relevance of the trait analysed 2) user request.
 
-== Extending Catalog scope to include sequencing-based association studies
-* We are investigating expanding the scope of the GWAS Catalog to include sequencing-based association studies. You can read the results of our review of the sequencing-based association literature, see our list of studies and curated metadata, and give us your input on https://www.ebi.ac.uk/gwas/docs/pilots[our pilots projects page].
-* We welcome submissions of summary statistics for sequencing-based association studies, although we are not routinely curating full metadata and top associations as yet.
+Publications containing targeted array studies are indicated in the search results using  a small “target” icon. This icon also appears in the "Studies" table on specific pages, next to the study accession number.
 
-Previous pilots are also described on our http://www.ebi.ac.uk/gwas/docs/pilots[pilot projects page]. For a full list of publications by the GWAS Catalog team, and other useful background reading, please visit our http://www.ebi.ac.uk/gwas/docs/related-resources[Related Resources page]
+We welcome submissions of summary statistics for targeted and exome array studies with >100,000 variants.
+
+== Pilot projects
+
+Our inclusion criteria are under regular review and pilots are conducted to investigate extensions to the Catalog's scope. Previous pilots are described on our http://www.ebi.ac.uk/gwas/docs/pilots[pilot projects page]. For a full list of publications by the GWAS Catalog team, and other useful background reading, please visit our http://www.ebi.ac.uk/gwas/docs/related-resources[Related Resources page]
