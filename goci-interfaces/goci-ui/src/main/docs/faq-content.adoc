@@ -251,7 +251,7 @@ We are working on expanding the scope of the GWAS Catalog to include large-scale
 
 ==== [[faq-A17]]17. Does the GWAS Catalog include CNV studies?
 
-Studies looking at copy number variations (CNV) are not part of the remit of the GWAS Catalog. Historically, a couple of CNV studies had been included in the Catalog but these have now been removed. As the Catalog no longer contains any CNV studies, the decision was made to also eliminate the CNV flag from the search results for studies. The corresponding column is still available in the downloadable full Catalog spreadsheet to preserve backwards compatibility with previous spreadsheet versions.
+CNV studies are not currently within the scope of the GWAS Catalog for literature identification and curation of associations. However, we can accept submissions of summary statistics from CNV studies and will make files and metadata available for these studies.
 
 ==== [[faq-A18]]18. How can I separate OR from beta in the associations download?
 
