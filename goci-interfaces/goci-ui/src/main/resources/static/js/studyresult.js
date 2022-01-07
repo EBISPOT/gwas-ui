@@ -450,13 +450,3 @@ function setAncentrySection(study) {
     }
 }
 
-// GOCI-197 FTP Link Restructuring
-
-function getDirectoryBin(gcstId){
-    const gcst = gcstId.substring(gcstId.indexOf("GCST")+4);
-    const lowerRange = (Math.floor((parseInt(gcst)-1)/1000))*1000+1;
-    const upperRange = ((Math.floor((parseInt(gcst)-1)/1000))+1)*1000;
-    const range = 'GCST'+lowerRange.toString().padStart(6, '0')+'-GCST'+upperRange.toString().padStart(6, '0');
-    return range
-}
-
