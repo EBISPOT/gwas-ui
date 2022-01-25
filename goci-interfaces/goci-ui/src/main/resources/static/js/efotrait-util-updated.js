@@ -41,7 +41,13 @@ var pageRowLimit=5;
  */
 $('#ols-link').click(() => {
     // Single encode EFO term URI for use with OLS Web site
-    let efoTermUri = 'http://www.ebi.ac.uk/efo/';
+    let efoTermUri;
+    if (getMainEFO().startsWith('MONDO')) {
+        efoTermUri = 'http://purl.obolibrary.org/obo/'
+    }
+    else {
+        efoTermUri = 'http://www.ebi.ac.uk/efo/';
+    }
     let olsWebEfoTermUri = encodeURIComponent(efoTermUri);
     window.open(`${global_ols_efo_term}${olsWebEfoTermUri}`+ getMainEFO(), '_blank');
 });
@@ -566,7 +572,13 @@ processSolrSlimData = function(data) {
  */
 getEFOAttributesFromOLS = function(efoId) {
     // Double encode EFO term URI for use with OLS API
-    let efoTermUri = 'http://www.ebi.ac.uk/efo/';
+    let efoTermUri;
+    if (efoId.startsWith('MONDO')) {
+        efoTermUri = 'http://purl.obolibrary.org/obo/'
+    }
+    else {
+        efoTermUri = 'http://www.ebi.ac.uk/efo/';
+    }
     let olsEfoTermUri = encodeURIComponent(encodeURIComponent(efoTermUri))
 
     var url = `${global_ols_api_efo_terms}${olsEfoTermUri}${efoId}`;
