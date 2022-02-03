@@ -83,7 +83,7 @@ public class SolrSearchController {
 
     // Use queryFilter to return match to term synonym higher in the result list
     private void addQueryFilter(StringBuilder solrSearchBuilder) {
-        solrSearchBuilder.append("&defType=dismax&qf=title%5E2.0+synonyms%5E20.0+parent%5E2.0+text%5E1.0");
+        solrSearchBuilder.append("&defType=edismax&qf=title%5E2.0+synonyms%5E20.0+parent%5E2.0+text%5E1.0");
     }
 
 
