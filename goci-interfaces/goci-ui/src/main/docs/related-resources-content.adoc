@@ -8,13 +8,13 @@ Check out link:http://www.ebi.ac.uk/training/online/course/gwas-catalog-explorin
 
 Or watch our latest training webinars:
 
-https://www.ebi.ac.uk/training/events/exploring-genotype-phenotype-data-using-gwas-catalog/[Exploring genotype-phenotype data using the GWAS Catalog] (2022) for an introduction to the GWAS Catalog and a demonstration of our web-based search interface.
+* https://www.ebi.ac.uk/training/events/exploring-genotype-phenotype-data-using-gwas-catalog/[Exploring genotype-phenotype data using the GWAS Catalog] (2022) for an introduction to the GWAS Catalog and a demonstration of our web-based search interface.
 
-https://www.ebi.ac.uk/training/events/submitting-your-genome-wide-association-study-data-gwas-catalog/[Submitting your genome wide association study data to the GWAS Catalog] (2021) for a detailed walkthrough of our summary statistics submission system.
+* https://www.ebi.ac.uk/training/events/submitting-your-genome-wide-association-study-data-gwas-catalog/[Submitting your genome wide association study data to the GWAS Catalog] (2021) for a detailed walkthrough of our summary statistics submission system.
 
 Earlier webinars are also available:
 
-https://www.ebi.ac.uk/training/events/investigating-genotype-phenotype-data-using-gwas-catalog/[Investigating genotype/phenotype data using the GWAS Catalog] (2020).
+* https://www.ebi.ac.uk/training/events/investigating-genotype-phenotype-data-using-gwas-catalog/[Investigating genotype/phenotype data using the GWAS Catalog] (2020).
 
 ==== Workshop materials
 
@@ -22,12 +22,16 @@ Training materials from workshops held by the GWAS Catalog team are available on
 
 ==== Blog posts
 
-http://blog.opentargets.org/2021/03/11/open-sharing-of-cancer-summary-statistics/[Sharing is caring: why we need more freely available cancer GWAS summary statistics]: a blog post calling for more freely available cancer GWAS summary statistics.
+https://ebispot.github.io/gwas-blog/background-trait-update[Trait annotation in the GWAS Catalog] (2021): a discussion of how traits are annotated in the GWAS Catalog, focussing on improved background trait annotation.
 
-10th Anniversary (2018) http://www.ensembl.info/2018/06/28/ten-years-of-the-gwas-catalog-past-present-and-future/[blog post] highlighting the links between the GWAS Catalog and Ensembl.
+http://blog.opentargets.org/2021/03/11/open-sharing-of-cancer-summary-statistics/[Sharing is caring: why we need more freely available cancer GWAS summary statistics] (2021): a blog post calling for more freely available cancer GWAS summary statistics.
 
-http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new-gwas-catalog/[Everything you need to know about the new GWAS Catalog]: a blog post describing the collaboration between the GWAS Catalog and Open Targets.
- 
+http://www.ensembl.info/2018/06/28/ten-years-of-the-gwas-catalog-past-present-and-future/[Ten years of the GWAS Catalog – Past, present and future](2018): 10th Anniversary blog post highlighting the links between the GWAS Catalog and Ensembl.
+
+http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new-gwas-catalog/[Everything you need to know about the new GWAS Catalog] (2018): a blog post describing the collaboration between the GWAS Catalog and Open Targets.
+
+Or see the https://ebispot.github.io/gwas-blog/[full index].
+
 === Publications
 
 ==== GWAS Catalog publications
