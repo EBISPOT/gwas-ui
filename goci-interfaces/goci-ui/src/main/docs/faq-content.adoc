@@ -269,8 +269,7 @@ We welcome user submissions of summary statistics for sequencing-based associati
 
 ==== [[faq-A21]]21. How does the GWAS Catalog represent extremely small p-values?
 
-Some publications may report a GWAS association p-value of 0+E00 due to the limits of methods or analysis software to compute very small numbers (p<1x10-300). Where authors are unable to provide the precise p-value we will extract 1e-300 as the maximum p-value. However it should be noted that the true p-value may be much smaller. 
-
+Some publications may report a GWAS association p-value of 0 due to the limits of methods or analysis software to compute very small numbers. Where authors are unable to provide the precise p-value we will extract the maximum threshold provided to us, e.g. <1e-300 will be extracted as 1e-300. However it should be noted that the true p-value may be much smaller.
 
 ==== [[faq-A22]]22. Does the GWAS Catalog include data that isn't associated with a PubMed-indexed journal publication?
 
