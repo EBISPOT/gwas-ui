@@ -134,7 +134,7 @@ For more information on how we use these resources, see our link:https://www.ebi
 [cols="1,2"]
 |===
 
-|https://www.ensembl.org/info/docs/tools/vep/index.html[Variant Effect Predictor] (VEP)
+|https://www.ensembl.org/info/docs/tools/vep/index.html[Variant Effect Predictor (VEP)]
 |Determines the effect of variants (SNPs, insertions, deletions, CNVs or structural variants) on genes, transcripts, and protein sequence, as well as regulatory regions
 
 |http://www.phenoscanner.medschl.cam.ac.uk/phenoscanner[Phenoscanner]
@@ -154,6 +154,9 @@ For more information on how we use these resources, see our link:https://www.ebi
 
 |http://targetvalidation.org[Open Targets Platform]
 |Platform for the identification of drug targets using multiple data types including GWAS
+
+|https://unmtid-shinyapps.net/shiny/tiga/[Target Illumination GWAS Analytics (TIGA)]
+|Resource for drug target illumination by scoring and ranking protein-coding genes associated with traits from genome-wide association studies (GWAS)
 
 |link:http://locuszoom.org/[LocusZoom]
 |A suite of software for creating regional association plots from GWAS data
