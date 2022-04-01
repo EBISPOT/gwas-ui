@@ -156,7 +156,7 @@ For more information on how we use these resources, see our link:https://www.ebi
 |Platform for the identification of drug targets using multiple data types including GWAS
 
 |https://unmtid-shinyapps.net/shiny/tiga/[Target Illumination GWAS Analytics (TIGA)]
-|Resource for drug target illumination by scoring and ranking protein-coding genes associated with traits from genome-wide association studies (GWAS)
+|Resource for drug target illumination by scoring and ranking protein-coding genes associated with traits from GWAS
 
 |link:http://locuszoom.org/[LocusZoom]
 |A suite of software for creating regional association plots from GWAS data
