@@ -43,6 +43,9 @@
         if (host === "wwwdev.ebi.ac.uk") {
             gwasProperties.GWAS_REST_API = "https://wwwdev.ebi.ac.uk/gwas/rest/api";
         }
+        else if (host !== "www.ebi.ac.uk") {
+            gwasProperties.GWAS_REST_API = "http://" + host + "/gwas/rest/api";
+        }
         //console.log(gwasProperties);
         /*
                 function imageExists(url, callback) {
