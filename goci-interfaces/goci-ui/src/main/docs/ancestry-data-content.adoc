@@ -4,7 +4,9 @@
 
 == Ancestry category distribution in the GWAS Catalog.
 
-Here we present an analysis of the ancestry data contained in the GWAS Catalog for studies published from 2005 - Dec 2016.
+The https://gwasdiversitymonitor.com[GWAS Diversity Monitor] maintains an up-to-date interactive dashboard monitoring the diversity of participants across all published GWAS, based on data from the GWAS Catalog.
+
+Here we present an earlier analysis of the ancestry data contained in the GWAS Catalog for studies published from 2005 - Dec 2016.
 
 image::ancestry-data.png[Ancestry data,1000,1000,align="center"]
 

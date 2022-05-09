@@ -5,7 +5,9 @@
 
 == How to submit summary statistics
 
-The GWAS Catalog accepts summary statistics for both published and unpublished human genome-wide association studies. To submit summary statistics to the Catalog, please follow the steps below:
+The GWAS Catalog accepts summary statistics for both published and unpublished human genome-wide association studies. To submit summary statistics to the Catalog, please follow the steps below.
+
+You may also like to watch our webinar, https://www.ebi.ac.uk/training/events/submitting-your-genome-wide-association-study-data-gwas-catalog/[_Submitting your genome wide association study data to the GWAS Catalog_], which walks through the main steps for submission.
 
 <<A, A. Preparing for submission>>
 

@@ -6,24 +6,32 @@
 
 Check out link:http://www.ebi.ac.uk/training/online/course/gwas-catalog-exploring-snp-trait-associations[GWAS Catalog - Exploring SNP-trait associations] for an easily accessible interactive tutorial on the full range of features the GWAS Catalog has to offer.
 
-Watch our recorded webinar https://www.ebi.ac.uk/training/events/submitting-your-genome-wide-association-study-data-gwas-catalog/[Submitting your genome wide association study data to the GWAS Catalog] (2021) for a detailed walkthrough of our summary statistics submission system.
+Or watch our latest training webinars:
+
+* https://www.ebi.ac.uk/training/events/exploring-genotype-phenotype-data-using-gwas-catalog/[Exploring genotype-phenotype data using the GWAS Catalog] (2022) for an introduction to the GWAS Catalog and a demonstration of our web-based search interface.
+
+* https://www.ebi.ac.uk/training/events/submitting-your-genome-wide-association-study-data-gwas-catalog/[Submitting your genome wide association study data to the GWAS Catalog] (2021) for a detailed walkthrough of our summary statistics submission system.
+
+Earlier webinars are also available:
+
+* https://www.ebi.ac.uk/training/events/investigating-genotype-phenotype-data-using-gwas-catalog/[Investigating genotype/phenotype data using the GWAS Catalog] (2020).
 
 ==== Workshop materials
 
 Training materials from workshops held by the GWAS Catalog team are available on link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/training_materials/[our FTP server]. If you would like to make use of these slides, please cite the GWAS Catalog as detailed on the link:about[About] page.
 
-==== GWAS webinars & blog posts
+==== Blog posts
 
-https://www.ebi.ac.uk/training/events/submitting-your-genome-wide-association-study-data-gwas-catalog/[Submitting your genome wide association study data to the GWAS Catalog]: a webinar providing a step-by-step guide to the summary statistics submission process to the GWAS Catalog.
+https://ebispot.github.io/gwas-blog/background-trait-update[Trait annotation in the GWAS Catalog] (2021): a discussion of how traits are annotated in the GWAS Catalog, focussing on improved background trait annotation.
 
-http://blog.opentargets.org/2021/03/11/open-sharing-of-cancer-summary-statistics/[Sharing is caring: why we need more freely available cancer GWAS summary statistics]: a blog post calling for more freely available cancer GWAS summary statistics.
+http://blog.opentargets.org/2021/03/11/open-sharing-of-cancer-summary-statistics/[Sharing is caring: why we need more freely available cancer GWAS summary statistics] (2021): a blog post calling for more freely available cancer GWAS summary statistics.
 
-https://www.ebi.ac.uk/training/events/investigating-genotype-phenotype-data-using-gwas-catalog/[Investigating genotype/phenotype data using the GWAS Catalog]: a webinar providing an overwiew on how to access the GWAS Catalog data.
+http://www.ensembl.info/2018/06/28/ten-years-of-the-gwas-catalog-past-present-and-future/[Ten years of the GWAS Catalog – Past, present and future](2018): 10th Anniversary blog post highlighting the links between the GWAS Catalog and Ensembl.
 
-10th Anniversary (2018) http://www.ensembl.info/2018/06/28/ten-years-of-the-gwas-catalog-past-present-and-future/[blog post] highlighting the links between the GWAS Catalog and Ensembl.
+http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new-gwas-catalog/[Everything you need to know about the new GWAS Catalog] (2018): a blog post describing the collaboration between the GWAS Catalog and Open Targets.
 
-http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new-gwas-catalog/[Everything you need to know about the new GWAS Catalog]: a blog post describing the collaboration between the GWAS Catalog and Open Targets.
- 
+Or see the https://ebispot.github.io/gwas-blog/[full index].
+
 === Publications
 
 ==== GWAS Catalog publications
@@ -126,7 +134,7 @@ For more information on how we use these resources, see our link:https://www.ebi
 [cols="1,2"]
 |===
 
-|https://www.ensembl.org/info/docs/tools/vep/index.html[Variant Effect Predictor] (VEP)
+|https://www.ensembl.org/info/docs/tools/vep/index.html[Variant Effect Predictor (VEP)]
 |Determines the effect of variants (SNPs, insertions, deletions, CNVs or structural variants) on genes, transcripts, and protein sequence, as well as regulatory regions
 
 |http://www.phenoscanner.medschl.cam.ac.uk/phenoscanner[Phenoscanner]
@@ -146,6 +154,9 @@ For more information on how we use these resources, see our link:https://www.ebi
 
 |http://targetvalidation.org[Open Targets Platform]
 |Platform for the identification of drug targets using multiple data types including GWAS
+
+|https://unmtid-shinyapps.net/shiny/tiga/[Target Illumination GWAS Analytics (TIGA)]
+|Resource for drug target illumination by scoring and ranking protein-coding genes associated with traits from GWAS
 
 |link:http://locuszoom.org/[LocusZoom]
 |A suite of software for creating regional association plots from GWAS data
