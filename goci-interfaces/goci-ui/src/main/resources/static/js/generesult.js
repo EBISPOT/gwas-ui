@@ -201,7 +201,7 @@ function getEnsemblREST( URL ) {
 }
 
 function getImpcDetails(gene) {
-    var geneUrl = gwasProperties.IMPC_ID_URI +gene +'/impclink';
+    var geneUrl = gwasProperties.IMPC_ID_URI +gene;
     $.ajax({
         url: geneUrl,
         type: 'get',

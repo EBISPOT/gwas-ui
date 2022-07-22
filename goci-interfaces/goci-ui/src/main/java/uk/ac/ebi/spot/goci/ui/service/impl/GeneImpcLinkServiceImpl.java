@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ import uk.ac.ebi.spot.goci.ui.service.GeneImpcLinkService;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
 @Service
@@ -38,7 +37,7 @@ public class GeneImpcLinkServiceImpl implements GeneImpcLinkService {
      */
     public void populateGeneImpcMap() {
         RequestCallback callback = clientHttpRequest -> clientHttpRequest.getHeaders()
-                .setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
+                .setAccept(Collections.singletonList(MediaType.APPLICATION_OCTET_STREAM));
 
            File file = restTemplate.execute(endpoint, HttpMethod.GET, callback, clientHttpResponse -> {
                 File ret = File.createTempFile("download", "tmp");

@@ -12,7 +12,7 @@ import uk.ac.ebi.spot.goci.ui.service.GeneImpcLinkService;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = SearchUIConstants.API_V1 + SearchUIConstants.GENE_URI)
+@RequestMapping(value = SearchUIConstants.API_V1 + SearchUIConstants.GENE_MOUSE_ORTHOLOG_URI)
 public class GeneImpcLinkController {
     private static final Logger log = LoggerFactory.getLogger(GeneImpcLinkController.class);
 
@@ -22,13 +22,25 @@ public class GeneImpcLinkController {
     @Autowired
     GeneImpcLinkService geneImpcLinkService;
 
+
+    /** API to do on demand load of Mouse Ortholog & Gene Map
+     *
+     */
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @GetMapping
+    public void uploadImpcLinkMap(@RequestParam( value = SearchUIConstants.PARAM_OPERATION,
+                                  required = true) String operation){
+        if(operation.equals(SearchUIConstants.PURGE))
+            geneImpcLinkService.populateGeneImpcMap();
+    }
+
     /** API called UI to retreive Mouse Ortholog mapping for Gene
      *
      * @param geneId
      * @return
      */
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "{geneId}/impclink")
+    @GetMapping(value = "/{geneId}")
     public String retreiveImpcLink(@PathVariable String geneId ) {
         String impcId;
         if (impcIdentifierMap.getImpcGeneMap() != null){
@@ -42,14 +54,7 @@ public class GeneImpcLinkController {
         return impcId;
     }
 
-    /** API to do on demand load of Mouse Ortholog & Gene Map
-     *
-     */
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @GetMapping(value = "/impclinks")
-    public void uploadImpcLinkMap(){
-        geneImpcLinkService.populateGeneImpcMap();
-    }
+
 
 
 }

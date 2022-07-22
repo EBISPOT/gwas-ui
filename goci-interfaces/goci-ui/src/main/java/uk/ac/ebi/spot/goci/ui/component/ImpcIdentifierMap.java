@@ -20,9 +20,7 @@ public class ImpcIdentifierMap {
     /** Populate a Singleton Hash Map with  gene as key &
      * MGIdentifier as Value
      *
-     * @param file
-     * @return Hash Map
-     */
+     * */
     public Map<String, String> createImpcGeneMap(File file) {
         Map<String, String> geneMap = null;
         try {
