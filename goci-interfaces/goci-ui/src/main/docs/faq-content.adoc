@@ -48,6 +48,9 @@
 
 22. <<faq-A22, Does the GWAS Catalog include data that isn't associated with a journal publication?>>
 
+23. <<faq-A23, How can I find the mouse orthologs in IMPC for the genes in the GWAS Catalog?>>
+
+
 === B. Searching the GWAS Catalog
 
 1. <<faq-B1, How do I search the GWAS Catalog?>>
@@ -275,6 +278,8 @@ Some publications may report a GWAS association p-value of 0 due to the limits o
 
 From 2020, the GWAS Catalog started accepting submissions for unpublished GWAS (including pre-published GWAS i.e. data associated with a pre-print or article in press). Unpublished GWAS metadata is available via the study pages for each accession number and in more detail in the unpublished  https://www.ebi.ac.uk/gwas/downloads[download files]. Unpublished summary statistics are available via our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] and https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page] page as well as via the study pages. Unpublished data is made available exactly as submitted by authors and has not been reviewed by our curators. Upon publication it is curated, annotated, extended to include top associations and incorporated into our main database. 
 
+==== [[faq-A23]]23. How can I find the mouse orthologs in IMPC for the genes in the GWAS Catalog?
+Each GWAS Catalog gene with a mouse ortholog in https://www.mousephenotype.org/[IMPC] is linked via a button on the gene page. Orthology predictions are provided by IMPC’s reference database which is rebuilt every week to include the latest HCOP ortholog relationships and data from MGI. For more information on ortholog mapping, refer to IMPC's https://www.mousephenotype.org/help/data-integration/how-to-use-the-essential-genes-data-portal/0[documentation] and https://www.nature.com/articles/s41467-020-14284-2[publication]. Where no ortholog has been established, the button is not displayed.
 
 == [[B]]B. Searching the GWAS Catalog
 
