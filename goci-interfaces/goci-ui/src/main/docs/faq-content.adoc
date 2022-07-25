@@ -48,7 +48,7 @@
 
 22. <<faq-A22, Does the GWAS Catalog include data that isn't associated with a journal publication?>>
 
-23. <<faq-A23, How can I find the mouse orthologs in IMPC for the genes in the GWAS Catalog?>>
+23. <<faq-A23, How can I find mouse orthologs for the genes in the GWAS Catalog?>>
 
 
 === B. Searching the GWAS Catalog
