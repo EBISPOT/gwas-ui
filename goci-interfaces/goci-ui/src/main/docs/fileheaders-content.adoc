@@ -77,7 +77,7 @@ MERGED^*^: denotes whether the SNP has been merged into a subsequent rs record (
 
 SNP_ID_CURRENT^*^: current rs number (will differ from strongest SNP when merged = 1)
 
-CONTEXT^*^: SNP functional class
+CONTEXT^*^: provides information on a variant's predicted most severe functional effect from Ensembl
 
 INTERGENIC^*^: denotes whether SNP is in intergenic region (0 = no; 1 = yes)
 
