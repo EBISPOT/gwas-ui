@@ -200,6 +200,26 @@ function getEnsemblREST( URL ) {
     return result;
 }
 
+function getImpcDetails(gene) {
+    var geneUrl = gwasProperties.IMPC_ID_URI +gene;
+    $.ajax({
+        url: geneUrl,
+        type: 'get',
+        dataType: 'text',
+        async: false,
+        success: function(data) {
+            result = data;
+        },
+        error: function(request){
+            console.log("[Error] Retrieving data from Impc Url failed. URL: " + geneUrl);
+            console.log(request.responseText)
+            result = [];
+        }
+    });
+    return result;
+
+}
+
 /**
  * This function fills up the gene table.
  * Input:
@@ -221,7 +241,8 @@ function generateGeneInformationTable(slimData, studies) {
     var descriptionFields = slimData.description.split("|");
     $("#description").html(descriptionFields[0])
     $("#location").html(descriptionFields[1]);
-
+    // Hide the Button while loading
+    $("#impc_button").hide();
     // Adding cytogenic region:
     var regionLink = $("<a></a>").attr("href", gwasProperties.contextPath + 'regions/' + descriptionFields[2]).append(descriptionFields[2]);
     $("#cytogenicRegion").html(regionLink);
@@ -241,6 +262,8 @@ function generateGeneInformationTable(slimData, studies) {
     var xrefData = getEnsemblREST(xrefQueryURL);
     var entrezID = "NA";
     var OMIMID = "NA";
+    var impcId = getImpcDetails(slimData.title);
+    //console.log('impcId->'+impcId);
 
     for ( xref of xrefData ){
         if ( xref.dbname == "EntrezGene" ){
@@ -268,6 +291,12 @@ function generateGeneInformationTable(slimData, studies) {
     // Looping through the cross references and extract OMIM id:
     if ( OMIMID != "NA" ){
         $("#OMIM_button").attr('onclick', "window.open('"+gwasProperties.OMIMURL+ OMIMID + "',    '_blank')");
+    }
+
+    // Show button if MGIdentifier exists
+    if (impcId != "NA" ) {
+        $("#impc_button").show();
+        $("#impc_button").attr('onclick', "window.open('"+gwasProperties.IMPC_URI+ impcId + "',    '_blank')");
     }
 
     // OK, loading is complete:
