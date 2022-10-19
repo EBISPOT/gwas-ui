@@ -151,7 +151,11 @@ function solrSearch(queryTerm) {
 
         // Search using title field also in query
         var boost_field = ' OR title:"'.concat(queryTerm).concat('"')+' OR synonyms:"'.concat(queryTerm).concat('"');
-        var searchPhrase = searchTerm.concat(boost_field);
+        var searchPhrase = '('.concat(searchTerm).concat(boost_field).concat(')');
+
+        if (!queryTerm.toLowerCase().startsWith('gcst')) {
+            searchPhrase = searchPhrase.concat(' AND -resourcename:study')
+        }
 
         $.getJSON('api/search', {'q': searchPhrase, 'generalTextQuery': true})
             .done(function(data) {
