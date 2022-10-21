@@ -1,5 +1,7 @@
 package uk.ac.ebi.spot.goci.ui.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
@@ -16,10 +18,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import uk.ac.ebi.spot.goci.model.solr.Doc;
+import uk.ac.ebi.spot.goci.model.solr.ResponseHeader;
+import uk.ac.ebi.spot.goci.model.solr.SolrData;
+import uk.ac.ebi.spot.goci.model.solr.SumStatDownloadDto;
+import uk.ac.ebi.spot.goci.services.SolrService;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.exception.IllegalParameterCombinationException;
 import uk.ac.ebi.spot.goci.ui.service.JsonProcessingService;
 import uk.ac.ebi.spot.goci.ui.service.JsonStreamingProcessorService;
+import uk.ac.ebi.spot.goci.util.FileHandler;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -416,6 +424,34 @@ public class SolrSearchController {
         dispatchSearch(solrSearchBuilder.toString(), response.getOutputStream());
     }
 
+
+    @Autowired private SolrService solrService;
+
+    @GetMapping(value = "api/search/summaryStatistics/download", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Object downloadFullPvalueSetSolrSearch(HttpServletResponse response) throws IOException {
+
+        int maxResults = 50000;
+        int page = 1;
+        String query = "fullPvalueSet:true";
+        String fieldList = "accessionId,author_s,authorAscii_s,pubmedId,title,publication,publicationDate,mappedLabel,mappedUri,traitName_s,associationCount,agreedToCc0";
+
+        StringBuilder solrSearchBuilder = buildFatSearchRequest();
+        addRowsAndPage(solrSearchBuilder, maxResults, page);
+        addFilterQuery(solrSearchBuilder, searchConfiguration.getDefaultFacet(), "study");
+        solrSearchBuilder.append("&fl=").append(fieldList);
+        addQuery(solrSearchBuilder, query);
+        String content = solrService.dispatchSearch(solrSearchBuilder.toString());
+
+        List<SumStatDownloadDto> sumStatDownloadDtos = solrService.assembleSumStatDownloadDto(content);
+        String result = FileHandler.serializePojoToTsv(sumStatDownloadDtos);
+
+        response.setContentType("text/csv;charset=utf-8");
+        response.setHeader("Content-Disposition", "attachment; filename=list_gwas_summary_statistics.tsv");
+        response.getOutputStream().flush();
+        return result;
+    }
+
     @RequestMapping(value = "api/search/summaryStatistics", produces = MediaType.APPLICATION_JSON_VALUE)
     public void doFullPvalueSetSolrSearch(
             @RequestParam("q") String query,
@@ -426,8 +462,10 @@ public class SolrSearchController {
             @RequestParam(value = "sort", required = false) String sort,
             @RequestParam(value = "fl", required = false) String fieldList,
             HttpServletResponse response) throws IOException {
-        StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
+        StringBuilder solrSearchBuilder = buildFatSearchRequest();
+        //TODO: Temporarily set 3000 as ut off until scalability problem is fixed https://bit.ly/3TnkjH7, https://bit.ly/3EYGjnm
+        maxResults = 3000;
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
         }
@@ -889,11 +927,9 @@ public class SolrSearchController {
         }
     }
 
-
-
     private void dispatchSearch(String searchString, OutputStream out) throws IOException {
         getLog().trace(searchString);
-        System.out.println(searchString);
+        System.out.println("Search String: "+searchString);
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(searchString);
         if (System.getProperty("http.proxyHost") != null) {
