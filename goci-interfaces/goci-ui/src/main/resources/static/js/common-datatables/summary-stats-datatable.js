@@ -295,7 +295,7 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
         let textDesc = `Warning: only the first 5000 could be displayed, out of ${data.response.numFound} rows, please `;
         let linkTextDesc = " click the link here ";
         let trailingTextDesc = " to download the full data set.";
-        let downloadLink = "/api/search/summaryStatistics/download"
+        let downloadLink = `${gwasProperties.contextPath}/api/search/summaryStatistics/download`
         let notify = bootstrapNotify(textDesc, linkTextDesc, trailingTextDesc, downloadLink);
         $('#cut-off-notification').html(notify);
     }
