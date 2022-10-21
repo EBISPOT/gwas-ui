@@ -180,4 +180,23 @@ function getDirectoryBin(gcstId){
     return range
 }
 
+function bootstrapNotify() {
+    let div = document.createElement("div");
+    div.setAttribute("className", "alert alert-warning");
+    div.setAttribute("role", "alert");
+
+    let startText = document.createTextNode("Warning: only the first 3000 rows could be displayed, please");
+    let link = document.createElement("a");
+    link.setAttribute("className", "alert-link");
+    let linkText = document.createTextNode("click the download link here");
+    link.appendChild(linkText);
+
+    let trailingText = document.createTextNode("to download the full data set.");
+    div.appendChild(startText);
+    div.appendChild(link);
+    div.appendChild(trailingText);
+
+    return div;
+}
+
 
