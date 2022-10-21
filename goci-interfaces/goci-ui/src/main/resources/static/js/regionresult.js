@@ -169,7 +169,7 @@ function processSolrData(data, initLoad=false, searchTerm) {
         }
 
         var PAGE_TYPE = "region";
-        displayDatatableAssociations(data_association.docs);
+        displayDatatableAssociations(data_association);
 
         // when chr:pos is queried, there's no returned study. We have to specifically fetch those.
         if ( data_study.docs.length == 0 ){

@@ -82,7 +82,7 @@ function getDataSolr(main, initLoad = false) {
         } else {
             processSolrData(data, initLoad);
             setDownloadLink("accessionId:" + searchQuery);
-            displayDatatableAssociations(data_association.docs, cleanBeforeInsert = false);
+            displayDatatableAssociations(data_association, cleanBeforeInsert = false);
             displaySummaryStudy(data_study.docs);
             return data;
         }

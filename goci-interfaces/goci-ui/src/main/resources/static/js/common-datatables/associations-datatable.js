@@ -17,7 +17,12 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
     var asso_count = 0;
 
     if (data != undefined) {
-        asso_count = data.length
+        asso_count = data.numFound
+    }
+
+    if (parseInt(asso_count) > 5000){
+        let textDesc = `Warning: only the first 5000 could be displayed, out of ${asso_count} rows, please click the download catalog button to download the full data set`;
+        $('#cut-off-notification').html(gociBootstrapNotify(textDesc));
     }
 
     $(".association_count").html(asso_count);
@@ -32,7 +37,7 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
 
     var data_json = [];
     if (data != undefined) {
-        $.each(data, function (index, asso) {
+        $.each(data.docs, function (index, asso) {
 
             //if association does not have rsid, skip
             if (asso.strongestAllele == undefined) {
@@ -320,6 +325,16 @@ function displayDatatableAssociations(data, cleanBeforeInsert) {
     // Add custom tooltip text for button
     $('.keep-open').attr('title', 'Add/Remove Columns');
     hideLoadingOverLay('#association-table-loading')
+}
+
+function gociBootstrapNotify(textDesc) {
+
+    let div = document.createElement("div");
+    div.setAttribute("class", "alert alert-warning");
+    div.setAttribute("role", "alert");
+    let text = document.createTextNode(textDesc);
+    div.appendChild(text);
+    return div;
 }
 
 // This function returns matissa and exponent [mantissa, exponent]

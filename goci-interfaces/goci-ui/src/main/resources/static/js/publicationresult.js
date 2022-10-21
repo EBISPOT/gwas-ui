@@ -68,7 +68,7 @@ function getDataSolr(main, initLoad = false) {
         {
             'q': searchQuery,
             'max': 99999,
-            'group.limit': 3000,
+            'group.limit': 5000,
             'group.field': 'resourcename',
             'facet.field': 'resourcename',
             'hl.fl': 'shortForm,efoLink',
@@ -147,14 +147,14 @@ function processSolrData(data, initLoad = false) {
     remove.then(() => {
         //If no solr return,greate a fake empyt array so tables/plot are empty
         if (!isInCatalog) {
-            data_association.docs = []
+            data_association = []
             data_study.docs = []
         }
 
         var PAGE_TYPE = "publication";
 
         //update association/study table
-        displayDatatableAssociations(data_association.docs);
+        displayDatatableAssociations(data_association);
         displayDatatableStudies(data_study.docs, PAGE_TYPE);
         displaySummaryPublication(data_study.docs);
 

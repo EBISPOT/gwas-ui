@@ -464,8 +464,8 @@ public class SolrSearchController {
             HttpServletResponse response) throws IOException {
 
         StringBuilder solrSearchBuilder = buildFatSearchRequest();
-        //TODO: Temporarily set 3000 as ut off until scalability problem is fixed https://bit.ly/3TnkjH7, https://bit.ly/3EYGjnm
-        maxResults = 3000;
+        //TODO: In future, temporarily set 5000 as ut off until scalability problem is fixed https://bit.ly/3EYGjnm
+        maxResults = 5000;
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
         }
@@ -952,9 +952,6 @@ public class SolrSearchController {
         }
     }
 
-    // Renamed the method. It is a generic and useful method.
-    // Todo: change the name of the method. doEfoSorlSearch.
-    // Use SOLR FAT! SOLR FAT!
     @RequestMapping(value = "api/search/advancefilter", produces = MediaType.APPLICATION_JSON_VALUE,method = {RequestMethod.GET,RequestMethod.POST})
     public void doEfoSolrSearch(
             @RequestParam("q") String query,
@@ -973,6 +970,9 @@ public class SolrSearchController {
             HttpServletResponse response) throws IOException {
         StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
+        //TODO: Remove in future - Temporarily set 5000 as ut off until scalability problem is fixed https://bit.ly/3TnkjH7
+        groupLimit = 5000;
+
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
         }
@@ -984,11 +984,8 @@ public class SolrSearchController {
         addQuery(solrSearchBuilder, query);
         addGrouping(solrSearchBuilder, groupField, groupLimit);
         addFacet(solrSearchBuilder, facetField);
-
-        Collection<String> highlights = new HashSet<String>(Arrays.asList(hlFl.split(",")));
-
+        Collection<String> highlights = new HashSet<>(Arrays.asList(hlFl.split(",")));
         addHighlights(solrSearchBuilder,highlights,hlSnippets);
-
 
         if (fl != "") {
             solrSearchBuilder.append("&fl=").append(URLEncoder.encode(fl, "UTF-8"));

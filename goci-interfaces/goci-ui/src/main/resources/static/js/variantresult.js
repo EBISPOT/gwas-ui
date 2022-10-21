@@ -128,7 +128,7 @@ function processVariantData(data,rsId) {
         getLinkButtons(data_association.docs,rsId);
 
         displayDatatableTraits(data_association.docs, rsId);
-        displayDatatableAssociations(data_association.docs);
+        displayDatatableAssociations(data_association);
         displayDatatableStudies(data_study.docs);
 
         setDownloadLink("rsId:" + rsId);
