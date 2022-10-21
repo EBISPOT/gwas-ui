@@ -82,7 +82,7 @@ function getDataSolr(main, initLoad = false) {
         } else {
             processSolrData(data, initLoad);
             setDownloadLink("accessionId:" + searchQuery);
-            displayDatatableAssociations(data_association.docs, cleanBeforeInsert = false);
+            displayDatatableAssociations(data_association, cleanBeforeInsert = false);
             displaySummaryStudy(data_study.docs);
             return data;
         }
@@ -204,6 +204,7 @@ function displaySummaryStudy(data, clearBeforeInsert) {
     $("#study-genotyping-platform").html(study.platform);
     $("#study-sample-description").html(study.initialSampleDescription);
     if (study.agreedToCc0) $("#study-license").html(`<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank"> CC0 </a>`)
+    else if(study.pubmedId === '30510241') $("#study-license").html(`<span style="color: red;"> Please Refer to ReadMe File </span>`) //TODO: Implement cc-by-4 license properly
     else $("#study-license").html(`<a href="https://www.ebi.ac.uk/about/terms-of-use/" target="_blank"> Terms of use </a>`)
     setAncentrySection(study);
     var fullpvalset = study.fullPvalueSet;

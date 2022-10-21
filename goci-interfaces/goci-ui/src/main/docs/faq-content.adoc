@@ -48,6 +48,9 @@
 
 22. <<faq-A22, Does the GWAS Catalog include data that isn't associated with a journal publication?>>
 
+23. <<faq-A23, How can I find mouse orthologs for the genes in the GWAS Catalog?>>
+
+
 === B. Searching the GWAS Catalog
 
 1. <<faq-B1, How do I search the GWAS Catalog?>>
@@ -123,6 +126,8 @@
 4. <<faq-E4, Why do some SNPs not have any corresponding mapping information?>>
 
 5. <<faq-E5, How are SNP-SNP interactions and multi-SNP haplotypes displayed and annotated?>>
+
+6. <<faq-E6, What does the most severe consequence/CONTEXT field represent?>>
 
 === F. Ancestry
 
@@ -275,6 +280,8 @@ Some publications may report a GWAS association p-value of 0 due to the limits o
 
 From 2020, the GWAS Catalog started accepting submissions for unpublished GWAS (including pre-published GWAS i.e. data associated with a pre-print or article in press). Unpublished GWAS metadata is available via the study pages for each accession number and in more detail in the unpublished  https://www.ebi.ac.uk/gwas/downloads[download files]. Unpublished summary statistics are available via our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] and https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page] page as well as via the study pages. Unpublished data is made available exactly as submitted by authors and has not been reviewed by our curators. Upon publication it is curated, annotated, extended to include top associations and incorporated into our main database. 
 
+==== [[faq-A23]]23. How can I find the mouse orthologs in IMPC for the genes in the GWAS Catalog?
+Each GWAS Catalog gene with a mouse ortholog in https://www.mousephenotype.org/[IMPC] is linked via a button on the gene page. Orthology predictions are provided by IMPC’s reference database which is rebuilt every week to include the latest HCOP ortholog relationships and data from MGI. For more information on ortholog mapping, refer to IMPC's https://www.mousephenotype.org/help/data-integration/how-to-use-the-essential-genes-data-portal/0[documentation] and https://www.nature.com/articles/s41467-020-14284-2[publication]. Where no ortholog has been established, the button is not displayed.
 
 == [[B]]B. Searching the GWAS Catalog
 
@@ -459,6 +466,10 @@ SNPs are extracted from the literature exactly as reported by the authors of a p
 For SNP-SNP interactions, all elements that are specific to a given SNP (rsID, risk allele, mapped gene, chromosome location etc) are separated by an "x" (eg "rs1336472-A x rs4715555-G", "1p31.3 x 6p12.1", "3_prime_UTR_variant x upstream_gene_variant"). For multi-SNP haplotypes, elements are separated by a ";" (eg "rs17310467-?; rs6088735-?; rs6060278-?; rs867186-?", "MYH7B; EDEM2 - PROCR; EDEM2 - PROCR; PROCR", "upstream_gene_variant; intergenic_variant; intergenic_variant; missense_variant"). In both cases, the position of each element is the same across all variables, so the first rsID corresponds to the first mapped gene or mapped gene range (for intergenic SNPs), the first bp location etc.
 
 While we do provide the mapped gene and position information in this format in both the results page and the download, we excluded some of the additional gene-related information such as upstream/downstream gene IDs and distances from SNPs to genes from the download spreadsheet. This decision was made as it is almost impossible to present this kind of multi-dimensional data cleanly in the current spreadsheet format. In particular in large multi-SNP haplotypes, it is possible for some of the SNPs to be located within a gene while others are intergenic. Splitting gene IDs and distances by in-gene, upstream and downstream position would make the individual values much harder to pair up.
+
+==== [[faq-E6]]6. What does the most severe consequence/CONTEXT field represent?
+
+The 'CONTEXT/Most severe consequence' column provides information on a variant's predicted most severe functional effect from Ensembl. The effect of the allele of each variant on different transcripts may differ, but only the most severe consequence is reported here. Definition of terms and the order of severity is provided in Ensembl’s documentation: https://www.ensembl.org/info/genome/variation/prediction/predicted_data.html#consequences
 
 
 == F. Ancestry
