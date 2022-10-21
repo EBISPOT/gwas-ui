@@ -291,11 +291,11 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     $('.keep-open').attr('title','Add/Remove Columns');
     hideLoadingOverLay('#summary-stats-table-loading');
 
-    if (parseInt(data.response.numFound) > 3000){
-        let textDesc = `Warning: only the first 3000 could be displayed, out of ${data.response.numFound} rows, please `;
+    if (parseInt(data.response.numFound) > 5000){
+        let textDesc = `Warning: only the first 5000 could be displayed, out of ${data.response.numFound} rows, please `;
         let linkTextDesc = " click the link here ";
         let trailingTextDesc = " to download the full data set.";
-        let downloadLink = "/api/search/summaryStatistics/download"
+        let downloadLink = `${gwasProperties.contextPath}/api/search/summaryStatistics/download`
         let notify = bootstrapNotify(textDesc, linkTextDesc, trailingTextDesc, downloadLink);
         $('#cut-off-notification').html(notify);
     }
