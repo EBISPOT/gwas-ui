@@ -72,26 +72,6 @@
         </div>
 
         <div class="container">
-            <!--div class="row">
-                <h2 style="color: black">GWAS Summary Statistics</h2>
-                <p>
-                    There are thousands of genome-wide association studies and each study yields association data for hundreds of thousands of variants across the human genome.
-                    Manual curation of each GWAS publication by a dedicated team of scientists ensures that the Catalog contains the most significant findings (p-value &lt; 10-5).
-                </p>
-
-                <p>
-                    Studies are often accompanied with summary statistics providing the association data for all the variants analysed across the genome in a given study. Although most of these associations will be insignificant or ‘noise’, there will also be some highly significant associations. We aim to provide the tools to access these data and we encourage authors of GWAS publications to submit <a th:href="@{/docs/methods/summary-statistics}">their summary statistics to us</a> so that we can develop this into a powerful resource.
-                </p>
-
-                <p>
-                    Our first step to making summary statistics data accessible was by hosting the flat files on our FTP site for those studies that provided them. The main challenges for this type of data acquisition are that it is difficult to search and filter, the volume of data is prohibitively large and the data are not harmonised (see below). To address these challenges, we have now developed a dedicated summary statistics database, providing users with searchable, filterable, harmonised data via a <a href="https://www.ebi.ac.uk/gwas/summary-statistics/docs/" target="_blank">REST API.</a>For non-programmatic access, data are available on the <a th:href="@{/downloads/summary-statistics}">FTP site</a>.
-                </p>
-
-                <p>
-                    To make these data available in a consistent, searchable format, we had to define a summary statistics standard because there is no standard in place. Standardisation resolves the issues of files from different research groups containing different fields and headers to one another, there is no consensus on what should be included, what should be omitted and what data format to use. An additional challenge to users of these data is that the variants are reported against different genome builds, so the location of the same variant can be different between studies. Even if the genome build was the same, the same variant may be reported against the other strand from one study to the next. Furthermore, what is taken to be the effect allele one the study may the ancestral allele in others. To mitigate these inconsistencies all of the summary statistics data is harmonised {link}. For information on <a th:href="@{/docs/methods/summary-statistics}">the harmonisation see</a>.
-                </p>
-
-            </div-->
             <div class="row">
                 <a th:href="@{/docs/methods/summary-statistics}">
                     <div class="col-md-4 toplevel-view">
@@ -116,29 +96,6 @@
                 </a>
 
             </div>
-<!--            <div class="row">-->
-<!--                <a th:href="@{${@environment.getProperty('deposition.ui.uri')}}">-->
-<!--                    <div class="col-md-4 toplevel-view">-->
-<!--                        <h2 class="flaticon-upload14 color-primary-bold">Submit</h2>-->
-
-<!--                        <p>Submit Summary Statistics to GWAS Catalog with our Deposition App</p>-->
-<!--                    </div>-->
-<!--                </a>-->
-<!--                <a th:href="@{/docs/submission}">-->
-<!--                    <div class="col-md-4 toplevel-view">-->
-<!--                        <h2 class="flaticon-question10 color-primary-bold">How to submit</h2>-->
-
-<!--                        <p>How to Submit Summary Status to GWAS Catalog</p>-->
-<!--                    </div>-->
-<!--                </a>-->
-<!--                <a th:href="@{/docs/summary-statistics-format}">-->
-<!--                    <div class="col-md-4 toplevel-view">-->
-<!--                        <h2 class="flaticon-notes9 color-primary-bold">Summary statistics format</h2>-->
-
-<!--                        <p>Format for Summary Status Files</p>-->
-<!--                    </div>-->
-<!--                </a>-->
-<!--            </div>-->
 
             <hr/>
         </div>

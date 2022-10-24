@@ -147,7 +147,7 @@ function processSolrData(data, initLoad=false, searchTerm, slimData) {
     
     // Adding data tables:
     displayDatatableTraits(data_association.docs, searchTerm);
-    displayDatatableAssociations(data_association.docs);
+    displayDatatableAssociations(data_association);
     displayDatatableStudies(data_study.docs, PAGE_TYPE);
 
     // Generate info panel:

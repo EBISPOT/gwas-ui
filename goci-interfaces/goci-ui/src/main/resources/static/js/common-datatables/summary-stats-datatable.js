@@ -170,11 +170,6 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     var p_date = summary_stats.publicationDate;
     var publi = p_date.split('T')[0];
     tmp['publication_date'] = publi;
-
-    // var catalog_publish_date = summary_stats.catalogPublishDate;
-    // var cp_date = catalog_publish_date.split('T')[0];
-    // tmp['catalog_publish_date'] = cp_date;
-
     tmp['reported_trait'] = summary_stats.traitName_s;
 
     var mappedTraits = summary_stats.mappedLabel;
@@ -268,13 +263,6 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
                 title: 'Reported trait',
                 sortable: true
             },
-
-    /** Commented as part of #256 Removing the "association count" column from the sumstats availability **/
-//            {
-//                field: 'nr_associations',
-//                title: 'Association count',
-//                sortable: true
-//            },
             {
                 field: 'link',
                 title: 'Data access',
@@ -302,6 +290,38 @@ function displayDatatableSummaryStats(data, summaryStatsStudyAccessions) {
     // Add custom tooltip text for button
     $('.keep-open').attr('title','Add/Remove Columns');
     hideLoadingOverLay('#summary-stats-table-loading');
+
+    if (parseInt(data.response.numFound) > 5000){
+        let textDesc = `Warning: only the first 5000 could be displayed, out of ${data.response.numFound} rows, please `;
+        let linkTextDesc = " click the link here ";
+        let trailingTextDesc = " to download the full data set.";
+        let downloadLink = `${gwasProperties.contextPath}/api/search/summaryStatistics/download`
+        let notify = bootstrapNotify(textDesc, linkTextDesc, trailingTextDesc, downloadLink);
+        $('#cut-off-notification').html(notify);
+    }
+}
+
+function bootstrapNotify(textDesc, linkTextDesc, trailingTextDsc, downloadLink) {
+
+    let div = document.createElement("div");
+    div.setAttribute("class", "alert alert-warning");
+    div.setAttribute("role", "alert");
+
+    let startText = document.createTextNode(textDesc);
+    let linkText = document.createTextNode(linkTextDesc);
+    let trailingText = document.createTextNode(trailingTextDsc);
+
+    let link = document.createElement("a");
+    link.setAttribute("class", "alert-link");
+    link.setAttribute("target", "_blank");
+    link.setAttribute("href", downloadLink);
+    link.appendChild(linkText);
+    link.style.cursor = "pointer";
+
+    div.appendChild(startText);
+    div.appendChild(link);
+    div.appendChild(trailingText);
+    return div;
 }
 
 
