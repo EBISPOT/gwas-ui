@@ -146,9 +146,9 @@ function processSolrData(data, initLoad=false, searchTerm, slimData) {
     var PAGE_TYPE = "gene";
     
     // Adding data tables:
-    displayDatatableTraits(data_association.docs, searchTerm);
+    displayDatatableTraits(data_association, searchTerm);
     displayDatatableAssociations(data_association);
-    displayDatatableStudies(data_study.docs, PAGE_TYPE);
+    displayDatatableStudies(data_study, PAGE_TYPE);
 
     // Generate info panel:
     generateGeneInformationTable(slimData, data_study);

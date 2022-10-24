@@ -155,7 +155,7 @@ function processSolrData(data, initLoad = false) {
 
         //update association/study table
         displayDatatableAssociations(data_association);
-        displayDatatableStudies(data_study.docs, PAGE_TYPE);
+        displayDatatableStudies(data_study, PAGE_TYPE);
         displaySummaryPublication(data_study.docs);
 
     })

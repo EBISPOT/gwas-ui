@@ -773,7 +773,7 @@ function processSolrData(data, initLoad=false) {
 
         //update association/study table
         displayDatatableAssociations(data_association);
-        displayDatatableStudies(data_study.docs, );
+        displayDatatableStudies(data_study, );
 
         //work out highlight study
         var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
