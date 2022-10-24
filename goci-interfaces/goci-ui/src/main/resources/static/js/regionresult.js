@@ -174,14 +174,14 @@ function processSolrData(data, initLoad=false, searchTerm) {
         // when chr:pos is queried, there's no returned study. We have to specifically fetch those.
         if ( data_study.docs.length == 0 ){
             data_study.docs = fetchStudies(data_association.docs);
-            displayDatatableStudies(data_study.docs, PAGE_TYPE);
+            displayDatatableStudies(data_study, PAGE_TYPE);
         }
         else {
-            displayDatatableStudies(data_study.docs, PAGE_TYPE);
+            displayDatatableStudies(data_study, PAGE_TYPE);
         }
 
         generateRegionInformationTable(searchTerm, data_study);
-        displayDatatableTraits(data_association.docs, searchTerm);
+        displayDatatableTraits(data_association, searchTerm);
     })
 
 }

@@ -15,11 +15,21 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert = true) {
     // Process data to format for data table:
     var data_json = [];
     if( data ){
-        data_json = prepareDataForTable(data);
+        data_json = prepareDataForTable(data.docs);
     }
 
-    // Study count //
-    $(".study_count").html(data_json.length);
+    let study_count = 0;
+    if (data !== undefined) {
+        study_count = data.numFound
+    }
+
+    if (parseInt(study_count) > 5000){
+        let textDesc = `Warning: only the first 5000 row could be displayed, out of ${study_count} rows, please click the download catalog button to download the full study data`;
+        $('#study-cut-off-notification').html(gociBootstrapNotify(textDesc));
+    }
+
+    $(".study_count").html(study_count);
+
     if( study_ids.length == 1 ) {
         $(".study_label").html("Study");
     }
@@ -141,6 +151,16 @@ function displayDatatableStudies(data, PAGE_TYPE, cleanBeforeInsert = true) {
     // Add custom tooltip text for button
     $('.keep-open').attr('title', 'Add/Remove Columns');
     hideLoadingOverLay('#study-table-loading')
+}
+
+function gociBootstrapNotify(textDesc) {
+
+    let div = document.createElement("div");
+    div.setAttribute("class", "alert alert-warning");
+    div.setAttribute("role", "alert");
+    let text = document.createTextNode(textDesc);
+    div.appendChild(text);
+    return div;
 }
 
 /*

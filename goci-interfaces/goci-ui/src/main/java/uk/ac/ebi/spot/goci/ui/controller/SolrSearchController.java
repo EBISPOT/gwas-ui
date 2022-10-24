@@ -466,6 +466,8 @@ public class SolrSearchController {
         StringBuilder solrSearchBuilder = buildFatSearchRequest();
         //TODO: In future, temporarily set 5000 as ut off until scalability problem is fixed https://bit.ly/3EYGjnm
         maxResults = 5000;
+        sort = "publicationDate%20desc";
+
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
         }

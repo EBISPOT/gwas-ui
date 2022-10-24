@@ -127,9 +127,9 @@ function processVariantData(data,rsId) {
         // External links panel
         getLinkButtons(data_association.docs,rsId);
 
-        displayDatatableTraits(data_association.docs, rsId);
+        displayDatatableTraits(data_association, rsId);
         displayDatatableAssociations(data_association);
-        displayDatatableStudies(data_study.docs);
+        displayDatatableStudies(data_study);
 
         setDownloadLink("rsId:" + rsId);
     }

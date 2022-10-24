@@ -10,19 +10,22 @@ function displayDatatableTraits(data, HEADER_VALUE, cleanBeforeInsert) {
         cleanBeforeInsert = true;
     }
 
-
     if (cleanBeforeInsert) {
         $('#efotrait-table').bootstrapTable('removeAll');
     }
 
-
     // Preprocess data before adding to table
-    var preprocessedData = preprocessData(data);
+    var preprocessedData = preprocessData(data.docs);
 
     var trait_count = 0;
 
     if (data != undefined) {
-        trait_count = preprocessedData.length
+        trait_count = data.numFound;
+    }
+
+    if (parseInt(trait_count) > 5000){
+        let textDesc = `Warning: only the first 5000 could be displayed, out of ${trait_count} rows, please click the download catalog button to download the full trait data`;
+        $('#trait-cut-off-notification').html(gociBootstrapNotify(textDesc));
     }
 
     $(".efotrait_count").html(trait_count);
@@ -30,7 +33,6 @@ function displayDatatableTraits(data, HEADER_VALUE, cleanBeforeInsert) {
     if (trait_count < 2) {
         $(".efotrait_label").html("Trait");
     }
-
 
     var data_json = [];
 
@@ -91,7 +93,15 @@ function displayDatatableTraits(data, HEADER_VALUE, cleanBeforeInsert) {
     hideLoadingOverLay('#efotrait-table-loading')
 }
 
+function gociBootstrapNotify(textDesc) {
 
+    let div = document.createElement("div");
+    div.setAttribute("class", "alert alert-warning");
+    div.setAttribute("role", "alert");
+    let text = document.createTextNode(textDesc);
+    div.appendChild(text);
+    return div;
+}
 
 function preprocessData(data) {
 
