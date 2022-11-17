@@ -35,6 +35,8 @@ Or see the https://ebispot.github.io/gwas-blog/[full index].
 === Publications
 
 ==== GWAS Catalog publications
+Sollis et al, 2022 https://doi.org/10.1093/nar/gkac1010[The NHGRI-EBI GWAS Catalog: knowledgebase and deposition resource]. Nucleic Acids Research, 2022
+
 MacArthur et al, 2021 https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00004-5[Workshop proceedings: GWAS Catalog standards and sharing]. Cell Genomics Vol. 1, Issue 1, 100004.
 
 McMahon et al, 2021 https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00005-7[Sequencing-based genome-wide association studies reporting standards]. Cell Genomics Vol. 1, issue 1, 100005.
