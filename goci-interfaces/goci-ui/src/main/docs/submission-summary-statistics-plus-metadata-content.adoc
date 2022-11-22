@@ -140,7 +140,7 @@ There are 16 columns for you to fill in:
 
 |Reported trait
 |
-|The trait under investigation
+|The trait under investigation. Please describe the trait concisely but with enough detail to be clear to a non-specialist. Avoid use of abbreviations; if these are necessary, please define them or their source in the readme file.  
 |
 |yes
 |
