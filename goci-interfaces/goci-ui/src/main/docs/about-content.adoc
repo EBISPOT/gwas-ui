@@ -34,7 +34,7 @@ You can also follow us on Twitter https://twitter.com/GWASCatalog[@GWASCatalog].
 
 == Funding acknowledgements
 
-The NHGRI-EBI GWAS Catalog is funded by NHGRI Grant Number 2U41HG007823, and delivered by collaboration between the NHGRI, EMBL-EBI and NCBI.
+The NHGRI-EBI GWAS Catalog is funded by NHGRI Grant Number 1U24HG012542-01, and delivered by collaboration between the NHGRI, EMBL-EBI, University of Cambridge and NCBI.
 
 
 == Citing the GWAS Catalog
@@ -42,18 +42,18 @@ The NHGRI-EBI GWAS Catalog is funded by NHGRI Grant Number 2U41HG007823, and del
 
 === How to cite the NHGRI-EBI GWAS Catalog, data therein or diagram:
 
-_Buniello A, MacArthur JAL, Cerezo M, Harris LW, Hayhurst J, Malangone C, McMahon A, Morales J, Mountjoy E, Sollis E, Suveges D, Vrousgou O, Whetzel PL, Amode R, Guillen JA, Riat HS, Trevanion SJ, Hall P, Junkins H, Flicek P, Burdett T, Hindorff LA, Cunningham F and Parkinson H._ +
-The NHGRI-EBI GWAS Catalog of published genome-wide association studies, targeted arrays and summary statistics 2019. +
-Nucleic Acids Research, 2019, Vol. 47 (Database issue): D1005-D1012. +
+_Sollis E, Mosaku A, Abid A, Buniello A, Cerezo M, Gil L, Groza T, Güneş O, Hall P, Hayhurst J, Ibrahim A, Ji Y, John S, Lewis E, MacArthur JAL, McMahon A, Osumi-Sutherland D, Panoutsopoulou K, Pendlington Z, Ramachandran S, Stefancsik R, Stewart J, Whetzel P, Wilson R, Hindorff L, Cunningham F, Lambert SA, Inouye M, Parkinson H, Harris LW._ +
+The NHGRI-EBI GWAS Catalog: knowledgebase and deposition resource. +
+Nucleic Acids Res. 2022 Nov 9:gkac1010. doi: 10.1093/nar/gkac1010. Epub ahead of print. PMID: 36350656. +
 
-Users of summary statistics are requested to cite the data as follows: accession ID of the GWAS Catalog study e.g. “GCST007240”, the GWAS Catalog, and the date the summary statistics were downloaded. If the summary statistics originated from a published GWAS, please also cite the original publication. For example, “Summary statistics were downloaded from the NHGRI-EBI GWAS Catalog (Buniello, MacArthur et al., 2019) for study GCST007240 (Riveros-McKay et al., 2019) downloaded on 01/11/2018”.
+Users of summary statistics are requested to cite the data as follows: accession ID of the GWAS Catalog study e.g. “GCST007240”, the GWAS Catalog, and the date the summary statistics were downloaded. If the summary statistics originated from a published GWAS, please also cite the original publication. For example, “Summary statistics were downloaded from the NHGRI-EBI GWAS Catalog (Sollis et al., 2022) on 01/11/2020 for study GCST007240 (Riveros-McKay et al., 2019).
 
 For a full list of publications by the GWAS Catalog team, and other useful background reading, please visit our link:related-resources[Resources page]
 
 
 == Licensing information
 
-The NHGRI-EBI GWAS Catalog and all its contents are available under the general http://www.ebi.ac.uk/about/terms-of-use[Terms of Use for EMBL-EBI Services].
+The NHGRI-EBI GWAS Catalog and all its contents are available under the general http://www.ebi.ac.uk/about/terms-of-use[Terms of Use for EMBL-EBI Services]. Summary statistics are made available under https://creativecommons.org/publicdomain/zero/1.0/[CC0] unless https://www.ebi.ac.uk/gwas/docs/faq#faq-H7[otherwise stated]. We advise consumers of data hosted by the GWAS Catalog to note the license terms of individual datasets, if applicable to their specific use case. 
 
 All code for the GWAS Catalog infrastructure can be found in https://github.com/EBISPOT/goci[our Github repository]. The code is freely available under http://www.apache.org/licenses/LICENSE-2.0[the Apache version 2.0 license]
 
