@@ -26,7 +26,7 @@ In the Study tab, please add one row for each separate GWAS analysis (study) in 
 
 ==== Column instructions
 
-There are 16 columns for you to fill in:
+There are 24 columns for you to fill in:
 
 [cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
 |===
@@ -65,6 +65,9 @@ There are 16 columns for you to fill in:
 `Exome genotyping array`
 
 `Whole genome sequencing`
+
+`Exome-wide sequencing`
+
 |
 |`Genome-wide genotyping array` 
 
@@ -94,6 +97,16 @@ There are 16 columns for you to fill in:
 |
 |`Immunochip`
 
+|Analysis software
+|
+|Software and version used for the association analysis.
+|
+|yes *if* any p-values in sumstats file = 0
+|
+|Free text
+|
+|`PLINK`
+
 |Imputation
 |
 |Were SNPs imputed for the discovery GWAS?
@@ -107,6 +120,16 @@ There are 16 columns for you to fill in:
 `No`
 |
 |`Yes`
+
+|Imputation panel
+|
+|Panel used for imputation
+|
+|no
+|
+|Free text
+|
+|`1000 Genomes Phase 3`
 
 |Variant count
 |
@@ -137,6 +160,16 @@ There are 16 columns for you to fill in:
 |Free text
 |
 |...
+
+|Adjusted covariates
+|
+|Any covariates the GWAS is adjusted for. Multiple values can be listed separated by '\|'.
+|
+|no
+|
+|Free text
+|
+|`age\|sex`
 
 |Reported trait
 |
@@ -207,6 +240,30 @@ There are 16 columns for you to fill in:
 `NCBI34`
 |
 |`GRCh38`
+
+|Neg Log10 p-values
+|
+|Enter yes if the summary statistics p-values are given in the negative log10 form Example: yes, no
+|
+|no
+|
+|Must match one of the following options:
+
+`Yes`
+
+`No`
+|
+|`yes`
+
+|EAF lower limit
+|
+|Lowest possible effect allele frequency given in summary statistics
+|
+|no
+|
+|numeric
+|
+|`0.0001`
 
 |Cohort(s)
 |
@@ -419,6 +476,20 @@ There are 10 columns for you to fill in:
 |
 |`2000`
 
+|Case control study
+|
+|Is this a case control study?
+|
+|no (default is false)
+|
+|Must match one of the following options:
+
+`Yes`
+
+`No`
+|
+|`yes`
+
 |Number of cases
 |
 |Number of cases in this group
@@ -524,6 +595,16 @@ If it is not possible to assign an ancestry category to a group of samples, ente
 |Free text
 |
 |`Korculan(founder/genetic isolate)\|Vis(founder/genetic isolate)`
+
+|Ancestry method
+|
+|Method used to determine sample ancestry. Multiple values can be listed separated by '\|'.
+|
+|no
+|
+|Free text
+|
+|`self-reported\|genetically determined`
 
 |Country of recruitment
 |
