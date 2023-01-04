@@ -67,11 +67,11 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 
 |Genotyping technology
 |
-|The method used to genotype variants in the discovery stage. Multiple values can be listed separated by "\|".
+|Method(s) used to genotype variants in the discovery stage. Separate multiple methods by pipes "\|".
 |
 |yes
 |
-||Must match one of the following options:
+|Must match one of the following options:
 
 `Genome-wide genotyping array`
 
@@ -113,7 +113,7 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 |
 |Free text
 |
-|IMPUTE
+|`IMPUTE`
 
 |Adjusted covariates
 |
