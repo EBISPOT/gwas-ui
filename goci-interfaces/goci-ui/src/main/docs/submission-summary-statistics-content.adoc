@@ -41,7 +41,7 @@ Please note, the pre-filled form should contain one row for each GWAS analysis i
 
 === Data for you to enter
 
-There are 7 empty columns for you to fill in. Mandatory columns are highlighted in orange in the submission form. Grey columns are optional. However, we encourage you to submit as much information as you can.
+There are 14 empty columns for you to fill in. Mandatory columns are highlighted in orange in the submission form. Grey columns are optional. However, we encourage you to submit as much information as you can.
 
 [cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
 |===
@@ -65,6 +65,66 @@ There are 7 empty columns for you to fill in. Mandatory columns are highlighted 
 |
 |`WHR_unadj`
 
+|Genotyping technology
+|
+|The method used to genotype variants in the discovery stage. Multiple values can be listed separated by "\|".
+|
+|yes
+|
+||Must match one of the following options:
+
+`Genome-wide genotyping array`
+
+`Targeted genotyping array`
+
+`Exome genotyping array`
+
+`Whole genome sequencing`
+
+`Exome-wide sequencing`
+|
+|`Genome-wide genotyping array`
+
+|Analysis software
+|
+|Software and version used for the association analysis.
+|
+|yes *if* any p-values in sumstats file = 0
+|
+|Free text
+|
+|`PLINK`
+
+|Imputation panel
+|
+|Panel used for imputation
+|
+|no
+|
+|Free text
+|
+|`1000 Genomes Phase 3`
+
+|Imputation software
+|
+|Imputation software
+|
+|no
+|
+|Free text
+|
+|IMPUTE
+
+|Adjusted covariates
+|
+|Any covariates the GWAS is adjusted for. Multiple values can be listed separated by '\|'.
+|
+|no
+|
+|Free text
+|
+|`age\|sex`
+
 |Summary statistics file
 |
 |The name of the summary statistics file uploaded via Globus. Must be entered for at least one study. Enter "NR" for any studies without summary statistics.
@@ -85,7 +145,7 @@ There are 7 empty columns for you to fill in. Mandatory columns are highlighted 
 |
 |`49ea8cf53801c7f1e2f11336fb8a29c8`
 
-|Readme
+|Readme text
 |
 |The readme text that accompanies your analysis. Please copy the text into this cell, rather than uploading a separate readme file. If the same readme applies to all studies in the submission, please copy the text into each row. Leave blank for any studies without summary statistics.
 |
@@ -114,6 +174,30 @@ There are 7 empty columns for you to fill in. Mandatory columns are highlighted 
 `NCBI34`
 |
 |`GRCh38`
+
+|Neg Log10 p-values
+|
+|Enter yes if the summary statistics p-values are given in the negative log10 form.
+|
+|no
+|
+|Must match one of the following options:
+
+`Yes`
+
+`No`
+|
+|`yes`
+
+|EAF lower limit
+|
+|Lowest possible effect allele frequency given in summary statistics
+|
+|no
+|
+|numeric
+|
+|`0.0001`
 
 |Cohort(s)
 |
