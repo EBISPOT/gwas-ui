@@ -428,7 +428,7 @@ For example, for a single study in 2 ancestry groups, with 2 stages (discovery a
 
 ==== Column Instructions
 
-There are 10 columns for you to fill in:
+There are 12 columns for you to fill in:
 
 [cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
 |===
