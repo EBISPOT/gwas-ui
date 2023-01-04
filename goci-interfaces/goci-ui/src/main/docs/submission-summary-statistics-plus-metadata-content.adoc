@@ -26,7 +26,7 @@ In the Study tab, please add one row for each separate GWAS analysis (study) in 
 
 ==== Column instructions
 
-There are 24 columns for you to fill in:
+There are 21 columns for you to fill in:
 
 [cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
 |===
