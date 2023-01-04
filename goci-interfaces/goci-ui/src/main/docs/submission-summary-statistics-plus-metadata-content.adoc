@@ -243,7 +243,7 @@ There are 21 columns for you to fill in:
 
 |Neg Log10 p-values
 |
-|Enter yes if the summary statistics p-values are given in the negative log10 form Example: yes, no
+|Enter yes if the summary statistics p-values are given in the negative log10 form.
 |
 |no
 |
