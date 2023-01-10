@@ -93,7 +93,7 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 |
 |Free text
 |
-|`PLINK`
+|`PLINK 1.9`
 
 |Imputation panel
 |
