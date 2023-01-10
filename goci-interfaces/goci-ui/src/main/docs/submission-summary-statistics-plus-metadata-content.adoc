@@ -105,7 +105,7 @@ There are 22 columns for you to fill in:
 |
 |Free text
 |
-|`PLINK`
+|`PLINK 1.9`
 
 |Imputation
 |
