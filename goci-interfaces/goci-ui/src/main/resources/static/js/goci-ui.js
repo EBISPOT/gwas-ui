@@ -162,6 +162,7 @@ function setStats(data) {
         $('#lastUpdateDate').text(data.date);
         $('#studyCount').text(data.studies);
         $('#associationCount').text(data.associations);
+        $('#ssCount').text(data.sumstats);
         $('#genomeAssembly').text(data.genebuild);
         $('#dbSNP').text(data.dbsnpbuild);
     }
