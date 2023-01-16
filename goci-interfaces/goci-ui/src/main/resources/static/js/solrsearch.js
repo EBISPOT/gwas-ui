@@ -707,8 +707,8 @@ function setStats(data) {
         $('#releasedate-stat').text("Last data release on " + data.date);
         $('#studies-stat').text(data.studies + " publications");
         $('#snps-stat').text(data.snps + " SNPs");
-        $('#associations-stat').text(data.associations + " associations");
-        $('#ss-stat').text(data.sumstats + " summary-statistics");
+        $('#associations-stat').text(data.associations + " top associations");
+        $('#ss-stat').text(data.sumstats + " full summary statistics");
         $('#genomebuild').text("Genome assembly " + data.genebuild);
         $('#dbsnpbuild').text("dbSNP Build " + data.dbsnpbuild);
         $('#ensemblbuild').text("Ensembl Build " + data.ensemblbuild);
