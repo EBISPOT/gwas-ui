@@ -271,6 +271,7 @@ public class FileController {
         String studycount;
         String snpcount;
         String associationcount;
+        String sscount;
         String genebuild;
         String dbsnpbuild;
         String ensemblbuild;
@@ -282,6 +283,7 @@ public class FileController {
             studycount = properties.getProperty("studycount");
             snpcount = properties.getProperty("snpcount");
             associationcount = properties.getProperty("associationcount");
+            sscount = properties.getProperty("sscount");
             genebuild = properties.getProperty("genomebuild");
             dbsnpbuild = properties.getProperty("dbsnpbuild");
             ensemblbuild = properties.getProperty("ensemblbuild");
@@ -290,6 +292,7 @@ public class FileController {
             response.put("studies", studycount);
             response.put("snps", snpcount);
             response.put("associations", associationcount);
+            response.put("sumstats", sscount);
             response.put("genebuild", genebuild);
             response.put("dbsnpbuild", dbsnpbuild);
             response.put("ensemblbuild", ensemblbuild);
