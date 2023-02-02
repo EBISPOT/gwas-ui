@@ -7,10 +7,7 @@ For publications that are already included in the GWAS Catalog, we provide a par
 Instructions are provided below. When you have completed the submission form, return to the https://www.ebi.ac.uk/gwas/docs/submission#link-13[main submission instructions^].
 
 === Pre-filled data
-
 Three columns have been filled in for you.
-
-Please note, the pre-filled form should contain one row for each GWAS analysis in your publication, including one row for each set of summary statistics (i.e. each full set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite. If there are not enough rows to represent all of the GWAS analyses in your publication and/or the number of uploaded summary statistics, please contact gwas-subs@ebi.ac.uk for assistance.
 
 [cols="<4,<1,<10,<1,<6", options="header", grid="all", width=100%]
 |===
@@ -137,7 +134,7 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 
 |md5 sum
 |
-|The md5 checksum of the summary statistics file. Must be entered for at least one study. Enter "NR" for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums here^].
+|The md5 checksum of the summary statistics file. Must be entered for all studies with summary statistics. Enter "NR" for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums here^].
 |
 |yes
 |
@@ -147,7 +144,7 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 
 |Readme text
 |
-|The readme text that accompanies your analysis. Please copy the text into this cell, rather than uploading a separate readme file. If the same readme applies to all studies in the submission, please copy the text into each row. Leave blank for any studies without summary statistics.
+|Author notes to accompany your analysis. Please copy notes into this cell directly, rather than uploading a separate readme file. If the same note applies to all studies in the submission, please copy the text into each row. Leave blank for any studies without summary statistics.
 |
 |no
 |
@@ -207,7 +204,7 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 |
 |Free text
 |
-|`UKBB\|FINRISK`
+|`UKB\|FINRISK`
 
 |Cohort specific reference
 |
@@ -217,11 +214,12 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 |
 |Free text
 |
-|`UKBB_ANID45956`
+|`UKB_ANID45956`
 |===
 
-=== Additional information
+Please note, the pre-filled form should contain one row for each GWAS analysis in your publication, including one row for each set of summary statistics (i.e. each full set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite. If there are not enough rows to represent all of the GWAS analyses in your publication and/or the number of uploaded summary statistics, please contact gwas-subs@ebi.ac.uk for assistance.
 
+=== Additional information
 ==== What if I can't tell which study is which?
 
 If you need more information to identify each study, you can find additional details at the GWAS Catalog website, on the relevant publication page (https://www.ebi.ac.uk/gwas/ + the PMID of the publication).
