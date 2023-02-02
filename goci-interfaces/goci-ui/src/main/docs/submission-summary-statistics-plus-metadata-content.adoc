@@ -24,6 +24,8 @@ In each tab, mandatory columns are highlighted in orange. Grey columns are optio
 
 In the Study tab, please add one row for each separate GWAS analysis (study) in the submission. In particular, please make sure that there is one row for each set of summary statistics (i.e. each full set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite.
 
+If you performed multiple GWA studies but are only sharing summary statistics for a subset of the studies, you can enter metadata rows without summary statistics. However you must submit summary statistics for at least one study (including filename, md5sum, genome assembly).
+
 ==== Column instructions
 
 There are 22 columns for you to fill in:
@@ -213,7 +215,7 @@ There are 22 columns for you to fill in:
 
 |md5 sum
 |
-|The md5 checksum of the summary statistics file. Must be entered for at least one study. Enter "NR" for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums here^].
+|The md5 checksum of the summary statistics file. Must be entered for all studies with summary statistics. Enter "NR" for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums here^].
 |
 |yes
 |
@@ -233,7 +235,7 @@ There are 22 columns for you to fill in:
 
 |Summary statistics assembly
 |
-|Genome assembly for the summary statistics. Must be entered for at least one study. Enter "NR" for any studies without summary statistics.
+|Genome assembly for the summary statistics. Must be entered for all studies with summary statistics. Enter "NR" for any studies without summary statistics.
 |
 |yes
 |
@@ -608,7 +610,7 @@ If it is not possible to assign an ancestry category to a group of samples, ente
 
 |Ancestry method
 |
-|Method used to determine sample ancestry. Multiple values can be listed separated by '\|'.
+|Name the method used to determine sample ancestry. For consistency, we recommend you choose between the terms “self-reported” or “genetically determined” where appropriate, but other text is permissible if these do not apply. Multiple values can be listed separated by pipes "\|".
 |
 |no
 |
