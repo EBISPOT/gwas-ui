@@ -7,7 +7,7 @@ Summary statistics are defined as the aggregate p-values and association data fo
 The GWAS Catalog maintains a standard format for summary statistics, to ensure that datasets from a wide range of sources are as interoperable as possible. This standard format has been developed in consultation with the GWAS research community, and may be updated in future as the needs of the community change.
 
 
-The current version of the standard format is *GWAS-SSF* (published in https://doi.org/10.1101/2022.07.15.500230[Hayhurst et al., 2022^]).
+The current version of the standard format is *GWAS-SSF* (see https://github.com/EBISPOT/gwas-summary-statistics-standard[detailed specifications and citation information]).
 
 
 All submitted summary statistics are required to conform to the standard format. If you have difficulty meeting the requirements, please contact gwas-subs@ebi.ac.uk. This page outlines how to prepare and validate summary statistics files, including:
@@ -28,7 +28,7 @@ To validate your files prior to upload, we provide a validator that can be run l
 == [[format]]Summary statistics file format and content
 
 
-* Summary statistics should be provided in one file per GWAS.
+* Summary statistics should be provided in a separate file per GWAS.
 * The file must be in .tsv format.
 * The first line contains the table headers, followed by one row for each variant analysed.
 * Columns must follow the standard headers and data formats listed in Table 1.
@@ -50,14 +50,12 @@ Mandatory and encouraged fields are shown, with standard headers.
 |Accepted values
 |Example
 
-
 |0
 |chromosome
 |Chromosome where the variant is located
 |Mandatory
 |`1-22`, `23`=`X`, `24`=`Y` or `25`=`MT`
 |`13`
-
 
 |1
 |base_pair_location
@@ -66,14 +64,12 @@ Mandatory and encouraged fields are shown, with standard headers.
 |Integer > 0
 |`40983974`
 
-
 |2
 |effect_allele
 |The allele associated with the effect
 |Mandatory
 |Sequence of `A`, `C`, `T` and `G`
 |`G`
-
 
 |3
 |other_allele
@@ -82,16 +78,19 @@ Mandatory and encouraged fields are shown, with standard headers.
 |Sequence of `A`, `C`, `T` and `G`
 |`A`
 
+|4
+|(see below)
+|Column 4 must contain the primary effect size measurement (i.e. beta, odds ratio _or_ hazard ratio). If you have calculated more than one effect size statistic (e.g. beta as well as odds ratio), the other can be entered as an additional column at the end of the file.
+|Mandatory to include beta _or_ odds_ratio _or_ hazard ratio
+|-
+|-
 
 |4
 |beta
 |Effect measured as beta
-|Mandatory to include beta _or_ odds_ratio _or_ hazard ratio
+|(see above)
 |Number
 |`-0.064`
-
-
-
 
 |4
 |odds_ratio
@@ -99,7 +98,6 @@ Mandatory and encouraged fields are shown, with standard headers.
 |(see above)
 |Number ≥ 0
 |`1.50`
-
 
 |4
 |hazard_ratio
