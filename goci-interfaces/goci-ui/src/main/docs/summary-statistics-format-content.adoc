@@ -175,7 +175,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 
 |*
 |n
-|Sample size
+|Sample size per variant
 |Encouraged
 |Integer
 |`15000`
@@ -194,7 +194,7 @@ Genome-wide association study of habitual physical activity in over 377,000 UK B
 
 
 2. Clear description of the content presented in additional columns that are not present in our standard format
-e.g.: INFO: imputation quality/certainty metric from IMPUTE2
+e.g.: HetPVal: P-value for heterogeneity statistic
 
 
 3. Any other information or comment that can be useful to interpret and store the data under submission (e.g. broader description of the cohort used in the study, QC measures applied)
