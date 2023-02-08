@@ -29,6 +29,13 @@ public class SearchConfiguration {
     private String defaultFacet;
 
 
+    @Value("${search.proxy-prefix:#{NULL}}")
+    private String proxy_prefix;
+
+    @Value("${sumstats.ftp-link:#{NULL}}")
+    private String summaryStatsFTPLink;
+
+
     // SLIM Solr
     public URL getGwasSearchSlimServer() {
         return slimServerSource;
@@ -43,6 +50,15 @@ public class SearchConfiguration {
         return defaultFacet;
     }
 
+
+    public String getProxy_prefix() {
+        return proxy_prefix;
+    }
+
+
+    public String getSummaryStatsFTPLink() {
+        return summaryStatsFTPLink;
+    }
 
     @Bean
     public ErrorPageFilter errorPageFilter() {

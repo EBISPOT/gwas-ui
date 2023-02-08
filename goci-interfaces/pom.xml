@@ -16,6 +16,8 @@
         <version>3.6.3</version>
     </parent>
 
+
+
     <modules>
         <module>goci-ui</module>
     </modules>

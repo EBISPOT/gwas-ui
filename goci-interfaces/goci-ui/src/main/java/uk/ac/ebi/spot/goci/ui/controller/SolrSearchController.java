@@ -954,7 +954,7 @@ public class SolrSearchController {
         }
     }
 
-    @RequestMapping(value = "api/search/advancefilter", produces = MediaType.APPLICATION_JSON_VALUE,method = {RequestMethod.GET,RequestMethod.POST})
+        @RequestMapping(value = "api/search/advancefilter", produces = MediaType.APPLICATION_JSON_VALUE,method = {RequestMethod.GET,RequestMethod.POST})
     public void doEfoSolrSearch(
             @RequestParam("q") String query,
             @RequestParam(value = "jsonp", required = false, defaultValue = "false") boolean useJsonp,
@@ -973,7 +973,7 @@ public class SolrSearchController {
         StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
         //TODO: Remove in future - Temporarily set 5000 as ut off until scalability problem is fixed https://bit.ly/3TnkjH7
-        groupLimit = 5000;
+            groupLimit = 5000;
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
