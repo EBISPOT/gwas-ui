@@ -132,6 +132,32 @@ Mandatory and encouraged fields are shown, with standard headers.
 
 
 |*
+|variant_id
+|An internal variant identifier in the form of 
+`<chromosome>_<base_pair_location>_
+<other_allele>_<effect_allele>`
+|Encouraged
+|As above, concatenated with underscores (`_`)
+|`13_40983974_A_G`
+
+
+|*
+|rs_id
+|The rsID of the variant
+|Encouraged
+|Valid rsID
+|`rs7329174`
+
+
+|*
+|info
+|Imputation information metric
+|Encouraged
+|Number between 0 and 1
+|`0.98`
+
+
+|*
 |ci_lower
 |Lower confidence interval for the effect
 |Encouraged
@@ -148,29 +174,11 @@ Mandatory and encouraged fields are shown, with standard headers.
 
 
 |*
-|rs_id
-|The rsID of the variant
+|ref_allele
+|State which of the alleles is the reference allele
 |Encouraged
-|Valid rsID
-|`rs7329174`
-
-
-|*
-|variant_id
-|An internal variant identifier in the form of 
-`<chromosome>_<base_pair_location>_
-<other_allele>_<effect_allele>`
-|Encouraged
-|As above, concatenated with underscores (`_`)
-|`13_40983974_A_G`
-
-
-|*
-|info
-|Imputation information metric
-|Encouraged
-|Number between 0 and 1
-|`0.98`
+|'EA' for effect allele, 'OA' for other allele or 'NA' if unknown
+|`EA`
 
 
 |*
