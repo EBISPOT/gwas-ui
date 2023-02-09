@@ -68,7 +68,8 @@ Mandatory and encouraged fields are shown, with standard headers.
 |effect_allele
 |The allele associated with the effect
 |Mandatory
-|Sequence of `A`, `C`, `T` and `G`
+|Sequence of `A`, `C`, `T` and `G`.
+`LONG_STRING` may be used where sequence is too long to be represented.
 |`G`
 
 |3
@@ -81,7 +82,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 |4
 |(see below)
 |Column 4 must contain the primary effect size measurement (i.e. beta, odds ratio _or_ hazard ratio). If you have calculated more than one effect size statistic (e.g. beta as well as odds ratio), the other can be entered as an additional column at the end of the file.
-|Mandatory to include beta _or_ odds_ratio _or_ hazard ratio
+|Mandatory to include beta _or_ odds_ratio _or_ hazard_ratio
 |-
 |-
 
@@ -177,7 +178,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 |ref_allele
 |State which of the alleles is the reference allele
 |Encouraged
-|'EA' for effect allele, 'OA' for other allele or 'NA' if unknown
+|`EA` for effect allele, `OA` for other allele or `#NA` if unknown
 |`EA`
 
 
