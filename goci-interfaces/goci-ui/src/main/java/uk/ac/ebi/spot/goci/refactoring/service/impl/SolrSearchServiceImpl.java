@@ -70,10 +70,8 @@ public class SolrSearchServiceImpl implements SolrSearchService {
 
     private String buildURIComponent( int maxResults, int page, String query, SearchStudyDTO searchStudyDTO,
                                      String sortProperty, String sortDirection) {
-        StringBuilder solrSearchBuilder = new StringBuilder();
-        solrSearchBuilder.append(searchConfiguration.getGwasSearchFatServer().toString())
-                .append("/select?");
-        UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(solrSearchBuilder.toString())
+        String fatSolrUri = restInteractionService.getFatSolrUri();
+        UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(fatSolrUri)
                 .queryParams(buildQueryParams( maxResults, page, query, searchStudyDTO, sortProperty, sortDirection))
                 .build();
         return uriComponents.toUriString();
@@ -110,38 +108,17 @@ public class SolrSearchServiceImpl implements SolrSearchService {
         String bgTrait = searchStudyDTO.getBgTrait();
         filterQueryBuilder.append(filterQuery);
 
-        if(accessionId != null && reportedTrait != null && efoTrait != null && bgTrait != null) {
-            filterQueryBuilder.append(String.format(" AND accessionId:\"%s\" AND traitName:\"*%s*\" AND " +
-                            "mappedLabel:\"*%s*\" AND mappedBkgLabel:\"*%s*\"",accessionId, reportedTrait,
-                            efoTrait,  bgTrait));
-
-        } else if(reportedTrait != null && efoTrait != null && bgTrait != null ) {
-            filterQueryBuilder.append(String.format(" AND traitName:\"*%s*\" AND " +
-                            "mappedLabel:\"*%s*\" AND mappedBkgLabel:\"*%s*\"", reportedTrait,
-                    efoTrait,  bgTrait));
-        }else if(reportedTrait != null && efoTrait != null ) {
-            filterQueryBuilder.append(String.format(" AND traitName:\"*%s*\" AND " +
-                            "mappedLabel:\"*%s*\"", reportedTrait,
-                    efoTrait));
+        if(accessionId != null) {
+            filterQueryBuilder.append(String.format(" AND accessionId:\"%s\"",accessionId));
         }
-        else if(reportedTrait != null && bgTrait != null ) {
-            filterQueryBuilder.append(String.format(" AND traitName:\"*%s*\" AND " +
-                            "mappedBkgLabel:\"*%s*\"", reportedTrait,
-                    bgTrait));
-        }else if(efoTrait != null && bgTrait != null ) {
-            filterQueryBuilder.append(String.format(" AND mappedLabel:\"*%s*\" AND " +
-                            "mappedBkgLabel:\"*%s*\"", efoTrait,
-                    bgTrait));
-        }else if(reportedTrait != null ) {
-            filterQueryBuilder.append(String.format(" AND traitName:\"*%s*\"", reportedTrait));
-        }else if(efoTrait != null ) {
-            filterQueryBuilder.append(String.format(" AND mappedLabel:\"*%s*\"", efoTrait));
-        }else if(bgTrait != null ) {
-            filterQueryBuilder.append(String.format(" AND mappedBkgLabel:\"*%s*\"", bgTrait));
-        }else {
-            if(accessionId != null) {
-                filterQueryBuilder.append(String.format(" AND accessionId:\"%s\"", accessionId));
-            }
+        if(reportedTrait != null) {
+            filterQueryBuilder.append(String.format(" AND traitName:\"%s\"",reportedTrait));
+        }
+        if(efoTrait != null) {
+            filterQueryBuilder.append(String.format(" AND mappedLabel:\"%s\"",efoTrait));
+        }
+        if(bgTrait != null) {
+            filterQueryBuilder.append(String.format(" AND mappedBkgLabel:\"%s\"",bgTrait));
         }
 
         return filterQueryBuilder.toString();

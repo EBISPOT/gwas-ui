@@ -10,6 +10,8 @@ public class SearchUIConstants {
 
     public static final String VARIANTS = "/variants";
 
+    public static final String PUBLICATIONS = "/publications";
+
     public static final String SEARCH_STUDY = "/study";
 
     public static final String LINKS_PARENT = "parent";
@@ -18,4 +20,12 @@ public class SearchUIConstants {
     public static final String PURGE = "purge";
 
     public static final String FACET_STUDY = "study";
+    public static final String FACET_ASSOCIATION = "association";
+
+    public static final String ASSOCIATION_SOLR_FIELDS = "strongestAllele, riskFrequency, pValueMantissa, pValueExponent, qualifier, "
+            + "orPerCopyNum, orDescription, betaNum, betaUnit, betaDirection, range, ensemblMappedGenes, traitName, "
+            + "efoLink, mappedLabel, mappedUri, mappedBkgLabel, mappedBkgUri, positionLinks, author_s, publicationDate, pubmedId, "
+            + "accessionId";
+
+
 }

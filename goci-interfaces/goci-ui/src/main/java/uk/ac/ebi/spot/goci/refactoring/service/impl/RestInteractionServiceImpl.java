@@ -42,4 +42,11 @@ public class RestInteractionServiceImpl implements RestInteractionService {
         log.info("responseEntity Body"+responseEntity.hasBody());
       return responseEntity.getBody();
     }
+
+    public String getFatSolrUri() {
+        StringBuilder solrSearchBuilder = new StringBuilder();
+        solrSearchBuilder.append(searchConfiguration.getGwasSearchFatServer().toString())
+                .append("/select?");
+        return solrSearchBuilder.toString();
+    }
 }

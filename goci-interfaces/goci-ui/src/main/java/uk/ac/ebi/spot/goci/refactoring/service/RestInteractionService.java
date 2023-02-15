@@ -6,5 +6,7 @@ public interface RestInteractionService {
 
     public SolrData callSolrAPI(String uri);
 
+    public String getFatSolrUri();
+
 
 }

@@ -3,8 +3,6 @@ package uk.ac.ebi.spot.goci.refactoring.dto;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +10,13 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Component;
-import uk.ac.ebi.spot.goci.refactoring.model.EFOKeyLabel;
 import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
 import uk.ac.ebi.spot.goci.refactoring.rest.SolrSearchStudyController;
+import uk.ac.ebi.spot.goci.refactoring.util.SolrEntityTransformerUtility;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +36,9 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
     @Autowired
     SearchConfiguration searchConfiguration;
 
-    private final static DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ");
+    @Autowired
+    SolrEntityTransformerUtility solrEntityTransformerUtility;
+
 
     @Override
     public Resource<StudySolrDTO> toResource(StudyDoc studyDoc)  {
@@ -51,11 +52,11 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
                                         .title(studyDoc.getTitle())
                                         .associationCount(studyDoc.getAssociationCount())
                                         .pubmedId(studyDoc.getPubmedId())
-                                        .publicationDate(Optional.ofNullable(studyDoc.getPublicationDate()).map(this::formatPubDate).orElse(null))
+                                        .publicationDate(Optional.ofNullable(studyDoc.getPublicationDate()).map(solrEntityTransformerUtility::formatPubDate).orElse(null))
                                         .summaryStatistics(studyDoc.getFullPvalueSet() ? getSummaryStatsFTPDetails(studyDoc.getAccessionId()) : "NA")
-                                        .efoTraits(Optional.ofNullable(studyDoc.getEfoLink()).map(this::getEFOLinks)
-                                                .orElse(this.getEFOLinksfromUri(studyDoc.getMappedLabel(),studyDoc.getMappedUri())))
-                                        .bgTraits(Optional.ofNullable(studyDoc.getMappedBkgLabels()).map( bgLinks -> this.getBgLinksfromUri
+                                        .efoTraits(Optional.ofNullable(studyDoc.getEfoLink()).map(solrEntityTransformerUtility::getEFOLinks)
+                                                .orElse(solrEntityTransformerUtility.getEFOLinksfromUri(studyDoc.getMappedLabel(),studyDoc.getMappedUri())))
+                                        .bgTraits(Optional.ofNullable(studyDoc.getMappedBkgLabels()).map( bgLinks -> solrEntityTransformerUtility.getEFOLinksfromUri
                                                         (studyDoc.getMappedBkgLabels(),studyDoc.getMappedBkgUris())).orElse(null))
                                         .initialSampleDescription(Optional.ofNullable(studyDoc.getInitialSampleDescription()).map(this::populateInitialSampleDesc)
                                                 .orElse(null))
@@ -94,37 +95,6 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
                 +"-GCST"+StringUtils.leftPad(String.valueOf(upperRange),6,"0");
         return range;
     }
-
-    private List<EFOKeyLabel> getEFOLinks(List<String> efoLink) {
-
-        return efoLink.stream().map(this::splitEFOText)
-                .collect(Collectors.toList());
-    }
-
-    private List<EFOKeyLabel> getEFOLinksfromUri(List<String> efoMappedLabel, List<String> efoMappedUri) {
-        List<EFOKeyLabel> arr = new ArrayList<>();
-       for(int i = 0; i < efoMappedLabel.size(); i++) {
-           String efoId = efoMappedUri.get(i).substring(efoMappedUri.get(i).lastIndexOf("/")+1);
-           arr.add(new EFOKeyLabel(efoId,efoMappedLabel.get(i)));
-       }
-       return arr;
-    }
-
-    private List<EFOKeyLabel> getBgLinksfromUri(List<String> bgMappedLabel, List<String> bgMappedUri) {
-        List<EFOKeyLabel> arr = new ArrayList<>();
-        for(int i = 0; i < bgMappedLabel.size(); i++) {
-            String bgId = bgMappedUri.get(i).substring(bgMappedUri.get(i).lastIndexOf("/")+1);
-            arr.add(new EFOKeyLabel(bgId,bgMappedLabel.get(i)));
-        }
-        return arr;
-    }
-
-    private EFOKeyLabel splitEFOText(String efoText) {
-       String[] text = efoText.split("\\|");
-       return new EFOKeyLabel(text[1],text[0]);
-    }
-
-
     private List<String> populateInitialSampleDesc(String sampleDesc) {
         List<String> text = new ArrayList<>();
         String[] desc = sampleDesc.split(INITIAL_SAMPLE_DESC_REGEX);
@@ -183,9 +153,6 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
         }).collect(Collectors.toList());
     }
 
-    private LocalDate formatPubDate(String pubDate) {
-        return LocalDate.parse(pubDate, dtf );
-    }
 
 }
 
