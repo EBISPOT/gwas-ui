@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import uk.ac.ebi.spot.goci.model.solr.Doc;
+import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
 
 @Data
 @Builder
@@ -27,6 +28,5 @@ public class Response {
     @JsonProperty("start")
     private Integer start;
     @JsonProperty("docs")
-    private List<Doc> docs = null;
-
+    private List<?> docs = null;
 }
