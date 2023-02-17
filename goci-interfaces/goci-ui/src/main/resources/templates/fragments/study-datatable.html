@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!--move styles to the parent, remove jquery from scripts, replace parent jquery with this one here, remove head tag,-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.4/css/buttons.bootstrap.min.css"/>
+    <style>
+        .dataTables_info {
+            float: left;
+        }
+        .dataTables_filter {
+            float: right;
+        }
+    </style>
+</head>
 
 <body th:fragment="studies_datatable">
 <!-- Studies table -->
@@ -21,21 +35,84 @@
         </div>
 
         <div class="panel-body">
-            <table id="study-table" class="table table-striped borderless"
-                   data-flat="true"
-                   data-show-export="true"
-                   data-export-types="['csv']"
-                   data-search="true"
-                   data-show-columns="true"
-                   data-show-multi-sort="false"
-                   data-icons="icons"
-                   data-filter-control="true">
+            <table id="example"  style="width:100%" class="table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>First author</th>
+                    <th>Study accession</th>
+                    <th>Pub. date</th>
+                    <th>Journal</th>
+                    <th>Title</th>
+                    <th>Reported trait</th>
+                    <th>Trait(s)</th>
+                    <th>Background trait(s)</th>
+                    <th>Discovery sample</th>
+                    <th>Replication sample</th>
+                    <th>Association count</th>
+                    <th>Summary statistics</th>
+                </tr>
+                </thead>
             </table>
         </div>
     </div>
 </div>
-
 <script th:src="@{/js/common-datatables/datatable-icons.js}"></script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.13.2/dataRender/ellipsis.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/variants/rs7329174/studies',
+                dataType: 'JSON',
+                dataSrc: function (json) {
+                    json.recordsTotal = json.page.totalElements;
+                    json.recordsFiltered = json.page.totalElements;
+                    console.log(json);
+                    return json._embedded.studies;
+                },
+                data: function ( d ) {
+                    console.log(d)
+                    var c = {}
+                    c.sort = d.columns[d.order[0].column].name;
+                    c.dir = d.order[0].dir;
+                    c.size = d.length;
+                    c.page = d.start / d.length;
+                    console.log(c)
+                    return c;
+                }
+            },
+            columns: [
+                { data: 'firstAuthor', name: 'firstAuthor'},
+                { data: 'accessionId', name: 'accessionId' },
+                { data: 'publicationDate', name: 'publicationDate' },
+                { data: 'journal', name: 'journal'},
+                { data: 'title', name: 'title', render: $.fn.dataTable.render.ellipsis(50, true)},
+                { data: 'reportedTrait', name: 'reportedTrait'},
+                { data: 'efoTraits', name: 'efoTraits'},
+                { data: 'backgroundTraits', name: 'backgroundTraits', defaultContent: "-"},
+                { data: 'discoverySampleAncestry', name: 'discoverySampleAncestry'},
+                { data: 'replicationSampleAncestry', name: 'replicationSampleAncestry'},
+                { data: 'associationCount', name: 'associationCount'},
+                { data: 'associationCount', name: 'associationCount'},
+            ],
+            dom: 'Bfrtip',
+            lengthMenu: [
+                [ 10, 25, 50],
+                [ '10', '25', '50']
+            ],
+            buttons: [
+                'pageLength', 'colvis'
+            ]
+        });
+    });
+</script>
 </body>
 </html>
