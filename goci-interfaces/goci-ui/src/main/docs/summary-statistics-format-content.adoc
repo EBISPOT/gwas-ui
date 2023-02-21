@@ -33,8 +33,9 @@ To validate your files prior to upload, we provide a validator that can be run l
 * The first line contains the table headers, followed by one row for each variant analysed.
 * Columns must follow the standard headers and data formats listed in Table 1.
 * All mandatory fields must be present, in the defined order (0-7) (Table 1).
-* You may include any number of additional columns beyond the set of mandatory fields. Table 1 shows some non-mandatory (encouraged) fields that may be
-present (*).
+* Table 1 shows some non-mandatory (encouraged) fields that may be present (*). You are encouraged to include these additional fields in the standard format, where possible.
+* You may include any number of additional columns beyond the set of mandatory fields. 
+* We recommend that analyses are performed with effect allele and other allele fixed to ALT and REF where possible, which provides optimal identification of indels. However, other allele orders can be submitted. The optional column ref_allele should be used to indicate which allele is REF (see Table 1). 
 
 
 *Table 1. Required content and format*.
@@ -119,7 +120,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 |effect_allele_frequency
 |Frequency of the effect allele in the control population
 |Mandatory
-|Number between 0 and 1
+|Number between 0 and 1. If required, effect allele frequency may be rounded to a threshold value defined in the metadata
 |`0.22`
 
 
@@ -127,7 +128,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 |p_value
 |P-value of the association statistic
 |Mandatory
-|Number between 0 and 1 (standard p-value) _or_ Number ≥ 0 (-log10 p-value)
+|Number between 0 and 1 (standard p-value) _or_ Number ≥ 0 (-log10 p-value). If any p-value is equal to 0, the precision of the p-value must be given in the accompanying metadata
 |`1E-08`
 
 
