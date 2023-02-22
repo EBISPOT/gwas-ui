@@ -219,7 +219,7 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 |`UKB_ANID45956`
 |===
 
-* Effect allele frequency is a mandatory field. However, where privacy concerns might otherwise be a barrier to sharing the data (e.g. in small cohorts with sensitive phenotypes), a cutoff may be specified so that allele frequencies below that cutoff are rounded-up to mask their true values. For example, 0.01 here indicates the lowest possible value for the minor allele frequency in this file is 0.01, and anything below this threshold has been rounded up to 0.01 (noting that the minor allele is not necessarily the effect allele). Since masking allele frequency limits the downstream utility of the data, please submit full EAF data where possible.
+*{sp}Effect allele frequency is a mandatory field. However, where privacy concerns might otherwise be a barrier to sharing the data (e.g. in small cohorts with sensitive phenotypes), a cutoff may be specified so that allele frequencies below that cutoff are rounded-up to mask their true values. For example, 0.01 here indicates the lowest possible value for the minor allele frequency in this file is 0.01, and anything below this threshold has been rounded up to 0.01 (noting that the minor allele is not necessarily the effect allele). Since masking allele frequency limits the downstream utility of the data, please submit full EAF data where possible.
 
 
 === Additional information
