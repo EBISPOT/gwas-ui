@@ -13,6 +13,14 @@
         .dataTables_filter {
             float: right;
         }
+        tfoot input {
+            width: 100% !important;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+        tfoot {
+            display: table-header-group;
+        }
     </style>
 </head>
 
@@ -52,6 +60,23 @@
                     <th>Summary statistics</th>
                 </tr>
                 </thead>
+                <tfoot>
+                <tr>
+                    <th>First author</th>
+                    <th class="searchable">Study accession</th>
+                    <th>Pub. date</th>
+                    <th>Journal</th>
+                    <th>Title</th>
+                    <th class="searchable">Reported trait</th>
+                    <th>Trait(s)</th>
+                    <th>Background trait(s)</th>
+                    <th>Discovery sample</th>
+                    <th>Replication sample</th>
+                    <th>Association count</th>
+                    <th>Summary statistics</th>
+                </tr>
+                </tfoot>
+                <tbody></tbody>
             </table>
         </div>
     </div>
@@ -65,12 +90,20 @@
 <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.colVis.min.js"></script>
 <script src="https://cdn.datatables.net/plug-ins/1.13.2/dataRender/ellipsis.js"></script>
 <script>
+    $('#example tfoot th').each(function () {
+        if ($(this).hasClass('searchable')) {
+            $(this).html('<input type="text" class="form-control"/>');
+        }
+        else {
+            $(this).html('<input type="text" class="form-control" disabled/>');
+        }
+    });
     $(document).ready(function () {
         $('#example').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-                url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/variants/rs7329174/studies',
+                url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/variants/rs9399137/studies',
                 dataType: 'JSON',
                 dataSrc: function (json) {
                     json.recordsTotal = json.page.totalElements;
@@ -81,6 +114,11 @@
                 data: function ( d ) {
                     console.log(d)
                     var c = {}
+                    d.columns.forEach(e => {
+                        if (e.search.value !== '') {
+                            c[e.name] = e.search.value;
+                        }
+                    })
                     c.sort = d.columns[d.order[0].column].name;
                     c.dir = d.order[0].dir;
                     c.size = d.length;
@@ -91,8 +129,8 @@
             },
             columns: [
                 { data: 'firstAuthor', name: 'firstAuthor'},
-                { data: 'accessionId', name: 'accessionId' },
-                { data: 'publicationDate', name: 'publicationDate' },
+                { data: 'accessionId', name: 'accessionId'},
+                { data: 'publicationDate', name: 'publicationDate'},
                 { data: 'journal', name: 'journal'},
                 { data: 'title', name: 'title', render: $.fn.dataTable.render.ellipsis(50, true)},
                 { data: 'reportedTrait', name: 'reportedTrait'},
@@ -110,7 +148,18 @@
             ],
             buttons: [
                 'pageLength', 'colvis'
-            ]
+            ],
+            initComplete: function () {
+                this.api()
+                    .columns()
+                    .every(function () {
+                        var that = this;
+                        $('input', this.footer()).on('keyup change', function(e) {
+                            if (that.search() !== this.value) that.search(this.value);
+                            if (e.keyCode === 13 ) that.draw();
+                        });
+                    });
+            },
         });
     });
 </script>
