@@ -89,18 +89,19 @@
 <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.colVis.min.js"></script>
 <script src="https://cdn.datatables.net/plug-ins/1.13.2/dataRender/ellipsis.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
 <script>
     $('#example tfoot th').each(function () {
         if ($(this).hasClass('searchable')) {
             $(this).html('<input type="text" class="form-control"/>');
         }
         else {
-            $(this).html('<input type="text" class="form-control" disabled/>');
+            $(this).html('<input type="text" class="form-control" disabled="disabled"/>');
         }
     });
     $(document).ready(function () {
+
         $('#example').DataTable({
-            processing: true,
             serverSide: true,
             ajax: {
                 url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/variants/rs9399137/studies',
@@ -111,7 +112,7 @@
                     console.log(json);
                     return json._embedded.studies;
                 },
-                data: function ( d ) {
+                data: function (d) {
                     console.log(d)
                     var c = {}
                     d.columns.forEach(e => {
@@ -134,7 +135,15 @@
                 { data: 'journal', name: 'journal'},
                 { data: 'title', name: 'title', render: $.fn.dataTable.render.ellipsis(50, true)},
                 { data: 'reportedTrait', name: 'reportedTrait'},
-                { data: 'efoTraits', name: 'efoTraits'},
+                { data: 'efoTraits', name: 'efoTraits', render: function (data, type, row, meta) {
+                    $.each(data, function(index, trait) {
+                        // TODO use the gwasProperties
+                        //  const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
+                        const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
+                        data[index] = '<a href="' + link + '">' + trait.label + '</a>'
+                    });
+                    return data.join(', ')
+                }},
                 { data: 'backgroundTraits', name: 'backgroundTraits', defaultContent: "-"},
                 { data: 'discoverySampleAncestry', name: 'discoverySampleAncestry'},
                 { data: 'replicationSampleAncestry', name: 'replicationSampleAncestry'},
@@ -160,8 +169,35 @@
                         });
                     });
             },
+        })
+            .on('processing.dt',function(e, settings, processing ){
+            if (processing){
+                showLoadingOverLay('#example');
+            } else {
+                hideLoadingOverLay('#example');
+            }
         });
     });
+    // todo externalise
+    showLoadingOverLay = function(tagID){
+        var options = {
+            color: "rgba(255, 255, 255, 0.8)",   // String
+            custom: "",                // String/DOM Element/jQuery Object
+            fade: [10, 10],                      // Boolean/Integer/String/Array
+            fontawesome: "",                          // String
+//            image: "data:image/gif;base32,...",  // String
+            imagePosition: "center center",             // String
+            maxSize: "100px",                  // Integer/String
+            minSize: "20px",                    // Integer/String
+            resizeInterval: 10,                       // Integer
+            size: "20%",                       // Integer/String
+            zIndex: 1000,                        // Integer
+        }
+        $(tagID).LoadingOverlay("show",options);
+    }
+    hideLoadingOverLay = function(tagID){
+        return $(tagID).LoadingOverlay("hide", true);
+    }
 </script>
 </body>
 </html>
