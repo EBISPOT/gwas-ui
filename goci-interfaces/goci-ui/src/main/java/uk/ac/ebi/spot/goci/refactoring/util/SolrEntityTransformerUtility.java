@@ -40,4 +40,8 @@ public class SolrEntityTransformerUtility {
     public LocalDate formatPubDate(String pubDate) {
         return LocalDate.parse(pubDate, dtf );
     }
+
+    public String retreiveEFOFromUri(String uri) {
+        return uri.substring(uri.lastIndexOf("/") + 1);
+    }
 }

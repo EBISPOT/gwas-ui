@@ -59,6 +59,9 @@ public class AssociationDoc extends Doc implements Serializable {
     @JsonProperty("studyId")
     private String studyId;
 
+    @JsonProperty("rsId")
+    private List<String> rsIds;
+
     public AssociationDoc(@JsonProperty("traitUri") Set<String> traitUris,
                           @JsonProperty("shortForm") Set<String> shortForms,
                           @JsonProperty("label") List<String> labels,
@@ -90,7 +93,8 @@ public class AssociationDoc extends Doc implements Serializable {
                           @JsonProperty("publicationDate") String publicationDate,
                           @JsonProperty("pubmedId") String pubmedId,
                           @JsonProperty("accessionId") String accessionId,
-                          @JsonProperty("studyId") String studyId) {
+                          @JsonProperty("studyId") String studyId,
+                          @JsonProperty("rsId") List<String> rsIds) {
         super(traitUris, shortForms, labels, synonym, efoLink, parent, descriptions, id, resourcename);
         this.strongestAllele = strongestAllele;
         this.riskFrequency = riskFrequency;
@@ -115,6 +119,7 @@ public class AssociationDoc extends Doc implements Serializable {
         this.pubmedId = pubmedId;
         this.accessionId = accessionId;
         this.studyId = studyId;
+        this.rsIds = rsIds;
     }
 
     public List<String> getStrongestAllele() {
@@ -299,5 +304,13 @@ public class AssociationDoc extends Doc implements Serializable {
 
     public void setStudyId(String studyId) {
         this.studyId = studyId;
+    }
+
+    public List<String> getRsIds() {
+        return rsIds;
+    }
+
+    public void setRsIds(List<String> rsIds) {
+        this.rsIds = rsIds;
     }
 }

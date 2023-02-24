@@ -27,5 +27,7 @@ public class SearchUIConstants {
             + "efoLink, mappedLabel, mappedUri, mappedBkgLabel, mappedBkgUri, positionLinks, author_s, publicationDate, pubmedId, "
             + "accessionId";
 
+    public static final String EFO_FIELDS = "traitName, mappedUri, mappedLabel, rsId, shortForm";
+
 
 }
