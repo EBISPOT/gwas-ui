@@ -17,13 +17,10 @@
     div.dataTables_info, div.dataTables_length {
       float: left;
     }
-    tfoot input {
+    thead input {
       width: 100% !important;
       padding: 3px;
       box-sizing: border-box;
-    }
-    tfoot {
-      display: table-header-group;
     }
   </style>
 </head>
@@ -47,7 +44,7 @@
     </div>
 
     <div class="panel-body">
-      <table id="example"  style="width:100%" class="table table-striped borderless">
+      <table id="example"  style="width:100%" class="table table-striped table-bordered">
         <thead>
         <tr>
           <th>First author</th>
@@ -63,8 +60,6 @@
           <th>Association count</th>
           <th>Summary statistics</th>
         </tr>
-        </thead>
-        <tfoot>
         <tr>
           <th>First author</th>
           <th class="searchable">Study accession</th>
@@ -79,7 +74,7 @@
           <th>Association count</th>
           <th>Summary statistics</th>
         </tr>
-        </tfoot>
+        </thead>
         <tbody></tbody>
       </table>
     </div>
@@ -95,7 +90,7 @@
 <script src="https://cdn.datatables.net/plug-ins/1.13.2/dataRender/ellipsis.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
 <script>
-  $('#example tfoot th').each(function () {
+  $('#example thead tr:eq(1) th').each(function () {
     if ($(this).hasClass('searchable')) {
       $(this).html('<input type="text" class="form-control"/>');
     }
@@ -130,6 +125,7 @@
           return c;
         }
       },
+      scrollX: true,
       order: [],
       columns: [
         { data: 'firstAuthor', name: 'firstAuthor', orderable: false},
@@ -162,7 +158,7 @@
                 .columns()
                 .every(function () {
                   var that = this;
-                  $('input', this.footer()).on('keyup change', function(e) {
+                  $('input', this.header()).on('keyup change', function(e) {
                     if (that.search() !== this.value) that.search(this.value);
                     if (e.keyCode === 13 ) that.draw();
                   });
