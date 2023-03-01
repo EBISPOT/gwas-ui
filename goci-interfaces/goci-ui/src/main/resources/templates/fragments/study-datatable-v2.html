@@ -7,11 +7,15 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap.min.css"/>
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.4/css/buttons.bootstrap.min.css"/>
   <style>
-    .dataTables_info {
-      float: left;
+    .btn:focus,.btn:active,a:focus {
+      outline: none !important;
+      box-shadow: none;
     }
-    .dataTables_filter {
+    div.dt-buttons {
       float: right;
+    }
+    div.dataTables_info, div.dataTables_length {
+      float: left;
     }
     tfoot input {
       width: 100% !important;
@@ -149,13 +153,9 @@
         { data: 'associationCount', name: 'associationCount'},
         { data: 'summaryStatistics', name: 'fullPvalueSet', render: function (data) { return data === 'NA' ? '-' : '<a href="'+data+'">FTP Download</a>'}},
       ],
-      dom: 'Bfrtip',
-      lengthMenu: [
-        [ 10, 25, 50],
-        [ '10', '25', '50']
-      ],
+      dom: 'lBrtip',
       buttons: [
-        'pageLength', 'colvis'
+        'colvis'
       ],
       initComplete: function () {
         this.api()
@@ -168,6 +168,12 @@
                   });
                 });
       },
+      language: {
+        paginate: {
+          next: '<span>&raquo;</span>',
+          previous: '<span>&laquo;</span>'
+        }
+      }
     })
             .on('processing.dt',function(e, settings, processing ){
               if (processing){
