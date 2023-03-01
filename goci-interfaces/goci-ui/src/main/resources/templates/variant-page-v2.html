@@ -42,19 +42,20 @@
   <![endif]-->
   <!--    todo remove-->
   <style>
-    .dataTables_info {
-      float: left;
+    .btn:focus,.btn:active,a:focus {
+      outline: none !important;
+      box-shadow: none;
     }
-    .dataTables_filter {
+    div.dt-buttons {
       float: right;
     }
-    tfoot input {
+    div.dataTables_info, div.dataTables_length {
+      float: left;
+    }
+    thead input {
       width: 100% !important;
       padding: 3px;
       box-sizing: border-box;
-    }
-    tfoot {
-      display: table-header-group;
     }
   </style>
 </head>
