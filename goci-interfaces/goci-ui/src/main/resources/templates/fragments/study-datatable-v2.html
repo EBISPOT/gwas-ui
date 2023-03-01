@@ -168,9 +168,9 @@
                     .columns()
                     .every(function (index) {
                         const that = this;
-                        $(this.table().container()).on( 'keyup', 'thead tr:eq(1) th:eq(' + index + ') input', function (e) {
-                          if (that.search() !== this.value) that.search(this.value);
-                          if (e.keyCode === 13 ) that.draw();
+                        $(this.table().container()).on('keyup', 'thead tr:eq(1) th:eq(' + index + ') input', function (e) {
+                            if (that.search() !== this.value) that.search(this.value);
+                            if (e.keyCode === 13) that.draw();
                         });
                     });
             },
