@@ -10,6 +10,8 @@ public class SearchUIConstants {
 
     public static final String VARIANTS = "/variants";
 
+    public static final String REGIONS = "/regions";
+
     public static final String PUBLICATIONS = "/publications";
 
     public static final String SEARCH_STUDY = "/study";
@@ -26,6 +28,13 @@ public class SearchUIConstants {
             + "orPerCopyNum, orDescription, betaNum, betaUnit, betaDirection, range, ensemblMappedGenes, traitName, "
             + "efoLink, mappedLabel, mappedUri, mappedBkgLabel, mappedBkgUri, positionLinks, author_s, publicationDate, pubmedId, "
             + "accessionId";
+
+    public static final String ACCESSION_ID = "accessionId";
+
+
+    public static final String MAX_STUDY_COUNT = "50000";
+
+    public static final String EFO_FIELDS = "traitName, mappedUri, mappedLabel, rsId, shortForm";
 
 
 }

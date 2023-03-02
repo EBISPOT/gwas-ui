@@ -11,7 +11,7 @@ import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
-import uk.ac.ebi.spot.goci.refactoring.rest.SolrSearchStudyController;
+import uk.ac.ebi.spot.goci.refactoring.rest.SolrSearchVariantController;
 import uk.ac.ebi.spot.goci.refactoring.util.SolrEntityTransformerUtility;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
@@ -70,9 +70,9 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
                                         .build();
         try {
             final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
-                    ControllerLinkBuilder.methodOn(SolrSearchStudyController.class).searchStudies(null, studyDoc.getAssociation_rsId().get(0), null, null));
+                    ControllerLinkBuilder.methodOn(SolrSearchVariantController.class).searchStudies(null, studyDoc.getAssociation_rsId().get(0), null, null));
             Resource<StudySolrDTO> resource = new Resource<>(studySolrDTO);
-            resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withRel(SearchUIConstants.LINKS_PARENT));
+            resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withSelfRel());
             return resource;
         } catch(IOException ex ){
             log.error("IO Exception "+ex.getMessage(),ex);

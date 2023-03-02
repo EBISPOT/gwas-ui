@@ -9,5 +9,5 @@ import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 
 public interface SolrSearchAssociationService {
 
-    public Page<AssociationDoc> searchAssociations(String pubmedId, Pageable pageable, SearchAssociationDTO searchAssociationDTO);
+   Page<AssociationDoc> searchAssociations(String query, Pageable pageable, SearchAssociationDTO searchAssociationDTO);
 }

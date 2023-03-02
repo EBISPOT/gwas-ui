@@ -27,7 +27,7 @@ import java.util.List;
 @Service
 public class SolrSearchAssociationServiceImpl implements SolrSearchAssociationService {
 
-    private static final Logger log = LoggerFactory.getLogger(SolrSearchServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(SolrSearchStudyServiceImpl.class);
     @Autowired
     SearchConfiguration searchConfiguration;
     @Autowired
@@ -36,9 +36,8 @@ public class SolrSearchAssociationServiceImpl implements SolrSearchAssociationSe
     ObjectMapper objectMapper = new ObjectMapper();
 
 
-    public Page<AssociationDoc> searchAssociations(String pubmedId, Pageable pageable, SearchAssociationDTO searchAssociationDTO) {
-
-        String query = String.format("pubmedId:%s", pubmedId);
+    public Page<AssociationDoc> searchAssociations(String query, Pageable pageable, SearchAssociationDTO searchAssociationDTO) {
+        log.info("Query->"+query);
         String uri = buildURIComponent(pageable.getPageSize(), pageable.getPageNumber() + 1, query,
                 searchAssociationDTO, buildSortParam(pageable));
         SolrData data = restInteractionService.callSolrAPI(uri);
