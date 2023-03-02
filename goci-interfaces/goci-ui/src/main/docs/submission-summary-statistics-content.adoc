@@ -114,6 +114,16 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 |
 |`IMPUTE`
 
+|Variant count
+|
+|The number of variants analysed in the discovery stage (after QC)
+|
+|yes
+|
+|Number >100,000
+|
+|`500000`
+
 |Adjusted covariates
 |
 |Any covariates the GWAS is adjusted for. Multiple values can be listed separated by '\|'.
