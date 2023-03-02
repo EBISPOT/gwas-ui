@@ -23,6 +23,7 @@ import uk.ac.ebi.spot.goci.refactoring.model.SearchStudyDTO;
 import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchAssociationService;
 import uk.ac.ebi.spot.goci.refactoring.service.impl.RestInteractionServiceImpl;
+import uk.ac.ebi.spot.goci.refactoring.util.SolrQueryParamBuilder;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
@@ -42,6 +43,9 @@ public class SolrSearchPublicationController {
     @Autowired
     SearchConfiguration searchConfiguration;
 
+    @Autowired
+    SolrQueryParamBuilder solrQueryParamBuilder;
+
     @GetMapping(value = "/{publicationId}/associations", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
@@ -50,7 +54,8 @@ public class SolrSearchPublicationController {
                                                             @PageableDefault(size = 10, page = 0) Pageable pageable,
                                                             PagedResourcesAssembler assembler) throws IOException {
         log.info(" Inside  searchAssociations ");
-        Page<AssociationDoc> pageStudyAsscns = solrSearchAssociationService.searchAssociations(publicationId,pageable,searchAssociationDTO);
+        String query = solrQueryParamBuilder.buildQueryParam("PMID", publicationId);
+        Page<AssociationDoc> pageStudyAsscns = solrSearchAssociationService.searchAssociations(query,pageable,searchAssociationDTO);
         final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
                 .methodOn(SolrSearchPublicationController.class).searchAssociations(searchAssociationDTO, publicationId, pageable, assembler));
         return assembler.toResource(pageStudyAsscns, associationSolrDTOAssembler,

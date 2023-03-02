@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface SolrSearchEFOTraitsService {
 
-    public Page<EFOTraitDoc> searchEFOTraits(SearchEFOTraitDTO searchEFOTraitDTO, String rsId, Pageable pageable);
+Page<EFOTraitDoc> searchEFOTraits(SearchEFOTraitDTO searchEFOTraitDTO, String query, Pageable pageable);
 
 
 }

@@ -14,17 +14,12 @@ import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import uk.ac.ebi.spot.goci.refactoring.dto.AssociationSolrDTO;
-import uk.ac.ebi.spot.goci.refactoring.dto.EFOTraitSolrDTOAssembler;
-import uk.ac.ebi.spot.goci.refactoring.dto.StudySolrDTO;
-import uk.ac.ebi.spot.goci.refactoring.dto.StudySolrDTOAssembler;
-import uk.ac.ebi.spot.goci.refactoring.model.EFOTraitDoc;
-import uk.ac.ebi.spot.goci.refactoring.model.SearchEFOTraitDTO;
-import uk.ac.ebi.spot.goci.refactoring.model.SearchStudyDTO;
-import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
+import uk.ac.ebi.spot.goci.refactoring.dto.*;
+import uk.ac.ebi.spot.goci.refactoring.model.*;
+import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchAssociationService;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchEFOTraitsService;
-import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchService;
-import uk.ac.ebi.spot.goci.refactoring.service.impl.RestInteractionServiceImpl;
+import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchStudyService;
+import uk.ac.ebi.spot.goci.refactoring.util.SolrQueryParamBuilder;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
@@ -33,12 +28,12 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping(value = SearchUIConstants.API_V2+SearchUIConstants.VARIANTS)
-public class SolrSearchStudyController {
+public class SolrSearchVariantController {
 
-    private static final Logger log = LoggerFactory.getLogger(RestInteractionServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(SolrSearchVariantController.class);
 
     @Autowired
-    SolrSearchService solrSearchService;
+    SolrSearchStudyService solrSearchService;
 
     @Autowired
     StudySolrDTOAssembler studySolrDTOAssembler;
@@ -46,9 +41,14 @@ public class SolrSearchStudyController {
     SearchConfiguration searchConfiguration;
     @Autowired
     SolrSearchEFOTraitsService solrSearchEFOTraitsService;
-
+    @Autowired
+    SolrSearchAssociationService solrSearchAssociationService;
     @Autowired
     EFOTraitSolrDTOAssembler efoTraitSolrDTOAssembler;
+    @Autowired
+    AssociationSolrDTOAssembler associationSolrDTOAssembler;
+    @Autowired
+    SolrQueryParamBuilder solrQueryParamBuilder;
 
     @GetMapping(value = "/{variantId}/studies", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
@@ -58,11 +58,31 @@ public class SolrSearchStudyController {
                                                       @PageableDefault(size = 10, page = 0) Pageable pageable,
                                                       PagedResourcesAssembler assembler) throws IOException {
         log.info(" Inside  searchStudies ");
-       Page<StudyDoc> pageStudyDocs = solrSearchService.searchStudies(variantId,pageable,searchStudyDTO);
+       String query = solrQueryParamBuilder.buildQueryParam("VARIANT",variantId);
+       Page<StudyDoc> pageStudyDocs = solrSearchService.searchStudies(query,pageable,searchStudyDTO);
         final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
-                .methodOn(SolrSearchStudyController.class).searchStudies(searchStudyDTO, variantId, pageable, assembler));
+                .methodOn(SolrSearchVariantController.class).searchStudies(searchStudyDTO, variantId, pageable, assembler));
         return assembler.toResource(pageStudyDocs, studySolrDTOAssembler,
                 new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
+
+    }
+
+
+    @GetMapping(value = "/{variantId}/associations", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public PagedResources<AssociationSolrDTO> searchAssociations(SearchAssociationDTO searchAssociationDTO,
+                                                                 @PathVariable String variantId,
+                                                                 @PageableDefault(size = 10, page = 0) Pageable pageable,
+                                                                 PagedResourcesAssembler assembler) throws IOException {
+        log.info(" Inside  searchAssociations ");
+        String query = solrQueryParamBuilder.buildQueryParam("VARIANT",variantId);
+        Page<AssociationDoc> pageAsscnDocs = solrSearchAssociationService.searchAssociations(query, pageable, searchAssociationDTO);
+        final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
+                .methodOn(SolrSearchPublicationController.class).searchAssociations(searchAssociationDTO, variantId, pageable, assembler));
+        return assembler.toResource(pageAsscnDocs, associationSolrDTOAssembler,
+                new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
+
 
     }
 
@@ -74,9 +94,10 @@ public class SolrSearchStudyController {
                                                              @PageableDefault(size = 10, page = 0) Pageable pageable,
                                                              PagedResourcesAssembler assembler) throws IOException {
         log.info(" Inside  searchEFOTraits ");
-       Page<EFOTraitDoc> efoTraitDocs = solrSearchEFOTraitsService.searchEFOTraits(searchEFOTraitDTO, variantId, pageable);
+        String query = solrQueryParamBuilder.buildQueryParam("VARIANT",variantId);
+       Page<EFOTraitDoc> efoTraitDocs = solrSearchEFOTraitsService.searchEFOTraits(searchEFOTraitDTO, query, pageable);
         final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
-                .methodOn(SolrSearchStudyController.class).searchEFOTraits( searchEFOTraitDTO, variantId, pageable, assembler));
+                .methodOn(SolrSearchVariantController.class).searchEFOTraits( searchEFOTraitDTO, variantId, pageable, assembler));
         return assembler.toResource(efoTraitDocs, efoTraitSolrDTOAssembler,
                 new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
 

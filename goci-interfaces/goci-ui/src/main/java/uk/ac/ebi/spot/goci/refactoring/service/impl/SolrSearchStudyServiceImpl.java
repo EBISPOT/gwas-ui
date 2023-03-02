@@ -18,7 +18,7 @@ import uk.ac.ebi.spot.goci.model.solr.SolrData;
 import uk.ac.ebi.spot.goci.refactoring.model.SearchStudyDTO;
 import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
 import uk.ac.ebi.spot.goci.refactoring.service.RestInteractionService;
-import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchService;
+import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchStudyService;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 
@@ -26,9 +26,9 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class SolrSearchServiceImpl implements SolrSearchService {
+public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
 
-    private static final Logger log = LoggerFactory.getLogger(SolrSearchServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(SolrSearchStudyServiceImpl.class);
     @Autowired
     SearchConfiguration searchConfiguration;
 
@@ -37,14 +37,15 @@ public class SolrSearchServiceImpl implements SolrSearchService {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    public Page<StudyDoc> searchStudies(String rsId, Pageable pageable, SearchStudyDTO searchStudyDTO) throws IOException {
-       String query = String.format("rsId:\"%s\" OR association_rsId :\"%s\"", rsId, rsId);
+    public Page<StudyDoc> searchStudies(String query, Pageable pageable, SearchStudyDTO searchStudyDTO) throws IOException {
+       //String query = String.format("rsId:\"%s\" OR association_rsId :\"%s\"", rsId, rsId);
         String sortDirection = "";
         String sortProperty = "";
         Sort sort = pageable.getSort();
         if(sort != null) {
             Sort.Order orderAsscn = sort.getOrderFor("associationCount");
             Sort.Order orderPvalue = sort.getOrderFor("fullPvalueSet");
+            Sort.Order orderPdate = sort.getOrderFor("publicationDate");
             if(orderAsscn != null) {
                 sortDirection =  orderAsscn.isAscending() ? "asc" : "desc";
                 sortProperty = "associationCount";
@@ -53,9 +54,14 @@ public class SolrSearchServiceImpl implements SolrSearchService {
                 sortDirection =  orderPvalue.isAscending() ? "asc" : "desc";
                 sortProperty = "fullPvalueSet";
             }
+            if(orderPdate != null) {
+                sortDirection =  orderPdate.isAscending() ? "asc" : "desc";
+                sortProperty = "publicationDate";
+            }
         }
        String uri = buildURIComponent( pageable.getPageSize(),  pageable.getPageNumber()+1, query, searchStudyDTO, sortProperty, sortDirection);
-       SolrData data =  restInteractionService.callSolrAPI(uri);
+       //SolrData data =  restInteractionService.callSolrAPI(uri, method);
+        SolrData data =  restInteractionService.callSolrAPIwithPayload(uri, buildQueryParams( pageable.getPageSize(), pageable.getPageNumber()+1, query, searchStudyDTO, sortProperty, sortDirection));
        if( data != null &&  data.getResponse() != null ) {
            log.info("Response data Count"+data.getResponse().getNumFound());
            List<? > docs =  data.getResponse().getDocs();
@@ -72,7 +78,7 @@ public class SolrSearchServiceImpl implements SolrSearchService {
                                      String sortProperty, String sortDirection) {
         String fatSolrUri = restInteractionService.getFatSolrUri();
         UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(fatSolrUri)
-                .queryParams(buildQueryParams( maxResults, page, query, searchStudyDTO, sortProperty, sortDirection))
+                //.queryParams(buildQueryParams( maxResults, page, query, searchStudyDTO, sortProperty, sortDirection))
                 .build();
         return uriComponents.toUriString();
     }

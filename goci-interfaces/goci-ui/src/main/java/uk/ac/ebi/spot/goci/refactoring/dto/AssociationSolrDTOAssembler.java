@@ -73,7 +73,7 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
             final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
                     ControllerLinkBuilder.methodOn(SolrSearchPublicationController.class).searchAssociations(null, associationDoc.getPubmedId(), null, null));
             Resource<AssociationSolrDTO> resource = new Resource<>(associationSolrDTO);
-            resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withRel(SearchUIConstants.LINKS_PARENT));
+            resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withSelfRel());
             return resource;
         } catch(IOException ex ){
             log.error("IO Exception "+ex.getMessage(),ex);
@@ -107,7 +107,7 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
     private String tranformPValueAnnotation(List<String> qualifier) {
         if(!qualifier.isEmpty()) {
            String qf = qualifier.get(0);
-           if(qf.matches("\\w"))
+           if(qf.matches(".+"))
             return qf;
            else
                return null;

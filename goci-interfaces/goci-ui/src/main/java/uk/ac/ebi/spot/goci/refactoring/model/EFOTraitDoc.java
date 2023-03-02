@@ -18,17 +18,14 @@ public class EFOTraitDoc implements Serializable {
     @JsonProperty("associationCount")
     private Integer associationCount;
 
-    @JsonProperty("variantId")
-    private String variantId;
 
     public EFOTraitDoc(@JsonProperty("efoTraits") List<EFOKeyLabel> efoTraits,
                        @JsonProperty("reportedTrait") List<String> reportedTrait,
-                       @JsonProperty("associationCount") Integer associationCount,
-                       @JsonProperty("variantId") String variantId ) {
+                       @JsonProperty("associationCount") Integer associationCount
+                       ) {
         this.efoTraits = efoTraits;
         this.reportedTrait = reportedTrait;
         this.associationCount = associationCount;
-        this.variantId = variantId;
     }
 
     public List<EFOKeyLabel> getEfoTraits() {
@@ -55,11 +52,4 @@ public class EFOTraitDoc implements Serializable {
         this.associationCount = associationCount;
     }
 
-    public String getVariantId() {
-        return variantId;
-    }
-
-    public void setVariantId(String variantId) {
-        this.variantId = variantId;
-    }
 }

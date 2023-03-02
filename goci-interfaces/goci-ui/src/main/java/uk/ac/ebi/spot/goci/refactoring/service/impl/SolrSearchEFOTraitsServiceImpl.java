@@ -39,8 +39,8 @@ public class SolrSearchEFOTraitsServiceImpl implements SolrSearchEFOTraitsServic
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    public Page<EFOTraitDoc> searchEFOTraits(SearchEFOTraitDTO searchEFOTraitDTO, String rsId, Pageable pageable) {
-      String query =  String.format("rsId:\"%s\" OR association_rsId :\"%s\"", rsId, rsId);
+    public Page<EFOTraitDoc> searchEFOTraits(SearchEFOTraitDTO searchEFOTraitDTO, String query, Pageable pageable) {
+      //String query =  String.format("rsId:\"%s\" OR association_rsId :\"%s\"", rsId, rsId);
         String uri = buildURIComponent(pageable.getPageSize(), pageable.getPageNumber() + 1, query);
         SolrData data = restInteractionService.callSolrAPI(uri);
         if( data != null &&  data.getResponse() != null ) {
@@ -51,7 +51,7 @@ public class SolrSearchEFOTraitsServiceImpl implements SolrSearchEFOTraitsServic
             int end = start + pageable.getPageSize();
             log.info("The start index is ->"+start);
             List<AssociationDoc> associationDocs = objectMapper.convertValue(docs, new TypeReference<List<AssociationDoc>>(){{}});
-            List<EFOTraitDoc> efoTraitsDocs = createEFOTraitData(associationDocs, rsId, searchEFOTraitDTO);
+            List<EFOTraitDoc> efoTraitsDocs = createEFOTraitData(associationDocs, query, searchEFOTraitDTO);
             Sort.Order orderAsscn  = null;
             if(sort != null) {
                 orderAsscn = sort.getOrderFor("associationCount");
@@ -86,7 +86,7 @@ public class SolrSearchEFOTraitsServiceImpl implements SolrSearchEFOTraitsServic
     private MultiValueMap<String, String> buildQueryParams(int maxResults, int page, String query) {
         MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
         paramsMap.add("wt","json");
-        //paramsMap.add("rows",String.valueOf(maxResults));
+        paramsMap.add("rows",SearchUIConstants.MAX_STUDY_COUNT);
         int start = (page - 1) * maxResults;
         //paramsMap.add("start", String.valueOf(start));
         String fq = searchConfiguration.getDefaultFacet()+":"+ SearchUIConstants.FACET_ASSOCIATION;
@@ -107,7 +107,7 @@ public class SolrSearchEFOTraitsServiceImpl implements SolrSearchEFOTraitsServic
            String efoDocId = Optional.ofNullable(associationDoc.getShortForms()).map(s -> s.stream().collect(Collectors.joining("_")))
                    .orElse(Optional.ofNullable(associationDoc.getMappedUri()).map(uris -> uris.stream().map(uri ->
                            solrEntityTransformerUtility.retreiveEFOFromUri(uri)).collect(Collectors.joining("_"))).orElse(null));
-           log.info("The EFO Doc Id is "+efoDocId);
+           //log.info("The EFO Doc Id is "+efoDocId);
            String reportedTrait = Optional.ofNullable(associationDoc.getTraitNames()).filter(traits ->
                    !traits.isEmpty()).map(traits -> traits.get(0)).orElse(null);
            Integer rsIdLen = Optional.ofNullable(associationDoc.getRsIds()).filter(rsids -> !rsids.isEmpty()).map(rsIds -> rsIds.size()).orElse(0);
@@ -130,7 +130,9 @@ public class SolrSearchEFOTraitsServiceImpl implements SolrSearchEFOTraitsServic
                    efoKeyLabels.add(efoKeyLabel);
                }
                efoKeyLabels.sort(Comparator.comparing(EFOKeyLabel::getLabel));
-               efoTraitDoc = new EFOTraitDoc(efoKeyLabels, Arrays.asList(reportedTrait), rsIdLen, rsId);
+               List<String> reportedTraitList = new ArrayList<>();
+               reportedTraitList.add(reportedTrait);
+               efoTraitDoc = new EFOTraitDoc(efoKeyLabels, reportedTraitList, rsIdLen);
                efoMap.put(efoDocId, efoTraitDoc);
            }
        });
