@@ -136,7 +136,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 |variant_id
 |An internal variant identifier in the form of 
 `<chromosome>_<base_pair_location>_
-<other_allele>_<effect_allele>`
+<reference_allele>_<alternate_allele>`
 |Encouraged
 |As above, concatenated with underscores (`_`).
 `LONG_STRING` may be used where allele string is too long to be represented.
