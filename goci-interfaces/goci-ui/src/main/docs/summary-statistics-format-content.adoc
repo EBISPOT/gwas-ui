@@ -138,7 +138,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 `<chromosome>_<base_pair_location>_
 <reference_allele>_<alternate_allele>`
 |Encouraged
-|As above, concatenated with underscores (`_`).
+|See description, concatenated with underscores (`_`).
 `LONG_STRING` may be used where allele string is too long to be represented.
 |`13_40983974_A_G`
 
