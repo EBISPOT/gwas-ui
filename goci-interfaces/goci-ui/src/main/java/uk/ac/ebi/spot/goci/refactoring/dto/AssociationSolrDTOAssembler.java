@@ -18,6 +18,7 @@ import uk.ac.ebi.spot.goci.util.BackendUtil;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -52,7 +53,7 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
                         associationDoc.getBetaDirection())).orElse(null))
                 .ci(associationDoc.getRange())
                 .mappedGenes(Optional.ofNullable(associationDoc.getEnsemblMappedGenes())
-                        .map(this::transformMappedGenes)
+                        //.map(this::transformMappedGenes)
                         .orElse(null))
                 .traitName(associationDoc.getTraitNames())
                 .efoTraits(Optional.ofNullable(associationDoc.getEfoLink())
@@ -142,7 +143,7 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
             if (ensemblGenes.size() == 1) {
                 String ensemblGene = ensemblGenes.get(0);
                 if (ensemblGene.contains(" x ")) {
-                    Arrays.asList(ensemblGene.split(" x ")).stream().
+                  return  Arrays.asList(ensemblGene.split(" x ")).stream().
                             flatMap((genes) -> Arrays.asList(genes.split(" - "))
                                     .stream())
                             .collect(Collectors.toList());
@@ -150,6 +151,7 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
                 if (ensemblGene.contains("; ")) {
                     return Arrays.asList(ensemblGene.split("; "));
                 }
+                return Collections.singletonList(ensemblGene);
             } else {
                 return ensemblGenes;
             }
