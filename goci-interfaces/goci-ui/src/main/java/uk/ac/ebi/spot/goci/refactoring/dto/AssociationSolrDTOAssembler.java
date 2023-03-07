@@ -69,6 +69,7 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
                 .publicationDate(Optional.ofNullable(associationDoc.getPublicationDate()).map(solrEntityTransformerUtility::formatPubDate).orElse(null))
                 .pubmedId(associationDoc.getPubmedId())
                 .accessionId(associationDoc.getAccessionId())
+                .riskAlleleSep(Optional.ofNullable(associationDoc.getStrongestAllele()).map(this::getRiskAllelleSep).orElse(null))
                 .build();
         try {
             final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
@@ -103,6 +104,18 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
             }).collect(Collectors.toList());
         }
         return null;
+    }
+
+    private String getRiskAllelleSep(List<String> riskAlleles) {
+        String separator = "";
+        if (!riskAlleles.isEmpty()) {
+            String riskAllele = riskAlleles.get(0).replaceAll(" -", "-");
+             separator = " x ";
+            if (riskAllele.contains(";")) {
+                separator = ";";
+            }
+        }
+        return separator;
     }
 
     private String tranformPValueAnnotation(List<String> qualifier) {
