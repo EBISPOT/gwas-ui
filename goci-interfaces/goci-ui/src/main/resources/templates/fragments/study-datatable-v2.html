@@ -133,7 +133,10 @@
             order: [],
             columns: [
                 {data: 'firstAuthor', name: 'firstAuthor', orderable: false},
-                {data: 'accessionId', name: 'accessionId', orderable: false},
+                {data: 'accessionId', name: 'accessionId', defaultContent: "-", render: function (data) {
+                        const link = gwasProperties.contextPath + 'studies/' + data;
+                        return !data ? null : '<a href="' + link + '">' + data + '</a>'
+                    }, orderable: false},
                 {data: 'publicationDate', name: 'publicationDate', orderable: false},
                 {data: 'journal', name: 'journal', orderable: false},
                 {data: 'title', name: 'title', render: $.fn.dataTable.render.ellipsis(50, true), orderable: false},
@@ -142,8 +145,8 @@
                     data: 'efoTraits', name: 'efoTraits', render: function (data) {
                         $.each(data, function (index, trait) {
                             // TODO use the gwasProperties
-                            //  const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
-                            const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
+                            const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
+                            // const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
                             data[index] = '<a href="' + link + '">' + trait.label + '</a>'
                         });
                         return data.join(', ')
@@ -154,8 +157,8 @@
                 {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: false},
                 {data: 'associationCount', name: 'associationCount'},
                 {
-                    data: 'summaryStatistics', name: 'fullPvalueSet', render: function (data) {
-                        return data === 'NA' ? '-' : '<a href="' + data + '">FTP Download</a>'
+                    data: 'summaryStatistics', name: 'fullPvalueSet', defaultContent: "-", render: function (data) {
+                        return data === 'NA' ? null : '<a href="' + data + '">FTP Download</a>'
                     }
                 },
             ],

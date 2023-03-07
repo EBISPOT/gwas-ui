@@ -203,7 +203,10 @@
             return data ? data.join(', ') : null;
           }, defaultContent: "-", orderable: false
         },
-        {data: 'accessionId', name: 'accessionId', defaultContent: "-", orderable: false},
+        {data: 'accessionId', name: 'accessionId', defaultContent: "-", render: function (data) {
+            const link = gwasProperties.contextPath + 'studies/' + data;
+            return !data ? null : '<a href="' + link + '">' + data + '</a>'
+          }, orderable: false},
         {data: 'locations', name: 'locations', orderable: false},
       ],
       dom: 'lBrtip',
