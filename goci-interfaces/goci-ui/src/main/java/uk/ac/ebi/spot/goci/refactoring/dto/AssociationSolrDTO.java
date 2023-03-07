@@ -55,6 +55,8 @@ public class AssociationSolrDTO extends ResourceSupport implements Serializable 
     private String pubmedId;
     @JsonProperty("accessionId")
     private String accessionId;
+    @JsonProperty("riskAlleleSep")
+    private String riskAlleleSep;
 
     public AssociationSolrDTO(@JsonProperty("riskAllele") List<EFOKeyLabel> riskAllele,
                               @JsonProperty("riskFrequency") String riskFrequency,
@@ -72,7 +74,8 @@ public class AssociationSolrDTO extends ResourceSupport implements Serializable 
                               @JsonProperty("author") String author,
                               @JsonProperty("publicationDate") LocalDate publicationDate,
                               @JsonProperty("pubmedId") String pubmedId,
-                              @JsonProperty("accessionId") String accessionId) {
+                              @JsonProperty("accessionId") String accessionId,
+                              @JsonProperty("riskAlleleSep") String riskAlleleSep) {
         this.riskAllele = riskAllele;
         this.riskFrequency = riskFrequency;
         this.pValue = pValue;
@@ -90,6 +93,7 @@ public class AssociationSolrDTO extends ResourceSupport implements Serializable 
         this.publicationDate = publicationDate;
         this.pubmedId = pubmedId;
         this.accessionId = accessionId;
+        this.riskAlleleSep = riskAlleleSep;
     }
 
     public List<EFOKeyLabel> getRiskAllele() {
@@ -226,5 +230,13 @@ public class AssociationSolrDTO extends ResourceSupport implements Serializable 
 
     public void setAccessionId(String accessionId) {
         this.accessionId = accessionId;
+    }
+
+    public String getRiskAlleleSep() {
+        return riskAlleleSep;
+    }
+
+    public void setRiskAlleleSep(String riskAlleleSep) {
+        this.riskAlleleSep = riskAlleleSep;
     }
 }
