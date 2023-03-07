@@ -125,11 +125,11 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
         StringBuilder finalBeta = new StringBuilder();
         finalBeta.append(beta);
         if(!(String.valueOf(beta)).isEmpty()) {
-            if(!betaUnit.isEmpty()) {
+            if(betaUnit != null && !betaUnit.isEmpty()) {
                 finalBeta.append(" ");
                 finalBeta.append(betaUnit);
             }
-            if(!betaDirection.isEmpty()) {
+            if(betaDirection != null && !betaDirection.isEmpty()) {
                 finalBeta.append(" ");
                 finalBeta.append(betaDirection);
             }
