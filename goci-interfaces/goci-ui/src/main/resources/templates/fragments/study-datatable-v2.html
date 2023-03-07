@@ -106,7 +106,7 @@
         $('#example').DataTable({
             serverSide: true,
             ajax: {
-                url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/variants/rs9399137/studies',
+                url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/variants/' + $('#query').text() + '/studies',
                 dataType: 'JSON',
                 dataSrc: function (json) {
                     json.recordsTotal = json.page.totalElements;
@@ -179,7 +179,11 @@
                     next: '<span>&raquo;</span>',
                     previous: '<span>&laquo;</span>'
                 }
-            }
+            },
+            lengthMenu: [
+                [5, 10, 25, 50],
+                [5, 10, 25, 50],
+            ]
         })
             .on('processing.dt', function (e, settings, processing) {
                 if (processing) {

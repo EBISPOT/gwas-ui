@@ -29,7 +29,7 @@ showLoadingOverLay = function(tagID){
     var options = {
         color: "rgba(255, 255, 255, 0.8)",   // String
         custom: "",                // String/DOM Element/jQuery Object
-        fade: [100, 1500],                      // Boolean/Integer/String/Array
+        fade: [10, 10],                      // Boolean/Integer/String/Array
         fontawesome: "",                          // String
 //            image: "data:image/gif;base32,...",  // String
         imagePosition: "center center",             // String
