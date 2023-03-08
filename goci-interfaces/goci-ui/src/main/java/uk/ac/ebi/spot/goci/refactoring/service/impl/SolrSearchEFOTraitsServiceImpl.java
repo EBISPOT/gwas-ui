@@ -184,7 +184,7 @@ public class SolrSearchEFOTraitsServiceImpl implements SolrSearchEFOTraitsServic
     private Boolean findMatchingReportedTraits(EFOTraitDoc efoTraitDoc, String reportedTrait) {
         List<String> matchingLabels = efoTraitDoc.getReportedTrait()
                 .stream()
-                .filter(label -> label.contains(reportedTrait)).
+                .filter(label -> label.toLowerCase().contains(reportedTrait.toLowerCase())).
                 collect(Collectors.toList());
         if (!matchingLabels.isEmpty())
             return true;
@@ -197,7 +197,7 @@ public class SolrSearchEFOTraitsServiceImpl implements SolrSearchEFOTraitsServic
     List<String> matchingLabels = efoTraitDoc.getEfoTraits()
             .stream()
             .map(efoKeyLabel -> efoKeyLabel.getLabel())
-            .filter(label -> label.contains(efo)).
+            .filter(label -> label.toLowerCase().contains(efo.toLowerCase())).
             collect(Collectors.toList());
     if (!matchingLabels.isEmpty())
         return true;

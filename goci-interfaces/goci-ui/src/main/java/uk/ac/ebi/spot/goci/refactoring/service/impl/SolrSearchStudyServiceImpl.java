@@ -115,16 +115,25 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
         filterQueryBuilder.append(filterQuery);
 
         if(accessionId != null) {
-            filterQueryBuilder.append(String.format(" AND accessionId:\"%s\"",accessionId));
+            filterQueryBuilder.append(String.format(" AND accessionId:\"*%s*\"",accessionId));
         }
         if(reportedTrait != null) {
-            filterQueryBuilder.append(String.format(" AND traitName:\"%s\"",reportedTrait));
+            if(reportedTrait.contains(" "))
+                filterQueryBuilder.append(String.format(" AND traitName:\"*%s*\"",reportedTrait));
+            else
+                filterQueryBuilder.append(String.format(" AND traitName:*%s*",reportedTrait));
         }
         if(efoTrait != null) {
-            filterQueryBuilder.append(String.format(" AND mappedLabel:\"%s\"",efoTrait));
+            if(efoTrait.contains(" "))
+                filterQueryBuilder.append(String.format(" AND mappedLabel:\"*%s*\"",efoTrait));
+            else
+                filterQueryBuilder.append(String.format(" AND mappedLabel:*%s*",efoTrait));
         }
         if(bgTrait != null) {
-            filterQueryBuilder.append(String.format(" AND mappedBkgLabel:\"%s\"",bgTrait));
+            if(bgTrait.contains(" "))
+                filterQueryBuilder.append(String.format(" AND mappedBkgLabel:\"*%s*\"",bgTrait));
+            else
+                filterQueryBuilder.append(String.format(" AND mappedBkgLabel:*%s*",bgTrait));
         }
 
         return filterQueryBuilder.toString();
