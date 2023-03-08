@@ -99,22 +99,40 @@ public class SolrSearchAssociationServiceImpl implements SolrSearchAssociationSe
         filterQueryString.append(filterQuery);
 
         if(riskAllele != null ) {
-            filterQueryString.append(String.format(" AND strongestAllele:\"*%s*\"", riskAllele));
+            if(riskAllele.contains(" "))
+                filterQueryString.append(String.format(" AND strongestAllele:\"*%s*\"", riskAllele));
+            else
+                filterQueryString.append(String.format(" AND strongestAllele:*%s*", riskAllele));
         }
         if(pValueAnnotation != null ) {
-            filterQueryString.append(String.format(" AND qualifier:\"*%s*\"", pValueAnnotation));
+            if(pValueAnnotation.contains(" "))
+                filterQueryString.append(String.format(" AND qualifier:\"*%s*\"", pValueAnnotation));
+            else
+                filterQueryString.append(String.format(" AND qualifier:*%s*", pValueAnnotation));
         }
         if(mappedGene != null ) {
-            filterQueryString.append(String.format(" AND ensemblMappedGenes:\"*%s*\"", mappedGene));
+            if(mappedGene.contains(" "))
+                filterQueryString.append(String.format(" AND ensemblMappedGenes:\"*%s*\"", mappedGene));
+            else
+                filterQueryString.append(String.format(" AND ensemblMappedGenes:*%s*", mappedGene));
         }
         if(reportedTrait != null ) {
-            filterQueryString.append(String.format(" AND traitName:\"*%s*\"", reportedTrait));
+            if(reportedTrait.contains(" "))
+                filterQueryString.append(String.format(" AND traitName:\"*%s*\"", reportedTrait));
+            else
+                filterQueryString.append(String.format(" AND traitName:*%s*", reportedTrait));
         }
         if(efoTrait != null ) {
-            filterQueryString.append(String.format(" AND mappedLabel:\"*%s*\"", efoTrait));
+            if(efoTrait.contains(" "))
+                filterQueryString.append(String.format(" AND mappedLabel:\"*%s*\"", efoTrait));
+            else
+                filterQueryString.append(String.format(" AND mappedLabel:*%s*", efoTrait));
         }
         if(bgTrait != null ) {
-            filterQueryString.append(String.format(" AND mappedBkgLabel:\"*%s*\"", bgTrait));
+            if(bgTrait.contains(" "))
+                filterQueryString.append(String.format(" AND mappedBkgLabel:\"*%s*\"", bgTrait));
+            else
+                filterQueryString.append(String.format(" AND mappedBkgLabel:*%s*", bgTrait));
         }
         if(accessionId != null ) {
             filterQueryString.append(String.format(" AND accessionId:\"*%s*\"", accessionId));
