@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <!--move styles to the parent, remove jquery from scripts, replace parent jquery with this one here, remove head tag,-->
+  <!-- todo move styles to the parent, remove jquery from scripts, replace parent jquery with this one here, remove head tag,-->
   <link rel="stylesheet" type="text/css"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap.min.css"/>
@@ -89,7 +89,6 @@
     </div>
   </div>
 </div>
-<script th:src="@{/js/common-datatables/datatable-icons.js}"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap.min.js"></script>
@@ -116,6 +115,7 @@
         dataSrc: function (json) {
           json.recordsTotal = json.page.totalElements;
           json.recordsFiltered = json.page.totalElements;
+          if (!json._embedded) json['_embedded'] = {};
           return json._embedded.associations;
         },
         data: function (d) {
@@ -185,8 +185,8 @@
           data: 'efoTraits', name: 'efoTrait', render: function (data) {
             $.each(data, function (index, trait) {
               // TODO use the gwasProperties
-              //  const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
-              const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
+              const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
+              // const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
               data[index] = '<a href="' + link + '">' + trait.label + '</a>'
             });
             return data ? data.join(', ') : null;
@@ -196,8 +196,8 @@
           data: 'backgroundTraits', name: 'bgTrait', render: function (data) {
             $.each(data, function (index, trait) {
               // TODO use the gwasProperties
-              //  const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
-              const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
+              const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
+              // const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
               data[index] = '<a href="' + link + '">' + trait.label + '</a>'
             });
             return data ? data.join(', ') : null;
