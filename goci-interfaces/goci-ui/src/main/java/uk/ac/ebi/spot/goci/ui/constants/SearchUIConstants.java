@@ -12,6 +12,11 @@ public class SearchUIConstants {
 
     public static final String REGIONS = "/regions";
 
+    public static final String EFOTRAITS = "/efotraits";
+
+    public static final String INCLUDE_CHILD_TRAITS = "includeChildTraits";
+
+    public static final String INCLUDE_BG_TRAITS = "includeBgTraits";
     public static final String PUBLICATIONS = "/publications";
 
     public static final String SEARCH_STUDY = "/study";

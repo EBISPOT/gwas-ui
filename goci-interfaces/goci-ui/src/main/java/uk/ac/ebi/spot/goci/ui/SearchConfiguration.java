@@ -34,6 +34,11 @@ public class SearchConfiguration {
 
     @Value("${sumstats.ftp-link:#{NULL}}")
     private String summaryStatsFTPLink;
+    @Value("${rest-api.endpoint:#{NULL}}")
+    private String restAPILink;
+
+    @Value("${ols-api.endpoint:#{NULL}}")
+    private String olsAPILink;
 
 
     // SLIM Solr
@@ -58,6 +63,15 @@ public class SearchConfiguration {
 
     public String getSummaryStatsFTPLink() {
         return summaryStatsFTPLink;
+    }
+
+
+    public String getRestAPILink() {
+        return restAPILink;
+    }
+
+    public String getOlsAPILink() {
+        return olsAPILink;
     }
 
     @Bean

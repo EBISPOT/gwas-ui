@@ -30,7 +30,12 @@ public class SolrQueryParamBuilder {
         else if(type.equals("VARIANT")) {
             return  String.format("rsId:\"%s\" OR association_rsId :\"%s\"", param, param);
         }
-
+        else if(type.equals("EFOTRAIT")) {
+            return String.format("shortForm:%s OR efoLink:%s OR mappedUri:%s",param, param, param);
+        }
+        else if(type.equals("BGTRAIT")) {
+            return param;
+        }
         return null;
 
     }
@@ -39,6 +44,11 @@ public class SolrQueryParamBuilder {
         String concatAccids = accessionIds.stream().collect(Collectors.joining(" OR "));
         log.info("Accession Ids concat ->"+concatAccids);
         return concatAccids;
+    }
+
+    public String buildEFOQueryParam(List<String> efoIds) {
+     String concatEfoQuery =   efoIds.stream().collect(Collectors.joining(","));
+     return String.format("shortForm:%s OR efoLink:%s OR mappedUri:%s",concatEfoQuery, concatEfoQuery, concatEfoQuery);
     }
 
 

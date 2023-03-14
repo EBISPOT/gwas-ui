@@ -30,7 +30,7 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
 
 
     private static final Logger log = LoggerFactory.getLogger(StudySolrDTOAssembler.class);
-    private final static String INITIAL_SAMPLE_DESC_REGEX = "([1-9][0-9]{0,2}(?:,[0-9]{3})*)";
+    private final static String INITIAL_SAMPLE_DESC_REGEX = "([1-9][0-9]{0,9}(?:,[0-9]{3})*)";
     final Pattern pattern = Pattern.compile(INITIAL_SAMPLE_DESC_REGEX);
 
     @Autowired
@@ -70,7 +70,7 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
                                         .build();
         try {
             final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
-                    ControllerLinkBuilder.methodOn(SolrSearchVariantController.class).searchStudies(null, studyDoc.getAssociation_rsId().get(0), null, null));
+                    ControllerLinkBuilder.methodOn(SolrSearchVariantController.class).searchStudies(null, "rsidxxxx", null, null));
             Resource<StudySolrDTO> resource = new Resource<>(studySolrDTO);
             resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withSelfRel());
             return resource;
@@ -96,10 +96,12 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
         return range;
     }
     private List<String> populateInitialSampleDesc(String sampleDesc) {
+
+        log.info("sampleDesc is ->"+sampleDesc);
         List<String> text = new ArrayList<>();
         String[] desc = sampleDesc.split(INITIAL_SAMPLE_DESC_REGEX);
         for(int i =0; i < desc.length ; i++) {
-            desc[i] = desc[i].replaceAll(",", "");
+            desc[i] = desc[i].replaceAll("(,\\s+$)", "");
             if(!desc[i].trim().isEmpty())
                 text.add(desc[i]);
         }
@@ -113,7 +115,9 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
 
         List<String> sampleDescriptions = new ArrayList<>();
 
-        for(int i = 0; i < sampleNumbers.size(); i++) {
+        for(int i = 0; i < text.size(); i++) {
+            log.info("Sample Number ["+i+"] "+sampleNumbers.get(i));
+            log.info("text ["+i+"] "+text.get(i));
             String freetext = sampleNumbers.get(i)+ text.get(i);
             sampleDescriptions.add(freetext);
         }

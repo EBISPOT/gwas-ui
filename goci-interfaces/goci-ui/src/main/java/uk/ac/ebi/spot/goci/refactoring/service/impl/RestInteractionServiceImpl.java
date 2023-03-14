@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 import uk.ac.ebi.spot.goci.model.solr.SolrData;
+import uk.ac.ebi.spot.goci.refactoring.model.OLSTermApiDoc;
+import uk.ac.ebi.spot.goci.refactoring.model.RestApiEFOTraitDoc;
 import uk.ac.ebi.spot.goci.refactoring.service.RestInteractionService;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 
@@ -24,6 +28,48 @@ public class RestInteractionServiceImpl implements RestInteractionService {
     SearchConfiguration searchConfiguration;
 
 
+    public OLSTermApiDoc callOlsRestAPI(String uri, String efoId) {
+        log.info("The OLS API call uri is ->"+uri);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
+        ResponseEntity<OLSTermApiDoc> responseEntity = null;
+        MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
+        paramsMap.add("id",efoId);
+        paramsMap.add("size","500");
+        String olsUri = UriComponentsBuilder.fromHttpUrl(uri).queryParams(paramsMap).build().toUriString();
+        try {
+            responseEntity = restTemplate.exchange(olsUri, HttpMethod.GET, httpEntity, new ParameterizedTypeReference
+                    <OLSTermApiDoc>() {
+            });
+        }catch(Exception ex){
+            log.error("Exception in Rest API call"+ex.getMessage(),ex);
+        }
+        log.info("responseEntity status code"+responseEntity.getStatusCodeValue());
+        log.info("responseEntity Body"+responseEntity.hasBody());
+        return responseEntity.getBody();
+    }
+
+    public RestApiEFOTraitDoc callRestAPIEFOTraits(String uri) {
+        //String uri = searchConfiguration.getRestAPILink();
+        log.info("The Rest API call uri is ->"+uri);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
+        ResponseEntity<RestApiEFOTraitDoc> responseEntity = null;
+
+        try {
+            responseEntity = restTemplate.exchange(uri, HttpMethod.GET, httpEntity, new ParameterizedTypeReference
+                    <RestApiEFOTraitDoc>() {
+            });
+        }catch(Exception ex){
+            log.error("Exception in Rest API call"+ex.getMessage(),ex);
+        }
+        log.info("responseEntity status code"+responseEntity.getStatusCodeValue());
+        log.info("responseEntity Body"+responseEntity.hasBody());
+        return responseEntity.getBody();
+
+    }
 
     @Override
     public SolrData callSolrAPI(String uri) {
