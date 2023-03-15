@@ -32,6 +32,7 @@ import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -77,7 +78,12 @@ public class SolrSearchEFOTraitsController {
         String query = "";
         if(includeChildTraits != null && includeChildTraits) {
          Map<String, String> olsTerms = solrSearchEFOTraitService.getOLSTerms(efotraitId);
-         List<String> efotraits = solrSearchEFOTraitService.getChildTraits(olsTerms);
+         List<String> efotraits = null;
+         if (olsTerms != null) {
+             efotraits = solrSearchEFOTraitService.getChildTraits(olsTerms);
+         }else {
+             efotraits = new ArrayList<>();
+         }
          efotraits.add(efotraitId);
          query = solrQueryParamBuilder.buildEFOQueryParam(efotraits);
         } else {

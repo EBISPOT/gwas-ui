@@ -13,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import uk.ac.ebi.spot.goci.model.solr.SolrData;
 import uk.ac.ebi.spot.goci.refactoring.model.OLSTermApiDoc;
 import uk.ac.ebi.spot.goci.refactoring.model.RestApiEFOTraitDoc;
+import uk.ac.ebi.spot.goci.refactoring.model.SumstatsAPIDoc;
 import uk.ac.ebi.spot.goci.refactoring.service.RestInteractionService;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 
@@ -69,6 +70,25 @@ public class RestInteractionServiceImpl implements RestInteractionService {
         log.info("responseEntity Body"+responseEntity.hasBody());
         return responseEntity.getBody();
 
+    }
+
+
+    public SumstatsAPIDoc callSSAPI(String uri) {
+        log.info("The SS API call uri is ->"+uri);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
+        ResponseEntity<SumstatsAPIDoc> responseEntity = null;
+        try {
+            responseEntity = restTemplate.exchange(uri, HttpMethod.GET, httpEntity, new ParameterizedTypeReference
+                    <SumstatsAPIDoc>() {
+            });
+        }catch(Exception ex){
+            log.error("Exception in Rest API call"+ex.getMessage(),ex);
+        }
+        log.info("responseEntity status code"+responseEntity.getStatusCodeValue());
+        log.info("responseEntity Body"+responseEntity.hasBody());
+        return responseEntity.getBody();
     }
 
     @Override

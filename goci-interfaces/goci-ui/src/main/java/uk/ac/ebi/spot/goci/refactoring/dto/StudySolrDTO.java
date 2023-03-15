@@ -57,6 +57,9 @@ public class StudySolrDTO extends ResourceSupport implements Serializable {
     @JsonProperty("summaryStatistics")
     private String summaryStatistics;
 
+    @JsonProperty("ssApiFlag")
+    private Boolean ssApiFlag;
+
 
     public StudySolrDTO(@JsonProperty("accessionId") String accessionId,
                         @JsonProperty("pubmedId") String pubmedId,
@@ -73,7 +76,8 @@ public class StudySolrDTO extends ResourceSupport implements Serializable {
                         @JsonProperty("discoverySampleAncestry") List<String> discoverySampleAncestry,
                         @JsonProperty("replicationSampleAncestry") List<String> replicationSampleAncestry,
                         @JsonProperty("associationCount") Integer associationCount,
-                        @JsonProperty("summaryStatistics") String summaryStatistics) {
+                        @JsonProperty("summaryStatistics") String summaryStatistics,
+                        @JsonProperty("ssApiFlag") Boolean ssApiFlag) {
         this.accessionId = accessionId;
         this.pubmedId = pubmedId;
         this.reportedTrait = reportedTrait;
@@ -90,6 +94,7 @@ public class StudySolrDTO extends ResourceSupport implements Serializable {
         this.replicationSampleAncestry = replicationSampleAncestry;
         this.associationCount = associationCount;
         this.summaryStatistics = summaryStatistics;
+        this.ssApiFlag = ssApiFlag;
     }
 
     public String getAccessionId() {
@@ -218,6 +223,15 @@ public class StudySolrDTO extends ResourceSupport implements Serializable {
 
     public void setPubmedId(String pubmedId) {
         this.pubmedId = pubmedId;
+    }
+
+
+    public Boolean getSsApiFlag() {
+        return ssApiFlag;
+    }
+
+    public void setSsApiFlag(Boolean ssApiFlag) {
+        this.ssApiFlag = ssApiFlag;
     }
 }
 
