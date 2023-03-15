@@ -148,11 +148,11 @@
             return data.join(', ')
           }, orderable: false
         },
-        {data: 'pValue', name: 'pValue', render: function (data, type, row) {
+        {data: 'pValue', name: 'pvalue', render: function (data, type, row) {
             return data + " x 10<sup>" + row["pValueExponent"] + "</sup>";
           }},
         {data: 'pValueAnnotation', name: 'pValueAnnotation', defaultContent: "-", orderable: false},
-        {data: 'riskFrequency', name: 'riskFrequency', defaultContent: "-"},
+        {data: 'riskFrequency', name: 'raf', defaultContent: "-"},
         {data: 'or', name: 'or', defaultContent: "-"},
         {data: 'beta', name: 'beta', defaultContent: "-"},
         {data: 'ci', name: 'ci', defaultContent: "-", orderable: false},
