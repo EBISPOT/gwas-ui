@@ -40,6 +40,8 @@ public class SearchConfiguration {
     @Value("${ols-api.endpoint:#{NULL}}")
     private String olsAPILink;
 
+    @Value("${sumstats-api.endpoint:#{NULL}}")
+    private String sumstatsAPILink;
 
     // SLIM Solr
     public URL getGwasSearchSlimServer() {
@@ -72,6 +74,10 @@ public class SearchConfiguration {
 
     public String getOlsAPILink() {
         return olsAPILink;
+    }
+
+    public String getSumstatsAPILink() {
+        return sumstatsAPILink;
     }
 
     @Bean

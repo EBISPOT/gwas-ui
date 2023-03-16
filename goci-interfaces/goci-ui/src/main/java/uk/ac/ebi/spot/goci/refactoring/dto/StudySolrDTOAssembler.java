@@ -10,6 +10,7 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Component;
+import uk.ac.ebi.spot.goci.refactoring.component.SumstatsIdentifierMap;
 import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
 import uk.ac.ebi.spot.goci.refactoring.rest.SolrSearchVariantController;
 import uk.ac.ebi.spot.goci.refactoring.util.SolrEntityTransformerUtility;
@@ -35,9 +36,10 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
 
     @Autowired
     SearchConfiguration searchConfiguration;
-
     @Autowired
     SolrEntityTransformerUtility solrEntityTransformerUtility;
+    @Autowired
+    SumstatsIdentifierMap sumstatsIdentifierMap;
 
 
     @Override
@@ -67,6 +69,7 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
                                         .replicationSampleAncestry(Optional.ofNullable(studyDoc.getAncestryLinks()).map(this::populateAncestryAndReplicationSampleNumber)
                                                 .orElse(null))
                                         .genotypingTechnologies(studyDoc.getGenotypingTechnologies())
+                                        .ssApiFlag(getSSApiFlag(studyDoc.getAccessionId()))
                                         .build();
         try {
             final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
@@ -80,7 +83,19 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
         return null;
     }
 
-  private String getSummaryStatsFTPDetails(String accessionId) {
+    private Boolean getSSApiFlag(String accessionId) {
+      String ssAccessId =  Optional.ofNullable(sumstatsIdentifierMap.getSumstatsMap())
+                .map( ssmap -> ssmap.get(accessionId))
+                .filter(accId -> accId != null)
+                .orElse(null);
+
+      if(ssAccessId != null)
+          return true;
+      else
+          return false;
+    }
+
+    private String getSummaryStatsFTPDetails(String accessionId) {
         String ftpDir = getDirectoryBin(accessionId);
         String ftpLink = searchConfiguration.getSummaryStatsFTPLink().concat(ftpDir).concat("/").concat(accessionId);
         return ftpLink;
@@ -97,7 +112,7 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
     }
     private List<String> populateInitialSampleDesc(String sampleDesc) {
 
-        log.info("sampleDesc is ->"+sampleDesc);
+        //log.info("sampleDesc is ->"+sampleDesc);
         List<String> text = new ArrayList<>();
         String[] desc = sampleDesc.split(INITIAL_SAMPLE_DESC_REGEX);
         for(int i =0; i < desc.length ; i++) {
@@ -115,10 +130,15 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
 
         List<String> sampleDescriptions = new ArrayList<>();
 
-        for(int i = 0; i < text.size(); i++) {
-            log.info("Sample Number ["+i+"] "+sampleNumbers.get(i));
-            log.info("text ["+i+"] "+text.get(i));
-            String freetext = sampleNumbers.get(i)+ text.get(i);
+        for(int i = 0; i < sampleNumbers.size(); i++) {
+            String freetext = "";
+            //log.info("sampleNumbers ["+i+"]->"+sampleNumbers.get(i));
+            //log.info("text ["+i+"]->"+text.get(i));
+            if(text.size() > sampleNumbers.size() ){
+                freetext = sampleNumbers.get(i)+ text.get(i+1);
+            } else {
+                freetext = sampleNumbers.get(i) + text.get(i);
+            }
             sampleDescriptions.add(freetext);
         }
 

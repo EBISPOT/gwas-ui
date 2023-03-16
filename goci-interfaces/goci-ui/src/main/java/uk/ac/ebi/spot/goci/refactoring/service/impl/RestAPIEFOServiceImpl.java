@@ -83,10 +83,15 @@ public class RestAPIEFOServiceImpl implements RestAPIEFOService {
     private Map<String, String> retreiveOlsTerms(OLSTermApiDoc olsTermApiDoc) {
         OLSResponseDoc responseDoc = olsTermApiDoc.getResponseDoc();
 
-        return Optional.ofNullable(responseDoc.getTerms())
-                .map(terms -> terms.stream()
-                        .collect(Collectors.toMap(TermApiDoc::getShortForm, TermApiDoc::getLabel,
-                                (existing, replacement) -> existing)))
-                .orElse(null);
+        if(responseDoc == null) {
+            return null;
+        }
+        else {
+            return Optional.ofNullable(responseDoc.getTerms())
+                    .map(terms -> terms.stream()
+                            .collect(Collectors.toMap(TermApiDoc::getShortForm, TermApiDoc::getLabel,
+                                    (existing, replacement) -> existing)))
+                    .orElse(null);
+        }
     }
 }
