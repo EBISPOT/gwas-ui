@@ -4,12 +4,13 @@
 
 For publications that are already included in the GWAS Catalog, we provide a partially pre-filled submission form showing each study (i.e. each GWAS analysis) in the publication. You will need to add information describing the corresponding summary statistics file for each study.
 
-Please note, the pre-filled form should contain one row for each GWAS analysis in your publication, including one row for each set of summary statistics (i.e. each full set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite. If there are not enough rows to represent all of the GWAS analyses in your publication and/or the number of uploaded summary statistics, please contact gwas-subs@ebi.ac.uk for assistance.
-
 Instructions are provided below. When you have completed the submission form, return to the https://www.ebi.ac.uk/gwas/docs/submission#link-13[main submission instructions^].
 
 === Pre-filled data
+
 Three columns have been filled in for you.
+
+Please note, the pre-filled form should contain one row for each GWAS analysis in your publication, including one row for each set of summary statistics (i.e. each full set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite. If there are not enough rows to represent all of the GWAS analyses in your publication and/or the number of uploaded summary statistics, please contact gwas-subs@ebi.ac.uk for assistance.
 
 [cols="<4,<1,<10,<1,<6", options="header", grid="all", width=100%]
 |===
@@ -40,7 +41,7 @@ Three columns have been filled in for you.
 
 === Data for you to enter
 
-There are 14 empty columns for you to fill in. Mandatory columns are highlighted in orange in the submission form. Grey columns are optional. However, we encourage you to submit as much information as you can.
+There are 7 empty columns for you to fill in. Mandatory columns are highlighted in orange in the submission form. Grey columns are optional. However, we encourage you to submit as much information as you can.
 
 [cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
 |===
@@ -64,76 +65,6 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 |
 |`WHR_unadj`
 
-|Genotyping technology
-|
-|Method(s) used to genotype variants in the discovery stage. Separate multiple methods by pipes "\|".
-|
-|yes
-|
-|Must match one of the following options:
-
-`Genome-wide genotyping array`
-
-`Targeted genotyping array`
-
-`Exome genotyping array`
-
-`Whole genome sequencing`
-
-`Exome-wide sequencing`
-|
-|`Genome-wide genotyping array`
-
-|Analysis software
-|
-|Software and version used for the association analysis.
-|
-|yes *if* any p-values in sumstats file = 0
-|
-|Free text
-|
-|`PLINK 1.9`
-
-|Imputation panel
-|
-|Panel used for imputation
-|
-|no
-|
-|Free text
-|
-|`1000 Genomes Phase 3`
-
-|Imputation software
-|
-|Imputation software
-|
-|no
-|
-|Free text
-|
-|`IMPUTE`
-
-|Variant count
-|
-|The number of variants analysed in the discovery stage (after QC)
-|
-|yes
-|
-|Number >100,000
-|
-|`500000`
-
-|Adjusted covariates
-|
-|Any covariates the GWAS is adjusted for. Multiple values can be listed separated by '\|'.
-|
-|no
-|
-|Free text
-|
-|`age\|sex`
-
 |Summary statistics file
 |
 |The name of the summary statistics file uploaded via Globus. Must be entered for at least one study. Enter "NR" for any studies without summary statistics.
@@ -146,7 +77,7 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 
 |md5 sum
 |
-|The md5 checksum of the summary statistics file. Must be entered for all studies with summary statistics. Enter "NR" for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums here^].
+|The md5 checksum of the summary statistics file. Must be entered for at least one study. Enter "NR" for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums here^].
 |
 |yes
 |
@@ -154,9 +85,9 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 |
 |`49ea8cf53801c7f1e2f11336fb8a29c8`
 
-|Readme text
+|Readme
 |
-|Author notes to accompany your analysis. Please copy notes into this cell directly, rather than uploading a separate readme file. If the same note applies to all studies in the submission, please copy the text into each row. Leave blank for any studies without summary statistics.
+|The readme text that accompanies your analysis. Please copy the text into this cell, rather than uploading a separate readme file. If the same readme applies to all studies in the submission, please copy the text into each row. Leave blank for any studies without summary statistics.
 |
 |no
 |
@@ -184,30 +115,6 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 |
 |`GRCh38`
 
-|Neg Log10 p-values
-|
-|Enter yes if the summary statistics p-values are given in the negative log10 form.
-|
-|no
-|
-|Must match one of the following options:
-
-`Yes`
-
-`No`
-|
-|`yes`
-
-|MAF lower limit
-|
-|Lowest possible allele frequency given in summary statistics *
-|
-|no
-|
-|numeric
-|
-|`0.0001`
-
 |Cohort(s)
 |
 |List of any named cohort(s) represented in the discovery sample, separated by pipes "\|". Enter only if the specific named cohorts are used in the analysis.
@@ -216,7 +123,7 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 |
 |Free text
 |
-|`UKB\|FINRISK`
+|`UKBB\|FINRISK`
 
 |Cohort specific reference
 |
@@ -226,34 +133,11 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 |
 |Free text
 |
-|`UKB_ANID45956`
-
-|Sex
-|
-|To indicate a sex-stratified analysis, enter the sex of participants as M or F. For non-sex-stratified analyses enter "combined", or NR if unknown. 
-|
-|no
-|
-|Free text
-|
-|`combined`
-
-|Coordinate system
-|
-|Coordinate system used for the summary statistics: 1-based or 0-based (https://www.biostars.org/p/84686/[More info]). 
-|
-|yes
-|
-|Free text
-|
-|`1-based`
-
+|`UKBB_ANID45956`
 |===
 
-*{sp}Effect allele frequency is a mandatory field. However, where privacy concerns might otherwise be a barrier to sharing the data (e.g. in small cohorts with sensitive phenotypes), a cutoff may be specified so that allele frequencies below that cutoff are rounded-up to mask their true values. For example, 0.01 here indicates the lowest possible value for the minor allele frequency in this file is 0.01, and anything below this threshold has been rounded up to 0.01 (noting that the minor allele is not necessarily the effect allele). Since masking allele frequency limits the downstream utility of the data, please submit full EAF data where possible.
-
-
 === Additional information
+
 ==== What if I can't tell which study is which?
 
 If you need more information to identify each study, you can find additional details at the GWAS Catalog website, on the relevant publication page (https://www.ebi.ac.uk/gwas/ + the PMID of the publication).
