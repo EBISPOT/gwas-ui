@@ -1,163 +1,269 @@
 = Preparing summary statistics files
 
-This page includes information about preparing and validating summary statistics files, including:
+
+Summary statistics are defined as the aggregate p-values and association data for every variant analysed in a genome-wide association study (GWAS).
+
+
+The GWAS Catalog maintains a standard format for summary statistics, to ensure that datasets from a wide range of sources are as interoperable as possible. This standard format has been developed in consultation with the GWAS research community, and may be updated in future as the needs of the community change.
+
+
+The current version of the standard format is *GWAS-SSF* (see https://github.com/EBISPOT/gwas-summary-statistics-standard[detailed specifications and citation information]).
+
+
+All submitted summary statistics are required to conform to the standard format. If you have difficulty meeting the requirements, please contact gwas-subs@ebi.ac.uk. This page outlines how to prepare and validate summary statistics files, including:
+
 
 * <<validator, Summary statistics validator>>
 * <<format, Summary statistics file format and content>>
 * <<readme, README content>>
 * <<checksums, Summary statistics checksums>>
 
+
 == [[validator]]Summary statistics validator
+
 
 To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see: https://pypi.org/project/ss-validate[^].
 
+
 == [[format]]Summary statistics file format and content
 
-Summary statistics are defined as the aggregate p-values and association data for every variant analysed in a genome-wide association study (GWAS). They should be provided in one file per GWAS with one row for each variant analysed.
 
-Submitted summary statistics files must conform to our standard file format and content (published in https://doi.org/10.1093/nar/gky1120[Buniello and MacArthur, 2019^] and described in detail on our https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[summary statistics methods page^]).
+* Summary statistics should be provided in a separate file per GWAS.
+* The file must be in .tsv format.
+* The first line contains the table headers, followed by one row for each variant analysed.
+* Columns must follow the standard headers and data formats listed in Table 1.
+* All mandatory fields must be present, in the defined order (0-7) (Table 1).
+* Table 1 shows some non-mandatory (encouraged) fields that may be present (*). You are encouraged to include these additional fields in the standard format, where possible.
+* You may include any number of additional columns beyond the set of mandatory fields. 
+* We recommend that analyses are performed with effect allele and other allele fixed to ALT and REF where possible, which provides optimal identification of indels. However, other allele orders can be submitted. The optional column ref_allele should be used to indicate which allele is REF (see Table 1). 
 
-Summary statistics file requirements:
 
-1. The file must be in .tsv format
-2. Columns must follow the standard headings and data formats listed in the table below
-3. The file must include at least one of the following combinations of mandatory columns(*): 
-  * Option 1: *variant_ID* and *p_value*
-  * Option 2: *chromosome*, *base_pair_location* and *p_value*  - for this option you must also provide the genome assembly in the submission template
-4. When one of the manditory columns is not provided, the column should be filled with NA
-5. To allow your data to be harmonised after submission (all genomic position data reported against the same and latest genome build and alleles orientated to the forward strand), you should also include *effect_allele* and *other_allele*. See https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[summary statistics methods^] for more details on our harmonisation pipeline.
-6. You may also include any number of additional columns
+*Table 1. Required content and format*.
+Mandatory and encouraged fields are shown, with standard headers.
 
-[cols="<2,<3,<1,<3,<1", options="header", grid="all", width=100%]
+
+[cols="<1,<2,<3,<2,<3,<1", options="header", grid="all", width=100%]
 |===
-|Column header
+|Field order
+|Field name
 |Description
-|Mandatory
-|Validation
+|Type
+|Accepted values
 |Example
 
+|0
+|chromosome
+|Chromosome where the variant is located
+|Mandatory
+|`1-22`, `23`=`X`, `24`=`Y` or `25`=`MT`
+|`13`
+
+|1
+|base_pair_location
+|The first position of the variant in the reference, counting on the bases, from 1
+|Mandatory
+|Integer > 0
+|`40983974`
+
+|2
+|effect_allele
+|The allele associated with the effect
+|Mandatory
+|Sequence of `A`, `C`, `T` and `G`.
+|`G`
+
+|3
+|other_allele
+|The non-effect allele
+|Mandatory
+|Sequence of `A`, `C`, `T` and `G`
+|`A`
+
+|4
+|(see below)
+|Column 4 must contain the primary effect size measurement (i.e. beta, odds ratio _or_ hazard ratio). If you have calculated more than one effect size statistic (e.g. beta as well as odds ratio), the other can be entered as an additional column at the end of the file.
+|Mandatory to include beta _or_ odds_ratio _or_ hazard_ratio
+|-
+|-
+
+|4
+|beta
+|Effect measured as beta
+|(see above)
+|Number
+|`-0.064`
+
+|4
+|odds_ratio
+|Effect measured as odds ratio
+|(see above)
+|Number ≥ 0
+|`1.50`
+
+|4
+|hazard_ratio
+|Effect measured as hazard ratio
+|(see above)
+|Number ≥ 0
+|`0.70`
+
+
+|5
+|standard_error
+|Standard error of the effect
+|Mandatory
+|Number
+|`0.03`
+
+
+|6
+|effect_allele_frequency
+|Frequency of the effect allele in the control population
+|Mandatory
+|Number between 0 and 1. If required, effect allele frequency may be rounded to a threshold value defined in the metadata
+|`0.22`
+
+
+|7
+|p_value
+|P-value of the association statistic
+|Mandatory
+|Number between 0 and 1 (standard p-value) _or_ Number ≥ 0 (-log10 p-value). If any p-value is equal to 0, the precision of the p-value must be given in the accompanying metadata
+|`1E-08`
+
+
+|*
 |variant_id
-|The rsid of the variant
-|yes*
+|An internal variant identifier in the form of 
+`<chromosome>_<base_pair_location>_
+<reference_allele>_<alternate_allele>`
+|Encouraged
+|See description, concatenated with underscores (`_`).
+`LONG_STRING` may be used where allele string is too long to be represented.
+|`13_40983974_A_G`
+
+
+|*
+|rs_id
+|The rsID of the variant
+|Encouraged
 |Valid rsID
 |`rs7329174`
 
-|p_value
-|The p-value of the variant/trait association
-|yes*
-|Numerical value in range 0 to 1
-|`1E-08`
 
-|chromosome
-|The chromosome that the variant is located on
-|yes*
-|Valid chromosome values are 1-25, X, Y, MT (23, 24, 25 are synonymous with ‘X’, ‘Y’, ‘MT’, respectively)
-|`13`
+|*
+|info
+|Imputation information metric
+|Encouraged
+|Number between 0 and 1
+|`0.98`
 
-|base_pair_location
-|The base pair location of the variant
-|yes*
-|Integer in range 1 to 999999999
-|`40983974`
 
-|effect_allele
-|The effect allele of the variant
-|no
-|Valid DNA string
-|`G`
-
-|other_allele
-|The non-effect allele
-|no
-|Valid DNA string
-|`A`
-
-|effect_allele_frequency
-|Frequency of the effect allele in the control population
-|no
-|Numerical value in range 0 to 1
-|`0.22`
-
-|odds_ratio
-|The odds ratio of the variant/trait association
-|no
-|Numerical value
-|`1.50`
-
+|*
 |ci_lower
-|The lower range of the odds ratio confidence interval
-|no
-|Numerical value
+|Lower confidence interval for the effect
+|Encouraged
+|Number
 |`1.36`
 
+
+|*
 |ci_upper
-|The upper range of the odds ratio confidence interval
-|no
-|Numerical value
+|Upper confidence interval for the effect
+|Encouraged
+|Number
 |`1.64`
 
-|beta
-|The beta of the variant/trait association
-|no
-|Numerical value (+/-)
-|`-0.064`
 
-|standard_error
-|The standard error of the beta
-|no
-|Numerical value
-|`0.03`
+|*
+|ref_allele
+|State which of the alleles is the reference allele
+|Encouraged
+|`EA` for effect allele, `OA` for other allele or `#NA` if unknown
+|`EA`
+
+
+|*
+|n
+|Sample size per variant
+|Encouraged
+|Integer
+|`15000`
 |===
+
 
 == [[readme]]README content
 
+
 Each summary statistics file should be accompanied by readme text in a standard format. This should be copied into the submission form that you will be able to access during the submission process. Please do not upload a separate readme file.  The readme text should contain the following information in a numbered list:
 
-1. Full citation for the publication linked to the submitted summary statistics (in any standard citation style) 
-e.g: Klimentidis YC, Raichlen DA, Bea J, Garcia DO, Wineinger NE, Mandarino LJ, Alexander GE, Chen Z, Going SB (2018) 
+
+1. Full citation for the publication linked to the submitted summary statistics (in any standard citation style)
+e.g: Klimentidis YC, Raichlen DA, Bea J, Garcia DO, Wineinger NE, Mandarino LJ, Alexander GE, Chen Z, Going SB (2018)
 Genome-wide association study of habitual physical activity in over 377,000 UK Biobank participants identifies multiple variants including CADM2 and APOE. International Journal of Obesity. 42: 1161-1176. (If your submission is not for a published article, you may use whatever citation is most appropriate).
 
+
 2. Clear description of the content presented in additional columns that are not present in our standard format
-e.g.: INFO: imputation quality/certainty metric from IMPUTE2
+e.g.: HetPVal: P-value for heterogeneity statistic
+
 
 3. Any other information or comment that can be useful to interpret and store the data under submission (e.g. broader description of the cohort used in the study, QC measures applied)
 
+
 == [[checksums]]Summary statistics checksums
+
 
 In order to ensure the integrity of the uploaded summary statistics files before and after the upload, you must provide an md5 checksum (a kind of “fingerprint”) for each uploaded file. If there is any problem during the upload that leads to corruption of the data, this checksum will change. So by validating against the provided checksum, we can ensure the upload was successful and the data is not corrupted. Although there are various ways to calculate checksums, we are only supporting the most widely used md5 algorithm.
 
+
 === Calculating on Mac computers
+
 
 The md5 command line application is installed on Mac computers by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
 
+
   $ md5 summary_stats.gzip
 
+
 The output should look something like this:
-  
+ 
   MD5 (summary_stats.gzip) = 49ea8cf53801c7f1e2f11336fb8a29c8
+
 
 The md5 checksum is the 32-digit hexadecimal number in the output, after the filename. Copy this number into the corresponding column of the study sheet.
 
+
 === Calculating on Linux/Unix computers
+
 
 The md5sum command line application is installed on all Linux/Unix based systems by default. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
 
+
   $ md5sum summary_stats.gzip
 
+
 The output should look something like this:
+
 
   4ab6d4f4db143eed49c248d3ce23cb57  summary_stats.gzip
 
+
 The md5 checksum is the 32-digit hexadecimal number in the first column of the output, before the file name. Copy this number into the corresponding column of the study sheet.
+
 
 === Calculating on Windows computers
 
+
 In Windows, you can use the certutil command line tool to calculate md5 checksums. Type the following into the command line, replacing “summary_stats.gzip” with the name of your own file:
+
 
   > certutil -hashfile summary_stats.gzip MD5
 
+
 The output should look something like this:
 
+
   > MD5 hash of summary_stats.gzip: d19bbbed9d713f97f487b9ed9ec3f62f
+
 
 The md5 checksum is the 32-digit hexadecimal number in the output, after the file name. Copy this number into the corresponding column of the study sheet.
