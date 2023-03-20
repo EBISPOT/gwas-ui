@@ -24,11 +24,9 @@ In each tab, mandatory columns are highlighted in orange. Grey columns are optio
 
 In the Study tab, please add one row for each separate GWAS analysis (study) in the submission. In particular, please make sure that there is one row for each set of summary statistics (i.e. each full set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite.
 
-If you performed multiple GWA studies but are only sharing summary statistics for a subset of the studies, you can enter metadata rows without summary statistics. However you must submit summary statistics for at least one study (including filename, md5sum, genome assembly).
-
 ==== Column instructions
 
-There are 24 columns for you to fill in:
+There are 16 columns for you to fill in:
 
 [cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
 |===
@@ -67,9 +65,6 @@ There are 24 columns for you to fill in:
 `Exome genotyping array`
 
 `Whole genome sequencing`
-
-`Exome-wide sequencing`
-
 |
 |`Genome-wide genotyping array` 
 
@@ -99,16 +94,6 @@ There are 24 columns for you to fill in:
 |
 |`Immunochip`
 
-|Analysis software
-|
-|Software and version used for the association analysis.
-|
-|yes *if* any p-values in sumstats file = 0
-|
-|Free text
-|
-|`PLINK 1.9`
-
 |Imputation
 |
 |Were SNPs imputed for the discovery GWAS?
@@ -122,26 +107,6 @@ There are 24 columns for you to fill in:
 `No`
 |
 |`Yes`
-
-|Imputation panel
-|
-|Panel used for imputation
-|
-|no
-|
-|Free text
-|
-|`1000 Genomes Phase 3`
-
-|Imputation software
-|
-|Imputation software
-|
-|no
-|
-|Free text
-|
-|`IMPUTE`
 
 |Variant count
 |
@@ -172,16 +137,6 @@ There are 24 columns for you to fill in:
 |Free text
 |
 |...
-
-|Adjusted covariates
-|
-|Any covariates the GWAS is adjusted for. Multiple values can be listed separated by '\|'.
-|
-|no
-|
-|Free text
-|
-|`age\|sex`
 
 |Reported trait
 |
@@ -215,7 +170,7 @@ There are 24 columns for you to fill in:
 
 |md5 sum
 |
-|The md5 checksum of the summary statistics file. Must be entered for all studies with summary statistics. Enter "NR" for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums here^].
+|The md5 checksum of the summary statistics file. Must be entered for at least one study. Enter "NR" for any studies without summary statistics. See https://www.ebi.ac.uk/gwas/docs/summary-statistics-format#checksums[how to calculate checksums here^].
 |
 |yes
 |
@@ -235,7 +190,7 @@ There are 24 columns for you to fill in:
 
 |Summary statistics assembly
 |
-|Genome assembly for the summary statistics. Must be entered for all studies with summary statistics. Enter "NR" for any studies without summary statistics.
+|Genome assembly for the summary statistics. Must be entered for at least one study. Enter "NR" for any studies without summary statistics.
 |
 |yes
 |
@@ -252,30 +207,6 @@ There are 24 columns for you to fill in:
 `NCBI34`
 |
 |`GRCh38`
-
-|Neg Log10 p-values
-|
-|Enter yes if the summary statistics p-values are given in the negative log10 form.
-|
-|no
-|
-|Must match one of the following options:
-
-`Yes`
-
-`No`
-|
-|`yes`
-
-|MAF lower limit
-|
-|Lowest possible allele frequency given in summary statistics *
-|
-|no
-|
-|numeric
-|
-|`0.0001`
 
 |Cohort(s)
 |
@@ -296,29 +227,7 @@ There are 24 columns for you to fill in:
 |Free text
 |
 |`ANID45956`
-
-|Sex
-|
-|To indicate a sex-stratified analysis, enter the sex of participants as M or F. For non-sex-stratified analyses enter "combined", or NR if unknown. 
-|
-|no
-|
-|Free text
-|
-|`combined`
-
-|Coordinate system
-|
-|Coordinate system used for the summary statistics: 1-based or 0-based (https://www.biostars.org/p/84686/[More info]). 
-|
-|yes
-|
-|Free text
-|
-|`1-based`
 |===
-
-*{sp} Effect allele frequency is a mandatory field. However, where privacy concerns might otherwise be a barrier to sharing the data (e.g. in small cohorts with sensitive phenotypes), a cutoff may be specified so that allele frequencies below that cutoff are rounded-up to mask their true values. For example, 0.01 here indicates the lowest possible value for the minor allele frequency in this file is 0.01, and anything below this threshold has been rounded up to 0.01 (noting that the minor allele is not necessarily the effect allele). Since masking allele frequency limits the downstream utility of the data, please submit full EAF data where possible.
 
 === [[samples]]2. Sample tab
 
@@ -462,7 +371,7 @@ For example, for a single study in 2 ancestry groups, with 2 stages (discovery a
 
 ==== Column Instructions
 
-There are 12 columns for you to fill in:
+There are 10 columns for you to fill in:
 
 [cols="<4,<1,<6,<1,<2,<1,<4,<1,<4", options="header", grid="all", width=100%]
 |===
@@ -509,20 +418,6 @@ There are 12 columns for you to fill in:
 |An integer
 |
 |`2000`
-
-|Case control study
-|
-|Is this a case control study?
-|
-|no (default is false)
-|
-|Must match one of the following options:
-
-`Yes`
-
-`No`
-|
-|`yes`
 
 |Number of cases
 |
@@ -629,16 +524,6 @@ If it is not possible to assign an ancestry category to a group of samples, ente
 |Free text
 |
 |`Korculan(founder/genetic isolate)\|Vis(founder/genetic isolate)`
-
-|Ancestry method
-|
-|Name the method used to determine sample ancestry. For consistency, we recommend you choose between the terms “self-reported” or “genetically determined” where appropriate, but other text is permissible if these do not apply. Multiple values can be listed separated by pipes "\|".
-|
-|no
-|
-|Free text
-|
-|`self-reported\|genetically determined`
 
 |Country of recruitment
 |
