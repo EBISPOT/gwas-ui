@@ -65,7 +65,7 @@
                     <th>Summary statistics</th>
                 </tr>
                 <tr>
-                    <th>First author</th>
+                    <th class="searchable">First author</th>
                     <th class="searchable">Study accession</th>
                     <th>Pub. date</th>
                     <th>Journal</th>
@@ -139,7 +139,7 @@
                         const link = gwasProperties.contextPath + 'studies/' + data;
                         return !data ? null : '<a href="' + link + '">' + data + '</a>'
                     }, orderable: false},
-                {data: 'publicationDate', name: 'publicationDate', orderable: false},
+                {data: 'publicationDate', name: 'publicationDate', orderable: true},
                 {data: 'journal', name: 'journal', orderable: false},
                 {data: 'title', name: 'title', render: $.fn.dataTable.render.ellipsis(50, true), orderable: false},
                 {data: 'reportedTrait', name: 'reportedTrait', orderable: false},
