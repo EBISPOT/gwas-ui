@@ -115,6 +115,7 @@
         dataSrc: function (json) {
           json.recordsTotal = json.page.totalElements;
           json.recordsFiltered = json.page.totalElements;
+          $(".association_count").html(json.recordsTotal);
           if (!json._embedded) json['_embedded'] = {};
           return json._embedded.associations;
         },
