@@ -186,7 +186,7 @@ image::select_collection.png[Select your collection,width=800,align="center"]
 
 You should now see the GWAS Catalog submission folder side by side with your own computer’s file system.
 
-Now you can drag and drop the summary stats files you want to upload from the right window to the left window.
+Now you can drag and drop the summary stats files you want to upload from the right window to the left window. Please only upload data files in this window, and do not create any sub-directories, as this will prevent the submission pipeline from finding your files. 
 
 image::drag_and_drop.png[Drag and drop summary statistics,width=800,align="center"]
 
