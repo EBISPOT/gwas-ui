@@ -22,7 +22,7 @@ All submitted summary statistics are required to conform to the standard format.
 == [[validator]]Summary statistics validator
 
 
-To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see:  https://github.com/EBISPOT/gwas-sumstats-tools and use the "gwas-ssf validate" command. [^].
+To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see:  https://github.com/EBISPOT/gwas-sumstats-tools and use the "gwas-ssf validate" command.
 
 
 == [[format]]Summary statistics file format and content
