@@ -9,7 +9,9 @@ The GWAS Catalog accepts summary statistics for both published and unpublished h
 
 You may also like to watch our webinar, https://www.ebi.ac.uk/training/events/data-submission-genome-wide-association-studies-gwas-catalog/[_Data submission for genome-wide association studies at the GWAS Catalog_], which walks through the main steps for submission.
 
-*IMPORTANT: If you are planning to submit data after April 12th, please read the following announcement: https://ebispot.github.io/gwas-blog/gwas-ssf-release*
+*IMPORTANT: If you are planning to submit data after April 12th 2023, please first read the following announcement: https://ebispot.github.io/gwas-blog/gwas-ssf-release*
+
+Read on for general submission instructions. 
 
 <<A, A. Preparing for submission>>
 
