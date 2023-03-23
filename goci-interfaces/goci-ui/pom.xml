@@ -19,6 +19,54 @@
         <relativePath>../../goci-parent/pom.xml</relativePath>
     </parent>
 
+    <repositories>
+        <repository>
+            <id>spot-releases</id>
+            <name>Releases</name>
+            <url>https://wwwdev.ebi.ac.uk/gwas/nexus/repository/maven-releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spot-snapshots</id>
+            <name>Snapshot</name>
+            <url>https://wwwdev.ebi.ac.uk/gwas/nexus/repository/maven-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+      <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <layout>default</layout>
+            <url>https://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>spot</id>
+            <name>Releases</name>
+            <url>https://wwwdev.ebi.ac.uk/gwas/nexus/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>spot</id>
+            <name>Snapshot</name>
+            <url>https://wwwdev.ebi.ac.uk/gwas/nexus/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -39,6 +87,27 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.hateoas</groupId>
+            <artifactId>spring-hateoas</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-rest-hal-browser</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

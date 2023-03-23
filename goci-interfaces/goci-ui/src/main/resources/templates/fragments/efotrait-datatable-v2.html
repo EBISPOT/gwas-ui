@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!--todo move styles to the parent, remove jquery from scripts, replace parent jquery with this one here, remove head tag,-->
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.4/css/buttons.bootstrap.min.css"/>
+    <style>
+        .btn:focus, .btn:active, a:focus {
+            outline: none !important;
+            box-shadow: none;
+        }
+
+        div.dt-buttons {
+            float: right;
+        }
+
+        div.dataTables_info, div.dataTables_length {
+            float: left;
+        }
+
+        thead input {
+            width: 100% !important;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body th:fragment="efotraits_datatable">
+
+<span id="trait-cut-off-notification">  </span>
+
+<!-- EFO Traits table: it should be the future STANDARD -->
+<div class="row" id="efotrait-table-loading" style="margin-top:20px">
+    <div id="efotrait_panel" class="panel panel-default">
+        <div class="panel-heading background-color-primary-accent">
+            <h3 class="panel-title">
+                <span class="efotrait_label">Traits</span><span class="efotrait_count badge available-data-btn-badge"></span>
+            </h3>
+            <span class="pull-right">
+                        <span class="clickable"
+                              style="margin-left:25px"
+                              onclick="toggleSidebar('#efotrait_panel span.clickable')">
+                              <span class="glyphicon glyphicon-chevron-up"></span>
+                        </span>
+                    </span>
+        </div>
+
+        <div class="panel-body">
+            <table id="efotrait-table-v2" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Trait label(s)</th>
+                    <th>Reported trait(s)</th>
+                    <th>Association count with rs...</th>
+                </tr>
+                <tr>
+                    <th class="searchable">Trait label(s)</th>
+                    <th class="searchable">Reported trait(s)</th>
+                    <th>Association count with rs...</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.13.2/dataRender/ellipsis.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
+<script>
+    //<![CDATA[
+    $('#efotrait-table-v2 thead tr:eq(1) th').each(function () {
+        if ($(this).hasClass('searchable')) {
+            $(this).html('<input type="text" class="form-control"/>');
+        } else {
+            $(this).html('<input type="text" class="form-control" disabled="disabled"/>');
+        }
+    });
+    $(document).ready(function () {
+        $('#efotrait-table-v2').DataTable({
+            serverSide: true,
+            ajax: {
+                url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/variants/' + $('#query').text() + '/traits',
+                dataType: 'JSON',
+                dataSrc: function (json) {
+                    json.recordsTotal = json.page.totalElements;
+                    json.recordsFiltered = json.page.totalElements;
+                    $(".efotrait_count").html(json.recordsTotal);
+                    if (!json._embedded) json['_embedded'] = {};
+                    return json._embedded.efos;
+                },
+                data: function (d) {
+                    const c = {};
+                    d.columns.forEach(e => {
+                        if (e.search.value !== '') {
+                            c[e.name] = e.search.value;
+                        }
+                    })
+                    if (d.order.length > 0) {
+                        c.sort = d.columns[d.order[0].column].name + "," + d.order[0].dir;
+                    }
+                    c.size = d.length;
+                    c.page = d.start / d.length;
+                    return c;
+                }
+            },
+            orderCellsTop: true,
+            scrollX: true,
+            order: [],
+            columns: [
+                {data: 'efoTraits', name: 'efoTrait',
+                    render: function (data) {
+                        $.each(data, function (index, trait) {
+                            // TODO use the gwasProperties
+                            const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
+                            // const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
+                            data[index] = '<a href="' + link + '">' + trait.label + '</a>'
+                        });
+                        return data ? data.join(', ') : null;
+                    },
+                    defaultContent: "-", orderable: false, width: '15%'},
+                {data: 'reportedTrait', name: 'reportedTrait', render: function (data) {return data ? data.join(", ") : null}, defaultContent: "-", orderable: false},
+                {data: 'associationCount', name: 'associationCount', defaultContent: "-", width: '15%'}
+            ],
+            dom: 'lBrtip',
+            buttons: [
+                'colvis'
+            ],
+            initComplete: function () {
+                this.api()
+                    .columns()
+                    .every(function (index) {
+                        const that = this;
+                        $(this.table().container()).on('keyup', 'thead tr:eq(1) th:eq(' + index + ') input', function (e) {
+                            if (that.search() !== this.value) that.search(this.value);
+                            if (e.keyCode === 13) that.draw();
+                        });
+                    });
+            },
+            language: {
+                paginate: {
+                    next: '<span>&raquo;</span>',
+                    previous: '<span>&laquo;</span>'
+                }
+            },
+            lengthMenu: [
+                [5, 10, 25, 50],
+                [5, 10, 25, 50],
+            ]
+        })
+            .on('processing.dt', function (e, settings, processing) {
+                if (processing) {
+                    showLoadingOverLay('#efotrait-table-v2');
+                } else {
+                    hideLoadingOverLay('#efotrait-table-v2');
+                }
+            });
+    });
+    // todo externalise
+    showLoadingOverLay = function (tagID) {
+        var options = {
+            color: "rgba(255, 255, 255, 0.8)",   // String
+            custom: "",                // String/DOM Element/jQuery Object
+            fade: [10, 10],                      // Boolean/Integer/String/Array
+            fontawesome: "",                          // String
+//            image: "data:image/gif;base32,...",  // String
+            imagePosition: "center center",             // String
+            maxSize: "100px",                  // Integer/String
+            minSize: "20px",                    // Integer/String
+            resizeInterval: 10,                       // Integer
+            size: "20%",                       // Integer/String
+            zIndex: 1000,                        // Integer
+        }
+        $(tagID).LoadingOverlay("show", options);
+    }
+    hideLoadingOverLay = function (tagID) {
+        return $(tagID).LoadingOverlay("hide", true);
+    }
+    //]]>
+</script>
+
+</body>
+</html>

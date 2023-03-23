@@ -26,7 +26,7 @@ var CONTEXT_RANGE = 500;
  * @returns {Promise}
  */
 function getDataSolr(main, initLoad=false) {
-    
+
     var searchQuery = main;
 
     return promisePost( gwasProperties.contextPath + 'api/search/advancefilter',
@@ -48,7 +48,7 @@ function getDataSolr(main, initLoad=false) {
     }).catch(function(err) {
         throw(err);
     })
-    
+
 }
 
 

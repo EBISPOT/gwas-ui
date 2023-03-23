@@ -84,8 +84,11 @@
             </extension>
         </extensions>
     </build>
+
+
+
     
-    <dependencyManagement>
+     <dependencyManagement>
         <dependencies>
             <!-- version management for project internal dependencies -->
             <dependency>
@@ -94,7 +97,7 @@
                 <version>${goci.version}</version>
             </dependency>
         </dependencies>
-    </dependencyManagement>
+     </dependencyManagement>
 
     <!-- Reporting/Documentation output -->
     <reporting>
@@ -179,6 +182,53 @@
     <!--</url>-->
     <!--</site>-->
     <!--</distributionManagement>-->
+
+    <repositories>
+        <repository>
+            <id>spot-releases</id>
+            <name>Releases</name>
+            <url>https://wwwdev.ebi.ac.uk/gwas/nexus/repository/maven-releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spot-snapshots</id>
+            <name>Snapshot</name>
+            <url>https://wwwdev.ebi.ac.uk/gwas/nexus/repository/maven-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <layout>default</layout>
+            <url>https://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>spot</id>
+            <name>Releases</name>
+            <url>https://wwwdev.ebi.ac.uk/gwas/nexus/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>spot</id>
+            <name>Snapshot</name>
+            <url>https://wwwdev.ebi.ac.uk/gwas/nexus/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 
     <!-- Developer Listing -->
