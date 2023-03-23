@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.*;
 import uk.ac.ebi.spot.goci.refactoring.dto.AssociationSolrDTO;
 import uk.ac.ebi.spot.goci.refactoring.dto.AssociationSolrDTOAssembler;
 import uk.ac.ebi.spot.goci.refactoring.dto.StudySolrDTO;
+import uk.ac.ebi.spot.goci.refactoring.dto.StudySolrDTOAssembler;
 import uk.ac.ebi.spot.goci.refactoring.model.AssociationDoc;
 import uk.ac.ebi.spot.goci.refactoring.model.SearchAssociationDTO;
 import uk.ac.ebi.spot.goci.refactoring.model.SearchStudyDTO;
 import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchAssociationService;
+import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchStudyService;
 import uk.ac.ebi.spot.goci.refactoring.service.impl.RestInteractionServiceImpl;
 import uk.ac.ebi.spot.goci.refactoring.util.SolrQueryParamBuilder;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
@@ -36,6 +38,10 @@ public class SolrSearchPublicationController {
     private static final Logger log = LoggerFactory.getLogger(SolrSearchPublicationController.class);
     @Autowired
     SolrSearchAssociationService solrSearchAssociationService;
+    @Autowired
+    SolrSearchStudyService solrSearchService;
+    @Autowired
+    StudySolrDTOAssembler studySolrDTOAssembler;
 
     @Autowired
     AssociationSolrDTOAssembler associationSolrDTOAssembler;
@@ -45,6 +51,21 @@ public class SolrSearchPublicationController {
 
     @Autowired
     SolrQueryParamBuilder solrQueryParamBuilder;
+
+    @GetMapping(value = "/{publicationId}/studies", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public PagedResources<StudySolrDTO> searchStudies(SearchStudyDTO searchStudyDTO,
+                                                      @PathVariable String publicationId,
+                                                      @PageableDefault(size = 10, page = 0) Pageable pageable,
+                                                      PagedResourcesAssembler assembler) throws IOException {
+        String query = solrQueryParamBuilder.buildQueryParam("PMID", publicationId);
+        Page<StudyDoc> pageStudyDocs = solrSearchService.searchStudies(query, pageable, searchStudyDTO);
+        final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
+                .methodOn(SolrSearchVariantController.class).searchStudies(searchStudyDTO, publicationId, pageable, assembler));
+        return assembler.toResource(pageStudyDocs, studySolrDTOAssembler,
+                new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
+    }
 
     @GetMapping(value = "/{publicationId}/associations", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
@@ -62,6 +83,8 @@ public class SolrSearchPublicationController {
                 new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
 
     }
+
+
 
 
 }

@@ -46,6 +46,7 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
             Sort.Order orderAsscn = sort.getOrderFor("associationCount");
             Sort.Order orderPvalue = sort.getOrderFor("fullPvalueSet");
             Sort.Order orderPdate = sort.getOrderFor("publicationDate");
+            Sort.Order orderFirstAuthor = sort.getOrderFor("firstAuthor");
             if(orderAsscn != null) {
                 sortDirection =  orderAsscn.isAscending() ? "asc" : "desc";
                 sortProperty = "associationCount";
@@ -57,6 +58,10 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
             if(orderPdate != null) {
                 sortDirection =  orderPdate.isAscending() ? "asc" : "desc";
                 sortProperty = "publicationDate";
+            }
+            if(orderFirstAuthor != null) {
+                sortDirection =  orderFirstAuthor.isAscending() ? "asc" : "desc";
+                sortProperty = "author_s";
             }
         }
        String uri = buildURIComponent( pageable.getPageSize(),  pageable.getPageNumber()+1, query, searchStudyDTO, sortProperty, sortDirection);

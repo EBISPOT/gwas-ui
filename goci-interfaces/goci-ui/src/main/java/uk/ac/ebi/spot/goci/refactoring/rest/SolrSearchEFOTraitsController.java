@@ -77,25 +77,27 @@ public class SolrSearchEFOTraitsController {
                                                       PagedResourcesAssembler assembler) throws IOException {
         String query = "";
         if(includeChildTraits != null && includeChildTraits) {
-         Map<String, String> olsTerms = solrSearchEFOTraitService.getOLSTerms(efotraitId);
-         List<String> efotraits = null;
-         if (olsTerms != null) {
-             efotraits = solrSearchEFOTraitService.getChildTraits(olsTerms);
-         }else {
-             efotraits = new ArrayList<>();
-         }
-         efotraits.add(efotraitId);
-         query = solrQueryParamBuilder.buildEFOQueryParam(efotraits);
+            Map<String, String> olsTerms = solrSearchEFOTraitService.getOLSTerms(efotraitId);
+            List<String> efotraits = null;
+            if (olsTerms != null) {
+                efotraits = solrSearchEFOTraitService.getChildTraits(olsTerms);
+            } else {
+                efotraits = new ArrayList<>();
+            }
+            efotraits.add(efotraitId);
+            query = solrQueryParamBuilder.buildEFOQueryParam(efotraits, includeBgTraits);
         } else {
-            query = solrQueryParamBuilder.buildQueryParam("EFOTRAIT", efotraitId);
+            if(includeBgTraits) {
+                query = solrQueryParamBuilder.buildQueryParam("BGTRAIT", efotraitId);
+            } else {
+                query = solrQueryParamBuilder.buildQueryParam("EFOTRAIT", efotraitId);
+            }
         }
-        if(includeBgTraits != null && includeBgTraits) {
-            query = solrQueryParamBuilder.buildQueryParam("BGTRAIT", efotraitId);
-        }
-        log.info("Query for EFO Traits is->"+query);
+
+        //log.info("Query for EFO Traits is->"+query);
         Page<StudyDoc> pageStudyDocs = solrSearchService.searchStudies(query, pageable, searchStudyDTO);
         final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
-                .methodOn(SolrSearchVariantController.class).searchStudies(searchStudyDTO, efotraitId, pageable, assembler));
+                .methodOn(SolrSearchEFOTraitsController.class).searchStudies(searchStudyDTO, efotraitId,false, false, pageable, assembler));
         return assembler.toResource(pageStudyDocs, studySolrDTOAssembler,
                 new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
 
@@ -118,17 +120,19 @@ public class SolrSearchEFOTraitsController {
             Map<String, String> olsTerms = solrSearchEFOTraitService.getOLSTerms(efotraitId);
             List<String> efotraits = solrSearchEFOTraitService.getChildTraits(olsTerms);
             efotraits.add(efotraitId);
-            query = solrQueryParamBuilder.buildEFOQueryParam(efotraits);
+            query = solrQueryParamBuilder.buildEFOQueryParam(efotraits, includeBgTraits);
         } else {
-            query = solrQueryParamBuilder.buildQueryParam("EFOTRAIT", efotraitId);
+            if(includeBgTraits) {
+                query = solrQueryParamBuilder.buildQueryParam("BGTRAIT", efotraitId);
+            } else {
+                query = solrQueryParamBuilder.buildQueryParam("EFOTRAIT", efotraitId);
+            }
         }
-        if(includeBgTraits != null && includeBgTraits) {
-            query = solrQueryParamBuilder.buildQueryParam("BGTRAIT", efotraitId);
-        }
+
         log.info("Query for EFO Traits is->"+query);
         Page<AssociationDoc> pageAssociationDocs = solrSearchAssociationService.searchAssociations(query, pageable, searchAssociationDTO );
         final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
-                .methodOn(SolrSearchVariantController.class).searchAssociations(searchAssociationDTO, efotraitId, pageable, assembler));
+                .methodOn(SolrSearchEFOTraitsController.class).searchAssociations(searchAssociationDTO, efotraitId,false, false, pageable, assembler));
         return assembler.toResource(pageAssociationDocs, associationSolrDTOAssembler,
                 new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
     }
@@ -142,5 +146,42 @@ public class SolrSearchEFOTraitsController {
         List<String> efoLabels = solrSearchEFOTraitService.getChildTraitLabels(efotraits);
         efoLabels.sort(Comparator.comparing(String::toLowerCase));
         return new ResponseEntity<>(efoLabels, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{efotraitId}/locuszoom/associations", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public PagedResources<AssociationSolrDTO> searchLocusAssociations(@PathVariable(value = "efotraitId") String efotraitId,
+                                                                 @RequestParam(value = SearchUIConstants.INCLUDE_CHILD_TRAITS,
+                                                                         required = false) Boolean includeChildTraits,
+                                                                 @RequestParam(value = SearchUIConstants.INCLUDE_BG_TRAITS,
+                                                                         required = false) Boolean includeBgTraits,
+                                                                 @PageableDefault(size = 10, page = 0) Pageable pageable,
+                                                                 PagedResourcesAssembler assembler) throws IOException {
+        String query = "";
+
+        if(includeChildTraits != null && includeChildTraits) {
+            Map<String, String> olsTerms = solrSearchEFOTraitService.getOLSTerms(efotraitId);
+            List<String> efotraits = solrSearchEFOTraitService.getChildTraits(olsTerms);
+            efotraits.add(efotraitId);
+            query = solrQueryParamBuilder.buildEFOQueryParam(efotraits, includeBgTraits);
+        } else {
+            if(includeBgTraits != null ) {
+                if(includeBgTraits) {
+                    query = solrQueryParamBuilder.buildQueryParam("BGTRAIT", efotraitId);
+                } else {
+                    query = solrQueryParamBuilder.buildQueryParam("EFOTRAIT", efotraitId);
+                }
+            } else{
+                query = solrQueryParamBuilder.buildQueryParam("EFOTRAIT", efotraitId);
+            }
+        }
+
+        Page<AssociationDoc> pageAssociationDocs = solrSearchEFOTraitService.searchAssociations(query, pageable );
+        final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
+                .methodOn(SolrSearchEFOTraitsController.class).searchLocusAssociations(efotraitId, false, false, pageable, assembler));
+        return assembler.toResource(pageAssociationDocs, associationSolrDTOAssembler,
+                new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
+
     }
 }
