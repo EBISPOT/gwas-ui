@@ -24,9 +24,13 @@ public class SolrEntityTransformerUtility {
 
     public  List<EFOKeyLabel> getEFOLinksfromUri(List<String> efoMappedLabel, List<String> efoMappedUri) {
         List<EFOKeyLabel> arr = new ArrayList<>();
-        for(int i = 0; i < efoMappedLabel.size(); i++) {
-            String efoId = efoMappedUri.get(i).substring(efoMappedUri.get(i).lastIndexOf("/")+1);
-            arr.add(new EFOKeyLabel(efoId,efoMappedLabel.get(i)));
+        if(efoMappedUri != null && efoMappedUri != null) {
+            for (int i = 0; i < efoMappedLabel.size(); i++) {
+                String efoId = efoMappedUri.get(i).substring(efoMappedUri.get(i).lastIndexOf("/") + 1);
+                arr.add(new EFOKeyLabel(efoId, efoMappedLabel.get(i)));
+            }
+        } else {
+            return null;
         }
         return arr;
     }

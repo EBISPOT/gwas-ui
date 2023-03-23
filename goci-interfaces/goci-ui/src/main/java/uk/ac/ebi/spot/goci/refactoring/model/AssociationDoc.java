@@ -62,6 +62,9 @@ public class AssociationDoc extends Doc implements Serializable {
     @JsonProperty("rsId")
     private List<String> rsIds;
 
+    @JsonProperty("chromLocation")
+    private List<String> chromLocation;
+
     public AssociationDoc(@JsonProperty("traitUri") Set<String> traitUris,
                           @JsonProperty("shortForm") Set<String> shortForms,
                           @JsonProperty("label") List<String> labels,
@@ -94,7 +97,8 @@ public class AssociationDoc extends Doc implements Serializable {
                           @JsonProperty("pubmedId") String pubmedId,
                           @JsonProperty("accessionId") String accessionId,
                           @JsonProperty("studyId") String studyId,
-                          @JsonProperty("rsId") List<String> rsIds) {
+                          @JsonProperty("rsId") List<String> rsIds,
+                          @JsonProperty("chromLocation") List<String> chromLocation) {
         super(traitUris, shortForms, labels, synonym, efoLink, parent, descriptions, id, resourcename);
         this.strongestAllele = strongestAllele;
         this.riskFrequency = riskFrequency;
@@ -120,6 +124,7 @@ public class AssociationDoc extends Doc implements Serializable {
         this.accessionId = accessionId;
         this.studyId = studyId;
         this.rsIds = rsIds;
+        this.chromLocation = chromLocation;
     }
 
     public List<String> getStrongestAllele() {
@@ -312,5 +317,13 @@ public class AssociationDoc extends Doc implements Serializable {
 
     public void setRsIds(List<String> rsIds) {
         this.rsIds = rsIds;
+    }
+
+    public List<String> getChromLocation() {
+        return chromLocation;
+    }
+
+    public void setChromLocation(List<String> chromLocation) {
+        this.chromLocation = chromLocation;
     }
 }

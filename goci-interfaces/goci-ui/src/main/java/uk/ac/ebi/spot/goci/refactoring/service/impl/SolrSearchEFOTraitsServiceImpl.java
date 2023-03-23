@@ -86,7 +86,7 @@ public class SolrSearchEFOTraitsServiceImpl implements SolrSearchEFOTraitsServic
     private MultiValueMap<String, String> buildQueryParams(int maxResults, int page, String query) {
         MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
         paramsMap.add("wt","json");
-        paramsMap.add("rows",SearchUIConstants.MAX_STUDY_COUNT);
+        paramsMap.add("rows",String.valueOf(Integer.MAX_VALUE));
         int start = (page - 1) * maxResults;
         //paramsMap.add("start", String.valueOf(start));
         String fq = searchConfiguration.getDefaultFacet()+":"+ SearchUIConstants.FACET_ASSOCIATION;

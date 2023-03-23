@@ -70,10 +70,11 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
                 .pubmedId(associationDoc.getPubmedId())
                 .accessionId(associationDoc.getAccessionId())
                 .riskAlleleSep(Optional.ofNullable(associationDoc.getStrongestAllele()).map(this::getRiskAllelleSep).orElse(null))
+                .chromLocation(associationDoc.getChromLocation())
                 .build();
         try {
             final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
-                    ControllerLinkBuilder.methodOn(SolrSearchPublicationController.class).searchAssociations(null, associationDoc.getPubmedId(), null, null));
+                    ControllerLinkBuilder.methodOn(SolrSearchPublicationController.class).searchAssociations(null, "Pmid", null, null));
             Resource<AssociationSolrDTO> resource = new Resource<>(associationSolrDTO);
             resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withSelfRel());
             return resource;

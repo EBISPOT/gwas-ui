@@ -14,6 +14,8 @@ public class SearchUIConstants {
 
     public static final String EFOTRAITS = "/efotraits";
 
+    public static final String GENES = "/genes";
+
     public static final String INCLUDE_CHILD_TRAITS = "includeChildTraits";
 
     public static final String INCLUDE_BG_TRAITS = "includeBgTraits";
@@ -33,6 +35,8 @@ public class SearchUIConstants {
             + "orPerCopyNum, orDescription, betaNum, betaUnit, betaDirection, range, ensemblMappedGenes, traitName, "
             + "efoLink, mappedLabel, mappedUri, mappedBkgLabel, mappedBkgUri, positionLinks, author_s, publicationDate, pubmedId, "
             + "accessionId";
+
+    public static final String LOCUS_ZOOM_SOLR_FIELDS = "chromLocation, pValueExponent, pValueMantissa";
 
     public static final String ACCESSION_ID = "accessionId";
 

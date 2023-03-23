@@ -55,7 +55,7 @@ public class SolrRegionServiceImpl implements SolrRegionService {
     private MultiValueMap<String, String> buildQueryParams(String query) {
         MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
         paramsMap.add("wt","json");
-        paramsMap.add("rows",String.valueOf(50000));
+        paramsMap.add("rows",String.valueOf(Integer.MAX_VALUE));
         //int start = (page - 1) * maxResults;
         //paramsMap.add("start", String.valueOf(start));
         String fq = searchConfiguration.getDefaultFacet()+":"+ SearchUIConstants.FACET_ASSOCIATION;

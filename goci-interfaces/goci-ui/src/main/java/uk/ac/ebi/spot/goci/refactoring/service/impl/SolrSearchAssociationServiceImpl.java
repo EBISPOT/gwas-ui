@@ -38,9 +38,8 @@ public class SolrSearchAssociationServiceImpl implements SolrSearchAssociationSe
 
     public Page<AssociationDoc> searchAssociations(String query, Pageable pageable, SearchAssociationDTO searchAssociationDTO) {
         log.info("Query->"+query);
-        String uri = buildURIComponent(pageable.getPageSize(), pageable.getPageNumber() + 1, query,
-                searchAssociationDTO, buildSortParam(pageable));
-        SolrData data = restInteractionService.callSolrAPI(uri);
+        String uri = buildURIComponent();
+        SolrData data = restInteractionService.callSolrAPIwithPayload(uri, buildQueryParams( pageable.getPageSize(), pageable.getPageNumber() + 1, query, searchAssociationDTO, buildSortParam(pageable)));
         if( data != null &&  data.getResponse() != null ) {
             log.info("Response data Count"+data.getResponse().getNumFound());
             List<? > docs =  data.getResponse().getDocs();
@@ -53,11 +52,10 @@ public class SolrSearchAssociationServiceImpl implements SolrSearchAssociationSe
     }
 
 
-    private String buildURIComponent( int maxResults, int page, String query, SearchAssociationDTO searchAssociationDTO,
-                                      String sortParam) {
+    private String buildURIComponent() {
         String fatSolrUri = restInteractionService.getFatSolrUri();
         UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(fatSolrUri)
-                .queryParams(buildQueryParams( maxResults, page, query, searchAssociationDTO, sortParam))
+                //.queryParams(buildQueryParams( maxResults, page, query, searchAssociationDTO, sortParam))
                 .build();
         return uriComponents.toUriString();
     }
@@ -149,6 +147,7 @@ public class SolrSearchAssociationServiceImpl implements SolrSearchAssociationSe
             Sort.Order orderRAF = sort.getOrderFor("raf");
             Sort.Order orderBeta = sort.getOrderFor("beta");
             Sort.Order orderOr = sort.getOrderFor("or");
+            Sort.Order orderFirstAuthor = sort.getOrderFor("firstAuthor");
 
             if(orderPvalue != null) {
                 sortProperty = orderPvalue.isAscending() ? "asc" : "desc";
@@ -168,6 +167,11 @@ public class SolrSearchAssociationServiceImpl implements SolrSearchAssociationSe
             if(orderOr != null) {
                 sortProperty = orderOr.isAscending() ? "asc" : "desc";
                 sortParam = String.format("orPerCopyNum %s", sortProperty);
+            }
+
+            if(orderFirstAuthor != null) {
+                sortProperty = orderFirstAuthor.isAscending() ? "asc" : "desc";
+                sortParam = String.format("author_s %s", sortProperty);
             }
 
              }

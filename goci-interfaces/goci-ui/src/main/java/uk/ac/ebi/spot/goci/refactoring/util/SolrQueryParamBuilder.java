@@ -36,6 +36,9 @@ public class SolrQueryParamBuilder {
         else if(type.equals("BGTRAIT")) {
             return param;
         }
+        else if(type.equals("GENE")) {
+            return String .format("ensemblMappedGenes:\"%s\" OR association_ensemblMappedGenes:\"%s\"",param, param);
+        }
         return null;
 
     }
@@ -46,9 +49,18 @@ public class SolrQueryParamBuilder {
         return concatAccids;
     }
 
-    public String buildEFOQueryParam(List<String> efoIds) {
-     String concatEfoQuery =   efoIds.stream().collect(Collectors.joining(","));
-     return String.format("shortForm:%s OR efoLink:%s OR mappedUri:%s",concatEfoQuery, concatEfoQuery, concatEfoQuery);
+    public String buildEFOQueryParam(List<String> efoIds, Boolean includeBGtraits) {
+        String concatEfoQuery =   efoIds.stream().collect(Collectors.joining(","));
+        //return String.format("{!terms shortForm}%s OR {!terms efoLink}%s OR {!mappedUri efoLink}%s",concatEfoQuery, concatEfoQuery, concatEfoQuery);
+       if(includeBGtraits != null ) {
+           if (!includeBGtraits)
+               return String.format("shortForm:%s OR efoLink:%s OR mappedUri:%s", concatEfoQuery, concatEfoQuery, concatEfoQuery);
+           else
+               return concatEfoQuery;
+       } else {
+           return String.format("shortForm:%s OR efoLink:%s OR mappedUri:%s", concatEfoQuery, concatEfoQuery, concatEfoQuery);
+       }
+
     }
 
 

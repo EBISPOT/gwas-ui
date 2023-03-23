@@ -58,6 +58,9 @@ public class AssociationSolrDTO extends ResourceSupport implements Serializable 
     @JsonProperty("riskAlleleSep")
     private String riskAlleleSep;
 
+    @JsonProperty("chromLocation")
+    private List<String> chromLocation;
+
     public AssociationSolrDTO(@JsonProperty("riskAllele") List<EFOKeyLabel> riskAllele,
                               @JsonProperty("riskFrequency") String riskFrequency,
                               @JsonProperty("pValue") Integer pValue,
@@ -75,7 +78,8 @@ public class AssociationSolrDTO extends ResourceSupport implements Serializable 
                               @JsonProperty("publicationDate") LocalDate publicationDate,
                               @JsonProperty("pubmedId") String pubmedId,
                               @JsonProperty("accessionId") String accessionId,
-                              @JsonProperty("riskAlleleSep") String riskAlleleSep) {
+                              @JsonProperty("riskAlleleSep") String riskAlleleSep,
+                              @JsonProperty("chromLocation") List<String> chromLocation) {
         this.riskAllele = riskAllele;
         this.riskFrequency = riskFrequency;
         this.pValue = pValue;
@@ -94,6 +98,7 @@ public class AssociationSolrDTO extends ResourceSupport implements Serializable 
         this.pubmedId = pubmedId;
         this.accessionId = accessionId;
         this.riskAlleleSep = riskAlleleSep;
+        this.chromLocation = chromLocation;
     }
 
     public List<EFOKeyLabel> getRiskAllele() {
@@ -238,5 +243,14 @@ public class AssociationSolrDTO extends ResourceSupport implements Serializable 
 
     public void setRiskAlleleSep(String riskAlleleSep) {
         this.riskAlleleSep = riskAlleleSep;
+    }
+
+
+    public List<String> getChromLocation() {
+        return chromLocation;
+    }
+
+    public void setChromLocation(List<String> chromLocation) {
+        this.chromLocation = chromLocation;
     }
 }
