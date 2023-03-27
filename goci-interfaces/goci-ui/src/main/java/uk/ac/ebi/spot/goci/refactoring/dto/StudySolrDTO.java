@@ -60,6 +60,8 @@ public class StudySolrDTO extends ResourceSupport implements Serializable {
     @JsonProperty("ssApiFlag")
     private Boolean ssApiFlag;
 
+    @JsonProperty("agreedToCc0")
+    private Boolean agreedToCc;
 
     public StudySolrDTO(@JsonProperty("accessionId") String accessionId,
                         @JsonProperty("pubmedId") String pubmedId,
@@ -77,7 +79,8 @@ public class StudySolrDTO extends ResourceSupport implements Serializable {
                         @JsonProperty("replicationSampleAncestry") List<String> replicationSampleAncestry,
                         @JsonProperty("associationCount") Integer associationCount,
                         @JsonProperty("summaryStatistics") String summaryStatistics,
-                        @JsonProperty("ssApiFlag") Boolean ssApiFlag) {
+                        @JsonProperty("ssApiFlag") Boolean ssApiFlag,
+                        @JsonProperty("agreedToCc0") Boolean agreedToCc) {
         this.accessionId = accessionId;
         this.pubmedId = pubmedId;
         this.reportedTrait = reportedTrait;
@@ -95,6 +98,7 @@ public class StudySolrDTO extends ResourceSupport implements Serializable {
         this.associationCount = associationCount;
         this.summaryStatistics = summaryStatistics;
         this.ssApiFlag = ssApiFlag;
+        this.agreedToCc = agreedToCc;
     }
 
     public String getAccessionId() {
@@ -232,6 +236,14 @@ public class StudySolrDTO extends ResourceSupport implements Serializable {
 
     public void setSsApiFlag(Boolean ssApiFlag) {
         this.ssApiFlag = ssApiFlag;
+    }
+
+    public Boolean getAgreedToCc() {
+        return agreedToCc;
+    }
+
+    public void setAgreedToCc(Boolean agreedToCc) {
+        this.agreedToCc = agreedToCc;
     }
 }
 

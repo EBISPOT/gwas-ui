@@ -7,7 +7,7 @@ import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
 
 import java.io.IOException;
 
-public interface SolrSearchStudyService {
+public interface SolrSearchSumstatsService {
 
     Page<StudyDoc> searchStudies(String query, Pageable pageable, SearchStudyDTO searchStudyDTO) throws IOException;
 }

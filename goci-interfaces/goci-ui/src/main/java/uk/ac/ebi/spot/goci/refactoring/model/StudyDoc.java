@@ -91,6 +91,9 @@ public class StudyDoc extends Doc implements Serializable {
     @JsonProperty("association_positionLinks")
     private List<String> positionLinks;
 
+    @JsonProperty("agreedToCc0")
+    private Boolean agreedToCc;
+
     public StudyDoc(@JsonProperty("traitUri") Set<String> traitUris,
                     @JsonProperty("shortForm") Set<String> shortForms,
                     @JsonProperty("label") List<String> labels,
@@ -137,7 +140,8 @@ public class StudyDoc extends Doc implements Serializable {
                     @JsonProperty("association_reportedGeneLinks") List<String> reportedGeneLinks,
                     @JsonProperty("association_chromosomeName") List<String> chromosomeNames,
                     @JsonProperty("chromosomePositions") List<String> chromosomePositions,
-                    @JsonProperty("association_positionLinks") List<String> positionLinks) {
+                    @JsonProperty("association_positionLinks") List<String> positionLinks,
+                    @JsonProperty("agreedToCc0") Boolean agreedToCc) {
         //super();
         super(traitUris, shortForms, labels, synonym, efoLink, parent, descriptions, id, resourcename);
         this.pubmedId = pubmedId;
@@ -178,6 +182,7 @@ public class StudyDoc extends Doc implements Serializable {
         this.chromosomeNames = chromosomeNames;
         this.chromosomePositions = chromosomePositions;
         this.positionLinks = positionLinks;
+        this.agreedToCc = agreedToCc;
     }
 
     public String getPubmedId() {
@@ -482,5 +487,13 @@ public class StudyDoc extends Doc implements Serializable {
 
     public void setPositionLinks(List<String> positionLinks) {
         this.positionLinks = positionLinks;
+    }
+
+    public Boolean getAgreedToCc() {
+        return agreedToCc;
+    }
+
+    public void setAgreedToCc(Boolean agreedToCc) {
+        this.agreedToCc = agreedToCc;
     }
 }

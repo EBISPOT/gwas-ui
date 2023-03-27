@@ -39,6 +39,9 @@ public class SolrQueryParamBuilder {
         else if(type.equals("GENE")) {
             return String .format("ensemblMappedGenes:\"%s\" OR association_ensemblMappedGenes:\"%s\"",param, param);
         }
+        else if(type.equals("SUMSTATS")) {
+            return "fullPvalueSet:true";
+        }
         return null;
 
     }
