@@ -70,6 +70,7 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
                                                 .orElse(null))
                                         .genotypingTechnologies(studyDoc.getGenotypingTechnologies())
                                         .ssApiFlag(getSSApiFlag(studyDoc.getAccessionId()))
+                                        .agreedToCc(studyDoc.getAgreedToCc())
                                         .build();
         try {
             final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
