@@ -45,33 +45,8 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
     @Override
     public Resource<StudySolrDTO> toResource(StudyDoc studyDoc)  {
 
+        StudySolrDTO studySolrDTO = assemble(studyDoc);
 
-        StudySolrDTO studySolrDTO = StudySolrDTO.builder()
-                                        .accessionId(studyDoc.getAccessionId())
-                                        .reportedTrait(studyDoc.getTraitName_s())
-                                        .journal(studyDoc.getPublication())
-                                        .firstAuthor(Optional.ofNullable(studyDoc.getAuthorS()).orElse("NA"))
-                                        .title(studyDoc.getTitle())
-                                        .associationCount(studyDoc.getAssociationCount())
-                                        .pubmedId(studyDoc.getPubmedId())
-                                        .publicationDate(Optional.ofNullable(studyDoc.getPublicationDate()).map(solrEntityTransformerUtility::formatPubDate).orElse(null))
-                                        .summaryStatistics(studyDoc.getFullPvalueSet() ? getSummaryStatsFTPDetails(studyDoc.getAccessionId()) : "NA")
-                                        .efoTraits(Optional.ofNullable(studyDoc.getEfoLink()).map(solrEntityTransformerUtility::getEFOLinks)
-                                                .orElse(solrEntityTransformerUtility.getEFOLinksfromUri(studyDoc.getMappedLabel(),studyDoc.getMappedUri())))
-                                        .bgTraits(Optional.ofNullable(studyDoc.getMappedBkgLabels()).map( bgLinks -> solrEntityTransformerUtility.getEFOLinksfromUri
-                                                        (studyDoc.getMappedBkgLabels(),studyDoc.getMappedBkgUris())).orElse(null))
-                                        .initialSampleDescription(Optional.ofNullable(studyDoc.getInitialSampleDescription()).map(this::populateInitialSampleDesc)
-                                                .orElse(null))
-                                        .replicateSampleDescription(Optional.ofNullable(studyDoc.getReplicateSampleDescription()).map(this::populateReplicationSampleDesc)
-                                                .orElse(null))
-                                        .discoverySampleAncestry(Optional.ofNullable(studyDoc.getAncestryLinks()).map(this::populateAncestryAndInitialSampleNumber)
-                                                .orElse(null))
-                                        .replicationSampleAncestry(Optional.ofNullable(studyDoc.getAncestryLinks()).map(this::populateAncestryAndReplicationSampleNumber)
-                                                .orElse(null))
-                                        .genotypingTechnologies(studyDoc.getGenotypingTechnologies())
-                                        .ssApiFlag(getSSApiFlag(studyDoc.getAccessionId()))
-                                        .agreedToCc(studyDoc.getAgreedToCc())
-                                        .build();
         try {
             final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
                     ControllerLinkBuilder.methodOn(SolrSearchVariantController.class).searchStudies(null, "rsidxxxx", null, null));
@@ -82,6 +57,35 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
             log.error("IO Exception "+ex.getMessage(),ex);
         }
         return null;
+    }
+
+    public StudySolrDTO assemble(StudyDoc studyDoc ){
+        return StudySolrDTO.builder()
+                .accessionId(studyDoc.getAccessionId())
+                .reportedTrait(studyDoc.getTraitName_s())
+                .journal(studyDoc.getPublication())
+                .firstAuthor(Optional.ofNullable(studyDoc.getAuthorS()).orElse("NA"))
+                .title(studyDoc.getTitle())
+                .associationCount(studyDoc.getAssociationCount())
+                .pubmedId(studyDoc.getPubmedId())
+                .publicationDate(Optional.ofNullable(studyDoc.getPublicationDate()).map(solrEntityTransformerUtility::formatPubDate).orElse(null))
+                .summaryStatistics(studyDoc.getFullPvalueSet() ? getSummaryStatsFTPDetails(studyDoc.getAccessionId()) : "NA")
+                .efoTraits(Optional.ofNullable(studyDoc.getEfoLink()).map(solrEntityTransformerUtility::getEFOLinks)
+                        .orElse(solrEntityTransformerUtility.getEFOLinksfromUri(studyDoc.getMappedLabel(),studyDoc.getMappedUri())))
+                .bgTraits(Optional.ofNullable(studyDoc.getMappedBkgLabels()).map( bgLinks -> solrEntityTransformerUtility.getEFOLinksfromUri
+                        (studyDoc.getMappedBkgLabels(),studyDoc.getMappedBkgUris())).orElse(null))
+                .initialSampleDescription(Optional.ofNullable(studyDoc.getInitialSampleDescription()).map(this::populateInitialSampleDesc)
+                        .orElse(null))
+                .replicateSampleDescription(Optional.ofNullable(studyDoc.getReplicateSampleDescription()).map(this::populateReplicationSampleDesc)
+                        .orElse(null))
+                .discoverySampleAncestry(Optional.ofNullable(studyDoc.getAncestryLinks()).map(this::populateAncestryAndInitialSampleNumber)
+                        .orElse(null))
+                .replicationSampleAncestry(Optional.ofNullable(studyDoc.getAncestryLinks()).map(this::populateAncestryAndReplicationSampleNumber)
+                        .orElse(null))
+                .genotypingTechnologies(studyDoc.getGenotypingTechnologies())
+                .ssApiFlag(getSSApiFlag(studyDoc.getAccessionId()))
+                .agreedToCc(studyDoc.getAgreedToCc())
+                .build();
     }
 
     private Boolean getSSApiFlag(String accessionId) {

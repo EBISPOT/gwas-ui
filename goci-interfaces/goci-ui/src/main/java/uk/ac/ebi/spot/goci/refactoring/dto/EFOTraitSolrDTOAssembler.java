@@ -23,11 +23,7 @@ public class EFOTraitSolrDTOAssembler implements ResourceAssembler<EFOTraitDoc, 
 
     @Override
     public Resource<EFOTraitSolrDTO> toResource(EFOTraitDoc efoTraitDoc) {
-        EFOTraitSolrDTO efoTraitSolrDTO = EFOTraitSolrDTO.builder()
-                .efoTraits(efoTraitDoc.getEfoTraits())
-                .reportedTrait(efoTraitDoc.getReportedTrait())
-                .associationCount(efoTraitDoc.getAssociationCount())
-                .build();
+        EFOTraitSolrDTO efoTraitSolrDTO = assemble(efoTraitDoc);
 
         try {
             final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
@@ -39,6 +35,14 @@ public class EFOTraitSolrDTOAssembler implements ResourceAssembler<EFOTraitDoc, 
             log.error("IO Exception " + ex.getMessage(), ex);
         }
         return null;
+    }
+
+    public EFOTraitSolrDTO assemble(EFOTraitDoc efoTraitDoc) {
+        return EFOTraitSolrDTO.builder()
+                .efoTraits(efoTraitDoc.getEfoTraits())
+                .reportedTrait(efoTraitDoc.getReportedTrait())
+                .associationCount(efoTraitDoc.getAssociationCount())
+                .build();
     }
 
 }

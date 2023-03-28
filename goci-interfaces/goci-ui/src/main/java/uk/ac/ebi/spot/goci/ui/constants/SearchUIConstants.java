@@ -42,7 +42,7 @@ public class SearchUIConstants {
             + "publicationDate,mappedLabel,mappedUri,traitName_s,associationCount,agreedToCc0,fullPvalueSet";
 
     public static final String LOCUS_ZOOM_SOLR_FIELDS = "chromLocation, pValueExponent, pValueMantissa, strongestAllele," +
-            "ensemblMappedGenes,traitName_s,mappedLabel,accessionId,pubmedId,author_s,publicationDate";
+            "ensemblMappedGenes,traitName,mappedLabel,accessionId,pubmedId,author_s,publicationDate,efoLink,mappedUri";
 
     public static final String ACCESSION_ID = "accessionId";
 

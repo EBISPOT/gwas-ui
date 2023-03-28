@@ -13,5 +13,7 @@ public interface SolrSearchEFOTraitsService {
 
 Page<EFOTraitDoc> searchEFOTraits(SearchEFOTraitDTO searchEFOTraitDTO, String query, Pageable pageable);
 
+List<EFOTraitDoc> createEFOTraitData(List<AssociationDoc> associationDocs, String rsId, SearchEFOTraitDTO searchEFOTraitDTO);
+
 
 }
