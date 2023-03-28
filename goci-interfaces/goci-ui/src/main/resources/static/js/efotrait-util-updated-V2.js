@@ -91,25 +91,26 @@ function parsePgsTraitResult(data) {
  * Page is ready to run methods
  */
 $(document).ready(() => {
-    $('#toggle-data-display').on('change', () => {
-        const associationTable = $('#association-table-v2').DataTable();
-        associationTable.ajax.reload();
-        const studyTable = $('#study-table-v2').DataTable();
-        studyTable.ajax.reload();
-    });
-    $('#include-bg-traits').on('change', () => {
-        const associationTable = $('#association-table-v2').DataTable();
-        associationTable.ajax.reload();
-        const studyTable = $('#study-table-v2').DataTable();
-        studyTable.ajax.reload();
-    });
+    $('#toggle-data-display').on('change', reloadTablesAndLocusZoom);
+    $('#include-bg-traits').on('change', reloadTablesAndLocusZoom);
     // Conditional display of PGS link/button
     isTraitInPGS();
 
     // Get trait information
     const initialCBState = true;
     displayEFOInfo(initialCBState);
+    prepareLocusZoom(false, true);
 });
+
+function reloadTablesAndLocusZoom() {
+    const associationTable = $('#association-table-v2').DataTable();
+    associationTable.ajax.reload();
+    const studyTable = $('#study-table-v2').DataTable();
+    studyTable.ajax.reload();
+    let includeBgTraits = $('#include-bg-traits').is(':checked');
+    let includeChildTraits = $('#toggle-data-display').is(':checked');
+    prepareLocusZoom(includeBgTraits, includeChildTraits);
+}
 
 
 
@@ -243,109 +244,18 @@ displayEFOInfo = function(initCBState) {
     // TEST - Set-up Hidden form
     getDownloadCatalogData();
 
-
-    // Get EFO child traits data from OLS to (1) display in term info panel and (2) use for data tables and download file data generation
-    const allTermIds = [], allChildTermObj = {};
-    const olsParam = `?id=${efoId}&size=500`;
-    let efo_child_traits_url = `${global_ols_efo_hierarchical_descendents}${olsParam}`;
-
-    // Get all child term information from OLS REST API
-    const childTraitResults = getChildTraits(efoId, efo_child_traits_url, allTermIds, allChildTermObj);
-    //TODO fix here up and down
-    Promise.resolve(childTraitResults).then(function(childResults) {
-        hideLoadingOverLay('#summary-panel-loading'); // Done loading data for trait info panel
-
-        // Get all EFO trait terms used in GOCI database from GWAS REST API
-        const allEFOIDs = [], allEFOLabels = [];
-        const efoTraitsParam = `?size=500`;
-        let efoTraits_url = `${global_gwas_trait_api}${efoTraitsParam}`;
-
-        const allEfoTraitResponse = getAllEFOTraits(efoTraits_url, allEFOIDs, allEFOLabels);
-        Promise.resolve(allEfoTraitResponse).then(function(allEfoTraitResults) {
-
-            // Filter list of allIds against list of all child term IDs
-            let filteredTraitIds = childResults[0].filter(Id => allEfoTraitResults[0].includes(Id));
-
-            // Based on filteredTraitIds, get list of filteredTraitLabels for all IDs
-            let filteredTraitLabels = [];
-            for (const id of filteredTraitIds) {
-                // Get child term label from lookup
-                let label = childResults[1][id];
-                filteredTraitLabels.push(label);
-            }
-
-            // Set display of Child traits here so only child term labels with data are displayed
-            $("#efo-child-trait-label").html(longContentList(
-                "gwas_child_traits_div", filteredTraitLabels.sort(), 'child traits')
-            );
-
-
-            // Add mainEFO to filtered Trait Id list before query to Fat Solr
-            filteredTraitIds.push(efoId);
-
-            // Show status message for traitCount used to get data
-            displayTraitCountLoading(filteredTraitIds.length, true);
-
-            // Get data from Fat Solr for filteredTraits list with mainEFO in the list
-            let displayData = getEfoTraitDataSolr(filteredTraitIds, isBkgTraitsCheckboxChecked);
-            Promise.resolve(displayData).then(function() {
-                hideLoadingOverLay('#highlighted-study-button');
-                hideGroupedPanelLoadingOverlay();
-                // Hide status message for traitCount used to get data
-                displayTraitCountLoading(filteredTraitIds.length, false);
-            });
-
-            // Get data for "Download Catalog data" button
-            setTraitDownloadLink(filteredTraitIds);
-            let traitsToDisplay = filteredTraitIds;
-
-            // Change data display and download data file content
-            // based on checkbox state to show/hide child trait data
-            // myCheckbox.addEventListener('change', e => {
-            //     showGroupedPanelLoadingOverlay();
-            //
-            //     if (e.target.checked) {
-            //         // Show status message for traitCount used to get data
-            //         displayTraitCountLoading(filteredTraitIds.length, true);
-            //
-            //         // Display data for mainEFO and child terms
-            //         let displayData = getEfoTraitDataSolr(filteredTraitIds, isBkgTraitsCheckboxChecked);
-            //         traitsToDisplay = filteredTraitIds;
-            //         Promise.resolve(displayData).then(function() {
-            //             hideGroupedPanelLoadingOverlay();
-            //             // Hide status message for traitCount used to get data
-            //             displayTraitCountLoading(filteredTraitIds.length, false);
-            //         });
-            //
-            //         // Get data for "Download Catalog data" button for mainEFO and child terms
-            //         setTraitDownloadLink(filteredTraitIds);
-            //     } else {
-            //         // Show status message for traitCount used to get data
-            //         displayTraitCountLoading([efoId].length, true);
-            //         traitsToDisplay = efoId;
-            //         // Display data for mainEFO only
-            //         let displayData = getEfoTraitDataSolr(efoId, isBkgTraitsCheckboxChecked);
-            //         Promise.resolve(displayData).then(function() {
-            //             hideGroupedPanelLoadingOverlay();
-            //             // Hide status message for traitCount used to get data
-            //             displayTraitCountLoading([efoId].length, false);
-            //         });
-            //
-            //         // Get data for "Download Catalog data" button for mainEFO
-            //         setTraitDownloadLink([efoId]);
-            //     }
-            // });
-
-            // document.getElementById('include-bg-traits').addEventListener('change', () => {
-            //     showGroupedPanelLoadingOverlay();
-            //     isBkgTraitsCheckboxChecked = !isBkgTraitsCheckboxChecked;
-            //     let displayData = getEfoTraitDataSolr(traitsToDisplay, isBkgTraitsCheckboxChecked);
-            //     Promise.resolve(displayData).then(function () {
-            //         hideGroupedPanelLoadingOverlay();
-            //     });
-            // })
+    // todo change to gwasProperties.url
+    promiseGet('http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/efotraits/EFO_0000305/traits/children', {}, false)
+        .then(JSON.parse).then(function(data) {
+            console.log(typeof data);
+            $("#efo-child-trait-label").html(longContentList("gwas_child_traits_div", data.sort(), 'child traits'));
+            hideLoadingOverLay('#summary-panel-loading');
+            hideLoadingOverLay('#highlighted-study-button');
+            hideGroupedPanelLoadingOverlay();
+        }).catch(function (err) {
+            throw(err);
         });
-    });
+
 };
 
 
@@ -773,24 +683,6 @@ function processSolrData(data, initLoad=false) {
 
 
     remove.then(()=>{
-        // If no solr return, generate a fake empty array so tables/plot are empty
-        if(!isInCatalog) {
-            data_association.docs = []
-            data_study.docs = []
-        }
-
-        //update association/study table
-        displayDatatableAssociations(data_association);
-        displayDatatableStudies(data_study, );
-
-        //work out highlight study
-        var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
-        // if(initLoad && highlightedStudy!= undefined){
-        if(highlightedStudy!= undefined){
-            displayHighlightedStudy(highlightedStudy);
-            //display summary information like 'EFO trait first reported in GWAS Catalog in 2007, 5 studies report this efotrait'
-            getSummary(findStudiesForEFO(getMainEFO()));
-        }
 
         // GOCI_CM_TW_Integration_Plot_no_association
         if ('docs' in data_association) {
@@ -839,6 +731,50 @@ function processSolrData(data, initLoad=false) {
 
 }
 
+function prepareLocusZoom(includeBgTraits, includeChildTraits) {
+    Promise.resolve(getLocusZoomAssociations([], includeBgTraits, includeChildTraits, 0))
+        .then(function (data) {
+            data.forEach(d => {
+                d.pValueMantissa = d.pValue;
+                d.id = Math.random();
+                d.popoverHTML = buildLocusPlotPopoverHTML(d);
+            })
+            getColourForEFO(getMainEFO()).then((response) => {
+                data.forEach(d => {
+                    d.preferedColor = response.colour;
+                    d.preferedParentUri = response.parentUri;
+                    d.preferedParentLabel = response.parent;
+                    d.category = response.parent;
+                })
+            }).catch((err) => {
+                console.warn(`Error loading colour for Locus zoom plot from ${global_color_url}. ${err}. Using default colour.`)
+            }).then(() => {
+                const cata = {};
+                cata.docs = data;
+                reloadLocusZoom('#plot', cata);
+            });
+        });
+}
+
+getLocusZoomAssociations = async function(allAssociations, includeBgTraits, includeChildTraits, page) {
+    let locusZoomAssociationsUrl = 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/efotraits/EFO_0000305/locuszoom/associations?'
+    const searchParams = new URLSearchParams();
+    searchParams.set('page', page);
+    searchParams.set('size', '500');
+    searchParams.set('includeBgTraits', includeBgTraits);
+    searchParams.set('includeChildTraits', includeChildTraits);
+    locusZoomAssociationsUrl += searchParams.toString();
+    await promiseGet(locusZoomAssociationsUrl).then(JSON.parse).then(function (response) {
+        allAssociations.push(...response._embedded.associations);
+        // Page through all results
+        if (response._links.next.href) {
+            return getLocusZoomAssociations(allAssociations, includeBgTraits, includeChildTraits, ++page);
+        }
+    }).catch(function (err) {
+        console.debug('Error getting info for: ' + err);
+    });
+    return allAssociations;
+};
 
 /**
  * Display highlighted study on the page
@@ -1080,16 +1016,16 @@ buildLocusPlotPopoverHTML = function(association){
     }
     var text = $('<div/>');
 
-    var rsid = association.rsId==undefined? '' : association.rsId[0];
-    text.append(_addNameValuePairHTML('Variant and risk allele', association.strongestAllele));
+    text.append(_addNameValuePairHTML('Variant and risk allele', association.riskAllele[0]?.label));
     text.append(_addNameValuePairHTML('Location',association.chromLocation));
-    text.append(_addNameValuePairHTML('P-value',association.pValueMantissa+' x 10'+"<sup>"+association.pValueExponent+"</sup>"));
+    text.append(_addNameValuePairHTML('P-value',association.pValue+' x 10'+"<sup>"+association.pValueExponent+"</sup>"));
     text.append(_addNameValuePairHTML('Mapped gene(s)',association.ensemblMappedGenes));
     text.append(_addNameValuePairHTML('Reported trait', association.traitName_s));
-    text.append(_addNameValuePairHTML('Trait(s)', association.mappedLabel.toString()));
+    // todo fix and uncomment
+    // text.append(_addNameValuePairHTML('Trait(s)', association.mappedLabel.toString())); //use global label
     text.append(_addNameValuePairHTML('Study accession', association.accessionId));
     text.append(_addNameValuePairHTML('PubMed ID', association.pubmedId));
-    text.append(_addNameValuePairHTML('Author',association.author_s));
+    text.append(_addNameValuePairHTML('Author', association.author));
     text.append(_addNameValuePairHTML('Publication year', new Date(association.publicationDate).getFullYear()));
     return text.prop('outerHTML');
 };
