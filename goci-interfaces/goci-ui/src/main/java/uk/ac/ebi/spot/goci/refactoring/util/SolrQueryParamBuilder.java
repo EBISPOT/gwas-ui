@@ -17,7 +17,11 @@ public class SolrQueryParamBuilder {
     private static final Logger log = LoggerFactory.getLogger(SolrQueryParamBuilder.class);
     public final static String REGEX_REGION = "([XY0-9]{1,2}):(\\d+)-(\\d+)";
 
+    public final static String REGEX_CYTOBAND = "([XY0-9]{1,2})([PQ][0-9]+\\.[0-9]+)";
+
     final Pattern pattern = Pattern.compile(REGEX_REGION, Pattern.CASE_INSENSITIVE);
+
+    final Pattern cytoPattern = Pattern.compile(REGEX_CYTOBAND, Pattern.CASE_INSENSITIVE);
 
     public String buildQueryParam(String type, String param) {
 
@@ -73,5 +77,11 @@ public class SolrQueryParamBuilder {
         return String.format("chromosomeName: %s AND chromosomePosition:[ %s TO %s ]",matcher.group(1), matcher.group(2), matcher.group(3));
         }
         return null;
+    }
+
+
+    public Boolean checkCytoBandPattern(String cytoBand) {
+        final Matcher matcher = cytoPattern.matcher(cytoBand);
+        return matcher.find();
     }
 }

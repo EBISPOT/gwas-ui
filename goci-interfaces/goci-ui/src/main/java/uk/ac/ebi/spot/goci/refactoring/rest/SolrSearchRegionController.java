@@ -58,7 +58,12 @@ public class SolrSearchRegionController {
                                                                  @PathVariable String regionId,
                                                                  @PageableDefault(size = 10, page = 0) Pageable pageable,
                                                                  PagedResourcesAssembler assembler) throws IOException {
-        String query = solrQueryParamBuilder.buildQueryParam("REGION", regionId);
+        String query = "";
+        if(solrQueryParamBuilder.checkCytoBandPattern(regionId)) {
+            query = regionId;
+        } else {
+            query = solrQueryParamBuilder.buildQueryParam("REGION", regionId);
+        }
         Page<AssociationDoc> pageAsssns = solrSearchAssociationService.searchAssociations(query, pageable, searchAssociationDTO);
         final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
                 .methodOn(SolrSearchRegionController.class).searchAssociations(searchAssociationDTO, regionId, pageable, assembler));
@@ -74,11 +79,16 @@ public class SolrSearchRegionController {
                                                       @PathVariable String regionId,
                                                       @PageableDefault(size = 10, page = 0) Pageable pageable,
                                                       PagedResourcesAssembler assembler) throws IOException {
-        String query = solrQueryParamBuilder.buildQueryParam("REGION", regionId);
-        List<AssociationDoc> associationDocs = solrRegionService.searchAssociations(query);
-        Set<String> accIds = associationDocs.stream().map(associationDoc -> associationDoc.getAccessionId()).collect(Collectors.toSet());
-        String studyQuery = solrQueryParamBuilder.buildAccessionIdQueryParam(accIds);
-        Page<StudyDoc> pageStudyDocs = solrSearchService.searchStudies(studyQuery, pageable, searchStudyDTO);
+        String query = "";
+        if(solrQueryParamBuilder.checkCytoBandPattern(regionId)) {
+            query = regionId;
+        } else {
+            query = solrQueryParamBuilder.buildQueryParam("REGION", regionId);
+            List<AssociationDoc> associationDocs = solrRegionService.searchAssociations(query);
+            Set<String> accIds = associationDocs.stream().map(associationDoc -> associationDoc.getAccessionId()).collect(Collectors.toSet());
+            query = solrQueryParamBuilder.buildAccessionIdQueryParam(accIds);
+        }
+        Page<StudyDoc> pageStudyDocs = solrSearchService.searchStudies(query, pageable, searchStudyDTO);
         final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
                 .methodOn(SolrSearchRegionController.class).searchStudies(searchStudyDTO, regionId, pageable, assembler));
         return assembler.toResource(pageStudyDocs, studySolrDTOAssembler,
@@ -93,7 +103,12 @@ public class SolrSearchRegionController {
                                                            @PathVariable String regionId,
                                                            @PageableDefault(size = 10, page = 0) Pageable pageable,
                                                            PagedResourcesAssembler assembler) throws IOException {
-        String query = solrQueryParamBuilder.buildQueryParam("REGION", regionId);
+        String query = "";
+        if(solrQueryParamBuilder.checkCytoBandPattern(regionId)) {
+            query = regionId;
+        } else {
+            query = solrQueryParamBuilder.buildQueryParam("REGION", regionId);
+        }
         Page<EFOTraitDoc> efoTraitDocs = solrSearchEFOTraitsService.searchEFOTraits(searchEFOTraitDTO, query, pageable);
         final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
                 .methodOn(SolrSearchRegionController.class).searchEFOTraits( searchEFOTraitDTO, regionId, pageable, assembler));
