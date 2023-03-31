@@ -137,9 +137,7 @@ public class SolrSearchEFOTraitsController {
     public ResponseEntity<List<EFOKeyLabel>> getChildTraits(@PathVariable String efotraitId) {
         Map<String, String> olsTerms = solrSearchEFOTraitService.getOLSTerms(efotraitId);
         List<String> efotraits = solrSearchEFOTraitService.getChildTraits(olsTerms);
-        System.out.println(efotraits);
         List<EFOKeyLabel> efos = solrSearchEFOTraitService.getChildTraitLabels(efotraits);
-        System.out.println(efos);
         efos.sort(Comparator.comparing(efoKeyLabel -> efoKeyLabel.getLabel().toLowerCase()));
         return new ResponseEntity<>(efos, HttpStatus.OK);
     }
