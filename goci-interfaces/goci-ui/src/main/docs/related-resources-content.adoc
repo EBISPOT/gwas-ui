@@ -10,7 +10,7 @@ Or watch our latest training webinars:
 
 * https://www.ebi.ac.uk/training/events/exploring-genotype-phenotype-data-using-gwas-catalog/[Exploring genotype-phenotype data using the GWAS Catalog] (2022) for an introduction to the GWAS Catalog and a demonstration of our web-based search interface.
 
-* https://www.ebi.ac.uk/training/events/submitting-your-genome-wide-association-study-data-gwas-catalog/[Submitting your genome wide association study data to the GWAS Catalog] (2021) for a detailed walkthrough of our summary statistics submission system.
+* https://www.ebi.ac.uk/training/events/data-submission-genome-wide-association-studies-gwas-catalog/[Data submission for genome-wide association studies at the GWAS Catalog] (2023) for a detailed walkthrough of our summary statistics submission system.
 
 Earlier webinars are also available:
 

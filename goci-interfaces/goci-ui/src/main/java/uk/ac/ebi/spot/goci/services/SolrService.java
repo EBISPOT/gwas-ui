@@ -1,5 +1,6 @@
 package uk.ac.ebi.spot.goci.services;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
@@ -11,9 +12,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Service;
-import uk.ac.ebi.spot.goci.model.solr.Doc;
 import uk.ac.ebi.spot.goci.model.solr.SolrData;
 import uk.ac.ebi.spot.goci.model.solr.SumStatDownloadDto;
+import uk.ac.ebi.spot.goci.refactoring.model.PublicationDoc;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,9 +55,10 @@ public class SolrService {
 
     public List<SumStatDownloadDto> assembleSumStatDownloadDto(String solrDataString) throws IOException{
         SolrData solrData = mapper.readValue(solrDataString, SolrData.class);
-        List<Doc> solrDocs = solrData.getResponse().getDocs();
+        List<?> solrDocs =  solrData.getResponse().getDocs();
+        List<PublicationDoc> pubDocs = mapper.convertValue(solrDocs, new TypeReference<PublicationDoc>() {});
         List<SumStatDownloadDto> sumStatDownloadDtos = new ArrayList<>();
-        solrDocs.forEach(solrDoc -> {
+        pubDocs.forEach(solrDoc -> {
             sumStatDownloadDtos.add(
                     SumStatDownloadDto.builder()
                             .authorS(solrDoc.getAuthorS())
