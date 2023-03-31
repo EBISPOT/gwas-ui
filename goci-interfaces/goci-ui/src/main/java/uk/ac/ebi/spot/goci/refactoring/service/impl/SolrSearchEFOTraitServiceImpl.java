@@ -16,17 +16,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 import uk.ac.ebi.spot.goci.model.solr.SolrData;
 import uk.ac.ebi.spot.goci.refactoring.component.EFOTraitIdentifierMap;
 import uk.ac.ebi.spot.goci.refactoring.model.AssociationDoc;
-import uk.ac.ebi.spot.goci.refactoring.model.SearchAssociationDTO;
+import uk.ac.ebi.spot.goci.refactoring.model.EFOKeyLabel;
 import uk.ac.ebi.spot.goci.refactoring.service.RestAPIEFOService;
 import uk.ac.ebi.spot.goci.refactoring.service.RestInteractionService;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchEFOTraitService;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 
-import java.util.Comparator;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -60,10 +57,13 @@ public class SolrSearchEFOTraitServiceImpl implements SolrSearchEFOTraitService 
                 .collect(Collectors.toList());
     }
 
-    public List<String> getChildTraitLabels(List<String> childTraits) {
+    public List<EFOKeyLabel> getChildTraitLabels(List<String> childTraits) {
+        List<EFOKeyLabel> efoKeyLabels = new ArrayList<>();
         Map<String, String> efoMap = efoTraitIdentifierMap.getEfoTraitMap();
-        return childTraits.stream().map(shortForm -> efoMap.get(shortForm))
-                .collect(Collectors.toList());
+        childTraits.forEach(s -> {
+            efoKeyLabels.add(new EFOKeyLabel(s, efoMap.get(s)));
+        });
+        return efoKeyLabels;
     }
 
    public  Page<AssociationDoc> searchAssociations(String query, Pageable pageable) {

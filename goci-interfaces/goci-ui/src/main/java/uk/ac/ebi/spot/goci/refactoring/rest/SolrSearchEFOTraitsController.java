@@ -18,10 +18,7 @@ import uk.ac.ebi.spot.goci.refactoring.dto.AssociationSolrDTO;
 import uk.ac.ebi.spot.goci.refactoring.dto.AssociationSolrDTOAssembler;
 import uk.ac.ebi.spot.goci.refactoring.dto.StudySolrDTO;
 import uk.ac.ebi.spot.goci.refactoring.dto.StudySolrDTOAssembler;
-import uk.ac.ebi.spot.goci.refactoring.model.AssociationDoc;
-import uk.ac.ebi.spot.goci.refactoring.model.SearchAssociationDTO;
-import uk.ac.ebi.spot.goci.refactoring.model.SearchStudyDTO;
-import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
+import uk.ac.ebi.spot.goci.refactoring.model.*;
 import uk.ac.ebi.spot.goci.refactoring.service.RestAPIEFOService;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchAssociationService;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchEFOTraitService;
@@ -32,10 +29,7 @@ import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = SearchUIConstants.API_V2+SearchUIConstants.EFOTRAITS)
@@ -140,12 +134,12 @@ public class SolrSearchEFOTraitsController {
     @GetMapping(value = "/{efotraitId}/traits/children", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public ResponseEntity<List<String>> getChildTraits(@PathVariable String efotraitId) {
+    public ResponseEntity<List<EFOKeyLabel>> getChildTraits(@PathVariable String efotraitId) {
         Map<String, String> olsTerms = solrSearchEFOTraitService.getOLSTerms(efotraitId);
         List<String> efotraits = solrSearchEFOTraitService.getChildTraits(olsTerms);
-        List<String> efoLabels = solrSearchEFOTraitService.getChildTraitLabels(efotraits);
-        efoLabels.sort(Comparator.comparing(String::toLowerCase));
-        return new ResponseEntity<>(efoLabels, HttpStatus.OK);
+        List<EFOKeyLabel> efos = solrSearchEFOTraitService.getChildTraitLabels(efotraits);
+        efos.sort(Comparator.comparing(efoKeyLabel -> efoKeyLabel.getLabel().toLowerCase()));
+        return new ResponseEntity<>(efos, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{efotraitId}/locuszoom/associations", produces = MediaType.APPLICATION_JSON_VALUE)

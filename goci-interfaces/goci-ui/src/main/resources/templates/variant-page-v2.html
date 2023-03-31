@@ -246,11 +246,11 @@
     <!-- List the available tables -->
     <div class="row search-results-container" >
       <!-- Associations table -->
-      <div th:include="fragments/association-datatable-v2 :: associations_datatable"></div>
+      <div th:include="fragments/association-datatable-v2 :: associations_datatable(${'/variants/' + result.getRsId()})"></div>
     </div>
 
     <div class="row search-results-container" >
-      <div th:include="fragments/study-datatable-v2 :: studies_datatable"></div>
+      <div th:include="fragments/study-datatable-v2 :: studies_datatable(${'/variants/' + result.getRsId()})"></div>
     </div>
 
     <div class="row search-results-container" >

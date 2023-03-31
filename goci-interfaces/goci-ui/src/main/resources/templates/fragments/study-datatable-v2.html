@@ -29,7 +29,7 @@
     </style>
 </head>
 
-<body th:fragment="studies_datatable">
+<body th:fragment="studies_datatable(url)">
 <!-- Studies table -->
 
 <span id="study-cut-off-notification">  </span>
@@ -93,7 +93,7 @@
 <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.colVis.min.js"></script>
 <script src="https://cdn.datatables.net/plug-ins/1.13.2/dataRender/ellipsis.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
-<script>
+<script th:inline="javascript">
     $('#study-table-v2 thead tr:eq(1) th').each(function () {
         if ($(this).hasClass('searchable')) {
             $(this).html('<input type="text" class="form-control"/>');
@@ -106,7 +106,7 @@
         $('#study-table-v2').DataTable({
             serverSide: true,
             ajax: {
-                url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/variants/' + $('#query').text() + '/studies',
+                url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2' + [[${url}]] + '/studies',
                 dataType: 'JSON',
                 dataSrc: function (json) {
                     json.recordsTotal = json.page.totalElements;
@@ -117,6 +117,9 @@
                 },
                 data: function (d) {
                     const c = {};
+                    // for trait page
+                    c.includeChildTraits = $('#toggle-data-display').is(':checked');
+                    c.includeBgTraits = $('#include-bg-traits').is(':checked');
                     d.columns.forEach(e => {
                         if (e.search.value !== '') {
                             c[e.name] = e.search.value;
@@ -165,8 +168,8 @@
                         return data ? data.join(', ') : null;
                     }, defaultContent: "-", orderable: false
                 },
-                {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: false},
-                {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: false},
+                {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: false, defaultContent: "-"},
+                {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: false, defaultContent: "-"},
                 {data: 'associationCount', name: 'associationCount'},
                 {
                     data: 'summaryStatistics', name: 'fullPvalueSet', defaultContent: "-", render: function (data) {
@@ -178,6 +181,7 @@
             buttons: [
                 'colvis'
             ],
+            retrieve: true,
             initComplete: function () {
                 this.api()
                     .columns()
