@@ -35,6 +35,7 @@ var data_highlighting={};
  */
 var pageRowLimit=5;
 
+var childEfos = [];
 
 /**
  * Linkout to OLS page for the main EFO term
@@ -109,6 +110,7 @@ function reloadTablesAndLocusZoom() {
     studyTable.ajax.reload();
     let includeBgTraits = $('#include-bg-traits').is(':checked');
     let includeChildTraits = $('#toggle-data-display').is(':checked');
+    setTraitDownloadLink(childEfos.concat([getMainEFO()]));
     prepareLocusZoom(includeBgTraits, includeChildTraits);
 }
 
@@ -186,8 +188,8 @@ displayTraitCountLoading = function(traitCount, isDisplayed) {
  */
 showGroupedPanelLoadingOverlay = function() {
     showLoadingOverLay('#download_data');
-    // showLoadingOverLay('#toggle-data-display-section');
-    // showLoadingOverLay('#include-bgs-section');
+    showLoadingOverLay('#toggle-data-display-section');
+    showLoadingOverLay('#include-bgs-section');
     // showLoadingOverLay('#association-table-loading');
     // showLoadingOverLay('#study-table-loading');
     showLoadingOverLay('#locus-plot-row-loading');
@@ -198,8 +200,8 @@ showGroupedPanelLoadingOverlay = function() {
  */
 hideGroupedPanelLoadingOverlay = function() {
     hideLoadingOverLay('#download_data');
-    // hideLoadingOverLay('#toggle-data-display-section');
-    // hideLoadingOverLay('#include-bgs-section');
+    hideLoadingOverLay('#toggle-data-display-section');
+    hideLoadingOverLay('#include-bgs-section');
     // hideLoadingOverLay('#association-table-loading');
     // hideLoadingOverLay('#study-table-loading');
     hideLoadingOverLay('#locus-plot-row-loading');
@@ -245,10 +247,15 @@ displayEFOInfo = function(initCBState) {
     getDownloadCatalogData();
 
     // todo change to gwasProperties.url
-    promiseGet('http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/efotraits/EFO_0000305/traits/children', {}, false)
+    promiseGet('http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/efotraits/' + getMainEFO() + '/traits/children', {}, false)
         .then(JSON.parse).then(function(data) {
-            console.log(typeof data);
-            $("#efo-child-trait-label").html(longContentList("gwas_child_traits_div", data.sort(), 'child traits'));
+            const childLabels = [];
+            for (const e of data) {
+                childLabels.push(e.label);
+                childEfos.push(e.key);
+            }
+            setTraitDownloadLink(childEfos.concat([getMainEFO()]));
+            $("#efo-child-trait-label").html(longContentList("gwas_child_traits_div", childLabels, 'child traits'));
             hideLoadingOverLay('#summary-panel-loading');
             hideLoadingOverLay('#highlighted-study-button');
             hideGroupedPanelLoadingOverlay();
@@ -525,45 +532,6 @@ getEFOAttributesFromOLS = function(efoId) {
 
 
 /**
- * Query OLS for child traits to display and use
- * when generating data for the "Download data" button
- * @param efoId
- */
-// was getHierarchicalDescendants()
-getChildTraits = async function(efoId, olsHierarchicalDescendantsUrl, allTermIds, allChildTermObj) {
-    let childTraitIds = [];
-    let childTermObj = {};
-
-    await promiseGet(olsHierarchicalDescendantsUrl).then(JSON.parse)
-        .then(function (response) {
-
-            // Get all term labels for result page
-            $.each(response._embedded.terms, function (index, term) {
-                childTraitIds.push(term.short_form);
-                childTermObj[term.short_form] = term.label;
-            });
-
-            // Store all child term IDs
-            allTermIds.push(...childTraitIds);
-
-            // Store all child term IDs and labels
-            Object.assign(allChildTermObj, childTermObj);
-
-            // Page through all results from OLS getHierarchichalDescendents endpoint
-            const nextPage = response._links.next.href;
-
-            if (nextPage) {
-                return getChildTraits(efoId, nextPage, allTermIds, allChildTermObj);
-            }
-        })
-        .catch(function (err) {
-        console.debug('Error getting info for: ' + olsHierarchicalDescendantsUrl + '. ' + err);
-    });
-    return [allTermIds, allChildTermObj]
-};
-
-
-/**
  * Query OXO to get term mappings.
  * @param efoId
  */
@@ -732,6 +700,7 @@ function processSolrData(data, initLoad=false) {
 }
 
 function prepareLocusZoom(includeBgTraits, includeChildTraits) {
+    showGroupedPanelLoadingOverlay();
     Promise.resolve(getLocusZoomAssociations([], includeBgTraits, includeChildTraits, 0))
         .then(function (data) {
             data.forEach(d => {
@@ -752,12 +721,13 @@ function prepareLocusZoom(includeBgTraits, includeChildTraits) {
                 const cata = {};
                 cata.docs = data;
                 reloadLocusZoom('#plot', cata);
+                hideGroupedPanelLoadingOverlay();
             });
         });
 }
 
 getLocusZoomAssociations = async function(allAssociations, includeBgTraits, includeChildTraits, page) {
-    let locusZoomAssociationsUrl = 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/efotraits/EFO_0000305/locuszoom/associations?'
+    let locusZoomAssociationsUrl = 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/efotraits/' + getMainEFO() + '/locuszoom/associations?'
     const searchParams = new URLSearchParams();
     searchParams.set('page', page);
     searchParams.set('size', '500');
