@@ -6,6 +6,9 @@
 var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
 // var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
 var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
+if (!gwasProperties.host.includes('www.ebi.ac.uk')) {
+    global_color_url = 'http://gwas-snoopy:9780/gwas/rest/api/parentMapping/EFO_0008185'
+}
 
 var global_gwas_trait_api = `${gwasProperties.GWAS_REST_API}/efoTraits/`;
 if (gwasProperties.host.includes('localhost')) {
@@ -559,51 +562,6 @@ getTermMappings = function(efoId) {
         }
     })
 };
-
-
-
-
-
-/**
- * Query Fat Solr for data for Associations and Studies data tables.
- * @param {String} mainEFO
- * @param {Boolean} includeBkgTraits
- * @returns {Promise}
- */
-function getEfoTraitDataSolr(mainEFO, includeBkgTraits) {
-    let searchQuery = mainEFO;
-    if (!includeBkgTraits) {
-        searchQuery = `shortForm: ${mainEFO} OR efoLink: ${mainEFO} OR mappedUri: ${mainEFO}`
-    }
-
-    return Promise.all([searchQuery]).then(() => {
-        return promisePost( gwasProperties.contextPath+'api/search/advancefilter',
-            {
-                'q': searchQuery,
-                'max': 99999,
-                'group.limit': 99999,
-                'group.field': 'resourcename',
-                'facet.field': 'resourcename',
-                'hl.fl': 'shortForm,efoLink,mappedUri',
-
-                'hl.snippets': 100,
-                'fl' : global_fl == undefined ? '*':global_fl,
-                // 'fq' : global_fq == undefined ? '*:*':global_fq,
-                'raw' : global_raw == undefined ? '' : global_raw,
-            },'application/x-www-form-urlencoded').then(JSON.parse).then(function(data) {
-            if( data.grouped.resourcename.groups.length === 0 && includeBkgTraits){
-                $('#lower_container').html("<h2>The EFO trait <em>"+searchQuery+"</em> cannot be found in the GWAS Catalog database</h2>");
-            } else{
-                // processSolrData(data, initLoad);
-                processSolrData(data, false);
-                return data;
-            }
-        }).catch(function(err) {
-            console.error('Error when searching solr for: ' + searchQuery + '. ' + err);
-            throw(err);
-        })
-    })
-}
 
 
 /**
