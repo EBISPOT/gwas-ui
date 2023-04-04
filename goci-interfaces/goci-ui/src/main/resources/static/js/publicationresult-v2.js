@@ -123,8 +123,7 @@ function processSolrData(data) {
  * @param {Object} data - study solr docs
  * @param {Boolean} cleanBeforeInsert
  */
-function displaySummaryPublication(data, clearBeforeInsert) {
-    var study_count = data.length;
+function displaySummaryPublication(data) {
     var publication = data[0];
     var first_author = publication.author_s;
     if ('orcid_s' in publication) {
