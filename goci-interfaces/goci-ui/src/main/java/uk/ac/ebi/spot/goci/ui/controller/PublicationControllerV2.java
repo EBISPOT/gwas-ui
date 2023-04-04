@@ -25,11 +25,6 @@ public class PublicationControllerV2 {
         this.searchConfiguration = searchConfiguration;
     }
 
-    @RequestMapping(value = "publications", produces = MediaType.TEXT_HTML_VALUE)
-    public String search() {
-        return "publications";
-    }
-
     @RequestMapping(value = "/v2/publications/{pubmedId}", produces = MediaType.TEXT_HTML_VALUE)
     public String search(Model model,
                          @PathVariable(required = false) String pubmedId,

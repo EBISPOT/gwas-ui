@@ -35,9 +35,6 @@ updatePage = function (initLoad = false) {
     if (initLoad) {
         showLoadingOverLay('#summary-panel-loading');
     }
-    showLoadingOverLay('#study-table-loading');
-    showLoadingOverLay('#association-table-loading');
-    showLoadingOverLay('#efotrait-table-loading');
 
     var main = getTextToSearch('#query');
 
@@ -63,19 +60,30 @@ function getDataSolr(main, initLoad = false) {
 
     var searchQuery = 'pubmedId:' + main;
 
+    // slim solr for fullPvalueSet
+    promiseGet(gwasProperties.contextPath+'api/search',
+        {
+            'q': 'pmid:' + main,
+            'max': 1,
+            'resourcename': 'publication',
+            'wt':'json',
+            'dataType': 'jsonp',
+        }, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
+        var summaryStatsIcon = "<span>-</span>";
+        if (data.response.docs[0].fullPvalueSet) summaryStatsIcon = "<a href='#study_panel'><span style='font-size: 20px;' " +
+            "class='glyphicon glyphicon-signal clickable'></span></a>";
+        $("#study-summary-stats").html(summaryStatsIcon);
+    }).catch(function (err) {
+        console.error('Error when searching Solr Slim for: ' + "pmid:" + main + '. ' + err);
+        throw(err);
+    })
     // console.log("Solr research request received for " + searchQuery);
     return promisePost(gwasProperties.contextPath + 'api/search/advancefilter',
         {
-            'q': searchQuery,
-            'max': 99999,
-            'group.limit': 5000,
+            'q': 'pubmedId:' + main + ' AND resourcename: study',
+            'max': 1,
+            'group.limit': 1,
             'group.field': 'resourcename',
-            'facet.field': 'resourcename',
-            'hl.fl': 'shortForm,efoLink',
-            'hl.snippets': 100,
-            'fl': global_fl == undefined ? '*' : global_fl,
-            // 'fq' : global_fq == undefined ? '*:*':global_fq,
-            'raw': global_raw == undefined ? '' : global_raw,
         }, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
         // Check if Solr returns some results
         if (data.grouped.resourcename.groups.length == 0) {
@@ -105,61 +113,9 @@ function getDataSolr(main, initLoad = false) {
  * @param {{}} data - solr result
  * @param {Boolean} initLoad
  */
-function processSolrData(data, initLoad = false) {
-    var isInCatalog = true;
-
-    data_association = [];
-    data_study = [];
-    data_association.docs = [];
-    data_study.docs = [];
-
-    if (data.grouped.resourcename.matches == 0) {
-        isInCatalog = false;
-    }
-    //split the solr search by groups
-    //data_efo, data_study, data_association, data_diseasetrait;
-    data_facet = data.facet_counts.facet_fields.resourcename;
-    data_highlighting = data.highlighting;
-
-    //TODO not repeat yourself!!!!
-    $.each(data.grouped.resourcename.groups, (index, group) => {
-        switch (group.groupValue) {
-            case "efotrait":
-                data_efo = group.doclist;
-                break;
-            case "study":
-                data_study = group.doclist;
-                break;
-            case "association":
-                data_association = group.doclist;
-                break;
-            //not sure we need this!
-            case "diseasetrait":
-                data_diseasetrait = group.doclist;
-                break;
-            default:
-        }
-    });
-
-    //remove association that annotated with efos which are not in the list
-    var remove = Promise.resolve();
-
-    remove.then(() => {
-        //If no solr return,greate a fake empyt array so tables/plot are empty
-        if (!isInCatalog) {
-            data_association = []
-            data_study.docs = []
-        }
-
-        var PAGE_TYPE = "publication";
-
-        //update association/study table
-        displayDatatableAssociations(data_association);
-        displayDatatableStudies(data_study, PAGE_TYPE);
-        displaySummaryPublication(data_study.docs);
-
-    })
-
+function processSolrData(data) {
+    data_study = data.grouped.resourcename.groups[0].doclist;
+    displaySummaryPublication(data_study.docs);
 }
 
 /**
@@ -188,10 +144,6 @@ function displaySummaryPublication(data, clearBeforeInsert) {
         reduce_text = addShowMoreLink(reduce_text, 500, "...");
         $("#publication-authors-list").html(reduce_text);
     }
-    // Display Summary stats icon if any study in publication has fullPvalueSet: true
-    var fullpvalset = checkFullPValueStatus(data);
-    $("#study-summary-stats").html(fullpvalset);
-
 
     $("#pubmedid_button").attr('onclick', "window.open('" + gwasProperties.NCBI_URL + publication.pubmedId + "',    '_blank')");
     $("#europepmc_button").attr('onclick', "window.open('" + gwasProperties.EPMC_URL + publication.pubmedId + "',    '_blank')");
@@ -202,20 +154,6 @@ function displaySummaryPublication(data, clearBeforeInsert) {
     getPgsPublicationId(publication.pubmedId);
 
 }
-
-
-function checkFullPValueStatus(data) {
-    var summaryStatsIcon = "<span>-</span>";
-    for (var i = 0; i < data.length; i++) {
-        if (data[i].fullPvalueSet == true) {
-            summaryStatsIcon = "<a href='#study_panel'><span style='font-size: 20px;' " +
-                "class='glyphicon glyphicon-signal clickable'></span></a>";
-            return summaryStatsIcon;
-        }
-    }
-    return summaryStatsIcon;
-}
-
 
 /**
  * Query PGS Catalog to find matching Publication page
