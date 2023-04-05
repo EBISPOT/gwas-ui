@@ -564,7 +564,7 @@ Please do not enter ancestry information in this column (see other columns below
 |
 |Broad ancestry category that best describes the sample. For more information about each category, see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5815218/table/Tab1/?report=objectonly[Table 1, Morales et al., 2018^].
 
-You should create a new row for each ancestry category. However, you may enter multiple categories in the same row, separated by pipes "\|", only if separate sample numbers are unavailable for each category.
+You should create a new row for each ancestry category. Providing ancestry-specific sample numbers is important for reusability of the data. However, if separate sample numbers are unavailable for each category, you may enter multiple categories in the same row, separated by pipes "\|".
 
 If it is not possible to assign an ancestry category to a group of samples, enter 'NR' (Not Reported).
 |
