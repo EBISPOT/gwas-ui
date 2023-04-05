@@ -31,15 +31,36 @@
     <link rel="stylesheet" th:href="@{/css/goci-ui.css}"/>
     <link rel="stylesheet" th:href="@{/css/icons/flaticon.css}"/>
     <link rel="stylesheet" th:href="@{/css/goci-color-palette-1.css}"/>
-    <script src="../static/js/regionresult.js"></script>
-
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.4/css/buttons.bootstrap.min.css"/>
+    <style>
+        .btn:focus, .btn:active, a:focus {
+            outline: none !important;
+            box-shadow: none;
+        }
 
+        div.dt-buttons {
+            float: right;
+        }
+
+        div.dataTables_info, div.dataTables_length {
+            float: left;
+        }
+
+        thead input {
+            width: 100% !important;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+    </style>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -125,7 +146,7 @@
             <div id="table-list" class="panel clearfix" style="padding-left:0px;box-shadow:none">
                 <span style="margin-right:10px;font-weight:bold">Available data:</span>
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#association_panel')">
-                    <span class="association_label">Associations</span><span class="association_count badge" style="background-color: #398A96;margin-left:10px"></span>
+                    <span class="association_label">Associations</span><span id="association_count" class="association_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#study_panel')">
                     <span class="study_label">Studies</span><span class="study_count badge" style="background-color: #398A96;margin-left:10px"></span>
@@ -142,14 +163,14 @@
 
         <div class="row search-results-container" >
             <!-- Associations table -->
-            <div th:include="fragments/association-datatable :: associations_datatable"></div>
+            <div th:include="fragments/association-datatable-v2 :: associations_datatable(${'/regions/' + result.query})"></div>
         </div>
         <div class="row search-results-container" >
             <!-- Studies table -->
-            <div th:include="fragments/study-datatable :: studies_datatable"></div>
+            <div th:include="fragments/study-datatable-v2 :: studies_datatable(${'/regions/' + result.query})"></div>
         </div>
         <div class="row search-results-container" >
-            <div th:include="fragments/efotrait-datatable :: efotraits_datatable"></div>
+            <div th:include="fragments/efotrait-datatable-v2 :: efotraits_datatable(${'/regions/' + result.query}, ${result.query})"></div>
         </div>
 
     </div>
@@ -163,7 +184,6 @@
     <!-- Bootstrap core JavaScript
         ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
 
@@ -204,7 +224,7 @@
     <script th:src="@{/js/common-datatables/efotraits-datatable.js}"></script>
 
     <!-- this file must be the last. onload action -->
-    <script th:src="@{/js/regionresult.js}"></script>
+    <script th:src="@{/js/regionresult-v2.js}"></script>
 
 
     <!-- clipboardjs
