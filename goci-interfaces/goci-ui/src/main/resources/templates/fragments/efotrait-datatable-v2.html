@@ -87,6 +87,7 @@
         }
     });
     $(document).ready(function () {
+        showLoadingOverLay('#efotrait-table-loading');
         $('#efotrait-table-v2').DataTable({
             serverSide: true,
             ajax: {
@@ -138,6 +139,7 @@
             ],
             retrieve: true,
             initComplete: function () {
+                hideLoadingOverLay('#efotrait-table-loading');
                 this.api()
                     .columns()
                     .every(function (index) {
@@ -161,9 +163,9 @@
         })
             .on('processing.dt', function (e, settings, processing) {
                 if (processing) {
-                    showLoadingOverLay('#efotrait-table-v2');
+                    showLoadingOverLay('#efotrait-table-loading');
                 } else {
-                    hideLoadingOverLay('#efotrait-table-v2');
+                    hideLoadingOverLay('#efotrait-table-loading');
                 }
             });
     });

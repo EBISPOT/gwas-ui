@@ -107,6 +107,7 @@
     }
   });
   $(document).ready(function () {
+    showLoadingOverLay('#association-table-loading');
     $('#association-table-v2').DataTable({
       serverSide: true,
       ajax: {
@@ -220,6 +221,7 @@
       ],
       retrieve: true,
       initComplete: function () {
+        hideLoadingOverLay('#association-table-loading');
         this.api()
                 .columns()
                 .every(function (index) {
@@ -243,9 +245,9 @@
     })
             .on('processing.dt', function (e, settings, processing) {
               if (processing) {
-                showLoadingOverLay('#association-table-v2');
+                showLoadingOverLay('#association-table-loading');
               } else {
-                hideLoadingOverLay('#association-table-v2');
+                hideLoadingOverLay('#association-table-loading');
               }
             });
   });
