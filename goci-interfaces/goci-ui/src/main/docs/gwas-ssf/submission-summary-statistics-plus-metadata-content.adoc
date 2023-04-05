@@ -324,7 +324,7 @@ There are 24 columns for you to fill in:
 
 ==== Overview
 
-In the Sample tab, enter information about the samples included in each GWAS. Please create a new row for each GWAS and for each broad ancestry category within each GWAS. See the Column Instructions below for the list of standardised ancestry categories used by the GWAS Catalog.
+In the Sample tab, enter information about the samples included in each GWAS. Please create a new row for each GWAS and for each broad ancestry category within each GWAS. *For multi-ancestry GWAS, please create a new row for each included ancestry (study tags can be reused multiple times on this sheet)*. See the Column Instructions below for the list of standardised ancestry categories used by the GWAS Catalog.
 
 For example, for 2 studies on different traits, analysed in 2 ancestry categories, create 2 x 2 = 4 rows:
 [cols="<4,<1,<4,<1,<4,<1,<1,<1,<4,<1,<1", options="header", grid="all", width=100%]
