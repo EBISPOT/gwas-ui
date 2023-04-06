@@ -967,7 +967,7 @@ public class SolrSearchControllerV2 {
         StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
         //TODO: Remove in future - Temporarily set 5000 as ut off until scalability problem is fixed https://bit.ly/3TnkjH7
-        groupLimit = 5000;
+        if (groupLimit != 1) groupLimit = 5000;
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);

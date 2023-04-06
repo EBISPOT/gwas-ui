@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<body th:fragment="summary_stats_datatable">
+
+<span id="cut-off-notification">  </span>
+
+<!--Warning: only the first 3000 rows could be displayed, please-->
+<!--<a href='#' class='alert-link'> click the download link here </a> to download the full data set.-->
+
+<!--summary statistics table -->
+<div class="row" id="summary-stats-table-loading" style="margin-top:5px">
+    <table id="summary-stats-table" class="table table-striped borderless"
+           data-flat="false"
+           data-show-export="true"
+           data-export-types="['csv']"
+           data-search="true"
+           data-show-columns="true"
+           data-show-multi-sort="false"
+           data-icons="icons">
+    </table>
+</div>
+
+<script th:src="@{/js/common-datatables/datatable-icons.js}"></script>
+
+</body>
+</html>

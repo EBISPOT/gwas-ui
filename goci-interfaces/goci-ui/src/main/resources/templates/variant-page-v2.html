@@ -254,7 +254,7 @@
     </div>
 
     <div class="row search-results-container" >
-      <div th:include="fragments/efotrait-datatable-v2 :: efotraits_datatable"></div>
+      <div th:include="fragments/efotrait-datatable-v2 :: efotraits_datatable(${'/variants/' + result.getRsId()}, ${result.query})"></div>
     </div>
 
 

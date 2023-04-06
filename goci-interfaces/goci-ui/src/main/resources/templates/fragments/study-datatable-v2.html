@@ -102,7 +102,7 @@
         }
     });
     $(document).ready(function () {
-
+        showLoadingOverLay('#study-table-loading');
         $('#study-table-v2').DataTable({
             serverSide: true,
             ajax: {
@@ -183,6 +183,7 @@
             ],
             retrieve: true,
             initComplete: function () {
+                hideLoadingOverLay('#study-table-loading');
                 this.api()
                     .columns()
                     .every(function (index) {
@@ -206,9 +207,9 @@
         })
             .on('processing.dt', function (e, settings, processing) {
                 if (processing) {
-                    showLoadingOverLay('#study-table-v2');
+                    showLoadingOverLay('#study-table-loading');
                 } else {
-                    hideLoadingOverLay('#study-table-v2');
+                    hideLoadingOverLay('#study-table-loading');
                 }
             });
     });
