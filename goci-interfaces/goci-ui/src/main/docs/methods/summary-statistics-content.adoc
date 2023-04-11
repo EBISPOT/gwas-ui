@@ -58,7 +58,7 @@ The summary statistics standard used at the GWAS Catalog was the product of a se
 == Formatted summary statistics data 
 
 * Data is submitted in a standard format
-* This can be the original minimal format or the newer GWAS_SSF format. 
+* This can be the original minimal format or the newer GWAS-SSF format. 
 * How can you tell? See accompanying metadata file (see below)
 * Metadata files are available for all new submissions (since April 2023) and we are retrospectively generating for all older submissions (in progress)
 * If there is no metadata file, the file is in the old, or a non standard format. 
