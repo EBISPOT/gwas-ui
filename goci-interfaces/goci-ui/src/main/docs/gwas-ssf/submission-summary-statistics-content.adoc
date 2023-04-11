@@ -136,7 +136,7 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 
 |Summary statistics file
 |
-|The name of the summary statistics file uploaded via Globus. Must be entered for at least one study. Enter "NR" for any studies without summary statistics.
+|The name of the summary statistics file uploaded via Globus. Summary statistics must be submitted for at least one study. Enter "NR" for any additional studies without summary statistics.
 |
 |yes
 |
@@ -166,7 +166,7 @@ There are 14 empty columns for you to fill in. Mandatory columns are highlighted
 
 |Summary statistics assembly
 |
-|Genome assembly for the summary statistics. Must be entered for at least one study. Enter "NR" for any studies without summary statistics.
+|Genome assembly for the summary statistics. Must be entered for every row that includes summary statistics. Enter "NR" for any additional studies without summary statistics.
 |
 |yes
 |
