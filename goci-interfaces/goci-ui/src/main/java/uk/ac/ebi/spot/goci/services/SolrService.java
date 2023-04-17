@@ -56,7 +56,7 @@ public class SolrService {
     public List<SumStatDownloadDto> assembleSumStatDownloadDto(String solrDataString) throws IOException{
         SolrData solrData = mapper.readValue(solrDataString, SolrData.class);
         List<?> solrDocs =  solrData.getResponse().getDocs();
-        List<PublicationDoc> pubDocs = mapper.convertValue(solrDocs, new TypeReference<PublicationDoc>() {});
+        List<PublicationDoc> pubDocs = mapper.convertValue(solrDocs, new TypeReference<List<PublicationDoc>>() {});
         List<SumStatDownloadDto> sumStatDownloadDtos = new ArrayList<>();
         pubDocs.forEach(solrDoc -> {
             sumStatDownloadDtos.add(
