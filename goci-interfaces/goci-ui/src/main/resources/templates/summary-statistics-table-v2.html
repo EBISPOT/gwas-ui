@@ -39,6 +39,31 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.4/css/buttons.bootstrap.min.css"/>
+    <style>
+        .btn:focus, .btn:active, a:focus {
+            outline: none !important;
+            box-shadow: none;
+        }
+
+        div.dt-buttons {
+            float: right;
+        }
+
+        div.dataTables_info, div.dataTables_length {
+            float: left;
+        }
+
+        thead input {
+            width: 100% !important;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+    </style>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+
     <script  th:src="@{/js/console-plugin.js}"></script>
 </head>
 
@@ -89,19 +114,9 @@
             </div>
 
             <h3>List of published studies with summary statistics</h3>
-            <div class="row" id="loadingStudies" style="display: none">
-                <div class="col-md-offset-4">
-                    <button class="btn btn-lg">
-                            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"
-                                  style="margin-right: 1em;"></span>
-                        <span style="font-size: 15px;"> Loading Published With Summary Statistics... </span>
-                    </button>
-
-                </div>
-            </div>
             <div class="row">
                 <!-- Summary Stats table -->
-                <div th:include="fragments/summary-stats-datatable :: summary_stats_datatable"></div>
+                <div th:include="fragments/summary-stats-datatable-v2 :: summary_stats_datatable"></div>
             </div>
 
             <h3>List of prepublished/unpublished studies with summary statistics</h3>
@@ -167,7 +182,6 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
 <script  th:src="@{/js/bootstrap-datepicker.js}"></script>
@@ -197,7 +211,6 @@
 <script th:src="@{/js/helpers/utils-helper.js}"></script>
 <script th:src="@{/js/helpers/promise-helper.js}"></script>
 <script th:src="@{/js/helpers/utils-helper.js}"></script>
-<script th:src="@{/js/common-datatables/summary-stats-datatable.js}"></script>
 
 <!-- this file must be the last. onload action -->
 <script  th:src="@{/js/fullpvalueset.js}"></script>
