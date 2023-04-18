@@ -24,10 +24,10 @@ public class StudyControllerV2 {
         this.searchConfiguration = searchConfiguration;
     }
 
-    @RequestMapping(value = "studies", produces = MediaType.TEXT_HTML_VALUE)
-    public String search() {
-        return "studies";
-    }
+//    @RequestMapping(value = "studies", produces = MediaType.TEXT_HTML_VALUE)
+//    public String search() {
+//        return "studies";
+//    }
 
     @RequestMapping(value = "/v2/studies/{accessionId}", produces = MediaType.TEXT_HTML_VALUE)
     public String search(Model model,

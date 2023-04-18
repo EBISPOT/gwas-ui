@@ -63,8 +63,8 @@ function getDataSolr(main, initLoad = false) {
     //Please use the contextPath !
     var URLService = gwasProperties.contextPath + 'api/search/advancefilter';
     return promisePost(URLService, {
-        'q': "accessionId:" + searchQuery,
-        'max': 99999,
+        'q': "accessionId:" + searchQuery + " AND resourcename: study",
+        'max': 1,
         'group.limit': 99999,
         'group.field': 'resourcename',
         'facet.field': 'resourcename',
@@ -82,7 +82,6 @@ function getDataSolr(main, initLoad = false) {
         } else {
             processSolrData(data, initLoad);
             setDownloadLink("accessionId:" + searchQuery);
-            displayDatatableAssociations(data_association, cleanBeforeInsert = false);
             displaySummaryStudy(data_study.docs);
             return data;
         }
