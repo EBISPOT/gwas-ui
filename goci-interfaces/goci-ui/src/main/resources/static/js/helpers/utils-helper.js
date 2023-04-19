@@ -254,6 +254,13 @@ function displayAuthorsListAsList(data_array) {
 
 // Toogle a table and scroll to it.
 function toggle_and_scroll (id) {
+    if ($(id +" div:first-child").find('span').hasClass('panel-collapsed')) {
+        toggleSidebar(id + ' span.clickable');
+    }
+    $(window).scrollTop($(id).offset().top - 70);
+}
+
+function tabIn(id) {
     const panels = ['#study_panel', '#association_panel', '#efotrait_panel', '#ld_panel', '#locus_panel'];
     for (const panel of panels) {
         if (panel !== id) {
