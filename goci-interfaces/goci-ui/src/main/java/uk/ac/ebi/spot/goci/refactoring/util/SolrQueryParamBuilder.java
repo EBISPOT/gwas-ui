@@ -46,6 +46,9 @@ public class SolrQueryParamBuilder {
         else if(type.equals("SUMSTATS")) {
             return "fullPvalueSet:true";
         }
+        else if(type.equals("GCST")) {
+            return String.format("accessionId:%s", param);
+        }
         return null;
 
     }
