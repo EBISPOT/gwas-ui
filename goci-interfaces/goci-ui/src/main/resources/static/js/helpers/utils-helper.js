@@ -254,11 +254,23 @@ function displayAuthorsListAsList(data_array) {
 
 // Toogle a table and scroll to it.
 function toggle_and_scroll (id) {
-    if ($(id +" div:first-child").find('span').hasClass('panel-collapsed')) {
-        toggleSidebar(id + ' span.clickable');
+    const panels = ['#study_panel', '#association_panel', '#efotrait_panel', '#ld_panel', '#locus_panel'];
+    for (const panel of panels) {
+        if (panel !== id) {
+            $(panel).hide();
+        }
+        else {
+            $(panel).show();
+            // this is a workaround to make hide/show work with datatable scrollx
+            $(window).trigger('resize');
+        }
     }
-    $(window).scrollTop($(id).offset().top - 70);
 }
+
+$("#table-list button").click(function(){
+    $('#table-list button').removeClass('tabbed'); // Remove Before set color to selected button
+    $(this).addClass('tabbed'); // Set Color to Selected Button
+});
 
 // Create a list item tag (<li>) and add content in it
 function newItem(content) {

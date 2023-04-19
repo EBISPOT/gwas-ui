@@ -57,6 +57,11 @@
       padding: 3px;
       box-sizing: border-box;
     }
+    .tabbed {
+      background-image: none;
+      border-color: #adadad;
+      background-color: #B0DFE6 !important;
+    }
   </style>
 </head>
 
@@ -219,7 +224,6 @@
         </div>
       </div>
     </div>
-
     <!-- List the available tables -->
     <div class="row" style="margin-top:0px">
       <div id="table-list" class="panel clearfix" style="padding-left:0px;box-shadow:none">
@@ -242,25 +246,13 @@
       </div>
     </div>
 
-
     <!-- List the available tables -->
-    <div class="row search-results-container" >
-      <!-- Associations table -->
-      <div th:include="fragments/association-datatable-v2 :: associations_datatable(${'/variants/' + result.getRsId()})"></div>
-    </div>
-
-    <div class="row search-results-container" >
-      <div th:include="fragments/study-datatable-v2 :: studies_datatable(${'/variants/' + result.getRsId()})"></div>
-    </div>
-
-    <div class="row search-results-container" >
-      <div th:include="fragments/efotrait-datatable-v2 :: efotraits_datatable(${'/variants/' + result.getRsId()}, ${result.query})"></div>
-    </div>
-
-
+    <div th:include="fragments/association-datatable-v2 :: associations_datatable(${'/variants/' + result.getRsId()})"></div>
+    <div th:include="fragments/study-datatable-v2 :: studies_datatable(${'/variants/' + result.getRsId()})"></div>
+    <div th:include="fragments/efotrait-datatable-v2 :: efotraits_datatable(${'/variants/' + result.getRsId()}, ${result.query})"></div>
 
     <!-- Linkage disequilibrium -->
-    <div class="row" style="margin-top:20px">
+    <div>
       <div id="ld_panel" class="panel panel-default">
         <div class="panel-heading background-color-primary-accent">
           <h3 class="panel-title">
@@ -278,17 +270,6 @@
         </div>
       </div>
     </div>
-
-    <!-- List the available tables -->
-
-    <!--<div class="row search-results-container" >-->
-    <!--<div th:include="fragments/study-datatable :: studies_datatable"></div>-->
-    <!--</div>-->
-
-    <!--<div class="row search-results-container" >-->
-    <!--&lt;!&ndash; Associations table &ndash;&gt;-->
-    <!--<div th:include="fragments/association-datatable :: associations_datatable"></div>-->
-    <!--</div>-->
 
   </div>
 
