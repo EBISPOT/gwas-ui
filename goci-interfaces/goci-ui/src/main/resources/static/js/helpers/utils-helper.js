@@ -260,6 +260,25 @@ function toggle_and_scroll (id) {
     $(window).scrollTop($(id).offset().top - 70);
 }
 
+function tabIn(id) {
+    const panels = ['#study_panel', '#association_panel', '#efotrait_panel', '#ld_panel', '#locus_panel'];
+    for (const panel of panels) {
+        if (panel !== id) {
+            $(panel).hide();
+        }
+        else {
+            $(panel).show();
+            // this is a workaround to make hide/show work with datatable scrollx
+            $(window).trigger('resize');
+        }
+    }
+}
+
+$("#table-list button").click(function(){
+    $('#table-list button').removeClass('tabbed'); // Remove Before set color to selected button
+    $(this).addClass('tabbed'); // Set Color to Selected Button
+});
+
 // Create a list item tag (<li>) and add content in it
 function newItem(content) {
     return $("<li></li>").html(content);

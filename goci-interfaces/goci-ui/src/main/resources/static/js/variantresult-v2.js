@@ -7,6 +7,9 @@ var ENS_SHARE_LINK = 'Variant_specific_location_link/97NKbgkp09vPRy1xXwnqG1x6KGg
 var CONTEXT_RANGE = 500;
 
 $(document).ready(function() {
+    $('#study_panel').hide();
+    $('#efotrait_panel').hide();
+    $('#ld_panel').hide();
 
     var rsId = $('#query').text();
     if (rsId != '') {
