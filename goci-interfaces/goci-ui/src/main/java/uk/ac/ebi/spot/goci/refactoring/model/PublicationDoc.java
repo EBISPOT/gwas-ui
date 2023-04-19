@@ -49,17 +49,17 @@ public class PublicationDoc extends Doc implements Serializable  {
                           @JsonProperty("description") List<String> descriptions,
                           @JsonProperty("id") String id,
                           @JsonProperty("resourcename") String resourcename,
-                          String pubmedId,
-                          String title,
-                          String authorS,
-                          String authorAsciiS,
-                          String publication,
-                          String publicationDate,
-                          String accessionId,
-                          Integer associationCount,
-                          String traitNameS,
-                          List<String> mappedLabel,
-                          List<String> mappedUri) {
+                          @JsonProperty("pubmedId") String pubmedId,
+                          @JsonProperty("title") String title,
+                          @JsonProperty("author_s") String authorS,
+                          @JsonProperty("authorAscii_s") String authorAsciiS,
+                          @JsonProperty("publication") String publication,
+                          @JsonProperty("publicationDate") String publicationDate,
+                          @JsonProperty("accessionId") String accessionId,
+                          @JsonProperty("associationCount") Integer associationCount,
+                          @JsonProperty("traitName_s") String traitNameS,
+                          @JsonProperty("mappedLabel") List<String> mappedLabel,
+                          @JsonProperty("mappedUri") List<String> mappedUri) {
         super(traitUris, shortForms, labels, synonym, efoLink, parent, descriptions, id, resourcename);
         this.pubmedId = pubmedId;
         this.title = title;
