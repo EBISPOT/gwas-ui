@@ -3,6 +3,8 @@
 
 showLoadingOverLay('#summary-panel-loading');
 $(document).ready(() => {
+    $('#study_panel').hide();
+    $('#efotrait_panel').hide();
     // First time loading the page:
     updatePage(true);
 });

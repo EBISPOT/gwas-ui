@@ -95,6 +95,9 @@ function parsePgsTraitResult(data) {
  * Page is ready to run methods
  */
 $(document).ready(() => {
+    $('#study_panel').hide();
+    $('#locus_panel').hide();
+    $('#ld_panel').hide();
     $('#toggle-data-display').on('change', reloadTablesAndLocusZoom);
     $('#include-bg-traits').on('change', reloadTablesAndLocusZoom);
     // Conditional display of PGS link/button

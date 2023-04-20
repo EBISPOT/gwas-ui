@@ -58,6 +58,11 @@
             padding: 3px;
             box-sizing: border-box;
         }
+        .tabbed {
+            background-image: none;
+            border-color: #adadad;
+            background-color: #B0DFE6 !important;
+        }
     </style>
     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 </head>
@@ -302,18 +307,18 @@
                     <div id="table-list" class="panel clearfix" style="padding-left:0px;box-shadow:none">
                         <span style="margin-right:10px;font-weight:bold">Available data:</span>
                         <button type="button"
-                                class="btn btn-default available-data-btn"
-                                onclick="toggle_and_scroll('#association_panel')">
+                                class="btn btn-default available-data-btn tabbed"
+                                onclick="tabIn('#association_panel')">
                             <span class="association_label">Associations</span><span class="association_count badge available-data-btn-badge"></span>
                         </button>
                         <button type="button"
                                 class="btn btn-default available-data-btn"
-                                onclick="toggle_and_scroll('#study_panel')">
+                                onclick="tabIn('#study_panel')">
                             <span class="study_label">Studies</span><span class="study_count badge available-data-btn-badge"></span>
                         </button>
                         <button type="button"
                                 class="btn btn-default available-data-btn"
-                                onclick="toggle_and_scroll('#locus_panel')">
+                                onclick="tabIn('#locus_panel')">
                             <span class="locus_label">LocusZoom</span>
                         </button>
 
@@ -361,7 +366,7 @@
 
 
 
-                <div class="row search-results-container" >
+                <div>
                     <!-- Associations table -->
                     <div th:include="fragments/association-datatable-v2 :: associations_datatable(${'/efotraits/' + result.getEfoId()})"></div>
 
@@ -371,7 +376,7 @@
 
 
                 <!-- locus plot -->
-                <div class="row" style="margin-top:20px" id="locus-plot-row-loading">
+                <div id="locus-plot-row-loading">
                     <div id="locus_panel" class="panel panel-default">
                         <div class="panel-heading background-color-primary-accent">
                             <h3 class="panel-title">

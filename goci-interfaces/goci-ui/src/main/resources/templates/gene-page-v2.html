@@ -61,6 +61,11 @@
             padding: 3px;
             box-sizing: border-box;
         }
+        .tabbed {
+            background-image: none;
+            border-color: #adadad;
+            background-color: #B0DFE6 !important;
+        }
     </style>
     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 </head>
@@ -191,13 +196,13 @@
         <div class="row" style="margin-top:0px">
             <div id="table-list" class="panel clearfix" style="padding-left:0px;box-shadow:none">
                 <span style="margin-right:10px;font-weight:bold">Available data:</span>
-                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#association_panel')">
+                <button type="button" class="btn btn-default tabbed" style="margin-right:10px;font-weight:bold" onclick="tabIn('#association_panel')">
                     <span class="association_label">Associations</span><span class="association_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
-                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#study_panel')">
+                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="tabIn('#study_panel')">
                     <span class="study_label">Studies</span><span class="study_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
-                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="toggle_and_scroll('#efotrait_panel')">
+                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="tabIn('#efotrait_panel')">
                     <span class="efotrait_label">Traits</span><span class="efotrait_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
                 <button type="button" class="btn btn-default pull-right" style="margin-right:10px;font-weight:bold" id="download_data">
@@ -206,15 +211,15 @@
             </div>
         </div>
 
-        <div class="row search-results-container" >
+        <div>
             <!-- Associations table -->
             <div th:include="fragments/association-datatable-v2 :: associations_datatable(${'/genes/' + result.query})"></div>
         </div>
-        <div class="row search-results-container" >
+        <div>
             <div th:include="fragments/study-datatable-v2 :: studies_datatable(${'/genes/' + result.query})"></div>
         </div>
 
-        <div class="row search-results-container" >
+        <div>
             <div th:include="fragments/efotrait-datatable-v2 :: efotraits_datatable(${'/genes/' + result.query}, ${result.query})"></div>
         </div>
 
