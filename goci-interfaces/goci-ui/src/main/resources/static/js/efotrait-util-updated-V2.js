@@ -227,7 +227,6 @@ getMainEFO = function() {
  */
 displayEFOInfo = function(initCBState) {
     showLoadingOverLay('#summary-panel-loading');
-    showLoadingOverLay('#highlighted-study-button');
     showGroupedPanelLoadingOverlay();
 
     const efoId = getMainEFO();
@@ -263,7 +262,6 @@ displayEFOInfo = function(initCBState) {
             setTraitDownloadLink(childEfos.concat([getMainEFO()]));
             $("#efo-child-trait-label").html(longContentList("gwas_child_traits_div", childLabels, 'child traits'));
             hideLoadingOverLay('#summary-panel-loading');
-            hideLoadingOverLay('#highlighted-study-button');
             hideGroupedPanelLoadingOverlay();
         }).catch(function (err) {
             throw(err);
@@ -705,47 +703,6 @@ getLocusZoomAssociations = async function(allAssociations, includeBgTraits, incl
         console.debug('Error getting info for: ' + err);
     });
     return allAssociations;
-};
-
-/**
- * Display highlighted study on the page
- * @param highlightedStudy
- * @example findHighlightedStudiesForEFO(getMainEFO()) give you an example study doc
- */
-displayHighlightedStudy = function() {
-    var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
-
-    $('#efotrait-highlighted-study-title').html(highlightedStudy.title);
-    $('#efotrait-highlighted-study-author').html(highlightedStudy.author_s +' (PMID:'+highlightedStudy.pubmedId+')');
-    $('#efotrait-highlighted-study-catalogPublishDate').html(highlightedStudy.publicationDate.split('T')[0]);
-    var link = gwasProperties.contextPath + 'studies/' + highlightedStudy.accessionId;
-    $('#efotrait-highlighted-study-accessionId').html(setInternalLinkText(link, highlightedStudy.accessionId));
-
-    EPMC.getByPumbedId(highlightedStudy.pubmedId).then((data) => {
-        var paperDetail = data.resultList.result[0];
-
-        $('#efotrait-highlighted-study-abstract').html(EPMC.searchResult.abstractText(data));
-        return paperDetail;
-    }).catch((err) => {
-        console.warn(`Error when loading data from EPMC! ${err}`);
-    }).then(() => {
-        hideLoadingOverLay('#highlight-study-panel-loading');
-    });
-};
-
-/**
- * work out which study is the highlighted study for an efo trait.
- * Currently find the one with largest initial sample size.
- * This require the solr search data.
- * @param String efoid
- * @return {Object} - study_solr_doc
- * @example findHighlightedStudiesForEFO('EFO_0000400')
- */
-findHighlightedStudiesForEFO = function(efoid) {
-    var studies = findStudiesForEFO(efoid);
-    var sorted_index = studySorting.sortByInitialSampleSize(studies);
-
-    return studies[sorted_index[0]];
 };
 
 /**
