@@ -1,6 +1,7 @@
 /** DRY. From Xin original code. We must refactor all these 'action'result.js in a common way! */
 
 $(document).ready(() => {
+    $('#study_panel').hide();
 
 //jump to the top of the page
     $('html,body').scrollTop(0);

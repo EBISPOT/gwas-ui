@@ -2,6 +2,8 @@
 
 
 $(document).ready(() => {
+    $('#study_panel').hide();
+    $('#efotrait_panel').hide();
 
     $('html,body').scrollTop(0);
     var searchTerm = getTextToSearch('#query');
