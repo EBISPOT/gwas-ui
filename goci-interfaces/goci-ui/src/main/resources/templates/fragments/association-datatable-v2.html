@@ -140,12 +140,12 @@
       order: [],
       columns: [
         {
-          data: 'riskAllele', name: 'riskAllele', render: function (data) {
+          data: 'riskAllele', name: 'riskAllele', defaultContent: '-', render: function (data) {
             $.each(data, function (index, trait) {
               // TODO use the gwasProperties
               //  const link = gwasProperties.contextPath + 'variants/' + trait.key;
-              const link = 'https://www.ebi.ac.uk/gwas/variants/' + trait.key;
-              data[index] = '<a href="' + link + '">' + trait.label + '</a>'
+              const link = 'https://www.ebi.ac.uk/gwas/variants/' + trait?.key;
+              data[index] = '<a href="' + link + '">' + trait?.label + '</a>'
             });
             return data.join(', ')
           }, orderable: false
