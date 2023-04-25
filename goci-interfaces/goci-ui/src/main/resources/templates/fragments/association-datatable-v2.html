@@ -156,7 +156,7 @@
         },
         {data: 'pValueAnnotation', name: 'pValueAnnotation', defaultContent: "-", orderable: false},
         {data: 'riskFrequency', name: 'raf', defaultContent: "-", width: '5%'},
-        {data: 'or', name: 'or', defaultContent: "-", width: '5%'},
+        {data: 'orValue', name: 'or', defaultContent: "-", width: '5%'},
         {data: 'beta', name: 'beta', defaultContent: "-", width: '5%'},
         {data: 'ci', name: 'ci', defaultContent: "-", orderable: false, width: '5%'},
         {
@@ -206,11 +206,11 @@
             return data ? data.join(', ') : null;
           }, defaultContent: "-", orderable: false
         },
-        {data: 'accessionId', name: 'accessionId', defaultContent: "-", render: function (data) {
+        {data: 'accessionId', name: 'accessionId', defaultContent: '-', render: function (data) {
             const link = gwasProperties.contextPath + 'studies/' + data;
             return !data ? null : '<a href="' + link + '">' + data + '</a>'
           }, orderable: false},
-        {data: 'locations', name: 'locations', orderable: false},
+        {data: 'locations', name: 'locations', orderable: false, defaultContent: 'Mapping not available'},
       ],
       dom: 'lBrtip',
       buttons: [

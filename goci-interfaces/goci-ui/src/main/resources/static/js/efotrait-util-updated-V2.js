@@ -7,7 +7,7 @@ var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
 // var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
 var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
 if (!gwasProperties.host.includes('www.ebi.ac.uk')) {
-    global_color_url = 'http://gwas-snoopy:9780/gwas/rest/api/parentMapping/EFO_0008185'
+    global_color_url = 'http://gwas-snoopy:9780/gwas/rest/api/parentMapping/'
 }
 
 var global_gwas_trait_api = `${gwasProperties.GWAS_REST_API}/efoTraits/`;
@@ -96,8 +96,7 @@ function parsePgsTraitResult(data) {
  */
 $(document).ready(() => {
     $('#study_panel').hide();
-    $('#locus_panel').hide();
-    $('#ld_panel').hide();
+    $('#locus_panel').hide()
     $('#toggle-data-display').on('change', reloadTablesAndLocusZoom);
     $('#include-bg-traits').on('change', reloadTablesAndLocusZoom);
     // Conditional display of PGS link/button
@@ -227,7 +226,6 @@ getMainEFO = function() {
  */
 displayEFOInfo = function(initCBState) {
     showLoadingOverLay('#summary-panel-loading');
-    showLoadingOverLay('#highlighted-study-button');
     showGroupedPanelLoadingOverlay();
 
     const efoId = getMainEFO();
@@ -263,7 +261,6 @@ displayEFOInfo = function(initCBState) {
             setTraitDownloadLink(childEfos.concat([getMainEFO()]));
             $("#efo-child-trait-label").html(longContentList("gwas_child_traits_div", childLabels, 'child traits'));
             hideLoadingOverLay('#summary-panel-loading');
-            hideLoadingOverLay('#highlighted-study-button');
             hideGroupedPanelLoadingOverlay();
         }).catch(function (err) {
             throw(err);
@@ -566,100 +563,6 @@ getTermMappings = function(efoId) {
     })
 };
 
-
-/**
- * Parse the Solr results and display the data on the HTML page
- * @param {{}} data - solr result
- * @param {Boolean} initLoad
- */
-function processSolrData(data, initLoad=false) {
-
-    var isInCatalog=true;
-    if (data.grouped.resourcename.matches == 0) {
-        isInCatalog = false
-    }
-    //split the solr search by groups
-    //data_efo, data_study, data_association, data_diseasetrait;
-    data_facet = data.facet_counts.facet_fields.resourcename;
-    data_highlighting = data.highlighting;
-    data_association = [];
-    data_study = [];
-    $.each(data.grouped.resourcename.groups, (index, group) => {
-        switch (group.groupValue) {
-            case "efotrait":
-                data_efo = group.doclist;
-                break;
-            case "study":
-                data_study = group.doclist;
-                break;
-            case "association":
-                data_association = group.doclist;
-                break;
-            //not sure we need this!
-            case "diseasetrait":
-                data_diseasetrait = group.doclist;
-                break;
-            default:
-        }
-    });
-
-    //remove association that annotated with efos which are not in the list
-    var remove = Promise.resolve();
-
-    if($('#cb-remove-nonunique-association').is(":checked")){
-        remove = removeAssociationWithNonSelectedEFO();
-    }
-
-
-    remove.then(()=>{
-
-        // GOCI_CM_TW_Integration_Plot_no_association
-        if ('docs' in data_association) {
-            // we add preferEFO for each association, generate the association data for popup of data points in the locus plot.
-            var allUniqueEFO = {}
-            data_association.docs.forEach((d, i) => {
-                // d.preferedEFO = findHighlightEFOForAssociation(d.id, data_highlighting)[0];
-                d.numberEFO = findAllEFOsforAssociation(d.id, data_association).length;
-                // allUniqueEFO[d.preferedEFO] = 1;
-                //add any string data that will be use in the locus plot popover
-                d.popoverHTML = buildLocusPlotPopoverHTML(d);
-            });
-
-            //get all ancestries of all associations
-            var allAncestries = {};
-            data_association.docs.map((d) => {
-                if(d.ancestralGroups != undefined){
-                    d.ancestralGroups.map((a) => {
-                        if(allAncestries[a] == undefined)
-                            allAncestries[a] = [];
-                        allAncestries[a].push(d.id)})
-                }
-            });
-
-            prepareAncestryFilter(allAncestries);
-
-            // Getting color for the main EFO and add to ALL associations.
-            getColourForEFO(getMainEFO()).then((response) => {
-                data_association.docs.forEach(function (d, i) {
-                    d.preferedColor = response.colour;
-                    d.preferedParentUri = response.parentUri;
-                    d.preferedParentLabel = response.parent;
-                    d.category = response.parent;
-                })
-            }).catch((err) => {
-                console.warn(`Error loading colour for Locus zoom plot from ${global_color_url}. ${err}. Using default colour.`)
-            }).then(() => {
-                reloadLocusZoom('#plot', data_association);
-            });
-
-        } else {
-            $("#plot").html('<span>No Associations for this EFO Trait</span>');
-            hideLoadingOverLay("#locus-plot-row-loading");
-        }
-    })
-
-}
-
 function prepareLocusZoom(includeBgTraits, includeChildTraits) {
     showGroupedPanelLoadingOverlay();
     Promise.resolve(getLocusZoomAssociations([], includeBgTraits, includeChildTraits, 0))
@@ -705,47 +608,6 @@ getLocusZoomAssociations = async function(allAssociations, includeBgTraits, incl
         console.debug('Error getting info for: ' + err);
     });
     return allAssociations;
-};
-
-/**
- * Display highlighted study on the page
- * @param highlightedStudy
- * @example findHighlightedStudiesForEFO(getMainEFO()) give you an example study doc
- */
-displayHighlightedStudy = function() {
-    var highlightedStudy = findHighlightedStudiesForEFO(getMainEFO());
-
-    $('#efotrait-highlighted-study-title').html(highlightedStudy.title);
-    $('#efotrait-highlighted-study-author').html(highlightedStudy.author_s +' (PMID:'+highlightedStudy.pubmedId+')');
-    $('#efotrait-highlighted-study-catalogPublishDate').html(highlightedStudy.publicationDate.split('T')[0]);
-    var link = gwasProperties.contextPath + 'studies/' + highlightedStudy.accessionId;
-    $('#efotrait-highlighted-study-accessionId').html(setInternalLinkText(link, highlightedStudy.accessionId));
-
-    EPMC.getByPumbedId(highlightedStudy.pubmedId).then((data) => {
-        var paperDetail = data.resultList.result[0];
-
-        $('#efotrait-highlighted-study-abstract').html(EPMC.searchResult.abstractText(data));
-        return paperDetail;
-    }).catch((err) => {
-        console.warn(`Error when loading data from EPMC! ${err}`);
-    }).then(() => {
-        hideLoadingOverLay('#highlight-study-panel-loading');
-    });
-};
-
-/**
- * work out which study is the highlighted study for an efo trait.
- * Currently find the one with largest initial sample size.
- * This require the solr search data.
- * @param String efoid
- * @return {Object} - study_solr_doc
- * @example findHighlightedStudiesForEFO('EFO_0000400')
- */
-findHighlightedStudiesForEFO = function(efoid) {
-    var studies = findStudiesForEFO(efoid);
-    var sorted_index = studySorting.sortByInitialSampleSize(studies);
-
-    return studies[sorted_index[0]];
 };
 
 /**
@@ -950,10 +812,8 @@ buildLocusPlotPopoverHTML = function(association){
     text.append(_addNameValuePairHTML('Variant and risk allele', association.riskAllele[0]?.label));
     text.append(_addNameValuePairHTML('Location',association.chromLocation));
     text.append(_addNameValuePairHTML('P-value',association.pValue+' x 10'+"<sup>"+association.pValueExponent+"</sup>"));
-    text.append(_addNameValuePairHTML('Mapped gene(s)',association.ensemblMappedGenes));
-    text.append(_addNameValuePairHTML('Reported trait', association.traitName_s));
-    // todo fix and uncomment
-    // text.append(_addNameValuePairHTML('Trait(s)', association.mappedLabel.toString())); //use global label
+    text.append(_addNameValuePairHTML('Mapped gene(s)',association.mappedGenes?.join(', ')));
+    text.append(_addNameValuePairHTML('Reported trait', association.traitName?.join(', ')));
     text.append(_addNameValuePairHTML('Study accession', association.accessionId));
     text.append(_addNameValuePairHTML('PubMed ID', association.pubmedId));
     text.append(_addNameValuePairHTML('Author', association.author));
