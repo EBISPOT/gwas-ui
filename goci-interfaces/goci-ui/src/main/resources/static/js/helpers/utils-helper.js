@@ -266,6 +266,13 @@ function tabIn(id) {
         if (panel !== id) {
             $(panel).hide();
         }
+        else if (panel === '#locus_panel') {
+            $(panel).show();
+            // resize event for the plot's popover to appear in place
+            const event = document.createEvent('HTMLEvents');
+            event.initEvent('resize', true, false);
+            document.dispatchEvent(event);
+        }
         else {
             $(panel).show();
             // this is a workaround to make hide/show work with datatable scrollx

@@ -280,7 +280,7 @@
         <div class="row search-results-container">
             <!-- Associations table -->
             <!-- todo change and use study/association api-->
-            <div th:include="fragments/association-datatable-v2 :: associations_datatable(${'/publications/32084209'})"></div>
+            <div th:include="fragments/association-datatable-v2 :: associations_datatable(${'/studies/' + result.query})"></div>
         </div>
     </div>
 
