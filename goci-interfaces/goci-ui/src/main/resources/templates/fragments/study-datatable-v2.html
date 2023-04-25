@@ -165,8 +165,13 @@
                         return data ? data.join(', ') : null;
                     }, defaultContent: "-", orderable: false
                 },
-                {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: false, defaultContent: "-"},
-                {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: false, defaultContent: "-"},
+                {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: false, defaultContent: "-", render: function (data) {
+                        return data.join('<br/>');
+                    }
+                },
+                {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: false, defaultContent: "-", render: function (data) {
+                        return data.join('<br/>');
+                    }},
                 {data: 'associationCount', name: 'associationCount'},
                 {
                     data: 'summaryStatistics', name: 'fullPvalueSet', defaultContent: "-", render: function (data) {
