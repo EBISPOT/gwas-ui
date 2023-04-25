@@ -1,7 +1,5 @@
 package uk.ac.ebi.spot.goci.ui.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
@@ -15,17 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import uk.ac.ebi.spot.goci.model.solr.Doc;
-import uk.ac.ebi.spot.goci.model.solr.ResponseHeader;
-import uk.ac.ebi.spot.goci.model.solr.SolrData;
 import uk.ac.ebi.spot.goci.model.solr.SumStatDownloadDto;
 import uk.ac.ebi.spot.goci.services.SolrService;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.exception.IllegalParameterCombinationException;
-import uk.ac.ebi.spot.goci.ui.service.JsonProcessingService;
 import uk.ac.ebi.spot.goci.ui.service.JsonStreamingProcessorService;
 import uk.ac.ebi.spot.goci.util.FileHandler;
 
@@ -44,6 +37,7 @@ import java.util.*;
  * @date 31/01/15
  */
 @Controller
+@RequestMapping("v2")
 public class SolrSearchController {
     private SearchConfiguration searchConfiguration;
 

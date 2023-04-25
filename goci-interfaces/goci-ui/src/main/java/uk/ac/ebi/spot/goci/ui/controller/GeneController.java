@@ -39,7 +39,7 @@ public class GeneController {
         geneResult.setFilter(filter);
         geneResult.setGeneId(geneId);
         model.addAttribute("result", geneResult);
-        return "gene-page";
+        return "gene-page-v2";
     }
 
 }

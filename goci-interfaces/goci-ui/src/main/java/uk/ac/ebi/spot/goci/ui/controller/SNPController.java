@@ -33,7 +33,7 @@ public class SNPController {
         result.setFilter(filter);
         result.setRsId(rsId);
         model.addAttribute("result", result);
-        return "/variant-page";
+        return "/variant-page-v2";
     }
 
 }
