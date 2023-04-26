@@ -4,7 +4,8 @@
 
 
 var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
-// var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
+var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
+// var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
 if (!gwasProperties.host.includes('ebi.ac.uk')) {
     global_color_url = 'http://gwas-snoopy:9780/gwas/rest/api/parentMapping/'
 }
