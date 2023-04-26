@@ -37,7 +37,7 @@ import java.util.*;
  * @date 31/01/15
  */
 @Controller
-@RequestMapping("v2")
+@RequestMapping("v2-old")
 public class SolrSearchControllerV2 {
     private SearchConfiguration searchConfiguration;
 
