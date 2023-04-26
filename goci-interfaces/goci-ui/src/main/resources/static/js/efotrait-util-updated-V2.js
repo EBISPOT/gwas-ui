@@ -248,7 +248,7 @@ displayEFOInfo = function(initCBState) {
     // TEST - Set-up Hidden form
     getDownloadCatalogData();
 
-    promiseGet(gwasProperties.contextPath + '/api/v2/efotraits/' + getMainEFO() + '/traits/children', {}, false)
+    promiseGet(gwasProperties.contextPath + 'api/v2/efotraits/' + getMainEFO() + '/traits/children', {}, false)
         .then(JSON.parse).then(function(data) {
             const childLabels = [];
             for (const e of data) {
@@ -281,7 +281,7 @@ getDownloadCatalogData = function() {
         const searchQuery = $("#queryInput").val();
 
         // Query Fat Solr using SolrSearchController
-        return promisePost( gwasProperties.contextPath + '/api/search/downloads',
+        return promisePost( gwasProperties.contextPath + 'api/search/downloads',
             {
                 'q': searchQuery
             },'application/octet-stream').then(function(result) {
@@ -588,7 +588,7 @@ function prepareLocusZoom(includeBgTraits, includeChildTraits) {
 }
 
 getLocusZoomAssociations = async function(allAssociations, includeBgTraits, includeChildTraits, page) {
-    let locusZoomAssociationsUrl = gwasProperties.contextPath + '/api/v2/efotraits/' + getMainEFO() + '/locuszoom/associations?'
+    let locusZoomAssociationsUrl = gwasProperties.contextPath + 'api/v2/efotraits/' + getMainEFO() + '/locuszoom/associations?'
     const searchParams = new URLSearchParams();
     searchParams.set('page', page);
     searchParams.set('size', '500');
