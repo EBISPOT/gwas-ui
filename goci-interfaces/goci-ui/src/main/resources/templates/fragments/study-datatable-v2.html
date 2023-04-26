@@ -174,8 +174,20 @@
                     }},
                 {data: 'associationCount', name: 'associationCount'},
                 {
-                    data: 'summaryStatistics', name: 'fullPvalueSet', defaultContent: "-", render: function (data) {
-                        return data === 'NA' ? null : '<a href="' + data + '">FTP Download</a>'
+                    data: 'summaryStatistics', name: 'fullPvalueSet', defaultContent: "Not available", render: function(data, type, row) {
+                        var res = null;
+                        if (data !== 'NA') {
+                            res = '<a href="' + data + '">FTP Download</a>'
+                        }
+                        if (row['ssApiFlag'] === true) {
+                            if (res === null) {
+                                res = '<a href="http://www.ebi.ac.uk/gwas/summary-statistics/docs" target="_blank">API access</a>';
+                            }
+                            else {
+                                res = res.concat('&nbsp;&nbsp;or&nbsp;&nbsp;<a href="http://www.ebi.ac.uk/gwas/summary-statistics/docs" target="_blank">API access</a>');
+                            }
+                        }
+                        return res;
                     }
                 },
             ],
