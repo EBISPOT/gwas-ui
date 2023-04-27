@@ -4,9 +4,9 @@
 
 
 var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
-// var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
-var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
-if (!gwasProperties.host.includes('www.ebi.ac.uk')) {
+var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
+// var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
+if (!gwasProperties.host.includes('ebi.ac.uk')) {
     global_color_url = 'http://gwas-snoopy:9780/gwas/rest/api/parentMapping/'
 }
 
@@ -126,8 +126,6 @@ function reloadTablesAndLocusZoom() {
  * in the Association, Study, and LocusZoom plot.
  */
 toggleDataDisplay = function () {
-    // TODO: When clicked, show loading for data tables, LocusZoom, and "Download Catalog data" button
-
     var checkBox = document.getElementById("toggle-data-display");
     var text = document.getElementById("text");
     if (checkBox.checked == true){
@@ -250,8 +248,7 @@ displayEFOInfo = function(initCBState) {
     // TEST - Set-up Hidden form
     getDownloadCatalogData();
 
-    // todo change to gwasProperties.url
-    promiseGet('http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/efotraits/' + getMainEFO() + '/traits/children', {}, false)
+    promiseGet(gwasProperties.contextPath + 'api/v2/efotraits/' + getMainEFO() + '/traits/children', {}, false)
         .then(JSON.parse).then(function(data) {
             const childLabels = [];
             for (const e of data) {
@@ -284,7 +281,7 @@ getDownloadCatalogData = function() {
         const searchQuery = $("#queryInput").val();
 
         // Query Fat Solr using SolrSearchController
-        return promisePost( gwasProperties.contextPath + '/api/search/downloads',
+        return promisePost( gwasProperties.contextPath + 'api/search/downloads',
             {
                 'q': searchQuery
             },'application/octet-stream').then(function(result) {
@@ -591,7 +588,7 @@ function prepareLocusZoom(includeBgTraits, includeChildTraits) {
 }
 
 getLocusZoomAssociations = async function(allAssociations, includeBgTraits, includeChildTraits, page) {
-    let locusZoomAssociationsUrl = 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/efotraits/' + getMainEFO() + '/locuszoom/associations?'
+    let locusZoomAssociationsUrl = gwasProperties.contextPath + 'api/v2/efotraits/' + getMainEFO() + '/locuszoom/associations?'
     const searchParams = new URLSearchParams();
     searchParams.set('page', page);
     searchParams.set('size', '500');

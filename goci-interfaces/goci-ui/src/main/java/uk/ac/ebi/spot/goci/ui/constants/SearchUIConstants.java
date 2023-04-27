@@ -23,6 +23,8 @@ public class SearchUIConstants {
     public static final String INCLUDE_BG_TRAITS = "includeBgTraits";
     public static final String PUBLICATIONS = "/publications";
 
+    public static final String STUDIES = "/studies";
+
     public static final String SEARCH_STUDY = "/study";
 
     public static final String LINKS_PARENT = "parent";

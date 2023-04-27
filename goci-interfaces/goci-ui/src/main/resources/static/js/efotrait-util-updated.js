@@ -356,7 +356,7 @@ getDownloadCatalogData = function() {
         const searchQuery = $("#queryInput").val();
 
         // Query Fat Solr using SolrSearchController
-        return promisePost( gwasProperties.contextPath + '/api/search/downloads',
+        return promisePost( gwasProperties.contextPath + 'api/search/downloads',
             {
                 'q': searchQuery
             },'application/octet-stream').then(function(result) {

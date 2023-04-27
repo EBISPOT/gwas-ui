@@ -108,7 +108,7 @@
     $('#association-table-v2').DataTable({
       serverSide: true,
       ajax: {
-        url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2' + [[${url}]] + '/associations',
+        url: gwasProperties.contextPath + 'api/v2' + [[${url}]] + '/associations',
         dataType: 'JSON',
         dataSrc: function (json) {
           json.recordsTotal = json.page.totalElements;
@@ -142,9 +142,8 @@
         {
           data: 'riskAllele', name: 'riskAllele', defaultContent: '-', render: function (data) {
             $.each(data, function (index, trait) {
-              // TODO use the gwasProperties
-              //  const link = gwasProperties.contextPath + 'variants/' + trait.key;
-              const link = 'https://www.ebi.ac.uk/gwas/variants/' + trait?.key;
+              const link = gwasProperties.contextPath + 'variants/' + trait?.key;
+              // const link = 'https://www.ebi.ac.uk/gwas/variants/' + trait?.key;
               data[index] = '<a href="' + link + '">' + trait?.label + '</a>'
             });
             return data.join(', ')

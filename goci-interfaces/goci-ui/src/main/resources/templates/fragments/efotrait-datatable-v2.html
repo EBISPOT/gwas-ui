@@ -88,7 +88,7 @@
         $('#efotrait-table-v2').DataTable({
             serverSide: true,
             ajax: {
-                url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2' + [[${url}]] + '/traits',
+                url: gwasProperties.contextPath + 'api/v2' + [[${url}]] + '/traits',
                 dataType: 'JSON',
                 dataSrc: function (json) {
                     json.recordsTotal = json.page.totalElements;
