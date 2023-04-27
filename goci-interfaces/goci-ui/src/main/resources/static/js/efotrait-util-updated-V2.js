@@ -139,40 +139,6 @@ toggleDataDisplay = function () {
 
 
 /**
- * Display an overlay spinner on a tag
- * https://gasparesganga.com/labs/jquery-loading-overlay/
- * @param {String} tagID
- * @returns undefined
- * @example showLoadingOverLay('#efoInfo')
- */
-showLoadingOverLay = function(tagID){
-    var options = {
-        color: "rgba(255, 255, 255, 0.8)",   // String
-        custom: "",                // String/DOM Element/jQuery Object
-        fade: [100, 1500],                      // Boolean/Integer/String/Array
-        fontawesome: "",                          // String
-        imagePosition: "center center",             // String
-        maxSize: "100px",                  // Integer/String
-        minSize: "20px",                    // Integer/String
-        resizeInterval: 10,                       // Integer
-        size: "20%",                       // Integer/String
-        zIndex: 1000,                        // Integer
-    };
-    $(tagID).LoadingOverlay("show",options);
-};
-
-/**
- * Hide an overlay spinner on a tag
- * https://gasparesganga.com/labs/jquery-loading-overlay/
- * @param {String} tagID
- * @returns undefined
- * @example hideLoadingOverLay('#efoInfo')
- */
-hideLoadingOverLay = function(tagID){
-    return $(tagID).LoadingOverlay("hide", true);
-};
-
-/**
  * Display trait count loading message
  * @param traitCount
  */
