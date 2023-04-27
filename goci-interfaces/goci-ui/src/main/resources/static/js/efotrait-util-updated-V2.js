@@ -561,7 +561,7 @@ getTermMappings = function(efoId) {
 };
 
 function prepareLocusZoom(includeBgTraits, includeChildTraits) {
-    showGroupedPanelLoadingOverlay();
+    showLoadingOverLay('#locus-plot-row-loading');
     Promise.resolve(getLocusZoomAssociations([], includeBgTraits, includeChildTraits, 0))
         .then(function (data) {
             data.forEach(d => {
@@ -582,7 +582,7 @@ function prepareLocusZoom(includeBgTraits, includeChildTraits) {
                 const cata = {};
                 cata.docs = data;
                 reloadLocusZoom('#plot', cata);
-                hideGroupedPanelLoadingOverlay();
+                hideLoadingOverLay('#locus-plot-row-loading');
             });
         });
 }
