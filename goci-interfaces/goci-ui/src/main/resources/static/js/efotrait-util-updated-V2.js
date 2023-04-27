@@ -195,7 +195,7 @@ showGroupedPanelLoadingOverlay = function() {
     showLoadingOverLay('#include-bgs-section');
     // showLoadingOverLay('#association-table-loading');
     // showLoadingOverLay('#study-table-loading');
-    showLoadingOverLay('#locus-plot-row-loading');
+    // showLoadingOverLay('#locus-plot-row-loading');
 };
 
 /**
@@ -207,7 +207,7 @@ hideGroupedPanelLoadingOverlay = function() {
     hideLoadingOverLay('#include-bgs-section');
     // hideLoadingOverLay('#association-table-loading');
     // hideLoadingOverLay('#study-table-loading');
-    hideLoadingOverLay('#locus-plot-row-loading');
+    // hideLoadingOverLay('#locus-plot-row-loading');
 };
 
 
