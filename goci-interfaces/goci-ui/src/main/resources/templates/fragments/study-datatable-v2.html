@@ -166,10 +166,12 @@
                     }, defaultContent: "-", orderable: false
                 },
                 {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: false, defaultContent: "-", render: function (data) {
+                        data = data.map(e => '&bull; ' + e);
                         return data.join('<br/>');
                     }
                 },
                 {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: false, defaultContent: "-", render: function (data) {
+                        data = data.map(e => '&bull; ' + e);
                         return data.join('<br/>');
                     }},
                 {data: 'associationCount', name: 'associationCount'},
