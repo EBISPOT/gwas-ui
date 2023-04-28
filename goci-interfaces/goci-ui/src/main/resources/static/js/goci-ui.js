@@ -117,8 +117,7 @@ function doSearch() {
     // redirect to search page
     var ORIGIN = window.location.origin;
     //console.log("** Search term: " + ORIGIN + "/gwas/search?query=" + searchTerm)
-    window.location = ORIGIN + "/gwas/search?query=" + searchTerm;
-
+    window.location = gwasProperties.contextPath + "search?query=" + searchTerm;
 }
 
 function toggleSidebar(ts) {

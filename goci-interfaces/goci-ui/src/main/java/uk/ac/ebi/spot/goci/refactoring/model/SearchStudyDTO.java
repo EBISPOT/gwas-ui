@@ -24,5 +24,8 @@ public class SearchStudyDTO {
     @JsonProperty("bgTrait")
     private String bgTrait;
 
+    @JsonProperty("fullPvalueSet")
+    private Boolean fullPvalueSet;
+
 
 }

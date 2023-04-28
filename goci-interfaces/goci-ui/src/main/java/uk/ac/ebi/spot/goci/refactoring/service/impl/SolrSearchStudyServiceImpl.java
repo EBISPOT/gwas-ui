@@ -117,6 +117,7 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
         String reportedTrait = searchStudyDTO.getReportedTrait();
         String efoTrait = searchStudyDTO.getEfoTrait();
         String bgTrait = searchStudyDTO.getBgTrait();
+        Boolean fullPValueSet = searchStudyDTO.getFullPvalueSet();
         filterQueryBuilder.append(filterQuery);
 
         if(accessionId != null) {
@@ -139,6 +140,11 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
                 filterQueryBuilder.append(String.format(" AND mappedBkgLabel:\"*%s*\"",bgTrait));
             else
                 filterQueryBuilder.append(String.format(" AND mappedBkgLabel:*%s*",bgTrait));
+        }
+        if(fullPValueSet != null) {
+            if(fullPValueSet) {
+                filterQueryBuilder.append(" AND fullPvalueSet:true");
+            }
         }
 
         return filterQueryBuilder.toString();
