@@ -201,7 +201,10 @@
                 </button>
 
                 <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="tabIn('#study_panel')">
-                    <span class="study_label">Studies &amp; Sumstats</span><span class="study_count badge" style="background-color: #398A96;margin-left:10px"></span>
+                    <span class="study_label">Studies</span><span class="study_count badge" style="background-color: #398A96;margin-left:10px"></span>
+                </button>
+                <button type="button" class="btn btn-default" style="margin-right:10px;font-weight:bold" onclick="tabIn('#ss_panel')">
+                    <span>Summary statistics</span><span class="ss_count badge" style="background-color: #398A96;margin-left:10px"></span>
                 </button>
                 <button type="button" class="btn btn-default pull-right" style="margin-right:10px;font-weight:bold" id="download_data">
                     <span>Download Catalog data</span><span class="glyphicon glyphicon-download-alt" style="color:#398A96;margin-left:10px"></span>
@@ -217,6 +220,10 @@
         <div>
             <!-- Studies table -->
             <div th:include="fragments/study-datatable-v2 :: studies_datatable(${'/publications/' + result.query})"></div>
+        </div>
+        <div>
+            <!-- Studies table -->
+            <div th:include="fragments/study-with-ss-datatable-v2 :: ss_datatable(${'/publications/' + result.query})"></div>
         </div>
 
     </div>
