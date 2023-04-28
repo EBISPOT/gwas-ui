@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--move styles to the parent, remove jquery from scripts, replace parent jquery with this one here, remove head tag,-->
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.4/css/buttons.bootstrap.min.css"/>
+    <style>
+        .btn:focus, .btn:active, a:focus {
+            outline: none !important;
+            box-shadow: none;
+        }
+
+        div.dt-buttons {
+            float: right;
+        }
+
+        div.dataTables_info, div.dataTables_length {
+            float: left;
+        }
+
+        thead input {
+            width: 100% !important;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body th:fragment="studies_datatable(url)">
+<!-- Studies table -->
+<div id="study-table-loading">
+    <div id="study_panel" class="panel panel-default">
+        <div class="panel-heading background-color-primary-accent">
+            <h3 class="panel-title">
+                <span class="study_label">Studies</span><span class="study_count badge available-data-btn-badge"></span>
+            </h3>
+            <span class="pull-right clickable"
+                  style="margin-left:25px"
+                  onclick="toggleSidebar('#study_panel span.clickable')">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </span>
+        </div>
+
+        <div class="panel-body">
+            <table id="study-table-v2" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>First author</th>
+                    <th>Study accession</th>
+                    <th>Pub. date</th>
+                    <th>Journal</th>
+                    <th>Title</th>
+                    <th>Reported trait</th>
+                    <th>Trait(s)</th>
+                    <th>Background trait(s)</th>
+                    <th>Discovery sample</th>
+                    <th>Replication sample</th>
+                    <th>Association count</th>
+                    <th>Summary statistics</th>
+                </tr>
+                <tr>
+                    <th class="searchable">First author</th>
+                    <th class="searchable">Study accession</th>
+                    <th>Pub. date</th>
+                    <th>Journal</th>
+                    <th>Title</th>
+                    <th class="searchable">Reported trait</th>
+                    <th class="searchable">Trait(s)</th>
+                    <th class="searchable">Background trait(s)</th>
+                    <th>Discovery sample</th>
+                    <th>Replication sample</th>
+                    <th>Association count</th>
+                    <th>Summary statistics</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/common-datatables/datatable-icons.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.13.2/dataRender/ellipsis.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
+<script th:inline="javascript">
+    $('#study-table-v2 thead tr:eq(1) th').each(function () {
+        if ($(this).hasClass('searchable')) {
+            $(this).html('<input type="text" class="form-control"/>');
+        } else {
+            $(this).html('<input type="text" class="form-control" disabled="disabled"/>');
+        }
+    });
+    $(document).ready(function () {
+        showLoadingOverLay('#study-table-loading');
+        $('#study-table-v2').DataTable({
+            serverSide: true,
+            ajax: {
+                url: gwasProperties.contextPath + 'api/v2' + [[${url}]] + '/studies',
+                dataType: 'JSON',
+                dataSrc: function (json) {
+                    json.recordsTotal = json.page.totalElements;
+                    json.recordsFiltered = json.page.totalElements;
+                    $(".study_count").html(json.recordsTotal);
+                    if (!json._embedded) json['_embedded'] = {};
+                    return json._embedded.studies;
+                },
+                data: function (d) {
+                    const c = {};
+                    // for trait page
+                    c.includeChildTraits = $('#toggle-data-display').is(':checked');
+                    c.includeBgTraits = $('#include-bg-traits').is(':checked');
+                    d.columns.forEach(e => {
+                        if (e.search.value !== '') {
+                            c[e.name] = e.search.value;
+                        }
+                    })
+                    if (d.order.length > 0) {
+                        c.sort = d.columns[d.order[0].column].name + "," + d.order[0].dir;
+                    }
+                    c.size = d.length;
+                    c.page = d.start / d.length;
+                    return c;
+                }
+            },
+            orderCellsTop: true,
+            scrollX: true,
+            order: [],
+            columns: [
+                {data: 'firstAuthor', name: 'firstAuthor', orderable: false},
+                {data: 'accessionId', name: 'accessionId', defaultContent: "-", render: function (data) {
+                        const link = gwasProperties.contextPath + 'studies/' + data;
+                        return !data ? null : '<a href="' + link + '">' + data + '</a>'
+                    }, orderable: false},
+                {data: 'publicationDate', name: 'publicationDate', orderable: true},
+                {data: 'journal', name: 'journal', orderable: false},
+                {data: 'title', name: 'title', render: $.fn.dataTable.render.ellipsis(50, true), orderable: false},
+                {data: 'reportedTrait', name: 'reportedTrait', orderable: false},
+                {
+                    data: 'efoTraits', name: 'efoTrait', render: function (data) {
+                        $.each(data, function (index, trait) {
+                            // TODO use the gwasProperties
+                            const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
+                            // const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
+                            data[index] = '<a href="' + link + '">' + trait.label + '</a>'
+                        });
+                        return data.join(', ')
+                    }, orderable: false
+                },
+                {
+                    data: 'backgroundTraits', name: 'bgTrait', render: function (data) {
+                        $.each(data, function (index, trait) {
+                            // TODO use the gwasProperties
+                            const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
+                            // const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
+                            data[index] = '<a href="' + link + '">' + trait.label + '</a>'
+                        });
+                        return data ? data.join(', ') : null;
+                    }, defaultContent: "-", orderable: false
+                },
+                {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: false, defaultContent: "-", render: function (data) {
+                        data = data.map(e => '&bull; ' + e);
+                        return data.join('<br/>');
+                    }
+                },
+                {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: false, defaultContent: "-", render: function (data) {
+                        data = data.map(e => '&bull; ' + e);
+                        return data.join('<br/>');
+                    }},
+                {data: 'associationCount', name: 'associationCount'},
+                {
+                    data: 'summaryStatistics', name: 'fullPvalueSet', defaultContent: "Not available", render: function(data, type, row) {
+                        var res = null;
+                        if (data !== 'NA') {
+                            res = '<a href="' + data + '">FTP Download</a>'
+                        }
+                        if (row['ssApiFlag'] === true) {
+                            if (res === null) {
+                                res = '<a href="http://www.ebi.ac.uk/gwas/summary-statistics/docs" target="_blank">API access</a>';
+                            }
+                            else {
+                                res = res.concat('&nbsp;&nbsp;or&nbsp;&nbsp;<a href="http://www.ebi.ac.uk/gwas/summary-statistics/docs" target="_blank">API access</a>');
+                            }
+                        }
+                        return res;
+                    }
+                },
+            ],
+            dom: 'lBrtip',
+            buttons: [
+                'colvis'
+            ],
+            retrieve: true,
+            initComplete: function () {
+                hideLoadingOverLay('#study-table-loading');
+                this.api()
+                    .columns()
+                    .every(function (index) {
+                        const that = this;
+                        $(this.table().container()).on('keyup', 'thead tr:eq(1) th:eq(' + index + ') input', function (e) {
+                            if (that.search() !== this.value) that.search(this.value);
+                            if (e.keyCode === 13) that.draw();
+                        });
+                    });
+            },
+            language: {
+                paginate: {
+                    next: '<span>&raquo;</span>',
+                    previous: '<span>&laquo;</span>'
+                }
+            },
+            lengthMenu: [
+                [5, 10, 25, 50],
+                [5, 10, 25, 50],
+            ]
+        })
+            .on('processing.dt', function (e, settings, processing) {
+                if (processing) {
+                    showLoadingOverLay('#study-table-loading');
+                } else {
+                    hideLoadingOverLay('#study-table-loading');
+                }
+            });
+    });
+</script>
+</body>
+</html>
