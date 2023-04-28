@@ -11,6 +11,8 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +21,16 @@ import uk.ac.ebi.spot.goci.refactoring.model.*;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchAssociationService;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchEFOTraitsService;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchStudyService;
+import uk.ac.ebi.spot.goci.refactoring.service.SolrTableExportService;
+import uk.ac.ebi.spot.goci.refactoring.util.FileHandler;
 import uk.ac.ebi.spot.goci.refactoring.util.SolrQueryParamBuilder;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = SearchUIConstants.API_V2+SearchUIConstants.VARIANTS)
@@ -49,6 +55,11 @@ public class SolrSearchVariantController {
     AssociationSolrDTOAssembler associationSolrDTOAssembler;
     @Autowired
     SolrQueryParamBuilder solrQueryParamBuilder;
+
+    @Autowired
+    SolrTableExportService solrTableExportService;
+    @Autowired
+    FileHandler fileHandler;
 
     @GetMapping(value = "/{variantId}/studies", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
@@ -103,7 +114,55 @@ public class SolrSearchVariantController {
 
     }
 
+    @GetMapping(value = "/{variantId}/studies/download", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public HttpEntity<byte[]> downloadStudies(@PathVariable String variantId) {
+        String query = solrQueryParamBuilder.buildQueryParam("VARIANT",variantId);
+        List<StudyDoc> studyDocList = solrTableExportService.fetchStudies(query);
+        byte[] result = fileHandler.serializePojoToTsv(studyDocList.stream()
+                .map(studyDoc -> studySolrDTOAssembler.assemble(studyDoc))
+                        .collect(Collectors.toList()));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=studyTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
+        return new HttpEntity<>(result, responseHeaders);
+
+    }
 
 
+    @GetMapping(value = "/{variantId}/associations/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public HttpEntity<byte[]> downloadAssociations(@PathVariable String variantId) {
+        String query = solrQueryParamBuilder.buildQueryParam("VARIANT",variantId);
+        List<AssociationDoc> asscnDocList = solrTableExportService.fetchAssociations(query);
+        byte[] result = fileHandler.serializePojoToTsv(asscnDocList.stream()
+                .map(asscnDoc -> associationSolrDTOAssembler.assemble(asscnDoc))
+                .collect(Collectors.toList()));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=asscnTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
+        return new HttpEntity<>(result, responseHeaders);
+    }
+
+
+    @GetMapping(value = "/{variantId}/traits/download", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public HttpEntity<byte[]> downloadEFOTraits(@PathVariable String variantId) {
+        String query = solrQueryParamBuilder.buildQueryParam("VARIANT",variantId);
+        List<EFOTraitDoc> efoDocList = solrTableExportService.fetchEFOTraits(query);
+        byte[] result = fileHandler.serializePojoToTsv(efoDocList.stream()
+                .map(efoDoc -> efoTraitSolrDTOAssembler.assemble(efoDoc))
+                .collect(Collectors.toList()));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=efoTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
+        return new HttpEntity<>(result, responseHeaders);
+    }
 
 }

@@ -16,10 +16,14 @@ public class SearchUIConstants {
 
     public static final String GENES = "/genes";
 
+    public static final String SUMMARY_STATISTICS = "/summaryStatistics";
+
     public static final String INCLUDE_CHILD_TRAITS = "includeChildTraits";
 
     public static final String INCLUDE_BG_TRAITS = "includeBgTraits";
     public static final String PUBLICATIONS = "/publications";
+
+    public static final String STUDIES = "/studies";
 
     public static final String SEARCH_STUDY = "/study";
 
@@ -36,7 +40,11 @@ public class SearchUIConstants {
             + "efoLink, mappedLabel, mappedUri, mappedBkgLabel, mappedBkgUri, positionLinks, author_s, publicationDate, pubmedId, "
             + "accessionId";
 
-    public static final String LOCUS_ZOOM_SOLR_FIELDS = "chromLocation, pValueExponent, pValueMantissa";
+    public static final String SUMSTATS_SOLR_FIELDS = "accessionId,author_s,authorAscii_s,pubmedId,title,publication,"
+            + "publicationDate,mappedLabel,mappedUri,traitName_s,associationCount,agreedToCc0,fullPvalueSet";
+
+    public static final String LOCUS_ZOOM_SOLR_FIELDS = "chromLocation, pValueExponent, pValueMantissa, strongestAllele," +
+            "ensemblMappedGenes,traitName,mappedLabel,accessionId,pubmedId,author_s,publicationDate,efoLink,mappedUri";
 
     public static final String ACCESSION_ID = "accessionId";
 

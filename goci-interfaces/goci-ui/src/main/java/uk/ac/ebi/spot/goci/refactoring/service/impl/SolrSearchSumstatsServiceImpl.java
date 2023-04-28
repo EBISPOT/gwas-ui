@@ -15,81 +15,54 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import uk.ac.ebi.spot.goci.model.solr.SolrData;
+import uk.ac.ebi.spot.goci.refactoring.model.SearchAssociationDTO;
 import uk.ac.ebi.spot.goci.refactoring.model.SearchStudyDTO;
 import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
 import uk.ac.ebi.spot.goci.refactoring.service.RestInteractionService;
-import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchStudyService;
+import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchSumstatsService;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 
 import java.io.IOException;
 import java.util.List;
-
 @Service
-public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
-
-    private static final Logger log = LoggerFactory.getLogger(SolrSearchStudyServiceImpl.class);
-    @Autowired
-    SearchConfiguration searchConfiguration;
-
+public class SolrSearchSumstatsServiceImpl implements SolrSearchSumstatsService {
+    private static final Logger log = LoggerFactory.getLogger(SolrSearchSumstatsServiceImpl.class);
     @Autowired
     RestInteractionService restInteractionService;
+    @Autowired
+    SearchConfiguration searchConfiguration;
 
     ObjectMapper objectMapper = new ObjectMapper();
 
     public Page<StudyDoc> searchStudies(String query, Pageable pageable, SearchStudyDTO searchStudyDTO) throws IOException {
-       //String query = String.format("rsId:\"%s\" OR association_rsId :\"%s\"", rsId, rsId);
-        String sortDirection = "";
-        String sortProperty = "";
-        Sort sort = pageable.getSort();
-        if(sort != null) {
-            Sort.Order orderAsscn = sort.getOrderFor("associationCount");
-            Sort.Order orderPvalue = sort.getOrderFor("fullPvalueSet");
-            Sort.Order orderPdate = sort.getOrderFor("publicationDate");
-            Sort.Order orderFirstAuthor = sort.getOrderFor("firstAuthor");
-            if(orderAsscn != null) {
-                sortDirection =  orderAsscn.isAscending() ? "asc" : "desc";
-                sortProperty = "associationCount";
-            }
-            if(orderPvalue != null) {
-                sortDirection =  orderPvalue.isAscending() ? "asc" : "desc";
-                sortProperty = "fullPvalueSet";
-            }
-            if(orderPdate != null) {
-                sortDirection =  orderPdate.isAscending() ? "asc" : "desc";
-                sortProperty = "publicationDate";
-            }
-            if(orderFirstAuthor != null) {
-                sortDirection =  orderFirstAuthor.isAscending() ? "asc" : "desc";
-                sortProperty = "author_s";
-            }
+        String uri = buildURIComponent();
+        log.info("The Query is ->"+query);
+        SolrData data = restInteractionService.callSolrAPIwithPayload(uri, buildQueryParams(pageable.getPageSize(), pageable.getPageNumber() + 1, query, searchStudyDTO, buildSortParam(pageable)));
+        if (data != null && data.getResponse() != null) {
+            log.info("Response data Count" + data.getResponse().getNumFound());
+            List<?> docs = data.getResponse().getDocs();
+            List<StudyDoc> studyDocs = objectMapper.convertValue(docs, new TypeReference<List<StudyDoc>>(){{}});
+            Page<StudyDoc> page = new PageImpl<>(studyDocs, pageable, data.getResponse().getNumFound());
+            return page;
+        } else {
+            return null;
         }
-       String uri = buildURIComponent( pageable.getPageSize(),  pageable.getPageNumber()+1, query, searchStudyDTO, sortProperty, sortDirection);
-       //SolrData data =  restInteractionService.callSolrAPI(uri, method);
-        SolrData data =  restInteractionService.callSolrAPIwithPayload(uri, buildQueryParams( pageable.getPageSize(), pageable.getPageNumber()+1, query, searchStudyDTO, sortProperty, sortDirection));
-       if( data != null &&  data.getResponse() != null ) {
-           log.info("Response data Count"+data.getResponse().getNumFound());
-           List<? > docs =  data.getResponse().getDocs();
-           List<StudyDoc> studyDocs = objectMapper.convertValue(docs, new TypeReference<List<StudyDoc>>(){{}});
-           Page<StudyDoc> page = new PageImpl<>(studyDocs, pageable, data.getResponse().getNumFound());
-           return page;
-       } else {
-           return null;
-       }
     }
 
 
-    private String buildURIComponent( int maxResults, int page, String query, SearchStudyDTO searchStudyDTO,
-                                     String sortProperty, String sortDirection) {
+    private String buildURIComponent() {
         String fatSolrUri = restInteractionService.getFatSolrUri();
         UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(fatSolrUri)
-                //.queryParams(buildQueryParams( maxResults, page, query, searchStudyDTO, sortProperty, sortDirection))
+                //.queryParams(buildQueryParams( maxResults, page, query, searchAssociationDTO, sortParam))
                 .build();
         return uriComponents.toUriString();
     }
 
-    private MultiValueMap<String, String> buildQueryParams( int maxResults, int page, String query, SearchStudyDTO searchStudyDTO ,
-                                                           String sortProperty, String sortDirection) {
+
+
+    private MultiValueMap<String, String> buildQueryParams(int maxResults, int page, String query, SearchStudyDTO searchStudyDTO ,
+                                                           String sortParam) {
         MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
         paramsMap.add("wt","json");
         paramsMap.add("rows",String.valueOf(maxResults));
@@ -100,8 +73,8 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
             fq = buildFilterQuery(fq, searchStudyDTO);
             log.info("The final fq value after applying filters is"+fq);
         }
-        String fl = "*";
-        String sortParam = sortProperty + " "+ sortDirection;
+        String fl = SearchUIConstants.SUMSTATS_SOLR_FIELDS;
+        //String fl = "*";
         paramsMap.add("q",query );
         paramsMap.add("fq",fq );
         paramsMap.add("fl",fl );
@@ -117,7 +90,6 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
         String reportedTrait = searchStudyDTO.getReportedTrait();
         String efoTrait = searchStudyDTO.getEfoTrait();
         String bgTrait = searchStudyDTO.getBgTrait();
-        Boolean fullPValueSet = searchStudyDTO.getFullPvalueSet();
         filterQueryBuilder.append(filterQuery);
 
         if(accessionId != null) {
@@ -141,15 +113,36 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
             else
                 filterQueryBuilder.append(String.format(" AND mappedBkgLabel:*%s*",bgTrait));
         }
-        if(fullPValueSet != null) {
-            if(fullPValueSet) {
-                filterQueryBuilder.append(" AND fullPvalueSet:true");
-            }
-        }
 
         return filterQueryBuilder.toString();
 
     }
 
+    private String  buildSortParam(Pageable pageable) {
+        Sort sort = pageable.getSort();
+        String sortParam = "";
+        String sortProperty = "";
+        if(sort != null) {
+            Sort.Order orderAsscn = sort.getOrderFor("associationCount");
+            Sort.Order orderPdate = sort.getOrderFor("publicationDate");
+            Sort.Order orderFirstAuthor = sort.getOrderFor("firstAuthor");
+            if(orderAsscn != null) {
+                sortProperty =  orderAsscn.isAscending() ? "asc" : "desc";
+                sortParam = String.format("associationCount %s", sortProperty);
+
+                if(orderPdate != null) {
+                    sortProperty =  orderPdate.isAscending() ? "asc" : "desc";
+                    sortParam = String.format("publicationDate %s", sortProperty);
+                }
+                if(orderFirstAuthor != null) {
+                    sortProperty =  orderFirstAuthor.isAscending() ? "asc" : "desc";
+                    sortProperty = String.format("author_s %s", sortProperty);
+                }
+            }
+        }else {
+            sortParam = "publicationDate desc";
+        }
+        return sortParam;
+    }
 
 }

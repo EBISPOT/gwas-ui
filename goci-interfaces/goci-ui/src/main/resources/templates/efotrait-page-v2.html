@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description"
+          content="The NHGRI-EBI GWAS Catalog: a curated collection of all published genome-wide association studies, produced by a collaboration between EMBL-EBI and NHGRI"/>
+    <meta name="keywords" content="GWAS Catalog, GWAS, NHGRI, EBI, EMBL-EBI, SPOT"/>
+    <meta name="author" content="Tony Burdett, Emma Hastings, Dani Welter, SPOT, EMBL-EBI, NHGRI"/>
+    <link rel="icon" th:href="@{/images/favicon.ico}"/>
+
+    <title>GWAS Catalog</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+    <!--xintodo disable for offline debug-->
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"/>
+    <!--rel="stylesheet"/>-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.5.0/bootstrap-table.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/jumbotron.css}" rel="stylesheet"/>
+    <link th:href="@{/css/sticky-footer-navbar.css}" rel="stylesheet"/>
+
+    <!-- Additional styling on top of bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/goci-ui.css}"/>
+    <link rel="stylesheet" th:href="@{/css/icons/flaticon.css}"/>
+    <link rel="stylesheet" th:href="@{/css/goci-color-palette-1.css}"/>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.4/css/buttons.bootstrap.min.css"/>
+    <style>
+        .btn:focus, .btn:active, a:focus {
+            outline: none !important;
+            box-shadow: none;
+        }
+
+        div.dt-buttons {
+            float: right;
+        }
+
+        div.dataTables_info, div.dataTables_length {
+            float: left;
+        }
+
+        thead input {
+            width: 100% !important;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+        .tabbed {
+            background-image: none;
+            border-color: #adadad;
+            background-color: #B0DFE6 !important;
+        }
+    </style>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+<!--Include header-->
+<div th:include="fragments/header :: navbar"></div>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron background-color-primary-accent" style="margin: 0%; padding-bottom: 30px;">
+    <div class="container-fluid clearfix">
+        <div class="col-xs-12 col-md-12 col-xs-12 col-xs-12">
+            <h2 style="margin:0px">
+                <span style="padding-left:5px">Trait: </span>
+                <span id="top-panel-trait-label" th:text="${result.query}" style="padding-left:5px"></span>
+            </h2>
+        </div>
+    </div>
+</div>
+
+<!--init search parameter-->
+<div style="display: none">
+    <!--<div>-->
+    <ul th:object="${result}" id="variables">
+        <li id="query" th:text="*{query}">User query</li>
+        <li id="facet" th:text="*{facet}">Facet</li>
+        <li id="filter" th:text="*{filter}">Disease trait</li>
+        <li id="included" th:text="*{included}">Included</li>
+        <li id="checked" th:text="*{checked}">checked</li>
+    </ul>
+</div>
+<!-- this is the main tag for all the cache data. -->
+<div style="display:none" id="efo-info"></div>
+
+
+<!--main container-->
+<div class="container-fluid" style="padding-top: 30px">
+    <!--search meta data-->
+    <ol class="breadcrumb background-color-complementary-accent">
+        <li><a href="index.html" th:href="@{/home}">GWAS</a></li>
+        <li>Traits</li>
+        <li class="active" th:text="${result.query}"></li>
+    </ol>
+
+
+    <!--disable when search is invalid-->
+    <div class="container-fluid" id="lower_container">
+        <!-- Summary panel -->
+        <div class="row" style="margin-top:10px">
+            <div id="summary-info" class="panel panel-default" style="padding-left:0px">
+                <!--heading-->
+                <div class="panel-heading background-color-primary-accent">
+                    <h3 class="panel-title">Trait information
+                    </h3>
+                </div>
+
+                <!-- Trait Summary -->
+                <div class="clearfix" id="summary-panel-loading">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top: 15px; padding-left: 15px; padding-right: 15px;" id="efo-details">
+
+                        <!-- EFO Label -->
+                        <div class="clearfix">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
+                                <span>Trait label</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                      title="Trait name in the Experimental Factor Ontology (EFO)">
+                                </span>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-label">-</div>
+                        </div>
+
+                        <!-- EFO ID -->
+                        <div class="clearfix">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left">
+                                <span>EFO ID</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                      title="Trait ID in the Experimental Factor Ontology (EFO)"></span>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-id">-</div>
+                        </div>
+
+                        <!-- EFO Synonyms -->
+                        <div class="clearfix">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
+                                <span>Synonyms</span>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-synonym">-</div>
+                        </div>
+
+                        <!-- EFO Term Mappings -->
+                        <div class="clearfix">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 item-left-bold">
+                                <span>Mapped terms</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                      title="Equivalent trait IDs in other ontologies">
+                                </span>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="efotrait-oxo-mappings">-</div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top: 15px; padding-left: 15px; padding-right: 15px;">
+                        <div class="btn-group-vertical pull-right" id="panel-links">
+                        <div style="margin-bottom: 0.6em">
+                            <a type="button" class="btn btn-default" id='ols-link'>Trait in <b>OLS</b>
+                                <span class="glyphicon glyphicon-new-window external-link"></span>
+                            </a>
+                        </div>
+
+                        <div style="margin-bottom: 0.6em">
+                            <a type="button" class="btn btn-default" id='oxo-link'>Trait in <b>OXO</b>
+                                <span class="glyphicon glyphicon-new-window external-link"></span>
+                            </a>
+                        </div>
+
+                        <div style="margin-bottom: 0.6em">
+                            <a type="button" class="btn btn-default" id="ot-link"> Trait in <b>Open Targets</b>
+                                <span class="glyphicon glyphicon-new-window external-link"></span>
+                            </a>
+                        </div>
+
+                        <div id="pgs-trait-link-div" style="margin-bottom: 0.6em; display: none">
+                            <a type="button" class="btn btn-default" id="pgs-trait-link"> Trait in <b>PGS Catalog</b>
+                                <span class="glyphicon glyphicon-new-window external-link"></span>
+                            </a>
+                        </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 item-left-bold">
+                                <span>Description</span>
+                            </div>
+                            <div class="col-lg-10" style="text-align: justify;" id="efotrait-description">-</div>
+                        </div>
+                    </div>
+
+                    <!-- Reported Traits mapped to this EFO term -->
+                    <div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 item-left">
+                                <span>Reported Traits</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                      title="List of detailed trait descriptions that are annotated with this trait.
+                                      Reported traits are based on author language and take into account study design.">
+                                </span>
+                            </div>
+                            <div class="col-lg-9" style="text-align: justify;" id="reported-traits">-</div>
+                        </div>
+                    </div>
+
+                    <!-- EFO Child traits -->
+                    <div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 item-left">
+                                <span>Child traits</span>
+                                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                  title="Child terms of this trait in the EFO hierarchy">
+                                </span>
+                            </div>
+                            <div class="col-lg-9" style="text-align: justify;" id="efo-child-trait-label">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row search-results-container" id="search-results-container">
+
+            <!--plot, tables-->
+            <div class="col-8" id="results-area">
+                <!-- List the available tables -->
+                <div class="row" style="margin-top:0px">
+                    <div id="table-list" class="panel clearfix" style="padding-left:0px;box-shadow:none">
+                        <span style="margin-right:10px;font-weight:bold">Available data:</span>
+                        <button type="button"
+                                class="btn btn-default available-data-btn tabbed"
+                                onclick="tabIn('#association_panel')">
+                            <span class="association_label">Associations</span><span class="association_count badge available-data-btn-badge"></span>
+                        </button>
+                        <button type="button"
+                                class="btn btn-default available-data-btn"
+                                onclick="tabIn('#study_panel')">
+                            <span class="study_label">Studies</span><span class="study_count badge available-data-btn-badge"></span>
+                        </button>
+                        <button type="button"
+                                class="btn btn-default available-data-btn"
+                                onclick="tabIn('#locus_panel')">
+                            <span class="locus_label">LocusZoom</span>
+                        </button>
+
+
+                        <!-- Hidden form used to generate download association data for traits -->
+                        <form name="form1" id="form1" style="display: none">
+                            Trait Association download data:
+                            <input id="queryInput" type="text" name="q" value=""/>
+                        </form>
+                        <button type="submit" class="btn btn-default pull-right" style="margin-right:10px;font-weight:bold" id="download_data" form="form1" value="Submit" th:disabled="true">
+                            <span>Download Catalog data</span><span class="glyphicon glyphicon-download-alt" style="color:#398A96;margin-left:10px"></span>
+                        </button>
+
+
+                        <!-- Alternative button to display for large file downloads  -->
+                        <button id="download_doc_page"
+                                type="button"
+                                class="btn btn-default pull-right"
+                                style="display: none;margin-right:10px;font-weight:bold"
+                        >
+                            <span>Download files</span><span class="glyphicon glyphicon-new-window external-link"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="include-bgs-section">
+                    <input type="checkbox" id="include-bg-traits" th:checked="false"/>
+                    <label>Include background traits data
+                        <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                              title="A trait that is not directly analysed in the GWAS, but is shared by all
+                              study participants as a common characteristic."></span>
+                    </label>
+                </div>
+
+                <!-- Use checkbox to toggle add/remove child trait data -->
+                <div id="toggle-data-display-section">
+                    <div>
+                        <input type="checkbox" id="toggle-data-display" th:checked="true" onclick="toggleDataDisplay()"/>
+                        <label>Include child trait data</label>
+                    </div>
+<!--                    <p id="text" style="display:none">Getting data for <label id="trait_cnt_loaded"></label> trait(s)</p>-->
+                    <p id="text"><label id="trait_cnt_loaded"></label></p>
+                </div>
+
+
+
+
+                <div>
+                    <!-- Associations table -->
+                    <div th:include="fragments/association-datatable-v2 :: associations_datatable(${'/efotraits/' + result.getEfoId()})"></div>
+
+                    <!-- Studies table -->
+                    <div th:include="fragments/study-datatable-v2 :: studies_datatable(${'/efotraits/' + result.getEfoId()})"></div>
+                </div>
+
+
+                <!-- locus plot -->
+                <div id="locus-plot-row-loading">
+                    <div id="locus_panel" class="panel panel-default">
+                        <div class="panel-heading background-color-primary-accent">
+                            <h3 class="panel-title">
+                                <span class="locus_label">Plot of Catalog associations for selected trait
+                                    across all studies</span>
+                            </h3>
+                            <span class="pull-right">
+                        <span class="clickable"
+                              style="margin-left:25px"
+                              onclick="toggleSidebar('#locus_panel span.clickable')">
+                            <span class="glyphicon glyphicon-chevron-up"></span>
+                        </span>
+                    </span>
+                        </div>
+                        <div class="panel-body">
+                            <!-- locus plot -->
+                            <div id="plot" style=" width: 850px; height: 590px; display: block; margin: 0 auto;"></div>
+                            <div id="plot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Include footer-->
+<div th:include="fragments/footer :: page_footer"></div>
+
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css" rel="stylesheet"/>
+
+<!-- Extensions for Column filters -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/extensions/filter-control/bootstrap-table-filter-control.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter/bootstrap-table-filter.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+
+
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script
+        th:src="@{/js/ie10-viewport-bug-workaround.js}"></script>
+<script>
+    $(document).ready(() => {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+<!-- GOCI JavaScript
+================================================== -->
+<script th:src="@{/js/goci-ui.js}"></script>
+<script th:src="@{/js/efotraitresult.js}"></script>
+
+<!-- LocusZoom
+================================================== -->
+<script th:src="@{/js/plugins/locuszoom.vendor.min.js}"></script>
+<script th:src="@{/js/plugins/locuszoom.app.js}"></script>
+<link rel="stylesheet" th:href="@{/css/locuszoom.css}"/>
+
+<!-- clipboardjs
+================================================== -->
+<script th:src="@{/js/plugins/clipboard.min.js}"></script>
+
+<!--vis.js-->
+<script src="https://cdn.rawgit.com/almende/vis/master/dist/vis.js"></script>
+
+<!--oxo-grapg-->
+<script th:src="@{/js/plugins/oxo-graph.js}"></script>
+
+<!-- loading overlay
+================================================== -->
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/extensions/export/bootstrap-table-export.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.18/tableExport.js"></script>
+
+<!-- trait page
+================================================== -->
+<script th:src="@{/js/efotrait-locuszoom.js}"></script>
+<script th:src="@{/js/helpers/promise-helper.js}"></script>
+<script th:src="@{/js/helpers/utils-helper.js}"></script>
+<script th:src="@{/js/common-datatables/studies-datatable.js}"></script>
+<script th:src="@{/js/common-datatables/associations-datatable.js}"></script>
+<script th:src="@{/js/autocomplete-termselect.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.min.js"></script>
+
+
+<!-- ORIGINAL TRAIT PAGE -->
+<!--<script th:src="@{/js/efotrait-util.js}"></script>-->
+
+<!-- NEW TRAIT PAGE -->
+<script th:src="@{/js/efotrait-util-updated-V2.js}"></script>
+
+
+<!--this come last to make sure trait page specific style is not overwritten by othe css.-->
+<link rel="stylesheet" th:href="@{/css/goci-efotrait-page.css}"/>
+<link rel="stylesheet" th:href="@{/css/ontology-autocomplete.css}"/>
+
+<!-- Google analytics
+================================================== -->
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-60195133-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+</body>
+</html>
