@@ -250,8 +250,7 @@
   function generateLinkedGene(geneNames, separator = ', '){
     var linkedGenes = [];
     for ( var gene of geneNames){
-      // var linkObject = $('<a></a>').attr("href", gwasProperties.contextPath + 'genes/' + gene).append(gene);
-      var linkObject = $('<a></a>').attr("href", 'https://www.ebi.ac.uk/gwas/genes/' + gene).append(gene);
+      var linkObject = $('<a></a>').attr("href", gwasProperties.contextPath + 'genes/' + gene).append(gene);
       linkedGenes.push(linkObject.prop('outerHTML'))
     }
     return (linkedGenes.join(separator));
