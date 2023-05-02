@@ -96,7 +96,8 @@ function parsePgsTraitResult(data) {
  */
 $(document).ready(() => {
     $('#study_panel').hide();
-    $('#locus_panel').hide()
+    $('#ss_panel').hide();
+    $('#locus_panel').hide();
     $('#toggle-data-display').on('change', reloadTablesAndLocusZoom);
     $('#include-bg-traits').on('change', reloadTablesAndLocusZoom);
     // Conditional display of PGS link/button
@@ -113,6 +114,8 @@ function reloadTablesAndLocusZoom() {
     associationTable.ajax.reload();
     const studyTable = $('#study-table-v2').DataTable();
     studyTable.ajax.reload();
+    const ssTable = $('#ss-table-v2').DataTable();
+    ssTable.ajax.reload();
     let includeBgTraits = $('#include-bg-traits').is(':checked');
     let includeChildTraits = $('#toggle-data-display').is(':checked');
     setTraitDownloadLink(childEfos.concat([getMainEFO()]));

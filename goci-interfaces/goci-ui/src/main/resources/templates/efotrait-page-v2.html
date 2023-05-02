@@ -254,6 +254,11 @@
                         </button>
                         <button type="button"
                                 class="btn btn-default available-data-btn"
+                                onclick="tabIn('#ss_panel')">
+                            <span>Summary statistics</span><span class="ss_count badge available-data-btn-badge"></span>
+                        </button>
+                        <button type="button"
+                                class="btn btn-default available-data-btn"
                                 onclick="tabIn('#locus_panel')">
                             <span class="locus_label">LocusZoom</span>
                         </button>
@@ -308,6 +313,7 @@
 
                     <!-- Studies table -->
                     <div th:include="fragments/study-datatable-v2 :: studies_datatable(${'/efotraits/' + result.getEfoId()})"></div>
+                    <div th:include="fragments/study-with-ss-datatable-v2 :: ss_datatable(${'/efotraits/' + result.query})"></div>
                 </div>
 
 

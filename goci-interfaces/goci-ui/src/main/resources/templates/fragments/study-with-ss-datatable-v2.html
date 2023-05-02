@@ -115,6 +115,8 @@
                 data: function (d) {
                     const c = {};
                     c.fullPvalueSet = true;
+                    c.includeChildTraits = $('#toggle-data-display').is(':checked');
+                    c.includeBgTraits = $('#include-bg-traits').is(':checked');
                     d.columns.forEach(e => {
                         if (e.search.value !== '') {
                             c[e.name] = e.search.value;
