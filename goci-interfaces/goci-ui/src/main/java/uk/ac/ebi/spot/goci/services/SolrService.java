@@ -3,6 +3,7 @@ package uk.ac.ebi.spot.goci.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
@@ -11,10 +12,12 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.ebi.spot.goci.model.solr.SolrData;
 import uk.ac.ebi.spot.goci.model.solr.SumStatDownloadDto;
 import uk.ac.ebi.spot.goci.refactoring.model.PublicationDoc;
+import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +28,8 @@ import java.util.List;
 public class SolrService {
 
     private final ObjectMapper mapper = new ObjectMapper();
+    @Autowired
+    SearchConfiguration searchConfiguration;
 
     public String dispatchSearch(String searchString) throws IOException {
         log.trace(searchString);
@@ -59,6 +64,13 @@ public class SolrService {
         List<PublicationDoc> pubDocs = mapper.convertValue(solrDocs, new TypeReference<List<PublicationDoc>>() {});
         List<SumStatDownloadDto> sumStatDownloadDtos = new ArrayList<>();
         pubDocs.forEach(solrDoc -> {
+            String accId = solrDoc.getAccessionId().substring(solrDoc.getAccessionId().indexOf("GCST")+4);
+            int gsctNum = Integer.parseInt(accId);
+            int lowerRange = (int) (Math.floor((gsctNum-1)/1000))*1000+1;
+            int upperRange = (int) (Math.floor((gsctNum-1)/1000)+1)*1000;
+            String range = "GCST"+ StringUtils.leftPad(String.valueOf(lowerRange),6,"0")
+                    +"-GCST"+StringUtils.leftPad(String.valueOf(upperRange),6,"0");
+            String ftpLink = searchConfiguration.getSummaryStatsFTPLink().concat(range).concat("/").concat(solrDoc.getAccessionId());
             sumStatDownloadDtos.add(
                     SumStatDownloadDto.builder()
                             .authorS(solrDoc.getAuthorS())
@@ -70,7 +82,7 @@ public class SolrService {
                             .mappedLabel(solrDoc.getMappedLabel().toString())
                             .traitNameS(solrDoc.getTraitNameS())
                             .mappedUri(solrDoc.getMappedUri().toString())
-                            .dataAccess("FTP Download")
+                            .dataAccess(ftpLink)
                             .build()
             );
         });
