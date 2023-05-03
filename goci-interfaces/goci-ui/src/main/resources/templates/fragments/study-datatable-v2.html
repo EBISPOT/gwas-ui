@@ -155,11 +155,9 @@
                     }, orderable: false
                 },
                 {
-                    data: 'backgroundTraits', name: 'bgTrait', render: function (data) {
+                    data: 'bgTraits', name: 'bgTrait', render: function (data) {
                         $.each(data, function (index, trait) {
-                            // TODO use the gwasProperties
                             const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
-                            // const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
                             data[index] = '<a href="' + link + '">' + trait.label + '</a>'
                         });
                         return data ? data.join(', ') : null;
