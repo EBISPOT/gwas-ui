@@ -2,6 +2,7 @@ package uk.ac.ebi.spot.goci.refactoring.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -17,6 +18,9 @@ import java.util.List;
 @EqualsAndHashCode
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({"riskAllele","riskFrequency","pValueExponent","pValue","pValueAnnotation","orValue","beta",
+"ci","mappedGenes","traitName","efoTraits","bgTraits","locations","author","publicationDate","accessionId","riskAlleleSep",
+"chromLocation","pubmedId"})
 @Relation(value = "association", collectionRelation = "associations")
 public class AssociationSolrDTO extends ResourceSupport implements Serializable {
 

@@ -37,7 +37,21 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
     @Override
     public Resource<AssociationSolrDTO> toResource(AssociationDoc associationDoc) {
 
-        AssociationSolrDTO associationSolrDTO = AssociationSolrDTO.builder()
+        AssociationSolrDTO associationSolrDTO = assemble(associationDoc);
+        try {
+            final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
+                    ControllerLinkBuilder.methodOn(SolrSearchPublicationController.class).searchAssociations(null, "Pmid", null, null));
+            Resource<AssociationSolrDTO> resource = new Resource<>(associationSolrDTO);
+            resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withSelfRel());
+            return resource;
+        } catch(IOException ex ){
+            log.error("IO Exception "+ex.getMessage(),ex);
+        }
+        return null;
+    }
+
+    public AssociationSolrDTO assemble(AssociationDoc associationDoc) {
+       return  AssociationSolrDTO.builder()
                 .riskAllele(Optional.ofNullable(associationDoc.getStrongestAllele()).map(this::transformRiskAllele)
                         .orElse(null))
                 .riskFrequency(associationDoc.getRiskFrequency())
@@ -50,7 +64,7 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
                         .orElse(null))
                 .beta(Optional.ofNullable(associationDoc.getBetaNum()).map((betanum) ->
                         this.transformBeta(betanum, associationDoc.getBetaUnit(),
-                        associationDoc.getBetaDirection())).orElse(null))
+                                associationDoc.getBetaDirection())).orElse(null))
                 .ci(associationDoc.getRange())
                 .mappedGenes(Optional.ofNullable(associationDoc.getEnsemblMappedGenes())
                         //.map(this::transformMappedGenes)
@@ -58,11 +72,11 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
                 .traitName(associationDoc.getTraitNames())
                 .efoTraits(Optional.ofNullable(associationDoc.getEfoLink())
                         .map(solrEntityTransformerUtility::getEFOLinks).orElse(
-                        solrEntityTransformerUtility.getEFOLinksfromUri
-                                (associationDoc.getMappedLabel(), associationDoc.getMappedUri())))
+                                solrEntityTransformerUtility.getEFOLinksfromUri
+                                        (associationDoc.getMappedLabel(), associationDoc.getMappedUri())))
                 .bgTraits(Optional.ofNullable(associationDoc.getMappedBkgLabel()).map(bglinks ->
-                        solrEntityTransformerUtility.getEFOLinksfromUri
-                        (associationDoc.getMappedBkgLabel(), associationDoc.getMappedBkgUri()))
+                                solrEntityTransformerUtility.getEFOLinksfromUri
+                                        (associationDoc.getMappedBkgLabel(), associationDoc.getMappedBkgUri()))
                         .orElse(null))
                 .locations(Optional.ofNullable(associationDoc.getPositionLinks()).map(this::transformPositionLinks).orElse(null))
                 .author(associationDoc.getAuthor_s())
@@ -72,16 +86,6 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
                 .riskAlleleSep(Optional.ofNullable(associationDoc.getStrongestAllele()).map(this::getRiskAllelleSep).orElse(null))
                 .chromLocation(associationDoc.getChromLocation())
                 .build();
-        try {
-            final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
-                    ControllerLinkBuilder.methodOn(SolrSearchPublicationController.class).searchAssociations(null, "Pmid", null, null));
-            Resource<AssociationSolrDTO> resource = new Resource<>(associationSolrDTO);
-            resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withSelfRel());
-            return resource;
-        } catch(IOException ex ){
-            log.error("IO Exception "+ex.getMessage(),ex);
-        }
-        return null;
     }
 
 

@@ -29,12 +29,9 @@
   </style>
 </head>
 
-<body th:fragment="associations_datatable">
+<body th:fragment="associations_datatable(url)">
 <!-- Associations table -->
-
-<span id="cut-off-notification">  </span>
-
-<div class="row" id="association-table-loading" style="margin-top:20px">
+<div>
   <div id="association_panel" class="panel panel-default">
     <div class="panel-heading background-color-primary-accent">
       <h3 class="panel-title">
@@ -97,7 +94,7 @@
 <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.colVis.min.js"></script>
 <script src="https://cdn.datatables.net/plug-ins/1.13.2/dataRender/ellipsis.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
-<script>
+<script th:inline="javascript">
   //<![CDATA[
   $('#association-table-v2 thead tr:eq(1) th').each(function () {
     if ($(this).hasClass('searchable')) {
@@ -107,10 +104,11 @@
     }
   });
   $(document).ready(function () {
+    showLoadingOverLay('#association-table-loading');
     $('#association-table-v2').DataTable({
       serverSide: true,
       ajax: {
-        url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/variants/' + $('#query').text() + '/associations',
+        url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2' + [[${url}]] + '/associations',
         dataType: 'JSON',
         dataSrc: function (json) {
           json.recordsTotal = json.page.totalElements;
@@ -121,6 +119,9 @@
         },
         data: function (d) {
           const c = {};
+          // for trait page
+          c.includeChildTraits = $('#toggle-data-display').is(':checked');
+          c.includeBgTraits = $('#include-bg-traits').is(':checked');
           d.columns.forEach(e => {
             if (e.search.value !== '') {
               c[e.name] = e.search.value;
@@ -139,24 +140,25 @@
       order: [],
       columns: [
         {
-          data: 'riskAllele', name: 'riskAllele', render: function (data) {
+          data: 'riskAllele', name: 'riskAllele', defaultContent: '-', render: function (data) {
             $.each(data, function (index, trait) {
               // TODO use the gwasProperties
               //  const link = gwasProperties.contextPath + 'variants/' + trait.key;
-              const link = 'https://www.ebi.ac.uk/gwas/variants/' + trait.key;
-              data[index] = '<a href="' + link + '">' + trait.label + '</a>'
+              const link = 'https://www.ebi.ac.uk/gwas/variants/' + trait?.key;
+              data[index] = '<a href="' + link + '">' + trait?.label + '</a>'
             });
             return data.join(', ')
           }, orderable: false
         },
         {data: 'pValue', name: 'pvalue', render: function (data, type, row) {
             return data + " x 10<sup>" + row["pValueExponent"] + "</sup>";
-          }},
+          }, width: '5%'
+        },
         {data: 'pValueAnnotation', name: 'pValueAnnotation', defaultContent: "-", orderable: false},
-        {data: 'riskFrequency', name: 'raf', defaultContent: "-"},
-        {data: 'or', name: 'or', defaultContent: "-"},
-        {data: 'beta', name: 'beta', defaultContent: "-"},
-        {data: 'ci', name: 'ci', defaultContent: "-", orderable: false},
+        {data: 'riskFrequency', name: 'raf', defaultContent: "-", width: '5%'},
+        {data: 'orValue', name: 'or', defaultContent: "-", width: '5%'},
+        {data: 'beta', name: 'beta', defaultContent: "-", width: '5%'},
+        {data: 'ci', name: 'ci', defaultContent: "-", orderable: false, width: '5%'},
         {
           data: 'mappedGenes',
           name: 'mappedGene',
@@ -204,17 +206,19 @@
             return data ? data.join(', ') : null;
           }, defaultContent: "-", orderable: false
         },
-        {data: 'accessionId', name: 'accessionId', defaultContent: "-", render: function (data) {
+        {data: 'accessionId', name: 'accessionId', defaultContent: '-', render: function (data) {
             const link = gwasProperties.contextPath + 'studies/' + data;
             return !data ? null : '<a href="' + link + '">' + data + '</a>'
           }, orderable: false},
-        {data: 'locations', name: 'locations', orderable: false},
+        {data: 'locations', name: 'locations', orderable: false, defaultContent: 'Mapping not available'},
       ],
       dom: 'lBrtip',
       buttons: [
         'colvis'
       ],
+      retrieve: true,
       initComplete: function () {
+        hideLoadingOverLay('#association-table-loading');
         this.api()
                 .columns()
                 .every(function (index) {
@@ -238,9 +242,9 @@
     })
             .on('processing.dt', function (e, settings, processing) {
               if (processing) {
-                showLoadingOverLay('#association-table-v2');
+                showLoadingOverLay('#association-table-loading');
               } else {
-                hideLoadingOverLay('#association-table-v2');
+                hideLoadingOverLay('#association-table-loading');
               }
             });
   });

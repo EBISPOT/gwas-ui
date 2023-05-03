@@ -425,7 +425,7 @@ public class SolrSearchControllerV2 {
     @ResponseBody
     public Object downloadFullPvalueSetSolrSearch(HttpServletResponse response) throws IOException {
 
-        int maxResults = 50000;
+        int maxResults = Integer.MAX_VALUE;
         int page = 1;
         String query = "fullPvalueSet:true";
         String fieldList = "accessionId,author_s,authorAscii_s,pubmedId,title,publication,publicationDate,mappedLabel,mappedUri,traitName_s,associationCount,agreedToCc0";
@@ -967,7 +967,7 @@ public class SolrSearchControllerV2 {
         StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
         //TODO: Remove in future - Temporarily set 5000 as ut off until scalability problem is fixed https://bit.ly/3TnkjH7
-        groupLimit = 5000;
+        if (groupLimit != 1) groupLimit = 5000;
 
         if (useJsonp) {
             addJsonpCallback(solrSearchBuilder, callbackFunction);
