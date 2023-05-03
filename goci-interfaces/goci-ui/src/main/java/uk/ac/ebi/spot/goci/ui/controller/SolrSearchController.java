@@ -424,7 +424,7 @@ public class SolrSearchController {
     @ResponseBody
     public Object downloadFullPvalueSetSolrSearch(HttpServletResponse response) throws IOException {
 
-        int maxResults = 50000;
+        int maxResults = Integer.MAX_VALUE;
         int page = 1;
         String query = "fullPvalueSet:true";
         String fieldList = "accessionId,author_s,authorAscii_s,pubmedId,title,publication,publicationDate,mappedLabel,mappedUri,traitName_s,associationCount,agreedToCc0";
