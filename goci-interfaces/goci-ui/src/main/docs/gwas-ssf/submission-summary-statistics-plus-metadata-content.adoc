@@ -205,7 +205,7 @@ There are 24 columns for you to fill in:
 
 |Summary statistics file
 |
-|The name of the summary statistics file uploaded via Globus. Must be entered for at least one study. Enter "NR" for any studies without summary statistics.
+|The name of the summary statistics file uploaded via Globus. Summary statistics must be submitted for at least one study. Enter "NR" for any additional studies without summary statistics.
 |
 |yes
 |
@@ -235,7 +235,7 @@ There are 24 columns for you to fill in:
 
 |Summary statistics assembly
 |
-|Genome assembly for the summary statistics. Must be entered for all studies with summary statistics. Enter "NR" for any studies without summary statistics.
+|Genome assembly for the summary statistics. Must be entered for every row that includes summary statistics. Enter "NR" for any additional studies without summary statistics.
 |
 |yes
 |
@@ -324,7 +324,7 @@ There are 24 columns for you to fill in:
 
 ==== Overview
 
-In the Sample tab, enter information about the samples included in each GWAS. Please create a new row for each GWAS and for each broad ancestry category within each GWAS. See the Column Instructions below for the list of standardised ancestry categories used by the GWAS Catalog.
+In the Sample tab, enter information about the samples included in each GWAS. Please create a new row for each GWAS and for each broad ancestry category within each GWAS. *For multi-ancestry GWAS, please create a new row for each included ancestry (study tags can be reused multiple times on this sheet)*. See the Column Instructions below for the list of standardised ancestry categories used by the GWAS Catalog.
 
 For example, for 2 studies on different traits, analysed in 2 ancestry categories, create 2 x 2 = 4 rows:
 [cols="<4,<1,<4,<1,<4,<1,<1,<1,<4,<1,<1", options="header", grid="all", width=100%]
@@ -564,7 +564,7 @@ Please do not enter ancestry information in this column (see other columns below
 |
 |Broad ancestry category that best describes the sample. For more information about each category, see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5815218/table/Tab1/?report=objectonly[Table 1, Morales et al., 2018^].
 
-You should create a new row for each ancestry category. However, you may enter multiple categories in the same row, separated by pipes "\|", only if separate sample numbers are unavailable for each category.
+You should create a new row for each ancestry category. Providing ancestry-specific sample numbers is important for reusability of the data. However, if separate sample numbers are unavailable for each category, you may enter multiple categories in the same row, separated by pipes "\|".
 
 If it is not possible to assign an ancestry category to a group of samples, enter 'NR' (Not Reported).
 |

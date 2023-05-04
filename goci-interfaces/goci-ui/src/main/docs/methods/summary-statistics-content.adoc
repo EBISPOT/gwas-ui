@@ -17,12 +17,14 @@ Summary statistics must meet a number of criteria to be eligible for inclusion i
 
 == Summary statistics availability
 
-We store summary statistics files in two different places, on our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], and in harmonised format in our database. 
+We store summary statistics files in two different places, on our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], and a subset of files in our database.
 
-The FTP site hosts the original files and, when they are processed, a subdirectory called 'harmonised' containing a README file, a standard formatted version of the original file (see below) and a harmonised version of the file (also below). The REST API for the summary statistics database is now available at https://www.ebi.ac.uk/gwas/summary-statistics/api/. 
+The FTP site hosts the original files and, when they are processed, a subdirectory called 'harmonised' containing a README file, a standard formatted version of the original file (see below) and a harmonised version of the file (also below). The FTP is updated nightly with any newly ingested data.
+
+The REST API for the summary statistics database is now available at https://www.ebi.ac.uk/gwas/summary-statistics/api/. 
 For full documentation on the REST API, please see https://www.ebi.ac.uk/gwas/summary-statistics/docs/[here].
 
-It's important to note that the data available on the FTP and REST API out of sync. The FTP is updated nightly with any newly ingested data. Currently, we're unable to release more data to the REST API as it's undergoing a complete redevelopment to help us cope with the tremendous growth in summary statistics data.
+It’s important to note that the data available via REST API is a subset of that available via FTP. Currently, we’re unable to release more data to the REST API as it’s undergoing a complete redevelopment to help us cope with the tremendous growth in summary statistics data.
 
 ==== How do I navigate the FTP?
 
@@ -51,51 +53,25 @@ We encourage authors to submit summary statistics to the GWAS Catalog. Summary s
 
 We have proposed a standard format for GWAS summary statistics (Buniello and MacArthur, 2019). We encourage authors to provide summary statistics in this standard format. To enable users to access data with ease, we re-format summary statistics files where required.
 
-The standard format summary statistics file:
-
-- Is saved as .tsv
-- Contains mandatory fields in the following combinations: 
-
-  a) variant_ID and p-value
-  OR
-  b) chromosome, base_pair_location and p-value
-  
-Additional standard column headings are listed below.
-
-Standard format file headings
-
- 'variant_id' = variant ID
- 'p-value' = p-value
- 'chromosome' = chromosome
- 'base_pair_location' = base pair location
- 'odds_ratio' = odds ratio
- 'ci_lower' = lower 95% confidence interval
- 'ci_upper' = upper 95% confidence interval
- 'beta' = beta
- 'standard_error' = standard error
- 'effect_allele' = effect allele
- 'other_allele' = other allele
- 'effect_allele_frequency' = effect allele frequency
-
-Note that the headers in the formatted file are not limited to the above headers.
-
+The summary statistics standard used at the GWAS Catalog was the product of a series of working groups, which has been written up as a https://www.biorxiv.org/content/10.1101/2022.07.15.500230v2[preprint]. The specification of the standard can be found https://github.com/EBISPOT/gwas-summary-statistics-standard/blob/master/gwas-ssf_v0.1-draft.pdf[here] with further details in the https://github.com/EBISPOT/gwas-summary-statistics-standard[GitHub repository]. Prior to V1 of the standard, a minimum acceptable format was used for GWAS submissions, the details of which are available in <add link here>[Buniello and MacArthur, 2019]. 
 
 == Formatted summary statistics data 
 
-Summary statistics files are formatted by a scientific curator using a semi-automated process. Data are not manipulated but the headers converted to a consistent format across all summary statistics files.
+* Data is submitted in a standard format
+* This can be the original minimal format or the newer GWAS-SSF format. 
+* How can you tell? See accompanying metadata file (see below)
+* Metadata files are available for all new submissions (since April 2023) and we are retrospectively generating for all older submissions (in progress)
+* If there is no metadata file, the file is in the old, or a non standard format. 
 
-- Headers will be transformed to the 'standard format'.
+Prior to the GWAS Catalog accepting direct submissions, summary statistics files were formatted by scientific curators using a semi-automated process. Data were not manipulated but the headers were converted to a consistent format across all summary statistics files.
 
-- Rows will never be removed.
+* Headers were transformed to the ‘minimal acceptable format'
+* Rows were never removed
+* Columns may have been split, merged, deleted, added or moved
+* Values were unaltered
+* Missing data was set to 'NA'
 
-- Columns may be split, merged, deleted, added or moved.
-
-- Values will be unaltered.
-
-- Blanks will be set to 'NA'
-
-Formatted data is accessible on the GWAS Catalog dedicated summary statistics link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site]. Where the formatted files are available, they are nested within the 'harmonised' directory in the study directory.
-
+Formatted data is accessible on the GWAS Catalog dedicated summary statistics link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site]. Where the formatted files are available, they are nested within the 'harmonised' directory in the study directory with the ‘*.g.tsv.gz’ suffix. These files will not be available for newer submitted content because those datasets have already been formatted by the authors.
 
 == Harmonised summary statistics data
 
@@ -103,32 +79,48 @@ Formatted files are harmonised using an automated link:https://github.com/EBISPO
 
 The harmonisation process is the following:
 
-. Mapping variant IDs to locations
-.. Update base pair location value by mapping variant ID using latest Ensembl release, or
-.. if above not possible, liftover base pair location to latest genome build, or
+. Mapping variant IDs to locations (method used is reported in the ‘hm_coordinate_conversion’ field in the harmonised data file)
+.. Update base pair location value by mapping rsID using latest Ensembl release (‘hm_coordinate_conversion’ = ‘rs’);  or
+.. if above not possible, liftover base pair location to latest genome build (‘hm_coordinate_conversion’ = ‘lo’); or
 .. if above not possible, remove variant from file.
 
 . Orientation (link:https://github.com/opentargets/sumstat_harmoniser[Open Targets project])
-.. Using chromosome, base pair location and the effect and other alleles, check the orientation of all non-palindromic variants against Ensembl VCF references to detemine consensus:
-* forward
-* reverse
-* mixed
-.. If the consensus is 'forward' or 'reverse', the following harmonisation steps are performed on the palindromic variants, with the assumption that they are orientated according to the consensus, otherwise palindromic variants are not orientated.
-.. Using chromosome, base pair location and the effect and other alleles, query each variant against the Ensembl VCF reference to harmonise as appropriate by either:
-* keeping record as is because:
-** it is already correctly orientated
-** it cannot be orientated
-* orientating to reference strand:
-** reverse complement the effect and other alleles
-* flipping the effect and other alleles
-** because the effect and other alleles are flipped in the reference
-** this also means the beta, odds ratio, 95% CI and effect allele frequency are inverted
-* a combination of the orientating and flipping the alleles.
-.. The result of the orientation is the addition of a set of new fields for each record (see below). A harmonisation code is assigned to each record indicating the harmonisation process that was performed (note that currently any processes involving 'Infer strand' are not being used).
+.. Infer the orientation of palindromic variants. Palindromic variants are alleles on the forward strand which are the same as on the reverse strand. We infer the orientations of palindromic variants according to the strand consensus.
+... Firstly, we randomly select 10% of sites. The effect and other alleles are compared with counterpart alternative and reference alleles in the Ensembl VCF references to identify the strand of the non-palindromic variants (forward or reverse) .
+... The forward strand consensus can be calculated by forward/(forward+reverse) or reverse/(forward+reverse). To avoid any possibility of sampling bias:
+* If the rate  ≥ 0.995,  the following harmonisation steps on the palindromic variants are inferred as on the forward (or reverse) strand;
+* If the rate is the range of (0.995,0.9), this rate is recalculated by all non-palindromic variants in the data. The palindromic variants can be inferred as forward (or reverse) if the recalculated rate > 0.99, otherwise palindromic variants are dropped for harmonisation;
+* If the rate ≤ 0.9,  palindromic variants are dropped in the following harmonisation step.
+.. Variant harmonisation: Using chromosome, base pair location and the effect and other alleles, query each variant against the Ensembl VCF reference to harmonise as appropriate by either:
+... keeping record as is because:
+* it is already correctly orientated
+... orientating to reference strand:
+* reverse complement the effect and other alleles
+... flipping the effect and other alleles
+* because the effect and other alleles are flipped in the reference
+* this also means the beta, odds ratio, 95% CI and effect allele frequency are inverted
+... a combination of the orientating and flipping the alleles.
+... replace with NA because:
+* There is no counterpart record in the reference VCF file.
 
 . Filtering and QC
 .. Variant ID is set to variant IDs found by step (2).
 .. Records without a valid value for variant ID, chromosome, base pair location and p-value are removed.
+
+. Harmonisation result: For each input file, harmonisation generates three outputs:
+.. The harmonisation result (*.h.tsv.gz)
+* represents harmonised mandatory columns in a https://github.com/EBISPOT/gwas-summary-statistics-standard/blob/master/gwas-ssf_v0.1-draft.pdf[specific order] and other columns in the original order. 
+* contains a new column named harmonisation code is assigned to each record indicating the harmonisation process that was performed (note that currently any processes involving 'Infer strand' are not being used).
+* is sorted by chr and position and compressed using bgzip
+.. An index file (*.h.tsv.gz.tbi) 
+* A tabix index file of the harmonisation result for quick data retrieve purposes
+.. A report file (report.txt) summarises:
+* the reference VCF file used in harmonisation.
+* process on the palindromic variants
+* percentage of variants dropped in the qc step
+* percentage of variants that are successfully harmonised or failed
+.. A metadata YAML file (*.h.tsv.gz-meta.yaml) for the harmonised data file. 
+
 
 ==== Table of harmonisation codes
 
@@ -192,36 +184,25 @@ The harmonisation process is the following:
 |Palindromic; Infer strand; EAF < specified minor allele frequency threshold; Not orientated
 |===
 
-- Headers will be coerced to the 'harmonised format'.
-- Addition harmonised data columns will be added.
-- Rows may be removed.
-- Variant ID, chromosome and base pair location may change (likely).
+Harmonised data files conform to the standard but there are some additional points to mention:
 
-
-Harmonised file headings (not all may be present in file):
-
-    'variant_id' = variant ID
-    'p-value' = p-value
-    'chromosome' = chromosome
-    'base_pair_location' = base pair location
-    'odds_ratio' = odds ratio
-    'ci_lower' = lower 95% confidence interval
-    'ci_upper' = upper 95% confidence interval
-    'beta' = beta
-    'standard_error' = standard error
-    'effect_allele' = effect allele
-    'other_allele' = other allele
-    'effect_allele_frequency' = effect allele frequency
-    'hm_variant_id' = harmonised variant ID
-    'hm_odds_ratio' = harmonised odds ratio
-    'hm_ci_lower' = harmonised lower 95% confidence interval
-    'hm_ci_upper' =  harmonised lower 95% confidence interval
-    'hm_beta' = harmonised beta
-    'hm_effect_allele' = harmonised effect allele
-    'hm_other_allele' = harmonised other allele
-    'hm_effect_allele_frequency' = harmonised effect allele frequency
-    'hm_code = harmonisation code (to lookup in 'Harmonisation Code Table')
-
-Headings prefixed with 'hm_' are the output from the orientation (step 2) in the harmonisation process (see above). With the exception of 'hm_code', these will take the value of 'NA' where it was not possible to orientate the allele. In this situation, the data are still harmonised according to definition given above, but the orientation was not possible.
+. Where possible, data are sorted by chromosome and base pair location
+. Where possible, a <data_file>.tbi file is available to enable access to a specified genomic region using tabix (link)
+. A running report from the harmonisation is available with the harmonised file on the FTP
+. A field in the data file, ‘‘hm_coordinate_conversion’’, signifies whether the position was mapped using rsID (‘rs’) lookup or liftOver (‘lo’).
 
 There may be differences between the data available on the FTP site compared to the database where number rounding has taken place. In the database, chromosome values of 'X', 'Y' and 'MT' will appear as 23, 24 and 25, respectively.
+
+== Summary statistics metadata
+
+=== Metadata fields
+
+The metadata describing summary statistics data can be broken down into 3 main categories:
+File metadata, such as the name, md5sum and modified date of the data file; study metadata, such as reported trait, ancestry information, author notes; and methodological metadata such as genome assembly and analysis software. A full description of metadata fields and the format can be found in the standard repository: https://github.com/EBISPOT/gwas-summary-statistics-standard.
+
+=== Metadata access
+
+These metadata are provided in a computer and human readable YAML file adjacent to the data file in a file suffixed with -meta.yaml. So where the data file is called GCST123456.tsv.gz, the metadata can be found with the name GCST123456.tsv.gz-meta.yaml. For further information, please see the standard documentation linked above.
+
+For summary statistics associated with a journal publication, study metadata can also be accessed via the GWAS Catalog web interface and REST API.
+
