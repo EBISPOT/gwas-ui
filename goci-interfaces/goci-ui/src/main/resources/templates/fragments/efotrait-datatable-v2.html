@@ -132,7 +132,20 @@
             ],
             dom: 'lBrtip',
             buttons: [
-                'colvis'
+                'colvis',
+                {
+                    text: 'Clear search',
+                    action: function (e, dt) {
+                        $("tr input[type='text']").each(function () {
+                            $(this).val('');
+                        })
+                        dt.columns().every(function () {
+                            const column = this;
+                            column.search('');
+                        });
+                        dt.search('').draw();
+                    }
+                }
             ],
             retrieve: true,
             initComplete: function () {
