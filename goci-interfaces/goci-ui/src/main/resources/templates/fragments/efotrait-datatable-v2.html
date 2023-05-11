@@ -110,6 +110,12 @@
                     c.size = d.length;
                     c.page = d.start / d.length;
                     return c;
+                },
+                error: function () {
+                    hideLoadingOverLay('#efotrait-table-loading');
+                    $('#efotrait-table-v2_processing').hide();
+                    $("#efotrait-table-v2 tbody").empty();
+                    $("#efotrait-table-v2 tbody").html('<td colspan="46"><center><h4 class="text-danger">An error occurred, try reloading page or clearing filters.</h4></center></td>');
                 }
             },
             orderCellsTop: true,

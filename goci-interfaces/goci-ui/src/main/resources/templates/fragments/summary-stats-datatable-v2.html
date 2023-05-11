@@ -122,6 +122,12 @@
                     c.size = d.length;
                     c.page = d.start / d.length;
                     return c;
+                },
+                error: function () {
+                    hideLoadingOverLay('#study-table-loading');
+                    $('#study-table-v2_processing').hide();
+                    $("#study-table-v2 tbody").empty();
+                    $("#study-table-v2 tbody").html('<td colspan="46"><center><h4 class="text-danger">An error occurred, try reloading page or clearing filters.</h4></center></td>');
                 }
             },
             orderCellsTop: true,

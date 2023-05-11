@@ -128,6 +128,12 @@
                     c.size = d.length;
                     c.page = d.start / d.length;
                     return c;
+                },
+                error: function () {
+                    hideLoadingOverLay('#ss-table-loading');
+                    $('#ss-table-v2_processing').hide();
+                    $("#ss-table-v2 tbody").empty();
+                    $("#ss-table-v2 tbody").html('<td colspan="46"><center><h4 class="text-danger">An error occurred, try reloading page or clearing filters.</h4></center></td>');
                 }
             },
             orderCellsTop: true,
