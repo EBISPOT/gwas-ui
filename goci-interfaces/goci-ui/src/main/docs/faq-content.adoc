@@ -351,6 +351,8 @@ Where a study has combined groups of individuals with different traits in the sa
 
 Where a study includes individuals each having multiple traits, this is indicated by the word “and” in the reported trait. For example, if individuals diagnosed with bipolar disorder who show binge-eating behaviour were compared to controls, the reported trait would be “bipolar disorder and binge eating”. The study would be mapped to two traits from the ontology: “bipolar disorder” and “binge eating”.
 
+**Please note:** due to issues of scale with the increasing number of studies associated with biobanks, where reported traits include the words “UKB data field” or ICD codes we cannot guarantee these follow our standard naming conventions as they may have been lifted unedited from the paper. Users are recommended to refer to the source of the code (e.g. https://biobank.ndph.ox.ac.uk/ukb/index.cgi) to confirm details in this case.
+
 ==== [[faq-B12]]5. How are background traits represented in the Catalog?
 
 A background trait is a characteristic that is shared by all participants in a study, but is not directly tested in the association analysis. See <<faq-A13, FAQ A13>> for a more detailed introduction to background traits. 
