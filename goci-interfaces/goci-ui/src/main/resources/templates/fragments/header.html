@@ -76,13 +76,13 @@
                     </a>
                 </li>
 
-                <li th:classappend="${#httpServletRequest.getServletPath() == '/docs/about' ? 'active':''}" class="hidden-sm">
+                <li th:classappend="${#httpServletRequest.getServletPath() == '/docs/about' ? 'active':''}" class="hidden-sm hidden-md">
                     <a th:href="@{/docs/about}">
                         About
                     </a>
                 </li>
 
-                <li class="hidden-sm">
+                <li class="hidden-sm hidden-md">
                     <a href="https://ebispot.github.io/gwas-blog/" target="_blank">
                         Blog
                     </a>
