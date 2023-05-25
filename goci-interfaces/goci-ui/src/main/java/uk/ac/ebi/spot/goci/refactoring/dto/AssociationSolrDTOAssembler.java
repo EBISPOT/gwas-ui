@@ -17,10 +17,7 @@ import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -85,6 +82,41 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
                 .accessionId(associationDoc.getAccessionId())
                 .riskAlleleSep(Optional.ofNullable(associationDoc.getStrongestAllele()).map(this::getRiskAllelleSep).orElse(null))
                 .chromLocation(associationDoc.getChromLocation())
+                .build();
+    }
+
+
+    public AssociationTableExportDTO assembleAssociationExport(AssociationDoc associationDoc) {
+        return  AssociationTableExportDTO.builder()
+                .riskAllele(parseLabelsFromEFO(Optional.ofNullable(associationDoc.getStrongestAllele()).map(this::transformRiskAllele)
+                        .orElse(null)))
+                .riskFrequency(associationDoc.getRiskFrequency())
+                .pValue(String.format("%sE%s",associationDoc.getpValueMantissa(),associationDoc.getpValueExponent()))
+                .pValueAnnotation(Optional.ofNullable(associationDoc.getQualifier()).map(this::tranformPValueAnnotation)
+                        .orElse("-"))
+                .orValue(Optional.ofNullable(associationDoc.getOrPerCopyNum()).map((orVal) ->
+                                this.transformOrValue(orVal, associationDoc.getOrDescription() ))
+                        .orElse("-"))
+                .beta(Optional.ofNullable(associationDoc.getBetaNum()).map((betanum) ->
+                        this.transformBeta(betanum, associationDoc.getBetaUnit(),
+                                associationDoc.getBetaDirection())).orElse("-"))
+                .ci(Optional.ofNullable(associationDoc.getRange()).orElse("-"))
+                .mappedGenes(convertListToString(Optional.ofNullable(associationDoc.getEnsemblMappedGenes())
+                        //.map(this::transformMappedGenes)
+                        .orElse(Collections.emptyList())))
+                .traitName(convertListToString(associationDoc.getTraitNames()))
+                .efoTraits(parseLabelsFromEFO(Optional.ofNullable(associationDoc.getEfoLink())
+                        .map(solrEntityTransformerUtility::getEFOLinks).orElse(
+                                solrEntityTransformerUtility.getEFOLinksfromUri
+                                        (associationDoc.getMappedLabel(), associationDoc.getMappedUri()))))
+                .bgTraits(parseLabelsFromEFO(Optional.ofNullable(associationDoc.getMappedBkgLabel()).map(bglinks ->
+                                solrEntityTransformerUtility.getEFOLinksfromUri
+                                        (associationDoc.getMappedBkgLabel(), associationDoc.getMappedBkgUri()))
+                        .orElse(null)))
+                .locations(convertListToString(Optional.ofNullable(associationDoc.getPositionLinks()).map(this::transformPositionLinks).orElse(Collections.emptyList())))
+                .author(associationDoc.getAuthor_s())
+                .pubmedId(associationDoc.getPubmedId())
+                .accessionId(associationDoc.getAccessionId())
                 .build();
     }
 
@@ -197,6 +229,22 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
         else{
             return null;
         }
+    }
+
+    private String parseLabelsFromEFO(List<EFOKeyLabel> efoKeyLabels) {
+        if(efoKeyLabels != null) {
+            return efoKeyLabels.stream().filter(Objects::nonNull).
+                    map(EFOKeyLabel::getLabel).
+                    collect(Collectors.joining(","));
+        }
+        return "-";
+    }
+
+    private String convertListToString(List<String> anyList) {
+        if(anyList != null && !anyList.isEmpty()) {
+            return anyList.stream().collect(Collectors.joining(","));
+        }
+        return "-";
     }
 
 }

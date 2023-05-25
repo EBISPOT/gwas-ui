@@ -45,6 +45,10 @@ public class SolrEntityTransformerUtility {
         return LocalDate.parse(pubDate, dtf );
     }
 
+    public String formatPubDateasString(LocalDate pubDate) {
+        return pubDate.toString("yyyy-MM-dd");
+    }
+
     public String retreiveEFOFromUri(String uri) {
         return uri.substring(uri.lastIndexOf("/") + 1);
     }

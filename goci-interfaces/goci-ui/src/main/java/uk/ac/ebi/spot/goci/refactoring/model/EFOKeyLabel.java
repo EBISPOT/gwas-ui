@@ -2,7 +2,11 @@ package uk.ac.ebi.spot.goci.refactoring.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EFOKeyLabel {
     @JsonProperty("key")

@@ -54,4 +54,11 @@ public class SearchUIConstants {
     public static final String EFO_FIELDS = "traitName, mappedUri, mappedLabel, rsId, shortForm";
 
 
+    public static final String STUDY_HEADER_CONTENT_FILE = "/export-templates/head_metadata-study-table.tsv";
+
+
+    public static final String ASSOCIATION_HEADER_CONTENT_FILE = "/export-templates/head_metadata-association-table.tsv";
+
+    public static final String EFO_HEADER_CONTENT_FILE = "/export-templates/head_metadata-efo-table.tsv";
+
 }

@@ -10,6 +10,8 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +20,15 @@ import uk.ac.ebi.spot.goci.refactoring.model.*;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchAssociationService;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchEFOTraitsService;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchStudyService;
+import uk.ac.ebi.spot.goci.refactoring.service.SolrTableExportService;
+import uk.ac.ebi.spot.goci.refactoring.util.FileHandler;
 import uk.ac.ebi.spot.goci.refactoring.util.SolrQueryParamBuilder;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = SearchUIConstants.API_V2+SearchUIConstants.GENES)
@@ -48,6 +53,10 @@ public class SolrSearchGeneController {
     AssociationSolrDTOAssembler associationSolrDTOAssembler;
     @Autowired
     EFOTraitSolrDTOAssembler efoTraitSolrDTOAssembler;
+    @Autowired
+    SolrTableExportService solrTableExportService;
+    @Autowired
+    FileHandler fileHandler;
 
     @GetMapping(value = "/{geneId}/studies", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
@@ -99,6 +108,57 @@ public class SolrSearchGeneController {
                 .methodOn(SolrSearchRegionController.class).searchEFOTraits( searchEFOTraitDTO, geneId, pageable, assembler));
         return assembler.toResource(efoTraitDocs, efoTraitSolrDTOAssembler,
                 new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
+    }
+
+
+    @GetMapping(value = "/{geneId}/studies/download", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public HttpEntity<byte[]> downloadStudies(SearchStudyDTO searchStudyDTO,
+                                              @PathVariable String geneId,
+                                              @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
+        String query = solrQueryParamBuilder.buildQueryParam("GENE", geneId);
+        List<StudyDoc> studyDocList = solrTableExportService.fetchStudies(query, searchStudyDTO, pageable);
+        byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readStudyHeaderContent(studyDocList));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=studyTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
+        return new HttpEntity<>(result, responseHeaders);
+
+    }
+
+    @GetMapping(value = "/{geneId}/associations/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public HttpEntity<byte[]> downloadAssociations(SearchAssociationDTO searchAssociationDTO,
+                                                   @PathVariable String geneId,
+                                                   @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
+        String query = solrQueryParamBuilder.buildQueryParam("GENE", geneId);
+        List<AssociationDoc> asscnDocList = solrTableExportService.fetchAssociations(query, searchAssociationDTO,  pageable);
+        byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readAssociationHeaderContent(asscnDocList));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=asscnTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
+        return new HttpEntity<>(result, responseHeaders);
+    }
+
+
+    @GetMapping(value = "/{geneId}/traits/download", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public HttpEntity<byte[]> downloadEFOTraits(SearchEFOTraitDTO searchEFOTraitDTO,
+                                                @PathVariable String geneId,
+                                                @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
+        String query = solrQueryParamBuilder.buildQueryParam("GENE", geneId);
+        List<EFOTraitDoc> efoDocList = solrTableExportService.fetchEFOTraits(query, searchEFOTraitDTO, pageable);
+        byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readEFOHeaderContent(efoDocList));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=efoTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
+        return new HttpEntity<>(result, responseHeaders);
     }
 }
 

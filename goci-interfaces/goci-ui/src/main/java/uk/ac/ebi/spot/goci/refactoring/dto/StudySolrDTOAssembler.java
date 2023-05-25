@@ -11,6 +11,7 @@ import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.spot.goci.refactoring.component.SumstatsIdentifierMap;
+import uk.ac.ebi.spot.goci.refactoring.model.EFOKeyLabel;
 import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
 import uk.ac.ebi.spot.goci.refactoring.rest.SolrSearchVariantController;
 import uk.ac.ebi.spot.goci.refactoring.util.SolrEntityTransformerUtility;
@@ -19,10 +20,7 @@ import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -100,6 +98,46 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
           return false;
     }
 
+    private String getBooleanText(Boolean flag){
+        if(flag != null) {
+            if (flag)
+                return "yes";
+            else
+                return "no";
+        }
+        return "-";
+    }
+
+    public StudyTableExportDTO assembleStudyExport(StudyDoc studyDoc) {
+      return  StudyTableExportDTO.builder()
+                .accessionId(studyDoc.getAccessionId())
+                .reportedTrait(studyDoc.getTraitName_s())
+                .journal(studyDoc.getPublication())
+                .firstAuthor(Optional.ofNullable(studyDoc.getAuthorS()).orElse("NA"))
+                .title(studyDoc.getTitle())
+                .associationCount(studyDoc.getAssociationCount())
+                .pubmedId(studyDoc.getPubmedId())
+                .publicationDate(Optional.ofNullable(studyDoc.getPublicationDate().substring(0,studyDoc.getPublicationDate().indexOf("T") )).orElse(null))
+                .summaryStatistics(studyDoc.getFullPvalueSet() ? getSummaryStatsFTPDetails(studyDoc.getAccessionId()) : "NA")
+                .efoTraits(parseLabelsFromEFO(Optional.ofNullable(studyDoc.getEfoLink()).map(solrEntityTransformerUtility::getEFOLinks)
+                        .orElse(solrEntityTransformerUtility.getEFOLinksfromUri(studyDoc.getMappedLabel(),studyDoc.getMappedUri()))))
+                .bgTraits(parseLabelsFromEFO(Optional.ofNullable(studyDoc.getMappedBkgLabels()).map( bgLinks -> solrEntityTransformerUtility.getEFOLinksfromUri
+                        (studyDoc.getMappedBkgLabels(),studyDoc.getMappedBkgUris())).orElse(null)))
+                .initialSampleDescription(convertListToString(Optional.ofNullable(studyDoc.getInitialSampleDescription()).map(this::populateInitialSampleDesc)
+                        .orElse(null)))
+                .replicateSampleDescription(convertListToString(Optional.ofNullable(studyDoc.getReplicateSampleDescription()).map(this::populateReplicationSampleDesc)
+                        .orElse(null)))
+                .discoverySampleAncestry(convertListToString(Optional.ofNullable(studyDoc.getAncestryLinks()).map(this::populateAncestryAndInitialSampleNumber)
+                        .orElse(null)))
+                .replicationSampleAncestry(convertListToString(Optional.ofNullable(studyDoc.getAncestryLinks()).map(this::populateAncestryAndReplicationSampleNumber)
+                        .orElse(null)))
+                .genotypingTechnologies(convertListToString(studyDoc.getGenotypingTechnologies()))
+                .ssApiFlag(getBooleanText(getSSApiFlag(studyDoc.getAccessionId())))
+                .agreedToCc(getBooleanText(studyDoc.getAgreedToCc()))
+                .build();
+
+    }
+
     private String getSummaryStatsFTPDetails(String accessionId) {
         String ftpDir = getDirectoryBin(accessionId);
         String ftpLink = searchConfiguration.getSummaryStatsFTPLink().concat(ftpDir).concat("/").concat(accessionId);
@@ -117,7 +155,7 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
     }
     private List<String> populateInitialSampleDesc(String sampleDesc) {
 
-        //log.info("sampleDesc is ->"+sampleDesc);
+        log.info("sampleDesc is ->"+sampleDesc);
         List<String> text = new ArrayList<>();
         String[] desc = sampleDesc.split(INITIAL_SAMPLE_DESC_REGEX);
         for(int i =0; i < desc.length ; i++) {
@@ -137,8 +175,8 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
 
         for(int i = 0; i < sampleNumbers.size(); i++) {
             String freetext = "";
-            //log.info("sampleNumbers ["+i+"]->"+sampleNumbers.get(i));
-            //log.info("text ["+i+"]->"+text.get(i));
+            log.info("sampleNumbers ["+i+"]->"+sampleNumbers.get(i));
+            log.info("text ["+i+"]->"+text.get(i));
             if(text.size() > sampleNumbers.size() ){
                 freetext = sampleNumbers.get(i)+ text.get(i+1);
             } else {
@@ -182,6 +220,22 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
         }).collect(Collectors.toList());
     }
 
+    private String parseLabelsFromEFO(List<EFOKeyLabel> efoKeyLabels) {
+        if(efoKeyLabels != null) {
+            return efoKeyLabels.stream().filter(Objects::nonNull).
+                    map(EFOKeyLabel::getLabel).
+                    collect(Collectors.joining(","));
+        }
+            return "-";
+    }
+
+
+    private String convertListToString(List<String> anyList) {
+        if(anyList != null) {
+         return anyList.stream().collect(Collectors.joining(","));
+        }
+            return "-";
+    }
 
 }
 

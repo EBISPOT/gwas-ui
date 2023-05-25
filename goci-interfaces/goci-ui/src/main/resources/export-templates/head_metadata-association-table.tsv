@@ -1,0 +1,2 @@
+riskAllele	pValue	pValueAnnotation	riskFrequency	orValue	beta	ci	mappedGenes	traitName	efoTraits	bgTraits	accessionId	locations	pubmedId	author
+[rs7329174-G]	8.00E-09	-	NR	1.27	-	[1.17-1.38]	[ELF1]	[Crohn's disease]	[Crohn's disease]	[]	GCST001785	[13:40983974]	23266558	Yamazaki K

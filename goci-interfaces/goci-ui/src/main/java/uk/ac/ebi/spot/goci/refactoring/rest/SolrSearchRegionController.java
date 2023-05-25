@@ -8,15 +8,15 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.ebi.spot.goci.refactoring.dto.*;
 import uk.ac.ebi.spot.goci.refactoring.model.*;
-import uk.ac.ebi.spot.goci.refactoring.service.SolrRegionService;
-import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchAssociationService;
-import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchEFOTraitsService;
-import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchStudyService;
+import uk.ac.ebi.spot.goci.refactoring.service.*;
+import uk.ac.ebi.spot.goci.refactoring.util.FileHandler;
 import uk.ac.ebi.spot.goci.refactoring.util.SolrQueryParamBuilder;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
@@ -50,6 +50,11 @@ public class SolrSearchRegionController {
     StudySolrDTOAssembler studySolrDTOAssembler;
     @Autowired
     EFOTraitSolrDTOAssembler efoTraitSolrDTOAssembler;
+
+    @Autowired
+    SolrTableExportService solrTableExportService;
+    @Autowired
+    FileHandler fileHandler;
 
     @GetMapping(value = "/{regionId}/associations", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
@@ -114,6 +119,71 @@ public class SolrSearchRegionController {
                 .methodOn(SolrSearchRegionController.class).searchEFOTraits( searchEFOTraitDTO, regionId, pageable, assembler));
         return assembler.toResource(efoTraitDocs, efoTraitSolrDTOAssembler,
                 new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
+    }
+
+    @GetMapping(value = "/{regionId}/studies/download", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public HttpEntity<byte[]> downloadStudies(SearchStudyDTO searchStudyDTO,
+                                              @PathVariable String regionId,
+                                              @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
+        String query = "";
+        if(solrQueryParamBuilder.checkCytoBandPattern(regionId)) {
+            query = regionId;
+        } else {
+            query = solrQueryParamBuilder.buildQueryParam("REGION", regionId);
+        }
+        List<StudyDoc> studyDocList = solrTableExportService.fetchStudies(query, searchStudyDTO, pageable);
+        byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readStudyHeaderContent(studyDocList));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=studyTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
+        return new HttpEntity<>(result, responseHeaders);
+
+    }
+
+    @GetMapping(value = "/{regionId}/associations/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public HttpEntity<byte[]> downloadAssociations(SearchAssociationDTO searchAssociationDTO,
+                                                   @PathVariable String regionId,
+                                                   @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
+        String query = "";
+        if(solrQueryParamBuilder.checkCytoBandPattern(regionId)) {
+            query = regionId;
+        } else {
+            query = solrQueryParamBuilder.buildQueryParam("REGION", regionId);
+        }
+        List<AssociationDoc> asscnDocList = solrTableExportService.fetchAssociations(query, searchAssociationDTO,  pageable);
+        byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readAssociationHeaderContent(asscnDocList));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=asscnTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
+        return new HttpEntity<>(result, responseHeaders);
+    }
+
+
+    @GetMapping(value = "/{regionId}/traits/download", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public HttpEntity<byte[]> downloadEFOTraits(SearchEFOTraitDTO searchEFOTraitDTO,
+                                                @PathVariable String regionId,
+                                                @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
+        String query = "";
+        if(solrQueryParamBuilder.checkCytoBandPattern(regionId)) {
+            query = regionId;
+        } else {
+            query = solrQueryParamBuilder.buildQueryParam("REGION", regionId);
+        }
+        List<EFOTraitDoc> efoDocList = solrTableExportService.fetchEFOTraits(query, searchEFOTraitDTO, pageable);
+        byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readEFOHeaderContent(efoDocList));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=efoTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
+        return new HttpEntity<>(result, responseHeaders);
     }
 
 }
