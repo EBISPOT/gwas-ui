@@ -42,7 +42,9 @@ public class FileHandler {
                     csvHead.add(key);
                 }
             });
-            csvData.add(rowData);
+            if(counter.get() != 0 ) {
+                csvData.add(rowData);
+            }
             counter.getAndIncrement();
         });
         CsvSchema.Builder builder = CsvSchema.builder();

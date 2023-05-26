@@ -62,7 +62,7 @@ public class SolrSearchAssociationServiceImpl implements SolrSearchAssociationSe
 
 
 
-    private MultiValueMap<String, String> buildQueryParams(int maxResults, int page, String query, SearchAssociationDTO searchAssociationDTO ,
+    public MultiValueMap<String, String> buildQueryParams(int maxResults, int page, String query, SearchAssociationDTO searchAssociationDTO ,
                                                            String sortParam) {
         MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
         paramsMap.add("wt","json");
@@ -85,7 +85,7 @@ public class SolrSearchAssociationServiceImpl implements SolrSearchAssociationSe
         return paramsMap;
     }
 
-    private String buildFilterQuery(String filterQuery, SearchAssociationDTO searchAssociationDTO) {
+    public String buildFilterQuery(String filterQuery, SearchAssociationDTO searchAssociationDTO) {
         StringBuilder filterQueryString = new StringBuilder();
         String riskAllele = searchAssociationDTO.getRiskAllele();
         String pValueAnnotation = searchAssociationDTO.getPValueAnnotation();
@@ -138,7 +138,7 @@ public class SolrSearchAssociationServiceImpl implements SolrSearchAssociationSe
         return filterQueryString.toString();
     }
 
-    private String buildSortParam(Pageable pageable) {
+    public String buildSortParam(Pageable pageable) {
         Sort sort = pageable.getSort();
         String sortParam = "";
         String sortProperty = "";

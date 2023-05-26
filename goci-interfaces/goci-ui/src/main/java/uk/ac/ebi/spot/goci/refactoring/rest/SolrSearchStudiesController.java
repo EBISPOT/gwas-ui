@@ -10,6 +10,8 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +20,15 @@ import uk.ac.ebi.spot.goci.refactoring.dto.AssociationSolrDTOAssembler;
 import uk.ac.ebi.spot.goci.refactoring.model.AssociationDoc;
 import uk.ac.ebi.spot.goci.refactoring.model.SearchAssociationDTO;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchAssociationService;
+import uk.ac.ebi.spot.goci.refactoring.service.SolrTableExportService;
+import uk.ac.ebi.spot.goci.refactoring.util.FileHandler;
 import uk.ac.ebi.spot.goci.refactoring.util.SolrQueryParamBuilder;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = SearchUIConstants.API_V2+SearchUIConstants.STUDIES)
@@ -38,6 +43,11 @@ public class SolrSearchStudiesController {
     SolrSearchAssociationService solrSearchAssociationService;
     @Autowired
     AssociationSolrDTOAssembler associationSolrDTOAssembler;
+
+    @Autowired
+    SolrTableExportService solrTableExportService;
+    @Autowired
+    FileHandler fileHandler;
 
     @GetMapping(value = "/{accessionId}/associations", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
@@ -54,5 +64,22 @@ public class SolrSearchStudiesController {
         return assembler.toResource(pageStudyAsscns, associationSolrDTOAssembler,
                 new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
 
+    }
+
+
+    @GetMapping(value = "/{accessionId}/associations/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public HttpEntity<byte[]> downloadAssociations(SearchAssociationDTO searchAssociationDTO,
+                                                   @PathVariable String accessionId,
+                                                   @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
+        String query = solrQueryParamBuilder.buildQueryParam("GCST", accessionId);
+        List<AssociationDoc> asscnDocList = solrTableExportService.fetchAssociations(query, searchAssociationDTO,  pageable);
+        byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readAssociationHeaderContent(asscnDocList));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=asscnTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
+        return new HttpEntity<>(result, responseHeaders);
     }
 }

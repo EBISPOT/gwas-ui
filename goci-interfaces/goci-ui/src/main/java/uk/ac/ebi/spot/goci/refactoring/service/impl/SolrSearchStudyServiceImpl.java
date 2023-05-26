@@ -39,34 +39,9 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
 
     public Page<StudyDoc> searchStudies(String query, Pageable pageable, SearchStudyDTO searchStudyDTO) throws IOException {
        //String query = String.format("rsId:\"%s\" OR association_rsId :\"%s\"", rsId, rsId);
-        String sortDirection = "";
-        String sortProperty = "";
-        Sort sort = pageable.getSort();
-        if(sort != null) {
-            Sort.Order orderAsscn = sort.getOrderFor("associationCount");
-            Sort.Order orderPvalue = sort.getOrderFor("fullPvalueSet");
-            Sort.Order orderPdate = sort.getOrderFor("publicationDate");
-            Sort.Order orderFirstAuthor = sort.getOrderFor("firstAuthor");
-            if(orderAsscn != null) {
-                sortDirection =  orderAsscn.isAscending() ? "asc" : "desc";
-                sortProperty = "associationCount";
-            }
-            if(orderPvalue != null) {
-                sortDirection =  orderPvalue.isAscending() ? "asc" : "desc";
-                sortProperty = "fullPvalueSet";
-            }
-            if(orderPdate != null) {
-                sortDirection =  orderPdate.isAscending() ? "asc" : "desc";
-                sortProperty = "publicationDate";
-            }
-            if(orderFirstAuthor != null) {
-                sortDirection =  orderFirstAuthor.isAscending() ? "asc" : "desc";
-                sortProperty = "author_s";
-            }
-        }
-       String uri = buildURIComponent( pageable.getPageSize(),  pageable.getPageNumber()+1, query, searchStudyDTO, sortProperty, sortDirection);
+       String uri = buildURIComponent();
        //SolrData data =  restInteractionService.callSolrAPI(uri, method);
-        SolrData data =  restInteractionService.callSolrAPIwithPayload(uri, buildQueryParams( pageable.getPageSize(), pageable.getPageNumber()+1, query, searchStudyDTO, sortProperty, sortDirection));
+        SolrData data =  restInteractionService.callSolrAPIwithPayload(uri, buildQueryParams( pageable.getPageSize(), pageable.getPageNumber()+1, query, searchStudyDTO, buildSortParam(pageable)));
        if( data != null &&  data.getResponse() != null ) {
            log.info("Response data Count"+data.getResponse().getNumFound());
            List<? > docs =  data.getResponse().getDocs();
@@ -79,8 +54,7 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
     }
 
 
-    private String buildURIComponent( int maxResults, int page, String query, SearchStudyDTO searchStudyDTO,
-                                     String sortProperty, String sortDirection) {
+    private String buildURIComponent() {
         String fatSolrUri = restInteractionService.getFatSolrUri();
         UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(fatSolrUri)
                 //.queryParams(buildQueryParams( maxResults, page, query, searchStudyDTO, sortProperty, sortDirection))
@@ -88,8 +62,8 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
         return uriComponents.toUriString();
     }
 
-    private MultiValueMap<String, String> buildQueryParams( int maxResults, int page, String query, SearchStudyDTO searchStudyDTO ,
-                                                           String sortProperty, String sortDirection) {
+    public MultiValueMap<String, String> buildQueryParams( int maxResults, int page, String query, SearchStudyDTO searchStudyDTO ,
+                                                           String sortParam) {
         MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
         paramsMap.add("wt","json");
         paramsMap.add("rows",String.valueOf(maxResults));
@@ -101,7 +75,6 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
             log.info("The final fq value after applying filters is"+fq);
         }
         String fl = "*";
-        String sortParam = sortProperty + " "+ sortDirection;
         paramsMap.add("q",query );
         paramsMap.add("fq",fq );
         paramsMap.add("fl",fl );
@@ -111,7 +84,7 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
         return paramsMap;
     }
 
-    private String buildFilterQuery(String filterQuery, SearchStudyDTO searchStudyDTO) {
+    public String buildFilterQuery(String filterQuery, SearchStudyDTO searchStudyDTO) {
         StringBuilder filterQueryBuilder = new StringBuilder();
         String accessionId = searchStudyDTO.getAccessionId();
         String reportedTrait = searchStudyDTO.getReportedTrait();
@@ -149,6 +122,35 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
 
         return filterQueryBuilder.toString();
 
+    }
+
+    public String buildSortParam(Pageable pageable) {
+        Sort sort = pageable.getSort();
+        String sortParam = "";
+        String sortProperty = "";
+        if(sort != null) {
+            Sort.Order orderAsscn = sort.getOrderFor("associationCount");
+            Sort.Order orderPvalue = sort.getOrderFor("fullPvalueSet");
+            Sort.Order orderPdate = sort.getOrderFor("publicationDate");
+            Sort.Order orderFirstAuthor = sort.getOrderFor("firstAuthor");
+            if(orderAsscn != null) {
+                sortProperty =  orderAsscn.isAscending() ? "asc" : "desc";
+                sortParam = String.format("associationCount %s", sortProperty);
+            }
+            if(orderPvalue != null) {
+                sortProperty =  orderPvalue.isAscending() ? "asc" : "desc";
+                sortParam = String.format("fullPvalueSet %s", sortProperty);
+            }
+            if(orderPdate != null) {
+                sortProperty =  orderPdate.isAscending() ? "asc" : "desc";
+                sortParam = String.format("publicationDate %s", sortProperty);
+            }
+            if(orderFirstAuthor != null) {
+                sortProperty =  orderFirstAuthor.isAscending() ? "asc" : "desc";
+                sortParam = String.format("author_s %s", sortProperty);
+            }
+        }
+        return sortParam;
     }
 
 

@@ -117,12 +117,12 @@ public class SolrSearchVariantController {
     @GetMapping(value = "/{variantId}/studies/download", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public HttpEntity<byte[]> downloadStudies(@PathVariable String variantId) {
+    public HttpEntity<byte[]> downloadStudies(SearchStudyDTO searchStudyDTO,
+                                              @PathVariable String variantId,
+                                              @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
         String query = solrQueryParamBuilder.buildQueryParam("VARIANT",variantId);
-        List<StudyDoc> studyDocList = solrTableExportService.fetchStudies(query);
-        byte[] result = fileHandler.serializePojoToTsv(studyDocList.stream()
-                .map(studyDoc -> studySolrDTOAssembler.assemble(studyDoc))
-                        .collect(Collectors.toList()));
+        List<StudyDoc> studyDocList = solrTableExportService.fetchStudies(query, searchStudyDTO, pageable);
+        byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readStudyHeaderContent(studyDocList));
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=studyTableExport.tsv");
         responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
@@ -135,12 +135,12 @@ public class SolrSearchVariantController {
     @GetMapping(value = "/{variantId}/associations/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public HttpEntity<byte[]> downloadAssociations(@PathVariable String variantId) {
+    public HttpEntity<byte[]> downloadAssociations(SearchAssociationDTO searchAssociationDTO,
+                                                   @PathVariable String variantId,
+                                                   @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
         String query = solrQueryParamBuilder.buildQueryParam("VARIANT",variantId);
-        List<AssociationDoc> asscnDocList = solrTableExportService.fetchAssociations(query);
-        byte[] result = fileHandler.serializePojoToTsv(asscnDocList.stream()
-                .map(asscnDoc -> associationSolrDTOAssembler.assemble(asscnDoc))
-                .collect(Collectors.toList()));
+        List<AssociationDoc> asscnDocList = solrTableExportService.fetchAssociations(query, searchAssociationDTO,  pageable);
+        byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readAssociationHeaderContent(asscnDocList));
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=asscnTableExport.tsv");
         responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
@@ -152,12 +152,12 @@ public class SolrSearchVariantController {
     @GetMapping(value = "/{variantId}/traits/download", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public HttpEntity<byte[]> downloadEFOTraits(@PathVariable String variantId) {
+    public HttpEntity<byte[]> downloadEFOTraits(SearchEFOTraitDTO searchEFOTraitDTO,
+                                                @PathVariable String variantId,
+                                                @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
         String query = solrQueryParamBuilder.buildQueryParam("VARIANT",variantId);
-        List<EFOTraitDoc> efoDocList = solrTableExportService.fetchEFOTraits(query);
-        byte[] result = fileHandler.serializePojoToTsv(efoDocList.stream()
-                .map(efoDoc -> efoTraitSolrDTOAssembler.assemble(efoDoc))
-                .collect(Collectors.toList()));
+        List<EFOTraitDoc> efoDocList = solrTableExportService.fetchEFOTraits(query, searchEFOTraitDTO, pageable);
+        byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readEFOHeaderContent(efoDocList));
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=efoTableExport.tsv");
         responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);

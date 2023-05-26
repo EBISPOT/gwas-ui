@@ -7,12 +7,18 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Component;
+import uk.ac.ebi.spot.goci.refactoring.model.EFOKeyLabel;
 import uk.ac.ebi.spot.goci.refactoring.model.EFOTraitDoc;
 import uk.ac.ebi.spot.goci.refactoring.rest.SolrSearchVariantController;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component
 public class EFOTraitSolrDTOAssembler implements ResourceAssembler<EFOTraitDoc, Resource<EFOTraitSolrDTO>> {
@@ -45,4 +51,28 @@ public class EFOTraitSolrDTOAssembler implements ResourceAssembler<EFOTraitDoc, 
                 .build();
     }
 
+
+    public EFOTableExportDTO assembleEFOExport(EFOTraitDoc efoTraitDoc) {
+        return EFOTableExportDTO.builder()
+                .efoTraits(parseLabelsFromEFO(efoTraitDoc.getEfoTraits()))
+                .reportedTrait(convertListToString(efoTraitDoc.getReportedTrait()))
+                .associationCount(efoTraitDoc.getAssociationCount())
+                .build();
+    }
+
+    private String parseLabelsFromEFO(List<EFOKeyLabel> efoKeyLabels) {
+        if(efoKeyLabels != null) {
+            return efoKeyLabels.stream().filter(Objects::nonNull).
+                    map(EFOKeyLabel::getLabel).
+                    collect(Collectors.joining(","));
+        }
+        return "-";
+    }
+
+    private String convertListToString(List<String> anyList) {
+        if(anyList != null) {
+            return anyList.stream().collect(Collectors.joining(","));
+        }
+        return "-";
+    }
 }
