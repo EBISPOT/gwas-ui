@@ -1,14 +1,9 @@
 package uk.ac.ebi.spot.goci.refactoring.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
-import uk.ac.ebi.spot.goci.refactoring.util.JsonListSerializer;
-
-import java.util.List;
 
 
 @EqualsAndHashCode
@@ -46,10 +41,8 @@ public class StudyTableExportDTO {
     @JsonProperty("reportedTrait")
     private String reportedTrait;
     @JsonProperty("efoTraits")
-    //@JsonSerialize(using = JsonListSerializer.class)
     private String efoTraits;
     @JsonProperty("bgTraits")
-    //@JsonSerialize(using = JsonListSerializer.class)
     private String bgTraits;
     @JsonProperty("publicationDate")
     private String publicationDate;
@@ -61,19 +54,19 @@ public class StudyTableExportDTO {
     @JsonProperty("firstAuthor")
     private String firstAuthor;
     @JsonProperty("genotypingTechnologies")
-    //@JsonSerialize(using = JsonListSerializer.class)
+    
     private String genotypingTechnologies;
     @JsonProperty("initialSampleDescription")
-    //@JsonSerialize(using = JsonListSerializer.class)
+    
     private String initialSampleDescription;
     @JsonProperty("replicateSampleDescription")
-    //@JsonSerialize(using = JsonListSerializer.class)
+    
     private String replicateSampleDescription;
     @JsonProperty("discoverySampleAncestry")
-    //@JsonSerialize(using = JsonListSerializer.class)
+    
     private String discoverySampleAncestry;
     @JsonProperty("replicationSampleAncestry")
-    //@JsonSerialize(using = JsonListSerializer.class)
+    
     private String replicationSampleAncestry;
     @JsonProperty("associationCount")
     private Integer associationCount;
@@ -90,17 +83,17 @@ public class StudyTableExportDTO {
     public StudyTableExportDTO(@JsonProperty("accessionId") String accessionId,
                         @JsonProperty("pubmedId") String pubmedId,
                         @JsonProperty("reportedTrait") String reportedTrait,
-                        @JsonProperty("efoTraits") /* @JsonSerialize(using = JsonListSerializer.class) */ String efoTraits,
-                        @JsonProperty("bgTraits") /* @JsonSerialize(using = JsonListSerializer.class) */ String bgTraits,
+                        @JsonProperty("efoTraits") String efoTraits,
+                        @JsonProperty("bgTraits") String bgTraits,
                         @JsonProperty("publicationDate")  String publicationDate,
                         @JsonProperty("journal") String journal,
                         @JsonProperty("title") String title,
                         @JsonProperty("firstAuthor")  String firstAuthor,
-                        @JsonProperty("genotypingTechnologies") /* @JsonSerialize(using = JsonListSerializer.class) */ String genotypingTechnologies,
-                        @JsonProperty("initialSampleDescription") /* @JsonSerialize(using = JsonListSerializer.class) */ String initialSampleDescription,
-                        @JsonProperty("replicateSampleDescription") /* @JsonSerialize(using = JsonListSerializer.class) */  String replicateSampleDescription,
-                        @JsonProperty("discoverySampleAncestry") /* @JsonSerialize(using = JsonListSerializer.class) */ String discoverySampleAncestry,
-                        @JsonProperty("replicationSampleAncestry") /* @JsonSerialize(using = JsonListSerializer.class) */ String replicationSampleAncestry,
+                        @JsonProperty("genotypingTechnologies") String genotypingTechnologies,
+                        @JsonProperty("initialSampleDescription") String initialSampleDescription,
+                        @JsonProperty("replicateSampleDescription")  String replicateSampleDescription,
+                        @JsonProperty("discoverySampleAncestry") String discoverySampleAncestry,
+                        @JsonProperty("replicationSampleAncestry") String replicationSampleAncestry,
                         @JsonProperty("associationCount") Integer associationCount,
                         @JsonProperty("summaryStatistics") String summaryStatistics,
                         @JsonProperty("ssApiFlag") String ssApiFlag,

@@ -2,13 +2,8 @@ package uk.ac.ebi.spot.goci.refactoring.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
-import uk.ac.ebi.spot.goci.refactoring.model.EFOKeyLabel;
-import uk.ac.ebi.spot.goci.refactoring.util.JsonListSerializer;
-
-import java.util.List;
 
 @EqualsAndHashCode
 @Builder
