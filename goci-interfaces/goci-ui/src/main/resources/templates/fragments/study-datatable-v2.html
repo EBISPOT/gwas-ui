@@ -57,6 +57,8 @@
                     <th>Trait(s)</th>
                     <th>Background trait(s)</th>
                     <th>Discovery sample</th>
+                    <th>Discovery sample description</th>
+                    <th>Replication sample description</th>
                     <th>Replication sample</th>
                     <th>Association count</th>
                     <th>Summary statistics</th>
@@ -71,6 +73,8 @@
                     <th class="searchable">Trait(s)</th>
                     <th class="searchable">Background trait(s)</th>
                     <th>Discovery sample</th>
+                    <th>Discovery sample description</th>
+                    <th>Replication sample description</th>
                     <th>Replication sample</th>
                     <th>Association count</th>
                     <th>Summary statistics</th>
@@ -169,7 +173,19 @@
                         return data ? data.join(', ') : null;
                     }, defaultContent: "-", orderable: false
                 },
-                {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: false, defaultContent: "-", render: function (data) {
+                {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: false, visible: false, defaultContent: "-", render: function (data) {
+                        data = data.map(e => '&bull; ' + e);
+                        return data.join('<br/>');
+                    }
+                },
+                {
+                    data: 'initialSampleDescription', name: 'initialSampleDescription', orderable: false, visible: false, defaultContent: "-", render: function (data) {
+                        data = data.map(e => '&bull; ' + e);
+                        return data.join('<br/>');
+                    }
+                },
+                {
+                    data: 'replicateSampleDescription', name: 'discoverySampleAncestry', orderable: false, defaultContent: "-", render: function (data) {
                         data = data.map(e => '&bull; ' + e);
                         return data.join('<br/>');
                     }
