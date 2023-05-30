@@ -275,6 +275,7 @@ public class FileController {
         String genebuild;
         String dbsnpbuild;
         String ensemblbuild;
+        String efoversion;
 
         Properties properties = new Properties();
         try {
@@ -287,6 +288,7 @@ public class FileController {
             genebuild = properties.getProperty("genomebuild");
             dbsnpbuild = properties.getProperty("dbsnpbuild");
             ensemblbuild = properties.getProperty("ensemblbuild");
+            efoversion = properties.getProperty("efoversion");
 
             response.put("date", releasedate);
             response.put("studies", studycount);
@@ -296,6 +298,7 @@ public class FileController {
             response.put("genebuild", genebuild);
             response.put("dbsnpbuild", dbsnpbuild);
             response.put("ensemblbuild", ensemblbuild);
+            response.put("efoversion", efoversion);
 
         }
         catch (IOException e) {
