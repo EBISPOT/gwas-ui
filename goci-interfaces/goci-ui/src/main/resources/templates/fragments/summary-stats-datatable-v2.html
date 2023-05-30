@@ -145,7 +145,7 @@
                 {data: 'title', name: 'title', render: $.fn.dataTable.render.ellipsis(50, true), orderable: false},
                 {data: 'reportedTrait', name: 'reportedTrait', orderable: false},
                 {
-                    data: 'efoTraits', name: 'efoTraits', render: function (data) {
+                    data: 'efoTraits', name: 'efoTrait', render: function (data) {
                         $.each(data, function (index, trait) {
                             // TODO use the gwasProperties
                             const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
