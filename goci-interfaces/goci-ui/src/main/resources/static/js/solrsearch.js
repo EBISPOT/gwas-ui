@@ -712,7 +712,7 @@ function setStats(data) {
         $('#genomebuild').text("Genome assembly " + data.genebuild);
         $('#dbsnpbuild').text("dbSNP Build " + data.dbsnpbuild);
         $('#ensemblbuild').text("Ensembl Build " + data.ensemblbuild);
-        $('#efoVersion').text("EFO Version " + data.efoversion);
+        $('#efoversion').text("EFO Version " + data.efoversion);
         $('#catalog-stats').show();
     }
     catch (ex) {
