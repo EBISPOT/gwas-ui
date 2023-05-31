@@ -63,6 +63,8 @@
           <th>Trait(s)</th>
           <th>Background <br/> trait(s)</th>
           <th>Study accession</th>
+          <th>First Author</th>
+          <th>PubMed ID</th>
           <th>Location</th>
         </tr>
         <tr>
@@ -78,6 +80,8 @@
           <th class="searchable">Trait(s)</th>
           <th class="searchable">Background trait(s)</th>
           <th class="searchable">Study accession</th>
+          <th>First Author</th>
+          <th>PubMed ID</th>
           <th>Location</th>
         </tr>
         </thead>
@@ -215,7 +219,9 @@
             const link = gwasProperties.contextPath + 'studies/' + data;
             return !data ? null : '<a href="' + link + '">' + data + '</a>'
           }, orderable: false},
-        {data: 'locations', name: 'locations', orderable: false, defaultContent: 'Mapping not available'},
+        {data: 'author', name: 'author', orderable: false, visible: false, defaultContent: '-'},
+        {data: 'pubmedId', name: 'pubmedId', orderable: false, visible: false, defaultContent: 'Mapping not available'},
+        {data: 'locations', name: 'locations', orderable: false, defaultContent: 'Mapping not available'}
       ],
       dom: 'lBrtip',
       buttons: [
