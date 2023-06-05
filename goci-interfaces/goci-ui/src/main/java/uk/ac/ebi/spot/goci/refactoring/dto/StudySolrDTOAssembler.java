@@ -29,7 +29,7 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
 
 
     private static final Logger log = LoggerFactory.getLogger(StudySolrDTOAssembler.class);
-    private final static String INITIAL_SAMPLE_DESC_REGEX = "([1-9][0-9]{0,9}(?:,[0-9]{3})*)";
+    private final static String INITIAL_SAMPLE_DESC_REGEX = "([1-9][0-9]{0,9}(?:,[0-9]{3,5})*)";
     final Pattern pattern = Pattern.compile(INITIAL_SAMPLE_DESC_REGEX);
 
     @Autowired
@@ -109,6 +109,8 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
     }
 
     public StudyTableExportDTO assembleStudyExport(StudyDoc studyDoc) {
+
+        //log.info("The Accession Id in question is -> "+studyDoc.getAccessionId());
       return  StudyTableExportDTO.builder()
                 .accessionId(studyDoc.getAccessionId())
                 .reportedTrait(studyDoc.getTraitName_s())
@@ -155,7 +157,7 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
     }
     private List<String> populateInitialSampleDesc(String sampleDesc) {
 
-        log.info("sampleDesc is ->"+sampleDesc);
+        //log.info("sampleDesc is ->"+sampleDesc);
         List<String> text = new ArrayList<>();
         String[] desc = sampleDesc.split(INITIAL_SAMPLE_DESC_REGEX);
         for(int i =0; i < desc.length ; i++) {
@@ -175,8 +177,8 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
 
         for(int i = 0; i < sampleNumbers.size(); i++) {
             String freetext = "";
-            log.info("sampleNumbers ["+i+"]->"+sampleNumbers.get(i));
-            log.info("text ["+i+"]->"+text.get(i));
+            //log.info("sampleNumbers ["+i+"]->"+sampleNumbers.get(i));
+            //log.info("text ["+i+"]->"+text.get(i));
             if(text.size() > sampleNumbers.size() ){
                 freetext = sampleNumbers.get(i)+ text.get(i+1);
             } else {
