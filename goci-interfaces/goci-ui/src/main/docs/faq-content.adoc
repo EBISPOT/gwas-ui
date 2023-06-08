@@ -129,6 +129,8 @@
 
 6. <<faq-E6, What does the most severe consequence/CONTEXT field represent?>>
 
+7. <<faq-E7, Why does the risk allele of a variant not match either of the alleles in the reference genome assembly?>> 
+
 === F. Ancestry
 
 1. <<faq-F1, How is the ancestry data in the GWAS Catalog provided?>>
@@ -473,6 +475,9 @@ While we do provide the mapped gene and position information in this format in b
 
 The 'CONTEXT/Most severe consequence' column provides information on a variant's predicted most severe functional effect from Ensembl. The effect of the allele of each variant on different transcripts may differ, but only the most severe consequence is reported here. Definition of terms and the order of severity is provided in Ensembl’s documentation: https://www.ensembl.org/info/genome/variation/prediction/predicted_data.html#consequences
 
+==== [[faq-E7]]7. Why does the risk allele of a variant not match either of the alleles in the reference genome assembly?
+
+Variants and their risk alleles are extracted exactly as reported in the paper. In a small number of cases, the curated risk allele does not match either of the alleles reported in the reference genome assembly, which are displayed in the Info panel on the variant page. This may be due to strand flipping between genome builds, where the association was originally reported on an older genome build. We are unable to account for this in the curated data as genome build is not consistently reported by authors.  For more detail on this issue, please refer to link:https://pubmed.ncbi.nlm.nih.gov/36465187/[Sheng et al 2022].  
 
 == F. Ancestry
 
