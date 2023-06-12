@@ -27,5 +27,14 @@ public class SearchStudyDTO {
     @JsonProperty("fullPvalueSet")
     private Boolean fullPvalueSet;
 
+    @JsonProperty("discoverySample")
+    private String discoverySample;
+
+    @JsonProperty("replicationSample")
+    private String replicationSample;
+
+    @JsonProperty("firstAuthor")
+    private String firstAuthor;
+
 
 }

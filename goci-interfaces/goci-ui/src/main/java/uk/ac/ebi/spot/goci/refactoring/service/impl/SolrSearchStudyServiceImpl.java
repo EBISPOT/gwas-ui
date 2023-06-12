@@ -91,6 +91,9 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
         String efoTrait = searchStudyDTO.getEfoTrait();
         String bgTrait = searchStudyDTO.getBgTrait();
         Boolean fullPValueSet = searchStudyDTO.getFullPvalueSet();
+        String discoverySample = searchStudyDTO.getDiscoverySample();
+        String replicationSample = searchStudyDTO.getReplicationSample();
+        String firstAuthor = searchStudyDTO.getFirstAuthor();
         filterQueryBuilder.append(filterQuery);
 
         if(accessionId != null) {
@@ -114,10 +117,28 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
             else
                 filterQueryBuilder.append(String.format(" AND mappedBkgLabel:*%s*",bgTrait));
         }
+        if(discoverySample != null) {
+            if(discoverySample.contains(" "))
+                filterQueryBuilder.append(String.format( " AND discovery-sample-ancestry:\"*%s*\"", discoverySample));
+            else
+                filterQueryBuilder.append(String.format( " AND discovery-sample-ancestry:*%s*", discoverySample));
+        }
+        if(replicationSample != null) {
+            if(replicationSample.contains(" "))
+                filterQueryBuilder.append(String.format( " AND replication-sample-ancestry:\"*%s*\"", replicationSample));
+            else
+                filterQueryBuilder.append(String.format( " AND replication-sample-ancestry:*%s*", replicationSample));
+        }
         if(fullPValueSet != null) {
             if(fullPValueSet) {
                 filterQueryBuilder.append(" AND fullPvalueSet:true");
             }
+        }
+        if(firstAuthor != null) {
+            if(firstAuthor.contains(" "))
+                filterQueryBuilder.append(String.format( " AND author:\"*%s*\"", firstAuthor));
+            else
+                filterQueryBuilder.append(String.format( " AND author:*%s*", firstAuthor));
         }
 
         return filterQueryBuilder.toString();
@@ -133,6 +154,8 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
             Sort.Order orderPvalue = sort.getOrderFor("fullPvalueSet");
             Sort.Order orderPdate = sort.getOrderFor("publicationDate");
             Sort.Order orderFirstAuthor = sort.getOrderFor("firstAuthor");
+            Sort.Order orderInitialSample = sort.getOrderFor("initialSample");
+            Sort.Order orderReplicationSample = sort.getOrderFor("replicationSample");
             if(orderAsscn != null) {
                 sortProperty =  orderAsscn.isAscending() ? "asc" : "desc";
                 sortParam = String.format("associationCount %s", sortProperty);
@@ -148,6 +171,14 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
             if(orderFirstAuthor != null) {
                 sortProperty =  orderFirstAuthor.isAscending() ? "asc" : "desc";
                 sortParam = String.format("author_s %s", sortProperty);
+            }
+            if(orderInitialSample != null) {
+                sortProperty =  orderInitialSample.isAscending() ? "asc" : "desc";
+                sortParam = String.format("numberOfIndividualsInitial %s", sortProperty);
+            }
+            if(orderReplicationSample != null) {
+                sortProperty =  orderReplicationSample.isAscending() ? "asc" : "desc";
+                sortParam = String.format("numberOfIndividualsReplication %s", sortProperty);
             }
         }
         return sortParam;

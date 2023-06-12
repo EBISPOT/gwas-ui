@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import uk.ac.ebi.spot.goci.model.solr.Doc;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -94,6 +95,18 @@ public class StudyDoc extends Doc implements Serializable {
     @JsonProperty("agreedToCc0")
     private Boolean agreedToCc;
 
+    @JsonProperty("numberOfIndividualsInitial")
+    private Integer numberOfIndividualsInitial;
+
+    @JsonProperty("numberOfIndividualReplication")
+    private Integer numberOfIndividualReplication;
+
+    @JsonProperty("discovery-sample-ancestry")
+    private List<String> discoverySampleAncestry;
+
+    @JsonProperty("replication-sample-ancestry")
+    private List<String> replicationSampleAncestry;
+
     public StudyDoc(@JsonProperty("traitUri") Set<String> traitUris,
                     @JsonProperty("shortForm") Set<String> shortForms,
                     @JsonProperty("label") List<String> labels,
@@ -141,7 +154,11 @@ public class StudyDoc extends Doc implements Serializable {
                     @JsonProperty("association_chromosomeName") List<String> chromosomeNames,
                     @JsonProperty("chromosomePositions") List<String> chromosomePositions,
                     @JsonProperty("association_positionLinks") List<String> positionLinks,
-                    @JsonProperty("agreedToCc0") Boolean agreedToCc) {
+                    @JsonProperty("agreedToCc0") Boolean agreedToCc,
+                    @JsonProperty("numberOfIndividualsInitial") Integer numberOfIndividualsInitial,
+                    @JsonProperty("numberOfIndividualReplication") Integer numberOfIndividualReplication,
+                    @JsonProperty("discovery-sample-ancestry") List<String> discoverySampleAncestry,
+                    @JsonProperty("replication-sample-ancestry") List<String> replicationSampleAncestry) {
         //super();
         super(traitUris, shortForms, labels, synonym, efoLink, parent, descriptions, id, resourcename);
         this.pubmedId = pubmedId;
@@ -183,6 +200,10 @@ public class StudyDoc extends Doc implements Serializable {
         this.chromosomePositions = chromosomePositions;
         this.positionLinks = positionLinks;
         this.agreedToCc = agreedToCc;
+        this.numberOfIndividualsInitial = numberOfIndividualsInitial;
+        this.numberOfIndividualReplication = numberOfIndividualReplication;
+        this.discoverySampleAncestry = discoverySampleAncestry;
+        this.replicationSampleAncestry = replicationSampleAncestry;
     }
 
     public String getPubmedId() {
@@ -495,5 +516,38 @@ public class StudyDoc extends Doc implements Serializable {
 
     public void setAgreedToCc(Boolean agreedToCc) {
         this.agreedToCc = agreedToCc;
+    }
+
+
+    public Integer getNumberOfIndividualsInitial() {
+        return numberOfIndividualsInitial;
+    }
+
+    public void setNumberOfIndividualsInitial(Integer numberOfIndividualsInitial) {
+        this.numberOfIndividualsInitial = numberOfIndividualsInitial;
+    }
+
+    public Integer getNumberOfIndividualReplication() {
+        return numberOfIndividualReplication;
+    }
+
+    public void setNumberOfIndividualReplication(Integer numberOfIndividualReplication) {
+        this.numberOfIndividualReplication = numberOfIndividualReplication;
+    }
+
+    public List<String> getDiscoverySampleAncestry() {
+        return discoverySampleAncestry;
+    }
+
+    public void setDiscoverySampleAncestry(List<String> discoverySampleAncestry) {
+        this.discoverySampleAncestry = discoverySampleAncestry;
+    }
+
+    public List<String> getReplicationSampleAncestry() {
+        return replicationSampleAncestry;
+    }
+
+    public void setReplicationSampleAncestry(List<String> replicationSampleAncestry) {
+        this.replicationSampleAncestry = replicationSampleAncestry;
     }
 }
