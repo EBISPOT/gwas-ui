@@ -91,8 +91,8 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
         String efoTrait = searchStudyDTO.getEfoTrait();
         String bgTrait = searchStudyDTO.getBgTrait();
         Boolean fullPValueSet = searchStudyDTO.getFullPvalueSet();
-        String discoverySample = searchStudyDTO.getDiscoverySample();
-        String replicationSample = searchStudyDTO.getReplicationSample();
+        String discoverySample = searchStudyDTO.getDiscoverySampleAncestry();
+        String replicationSample = searchStudyDTO.getReplicationSampleAncestry();
         String firstAuthor = searchStudyDTO.getFirstAuthor();
         filterQueryBuilder.append(filterQuery);
 
@@ -154,8 +154,8 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
             Sort.Order orderPvalue = sort.getOrderFor("fullPvalueSet");
             Sort.Order orderPdate = sort.getOrderFor("publicationDate");
             Sort.Order orderFirstAuthor = sort.getOrderFor("firstAuthor");
-            Sort.Order orderInitialSample = sort.getOrderFor("initialSample");
-            Sort.Order orderReplicationSample = sort.getOrderFor("replicationSample");
+            Sort.Order orderInitialSample = sort.getOrderFor("discoverySampleAncestry");
+            Sort.Order orderReplicationSample = sort.getOrderFor("replicationSampleAncestry");
             if(orderAsscn != null) {
                 sortProperty =  orderAsscn.isAscending() ? "asc" : "desc";
                 sortParam = String.format("associationCount %s", sortProperty);

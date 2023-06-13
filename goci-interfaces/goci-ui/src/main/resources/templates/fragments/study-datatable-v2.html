@@ -70,8 +70,8 @@
                     <th class="searchable">Reported trait</th>
                     <th class="searchable">Trait(s)</th>
                     <th class="searchable">Background trait(s)</th>
-                    <th>Discovery sample</th>
-                    <th>Replication sample</th>
+                    <th class="searchable">Discovery sample</th>
+                    <th class="searchable">Replication sample</th>
                     <th>Association count</th>
                     <th>Summary statistics</th>
                 </tr>
@@ -165,11 +165,11 @@
                         return data ? data.join(', ') : null;
                     }, defaultContent: "-", orderable: false
                 },
-                {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: false, defaultContent: "-", render: function (data) {
+                {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: true, defaultContent: "-", render: function (data) {
                         return data.join('<br/>');
                     }
                 },
-                {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: false, defaultContent: "-", render: function (data) {
+                {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: true, defaultContent: "-", render: function (data) {
                         return data.join('<br/>');
                     }},
                 {data: 'associationCount', name: 'associationCount'},
