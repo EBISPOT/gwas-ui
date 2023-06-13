@@ -13,7 +13,7 @@
     <meta name="author" content="Tony Burdett, Emma Hastings, Dani Welter, SPOT, EMBL-EBI, NHGRI"/>
     <link rel="icon" th:href="@{/images/favicon.ico}"/>
 
-    <title>GWAS Catalog</title>
+    <title>GWAS Catalog LABS</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
@@ -54,9 +54,17 @@
     <!-- This spaces is reserved for banners occasionally displayed on the main website -->
     <div class="row background-color-complementary-accent main-banner" style="text-align: center; margin-top: 5px;">
         <h2 class="text-muted">
+
             Help us test the
             <strong><a target="_blank" href="https://www.ebi.ac.uk/gwas/labs/">new GWAS Catalog search pages</a></strong>
             with fast page loading and new features to help you find summary statistics!
+
+            Welcome to the GWAS Catalog labs site, which is under development!
+            <br/>
+            Please provide feedback and bug reports to
+            <a href="mailto:gwas-info@ebi.ac.uk">gwas-info@ebi.ac.uk</a>
+             or via
+            <strong><a target="_blank" href="https://github.com/EBISPOT/gwas-ui/issues">Github</a></strong>.
         </h2>
     </div>
 
@@ -76,7 +84,7 @@
                 <p>Documentation and access to full summary statistics for GWAS Catalog studies where available.</p>
             </div>
         </a>
-        <a th:href="@{/deposition}">
+        <a th:href="@{/deposition}" class="disabled">
             <div class="col-md-4 toplevel-view">
                 <h2 class="flaticon-upload14 color-primary-bold">Submit </h2>
 
@@ -93,7 +101,7 @@
                 <p>Including FAQs, our curation process, training materials, related resources, a list of abbreviations and API documentation.</p>
             </div>
         </a>
-        <a th:href="@{/diagram}">
+        <a th:href="@{/diagram}" class="disabled">
             <div class="col-md-4 toplevel-view">
                 <h2 class="flaticon-image11 color-primary-bold">Diagram</h2>
 

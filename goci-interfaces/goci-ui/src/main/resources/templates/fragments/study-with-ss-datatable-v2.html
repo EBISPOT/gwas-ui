@@ -29,23 +29,23 @@
     </style>
 </head>
 
-<body th:fragment="studies_datatable(url)">
-<!-- Studies table -->
-<div id="study-table-loading">
-    <div id="study_panel" class="panel panel-default">
+<body th:fragment="ss_datatable(url)">
+<!-- ss table -->
+<div id="ss-table-loading">
+    <div id="ss_panel" class="panel panel-default">
         <div class="panel-heading background-color-primary-accent">
             <h3 class="panel-title">
-                <span class="study_label">Studies</span><span class="study_count badge available-data-btn-badge"></span>
+                <span class="ss_label">Studies with summary statistics</span><span class="ss_count badge available-data-btn-badge"></span>
             </h3>
             <span class="pull-right clickable"
                   style="margin-left:25px"
-                  onclick="toggleSidebar('#study_panel span.clickable')">
+                  onclick="toggleSidebar('#ss_panel span.clickable')">
                 <span class="glyphicon glyphicon-chevron-up"></span>
             </span>
         </div>
 
         <div class="panel-body">
-            <table id="study-table-v2" style="width:100%" class="table table-striped table-bordered">
+            <table id="ss-table-v2" style="width:100%" class="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th>First author</th>
@@ -58,8 +58,6 @@
                     <th>Background trait(s)</th>
                     <th>Discovery sample</th>
                     <th>Replication sample</th>
-                    <th>Discovery sample description</th>
-                    <th>Replication sample description</th>
                     <th>Association count</th>
                     <th>Summary statistics</th>
                 </tr>
@@ -74,8 +72,6 @@
                     <th class="searchable">Background trait(s)</th>
                     <th class="searchable">Discovery sample</th>
                     <th class="searchable">Replication sample</th>
-                    <th>Discovery sample description</th>
-                    <th>Replication sample description</th>
                     <th>Association count</th>
                     <th>Summary statistics</th>
                 </tr>
@@ -95,7 +91,7 @@
 <script src="https://cdn.datatables.net/plug-ins/1.13.2/dataRender/ellipsis.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
 <script th:inline="javascript">
-    $('#study-table-v2 thead tr:eq(1) th').each(function () {
+    $('#ss-table-v2 thead tr:eq(1) th').each(function () {
         if ($(this).hasClass('searchable')) {
             $(this).html('<input type="text" class="form-control"/>');
         } else {
@@ -103,8 +99,8 @@
         }
     });
     $(document).ready(function () {
-        showLoadingOverLay('#study-table-loading');
-        $('#study-table-v2').DataTable({
+        showLoadingOverLay('#ss-table-loading');
+        $('#ss-table-v2').DataTable({
             serverSide: true,
             ajax: {
                 url: gwasProperties.contextPath + 'api/v2' + [[${url}]] + '/studies',
@@ -112,13 +108,13 @@
                 dataSrc: function (json) {
                     json.recordsTotal = json.page.totalElements;
                     json.recordsFiltered = json.page.totalElements;
-                    $(".study_count").html(json.recordsTotal);
+                    $(".ss_count").html(json.recordsTotal);
                     if (!json._embedded) json['_embedded'] = {};
                     return json._embedded.studies;
                 },
                 data: function (d) {
                     const c = {};
-                    // for trait page
+                    c.fullPvalueSet = true;
                     c.includeChildTraits = $('#toggle-data-display').is(':checked');
                     c.includeBgTraits = $('#include-bg-traits').is(':checked');
                     d.columns.forEach(e => {
@@ -134,10 +130,10 @@
                     return c;
                 },
                 error: function () {
-                    hideLoadingOverLay('#study-table-loading');
-                    $('#study-table-v2_processing').hide();
-                    $("#study-table-v2 tbody").empty();
-                    $("#study-table-v2 tbody").html('<td colspan="46"><center><h4 class="text-danger">An error occurred, try reloading page or clearing filters.</h4></center></td>');
+                    hideLoadingOverLay('#ss-table-loading');
+                    $('#ss-table-v2_processing').hide();
+                    $("#ss-table-v2 tbody").empty();
+                    $("#ss-table-v2 tbody").html('<td colspan="46"><center><h4 class="text-danger">An error occurred, try reloading page or clearing filters.</h4></center></td>');
                 }
             },
             orderCellsTop: true,
@@ -167,38 +163,23 @@
                 {
                     data: 'bgTraits', name: 'bgTrait', render: function (data) {
                         $.each(data, function (index, trait) {
+                            // TODO use the gwasProperties
                             const link = gwasProperties.contextPath + 'efotraits/' + trait.key;
+                            // const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
                             data[index] = '<a href="' + link + '">' + trait.label + '</a>'
                         });
                         return data ? data.join(', ') : null;
                     }, defaultContent: "-", orderable: false
                 },
-
-
-
                 {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: true, defaultContent: "-", render: function (data) {
-                        data = data?.map(e => '&bull; ' + e);
-                        return data?.join('<br/>');
+                        data = data ?.map(e => '&bull; ' + e);
+                        return data ?.join('<br/>');
                     }
                 },
                 {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: true, defaultContent: "-", render: function (data) {
-                        data = data?.map(e => '&bull; ' + e);
-                        return data?.join('<br/>');
-                    }
-                },
-                {
-                    data: 'initialSampleDescription', name: 'initialSampleDescription', orderable: false, visible: false , defaultContent: "-", render: function (data) {
-                        data = data?.map(e => '&bull; ' + e);
-                        return data?.join('<br/>');
-                    }
-                },
-                {
-                    data: 'replicateSampleDescription', name: 'replicateSampleDescription', orderable: false, visible: false, defaultContent: "-", render: function (data) {
-                        data = data?.map(e => '&bull; ' + e);
-                        return data?.join('<br/>');
-                    }
-                },
-
+                        data = data ?.map(e => '&bull; ' + e);
+                        return data ?.join('<br/>');
+                    }},
                 {data: 'associationCount', name: 'associationCount'},
                 {
                     data: 'summaryStatistics', name: 'fullPvalueSet', defaultContent: "Not available", render: function(data, type, row) {
@@ -237,7 +218,7 @@
             ],
             retrieve: true,
             initComplete: function () {
-                hideLoadingOverLay('#study-table-loading');
+                hideLoadingOverLay('#ss-table-loading');
                 this.api()
                     .columns()
                     .every(function (index) {
@@ -261,9 +242,9 @@
         })
             .on('processing.dt', function (e, settings, processing) {
                 if (processing) {
-                    showLoadingOverLay('#study-table-loading');
+                    showLoadingOverLay('#ss-table-loading');
                 } else {
-                    hideLoadingOverLay('#study-table-loading');
+                    hideLoadingOverLay('#ss-table-loading');
                 }
             });
     });

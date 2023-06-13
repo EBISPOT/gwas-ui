@@ -25,7 +25,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" th:href="@{/home}">GWAS Catalog</a>
+            <a class="navbar-brand" th:href="@{/home}">GWAS Catalog LABS</a>
 
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -52,14 +52,14 @@
                     </span>
                 </li>
 
-                <li th:classappend="${#httpServletRequest.getServletPath() == '/diagram' ? 'active':''}">
-                    <a th:href="@{/diagram}">
+                <li th:classappend="${#httpServletRequest.getServletPath() == '/diagram' ? 'active':''}" class="disabled">
+                    <a th:href="@{/diagram}" class="disabled">
                         Diagram
                     </a>
                 </li>
 
-                <li>
-                    <a th:href="@{/deposition}">
+                <li class="disabled">
+                    <a th:href="@{/deposition}" class="disabled">
                         Submit
                     </a>
                 </li>
@@ -76,30 +76,35 @@
                     </a>
                 </li>
 
-                <li th:classappend="${#httpServletRequest.getServletPath() == '/docs/about' ? 'active':''}" class="hidden-sm">
+                <li th:classappend="${#httpServletRequest.getServletPath() == '/docs/about' ? 'active':''}" class="hidden-sm hidden-md">
                     <a th:href="@{/docs/about}">
                         About
                     </a>
                 </li>
 
-                <li class="hidden-sm">
+                <li class="hidden-sm hidden-md">
                     <a href="https://ebispot.github.io/gwas-blog/" target="_blank">
                         Blog
                     </a>
                 </li>
 
                 <li>
-                    <a class="icon" id="ebi-logo" href="//www.ebi.ac.uk">
+                    <a class="icon visible-lg visible-xs" id="ebi-logo" href="//www.ebi.ac.uk">
                         <img alt="EBI logo" th:src="@{/icons/EMBL_EBI_Logo_white.png}"/>
+                    </a>
+                    <a class="icon hidden-lg hidden-xs" id="ebi-sm-logo" href="//www.ebi.ac.uk">
+                        <img alt="EBI logo" th:src="@{/icons/EMBL_logo_img_only.png}" width="27px" height="25px"/>
                     </a>
                 </li>
 
                 <li>
-                    <a class="icon" id="nhgri-logo" href="//www.genome.gov">
+                    <a class="icon visible-lg visible-xs" id="nhgri-logo" href="//www.genome.gov">
                         <img alt="GWAS logo" th:src="@{/icons/NHGRI_NIH%20logo%20all%20verions-02-scaled.png}"/>
                     </a>
+                    <a class="icon hidden-lg hidden-xs" id="nhgri-sm-logo" href="//www.genome.gov">
+                        <img alt="GWAS logo" th:src="@{/icons/NHGRI_logo_sm.png}" width="30px" height="25px"/>
+                    </a>
                 </li>
-
             </ul>
         </div>
         <!--/.navbar-collapse -->
@@ -137,7 +142,7 @@
 
         </div>
         <div>
-            <h1>GWAS Catalog</h1>
+            <h1>GWAS Catalog LABS</h1>
 
             <h3>The NHGRI-EBI Catalog of human genome-wide association studies</h3>
 

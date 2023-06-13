@@ -39,7 +39,7 @@ public class PublicationController {
         publicationResult.setFilter(filter);
         publicationResult.setPumedId(pubmedId);
         model.addAttribute("result", publicationResult);
-        return "publication-page";
+        return "publication-page-v2";
     }
 
 }

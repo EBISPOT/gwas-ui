@@ -3,19 +3,10 @@
       xmlns="http://www.w3.org/1999/xhtml">
 
 <body th:fragment="page_footer">
-
-<script>
-    (function() {
-        if (document.querySelector('#search-box') === null) {
-            document.getElementById("header-searchbar").style.display = "block";
-        }
-    })();
-</script>
-
 <footer class="footer background-color-primary-accent">
     <!--<div class="footer-banner background-color-primary"></div>-->
     <div class="container">
-        <p class="text-muted">Copyright &copy; EMBL-EBI 2017 | EMBL-EBI is an Outstation of the
+        <p class="text-muted">Copyright &copy; EMBL-EBI <span id="year"></span> | EMBL-EBI is an Outstation of the
             <a href="http://www.embl.org">European Molecular
                                           Biology
                                           Laboratory</a> |
@@ -24,6 +15,13 @@
             <a href="//www.ebi.ac.uk/about/terms-of-use">Terms of use</a></p>
     </div>
 </footer>
-
+<script>
+    (function() {
+        if (document.querySelector('#search-box') === null) {
+            document.getElementById("header-searchbar").style.display = "block";
+        }
+    })();
+    document.getElementById("year").innerHTML = new Date().getFullYear().toString();
+</script>
 </body>
 </html>

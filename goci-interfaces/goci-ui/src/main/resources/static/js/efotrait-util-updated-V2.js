@@ -4,9 +4,9 @@
 
 
 var global_color_url_batch = gwasProperties.GWAS_REST_API + '/parentMappings';
-// var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
-var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
-if (!gwasProperties.host.includes('www.ebi.ac.uk')) {
+var global_color_url = gwasProperties.GWAS_REST_API + '/parentMapping/';
+// var global_color_url = 'https://www.ebi.ac.uk/gwas/rest/api/parentMapping/';
+if (!gwasProperties.host.includes('ebi.ac.uk')) {
     global_color_url = 'http://gwas-snoopy:9780/gwas/rest/api/parentMapping/'
 }
 
@@ -96,7 +96,8 @@ function parsePgsTraitResult(data) {
  */
 $(document).ready(() => {
     $('#study_panel').hide();
-    $('#locus_panel').hide()
+    $('#ss_panel').hide();
+    $('#locus_panel').hide();
     $('#toggle-data-display').on('change', reloadTablesAndLocusZoom);
     $('#include-bg-traits').on('change', reloadTablesAndLocusZoom);
     // Conditional display of PGS link/button
@@ -113,6 +114,8 @@ function reloadTablesAndLocusZoom() {
     associationTable.ajax.reload();
     const studyTable = $('#study-table-v2').DataTable();
     studyTable.ajax.reload();
+    const ssTable = $('#ss-table-v2').DataTable();
+    ssTable.ajax.reload();
     let includeBgTraits = $('#include-bg-traits').is(':checked');
     let includeChildTraits = $('#toggle-data-display').is(':checked');
     setTraitDownloadLink(childEfos.concat([getMainEFO()]));
@@ -126,8 +129,6 @@ function reloadTablesAndLocusZoom() {
  * in the Association, Study, and LocusZoom plot.
  */
 toggleDataDisplay = function () {
-    // TODO: When clicked, show loading for data tables, LocusZoom, and "Download Catalog data" button
-
     var checkBox = document.getElementById("toggle-data-display");
     var text = document.getElementById("text");
     if (checkBox.checked == true){
@@ -139,40 +140,6 @@ toggleDataDisplay = function () {
 };
 
 
-
-/**
- * Display an overlay spinner on a tag
- * https://gasparesganga.com/labs/jquery-loading-overlay/
- * @param {String} tagID
- * @returns undefined
- * @example showLoadingOverLay('#efoInfo')
- */
-showLoadingOverLay = function(tagID){
-    var options = {
-        color: "rgba(255, 255, 255, 0.8)",   // String
-        custom: "",                // String/DOM Element/jQuery Object
-        fade: [100, 1500],                      // Boolean/Integer/String/Array
-        fontawesome: "",                          // String
-        imagePosition: "center center",             // String
-        maxSize: "100px",                  // Integer/String
-        minSize: "20px",                    // Integer/String
-        resizeInterval: 10,                       // Integer
-        size: "20%",                       // Integer/String
-        zIndex: 1000,                        // Integer
-    };
-    $(tagID).LoadingOverlay("show",options);
-};
-
-/**
- * Hide an overlay spinner on a tag
- * https://gasparesganga.com/labs/jquery-loading-overlay/
- * @param {String} tagID
- * @returns undefined
- * @example hideLoadingOverLay('#efoInfo')
- */
-hideLoadingOverLay = function(tagID){
-    return $(tagID).LoadingOverlay("hide", true);
-};
 
 /**
  * Display trait count loading message
@@ -197,7 +164,7 @@ showGroupedPanelLoadingOverlay = function() {
     showLoadingOverLay('#include-bgs-section');
     // showLoadingOverLay('#association-table-loading');
     // showLoadingOverLay('#study-table-loading');
-    showLoadingOverLay('#locus-plot-row-loading');
+    // showLoadingOverLay('#locus-plot-row-loading');
 };
 
 /**
@@ -209,7 +176,7 @@ hideGroupedPanelLoadingOverlay = function() {
     hideLoadingOverLay('#include-bgs-section');
     // hideLoadingOverLay('#association-table-loading');
     // hideLoadingOverLay('#study-table-loading');
-    hideLoadingOverLay('#locus-plot-row-loading');
+    // hideLoadingOverLay('#locus-plot-row-loading');
 };
 
 
@@ -250,8 +217,7 @@ displayEFOInfo = function(initCBState) {
     // TEST - Set-up Hidden form
     getDownloadCatalogData();
 
-    // todo change to gwasProperties.url
-    promiseGet('http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/efotraits/' + getMainEFO() + '/traits/children', {}, false)
+    promiseGet(gwasProperties.contextPath + 'api/v2/efotraits/' + getMainEFO() + '/traits/children', {}, false)
         .then(JSON.parse).then(function(data) {
             const childLabels = [];
             for (const e of data) {
@@ -284,7 +250,7 @@ getDownloadCatalogData = function() {
         const searchQuery = $("#queryInput").val();
 
         // Query Fat Solr using SolrSearchController
-        return promisePost( gwasProperties.contextPath + '/api/search/downloads',
+        return promisePost( gwasProperties.contextPath + 'api/search/downloads',
             {
                 'q': searchQuery
             },'application/octet-stream').then(function(result) {
@@ -564,7 +530,7 @@ getTermMappings = function(efoId) {
 };
 
 function prepareLocusZoom(includeBgTraits, includeChildTraits) {
-    showGroupedPanelLoadingOverlay();
+    showLoadingOverLay('#locus-plot-row-loading');
     Promise.resolve(getLocusZoomAssociations([], includeBgTraits, includeChildTraits, 0))
         .then(function (data) {
             data.forEach(d => {
@@ -585,13 +551,13 @@ function prepareLocusZoom(includeBgTraits, includeChildTraits) {
                 const cata = {};
                 cata.docs = data;
                 reloadLocusZoom('#plot', cata);
-                hideGroupedPanelLoadingOverlay();
+                hideLoadingOverLay('#locus-plot-row-loading');
             });
         });
 }
 
 getLocusZoomAssociations = async function(allAssociations, includeBgTraits, includeChildTraits, page) {
-    let locusZoomAssociationsUrl = 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2/efotraits/' + getMainEFO() + '/locuszoom/associations?'
+    let locusZoomAssociationsUrl = gwasProperties.contextPath + 'api/v2/efotraits/' + getMainEFO() + '/locuszoom/associations?'
     const searchParams = new URLSearchParams();
     searchParams.set('page', page);
     searchParams.set('size', '500');

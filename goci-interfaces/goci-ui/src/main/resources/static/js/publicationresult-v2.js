@@ -2,6 +2,7 @@
 
 $(document).ready(() => {
     $('#study_panel').hide();
+    $('#ss_panel').hide();
 
 //jump to the top of the page
     $('html,body').scrollTop(0);
