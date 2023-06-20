@@ -11,15 +11,15 @@
 }
 
 .background-color-primary {
-    background-color: #7fd9e7;
+    background-color: #B0DFE6;
 }
 
 .background-color-primary-accent {
-    background-color: #98e1ea;
+    background-color: #E7F7F9;
 }
 
 .background-color-primary-bold {
-    background-color: #17636e;
+    background-color: #398A96;
 }
 
 .color-secondary {
@@ -79,7 +79,7 @@ a:hover {
 }
 
 a.list-group-item:hover {
-    background-color: #98e1ea;
+    background-color: #E7F7F9;
 }
 
 a.list-group-item.selected {
@@ -91,11 +91,11 @@ a > .toplevel-view {
 }
 
 .btn {
-    background-image: linear-gradient(to bottom, #98e1ea 50%, #D3EFF3 100%);
+    background-image: linear-gradient(to bottom, #E7F7F9 50%, #D3EFF3 100%);
 }
 
 .btn-default {
-    background-image: linear-gradient(to bottom, #98e1ea 50%, #D3EFF3 100%);
+    background-image: linear-gradient(to bottom, #E7F7F9 50%, #D3EFF3 100%);
 }
 
 .btn:hover {
@@ -123,7 +123,7 @@ a > .toplevel-view {
 }
 
 .list-group-item:hover {
-    background-color: #98e1ea;
+    background-color: #E7F7F9;
 }
 
 .list-group-item.disabled {
@@ -145,7 +145,7 @@ a > .toplevel-view {
 }
 
 .panel-default > .panel-heading {
-    background-image: linear-gradient(to bottom, #98e1ea 50%, #D3EFF3 100%);
+    background-image: linear-gradient(to bottom, #E7F7F9 50%, #D3EFF3 100%);
 }
 
 .table-striped > tbody > tr:nth-child(odd) {
