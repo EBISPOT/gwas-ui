@@ -32,7 +32,7 @@
 
 <body th:fragment="efotraits_datatable(url, q)">
 <!-- EFO Traits table: it should be the future STANDARD -->
-<div>
+<div id="efotrait-table-loading">
     <div id="efotrait_panel" class="panel panel-default">
         <div class="panel-heading background-color-primary-accent">
             <h3 class="panel-title">
@@ -66,7 +66,7 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.3.4/js/dataTables.buttons.min.js"></script>
@@ -88,7 +88,7 @@
         $('#efotrait-table-v2').DataTable({
             serverSide: true,
             ajax: {
-                url: 'http://gwas-snoopy.ebi.ac.uk:9780/gwas/api/v2' + [[${url}]] + '/traits',
+                url: gwasProperties.contextPath + 'api/v2' + [[${url}]] + '/traits',
                 dataType: 'JSON',
                 dataSrc: function (json) {
                     json.recordsTotal = json.page.totalElements;
@@ -110,6 +110,12 @@
                     c.size = d.length;
                     c.page = d.start / d.length;
                     return c;
+                },
+                error: function () {
+                    hideLoadingOverLay('#efotrait-table-loading');
+                    $('#efotrait-table-v2_processing').hide();
+                    $("#efotrait-table-v2 tbody").empty();
+                    $("#efotrait-table-v2 tbody").html('<td colspan="46"><center><h4 class="text-danger">An error occurred, try reloading page or clearing filters.</h4></center></td>');
                 }
             },
             orderCellsTop: true,
@@ -132,7 +138,20 @@
             ],
             dom: 'lBrtip',
             buttons: [
-                'colvis'
+                'colvis',
+                {
+                    text: 'Clear search',
+                    action: function (e, dt) {
+                        $("tr input[type='text']").each(function () {
+                            $(this).val('');
+                        })
+                        dt.columns().every(function () {
+                            const column = this;
+                            column.search('');
+                        });
+                        dt.search('').draw();
+                    }
+                }
             ],
             retrieve: true,
             initComplete: function () {
@@ -166,26 +185,6 @@
                 }
             });
     });
-    // todo externalise
-    showLoadingOverLay = function (tagID) {
-        var options = {
-            color: "rgba(255, 255, 255, 0.8)",   // String
-            custom: "",                // String/DOM Element/jQuery Object
-            fade: [10, 10],                      // Boolean/Integer/String/Array
-            fontawesome: "",                          // String
-//            image: "data:image/gif;base32,...",  // String
-            imagePosition: "center center",             // String
-            maxSize: "100px",                  // Integer/String
-            minSize: "20px",                    // Integer/String
-            resizeInterval: 10,                       // Integer
-            size: "20%",                       // Integer/String
-            zIndex: 1000,                        // Integer
-        }
-        $(tagID).LoadingOverlay("show", options);
-    }
-    hideLoadingOverLay = function (tagID) {
-        return $(tagID).LoadingOverlay("hide", true);
-    }
     //]]>
 </script>
 

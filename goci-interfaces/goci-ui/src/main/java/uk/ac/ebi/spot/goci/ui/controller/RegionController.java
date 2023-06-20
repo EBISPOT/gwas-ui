@@ -34,7 +34,7 @@ public class RegionController {
         regionResult.setFilter(filter);
         regionResult.setRegionId(regionId);
         model.addAttribute("result", regionResult);
-        return "region-page";
+        return "region-page-v2";
     }
 
 }

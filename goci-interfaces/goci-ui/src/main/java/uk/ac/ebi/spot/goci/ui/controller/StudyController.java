@@ -40,6 +40,6 @@ public class StudyController {
         studyResult.setFilter(filter);
         studyResult.setAccessionId(accessionId);
         model.addAttribute("result", studyResult);
-        return "study-page";
+        return "study-page-v2";
     }
 }

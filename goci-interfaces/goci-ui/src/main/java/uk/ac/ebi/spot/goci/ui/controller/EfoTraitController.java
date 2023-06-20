@@ -38,7 +38,7 @@ public class EfoTraitController {
         efoTraitResult.setIncluded(included);
         efoTraitResult.setChecked(checked);
         model.addAttribute("result", efoTraitResult);
-        return "efotrait-page";
+        return "efotrait-page-v2";
     }
 
 }

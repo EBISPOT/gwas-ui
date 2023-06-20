@@ -261,7 +261,7 @@ function toggle_and_scroll (id) {
 }
 
 function tabIn(id) {
-    const panels = ['#study_panel', '#association_panel', '#efotrait_panel', '#ld_panel', '#locus_panel'];
+    const panels = ['#study_panel', '#ss_panel', '#association_panel', '#efotrait_panel', '#ld_panel', '#locus_panel'];
     for (const panel of panels) {
         if (panel !== id) {
             $(panel).hide();
