@@ -52,14 +52,14 @@
                     </span>
                 </li>
 
-                <li th:classappend="${#httpServletRequest.getServletPath() == '/diagram' ? 'active':''}" class="disabled">
-                    <a th:href="@{/diagram}" class="disabled">
+                <li th:classappend="${#httpServletRequest.getServletPath() == '/diagram' ? 'active':''}">
+                    <a th:href="@{/diagram}">
                         Diagram
                     </a>
                 </li>
 
-                <li class="disabled">
-                    <a th:href="@{/deposition}" class="disabled">
+                <li>
+                    <a th:href="@{/deposition}">
                         Submit
                     </a>
                 </li>

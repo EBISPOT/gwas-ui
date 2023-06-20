@@ -544,8 +544,3 @@ a > .toplevel-view {
 .mg-t-15{
     margin-top: 15px;
 }
-
-a.disabled {
-    pointer-events: none;
-    cursor: default;
-}
