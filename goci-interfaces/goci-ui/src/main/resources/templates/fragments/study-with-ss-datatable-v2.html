@@ -70,8 +70,8 @@
                     <th class="searchable">Reported trait</th>
                     <th class="searchable">Trait(s)</th>
                     <th class="searchable">Background trait(s)</th>
-                    <th>Discovery sample</th>
-                    <th>Replication sample</th>
+                    <th class="searchable">Discovery sample</th>
+                    <th class="searchable">Replication sample</th>
                     <th>Association count</th>
                     <th>Summary statistics</th>
                 </tr>
@@ -148,7 +148,7 @@
                 {data: 'publicationDate', name: 'publicationDate', orderable: true},
                 {data: 'journal', name: 'journal', orderable: false},
                 {data: 'title', name: 'title', render: $.fn.dataTable.render.ellipsis(50, true), orderable: false},
-                {data: 'reportedTrait', name: 'reportedTrait', orderable: false},
+                {data: 'reportedTrait', name: 'reportedTrait', orderable: false, defaultContent: "-"},
                 {
                     data: 'efoTraits', name: 'efoTrait', render: function (data) {
                         $.each(data, function (index, trait) {
@@ -171,14 +171,14 @@
                         return data ? data.join(', ') : null;
                     }, defaultContent: "-", orderable: false
                 },
-                {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: false, defaultContent: "-", render: function (data) {
-                        data = data.map(e => '&bull; ' + e);
-                        return data.join('<br/>');
+                {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: true, defaultContent: "-", render: function (data) {
+                        data = data ?.map(e => '&bull; ' + e);
+                        return data ?.join('<br/>');
                     }
                 },
-                {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: false, defaultContent: "-", render: function (data) {
-                        data = data.map(e => '&bull; ' + e);
-                        return data.join('<br/>');
+                {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: true, defaultContent: "-", render: function (data) {
+                        data = data ?.map(e => '&bull; ' + e);
+                        return data ?.join('<br/>');
                     }},
                 {data: 'associationCount', name: 'associationCount'},
                 {
