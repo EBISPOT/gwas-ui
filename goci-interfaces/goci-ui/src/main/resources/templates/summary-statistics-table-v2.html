@@ -238,14 +238,6 @@
     ga('create', 'UA-60195133-1', 'auto');
     ga('send', 'pageview');
 </script>-->
-<!-- Google tag (gtag.js) -->
-<script async='async' src="https://www.googletagmanager.com/gtag/js?id=G-C4KFST3T0G"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-C4KFST3T0G');
-</script>
+<div th:remove="tag" th:replace="fragments/google-analytics :: analytics"></div>
 </body>
 </html>
