@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<body>
+<div th:fragment="analytics" xmlns:th="http://www.thymeleaf.org">
+    <!-- Google tag (gtag.js) -->
+    <script async='async' src="https://www.googletagmanager.com/gtag/js?id=G-C4KFST3T0G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-C4KFST3T0G');
+    </script>
+
+</div>
+
+</body>
+</html>
