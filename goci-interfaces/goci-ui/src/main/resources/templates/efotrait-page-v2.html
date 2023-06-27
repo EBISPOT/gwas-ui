@@ -65,6 +65,28 @@
         }
     </style>
     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script th:inline="javascript">
+        //<![CDATA[
+        function startDownloadExport(table) {
+            const a = document.createElement("a");
+            const includeBgTraits = 'includeBgTraits=' + $('#toggle-data-display').is(':checked');
+            const includeChildTraits = 'includeChildTraits=' + $('#include-bg-traits').is(':checked');
+            const q = [[${result.query}]];
+            if (table === 'studies') {
+                a.href = gwasProperties.contextPath + 'api/v2/efotraits/' + q + '/studies/download?' + includeBgTraits  + '&' + includeChildTraits;
+                // a.download = q + '_studies_export.tsv'
+            }
+            else if (table === 'associations') {
+                a.href = gwasProperties.contextPath + 'api/v2/efotraits/' + q + '/associations/download?' + includeBgTraits  + '&' + includeChildTraits;
+                // a.download = q + '_associations_export.tsv'
+            }
+            console.log('Downloading ' + a.href);
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+        }
+        //]]>
+    </script>
 </head>
 <body>
 <!--Include header-->
@@ -428,7 +450,7 @@
 
 <!-- Google analytics
 ================================================== -->
-<script>
+<!--<script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -436,7 +458,7 @@
 
     ga('create', 'UA-60195133-1', 'auto');
     ga('send', 'pageview');
-</script>
-
+</script>-->
+<div th:remove="tag" th:replace="fragments/google-analytics :: analytics"></div>
 </body>
 </html>

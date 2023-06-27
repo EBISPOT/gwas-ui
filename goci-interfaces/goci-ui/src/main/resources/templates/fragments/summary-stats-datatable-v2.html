@@ -143,7 +143,7 @@
                 {data: 'publicationDate', name: 'publicationDate', orderable: true},
                 {data: 'journal', name: 'journal', orderable: false},
                 {data: 'title', name: 'title', render: $.fn.dataTable.render.ellipsis(50, true), orderable: false},
-                {data: 'reportedTrait', name: 'reportedTrait', orderable: false},
+                {data: 'reportedTrait', name: 'reportedTrait', orderable: false, defaultContent: "-"},
                 {
                     data: 'efoTraits', name: 'efoTrait', render: function (data) {
                         $.each(data, function (index, trait) {
@@ -164,6 +164,12 @@
             dom: 'lBrtip',
             buttons: [
                 'colvis',
+                {
+                    text: 'Export',
+                    action: function() {
+                        startDownloadExport('ss')
+                    }
+                },
                 {
                     text: 'Clear search',
                     action: function (e, dt) {
@@ -210,6 +216,17 @@
                 }
             });
     });
+
+    function startDownloadExport(table) {
+        const a = document.createElement("a");
+        if (table === 'ss') {
+            a.href = gwasProperties.contextPath + 'api/v2/summaryStatistics/studies/download';
+        }
+        console.log('Downloading ' + a.href);
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+    }
 </script>
 </body>
 </html>

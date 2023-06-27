@@ -121,7 +121,7 @@ public class SolrSearchGeneController {
         List<StudyDoc> studyDocList = solrTableExportService.fetchStudies(query, searchStudyDTO, pageable);
         byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readStudyHeaderContent(studyDocList));
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=studyTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + geneId + "_studies_export.tsv");
         responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
         responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
         return new HttpEntity<>(result, responseHeaders);
@@ -138,7 +138,7 @@ public class SolrSearchGeneController {
         List<AssociationDoc> asscnDocList = solrTableExportService.fetchAssociations(query, searchAssociationDTO,  pageable);
         byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readAssociationHeaderContent(asscnDocList));
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=asscnTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + geneId + "_associations_export.tsv");
         responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
         responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
         return new HttpEntity<>(result, responseHeaders);
@@ -155,7 +155,7 @@ public class SolrSearchGeneController {
         List<EFOTraitDoc> efoDocList = solrTableExportService.fetchEFOTraits(query, searchEFOTraitDTO, pageable);
         byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readEFOHeaderContent(efoDocList));
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=efoTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + geneId + "_traits_export.tsv");
         responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
         responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
         return new HttpEntity<>(result, responseHeaders);

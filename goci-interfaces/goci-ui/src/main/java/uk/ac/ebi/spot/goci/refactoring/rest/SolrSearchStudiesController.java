@@ -77,7 +77,7 @@ public class SolrSearchStudiesController {
         List<AssociationDoc> asscnDocList = solrTableExportService.fetchAssociations(query, searchAssociationDTO,  pageable);
         byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readAssociationHeaderContent(asscnDocList));
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=asscnTableExport.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + accessionId + "_associations_export.tsv");
         responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
         responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
         return new HttpEntity<>(result, responseHeaders);
