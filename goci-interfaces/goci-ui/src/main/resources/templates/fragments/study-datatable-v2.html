@@ -222,6 +222,12 @@
             buttons: [
                 'colvis',
                 {
+                    text: 'Export',
+                    action: function() {
+                        startDownloadExport('studies')
+                    }
+                },
+                {
                     text: 'Clear search',
                     action: function (e, dt) {
                         $("tr input[type='text']").each(function () {
