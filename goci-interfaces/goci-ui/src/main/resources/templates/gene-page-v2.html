@@ -68,6 +68,27 @@
         }
     </style>
     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script th:inline="javascript">
+        //<![CDATA[
+        function startDownload(table) {
+            const a = document.createElement("a");
+            const q = [[${result.query}]];
+            if (table === 'studies') {
+                a.href = gwasProperties.contextPath + 'api/v2/genes/' + q + '/studies/download';
+            }
+            else if (table === 'associations') {
+                a.href = gwasProperties.contextPath + 'api/v2/genes/' + q + '/associations/download';
+            }
+            else if (table === 'traits') {
+                a.href = gwasProperties.contextPath + 'api/v2/genes/' + q + '/traits/download';
+            }
+            console.log('Downloading ' + a.href);
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+        }
+        //]]>
+    </script>
 </head>
 
 <body>
