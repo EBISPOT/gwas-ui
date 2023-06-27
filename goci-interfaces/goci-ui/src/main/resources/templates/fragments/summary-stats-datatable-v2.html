@@ -143,7 +143,7 @@
                 {data: 'publicationDate', name: 'publicationDate', orderable: true},
                 {data: 'journal', name: 'journal', orderable: false},
                 {data: 'title', name: 'title', render: $.fn.dataTable.render.ellipsis(50, true), orderable: false},
-                {data: 'reportedTrait', name: 'reportedTrait', orderable: false},
+                {data: 'reportedTrait', name: 'reportedTrait', orderable: false, defaultContent: "-"},
                 {
                     data: 'efoTraits', name: 'efoTrait', render: function (data) {
                         $.each(data, function (index, trait) {
