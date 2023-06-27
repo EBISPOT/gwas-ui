@@ -165,6 +165,12 @@
             buttons: [
                 'colvis',
                 {
+                    text: 'Export',
+                    action: function() {
+                        startDownloadExport('ss')
+                    }
+                },
+                {
                     text: 'Clear search',
                     action: function (e, dt) {
                         $("tr input[type='text']").each(function () {
@@ -210,6 +216,17 @@
                 }
             });
     });
+
+    function startDownloadExport(table) {
+        const a = document.createElement("a");
+        if (table === 'ss') {
+            a.href = gwasProperties.contextPath + 'api/v2/summaryStatistics/studies/download';
+        }
+        console.log('Downloading ' + a.href);
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+    }
 </script>
 </body>
 </html>
