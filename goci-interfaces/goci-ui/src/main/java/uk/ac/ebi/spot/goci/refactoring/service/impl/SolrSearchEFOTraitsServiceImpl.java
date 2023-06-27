@@ -124,12 +124,14 @@ public class SolrSearchEFOTraitsServiceImpl implements SolrSearchEFOTraitsServic
 
            } else {
                List<EFOKeyLabel> efoKeyLabels = new ArrayList<>();
-               for (int i = 0; i < associationDoc.getMappedLabel().size(); i++) {
-                   EFOKeyLabel efoKeyLabel = new EFOKeyLabel(solrEntityTransformerUtility.retreiveEFOFromUri
-                           (associationDoc.getMappedUri().get(i)), associationDoc.getMappedLabel().get(i));
-                   efoKeyLabels.add(efoKeyLabel);
+               if (associationDoc.getMappedLabel() != null) {
+                   for (int i = 0; i < associationDoc.getMappedLabel().size(); i++) {
+                       EFOKeyLabel efoKeyLabel = new EFOKeyLabel(solrEntityTransformerUtility.retreiveEFOFromUri
+                               (associationDoc.getMappedUri().get(i)), associationDoc.getMappedLabel().get(i));
+                       efoKeyLabels.add(efoKeyLabel);
+                   }
+                   efoKeyLabels.sort(Comparator.comparing(EFOKeyLabel::getLabel));
                }
-               efoKeyLabels.sort(Comparator.comparing(EFOKeyLabel::getLabel));
                List<String> reportedTraitList = new ArrayList<>();
                reportedTraitList.add(reportedTrait);
                efoTraitDoc = new EFOTraitDoc(efoKeyLabels, reportedTraitList, rsIdLen);
