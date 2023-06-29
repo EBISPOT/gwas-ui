@@ -203,6 +203,12 @@
             buttons: [
                 'colvis',
                 {
+                    text: 'Export',
+                    action: function() {
+                        startDownloadExport('ss')
+                    }
+                },
+                {
                     text: 'Clear search',
                     action: function (e, dt) {
                         $("tr input[type='text']").each(function () {

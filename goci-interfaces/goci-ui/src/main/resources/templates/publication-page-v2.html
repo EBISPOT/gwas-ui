@@ -76,6 +76,9 @@
             if (table === 'studies') {
                 a.href = gwasProperties.contextPath + 'api/v2/publications/' + q + '/studies/download';
             }
+            else if (table === 'ss') {
+                a.href = gwasProperties.contextPath + 'api/v2/publications/' + q + '/studies/download?fullPvalueSet=true';
+            }
             else if (table === 'associations') {
                 a.href = gwasProperties.contextPath + 'api/v2/publications/' + q + '/associations/download';
             }

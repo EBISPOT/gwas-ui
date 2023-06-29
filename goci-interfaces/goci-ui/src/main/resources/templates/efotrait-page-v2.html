@@ -76,6 +76,10 @@
                 a.href = gwasProperties.contextPath + 'api/v2/efotraits/' + q + '/studies/download?' + includeBgTraits  + '&' + includeChildTraits;
                 // a.download = q + '_studies_export.tsv'
             }
+            else if (table === 'ss') {
+                a.href = gwasProperties.contextPath + 'api/v2/efotraits/' + q + '/studies/download?' + includeBgTraits  + '&' + includeChildTraits + '&' + 'fullPvalueSet=true';
+                // a.download = q + '_associations_export.tsv'
+            }
             else if (table === 'associations') {
                 a.href = gwasProperties.contextPath + 'api/v2/efotraits/' + q + '/associations/download?' + includeBgTraits  + '&' + includeChildTraits;
                 // a.download = q + '_associations_export.tsv'
