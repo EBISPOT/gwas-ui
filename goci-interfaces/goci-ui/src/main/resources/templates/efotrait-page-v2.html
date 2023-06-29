@@ -69,8 +69,8 @@
         //<![CDATA[
         function startDownloadExport(table) {
             const a = document.createElement("a");
-            const includeBgTraits = 'includeBgTraits=' + $('#toggle-data-display').is(':checked');
-            const includeChildTraits = 'includeChildTraits=' + $('#include-bg-traits').is(':checked');
+            const includeBgTraits = 'includeBgTraits=' + $('#include-bg-traits').is(':checked');
+            const includeChildTraits = 'includeChildTraits=' + $('#toggle-data-display').is(':checked');
             const q = [[${result.query}]];
             if (table === 'studies') {
                 a.href = gwasProperties.contextPath + 'api/v2/efotraits/' + q + '/studies/download?' + includeBgTraits  + '&' + includeChildTraits;
