@@ -130,7 +130,7 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
             }
            String[] alleles = riskAllele.split(separator);
           return  Arrays.asList(alleles).stream().map((allele) -> {
-                if (allele.matches("\\w+-.+")) {
+                if (allele.matches(".+-.+")) {
                     int lastIndex = allele.lastIndexOf("-");
                     String allele_rsId = allele.substring(0, lastIndex).trim().replace(" ", "");
                     String allele_label = allele.substring(lastIndex + 1, allele.length()).trim();
