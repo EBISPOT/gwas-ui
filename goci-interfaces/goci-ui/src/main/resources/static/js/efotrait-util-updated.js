@@ -106,7 +106,7 @@ $(document).ready(() => {
  * in the Association, Study, and LocusZoom plot.
  */
 toggleDataDisplay = function () {
-    // TODO: When clicked, show loading for data tables, LocusZoom, and "Download Catalog data" button
+    // TODO: When clicked, show loading for data tables, LocusZoom, and "Download Associations" button
 
     var checkBox = document.getElementById("toggle-data-display");
     var text = document.getElementById("text");
@@ -287,7 +287,7 @@ displayEFOInfo = function(initCBState) {
                 displayTraitCountLoading(filteredTraitIds.length, false);
             });
 
-            // Get data for "Download Catalog data" button
+            // Get data for "Download Associations" button
             setTraitDownloadLink(filteredTraitIds);
             let traitsToDisplay = filteredTraitIds;
 
@@ -309,7 +309,7 @@ displayEFOInfo = function(initCBState) {
                         displayTraitCountLoading(filteredTraitIds.length, false);
                     });
 
-                    // Get data for "Download Catalog data" button for mainEFO and child terms
+                    // Get data for "Download Associations" button for mainEFO and child terms
                     setTraitDownloadLink(filteredTraitIds);
                 } else {
                     // Show status message for traitCount used to get data
@@ -323,7 +323,7 @@ displayEFOInfo = function(initCBState) {
                         displayTraitCountLoading([efoId].length, false);
                     });
 
-                    // Get data for "Download Catalog data" button for mainEFO
+                    // Get data for "Download Associations" button for mainEFO
                     setTraitDownloadLink([efoId]);
                 }
             });
@@ -342,7 +342,7 @@ displayEFOInfo = function(initCBState) {
 
 
 /**
- * Query Fat Solr to get data to download from "Download Catalog data" button.
+ * Query Fat Solr to get data to download from "Download Associations" button.
  */
 getDownloadCatalogData = function() {
     $("#form1").submit(function(e) {

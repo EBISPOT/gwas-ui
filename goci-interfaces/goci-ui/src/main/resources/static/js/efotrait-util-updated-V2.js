@@ -236,7 +236,7 @@ displayEFOInfo = function(initCBState) {
 
 
 /**
- * Query Fat Solr to get data to download from "Download Catalog data" button.
+ * Query Fat Solr to get data to download from "Download Associations" button.
  */
 getDownloadCatalogData = function() {
     $("#form1").submit(function(e) {
