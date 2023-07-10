@@ -60,6 +60,7 @@
                     <th>Replication sample</th>
                     <th>Association count</th>
                     <th>Summary statistics</th>
+                    <th>Licence</th>
                 </tr>
                 <tr>
                     <th class="searchable">First author</th>
@@ -74,6 +75,7 @@
                     <th class="searchable">Replication sample</th>
                     <th>Association count</th>
                     <th>Summary statistics</th>
+                    <th>Licence</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
@@ -198,6 +200,11 @@
                         return res;
                     }
                 },
+                {
+                    data: 'agreedToCc0', name: 'agreedToCc0', defaultContent: "No", visible: false, render: function(data) {
+                        return data === true ? 'CC0' : '-'
+                    }
+                }
             ],
             dom: 'lBrtip',
             buttons: [
