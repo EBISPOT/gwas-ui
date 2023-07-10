@@ -10,9 +10,9 @@ $(document).ready(function() {
     $('#study_panel').hide();
     $('#efotrait_panel').hide();
     $('#ld_panel').hide();
-
     var rsId = $('#query').text();
-    if (rsId != '') {
+    setDownloadLink("rsId:" + rsId);
+    if (rsId !== '') {
         // getVariantData(searchTerm);
         var slimSolrData = getSlimSolrData(rsId);
         var location = slimSolrData.position;
