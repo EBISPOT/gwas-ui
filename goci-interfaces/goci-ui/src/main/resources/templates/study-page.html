@@ -291,15 +291,15 @@
                         </div>
 
                         <div class="clearfix">
-                            <div class="col-lg-3 col-md-3 item-left">
-                                <span class="item-left-bold">Corresponding author</span>
-                            </div>
-                            <div class="col-lg-3 col-md-3" id="corresponding-author"></div>
-
-                            <div class="col-lg-3 col-md-3">
+                            <div class="col-lg-3 col-md-3  item-left">
                                 <span class="item-left-bold">Date submitted to Catalog</span>
                             </div>
                             <div class="col-lg-3 col-md-3" id="date-submitted"></div>
+
+<!--                            <div class="col-lg-3 col-md-3">-->
+<!--                                <span class="item-left-bold">Corresponding author</span>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-3 col-md-3" id="corresponding-author"></div>-->
                         </div>
 
                         <div class="clearfix">
@@ -437,24 +437,22 @@
 
     <!-- Google analytics
     ================================================== -->
-<!--    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    <!--    <script>
+         (function (i, s, o, g, r, a, m) {
+             i['GoogleAnalyticsObject'] = r;
+             i[r] = i[r] || function () {
+                 (i[r].q = i[r].q || []).push(arguments)
+             }, i[r].l = 1 * new Date();
+             a = s.createElement(o),
+                 m = s.getElementsByTagName(o)[0];
+             a.async = 1;
+             a.src = g;
+             m.parentNode.insertBefore(a, m)
+         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-60195133-1', 'auto');
         ga('send', 'pageview');
-    </script>-->
-
-    <div th:remove="tag" th:replace="fragments/google-analytics :: analytics"></div>
+    </script>
 </div>
 
 </body>
