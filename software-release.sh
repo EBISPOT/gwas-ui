@@ -5,7 +5,7 @@
 
 # Ensure all branches ready for release are merged into dev branch
 
-DEV_BRANCH='goci-977-Google-Analytics-release'
+DEV_BRANCH='dev'
 MASTER_BRANCH='master'
 DOCUMENTATION_BRANCH='documentation'
 
