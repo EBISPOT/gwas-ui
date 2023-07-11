@@ -56,11 +56,13 @@
                     <th>Reported trait</th>
                     <th>Trait(s)</th>
                     <th>Background trait(s)</th>
-                    <th>Discovery sample</th>
-                    <th>Replication sample</th>
+                    <th>Discovery sample number</th>
+                    <th>Replication sample number</th>
+                    <th>Discovery sample description</th>
+                    <th>Replication sample description</th>
                     <th>Association count</th>
                     <th>Summary statistics</th>
-                    <th>Licence</th>
+                    <th>License</th>
                 </tr>
                 <tr>
                     <th class="searchable">First author</th>
@@ -71,11 +73,13 @@
                     <th class="searchable">Reported trait</th>
                     <th class="searchable">Trait(s)</th>
                     <th class="searchable">Background trait(s)</th>
-                    <th class="searchable">Discovery sample</th>
-                    <th class="searchable">Replication sample</th>
+                    <th>Discovery sample number</th>
+                    <th>Replication sample number</th>
+                    <th>Discovery sample description</th>
+                    <th>Replication sample description</th>
                     <th>Association count</th>
                     <th>Summary statistics</th>
-                    <th>Licence</th>
+                    <th>License</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
@@ -173,15 +177,30 @@
                         return data ? data.join(', ') : null;
                     }, defaultContent: "-", orderable: false
                 },
-                {data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: true, defaultContent: "-", render: function (data) {
+                {
+                    data: 'discoverySampleAncestry', name: 'discoverySampleAncestry', orderable: true, defaultContent: "-", render: function (data) {
                         data = data ?.map(e => '&bull; ' + e);
                         return data ?.join('<br/>');
                     }
                 },
-                {data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: true, defaultContent: "-", render: function (data) {
+                {
+                    data: 'replicationSampleAncestry', name: 'replicationSampleAncestry', orderable: true, defaultContent: "-", render: function (data) {
                         data = data ?.map(e => '&bull; ' + e);
                         return data ?.join('<br/>');
-                    }},
+                    }
+                },
+                {
+                    data: 'initialSampleDescription', name: 'initialSampleDescription', orderable: false, visible: false , defaultContent: "-", render: function (data) {
+                        data = data?.map(e => '&bull; ' + e);
+                        return data?.join('<br/>');
+                    }
+                },
+                {
+                    data: 'replicateSampleDescription', name: 'replicateSampleDescription', orderable: false, visible: false, defaultContent: "-", render: function (data) {
+                        data = data?.map(e => '&bull; ' + e);
+                        return data?.join('<br/>');
+                    }
+                },
                 {data: 'associationCount', name: 'associationCount'},
                 {
                     data: 'summaryStatistics', name: 'fullPvalueSet', defaultContent: "Not available", render: function(data, type, row) {
