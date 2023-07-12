@@ -452,7 +452,9 @@
 
         ga('create', 'UA-60195133-1', 'auto');
         ga('send', 'pageview');
-    </script>
+    </script>-->
+
+    <div th:remove="tag" th:replace="fragments/google-analytics :: analytics"></div>
 </div>
 
 </body>
