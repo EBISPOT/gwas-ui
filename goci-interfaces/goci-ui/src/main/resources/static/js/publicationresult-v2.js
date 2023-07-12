@@ -71,9 +71,11 @@ function getDataSolr(main, initLoad = false) {
             'wt':'json',
             'dataType': 'jsonp',
         }, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
-        var summaryStatsIcon = "<span>-</span>";
-        if (data.response.docs[0].fullPvalueSet) summaryStatsIcon = "<a href='#study_panel'><span style='font-size: 20px;' " +
-            "class='glyphicon glyphicon-signal clickable'></span></a>";
+        var summaryStatsIcon = "<span>Not available</span>";
+        if (data.response.docs[0].fullPvalueSet) summaryStatsIcon =
+            "<a onclick=\"tabIn('#ss_panel'); $('#ss_btn').click(); $('html, body').animate({scrollTop: $('#assn_table').offset().top}, 2000);\">" +
+                "<span style='font-size: 20px;' class='glyphicon glyphicon-signal clickable'></span>" +
+            "</a>";
         $("#study-summary-stats").html(summaryStatsIcon);
     }).catch(function (err) {
         console.error('Error when searching Solr Slim for: ' + "pmid:" + main + '. ' + err);
