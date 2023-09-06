@@ -118,11 +118,11 @@ public class RestInteractionServiceImpl implements RestInteractionService {
         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(paramsMap, headers);
         ResponseEntity<SolrData> responseEntity = null;
         try {
-            StringBuilder stringBuilder = new StringBuilder();
-            for(String str : paramsMap.keySet()){
-                stringBuilder.append(str).append("=").append(paramsMap.getFirst(str)).append("&");
-            }
-            System.out.println("Copy this: " + stringBuilder);
+//            StringBuilder stringBuilder = new StringBuilder();
+//            for(String str : paramsMap.keySet()){
+//                stringBuilder.append(str).append("=").append(paramsMap.getFirst(str)).append("&");
+//            }
+//            System.out.println("Copy this: " + stringBuilder);
             responseEntity = restTemplate.exchange(uri, HttpMethod.POST, httpEntity, new ParameterizedTypeReference
                 <SolrData>() {
             });
