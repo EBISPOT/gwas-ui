@@ -90,10 +90,17 @@ public class SolrSearchSumstatsServiceImpl implements SolrSearchSumstatsService 
         String reportedTrait = searchStudyDTO.getReportedTrait();
         String efoTrait = searchStudyDTO.getEfoTrait();
         String bgTrait = searchStudyDTO.getBgTrait();
+        String firstAuthor = searchStudyDTO.getFirstAuthor();
         filterQueryBuilder.append(filterQuery);
 
         if(accessionId != null) {
             filterQueryBuilder.append(String.format(" AND accessionId:\"*%s*\"",accessionId));
+        }
+        if(firstAuthor != null) {
+            if(firstAuthor.contains(" "))
+                filterQueryBuilder.append(String.format( " AND author:\"*%s*\"", firstAuthor));
+            else
+                filterQueryBuilder.append(String.format( " AND author:*%s*", firstAuthor));
         }
         if(reportedTrait != null) {
             if(reportedTrait.contains(" "))
