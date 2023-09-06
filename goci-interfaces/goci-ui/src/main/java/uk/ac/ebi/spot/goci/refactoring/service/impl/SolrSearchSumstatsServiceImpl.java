@@ -133,21 +133,18 @@ public class SolrSearchSumstatsServiceImpl implements SolrSearchSumstatsService 
             Sort.Order orderAsscn = sort.getOrderFor("associationCount");
             Sort.Order orderPdate = sort.getOrderFor("publicationDate");
             Sort.Order orderFirstAuthor = sort.getOrderFor("firstAuthor");
+            if(orderPdate != null) {
+                sortProperty =  orderPdate.isAscending() ? "asc" : "desc";
+                sortParam = String.format("publicationDate %s", sortProperty);
+            }
             if(orderAsscn != null) {
                 sortProperty =  orderAsscn.isAscending() ? "asc" : "desc";
                 sortParam = String.format("associationCount %s", sortProperty);
-
-                if(orderPdate != null) {
-                    sortProperty =  orderPdate.isAscending() ? "asc" : "desc";
-                    sortParam = String.format("publicationDate %s", sortProperty);
-                }
-                if(orderFirstAuthor != null) {
-                    sortProperty =  orderFirstAuthor.isAscending() ? "asc" : "desc";
-                    sortProperty = String.format("author_s %s", sortProperty);
-                }
             }
-        }else {
-            sortParam = "publicationDate desc";
+            if(orderFirstAuthor != null) {
+                sortProperty =  orderFirstAuthor.isAscending() ? "asc" : "desc";
+                sortParam = String.format("author_s %s", sortProperty);
+            }
         }
         return sortParam;
     }
