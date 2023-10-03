@@ -20,14 +20,16 @@ public class JsonStreamingProcessorService {
     private boolean isMultiSnpHaplotype;
     private boolean isSnpInteraction;
     private boolean includeAncestry;
+    private boolean includeCohortsAndSs;
 
     public JsonStreamingProcessorService(BufferedReader input, boolean includeAnnotations, String type,
-                                         boolean includeAncestry, BufferedWriter output) {
+                                         boolean includeAncestry, boolean includeCohortsAndSs, BufferedWriter output) {
         this.input = input;
         this.output = output;
         this.includeAnnotations = includeAnnotations;
         this.type = type;
         this.includeAncestry = includeAncestry;
+        this.includeCohortsAndSs = includeCohortsAndSs;
         newline = System.getProperty("line.separator");
     }
 
@@ -55,11 +57,14 @@ public class JsonStreamingProcessorService {
         if((includeAnnotations) && (!type.equals("study_new_format")) ){
             header = header.concat("\tMAPPED_TRAIT\tMAPPED_TRAIT_URI\tSTUDY ACCESSION\tGENOTYPING TECHNOLOGY");
         }
+        if (includeCohortsAndSs) {
+            header = header.concat("\tCOHORT\tFULL SUMMARY STATISTICS\tSUMMARY STATS LOCATION");
+        }
 
         header = header.concat("\r\n");
         output.write(header);
 
-        JsonProcessingService processor = new JsonProcessingService("", includeAnnotations, type, includeAncestry);
+        JsonProcessingService processor = new JsonProcessingService("", includeAnnotations, type, includeAncestry, includeCohortsAndSs);
         ObjectMapper mapper = new ObjectMapper();
         JsonParser parser = mapper.getFactory().createParser(input);
         while(parser.nextToken() != JsonToken.START_ARRAY) {
@@ -105,7 +110,7 @@ public class JsonStreamingProcessorService {
             BufferedWriter output = new BufferedWriter(new FileWriter("out.txt"));
 
             JsonStreamingProcessorService processorService = new JsonStreamingProcessorService(input, true,
-                    "association", false, output);
+                    "association", false, false , output);
             processorService.processJson();
 //            JsonProcessingService oldProcessor = new JsonProcessingService(input.readLine(), true,
 //                    "association", false);
