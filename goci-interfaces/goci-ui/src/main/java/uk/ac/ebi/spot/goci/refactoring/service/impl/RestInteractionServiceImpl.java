@@ -30,7 +30,7 @@ public class RestInteractionServiceImpl implements RestInteractionService {
 
 
     public OLSTermApiDoc callOlsRestAPI(String uri, String efoId) {
-        log.info("The OLS API call uri is ->"+uri);
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
@@ -39,6 +39,7 @@ public class RestInteractionServiceImpl implements RestInteractionService {
         paramsMap.add("id",efoId);
         paramsMap.add("size","500");
         String olsUri = UriComponentsBuilder.fromHttpUrl(uri).queryParams(paramsMap).build().toUriString();
+        log.info("The OLS API call uri is ->"+olsUri);
         try {
             responseEntity = restTemplate.exchange(olsUri, HttpMethod.GET, httpEntity, new ParameterizedTypeReference
                     <OLSTermApiDoc>() {
