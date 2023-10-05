@@ -1430,7 +1430,7 @@ var OLS = {
      * @returns {[]}
      */
     getEFOAttributesFromOLS : function(efo_short_form_id) {
-        var url = `https://www.ebi.ac.uk/ols/api/ontologies/efo/terms/http%253A%252F%252Fwww.ebi.ac.uk%252Fefo%252F${efo_short_form_id}`
+        var url = `https://www.ebi.ac.uk/ols4/api/ontologies/efo/terms/http%253A%252F%252Fwww.ebi.ac.uk%252Fefo%252F${efo_short_form_id}`
         return promiseGet(url).then(JSON.parse).then(function(response) {
             var efoSynonyms = response["synonyms"];
             var description = response["description"];

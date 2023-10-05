@@ -15,9 +15,9 @@ if (gwasProperties.host.includes('localhost')) {
     global_gwas_trait_api = 'https://www.ebi.ac.uk/gwas/rest/api/efoTraits/';
 }
 
-var global_ols_efo_term = 'https://www.ebi.ac.uk/ols/ontologies/efo/terms?iri=';
-var global_ols_api_efo_terms = 'https://www.ebi.ac.uk/ols/api/ontologies/efo/terms/';
-var global_ols_efo_hierarchical_descendents = 'https://www.ebi.ac.uk/ols/api/ontologies/efo/hierarchicalDescendants';
+var global_ols_efo_term = 'https://www.ebi.ac.uk/ols4/ontologies/efo/terms?iri=';
+var global_ols_api_efo_terms = 'https://www.ebi.ac.uk/ols4/api/ontologies/efo/terms/';
+var global_ols_efo_hierarchical_descendents = 'https://www.ebi.ac.uk/ols4/api/ontologies/efo/hierarchicalDescendants';
 
 var global_efo_info_tag_id = '#efo-info';
 var global_epmc_api = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search';
