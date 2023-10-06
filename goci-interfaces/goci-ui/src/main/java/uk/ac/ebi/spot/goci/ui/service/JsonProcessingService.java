@@ -292,8 +292,8 @@ public class JsonProcessingService {
             line.append('\t').append(getCases(doc));
             line.append('\t').append(getControls(doc));
             line.append('\t').append(getSampleDescription(doc));
-            line.append('\t').append(getCohort(doc));
-            line.append('\t').append(getCohortReference(doc));
+//            line.append('\t').append(getCohort(doc));
+//            line.append('\t').append(getCohortReference(doc));
         }
 
         line.append("\r\n");
