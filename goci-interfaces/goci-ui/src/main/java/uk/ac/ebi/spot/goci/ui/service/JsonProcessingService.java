@@ -90,7 +90,7 @@ public class JsonProcessingService {
                 if(doc.get("ancestryLinks") != null){
                     for(JsonNode a : doc.get("ancestryLinks")){
                         if(type.equals("ancestry_new_format")){
-                            processAncestryJson(line, doc, a, true);
+                            processAncestryJson(line, doc, a, type);
                         }else {
                             processAncestryJson(line, doc, a);
                         }
@@ -198,10 +198,10 @@ public class JsonProcessingService {
         
     }
     public void processAncestryJson(StringBuilder line, JsonNode doc, JsonNode ancestryRow) throws IOException {
-        processAncestryJson(line, doc, ancestryRow, false);
+        processAncestryJson(line, doc, ancestryRow, "");
     }
 
-    public void processAncestryJson(StringBuilder line, JsonNode doc, JsonNode ancestryRow, boolean newFormat) throws IOException {
+    public void processAncestryJson(StringBuilder line, JsonNode doc, JsonNode ancestryRow, String type) throws IOException {
 
         String pubmedid = getPubmedId(doc);
 
@@ -287,13 +287,18 @@ public class JsonProcessingService {
         line.append(description);
 //        line.append("\t");
 
-        if(newFormat){
+        if ("ancestry_new_format".equals(type)){
             line.append('\t').append(getFounder(doc));
             line.append('\t').append(getCases(doc));
             line.append('\t').append(getControls(doc));
             line.append('\t').append(getSampleDescription(doc));
-//            line.append('\t').append(getCohort(doc));
-//            line.append('\t').append(getCohortReference(doc));
+            line.append('\t').append(getCohort(doc));
+            line.append('\t').append(getCohortReference(doc));
+        } else if ("ancestry_new_format_no_cohorts".equals(type)) {
+            line.append('\t').append(getFounder(doc));
+            line.append('\t').append(getCases(doc));
+            line.append('\t').append(getControls(doc));
+            line.append('\t').append(getSampleDescription(doc));
         }
 
         line.append("\r\n");

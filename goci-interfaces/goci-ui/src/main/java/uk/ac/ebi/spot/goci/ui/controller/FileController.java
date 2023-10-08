@@ -82,6 +82,9 @@ public class FileController {
     @Value("${download.new_format.ancestries}")
     private Resource newAncestriesFileDownload;
 
+    @Value("${download.new_format.ancestriesWithoutCohorts}")
+    private Resource ancestriesWithoutCohortsFileDownload;
+
 //    @Value("${download.ensemblmapping}")
 //    private Resource ensemblMappingFileDownload;
 
