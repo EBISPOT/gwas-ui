@@ -188,7 +188,7 @@ public class FileController {
 
             String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
             String fileName = "gwas-catalog-v1.0.3.1-studies-r".concat(releasedate).concat(".tsv");
-            buildDownload(fileName, newStudiesFileDownload, response);
+            buildDownload(fileName, newStudiesWithCohortsAndSsDownload, response);
         }
         else {
             throw new FileNotFoundException();
@@ -203,6 +203,20 @@ public class FileController {
             String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
             String fileName = "gwas-catalog-v1.0.3-ancestries-r".concat(releasedate).concat(".tsv");
             buildDownload(fileName, newAncestriesFileDownload, response);
+        }
+        else {
+            throw new FileNotFoundException();
+        }
+    }
+
+    @RequestMapping(value = "api/search/downloads/ancestries/v1.0.3.1",
+            method = RequestMethod.GET)
+    public void getNewAncestriesDownloadWithoutCohorts(HttpServletResponse response) throws IOException {
+        if (ancestriesWithoutCohortsFileDownload.exists() && catalogStatsFile.exists()) {
+
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
+            String fileName = "gwas-catalog-v1.0.3.1-ancestries-r".concat(releasedate).concat(".tsv");
+            buildDownload(fileName, ancestriesWithoutCohortsFileDownload, response);
         }
         else {
             throw new FileNotFoundException();
@@ -264,7 +278,7 @@ public class FileController {
             String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
 
             String fileName = "gwas_catalog_v1.0.2.1-studies_r".concat(releasedate).concat(".tsv");
-            buildDownload(fileName, alternativeStudiesDownload, response);
+            buildDownload(fileName, alternativeStudiesWithCohortsAndSsDownload, response);
         }
         else {
             throw new FileNotFoundException();
