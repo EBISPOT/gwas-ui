@@ -26,12 +26,14 @@ public class JsonProcessingService {
     private boolean isMultiSnpHaplotype;
     private boolean isSnpInteraction;
     private boolean includeAncestry;
+    private boolean includeCohortsAndSs;
 
-    public JsonProcessingService(String json, boolean includeAnnotations, String type, boolean includeAncestry) {
+    public JsonProcessingService(String json, boolean includeAnnotations, String type, boolean includeAncestry, boolean includeCohortsAndSs) {
         this.json = json;
         this.includeAnnotations = includeAnnotations;
         this.type = type;
         this.includeAncestry = includeAncestry;
+        this.includeCohortsAndSs = includeCohortsAndSs;
         newline = System.getProperty("line.separator");
 
     }
@@ -44,9 +46,12 @@ public class JsonProcessingService {
                     "DATE ADDED TO CATALOG\tPUBMEDID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tPLATFORM [SNPS PASSING QC]\tASSOCIATION COUNT";
         }
         else if(type.equals("study_new_format")){
-            header =
-                    "DATE ADDED TO CATALOG\tPUBMED ID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tPLATFORM [SNPS PASSING QC]\tASSOCIATION COUNT\tMAPPED_TRAIT\tMAPPED_TRAIT_URI\tSTUDY ACCESSION\tGENOTYPING TECHNOLOGY\tSUMMARY STATS LOCATION\tSUBMISSION DATE\tSTATISTICAL MODEL\tBACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT URI";
-        }else if(type.equals("ancestry_new_format")){
+            if (!includeCohortsAndSs)
+                header = "DATE ADDED TO CATALOG\tPUBMED ID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tPLATFORM [SNPS PASSING QC]\tASSOCIATION COUNT\tMAPPED_TRAIT\tMAPPED_TRAIT_URI\tSTUDY ACCESSION\tGENOTYPING TECHNOLOGY\tSUMMARY STATS LOCATION\tSUBMISSION DATE\tSTATISTICAL MODEL\tBACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT URI";
+            else
+                // same as above but without SUMMARY STATS LOCATION as will be added by includeCohortsAndSs
+                header = "DATE ADDED TO CATALOG\tPUBMED ID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tPLATFORM [SNPS PASSING QC]\tASSOCIATION COUNT\tMAPPED_TRAIT\tMAPPED_TRAIT_URI\tSTUDY ACCESSION\tGENOTYPING TECHNOLOGY\tSUBMISSION DATE\tSTATISTICAL MODEL\tBACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT URI";
+        } else if(type.equals("ancestry_new_format")){
             header =
                     "STUDY ACCESSION\tPUBMED ID\tFIRST AUTHOR\tDATE\tINITIAL SAMPLE DESCRIPTION\tREPLICATION SAMPLE DESCRIPTION\tSTAGE\tNUMBER OF INDIVIDUALS\tBROAD ANCESTRAL CATEGORY\tCOUNTRY OF ORIGIN\tCOUNTRY OF RECRUITMENT\tADDITIONAL ANCESTRY DESCRIPTION\tANCESTRY DESCRIPTOR\tFOUNDER/GENETICALLY ISOLATED POPULATION\tNUMBER OF CASES\tNUMBER OF CONTROLS\tSAMPLE DESCRIPTION\tCOHORT(S)\tCOHORT-SPECIFIC REFERENCE";
         }
@@ -85,7 +90,7 @@ public class JsonProcessingService {
                 if(doc.get("ancestryLinks") != null){
                     for(JsonNode a : doc.get("ancestryLinks")){
                         if(type.equals("ancestry_new_format")){
-                            processAncestryJson(line, doc, a, true);
+                            processAncestryJson(line, doc, a, type);
                         }else {
                             processAncestryJson(line, doc, a);
                         }
@@ -111,7 +116,7 @@ public class JsonProcessingService {
         processStudyJson(line, doc, false);
     }
 
-        public void processStudyJson(StringBuilder line, JsonNode doc, boolean newFormat) throws IOException{
+    public void processStudyJson(StringBuilder line, JsonNode doc, boolean newFormat) throws IOException{
 
         line.append(getDate(doc));
         line.append("\t");
@@ -175,6 +180,11 @@ public class JsonProcessingService {
             line.append("\t");
             line.append(getGenotypingTechonologies(doc));
         }
+        if (includeCohortsAndSs) {
+            line.append("\t").append(getCohort(doc));
+            line.append("\t").append(getFullPvalueSet(doc));
+            line.append("\t").append(getFtpLink(doc));
+        }
         if(newFormat){
             line.append("\t").append(getSummaryStatsLocation(doc));
             line.append("\t").append(getSubmissionDate(doc));
@@ -188,10 +198,10 @@ public class JsonProcessingService {
         
     }
     public void processAncestryJson(StringBuilder line, JsonNode doc, JsonNode ancestryRow) throws IOException {
-        processAncestryJson(line, doc, ancestryRow, false);
+        processAncestryJson(line, doc, ancestryRow, "");
     }
 
-    public void processAncestryJson(StringBuilder line, JsonNode doc, JsonNode ancestryRow, boolean newFormat) throws IOException {
+    public void processAncestryJson(StringBuilder line, JsonNode doc, JsonNode ancestryRow, String type) throws IOException {
 
         String pubmedid = getPubmedId(doc);
 
@@ -277,13 +287,18 @@ public class JsonProcessingService {
         line.append(description);
 //        line.append("\t");
 
-        if(newFormat){
+        if ("ancestry_new_format".equals(type)){
             line.append('\t').append(getFounder(doc));
             line.append('\t').append(getCases(doc));
             line.append('\t').append(getControls(doc));
             line.append('\t').append(getSampleDescription(doc));
             line.append('\t').append(getCohort(doc));
             line.append('\t').append(getCohortReference(doc));
+        } else if ("ancestry_new_format_no_cohorts".equals(type)) {
+            line.append('\t').append(getFounder(doc));
+            line.append('\t').append(getCases(doc));
+            line.append('\t').append(getControls(doc));
+            line.append('\t').append(getSampleDescription(doc));
         }
 
         line.append("\r\n");
@@ -1010,7 +1025,8 @@ public class JsonProcessingService {
     }
 
     private String getSummaryStatsLocation(JsonNode doc){
-        return getNodeValue(doc, "summary_stats_location");
+        // return getNodeValue(doc, "summary_stats_location");
+        return getFtpLink(doc);
     }
     private String getSubmissionDate(JsonNode doc){
         return getNodeValue(doc, "submission_date");
@@ -1042,6 +1058,15 @@ public class JsonProcessingService {
     }
     private String getCohort(JsonNode doc){
         return getNodeValue(doc, "cohort");
+    }
+    private String getFullPvalueSet(JsonNode doc){
+        String val = getNodeValue(doc, "fullPvalueSet");
+        return "true".equals(val) ? "yes" : "no";
+    }
+    private String getFtpLink(JsonNode doc){
+        String val = getNodeValue(doc, "ftpLink");
+        if (val == null || val.isEmpty()) return "NA";
+        return val;
     }
     private String getCohortReference(JsonNode doc){
         return getNodeValue(doc, "cohort_specific_reference");

@@ -46,6 +46,9 @@ public class FileController {
     @Value("${download.studiesAlternative}")
     private Resource alternativeStudiesDownload;
 
+    @Value("${download.studiesAlternativeWithCohortsAndSs}")
+    private Resource alternativeStudiesWithCohortsAndSsDownload;
+
     @Value("${download.ancestry}")
     private Resource ancestryFileDownload;
 
@@ -73,8 +76,14 @@ public class FileController {
     @Value("${download.new_format.studies}")
     private Resource newStudiesFileDownload;
 
+    @Value("${download.new_format.studiesWithCohortsAndSs}")
+    private Resource newStudiesWithCohortsAndSsDownload;
+
     @Value("${download.new_format.ancestries}")
     private Resource newAncestriesFileDownload;
+
+    @Value("${download.new_format.ancestriesWithoutCohorts}")
+    private Resource ancestriesWithoutCohortsFileDownload;
 
 //    @Value("${download.ensemblmapping}")
 //    private Resource ensemblMappingFileDownload;
@@ -172,6 +181,20 @@ public class FileController {
         }
     }
 
+    @RequestMapping(value = "api/search/downloads/studies/v1.0.3.1",
+            method = RequestMethod.GET)
+    public void getNewStudiesWithCohortAndSumstatsDownload(HttpServletResponse response) throws IOException {
+        if (newStudiesWithCohortsAndSsDownload.exists() && catalogStatsFile.exists()) {
+
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
+            String fileName = "gwas-catalog-v1.0.3.1-studies-r".concat(releasedate).concat(".tsv");
+            buildDownload(fileName, newStudiesFileDownload, response);
+        }
+        else {
+            throw new FileNotFoundException();
+        }
+    }
+
     @RequestMapping(value = "api/search/downloads/ancestries_new",
             method = RequestMethod.GET)
     public void getNewAncestriesDownload(HttpServletResponse response) throws IOException {
@@ -227,6 +250,20 @@ public class FileController {
             String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
 
             String fileName = "gwas_catalog_v1.0.2-studies_r".concat(releasedate).concat(".tsv");
+            buildDownload(fileName, alternativeStudiesDownload, response);
+        }
+        else {
+            throw new FileNotFoundException();
+        }
+    }
+
+    @RequestMapping(value = "api/search/downloads/studies/v1.0.2.1",
+            method = RequestMethod.GET)
+    public void getAlternativeStudiesWithCohortAndSumstatsDownload(HttpServletResponse response) throws IOException {
+        if (alternativeStudiesWithCohortsAndSsDownload.exists() && catalogStatsFile.exists()) {
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
+
+            String fileName = "gwas_catalog_v1.0.2.1-studies_r".concat(releasedate).concat(".tsv");
             buildDownload(fileName, alternativeStudiesDownload, response);
         }
         else {

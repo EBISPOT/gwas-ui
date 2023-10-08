@@ -20,14 +20,16 @@ public class JsonStreamingProcessorService {
     private boolean isMultiSnpHaplotype;
     private boolean isSnpInteraction;
     private boolean includeAncestry;
+    private boolean includeCohortsAndSs;
 
     public JsonStreamingProcessorService(BufferedReader input, boolean includeAnnotations, String type,
-                                         boolean includeAncestry, BufferedWriter output) {
+                                         boolean includeAncestry, boolean includeCohortsAndSs, BufferedWriter output) {
         this.input = input;
         this.output = output;
         this.includeAnnotations = includeAnnotations;
         this.type = type;
         this.includeAncestry = includeAncestry;
+        this.includeCohortsAndSs = includeCohortsAndSs;
         newline = System.getProperty("line.separator");
     }
 
@@ -41,8 +43,10 @@ public class JsonStreamingProcessorService {
             header =
                     "DATE ADDED TO CATALOG\tPUBMED ID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tPLATFORM [SNPS PASSING QC]\tASSOCIATION COUNT\tMAPPED_TRAIT\tMAPPED_TRAIT_URI\tSTUDY ACCESSION\tGENOTYPING TECHNOLOGY\tSUMMARY STATS LOCATION\tSUBMISSION DATE\tSTATISTICAL MODEL\tBACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT URI";
         }else if(type.equals("ancestry_new_format")){
-            header =
-                    "STUDY ACCESSION\tPUBMED ID\tFIRST AUTHOR\tDATE\tINITIAL SAMPLE DESCRIPTION\tREPLICATION SAMPLE DESCRIPTION\tSTAGE\tNUMBER OF INDIVIDUALS\tBROAD ANCESTRAL CATEGORY\tCOUNTRY OF ORIGIN\tCOUNTRY OF RECRUITMENT\tADDITIONAL ANCESTRY DESCRIPTION\tANCESTRY DESCRIPTOR\tFOUNDER/GENETICALLY ISOLATED POPULATION\tNUMBER OF CASES\tNUMBER OF CONTROLS\tSAMPLE DESCRIPTION\tCOHORT(S)\tCOHORT-SPECIFIC REFERENCE";
+            header = "STUDY ACCESSION\tPUBMED ID\tFIRST AUTHOR\tDATE\tINITIAL SAMPLE DESCRIPTION\tREPLICATION SAMPLE DESCRIPTION\tSTAGE\tNUMBER OF INDIVIDUALS\tBROAD ANCESTRAL CATEGORY\tCOUNTRY OF ORIGIN\tCOUNTRY OF RECRUITMENT\tADDITIONAL ANCESTRY DESCRIPTION\tANCESTRY DESCRIPTOR\tFOUNDER/GENETICALLY ISOLATED POPULATION\tNUMBER OF CASES\tNUMBER OF CONTROLS\tSAMPLE DESCRIPTION\tCOHORT(S)\tCOHORT-SPECIFIC REFERENCE";
+        }
+        else if (type.equals("ancestry_new_format_no_cohorts")) {
+            header = "STUDY ACCESSION\tPUBMED ID\tFIRST AUTHOR\tDATE\tINITIAL SAMPLE DESCRIPTION\tREPLICATION SAMPLE DESCRIPTION\tSTAGE\tNUMBER OF INDIVIDUALS\tBROAD ANCESTRAL CATEGORY\tCOUNTRY OF ORIGIN\tCOUNTRY OF RECRUITMENT\tADDITIONAL ANCESTRY DESCRIPTION\tANCESTRY DESCRIPTOR\tFOUNDER/GENETICALLY ISOLATED POPULATION\tNUMBER OF CASES\tNUMBER OF CONTROLS\tSAMPLE DESCRIPTION";
         }
         else if(includeAncestry){
             header =
@@ -55,11 +59,14 @@ public class JsonStreamingProcessorService {
         if((includeAnnotations) && (!type.equals("study_new_format")) ){
             header = header.concat("\tMAPPED_TRAIT\tMAPPED_TRAIT_URI\tSTUDY ACCESSION\tGENOTYPING TECHNOLOGY");
         }
+        if (includeCohortsAndSs) {
+            header = header.concat("\tCOHORT\tFULL SUMMARY STATISTICS\tSUMMARY STATS LOCATION");
+        }
 
         header = header.concat("\r\n");
         output.write(header);
 
-        JsonProcessingService processor = new JsonProcessingService("", includeAnnotations, type, includeAncestry);
+        JsonProcessingService processor = new JsonProcessingService("", includeAnnotations, type, includeAncestry, includeCohortsAndSs);
         ObjectMapper mapper = new ObjectMapper();
         JsonParser parser = mapper.getFactory().createParser(input);
         while(parser.nextToken() != JsonToken.START_ARRAY) {
@@ -78,7 +85,7 @@ public class JsonStreamingProcessorService {
                 if(doc.get("ancestryLinks") != null){
                     for(JsonNode a : doc.get("ancestryLinks")) {
                         if (type.equals("ancestry_new_format")) {
-                            processor.processAncestryJson(line, doc, a, true);
+                            processor.processAncestryJson(line, doc, a, type);
                         } else {
                             processor.processAncestryJson(line, doc, a);
                         }
@@ -105,7 +112,7 @@ public class JsonStreamingProcessorService {
             BufferedWriter output = new BufferedWriter(new FileWriter("out.txt"));
 
             JsonStreamingProcessorService processorService = new JsonStreamingProcessorService(input, true,
-                    "association", false, output);
+                    "association", false, false , output);
             processorService.processJson();
 //            JsonProcessingService oldProcessor = new JsonProcessingService(input.readLine(), true,
 //                    "association", false);
