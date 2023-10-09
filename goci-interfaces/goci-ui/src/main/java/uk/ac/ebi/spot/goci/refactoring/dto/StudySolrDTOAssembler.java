@@ -29,7 +29,8 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
 
 
     private static final Logger log = LoggerFactory.getLogger(StudySolrDTOAssembler.class);
-    private final static String INITIAL_SAMPLE_DESC_REGEX = "([1-9][0-9]{0,9}(?:,[0-9]{3,5})*)";
+    //private final static String INITIAL_SAMPLE_DESC_REGEX = "([1-9][0-9]{0,9}(?:,[0-9]{3,5})*)";
+    private final static String INITIAL_SAMPLE_DESC_REGEX = "([1-9][0-9]{0,9}(?:,[0-9]{3,5}))";
     final Pattern pattern = Pattern.compile(INITIAL_SAMPLE_DESC_REGEX);
 
     @Autowired
@@ -177,8 +178,8 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
 
         for(int i = 0; i < sampleNumbers.size(); i++) {
             String freetext = "";
-            //log.info("sampleNumbers ["+i+"]->"+sampleNumbers.get(i));
-            //log.info("text ["+i+"]->"+text.get(i));
+           // log.info("sampleNumbers ["+i+"]->"+sampleNumbers.get(i));
+           // log.info("text ["+i+"]->"+text.get(i));
             if(text.size() > sampleNumbers.size() ){
                 freetext = sampleNumbers.get(i)+ text.get(i+1);
             } else {
