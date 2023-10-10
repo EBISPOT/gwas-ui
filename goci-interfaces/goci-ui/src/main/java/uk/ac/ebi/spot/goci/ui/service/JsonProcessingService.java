@@ -180,19 +180,20 @@ public class JsonProcessingService {
             line.append("\t");
             line.append(getGenotypingTechonologies(doc));
         }
-        if (includeCohortsAndSs) {
-            line.append("\t").append(getCohort(doc));
-            line.append("\t").append(getFullPvalueSet(doc));
-            line.append("\t").append(getFtpLink(doc));
-        }
         if(newFormat){
-            line.append("\t").append(getSummaryStatsLocation(doc));
+            if (!includeCohortsAndSs)
+                line.append("\t").append(getSummaryStatsLocation(doc));
             line.append("\t").append(getSubmissionDate(doc));
             line.append("\t").append(getStatisticalModel(doc));
             line.append("\t").append(getBackgroundTrait(doc));
             Map<String, String> bkgTraits = getBackgroundEfoTraits(doc);
             line.append("\t").append(bkgTraits.get("labels"));
             line.append("\t").append(bkgTraits.get("uris"));
+        }
+        if (includeCohortsAndSs) {
+            line.append("\t").append(getCohort(doc));
+            line.append("\t").append(getFullPvalueSet(doc));
+            line.append("\t").append(getFtpLink(doc));
         }
         line.append("\r\n");
         
