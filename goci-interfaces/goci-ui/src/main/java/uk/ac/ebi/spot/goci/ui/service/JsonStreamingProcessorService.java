@@ -83,11 +83,11 @@ public class JsonStreamingProcessorService {
             if(type.equals("study") && !includeAncestry) {
                 processor.processStudyJson(line, doc);
             }
-            else if(includeAncestry || type.equals("ancestry_new_format")){
+            else if(includeAncestry || type.startsWith("ancestry_new_format")){
 
                 if(doc.get("ancestryLinks") != null){
                     for(JsonNode a : doc.get("ancestryLinks")) {
-                        if (type.equals("ancestry_new_format")) {
+                        if (type.startsWith("ancestry_new_format")) {
                             processor.processAncestryJson(line, doc, a, type);
                         } else {
                             processor.processAncestryJson(line, doc, a);
