@@ -40,7 +40,7 @@ public class JsonProcessingService {
 
     public String processJson() throws IOException {
         String header;
-        
+
         if(type.equals("study") && !includeAncestry){
             header =
                     "DATE ADDED TO CATALOG\tPUBMEDID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tPLATFORM [SNPS PASSING QC]\tASSOCIATION COUNT";
@@ -196,7 +196,7 @@ public class JsonProcessingService {
             line.append("\t").append(getFtpLink(doc));
         }
         line.append("\r\n");
-        
+
     }
     public void processAncestryJson(StringBuilder line, JsonNode doc, JsonNode ancestryRow) throws IOException {
         processAncestryJson(line, doc, ancestryRow, "");
@@ -289,6 +289,9 @@ public class JsonProcessingService {
 //        line.append("\t");
 
         if ("ancestry_new_format".equals(type)){
+            //for ANCESTRY DESCRIPTOR header which isnt filled to avoid misalignment of next columns
+            //TODO must fill with appropriate value or clear header
+            line.append('\t').append(" ");
             line.append('\t').append(getFounder(doc));
             line.append('\t').append(getCases(doc));
             line.append('\t').append(getControls(doc));
@@ -296,6 +299,9 @@ public class JsonProcessingService {
             line.append('\t').append(getCohort(doc));
             line.append('\t').append(getCohortReference(doc));
         } else if ("ancestry_new_format_no_cohorts".equals(type)) {
+            //for ANCESTRY DESCRIPTOR header which isnt filled to avoid misalignment of next columns
+            //TODO must fill with appropriate value or clear header
+            line.append('\t').append(" ");
             line.append('\t').append(getFounder(doc));
             line.append('\t').append(getCases(doc));
             line.append('\t').append(getControls(doc));
@@ -474,7 +480,7 @@ public class JsonProcessingService {
         }
 
         line.append("\r\n");
-    
+
     }
 
     private String getPlatform(JsonNode doc) {
