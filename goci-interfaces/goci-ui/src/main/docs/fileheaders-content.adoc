@@ -9,21 +9,21 @@ Data in the GWAS Catalog is currently mapped to genome assembly <span id="genome
 
 
 
-<<File headers for catalog version 1.0>>
+<<File headers for catalog v1.0>>
 
-<<File headers for catalog version 1.0.1>>
+<<File headers for catalog v1.0.1>>
 
-<<File headers for catalog version 1.0.2>>
+<<File headers for catalog v1.0.2>>
 
-<<File headers for catalog version 1.0.2.1>>
+<<File headers for catalog v1.0.2.1>>
 
 <<File headers for ancestry download>>
 
-<<File headers for unpublished studies v1.0.3.1>>
+<<File headers for unpublished studies v1.0.3>>
 
 <<File headers for unpublished studies v1.0.3.1>>
 
-<<File headers for unpublished ancestries>>
+<<File headers for unpublished ancestries v1.0.3.1>>
 
 *Available in associations download files
 
@@ -31,7 +31,7 @@ Data in the GWAS Catalog is currently mapped to genome assembly <span id="genome
 
 '''
 
-=== File headers for catalog version 1.0
+=== File headers for catalog v1.0
 
 DATE ADDED TO CATALOG^*^ ^+^: Date a study is published in the catalog
 
@@ -107,7 +107,7 @@ _Last updated: 12 January 2016_
 
 '''
 
-=== File headers for catalog version 1.0.1
+=== File headers for catalog v1.0.1
 
 As for version 1.0 plus
 
@@ -123,7 +123,7 @@ _Last updated: 24 April 2018_
 
 '''
 
-=== File headers for catalog version 1.0.2
+=== File headers for catalog v1.0.2
 
 As for version 1.0.1 plus
 
@@ -133,7 +133,7 @@ _Added: 24 April 2018_
 
 '''
 
-=== File headers for catalog version 1.0.2.1
+=== File headers for catalog v1.0.2.1
 As for version 1.0.2 plus
 
 COHORT+: Discovery stage cohorts used in this study. The full list of cohort abbreviations and definitions can be found here[LINK]. 
@@ -176,7 +176,7 @@ _Added: 16 September 2016_
 
 '''
 
-=== File headers for unpublished studies v1.0.3.1
+=== File headers for unpublished studies v1.0.3
 
 DATE ADDED TO CATALOG	Not used
 
@@ -238,7 +238,7 @@ _Added October 2023_
 
 '''
 
-=== File headers for unpublished ancestries
+=== File headers for unpublished ancestries v1.0.3.1
 
 STUDY ACCESSION	GWAS Catalog Accession ID
 
