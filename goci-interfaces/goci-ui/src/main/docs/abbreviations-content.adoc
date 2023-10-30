@@ -6,7 +6,7 @@
 
 === Cohorts
 
-For cohort abbreviations, please see https://www.ebi.ac.uk/gwas/docs/abbreviations[separate file]
+For cohort abbreviations, please see https://ftp.ebi.ac.uk/pub/databases/spot/pgs/metadata/pgs_all_metadata_cohorts.csv[separate file]
 
 === Special Characters
 
