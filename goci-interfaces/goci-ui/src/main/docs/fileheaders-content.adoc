@@ -228,7 +228,7 @@ _Added: 15 May 2020_
 
 === File headers for unpublished studies version 1.0.3.1
 
-As for version 1.0.3
+As for version 1.0.3 plus
 
 COHORT+: Discovery stage cohorts used in this study. The full list of cohort abbreviations and definitions can be found here: 
 
