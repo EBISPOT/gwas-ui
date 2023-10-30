@@ -19,9 +19,9 @@ Data in the GWAS Catalog is currently mapped to genome assembly <span id="genome
 
 <<File headers for ancestry download>>
 
-<<File headers for unpublished studies v1.0.3>>
+<<File headers for unpublished studies v1.0.3.1>>
 
-<<File headers for unpublished studies version 1.0.3.1>>
+<<File headers for unpublished studies v1.0.3.1>>
 
 <<File headers for unpublished ancestries>>
 
@@ -176,7 +176,7 @@ _Added: 16 September 2016_
 
 '''
 
-=== File headers for unpublished studies v1.0.3
+=== File headers for unpublished studies v1.0.3.1
 
 DATE ADDED TO CATALOG	Not used
 
@@ -226,7 +226,7 @@ _Added: 15 May 2020_
 
 '''
 
-=== File headers for unpublished studies version 1.0.3.1
+=== File headers for unpublished studies v1.0.3.1
 
 As for version 1.0.3 plus
 
