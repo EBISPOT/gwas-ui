@@ -60,7 +60,7 @@
 |tab separated file
 |link:fileheaders#_file_headers_for_unpublished_studies[ Click to view]
 
-|All unpublished ancestries *v1.0.3.1 - with added fields to match the unpublished downloads, including cohort identifiers and full summary statistics availability*
+|All unpublished ancestries *v1.0.3.1 - unpublished ancestries, new format*
 |link:../api/search/downloads/unpublished_ancestries/v1.0.3.1[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_unpublished_ancestries[ Click to view]
