@@ -70,8 +70,14 @@ public class FileController {
     @Value("${download.unpublished.studies}")
     private Resource unpublishedStudiesFileDownload;
 
+    @Value("${download.new_unpublished.studies}")
+    private Resource newUnpublishedStudiesFileDownload;
+
     @Value("${download.unpublished.ancestries}")
     private Resource unpublishedAncestriesFileDownload;
+
+    @Value("${download.new_unpublished.ancestries}")
+    private Resource newUnpublishedAncestriesFileDownload;
 
     @Value("${download.new_format.studies}")
     private Resource newStudiesFileDownload;
@@ -153,6 +159,20 @@ public class FileController {
         }
     }
 
+    @RequestMapping(value = "api/search/downloads/unpublished_studies/v1.0.3.1",
+            method = RequestMethod.GET)
+    public void getNewUnpublishedStudiesDownload(HttpServletResponse response) throws IOException {
+        if (newUnpublishedStudiesFileDownload.exists() && catalogStatsFile.exists()) {
+
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
+            String fileName = "gwas-catalog-v1.0.3.1-unpublished-studies-r".concat(releasedate).concat(".tsv");
+            buildDownload(fileName, newUnpublishedStudiesFileDownload, response);
+        }
+        else {
+            throw new FileNotFoundException();
+        }
+    }
+
     @RequestMapping(value = "api/search/downloads/unpublished_ancestries",
             method = RequestMethod.GET)
     public void getUnpublishedAncestriesDownload(HttpServletResponse response) throws IOException {
@@ -161,6 +181,20 @@ public class FileController {
             String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
             String fileName = "gwas-catalog-v1.0.3-unpublished-ancestries-r".concat(releasedate).concat(".tsv");
             buildDownload(fileName, unpublishedAncestriesFileDownload, response);
+        }
+        else {
+            throw new FileNotFoundException();
+        }
+    }
+
+    @RequestMapping(value = "api/search/downloads/unpublished_ancestries/v1.0.3.1",
+            method = RequestMethod.GET)
+    public void getNewUnpublishedAncestriesDownload(HttpServletResponse response) throws IOException {
+        if (newUnpublishedAncestriesFileDownload.exists() && catalogStatsFile.exists()) {
+
+            String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
+            String fileName = "gwas-catalog-v1.0.3.1-unpublished-ancestries-r".concat(releasedate).concat(".tsv");
+            buildDownload(fileName, newUnpublishedAncestriesFileDownload, response);
         }
         else {
             throw new FileNotFoundException();
