@@ -4,7 +4,7 @@
 == Description of column headings for downloadable files
 
 
-Association data in the GWAS Catalog is mapped to genome using the latest version of Ensembl. For details on genome assembly and dbSNP build, refer to the GWAS Catalog https://www.ebi.ac.uk/gwas[homepage].
+Association data in the GWAS Catalog is mapped to the genome using the latest version of Ensembl. For details on genome assembly and dbSNP build, refer to the GWAS Catalog https://www.ebi.ac.uk/gwas[homepage].
 
 
 <<File headers for catalog v1.0>>
