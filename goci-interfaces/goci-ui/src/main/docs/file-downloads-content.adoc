@@ -77,7 +77,7 @@ File name conventions:
 
 Older versions of the GWAS Catalog, with or without ontology annotations, can be found on link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/releases[ our FTP server].
 
-We are working to provide richer, fully customise-able downloads of GWAS data and these will be available soon.
+To obtain custom downloads of study and association data for a specific trait, gene, variant, genomic region or publication please access the relevant search pages and use the export option on the data tables.
 
 
 == GWAS to EFO mappings
