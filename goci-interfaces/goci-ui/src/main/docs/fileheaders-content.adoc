@@ -23,7 +23,7 @@ Data in the GWAS Catalog is currently mapped to genome assembly <span id="genome
 
 <<File headers for unpublished studies v1.0.3.1>>
 
-<<File headers for unpublished ancestries v1.0.3.1>>
+<<File headers for unpublished ancestries>>
 
 *Available in associations download files
 
