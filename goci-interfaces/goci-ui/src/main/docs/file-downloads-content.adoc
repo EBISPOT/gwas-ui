@@ -1,6 +1,6 @@
 == Downloading the GWAS Catalog
 
-
+Version numbers refer to the <<file-names,file format version>>. Data is released biweekly and release version is indicated by r-DATE in the downloaded file name.   
 
 [width="80%",options="header",cols="4,2,2,2", halign = "center", role="table table-hover"]
 |===
@@ -64,7 +64,7 @@
 '''
 
 
-File name conventions:
+[file-names]File name conventions:
 
 * v1.0 indicates the columns originally proposed by the NCBI
 * v1.0.1 indicates the addition of ontology annotations, GWAS Catalog study accession numbers and other new columns (dismissed from 1 May 2018) 
