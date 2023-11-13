@@ -1,6 +1,6 @@
 == Downloading the GWAS Catalog
 
-
+Version numbers refer to the <<file-names,file format version>>. Data is released biweekly and release version is indicated by r-DATE in the downloaded file name.   
 
 [width="80%",options="header",cols="4,2,2,2", halign = "center", role="table table-hover"]
 |===
@@ -21,13 +21,13 @@
 |tab separated file
 |link:fileheaders[ Click to view]
 
-|All studies *v1.0.2 - with added ontology annotations, GWAS Catalog study accession numbers and genotyping technology*
-|link:../api/search/downloads/studies_alternative[ Click to download]
+|All studies *v1.0.2.1 - With study accession numbers, ontology annotations, genotyping technology, cohort identifiers and full summary statistics availability*
+|link:../api/search/downloads/studies/v1.0.2.1[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_catalog_version_1_0_1[ Click to view]
 
-|All studies *v1.0.3 - with added fields to match unpublished downloads (see below)*
-|link:../api/search/downloads/studies_new[ Click to download]
+|All studies *v1.0.3.1 - with added fields to match the unpublished downloads, including cohort identifiers and full summary statistics availability*
+|link:../api/search/downloads/studies/v1.0.3.1[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_unpublished_studies[ Click to view]
 
@@ -36,8 +36,8 @@
 |tab separated file
 |link:fileheaders#_file_headers_for_ancestry_download[ Click to view]
 
-|All ancestry data *v1.0.3 - with added fields to match unpublished downloads (see below)* _(link:faq#faq-F2[see FAQ F2 for more details])_
-|link:../api/search/downloads/ancestries_new[ Click to download]
+|All ancestry data *v1.0.3.1 - with added fields to match unpublished downloads (see below)* _(link:faq#faq-F2[see FAQ F2 for more details])_
+|link:../api/search/downloads/ancestries/v1.0.3.1[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_unpublished_ancestries[ Click to view]
 
@@ -50,13 +50,13 @@
 |===
 |Description | Download Link |Format  | Column header descriptions
 
-|All unpublished studies *v1.0.3 - unpublished studies, new format*
-|link:../api/search/downloads/unpublished_studies[ Click to download]
+|All unpublished studies *v1.0.3.1 - new format, with added cohort identifiers*
+|link:../api/search/downloads/unpublished_studies/v1.0.3.1[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_unpublished_studies[ Click to view]
 
-|All unpublished ancestries *v1.0.3 - unpublished ancestries, new format*
-|link:../api/search/downloads/unpublished_ancestries[ Click to download]
+|All unpublished ancestries *v1.0.3.1 - unpublished ancestries, new format*
+|link:../api/search/downloads/unpublished_ancestries/v1.0.3.1[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_unpublished_ancestries[ Click to view]
 
@@ -64,18 +64,20 @@
 '''
 
 
-File name conventions:
+[file-names]File name conventions:
 
 * v1.0 indicates the columns originally proposed by the NCBI
 * v1.0.1 indicates the addition of ontology annotations, GWAS Catalog study accession numbers and other new columns (dismissed from 1 May 2018) 
-* v1.0.2 indicates the addition of ontology annotations, GWAS Catalog study accession numbers and other new columns such as genotyping technology
-* v1.0.3 indicates the addition of unpublished data and additional trait information
+* v1.0.2 indicates the addition of ontology annotations, GWAS Catalog study accession numbers and other new columns such as genotyping technology 
+* v1.0.2.1 indicates the addition of all fields in v1.0.2, plus cohort identifiers and summary statistics availability in the studies download
+* v1.0.3 indicates the addition of unpublished data and additional trait information (dismissed from 1 Dec 2023)
+* V1.0.3.1 indicates the addition of all fields in v1.0.3, plus cohort identifiers and summary statistics availability in the studies download
 * eXX indicates the Ensembl release version that the data is mapped to
 * rYYYY-MM-DD indicates the date on which the GWAS Catalog was released
 
 Older versions of the GWAS Catalog, with or without ontology annotations, can be found on link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/releases[ our FTP server].
 
-We are working to provide richer, fully customise-able downloads of GWAS data and these will be available soon.
+To obtain custom downloads of study and association data for a specific trait, gene, variant, genomic region or publication please access the relevant search pages and use the export option on the data tables.
 
 
 == GWAS to EFO mappings

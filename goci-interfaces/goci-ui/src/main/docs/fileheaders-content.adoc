@@ -3,21 +3,23 @@
 
 == Description of column headings for downloadable files
 
-++++
-Data in the GWAS Catalog is currently mapped to genome assembly <span id="genomeBuild">GRCh38.p5</span> and dbSNP Build <span id="dbSNP">144</span>.
-++++
+
+Association data in the GWAS Catalog is mapped to the genome using the latest version of Ensembl. For details on genome assembly and dbSNP build, refer to the GWAS Catalog https://www.ebi.ac.uk/gwas[homepage].
 
 
+<<File headers for catalog v1.0>>
 
-<<File headers for catalog version 1.0>>
+<<File headers for catalog v1.0.1>>
 
-<<File headers for catalog version 1.0.1>>
+<<File headers for catalog v1.0.2>>
 
-<<File headers for catalog version 1.0.2>>
+<<File headers for catalog v1.0.2.1>>
 
 <<File headers for ancestry download>>
 
-<<File headers for unpublished studies>>
+<<File headers for unpublished studies v1.0.3>>
+
+<<File headers for unpublished studies v1.0.3.1>>
 
 <<File headers for unpublished ancestries>>
 
@@ -27,7 +29,7 @@ Data in the GWAS Catalog is currently mapped to genome assembly <span id="genome
 
 '''
 
-=== File headers for catalog version 1.0
+=== File headers for catalog v1.0
 
 DATE ADDED TO CATALOG^*^ ^+^: Date a study is published in the catalog
 
@@ -103,7 +105,7 @@ _Last updated: 12 January 2016_
 
 '''
 
-=== File headers for catalog version 1.0.1
+=== File headers for catalog v1.0.1
 
 As for version 1.0 plus
 
@@ -119,13 +121,26 @@ _Last updated: 24 April 2018_
 
 '''
 
-=== File headers for catalog version 1.0.2
+=== File headers for catalog v1.0.2
 
 As for version 1.0.1 plus
 
 GENOTYPING_TECHNOLOGY^*^ ^+^: Genotyping technology/ies used in this study, with additional array information (ex. Immunochip or Exome array) in brackets.
 
 _Added: 24 April 2018_
+
+'''
+
+=== File headers for catalog v1.0.2.1
+As for version 1.0.2 plus
+
+COHORT+: Discovery stage cohorts used in this study. The full list of cohort abbreviations and definitions can be found here[LINK]. 
+
+FULL SUMMARY STATISTICS+: Availability of full genome-wide summary statistics files for download 
+
+SUMMARY STATS LOCATION+: The location of the summary statistics file
+
+_Added: October 2023_
 
 '''
 
@@ -157,7 +172,9 @@ ADDITONAL ANCESTRY DESCRIPTION: Any additional ancestry descriptors relevant to 
 
 _Added: 16 September 2016_
 
-=== File headers for unpublished studies
+'''
+
+=== File headers for unpublished studies v1.0.3
 
 DATE ADDED TO CATALOG	Not used
 
@@ -203,8 +220,19 @@ SUBMISSION DATE	The date the GWAS was submitted to the Catalog
 
 STATISTICAL MODEL	Details of the statistical model used to determine association significance
 
-
 _Added: 15 May 2020_
+
+'''
+
+=== File headers for unpublished studies v1.0.3.1
+
+As for version 1.0.3 plus
+
+COHORT+: Discovery stage cohorts used in this study. The full list of cohort abbreviations and definitions can be found here: 
+
+FULL SUMMARY STATISTICS+: Availability of full genome-wide summary statistics files for download
+
+_Added October 2023_ 
 
 '''
 
@@ -218,7 +246,7 @@ FIRST AUTHOR	Last name and initials of first author
 
 DATE	not used
 
-INITIAL SAMPLE DESCRIPTION	?
+INITIAL SAMPLE DESCRIPTION	not used
 
 REPLICATION SAMPLE DESCRIPTION	not used
 
@@ -244,11 +272,11 @@ NUMBER OF CONTROLS	The number of controls in this broad ancestry group
 
 SAMPLE DESCRIPTION	Additional sample information required for the interpretation of result
 
-COHORT(S)	List of cohort(s) represented in the discovery sample
+COHORT(S)	List of cohort(s) represented in the discovery sample (moved to studies download in v1.0.3.1)
 
-COHORT-SPECIFIC REFERENCE	List of cohort specific identifier(s) issued to this research study
+COHORT-SPECIFIC REFERENCE	List of cohort specific identifier(s) issued to this research study (removed in v1.0.3.1)
 
-_Added: 15 May 2020_
+_Added 15 May 2020, updated October 2023_
 
 '''
 

@@ -2,7 +2,11 @@
 
 == Full Description of Abbreviations used in the Catalog
 
-<<Special Characters>>, <<A>>, <<B>>, <<C>>, <<D>>, <<E>>, <<F>>, <<G>>, <<H>>, <<I>>, <<K>>, <<L>>, <<M>>, <<N>> ,<<O>>, <<P>>, <<Q>>, <<R>>, <<S>>, <<T>>, <<U>>, <<V>>, <<W>>, <<XYZ>>
+<<Cohorts>>, <<Special Characters>>, <<A>>, <<B>>, <<C>>, <<D>>, <<E>>, <<F>>, <<G>>, <<H>>, <<I>>, <<K>>, <<L>>, <<M>>, <<N>> ,<<O>>, <<P>>, <<Q>>, <<R>>, <<S>>, <<T>>, <<U>>, <<V>>, <<W>>, <<XYZ>>
+
+=== Cohorts
+
+For cohort abbreviations, please see https://ftp.ebi.ac.uk/pub/databases/spot/pgs/metadata/pgs_all_metadata_cohorts.csv[separate file]
 
 === Special Characters
 

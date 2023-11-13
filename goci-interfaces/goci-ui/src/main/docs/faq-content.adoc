@@ -145,6 +145,8 @@
 
 5. <<faq-F5, Why is the ancestry information provided in a separate downloadable spreadsheet to the rest of the study-level information?>>
 
+6. <<faq-F6, What is included in the COHORT field?>>
+
 === G. Programmatic access
 
 1. <<faq-G1, How do I use the GWAS Catalog REST API?>>
@@ -510,6 +512,14 @@ As of September 2016, we release publicly all ancestry data extracted from the G
 ==== [[faq-F5]]5. Why is the ancestry information provided in a separate downloadable spreadsheet to the rest of the study-level information?
 
 Most GWAS Catalog studies include at least two ancestry entries, one for the initial stage and one for the replication stage, and some studies may have several entries for each stage. As there is no way of usefully representing this multi-dimensional data in a single row in a spreadsheet, this data is instead provided in a separate spreadsheet, with each ancestry entry in its own row.
+
+==== [[faq-F6]]6. What is included in the COHORT field?
+
+The COHORT field describes the discovery stage (genome-wide) cohorts used in each study. 
+Cohort abbreviations from discovery stage GWAS are extracted from literature to match a predefined list shared with the PGS Catalog, and are made available in the COHORT field of the studies download file. The initial list of common cohorts used in genetics studies that seeded these annotations is from https://doi.org/10.1038/s42003-018-0261-x[Mills & Rahal. Communications Biology (2019)]. A full list of abbreviations and corresponding full cohort names is available to download https://ftp.ebi.ac.uk/pub/databases/spot/pgs/metadata/pgs_all_metadata_cohorts.csv[separately]. Since the list is shared with the PGS Catalog, this may include cohorts that are not currently associated with a GWAS Catalog study. 
+Where a sample cohort in the literature was not already in the predefined list, or was not clearly and unambiguously described by authors, “other” will appear in our studies download file. Where a sample in literature had no cohort reported, “NR” will appear in our studies download file. Empty cohort fields will appear for studies which were curated before the extraction of this information began (~2020).
+
+Note: cohorts appearing in the unpublished download files are yet to undergo in-house curation and therefore may not exactly match against the predefined list.
 
 
 == [[G]]G. Programmatic access
