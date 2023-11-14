@@ -228,7 +228,7 @@ _Added: 15 May 2020_
 
 As for version 1.0.3 plus
 
-COHORT+: Discovery stage cohorts used in this study. The full list of cohort abbreviations and definitions can be found here: 
+COHORT+: Discovery stage cohorts used in this study. The full list of cohort abbreviations and definitions can be found https://ftp.ebi.ac.uk/pub/databases/spot/pgs/metadata/pgs_all_metadata_cohorts.csv[here]. 
 
 FULL SUMMARY STATISTICS+: Availability of full genome-wide summary statistics files for download
 
