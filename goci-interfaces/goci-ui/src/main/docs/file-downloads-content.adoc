@@ -64,7 +64,7 @@ Version numbers refer to the <<file-names,file format version>>. Data is release
 '''
 
 
-[file-names]File name conventions:
+[[file-names]]File name conventions:
 
 * v1.0 indicates the columns originally proposed by the NCBI
 * v1.0.1 indicates the addition of ontology annotations, GWAS Catalog study accession numbers and other new columns (dismissed from 1 May 2018) 
