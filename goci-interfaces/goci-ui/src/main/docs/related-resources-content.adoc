@@ -35,13 +35,15 @@ Or see the https://ebispot.github.io/gwas-blog/[full index].
 === Publications
 
 ==== GWAS Catalog publications
-Sollis et al, 2022 https://doi.org/10.1093/nar/gkac1010[The NHGRI-EBI GWAS Catalog: knowledgebase and deposition resource]. Nucleic Acids Research, 2022
+**Sollis et al, 2023 https://doi.org/10.1093/nar/gkac1010[The NHGRI-EBI GWAS Catalog: knowledgebase and deposition resource]. Nucleic Acids Research 51(D1):D977-D985**
+
+Stefancik et al, 2023 https://link.springer.com/article/10.1007/s00335-023-09992-1[The Ontology of Biological Attributes (OBA) - Computational Traits for the Life Sciences]. Mammalian Genome 34, 364–378.
 
 MacArthur et al, 2021 https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00004-5[Workshop proceedings: GWAS Catalog standards and sharing]. Cell Genomics Vol. 1, Issue 1, 100004.
 
 McMahon et al, 2021 https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00005-7[Sequencing-based genome-wide association studies reporting standards]. Cell Genomics Vol. 1, issue 1, 100005.
 
-Lambert et al, 2021 https://www.nature.com/articles/s41588-021-00783-5/[The Polygenic Score Catalog as an open database for reproducibility and systematic evaluation]. Nature Genetics volume 53, pages420–425(2021).
+Lambert et al, 2021 https://www.nature.com/articles/s41588-021-00783-5/[The Polygenic Score Catalog as an open database for reproducibility and systematic evaluation]. Nature Genetics volume 53, pages420–425.
   
 Buniello, MacArthur et al, 2019 link:https://academic.oup.com/nar/article/47/D1/D1005/5184712[The NHGRI-EBI GWAS Catalog of published genome-wide association studies, targeted arrays and summary statistics 2019]. Nucleic Acids Research, 2019, Vol. 47 (Database issue): D1005-D1012.
 
