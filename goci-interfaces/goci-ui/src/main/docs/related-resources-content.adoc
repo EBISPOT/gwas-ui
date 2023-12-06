@@ -138,14 +138,17 @@ For more information on how we use these resources, see our link:https://www.ebi
 [cols="1,2"]
 |===
 
+|https://github.com/ramiromagno/gwasrapidd[gwasrapidd]
+|an R package to query, download and wrangle GWAS Catalog data
+
+|https://pypi.org/project/pandasgwas/[pandasgwas]
+|A Python package for retrieval of GWAS Catalog data
+
 |https://www.ensembl.org/info/docs/tools/vep/index.html[Variant Effect Predictor (VEP)]
 |Determines the effect of variants (SNPs, insertions, deletions, CNVs or structural variants) on genes, transcripts, and protein sequence, as well as regulatory regions
 
 |http://www.phenoscanner.medschl.cam.ac.uk/phenoscanner[Phenoscanner]
 |Tool to facilitate “phenome scans”, the cross-referencing of genetic variants with a broad range of phenotypes, using a range of data sources including GWAS, eQTL and metabolite data
-
-|https://github.com/ramiromagno/gwasrapidd[gwasrapidd]
-|an R package to query, download and wrangle GWAS Catalog data
 
 |https://phgkb.cdc.gov/PHGKB/hNHome.action[HuGE Navigator]
 |Knowledge base in human genome epidemiology, including information on population prevalence of genetic variants, gene-disease associations, gene-gene and gene- environment interactions
