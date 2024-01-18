@@ -1,86 +1,134 @@
-= Summary statistics
+= Summary statistics 
 
-This page includes general documentation about the summary statistics we host in the GWAS Catalog. For instructions on submitting summary statistics please see our https://www.ebi.ac.uk/gwas/docs/submission[submission documentation].
+:imagesdir: ../images
 
-== Summary statistics eligibility
+This page includes general documentation about the summary statistics we host in the GWAS Catalog. **For instructions on submitting summary statistics please see our https://www.ebi.ac.uk/gwas/docs/submission[submission documentation].**
 
-The GWAS Catalog now hosts summary statistics files (aggregate p-values and association data for every variant analysed in a study) when available, in addition to curated associations.
-For summary statistics FAQ, please see https://www.ebi.ac.uk/gwas/docs/faq[here].
+'''
+
+<<What are summary statistics?, What are summary statistics?>>
+
+<<Sources,Sources>>
+
+<<Eligibility,Eligibility>>
+
+<<Standard format,Standard format>>
+
+<<Access,Access>>
+
+> <<Searching via our web interface:,Searching our web interface>>
+
+> <<Navigating the FTP:,Navigating the FTP>>
+
+> <<Directories:,Directories>>
+
+> <<Harmonised subdirectories:,Harmonised subdirectories>>
+
+> <<How can I find all the harmonised data?,How can I find all the harmonised data?>>
+
+<<What are “formatted files”?,What are “formatted files”?>>
+
+<<What are harmonised files?,What are harmonised files?>>
+
+> <<Table of harmonisation codes,Table of harmonisation codes>>
+
+<<Accompanying metadata (-meta.yaml),Accompanying metadata (-meta.yaml)>>
+
+<<REST API,REST API>>
+
+'''
+== What are summary statistics?
+
+While associations included within the Catalog are curated, significant (p<1e-5) and independent loci reported within a paper, summary statistics (sumstats) are the full, aggregate p-values and association data for every variant analysed in a study. These are hosted on our servers when available and can be downloaded via links on study and publication pages.
+For more summary statistics FAQ, please see https://www.ebi.ac.uk/gwas/docs/faq#faq-H1[here].
+
+== Sources
+
+Summary statistics are acquired from a number of different sources:
+
+* Submitted to the GWAS Catalog by an author
+* Identified via link or reference in a curated paper
+* Identified via a consortium or author website
+* Included in a curated paper as a supplementary file
+
+We encourage authors to submit summary statistics to the GWAS Catalog. Summary statistics for published and pre-published/unpublished GWAS can be submitted directly via the http://www.ebi.ac.uk/gwas/deposition[Submission page]. Instructions on how to submit summary statistics can be found https://www.ebi.ac.uk/gwas/docs/submission[here].
+
+== Eligibility
 
 Summary statistics must meet a number of criteria to be eligible for inclusion in the GWAS Catalog:
 
 * Must include >100,000 SNPs
-* Must reproduce the initial GWAS extracted in the Catalog, i.e. same samples (not a sub-set, e.g. one cohort of a meta-analysis), and on the same trait
-* Must be freely available, i.e. not only by request to author or password-protected
-* Must not require agreement to any specific terms and conditions, unless this has been agreed in advance by the author/consortium
+* Must reproduce a GWAS described in a published paper (ie. same sample metadata and trait), or is clearly marked as pre/un-published.
+* Must be freely available, i.e. not only by request to author or password-protected.
+* Must not require agreement to any specific terms and conditions, unless this has been agreed in advance by the author/consortium. Since 2022, we have required newly submitted sumstats to be released under CC0 - noted under ‘Terms/Licence’ on study pages. In rare cases, special licensing terms will appear in an adjacent readme.txt.
+
+== Standard format
+The vast majority of files adhere to one of two standard formats, GWAS-SSF and pre-GWAS-SSF. 
+
+Since April 2023, all summary statistics will meet GWAS-SSF - the product of a series of working groups, which has been written up as a https://www.biorxiv.org/content/10.1101/2022.07.15.500230v2[preprint]. The specification of the standard can be found https://github.com/EBISPOT/gwas-summary-statistics-standard/blob/master/gwas-ssf_v1.0.0.pdf[here] with further details in the https://github.com/EBISPOT/gwas-summary-statistics-standard[GitHub repository]. Prior to V1 of this standard, a minimum acceptable format (pre-GWAS-SSF) was used, the details of which are available in https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6323933/[Buniello and MacArthur, 2019].
+
+Standardised data files are additionally provided in a <<What are harmonised files?,harmonised format>>, with all data reported against the same genome build and alleles aligned to the forward strand. Each file has an accompanying <<Accompanying metadata (-meta.yaml),metadata>> file in .yaml format, which indicates the file type and whether or not the file has been harmonised. 
+
+We also host a small number of non-standard files with eg. fewer than 100,000 SNPs or  non-standard study design (eg. CNV or gene-based). These will be flagged as ‘Non-GWAS-SSF’ in the .yaml.
+
+== Access
+
+We store summary statistics files in two different places, on our https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], and a subset of files in our database (see <<REST API,REST API>>). The FTP is updated nightly with any newly ingested data.
+
+=== Searching via our web interface: 
+
+image:sumstats_logo.png[Sumstats logo,50]
+
+Links to FTP directories are provided within the main Catalog pages. In this way, summary statistics can be found by searching for a specific trait, accession ID, PMID, author and other key words. Sumstats availability is denoted by the above icon, and listed under the summary statistics tab of a publication. 
 
 
-== Summary statistics availability
-
-We store summary statistics files in two different places, on our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], and a subset of files in our database.
-
-The FTP site hosts the original files and, when they are processed, a subdirectory called 'harmonised' containing a README file, a standard formatted version of the original file (see below) and a harmonised version of the file (also below). The FTP is updated nightly with any newly ingested data.
-
-The REST API for the summary statistics database is now available at https://www.ebi.ac.uk/gwas/summary-statistics/api/. 
-For full documentation on the REST API, please see https://www.ebi.ac.uk/gwas/summary-statistics/docs/[here].
-
-It’s important to note that the data available via REST API is a subset of that available via FTP. Currently, we’re unable to release more data to the REST API as it’s undergoing a complete redevelopment to help us cope with the tremendous growth in summary statistics data.
-
-==== How do I navigate the FTP?
+=== Navigating the FTP:
 
 Every summary statistics file is available at a path based on the GCST accession ID. For example, the summary statistics for accession GCST123456 would be available at 'ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST123001-GCST124000/GCST123456/'. You can see that the directory 'GCST123456/' is nested inside 'ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST123001-GCST124000/'. This parent directory holds up to 1000 GCSTs, and will only contain those GCSTs that are within the range given. These bins of one thousand are added as necessary, when new GCSTs need housing.
 
-==== How can I find all the harmonised data?
+=== Directories:
 
-Harmonised summary statistics are released daily and a text file listing all of the harmonised studies is available on the FTP at the following location: https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/harmonised_list.txt. This text file is updated on a nightly basis. 
+Each accession ID directory contains:
 
-== Sharing and standards workshop
+* The original sumstats file .tsv
+* A metadata .yaml
+* A separate readme, if provided .txt (newer folders will hold this under ‘author_notes’ inside the .yaml)
+* When possible, and once processed, a harmonised directory
 
-In June 2020, the GWAS Catalog organised a community workshop to address the standards, infrastructure and incentives required to promote and enable broader sharing of GWAS summary statistics. https://www.ebi.ac.uk/gwas/docs/sharing-standards-workshop[Workshop materials] are available.
+=== Harmonised subdirectories:
 
-== Summary statistics acquisition
+**The latest version of the harmonisation pipeline was released in 2023.** All files harmonised under this version, eg. https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90270001-GCST90271000/GCST90270927/harmonised/[GCST90270927] contain a ‘/harmonised’ directory with the following contents:
 
-Summary statistics are acquired from a number of different sources:
+* A harmonised version of the raw file. .h.tsv (see <<What are harmonised files?,What are harmonised files?>>)
+* An index file .tbi
+* A log file .log
+* A metadata file .yaml
 
-* Included in a curated paper as a supplementary file
-* Identified via link or reference in a curated paper
-* Identified via a consortium or author website
-* Submitted to the GWAS Catalog by an author
+**For files harmonised before 2023,** eg https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90001001-GCST90002000/GCST90001686/harmonised/[GCST90001686], the harmonised folder will contain:
 
-We encourage authors to submit summary statistics to the GWAS Catalog. Summary statistics for published and pre-published/unpublished GWAS can be submitted directly via the http://www.ebi.ac.uk/gwas/deposition[Submission page]. Instructions on how to submit summary statistics can be found http://snoopy.ebi.ac.uk:9580/gwas/docs/submission[here].
+* A formatted version of the raw file - with standardised headers .f.tsv (see <<What are “formatted files”?,What are "formatted files"?>>)
+* A harmonised version of the formatted file .h.tsv
+* A metadata file .yaml
 
-== Summary statistics standards
+In some cases, there will be no harmonised directory due to incompatibility with our pipeline. These will be marked out with ‘Non-GWAS-SSF’ under file_type in the .yaml. If the file type is GWAS-SSF or pre-GWAS-SSF and there is no harmonised file, it is likely awaiting harmonisation, please check back at a later date.
 
-We have proposed a standard format for GWAS summary statistics (Buniello and MacArthur, 2019). We encourage authors to provide summary statistics in this standard format. To enable users to access data with ease, we re-format summary statistics files where required.
+=== How can I find all the harmonised data?
 
-The summary statistics standard used at the GWAS Catalog was the product of a series of working groups, which has been written up as a https://www.biorxiv.org/content/10.1101/2022.07.15.500230v2[preprint]. The specification of the standard can be found https://github.com/EBISPOT/gwas-summary-statistics-standard/blob/master/gwas-ssf_v0.1-draft.pdf[here] with further details in the https://github.com/EBISPOT/gwas-summary-statistics-standard[GitHub repository]. Prior to V1 of the standard, a minimum acceptable format was used for GWAS submissions, the details of which are available in <add link here>[Buniello and MacArthur, 2019]. 
+Harmonised summary statistics are released daily and a text file listing all of the harmonised studies is available on the FTP at the following location: https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/harmonised_list.txt. This text file is updated on a nightly basis.
 
-== Formatted summary statistics data 
+== What are “formatted files”?
 
-* Data is submitted in a standard format
-* This can be the original minimal format or the newer GWAS-SSF format. 
-* How can you tell? See accompanying metadata file (see below)
-* Metadata files are available for all new submissions (since April 2023) and we are retrospectively generating for all older submissions (in progress)
-* If there is no metadata file, the file is in the old, or a non standard format. 
+Prior to the GWAS Catalog accepting direct submissions, summary statistics files were formatted by scientific curators using a semi-automated process. Where the formatted files are available, they are nested within the 'harmonised' subdirectory with the ‘*.f.tsv.gz’ suffix (https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90001001-GCST90002000/GCST90001686/harmonised/[example]). These files will not be available for newer submitted content because those datasets have already been formatted by the authors.
+During the formatting process data were not manipulated but the headers were converted to a consistent format across all summary statistics files.
 
-Prior to the GWAS Catalog accepting direct submissions, summary statistics files were formatted by scientific curators using a semi-automated process. Data were not manipulated but the headers were converted to a consistent format across all summary statistics files.
+== What are harmonised files?
 
-* Headers were transformed to the ‘minimal acceptable format'
-* Rows were never removed
-* Columns may have been split, merged, deleted, added or moved
-* Values were unaltered
-* Missing data was set to 'NA'
-
-Formatted data is accessible on the GWAS Catalog dedicated summary statistics link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site]. Where the formatted files are available, they are nested within the 'harmonised' directory in the study directory with the ‘*.g.tsv.gz’ suffix. These files will not be available for newer submitted content because those datasets have already been formatted by the authors.
-
-== Harmonised summary statistics data
-
-Formatted files are harmonised using an automated link:https://github.com/EBISPOT/gwas-sumstats-harmoniser[pipeline], which is detailed below. By 'harmonised' we mean that all genomic position data will be reported against the same and latest genome build. Missing chromosome, base pair location and variant ID data that can be inferred, will be. Furthermore, where possible, alleles are also orientated to the forward strand.
+Sumstats files are harmonised using an automated link:https://github.com/EBISPOT/gwas-sumstats-harmoniser[pipeline], which is detailed below. By 'harmonised' we mean that all genomic position data will be reported against the same and latest genome build. Missing chromosome, base pair location and variant ID data that can be inferred, will be. Furthermore, where possible, alleles are also orientated to the forward strand.
 
 The harmonisation process is the following:
 
 . Mapping variant IDs to locations (method used is reported in the ‘hm_coordinate_conversion’ field in the harmonised data file)
-.. Update base pair location value by mapping rsID using latest Ensembl release (‘hm_coordinate_conversion’ = ‘rs’);  or
+.. Update base pair location value by mapping rsID using Ensembl (currently v95) (‘hm_coordinate_conversion’ = ‘rs’);  or
 .. if above not possible, liftover base pair location to latest genome build (‘hm_coordinate_conversion’ = ‘lo’); or
 .. if above not possible, remove variant from file.
 
@@ -121,8 +169,7 @@ The harmonisation process is the following:
 * percentage of variants that are successfully harmonised or failed
 .. A metadata YAML file (*.h.tsv.gz-meta.yaml) for the harmonised data file. 
 
-
-==== Table of harmonisation codes
+===== Table of harmonisation codes
 
 [%header, cols="1*>,10"]
 |===
@@ -193,16 +240,22 @@ Harmonised data files conform to the standard but there are some additional poin
 
 There may be differences between the data available on the FTP site compared to the database where number rounding has taken place. In the database, chromosome values of 'X', 'Y' and 'MT' will appear as 23, 24 and 25, respectively.
 
-== Summary statistics metadata
+== Accompanying metadata (-meta.yaml)
 
-=== Metadata fields
+Metadata are provided in a computer and human readable YAML file adjacent to the data file, suffixed with -meta.yaml. So where the data file is called GCST123456.tsv.gz, the metadata can be found with the name GCST123456.tsv.gz-meta.yaml. For further information, please see the standard documentation linked above.
 
-The metadata describing summary statistics data can be broken down into 3 main categories:
-File metadata, such as the name, md5sum and modified date of the data file; study metadata, such as reported trait, ancestry information, author notes; and methodological metadata such as genome assembly and analysis software. A full description of metadata fields and the format can be found in the standard repository: https://github.com/EBISPOT/gwas-summary-statistics-standard.
 
-=== Metadata access
 
-These metadata are provided in a computer and human readable YAML file adjacent to the data file in a file suffixed with -meta.yaml. So where the data file is called GCST123456.tsv.gz, the metadata can be found with the name GCST123456.tsv.gz-meta.yaml. For further information, please see the standard documentation linked above.
+Explain file_types:
 
-For summary statistics associated with a journal publication, study metadata can also be accessed via the GWAS Catalog web interface and REST API.
+* GWAS-SSF v1
+* Pre-GWAS-SSF
+* Non-GWAS-SSF
 
+Note: for very old sumstats (where the filename does not begin ‘GCST’), no metadata .yaml will be available.
+
+For summary statistics associated with a journal publication, study metadata can also be accessed via the GWAS Catalog web interface and REST API. Metadata for unpublished submissions is not currently available via REST API but can be found in our https://www.ebi.ac.uk/gwas/docs/file-downloads[download files].
+
+== REST API
+The REST API for the summary statistics database is available at https://www.ebi.ac.uk/gwas/summary-statistics/api/. For full documentation on the REST API, please see https://www.ebi.ac.uk/gwas/summary-statistics/docs/[here].
+It’s important to note that the data available via REST API is a subset of that available via FTP. Currently, we’re unable to release more data to the REST API as it’s undergoing a complete redevelopment to help us cope with the tremendous growth in summary statistics data.
