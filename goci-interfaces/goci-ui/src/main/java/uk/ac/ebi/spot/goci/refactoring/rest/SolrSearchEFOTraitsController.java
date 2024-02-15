@@ -5,11 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.data.web.SortDefault;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.ebi.spot.goci.refactoring.dto.AssociationSolrDTO;
@@ -25,7 +28,11 @@ import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping(value = SearchUIConstants.API_V2+SearchUIConstants.EFOTRAITS)
@@ -62,14 +69,12 @@ public class SolrSearchEFOTraitsController {
     @GetMapping(value = "/{efotraitId}/studies", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public PagedResources<StudySolrDTO> searchStudies(SearchStudyDTO searchStudyDTO,
+    public ResponseEntity<CollectionModel<StudySolrDTO>> searchStudies(SearchStudyDTO searchStudyDTO,
                                                       @PathVariable String efotraitId,
-                                                      @RequestParam(value = SearchUIConstants.INCLUDE_CHILD_TRAITS,
-                                                              required = false) Boolean includeChildTraits,
-                                                      @RequestParam(value = SearchUIConstants.INCLUDE_BG_TRAITS,
-                                                              required = false) Boolean includeBgTraits,
+                                                      @RequestParam(value = SearchUIConstants.INCLUDE_CHILD_TRAITS, required = false) Boolean includeChildTraits,
+                                                      @RequestParam(value = SearchUIConstants.INCLUDE_BG_TRAITS, required = false) Boolean includeBgTraits,
                                                       @PageableDefault(size = 10, page = 0) Pageable pageable,
-                                                      PagedResourcesAssembler assembler) throws IOException {
+                                                      PagedResourcesAssembler<StudyDoc> assembler) throws IOException {
         String query = "";
         if(includeChildTraits != null && includeChildTraits) {
             Map<String, String> olsTerms = solrSearchEFOTraitService.getOLSTerms(efotraitId);
@@ -89,27 +94,21 @@ public class SolrSearchEFOTraitsController {
             }
         }
 
-        //log.info("Query for EFO Traits is->"+query);
         Page<StudyDoc> pageStudyDocs = solrSearchService.searchStudies(query, pageable, searchStudyDTO);
-        final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
-                .methodOn(SolrSearchEFOTraitsController.class).searchStudies(searchStudyDTO, efotraitId,false, false, pageable, assembler));
-        return assembler.toResource(pageStudyDocs, studySolrDTOAssembler,
-                new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
-
+        PagedModel<StudySolrDTO> pagedModel = assembler.toModel(pageStudyDocs, studySolrDTOAssembler);
+        return new ResponseEntity<>(pagedModel, HttpStatus.OK);
     }
 
 
     @GetMapping(value = "/{efotraitId}/associations", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public PagedResources<AssociationSolrDTO> searchAssociations(SearchAssociationDTO searchAssociationDTO,
+    public ResponseEntity<CollectionModel<AssociationSolrDTO>> searchAssociations(SearchAssociationDTO searchAssociationDTO,
                                                                  @PathVariable String efotraitId,
-                                                                 @RequestParam(value = SearchUIConstants.INCLUDE_CHILD_TRAITS,
-                                                                         required = false) Boolean includeChildTraits,
-                                                                 @RequestParam(value = SearchUIConstants.INCLUDE_BG_TRAITS,
-                                                                         required = false) Boolean includeBgTraits,
+                                                                 @RequestParam(value = SearchUIConstants.INCLUDE_CHILD_TRAITS, required = false) Boolean includeChildTraits,
+                                                                 @RequestParam(value = SearchUIConstants.INCLUDE_BG_TRAITS, required = false) Boolean includeBgTraits,
                                                                  @PageableDefault(size = 10, page = 0) Pageable pageable,
-                                                                 PagedResourcesAssembler assembler) throws IOException {
+                                                                 PagedResourcesAssembler<AssociationDoc> assembler) throws IOException {
         String query = "";
         if(includeChildTraits != null && includeChildTraits) {
             Map<String, String> olsTerms = solrSearchEFOTraitService.getOLSTerms(efotraitId);
@@ -126,10 +125,8 @@ public class SolrSearchEFOTraitsController {
 
         log.info("Query for EFO Traits is->"+query);
         Page<AssociationDoc> pageAssociationDocs = solrSearchAssociationService.searchAssociations(query, pageable, searchAssociationDTO );
-        final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
-                .methodOn(SolrSearchEFOTraitsController.class).searchAssociations(searchAssociationDTO, efotraitId,false, false, pageable, assembler));
-        return assembler.toResource(pageAssociationDocs, associationSolrDTOAssembler,
-                new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
+        PagedModel<AssociationSolrDTO> pagedModel = assembler.toModel(pageAssociationDocs, associationSolrDTOAssembler);
+        return new ResponseEntity<>(pagedModel, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{efotraitId}/traits/children", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -146,13 +143,11 @@ public class SolrSearchEFOTraitsController {
     @GetMapping(value = "/{efotraitId}/locuszoom/associations", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public PagedResources<AssociationSolrDTO> searchLocusAssociations(@PathVariable(value = "efotraitId") String efotraitId,
-                                                                 @RequestParam(value = SearchUIConstants.INCLUDE_CHILD_TRAITS,
-                                                                         required = false) Boolean includeChildTraits,
-                                                                 @RequestParam(value = SearchUIConstants.INCLUDE_BG_TRAITS,
-                                                                         required = false) Boolean includeBgTraits,
+    public ResponseEntity<CollectionModel<AssociationSolrDTO>> searchLocusAssociations(@PathVariable(value = "efotraitId") String efotraitId,
+                                                                 @RequestParam(value = SearchUIConstants.INCLUDE_CHILD_TRAITS, required = false) Boolean includeChildTraits,
+                                                                 @RequestParam(value = SearchUIConstants.INCLUDE_BG_TRAITS, required = false) Boolean includeBgTraits,
                                                                  @PageableDefault(size = 10, page = 0) Pageable pageable,
-                                                                 PagedResourcesAssembler assembler) throws IOException {
+                                                                 PagedResourcesAssembler<AssociationDoc> assembler) throws IOException {
         String query = "";
 
         if(includeChildTraits != null && includeChildTraits) {
@@ -173,11 +168,8 @@ public class SolrSearchEFOTraitsController {
         }
 
         Page<AssociationDoc> pageAssociationDocs = solrSearchEFOTraitService.searchAssociations(query, pageable );
-        final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
-                .methodOn(SolrSearchEFOTraitsController.class).searchLocusAssociations(efotraitId, false, false, pageable, assembler));
-        return assembler.toResource(pageAssociationDocs, associationSolrDTOAssembler,
-                new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
-
+        PagedModel<AssociationSolrDTO> pagedModel = assembler.toModel(pageAssociationDocs, associationSolrDTOAssembler);
+        return new ResponseEntity<>(pagedModel, HttpStatus.OK);
     }
 
 
@@ -186,10 +178,8 @@ public class SolrSearchEFOTraitsController {
     @ResponseBody
     public HttpEntity<byte[]> downloadStudies(SearchStudyDTO searchStudyDTO,
                                               @PathVariable String efotraitId,
-                                              @RequestParam(value = SearchUIConstants.INCLUDE_CHILD_TRAITS,
-                                                      required = false) Boolean includeChildTraits,
-                                              @RequestParam(value = SearchUIConstants.INCLUDE_BG_TRAITS,
-                                                      required = false) Boolean includeBgTraits,
+                                              @RequestParam(value = SearchUIConstants.INCLUDE_CHILD_TRAITS, required = false) Boolean includeChildTraits,
+                                              @RequestParam(value = SearchUIConstants.INCLUDE_BG_TRAITS, required = false) Boolean includeBgTraits,
                                               @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
         String query = "";
         if(includeChildTraits != null && includeChildTraits) {
@@ -224,10 +214,8 @@ public class SolrSearchEFOTraitsController {
     @ResponseBody
     public HttpEntity<byte[]> downloadAssociations(SearchAssociationDTO searchAssociationDTO,
                                                    @PathVariable String efotraitId,
-                                                   @RequestParam(value = SearchUIConstants.INCLUDE_CHILD_TRAITS,
-                                                           required = false) Boolean includeChildTraits,
-                                                   @RequestParam(value = SearchUIConstants.INCLUDE_BG_TRAITS,
-                                                           required = false) Boolean includeBgTraits,
+                                                   @RequestParam(value = SearchUIConstants.INCLUDE_CHILD_TRAITS, required = false) Boolean includeChildTraits,
+                                                   @RequestParam(value = SearchUIConstants.INCLUDE_BG_TRAITS, required = false) Boolean includeBgTraits,
                                                    @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
         String query = "";
         if(includeChildTraits != null && includeChildTraits) {

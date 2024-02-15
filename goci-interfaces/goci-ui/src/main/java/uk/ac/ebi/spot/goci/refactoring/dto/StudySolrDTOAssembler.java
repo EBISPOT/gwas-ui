@@ -2,21 +2,18 @@
 package uk.ac.ebi.spot.goci.refactoring.dto;
 
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.ResourceAssembler;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.spot.goci.refactoring.component.SumstatsIdentifierMap;
 import uk.ac.ebi.spot.goci.refactoring.model.EFOKeyLabel;
 import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
+import uk.ac.ebi.spot.goci.refactoring.rest.SolrSearchPublicationController;
 import uk.ac.ebi.spot.goci.refactoring.rest.SolrSearchVariantController;
 import uk.ac.ebi.spot.goci.refactoring.util.SolrEntityTransformerUtility;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
-import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 import uk.ac.ebi.spot.goci.util.BackendUtil;
 
 import java.io.IOException;
@@ -24,9 +21,12 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-@Component
-public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resource<StudySolrDTO>> {
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+@Component
+public class StudySolrDTOAssembler extends RepresentationModelAssemblerSupport<StudyDoc, StudySolrDTO> {
 
     private static final Logger log = LoggerFactory.getLogger(StudySolrDTOAssembler.class);
     //private final static String INITIAL_SAMPLE_DESC_REGEX = "([1-9][0-9]{0,9}(?:,[0-9]{3,5})*)";
@@ -40,22 +40,27 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
     @Autowired
     SumstatsIdentifierMap sumstatsIdentifierMap;
 
+    public StudySolrDTOAssembler() {
+        super(SolrSearchVariantController.class, StudySolrDTO.class);
+    }
 
     @Override
-    public Resource<StudySolrDTO> toResource(StudyDoc studyDoc)  {
+    public StudySolrDTO toModel(StudyDoc studyDoc)  {
 
         StudySolrDTO studySolrDTO = assemble(studyDoc);
+       // studySolrDTO.add(linkTo(methodOn(SolrSearchVariantController.class)).withSelfRel());
+        return studySolrDTO;
 
-        try {
-            final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
-                    ControllerLinkBuilder.methodOn(SolrSearchVariantController.class).searchStudies(null, "rsidxxxx", null, null));
-            Resource<StudySolrDTO> resource = new Resource<>(studySolrDTO);
-            resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withSelfRel());
-            return resource;
-        } catch(IOException ex ){
-            log.error("IO Exception "+ex.getMessage(),ex);
-        }
-        return null;
+//        try {
+//            final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
+//                    ControllerLinkBuilder.methodOn(SolrSearchVariantController.class).searchStudies(null, "rsidxxxx", null, null));
+//            Resource<StudySolrDTO> resource = new Resource<>(studySolrDTO);
+//            resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withSelfRel());
+//            return resource;
+//        } catch(IOException ex ){
+//            log.error("IO Exception "+ex.getMessage(),ex);
+//        }
+//        return null;
     }
 
     public StudySolrDTO assemble(StudyDoc studyDoc ){
@@ -111,7 +116,6 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
 
     public StudyTableExportDTO assembleStudyExport(StudyDoc studyDoc) {
 
-        //log.info("The Accession Id in question is -> "+studyDoc.getAccessionId());
       return  StudyTableExportDTO.builder()
                 .accessionId(studyDoc.getAccessionId())
                 .reportedTrait(studyDoc.getTraitName_s())

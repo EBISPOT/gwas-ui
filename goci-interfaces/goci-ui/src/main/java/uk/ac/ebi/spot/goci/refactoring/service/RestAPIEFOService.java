@@ -1,8 +1,5 @@
 package uk.ac.ebi.spot.goci.refactoring.service;
 
-import uk.ac.ebi.spot.goci.refactoring.model.RestApiEFOTraitDoc;
-
-import java.util.List;
 import java.util.Map;
 
 public interface RestAPIEFOService {

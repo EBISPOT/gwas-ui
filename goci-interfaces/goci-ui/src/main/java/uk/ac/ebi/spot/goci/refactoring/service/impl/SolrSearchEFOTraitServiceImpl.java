@@ -23,7 +23,10 @@ import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchEFOTraitService;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
 import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 

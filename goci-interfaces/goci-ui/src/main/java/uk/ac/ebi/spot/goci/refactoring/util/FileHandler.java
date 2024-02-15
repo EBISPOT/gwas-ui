@@ -1,17 +1,13 @@
 package uk.ac.ebi.spot.goci.refactoring.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.spot.goci.ui.exception.FileProcessingException;
 
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +25,7 @@ public class FileHandler {
 
     public  byte[] serializePojoToTsv(List<?> pojoList) {
         CsvMapper csvMapper = new CsvMapper();
-        List<Map<String, Object>> dataList = csvMapper.convertValue(pojoList, new TypeReference<Object>() {
-        });
+        List<Map<String, Object>> dataList = csvMapper.convertValue(pojoList, new TypeReference<List>() {});
         List<List<String>> csvData = new ArrayList<>();
         List<String> csvHead = new ArrayList<>();
         AtomicInteger counter = new AtomicInteger();

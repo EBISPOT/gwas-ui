@@ -1,11 +1,15 @@
 package uk.ac.ebi.spot.goci.refactoring.dto;
 
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
+
+import java.io.Serializable;
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
-import org.springframework.hateoas.ResourceSupport;
-import org.springframework.hateoas.core.Relation;
 import uk.ac.ebi.spot.goci.refactoring.model.EFOKeyLabel;
 
 import java.io.Serializable;
@@ -13,8 +17,8 @@ import java.util.List;
 @EqualsAndHashCode
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Relation(value = "efoData", collectionRelation = "efos")
-public class EFOTraitSolrDTO extends ResourceSupport implements Serializable {
+@Relation(itemRelation = "efoData", collectionRelation = "efos")
+public class EFOTraitSolrDTO extends RepresentationModel<EFOTraitSolrDTO> implements Serializable {
 
     @JsonProperty("efoTraits")
     private List<EFOKeyLabel> efoTraits;

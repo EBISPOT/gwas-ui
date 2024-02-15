@@ -4,24 +4,22 @@ package uk.ac.ebi.spot.goci.refactoring.dto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.ResourceAssembler;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.spot.goci.refactoring.model.AssociationDoc;
 import uk.ac.ebi.spot.goci.refactoring.model.EFOKeyLabel;
 import uk.ac.ebi.spot.goci.refactoring.rest.SolrSearchPublicationController;
 import uk.ac.ebi.spot.goci.refactoring.util.SolrEntityTransformerUtility;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
-import uk.ac.ebi.spot.goci.ui.constants.SearchUIConstants;
-import uk.ac.ebi.spot.goci.util.BackendUtil;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @Component
-public class AssociationSolrDTOAssembler implements ResourceAssembler<AssociationDoc, Resource<AssociationSolrDTO>> {
+public class AssociationSolrDTOAssembler extends RepresentationModelAssemblerSupport<AssociationDoc, AssociationSolrDTO> {
 
     private static final Logger log = LoggerFactory.getLogger(StudySolrDTOAssembler.class);
 
@@ -31,20 +29,15 @@ public class AssociationSolrDTOAssembler implements ResourceAssembler<Associatio
     @Autowired
     SolrEntityTransformerUtility solrEntityTransformerUtility;
 
-    @Override
-    public Resource<AssociationSolrDTO> toResource(AssociationDoc associationDoc) {
+    public AssociationSolrDTOAssembler() {
+        super(SolrSearchPublicationController.class, AssociationSolrDTO.class);
+    }
 
+    @Override
+    public AssociationSolrDTO toModel(AssociationDoc associationDoc) {
         AssociationSolrDTO associationSolrDTO = assemble(associationDoc);
-        try {
-            final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
-                    ControllerLinkBuilder.methodOn(SolrSearchPublicationController.class).searchAssociations(null, "Pmid", null, null));
-            Resource<AssociationSolrDTO> resource = new Resource<>(associationSolrDTO);
-            resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withSelfRel());
-            return resource;
-        } catch(IOException ex ){
-            log.error("IO Exception "+ex.getMessage(),ex);
-        }
-        return null;
+        //associationSolrDTO.add(linkTo(methodOn(SolrSearchPublicationController.class)).withSelfRel());
+        return associationSolrDTO;
     }
 
     public AssociationSolrDTO assemble(AssociationDoc associationDoc) {

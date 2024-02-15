@@ -7,8 +7,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import org.joda.time.LocalDate;
-import org.springframework.hateoas.ResourceSupport;
-import org.springframework.hateoas.core.Relation;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 import uk.ac.ebi.spot.goci.refactoring.model.EFOKeyLabel;
 import uk.ac.ebi.spot.goci.refactoring.util.JsonJodaLocalDateSerializer;
 
@@ -21,8 +21,8 @@ import java.util.List;
 @JsonPropertyOrder({"riskAllele","riskFrequency","pValueExponent","pValue","pValueAnnotation","orValue","beta",
 "ci","mappedGenes","traitName","efoTraits","bgTraits","locations","author","publicationDate","accessionId","riskAlleleSep",
 "chromLocation","pubmedId"})
-@Relation(value = "association", collectionRelation = "associations")
-public class AssociationSolrDTO extends ResourceSupport implements Serializable {
+@Relation(itemRelation = "association", collectionRelation = "associations")
+public class AssociationSolrDTO extends RepresentationModel<AssociationSolrDTO> implements Serializable {
 
     @JsonProperty("riskAllele")
     public List<EFOKeyLabel> riskAllele;

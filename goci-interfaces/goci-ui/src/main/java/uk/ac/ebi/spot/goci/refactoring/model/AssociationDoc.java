@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import uk.ac.ebi.spot.goci.model.solr.Doc;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
