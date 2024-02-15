@@ -12,8 +12,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.1.RELEASE</version>
-        <relativePath />
+        <version>2.7.15</version>
+        <relativePath/>
         <!-- lookup parent from repository -->
     </parent>
 
@@ -87,8 +87,8 @@
 
 
 
-    
-     <dependencyManagement>
+
+    <dependencyManagement>
         <dependencies>
             <!-- version management for project internal dependencies -->
             <dependency>
@@ -97,7 +97,7 @@
                 <version>${goci.version}</version>
             </dependency>
         </dependencies>
-     </dependencyManagement>
+    </dependencyManagement>
 
     <!-- Reporting/Documentation output -->
     <reporting>
