@@ -23,7 +23,6 @@ public class EFOTableExportDTO {
     @JsonProperty("associationCount")
     private Integer associationCount;
 
-
     public EFOTableExportDTO(@JsonProperty("efoTraits") String efoTraits,
                            @JsonProperty("reportedTrait") String reportedTrait,
                            @JsonProperty("associationCount") Integer associationCount) {

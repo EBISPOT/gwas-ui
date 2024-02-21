@@ -3,7 +3,6 @@ package uk.ac.ebi.spot.goci.refactoring.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import uk.ac.ebi.spot.goci.refactoring.service.impl.SolrRegionServiceImpl;
 
 import java.util.List;
 import java.util.Set;

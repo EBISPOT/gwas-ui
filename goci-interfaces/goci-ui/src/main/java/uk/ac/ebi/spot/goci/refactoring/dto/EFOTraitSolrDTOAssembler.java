@@ -3,44 +3,47 @@ package uk.ac.ebi.spot.goci.refactoring.dto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.ResourceAssembler;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.spot.goci.refactoring.model.EFOKeyLabel;
 import uk.ac.ebi.spot.goci.refactoring.model.EFOTraitDoc;
 import uk.ac.ebi.spot.goci.refactoring.rest.SolrSearchVariantController;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
-import uk.ac.ebi.spot.goci.util.BackendUtil;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @Component
-public class EFOTraitSolrDTOAssembler implements ResourceAssembler<EFOTraitDoc, Resource<EFOTraitSolrDTO>> {
+public class EFOTraitSolrDTOAssembler extends RepresentationModelAssemblerSupport<EFOTraitDoc, EFOTraitSolrDTO> {
 
     private static final Logger log = LoggerFactory.getLogger(EFOTraitSolrDTOAssembler.class);
     @Autowired
     SearchConfiguration searchConfiguration;
 
-    @Override
-    public Resource<EFOTraitSolrDTO> toResource(EFOTraitDoc efoTraitDoc) {
-        EFOTraitSolrDTO efoTraitSolrDTO = assemble(efoTraitDoc);
+    public EFOTraitSolrDTOAssembler() {
+        super(SolrSearchVariantController.class, EFOTraitSolrDTO.class);
+    }
 
-        try {
-            final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
-                    ControllerLinkBuilder.methodOn(SolrSearchVariantController.class).searchEFOTraits(null, "rs123456", null, null));
-            Resource<EFOTraitSolrDTO> resource = new Resource<>(efoTraitSolrDTO);
-            resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withSelfRel());
-            return resource;
-        } catch (IOException ex) {
-            log.error("IO Exception " + ex.getMessage(), ex);
-        }
-        return null;
+    @Override
+    public EFOTraitSolrDTO toModel(EFOTraitDoc efoTraitDoc) {
+        EFOTraitSolrDTO efoTraitSolrDTO = assemble(efoTraitDoc);
+        efoTraitSolrDTO.add(linkTo(methodOn(SolrSearchVariantController.class)).withSelfRel());
+        return efoTraitSolrDTO;
+
+//        try {
+//            final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(
+//                    ControllerLinkBuilder.methodOn(SolrSearchVariantController.class).searchEFOTraits(null, "rs123456", null, null));
+//            Resource<EFOTraitSolrDTO> resource = new Resource<>(efoTraitSolrDTO);
+//            resource.add(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).withSelfRel());
+//            return resource;
+//        } catch (IOException ex) {
+//            log.error("IO Exception " + ex.getMessage(), ex);
+//        }
+//        return null;
     }
 
     public EFOTraitSolrDTO assemble(EFOTraitDoc efoTraitDoc) {

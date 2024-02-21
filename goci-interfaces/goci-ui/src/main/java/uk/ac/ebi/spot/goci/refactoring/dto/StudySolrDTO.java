@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import org.joda.time.LocalDate;
-import org.springframework.hateoas.ResourceSupport;
-import org.springframework.hateoas.core.Relation;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 import uk.ac.ebi.spot.goci.refactoring.model.EFOKeyLabel;
 import uk.ac.ebi.spot.goci.refactoring.util.JsonJodaLocalDateSerializer;
 
@@ -17,8 +17,8 @@ import java.util.List;
 @EqualsAndHashCode
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Relation(value = "study", collectionRelation = "studies")
-public class StudySolrDTO extends ResourceSupport implements Serializable {
+@Relation(itemRelation = "study", collectionRelation = "studies")
+public class StudySolrDTO extends RepresentationModel<StudySolrDTO> implements Serializable {
 
     @JsonProperty("accessionId")
     private String accessionId;

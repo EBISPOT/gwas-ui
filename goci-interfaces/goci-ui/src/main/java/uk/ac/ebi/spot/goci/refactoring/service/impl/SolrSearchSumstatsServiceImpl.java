@@ -15,7 +15,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import uk.ac.ebi.spot.goci.model.solr.SolrData;
-import uk.ac.ebi.spot.goci.refactoring.model.SearchAssociationDTO;
 import uk.ac.ebi.spot.goci.refactoring.model.SearchStudyDTO;
 import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
 import uk.ac.ebi.spot.goci.refactoring.service.RestInteractionService;

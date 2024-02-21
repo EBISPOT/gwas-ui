@@ -2,7 +2,6 @@ package uk.ac.ebi.spot.goci.refactoring.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.ac.ebi.spot.goci.refactoring.model.Links;
 import uk.ac.ebi.spot.goci.refactoring.model.SSDoc;
 import uk.ac.ebi.spot.goci.refactoring.model.SumstatsAPIDoc;
 import uk.ac.ebi.spot.goci.refactoring.model.SumstatsResponseDoc;

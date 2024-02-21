@@ -18,33 +18,32 @@ public class FileHandler {
     }
 
     public static String serializePojoToTsv(List<?> pojoList) {
-        CsvMapper csvMapper = new CsvMapper();
-        List<Map<String, Object>> dataList = csvMapper.convertValue(pojoList, new TypeReference<Object>() {
-        });
-        List<List<String>> csvData = new ArrayList<>();
-        List<String> csvHead = new ArrayList<>();
-        AtomicInteger counter = new AtomicInteger();
-        dataList.forEach(row -> {
-            List<String> rowData = new ArrayList<>();
-            row.forEach((key, value) -> {
-                rowData.add(String.valueOf(value));
-                if (counter.get() == 0) {
-                    csvHead.add(key);
-                }
-            });
-            csvData.add(rowData);
-            counter.getAndIncrement();
-        });
-        CsvSchema.Builder builder = CsvSchema.builder();
-        csvHead.forEach(builder::addColumn);
-        CsvSchema schema = builder.build().withHeader().withLineSeparator("\n").withColumnSeparator('\t');
+//        CsvMapper csvMapper = new CsvMapper();
+//        List<Map<String, Object>> dataList = csvMapper.convertValue(pojoList, new TypeReference<Object>() {});
+//        List<List<String>> csvData = new ArrayList<>();
+//        List<String> csvHead = new ArrayList<>();
+//        AtomicInteger counter = new AtomicInteger();
+//        dataList.forEach(row -> {
+//            List<String> rowData = new ArrayList<>();
+//            row.forEach((key, value) -> {
+//                rowData.add(String.valueOf(value));
+//                if (counter.get() == 0) {
+//                    csvHead.add(key);
+//                }
+//            });
+//            csvData.add(rowData);
+//            counter.getAndIncrement();
+//        });
+//        CsvSchema.Builder builder = CsvSchema.builder();
+//        csvHead.forEach(builder::addColumn);
+//        CsvSchema schema = builder.build().withHeader().withLineSeparator("\n").withColumnSeparator('\t');
         String result = "";
 
-        try {
-            result = csvMapper.writer(schema).writeValueAsString(csvData);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            result = csvMapper.writer(schema).writeValueAsString(csvData);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
         return result;
     }
 

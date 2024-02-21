@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uk.ac.ebi.spot.goci.model.solr.Params;
 
 @Data
 @Builder

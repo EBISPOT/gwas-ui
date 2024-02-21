@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.spot.goci.refactoring.service.RestAPIEFOService;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
-import uk.ac.ebi.spot.goci.ui.cache.EFOTraitMapperCache;
 
 import java.util.HashMap;
 import java.util.Map;
