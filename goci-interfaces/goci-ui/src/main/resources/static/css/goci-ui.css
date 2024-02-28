@@ -206,11 +206,25 @@
     float: left;
     width: 200px;
     height: 100%;
-    padding-top: 20px;
+    margin-top: 20px;
 }
-.gbc-img{
-    float: right;
+
+.gbc-img {
     width: 100px;
+}
+
+.elixir-img {
+    width: 80px;
+    height: 42px;
+}
+
+.resource-img {
+    margin-top: 20px;
+    float: right;
+}
+
+.resource-img:hover {
+    outline: 1px dashed black;
 }
 
 .search-results-container {
