@@ -4,7 +4,7 @@
 
 ==== EBI Train online
 
-Check out link:http://www.ebi.ac.uk/training/online/courses/gwas-catalog-exploring-snp-trait-associations[GWAS Catalog - Exploring SNP-trait associations] for an easily accessible interactive tutorial on the full range of features the GWAS Catalog has to offer.
+Check out link:https://www.ebi.ac.uk/training/online/courses/gwas-catalogue-exploring-snp-trait-associations[GWAS Catalog - Exploring SNP-trait associations] for an easily accessible interactive tutorial on the full range of features the GWAS Catalog has to offer.
 
 Or watch our latest training webinars:
 
