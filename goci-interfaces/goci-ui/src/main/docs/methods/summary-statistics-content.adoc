@@ -31,13 +31,15 @@ This page includes general documentation about the summary statistics we host in
 
 - <<What are “formatted files”?,What are “formatted files”?>>
 
-- <<What are harmonised files?,What are harmonised files?>>
+- <<What are "harmonised files"?,What are "harmonised files"?>>
 
 * <<Table of harmonisation codes,Table of harmonisation codes>>
 
 ==== Accompanying metadata
 
 - <<Accompanying metadata (-meta.yaml),-meta.yaml info>>
+
+* <<File_types:,File types>>
 
 ==== API access
 
@@ -128,7 +130,7 @@ Harmonised summary statistics are released daily and a text file listing all of 
 Prior to the GWAS Catalog accepting direct submissions, summary statistics files were formatted by scientific curators using a semi-automated process. Where the formatted files are available, they are nested within the 'harmonised' subdirectory with the ‘*.f.tsv.gz’ suffix (https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90001001-GCST90002000/GCST90001686/harmonised/[example]). These files will not be available for newer submitted content because those datasets have already been formatted by the authors.
 During the formatting process data were not manipulated but the headers were converted to a consistent format across all summary statistics files.
 
-== What are harmonised files?
+== What are "harmonised files"?
 
 Sumstats files are harmonised using an automated link:https://github.com/EBISPOT/gwas-sumstats-harmoniser[pipeline], which is detailed below. By 'harmonised' we mean that all genomic position data will be reported against the same and latest genome build. Missing chromosome, base pair location and variant ID data that can be inferred, will be. Furthermore, where possible, alleles are also orientated to the forward strand.
 
@@ -294,9 +296,9 @@ Metadata are provided in a computer and human readable YAML file adjacent to the
 
 ==== File_types:
 
-* GWAS-SSF v1 - version 1 of the GWAS-SSF standard format.  
-* Pre-GWAS-SSF - the previous, minimal format requiring only chromosome, base_pair_location/rsID and p-value. 
-* Non-GWAS-SSF - not conforming to any standard format. Can include gene-based, CNV and multivariate analyses where eg. effect information is not available.
+* GWAS-SSF v1: Version 1 of the GWAS-SSF standard format.  
+* Pre-GWAS-SSF: The previous, minimal format requiring only chromosome, base_pair_location/rsID and p-value. 
+* Non-GWAS-SSF: Not conforming to any standard format. Can include gene-based, CNV and multivariate analyses where eg. effect information is not available.
 
 Note: for very old sumstats (where the filename does not begin ‘GCST’), no metadata .yaml will be available.
 
