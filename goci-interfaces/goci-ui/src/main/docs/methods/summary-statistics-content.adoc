@@ -5,36 +5,45 @@
 This page includes general documentation about the summary statistics we host in the GWAS Catalog. **For instructions on submitting summary statistics please see our https://www.ebi.ac.uk/gwas/docs/submission[submission documentation].**
 
 '''
+==== General
 
-<<What are summary statistics?, What are summary statistics?>>
+- <<What are summary statistics?, What are summary statistics?>>
 
-<<Sources,Sources>>
+- <<Sources,Sources>>
 
-<<Eligibility,Eligibility>>
+- <<Eligibility,Eligibility>>
 
-<<Standard format,Standard format>>
+- <<Standard format,Standard format>>
 
-<<Access,Access>>
+==== Access
 
-> <<Searching via our web interface:,Searching our web interface>>
+- <<Searching via our web interface:,Searching our web interface>>
 
-> <<Navigating the FTP:,Navigating the FTP>>
+- <<Navigating the FTP:,Navigating the FTP>>
 
-> <<Directories:,Directories>>
+- <<Directories:,Directories>>
 
-> <<Harmonised subdirectories:,Harmonised subdirectories>>
+* <<Harmonised subdirectories:,Harmonised subdirectories>>
 
-> <<How can I find all the harmonised data?,How can I find all the harmonised data?>>
+- <<How can I find all the harmonised data?,How can I find all the harmonised data?>>
 
-<<What are “formatted files”?,What are “formatted files”?>>
+==== Formatted and harmonised files
 
-<<What are harmonised files?,What are harmonised files?>>
+- <<What are “formatted files”?,What are “formatted files”?>>
 
-> <<Table of harmonisation codes,Table of harmonisation codes>>
+- <<What are "harmonised files"?,What are "harmonised files"?>>
 
-<<Accompanying metadata (-meta.yaml),Accompanying metadata (-meta.yaml)>>
+* <<Harmonisation codes,Harmonisation codes>>
 
-<<REST API,REST API>>
+==== Accompanying metadata
+
+- <<Accompanying metadata (-meta.yaml),-meta.yaml info>>
+
+* <<File_types:,File types>>
+
+==== API access
+
+- <<REST API,REST API>>
 
 '''
 == What are summary statistics?
@@ -75,18 +84,18 @@ We also host a small number of non-standard files with eg. fewer than 100,000 SN
 
 We store summary statistics files in two different places, on our https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], and a subset of files in our database (see <<REST API,REST API>>). The FTP is updated nightly with any newly ingested data.
 
-=== Searching via our web interface: 
+==== Searching via our web interface: 
 
 image:sumstats_logo.png[Sumstats logo,50]
 
 Links to FTP directories are provided within the main Catalog pages. In this way, summary statistics can be found by searching for a specific trait, accession ID, PMID, author and other key words. Sumstats availability is denoted by the above icon, and listed under the summary statistics tab of a publication. 
 
 
-=== Navigating the FTP:
+==== Navigating the FTP:
 
 Every summary statistics file is available at a path based on the GCST accession ID. For example, the summary statistics for accession GCST123456 would be available at 'ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST123001-GCST124000/GCST123456/'. You can see that the directory 'GCST123456/' is nested inside 'ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST123001-GCST124000/'. This parent directory holds up to 1000 GCSTs, and will only contain those GCSTs that are within the range given. These bins of one thousand are added as necessary, when new GCSTs need housing.
 
-=== Directories:
+==== Directories:
 
 Each accession ID directory contains:
 
@@ -95,7 +104,7 @@ Each accession ID directory contains:
 * A separate readme, if provided .txt (newer folders will hold this under ‘author_notes’ inside the .yaml)
 * When possible, and once processed, a harmonised directory
 
-=== Harmonised subdirectories:
+==== Harmonised subdirectories:
 
 **The latest version of the harmonisation pipeline was released in 2023.** All files harmonised under this version, eg. https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90270001-GCST90271000/GCST90270927/[GCST90270927] contain a ‘/harmonised’ directory with the following contents:
 
@@ -112,7 +121,7 @@ Each accession ID directory contains:
 
 In some cases, there will be no harmonised directory due to incompatibility with our pipeline. These will be marked out with ‘Non-GWAS-SSF’ under file_type in the .yaml. If the file type is GWAS-SSF or pre-GWAS-SSF and there is no harmonised file, it is likely awaiting harmonisation, please check back at a later date.
 
-=== How can I find all the harmonised data?
+==== How can I find all the harmonised data?
 
 Harmonised summary statistics are released daily and a text file listing all of the harmonised studies is available on the FTP at the following location: https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/harmonised_list.txt. This text file is updated on a nightly basis.
 
@@ -121,7 +130,7 @@ Harmonised summary statistics are released daily and a text file listing all of 
 Prior to the GWAS Catalog accepting direct submissions, summary statistics files were formatted by scientific curators using a semi-automated process. Where the formatted files are available, they are nested within the 'harmonised' subdirectory with the ‘*.f.tsv.gz’ suffix (https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90001001-GCST90002000/GCST90001686/harmonised/[example]). These files will not be available for newer submitted content because those datasets have already been formatted by the authors.
 During the formatting process data were not manipulated but the headers were converted to a consistent format across all summary statistics files.
 
-== What are harmonised files?
+== What are "harmonised files"?
 
 Sumstats files are harmonised using an automated link:https://github.com/EBISPOT/gwas-sumstats-harmoniser[pipeline], which is detailed below. By 'harmonised' we mean that all genomic position data will be reported against the same and latest genome build. Missing chromosome, base pair location and variant ID data that can be inferred, will be. Furthermore, where possible, alleles are also orientated to the forward strand.
 
@@ -169,7 +178,7 @@ The harmonisation process is the following:
 * percentage of variants that are successfully harmonised or failed
 .. A metadata YAML file (*.h.tsv.gz-meta.yaml) for the harmonised data file. 
 
-===== Table of harmonisation codes
+==== Harmonisation codes
 
 [%header, cols="1*>,10"]
 |===
@@ -243,26 +252,26 @@ There may be differences between the data available on the FTP site compared to 
 == Accompanying metadata (-meta.yaml)
 Metadata are provided in a computer and human readable YAML file adjacent to the data file, suffixed with -meta.yaml. So where the data file is called GCST123456.tsv.gz, the metadata can be found with the name GCST123456.tsv.gz-meta.yaml. 
 
-*metadata definitions:*
+*Metadata definitions:*
 [options="header"]
 |=============================================================================================================================================================
-|  Field                             |  Description                                                                         |  Data type and values                                     |  Mandatory                            |  Example                                                                                                              
-|    |    |   |    |  
-|  # Study meta-data                |                                                                                      |                                                           |                                       |                                                                                                                       
+|  *Field*                   |  *Description*                  |  *Data type and values*                  |  *Mandatory*                    |  *Example*                                                                                                              
+|--------------------------|----------------------------------|------------------|----------------|-------------------------------------
+|  # *Study meta-data* |                                                                                      |                                                           |                                       |                                                                                                                       
 |  gwas_id                           |  GWAS Catalog accession ID                                                           |  Text string                                              |  Yes                                  |  GCST90244057                                                                                                         
 |  author_notes                      |  Additional information about this study from the author                             |  Text string                                              |  No                                   |  File contains GWAS summary statistics from a meta-analysis of NMR metabolic traits in up to 33 cohorts.              
 |  gwas_catalog_api                  |  GWAS catalog REST API link                                                          |  Text string                                              |  Yes                                  |  https://www.ebi.ac.uk/gwas/rest/api/studies/GCST90244057
 |  date_metadata_last_modified       |  The latest date that metadata YAML file was modified                                |  date                                                     |  Yes                                  |  2023-11-28                                                                                                           
-|  # Trait Information              |                                                                                      |                                                           |                                       |                                                                                                                       
+|  # *Trait Information*              |                                                                                      |                                                           |                                       |                                                                                                                       
 |  trait_description                 |  Author reported trait description                                                   |  Text string (multiple possible)                          |  Yes                                  |  Body mass index                                                                                                      
 |  ontology_mapping                  |  Short form ontology terms describing the trait                                      |  Text string (multiple possible)                          |  No                                   |   EFO_0004918                                                                                                         
-|  # Genotyping Information         |                                                                                      |                                                           |                                       |                                                                                                                       
+|  # *Genotyping Information*         |                                                                                      |                                                           |                                       |                                                                                                                       
 |  genome_assembly                   |  Genome assembly for the summary statistics.                                         |  GRCh/NCBI/UCSC value                                     |  Yes                                  |  GRCh37                                                                                                               
 |  coordinate_system                 |  Coordinate system used for the summary statistics                                   |  Text String (1-based or 0-based)                         |  No                                   |  1-based                                                                                                              
 |  genotyping_technology             |  Method(s) used to genotype variants in the discovery stage.                         |  Text string (multiple possible)                          |  Yes                                  |   Genome-wide genotyping array                                                                                        
 |  imputation_panel                  |  Panel used for imputation                                                           |  Text string                                              |  No                                   |  HRC + UK10K                                                                                                          
 |  imputation_software               |  Software used for imputation                                                        |  Text string                                              |  No                                   |  SHAPEIT3 + IMPUTE4                                                                                                   
-|  # Sample Information             |                                                                                      |                                                           |                                       |                                                                                                                       
+|  # *Sample Information*             |                                                                                      |                                                           |                                       |                                                                                                                       
 |  sample_ancestry_category          |  Broad ancestry category that best describes the sample.                             |  Text string                                              |  Yes                                  |  European                                                                                                             
 |  sample_ancestry                   |  The most detailed ancestry descriptor(s) for the sample.                            |  Text string (multiple possible)                          |  Yes                                  |  Finnish                                                                                              
 |  sample_size                       |  Sample size                                                                         |  Integer                                                  |  Yes                                  | 27006                                                                                                                 
@@ -271,14 +280,14 @@ Metadata are provided in a computer and human readable YAML file adjacent to the
 |  case_count                        |  Number of cases for case/control study                                              |  Integer                                                  |  No, unless caseControlStudy is true  | 27006                                                                                                                 
 |  control_count                     |  Number of controls for case/control study                                           |  Integer                                                  |  No, unless caseControlStudy is true  | 27006                                                                                                                 
 |  sex                               |  To indicate a sex-stratified analysis                                               |  M (for male), F (for female), combined or NR if unknown  |  No                                   |  combined                                                                                                             
-|  # Summary Statistic information  |                                                                                      |                                                           |                                       |                                                                                                                       
+|  # *Summary Statistic information*  |                                                                                      |                                                           |                                       |                                                                                                                       
 |  data_file_name                    |  The name of the summary statistics file                                             |  Text string                                              |  Yes                                  |  GCST90244057_buildGRCh37.tsv                                                                                         
 |  file_type                         |  The format of the summary statistics file                                           |  "GWAS-SSF v1.0", "pre-GWAS-SSF", "non-GWAS-SSF"          |  Yes                                  |  GWAS-SSF v1.0                                                                                                        
 |  data_file_md5sum                  |  The md5 checksum of the summary statistics file.                                    |  Text string                                              |  Yes                                  |  0ec56396f89edcc21a3d5a25a6fa993d                                                                                     
 |  analysis_software                 |  Software and version used for the association analysis                              |  Text string (multiple possible)                          |  Yes if p-values of 0 given           |  REGENIE                                                                                                              
 |  adjusted_covariates               |  Any covariates the GWAS is adjusted for                                             |  Text string (multiple possible)                          |  No                                   |   sex                                                                                                                 
 |  minor_allele_freq_lower_limit     |  Lowest possible effect allele frequency                                             |  Numeric                                                  |  No                                   | 0.0003                                                                                                                
-|  # Harmonization status           |                                                                                      |                                                           |                                       |                                                                                                                       
+|  # *Harmonization status*           |                                                                                      |                                                           |                                       |                                                                                                                       
 |  is_harmonised                     |  Description of harmonisation codes                                                  |  Text string                                              |  Only given in harmonised datasets    |  false                                                                                                                
 |  is_sorted                         |  Flag whether the file is sorted by genomic location                                 |  Boolean                                                  |  Yes                                  |  false                                                                                                                
 |  harmonisation_reference           |  The genome reference file used for harmonising the summary statistics file          |  Text string                                              |  No                                   |   	ftp://ftp.ensembl.org/pub/release-104/fasta/homo_sapiens/dna/                                                                                                                     
@@ -287,9 +296,9 @@ Metadata are provided in a computer and human readable YAML file adjacent to the
 
 ==== File_types:
 
-* GWAS-SSF v1 - version 1 of the GWAS-SSF standard format.  
-* Pre-GWAS-SSF - the previous, minimal format requiring only chromosome, base_pair_location/rsID and p-value. 
-* Non-GWAS-SSF - not conforming to any standard format. Can include gene-based, CNV and multivariate analyses where eg. effect information is not available.
+* GWAS-SSF v1: Version 1 of the GWAS-SSF standard format.  
+* Pre-GWAS-SSF: The previous, minimal format requiring only chromosome, base_pair_location/rsID and p-value. 
+* Non-GWAS-SSF: Not conforming to any standard format. Can include gene-based, CNV and multivariate analyses where eg. effect information is not available.
 
 Note: for very old sumstats (where the filename does not begin ‘GCST’), no metadata .yaml will be available.
 
