@@ -33,7 +33,7 @@ This page includes general documentation about the summary statistics we host in
 
 - <<What are "harmonised files"?,What are "harmonised files"?>>
 
-* <<Table of harmonisation codes,Table of harmonisation codes>>
+* <<Harmonisation codes,Harmonisation codes>>
 
 ==== Accompanying metadata
 
@@ -84,18 +84,18 @@ We also host a small number of non-standard files with eg. fewer than 100,000 SN
 
 We store summary statistics files in two different places, on our https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], and a subset of files in our database (see <<REST API,REST API>>). The FTP is updated nightly with any newly ingested data.
 
-=== Searching via our web interface: 
+==== Searching via our web interface: 
 
 image:sumstats_logo.png[Sumstats logo,50]
 
 Links to FTP directories are provided within the main Catalog pages. In this way, summary statistics can be found by searching for a specific trait, accession ID, PMID, author and other key words. Sumstats availability is denoted by the above icon, and listed under the summary statistics tab of a publication. 
 
 
-=== Navigating the FTP:
+==== Navigating the FTP:
 
 Every summary statistics file is available at a path based on the GCST accession ID. For example, the summary statistics for accession GCST123456 would be available at 'ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST123001-GCST124000/GCST123456/'. You can see that the directory 'GCST123456/' is nested inside 'ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST123001-GCST124000/'. This parent directory holds up to 1000 GCSTs, and will only contain those GCSTs that are within the range given. These bins of one thousand are added as necessary, when new GCSTs need housing.
 
-=== Directories:
+==== Directories:
 
 Each accession ID directory contains:
 
@@ -104,7 +104,7 @@ Each accession ID directory contains:
 * A separate readme, if provided .txt (newer folders will hold this under ‘author_notes’ inside the .yaml)
 * When possible, and once processed, a harmonised directory
 
-=== Harmonised subdirectories:
+==== Harmonised subdirectories:
 
 **The latest version of the harmonisation pipeline was released in 2023.** All files harmonised under this version, eg. https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90270001-GCST90271000/GCST90270927/[GCST90270927] contain a ‘/harmonised’ directory with the following contents:
 
@@ -121,7 +121,7 @@ Each accession ID directory contains:
 
 In some cases, there will be no harmonised directory due to incompatibility with our pipeline. These will be marked out with ‘Non-GWAS-SSF’ under file_type in the .yaml. If the file type is GWAS-SSF or pre-GWAS-SSF and there is no harmonised file, it is likely awaiting harmonisation, please check back at a later date.
 
-=== How can I find all the harmonised data?
+==== How can I find all the harmonised data?
 
 Harmonised summary statistics are released daily and a text file listing all of the harmonised studies is available on the FTP at the following location: https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/harmonised_list.txt. This text file is updated on a nightly basis.
 
@@ -178,7 +178,7 @@ The harmonisation process is the following:
 * percentage of variants that are successfully harmonised or failed
 .. A metadata YAML file (*.h.tsv.gz-meta.yaml) for the harmonised data file. 
 
-===== Table of harmonisation codes
+==== Harmonisation codes
 
 [%header, cols="1*>,10"]
 |===
