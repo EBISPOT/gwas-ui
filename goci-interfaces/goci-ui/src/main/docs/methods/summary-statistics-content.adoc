@@ -1,6 +1,7 @@
 = Summary statistics 
 
 :imagesdir: ../images
+:data-uri:
 
 This page includes general documentation about the summary statistics we host in the GWAS Catalog. **For instructions on submitting summary statistics please see our https://www.ebi.ac.uk/gwas/docs/submission[submission documentation].**
 
