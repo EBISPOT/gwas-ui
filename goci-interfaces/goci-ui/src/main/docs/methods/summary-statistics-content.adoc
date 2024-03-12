@@ -33,7 +33,7 @@ This page includes general documentation about the summary statistics we host in
 
 - <<What are "harmonised files"?,What are "harmonised files"?>>
 
-* <<Harmonisation codes,Harmonisation codes>>
+* <<Harmonisation codes:,Harmonisation codes>>
 
 ==== Accompanying metadata
 
@@ -86,7 +86,7 @@ We store summary statistics files in two different places, on our https://ftp.eb
 
 ==== Searching via our web interface: 
 
-image:sumstats_logo.png[Sumstats logo,50]
+image::sumstats_logo.png[Sumstats logo,50]
 
 Links to FTP directories are provided within the main Catalog pages. In this way, summary statistics can be found by searching for a specific trait, accession ID, PMID, author and other key words. Sumstats availability is denoted by the above icon, and listed under the summary statistics tab of a publication. 
 
@@ -178,7 +178,9 @@ The harmonisation process is the following:
 * percentage of variants that are successfully harmonised or failed
 .. A metadata YAML file (*.h.tsv.gz-meta.yaml) for the harmonised data file. 
 
-==== Harmonisation codes
+
+==== Harmonisation codes:
+
 
 [%header, cols="1*>,10"]
 |===
@@ -256,7 +258,7 @@ Metadata are provided in a computer and human readable YAML file adjacent to the
 [options="header"]
 |=============================================================================================================================================================
 |  *Field*                   |  *Description*                  |  *Data type and values*                  |  *Mandatory*                    |  *Example*                                                                                                              
-|--------------------------|----------------------------------|------------------|----------------|-------------------------------------
+|--------------------------   |--------------------------   |--------------------------   |--------------------------   |--------------------------   
 |  # *Study meta-data* |                                                                                      |                                                           |                                       |                                                                                                                       
 |  gwas_id                           |  GWAS Catalog accession ID                                                           |  Text string                                              |  Yes                                  |  GCST90244057                                                                                                         
 |  author_notes                      |  Additional information about this study from the author                             |  Text string                                              |  No                                   |  File contains GWAS summary statistics from a meta-analysis of NMR metabolic traits in up to 33 cohorts.              
