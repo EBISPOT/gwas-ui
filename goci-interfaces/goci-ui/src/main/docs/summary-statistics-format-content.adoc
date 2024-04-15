@@ -123,14 +123,26 @@ Mandatory and encouraged fields are shown, with standard headers.
 |Number between 0 and 1. If required, effect allele frequency may be rounded to a threshold value defined in the metadata
 |`0.22`
 
+|7
+|(see below)
+|Column 7 must contain the significance value (i.e. p_value _or_ neg_log_10_p_value). If you provide the p_value as a negative log10 value, please make sure to change the column header to match.
+|Mandatory to include p_value _or_ neg_log_10_p_value
+|-
+|-
 
 |7
 |p_value
 |P-value of the association statistic
-|Mandatory
-|Number between 0 and 1 (standard p-value) _or_ Number ≥ 0 (-log10 p-value). If any p-value is equal to 0, the precision of the p-value must be given in the accompanying metadata
+|(see above)
+|Number between 0 and 1 (standard p-value). If any p-value is equal to 0, the precision of the p-value must be given in the accompanying metadata
 |`1E-08`
 
+|7
+|neg_log_10_p_value
+|Negative log10 p-value of the association statistic
+|(see above)
+|Number ≥ 0 (-log10 p-value).
+|`8.00`
 
 |*
 |variant_id
