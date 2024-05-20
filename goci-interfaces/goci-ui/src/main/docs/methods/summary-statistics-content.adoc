@@ -87,10 +87,11 @@ We store summary statistics files in two different places, on our https://ftp.eb
 
 ==== Searching via our web interface: 
 
-image::sumstats_logo.png[Sumstats logo,50]
+Links to FTP directories are provided within the main Catalog pages. Search for a specific trait, accession ID, PMID, author, etc., and look out for the summary statistics icon, denoting availability. 
 
-Links to FTP directories are provided within the main Catalog pages. In this way, summary statistics can be found by searching for a specific trait, accession ID, PMID, author and other key words. Sumstats availability is denoted by the above icon, and listed under the summary statistics tab of a publication. 
+Per publication page, all available sumstats will be listed under the 'Full summary statistics' tab. 
 
+You can also browse our summary statistics tables for all pre- and post-publication data here: https://www.ebi.ac.uk/gwas/downloads/summary-statistics
 
 ==== Navigating the FTP:
 
