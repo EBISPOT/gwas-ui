@@ -137,7 +137,7 @@ image::enter_email2.png[Enter Globus email,width=800,align="center"]
 
 === [[link-8]]4. Format and validate summary statistics
 
-Please confirm that your summary statistics files conform to our standard format and content, otherwise your submission will fail validation. If you haven’t already done so, follow the https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[Format and validate link^] for formatting instructions and to access our summary statistics formmating and validation tools.
+Please confirm that your summary statistics files conform to our standard format and content, otherwise your submission will fail validation. If you haven’t already done so, follow the https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[Format and validate link^] for formatting instructions and to access our summary statistics formating and validation tools.
 
 === [[link-9]]5. License agreement
 
