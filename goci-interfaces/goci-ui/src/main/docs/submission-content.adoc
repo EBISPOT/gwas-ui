@@ -46,7 +46,7 @@ Start by going to the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submiss
 
 === [[link-2]]Format and validate summary statistics
 
-Before submitting, you must ensure that your summary statistics files conform to our standard format, which makes your summary statistics interoperable with other datasets and helps others to make use of them. Click https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[here for instructions and to download our validator tool]. We strongly recommend running the validator offline prior to upload, especially for large datasets.
+Before submitting, you must ensure that your summary statistics files conform to our standard format, which makes your summary statistics interoperable with other datasets and helps others to make use of them. Click https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[here for instructions on using our formatter and validator tools], which can be run in the command line or via a web interface. We strongly recommend running the validator offline prior to upload, especially for large datasets.
 
 === [[link-3]]Submission questionnaire
 
