@@ -118,7 +118,7 @@ function reloadTablesAndLocusZoom() {
     ssTable.ajax.reload();
     let includeBgTraits = $('#include-bg-traits').is(':checked');
     let includeChildTraits = $('#toggle-data-display').is(':checked');
-    setTraitDownloadLink(childEfos.concat([getMainEFO()]));
+    setTraitDownloadLink([getMainEFO()].concat(childEfos));
     prepareLocusZoom(includeBgTraits, includeChildTraits);
 }
 
@@ -224,7 +224,7 @@ displayEFOInfo = function(initCBState) {
                 childLabels.push(e.label);
                 childEfos.push(e.key);
             }
-            setTraitDownloadLink(childEfos.concat([getMainEFO()]));
+            setTraitDownloadLink([getMainEFO()].concat(childEfos));
             $("#efo-child-trait-label").html(longContentList("gwas_child_traits_div", childLabels, 'child traits'));
             hideLoadingOverLay('#summary-panel-loading');
             hideGroupedPanelLoadingOverlay();
