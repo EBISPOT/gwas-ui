@@ -1027,6 +1027,7 @@ public class SolrSearchController {
             @RequestParam(value = "facet", required = true) String facet,
             @RequestParam(value = "ancestry", defaultValue = "false") boolean ancestry,
             @RequestParam(value = "cohortsAndSs", required = false) boolean includeCohortsAndSs,
+            @RequestParam(value = "includeGxE", required = false) boolean includeGxE,
             HttpServletResponse response) throws IOException {
 
         StringBuilder solrSearchBuilder = buildFatSearchRequest();
@@ -1141,7 +1142,7 @@ public class SolrSearchController {
 
         System.out.println("** query: "+solrSearchBuilder);
 
-        dispatchDownloadSearch(searchString, response.getOutputStream(), efo, facet, ancestry, includeCohortsAndSs);
+        dispatchDownloadSearch(searchString, response.getOutputStream(), efo, facet, ancestry, includeCohortsAndSs, includeGxE);
     }
 
 
@@ -1200,12 +1201,13 @@ public class SolrSearchController {
 
         System.out.println("** query-Trait Download: "+solrSearchBuilder);
 
-        dispatchDownloadSearch(searchString, response.getOutputStream(), efo, facet, ancestry, false);
+        dispatchDownloadSearch(searchString, response.getOutputStream(), efo, facet, ancestry, false, false);
     }
 
 
 
-    private void dispatchDownloadSearch(String searchString, OutputStream outputStream, boolean efo, String facet, boolean ancestry, boolean includeCohortsAndSs) throws IOException {
+    private void dispatchDownloadSearch(String searchString, OutputStream outputStream, boolean efo,
+                                        String facet, boolean ancestry, boolean includeCohortsAndSs, boolean includeGxE) throws IOException {
         getLog().trace(searchString);
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(searchString);
@@ -1230,7 +1232,7 @@ public class SolrSearchController {
             PrintWriter outputWriter = new PrintWriter(outputStream);
 
             JsonStreamingProcessorService jsonProcessor =
-                    new JsonStreamingProcessorService(br, efo, facet, ancestry, includeCohortsAndSs, new BufferedWriter(outputWriter));
+                    new JsonStreamingProcessorService(br, efo, facet, ancestry, includeCohortsAndSs, includeGxE, new BufferedWriter(outputWriter));
             jsonProcessor.processJson();
             outputWriter.flush();
             outputWriter.close();
