@@ -40,6 +40,7 @@ Both tools can be run locally via the command line or through the https://ebispo
 * Table 1 shows some non-mandatory (encouraged) fields that may be present (*). You are encouraged to include these additional fields in the standard format, where possible.
 * You may include any number of additional columns beyond the set of mandatory fields. 
 * We recommend that analyses are performed with effect allele and other allele fixed to ALT and REF where possible, which provides optimal identification of indels. However, other allele orders can be submitted. The optional column ref_allele should be used to indicate which allele is REF (see Table 1). 
+* If the output software or analysis method precludes submission of beta/OR/HR and/or standard error, please get in touch to discuss alternative submission arrangements
 
 
 *Table 1. Required content and format*.
@@ -85,7 +86,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 
 |4
 |(see below)
-|Column 4 must contain the primary effect size measurement (i.e. beta, odds ratio _or_ hazard ratio). If you have calculated more than one effect size statistic (e.g. beta as well as odds ratio), the other can be entered as an additional column at the end of the file.
+|Field 4 must contain the primary effect size measurement (i.e. beta, odds ratio _or_ hazard ratio). If you have calculated more than one effect size statistic (e.g. beta as well as odds ratio), the other can be entered as an additional column at the end of the file.
 |Mandatory to include beta _or_ odds_ratio _or_ hazard_ratio
 |-
 |-
@@ -177,7 +178,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 
 |*
 |ci_lower
-|Lower confidence interval for the effect
+|Lower confidence interval for the odds ratio
 |Encouraged
 |Number
 |`1.36`
@@ -185,7 +186,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 
 |*
 |ci_upper
-|Upper confidence interval for the effect
+|Upper confidence interval for the odds ratio
 |Encouraged
 |Number
 |`1.64`
