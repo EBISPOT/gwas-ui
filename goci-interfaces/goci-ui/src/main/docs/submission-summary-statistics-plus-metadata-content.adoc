@@ -324,7 +324,8 @@ There are 24 columns for you to fill in:
 
 ==== Overview
 
-In the Sample tab, enter information about the samples included in each GWAS. Please create a new row for each GWAS and for each broad ancestry category within each GWAS. *For multi-ancestry GWAS, please create a new row for each included ancestry (study tags can be reused multiple times on this sheet)*. See the Column Instructions below for the list of standardised ancestry categories used by the GWAS Catalog.
+In the Sample tab, enter information about the samples included in each GWAS. Please create a new row for each GWAS and for each for each group of individuals assigned an ancestry category label within each GWAS. *For multi-ancestry GWAS, please create a new row for each included ancestry category label (study tags can be reused multiple times on this sheet)*. See the Column Instructions below for the list of standardised ancestry categories used by the GWAS Catalog. For more information on why this is necessary, refer to our link:https://www.ebi.ac.uk/gwas/ancestry[documentation]. 
+
 
 For example, for 2 studies on different traits, analysed in 2 ancestry categories, create 2 x 2 = 4 rows:
 [cols="<4,<1,<4,<1,<4,<1,<1,<1,<4,<1,<1", options="header", grid="all", width=100%]
@@ -562,11 +563,11 @@ Please do not enter ancestry information in this column (see other columns below
 
 |Ancestry category
 |
-|Broad ancestry category that best describes the sample. For more information about each category, see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5815218/table/Tab1/?report=objectonly[Table 1, Morales et al., 2018^].
+|An ancestry category label that is appropriate for the sample. For more information about each category label, see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5815218/table/Tab1/?report=objectonly[Table 1, Morales et al., 2018^].
 
-You should create a new row for each ancestry category. Providing ancestry-specific sample numbers is important for reusability of the data. However, if separate sample numbers are unavailable for each category, you may enter multiple categories in the same row, separated by pipes "\|".
+You should create a new row for each ancestry category label. Providing group-specific sample numbers is important for reusability of the data. However, if separate sample numbers are unavailable for each group, you may enter multiple labels in the same row, separated by pipes "\|".
 
-If it is not possible to assign an ancestry category to a group of samples, enter 'NR' (Not Reported).
+If it is not possible to assign an ancestry category label to a group of samples, enter 'NR' (Not Reported).
 |
 |yes
 |
@@ -612,7 +613,7 @@ If it is not possible to assign an ancestry category to a group of samples, ente
 
 |Ancestry
 |
-|The most detailed ancestry descriptor(s) for the sample. Separate multiple descriptors by pipes "\|".
+|The most detailed available population descriptor(s) for the sample. Separate multiple descriptors by pipes "\|".
 |
 |no
 |
