@@ -205,6 +205,8 @@ function displaySummaryStudy(data, clearBeforeInsert) {
     if (study.agreedToCc0) $("#study-license").html(`<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank"> CC0 </a>`)
     else if(study.pubmedId === '30510241' || study.pubmedId === '36539618' || study.pubmedId === '37770635' ) $("#study-license").html(`<span style="color: red;"> Please Refer to ReadMe File </span>`) //TODO: Implement cc-by-4 license properly
     else $("#study-license").html(`<a href="https://www.ebi.ac.uk/about/terms-of-use/" target="_blank"> Terms of use </a>`)
+    $("#study-gxe").html(study.gxe ? '<span class="glyphicon glyphicon-ok"></span>' :
+        '<span class="glyphicon glyphicon-remove"></span>');
     setAncentrySection(study);
     var fullpvalset = study.fullPvalueSet;
     if (fullpvalset == 1) {
@@ -220,8 +222,6 @@ function displaySummaryStudy(data, clearBeforeInsert) {
 
         $("#study-summary-stats").html(linkFullPValue);
         var summaryStatData = getSummaryStatsInfo(study.accessionId, $("#study-summary-stats"));
-
-
     }
 
     $("#pubmedid_button").attr('onclick', "window.open('" + gwasProperties.NCBI_URL + study.pubmedId + "',    '_blank')");
