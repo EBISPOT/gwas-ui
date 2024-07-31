@@ -21,20 +21,25 @@ public class JsonStreamingProcessorService {
     private boolean isSnpInteraction;
     private boolean includeAncestry;
     private boolean includeCohortsAndSs;
+    private boolean includeGxE;
 
     public JsonStreamingProcessorService(BufferedReader input, boolean includeAnnotations, String type,
-                                         boolean includeAncestry, boolean includeCohortsAndSs, BufferedWriter output) {
+                                         boolean includeAncestry, boolean includeCohortsAndSs, boolean includeGxE,
+                                         BufferedWriter output) {
         this.input = input;
         this.output = output;
         this.includeAnnotations = includeAnnotations;
         this.type = type;
         this.includeAncestry = includeAncestry;
         this.includeCohortsAndSs = includeCohortsAndSs;
+        this.includeGxE = includeGxE;
         newline = System.getProperty("line.separator");
     }
 
+    // can be improved significantly... got messy as it grew
     public void processJson() throws IOException {
         String header;
+        // base of studies v1.0.2, with fields added below from includeAnnotations and includeCohortsAndSs
         if(type.equals("study") && !includeAncestry){
             header =
                     "DATE ADDED TO CATALOG\tPUBMEDID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tPLATFORM [SNPS PASSING QC]\tASSOCIATION COUNT";
@@ -43,7 +48,7 @@ public class JsonStreamingProcessorService {
             if (!includeCohortsAndSs)
                 header = "DATE ADDED TO CATALOG\tPUBMED ID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tPLATFORM [SNPS PASSING QC]\tASSOCIATION COUNT\tMAPPED_TRAIT\tMAPPED_TRAIT_URI\tSTUDY ACCESSION\tGENOTYPING TECHNOLOGY\tSUMMARY STATS LOCATION\tSUBMISSION DATE\tSTATISTICAL MODEL\tBACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT URI";
             else
-                // same as above but without SUMMARY STATS LOCATION as will be added by includeCohortsAndSs
+                // studies 1.0.3 same as above but without SUMMARY STATS LOCATION as will be added by includeCohortsAndSs below
                 header = "DATE ADDED TO CATALOG\tPUBMED ID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tPLATFORM [SNPS PASSING QC]\tASSOCIATION COUNT\tMAPPED_TRAIT\tMAPPED_TRAIT_URI\tSTUDY ACCESSION\tGENOTYPING TECHNOLOGY\tSUBMISSION DATE\tSTATISTICAL MODEL\tBACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT\tMAPPED BACKGROUND TRAIT URI";
         }else if(type.equals("ancestry_new_format")){
             header = "STUDY ACCESSION\tPUBMED ID\tFIRST AUTHOR\tDATE\tINITIAL SAMPLE DESCRIPTION\tREPLICATION SAMPLE DESCRIPTION\tSTAGE\tNUMBER OF INDIVIDUALS\tBROAD ANCESTRAL CATEGORY\tCOUNTRY OF ORIGIN\tCOUNTRY OF RECRUITMENT\tADDITIONAL ANCESTRY DESCRIPTION\tANCESTRY DESCRIPTOR\tFOUNDER/GENETICALLY ISOLATED POPULATION\tNUMBER OF CASES\tNUMBER OF CONTROLS\tSAMPLE DESCRIPTION\tCOHORT(S)\tCOHORT-SPECIFIC REFERENCE";
@@ -55,6 +60,7 @@ public class JsonStreamingProcessorService {
             header =
                     "STUDY ACCESSION\tPUBMEDID\tFIRST AUTHOR\tDATE\tINITIAL SAMPLE DESCRIPTION\tREPLICATION SAMPLE DESCRIPTION\tSTAGE\tNUMBER OF INDIVDUALS\tBROAD ANCESTRAL CATEGORY\tCOUNTRY OF ORIGIN\tCOUNTRY OF RECRUITMENT\tADDITONAL ANCESTRY DESCRIPTION";
         }
+        // studies v1.0
         else{
             header =
                     "DATE ADDED TO CATALOG\tPUBMEDID\tFIRST AUTHOR\tDATE\tJOURNAL\tLINK\tSTUDY\tDISEASE/TRAIT\tINITIAL SAMPLE SIZE\tREPLICATION SAMPLE SIZE\tREGION\tCHR_ID\tCHR_POS\tREPORTED GENE(S)\tMAPPED_GENE\tUPSTREAM_GENE_ID\tDOWNSTREAM_GENE_ID\tSNP_GENE_IDS\tUPSTREAM_GENE_DISTANCE\tDOWNSTREAM_GENE_DISTANCE\tSTRONGEST SNP-RISK ALLELE\tSNPS\tMERGED\tSNP_ID_CURRENT\tCONTEXT\tINTERGENIC\tRISK ALLELE FREQUENCY\tP-VALUE\tPVALUE_MLOG\tP-VALUE (TEXT)\tOR or BETA\t95% CI (TEXT)\tPLATFORM [SNPS PASSING QC]\tCNV";
@@ -65,11 +71,14 @@ public class JsonStreamingProcessorService {
         if (includeCohortsAndSs) {
             header = header.concat("\tCOHORT\tFULL SUMMARY STATISTICS\tSUMMARY STATS LOCATION");
         }
+        if (includeGxE) {
+            header = header.concat("\tGXE");
+        }
 
         header = header.concat("\r\n");
         output.write(header);
 
-        JsonProcessingService processor = new JsonProcessingService("", includeAnnotations, type, includeAncestry, includeCohortsAndSs);
+        JsonProcessingService processor = new JsonProcessingService("", includeAnnotations, type, includeAncestry, includeCohortsAndSs, includeGxE);
         ObjectMapper mapper = new ObjectMapper();
         JsonParser parser = mapper.getFactory().createParser(input);
         while(parser.nextToken() != JsonToken.START_ARRAY) {
@@ -115,7 +124,7 @@ public class JsonStreamingProcessorService {
             BufferedWriter output = new BufferedWriter(new FileWriter("out.txt"));
 
             JsonStreamingProcessorService processorService = new JsonStreamingProcessorService(input, true,
-                    "association", false, false , output);
+                    "association", false, false, false, output);
             processorService.processJson();
 //            JsonProcessingService oldProcessor = new JsonProcessingService(input.readLine(), true,
 //                    "association", false);
