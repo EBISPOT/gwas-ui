@@ -17,10 +17,16 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.ebi.spot.goci.refactoring.dto.AssociationSolrDTO;
 import uk.ac.ebi.spot.goci.refactoring.dto.AssociationSolrDTOAssembler;
+import uk.ac.ebi.spot.goci.refactoring.dto.StudySolrDTO;
+import uk.ac.ebi.spot.goci.refactoring.dto.StudySolrDTOAssembler;
 import uk.ac.ebi.spot.goci.refactoring.model.AssociationDoc;
 import uk.ac.ebi.spot.goci.refactoring.model.SearchAssociationDTO;
+import uk.ac.ebi.spot.goci.refactoring.model.SearchStudyDTO;
+import uk.ac.ebi.spot.goci.refactoring.model.StudyDoc;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchAssociationService;
+import uk.ac.ebi.spot.goci.refactoring.service.SolrSearchStudyService;
 import uk.ac.ebi.spot.goci.refactoring.service.SolrTableExportService;
+import uk.ac.ebi.spot.goci.refactoring.service.impl.SolrSearchStudyServiceImpl;
 import uk.ac.ebi.spot.goci.refactoring.util.FileHandler;
 import uk.ac.ebi.spot.goci.refactoring.util.SolrQueryParamBuilder;
 import uk.ac.ebi.spot.goci.ui.SearchConfiguration;
@@ -48,6 +54,26 @@ public class SolrSearchStudiesController {
     SolrTableExportService solrTableExportService;
     @Autowired
     FileHandler fileHandler;
+    @Autowired
+    SolrSearchStudyServiceImpl solrSearchStudyService;
+    @Autowired
+    private StudySolrDTOAssembler studySolrDTOAssembler;
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public PagedResources<StudySolrDTO> searchStudies(SearchStudyDTO searchStudyDTO,
+                                                      @PageableDefault(size = 10, page = 0) Pageable pageable,
+                                                      PagedResourcesAssembler assembler) throws IOException {
+        String q = solrQueryParamBuilder.buildAllStudiesQuery(searchStudyDTO.getGxe(), searchStudyDTO.getSeqGwas());
+        Page<StudyDoc> studies = solrSearchStudyService.searchStudies(q, pageable, searchStudyDTO);
+        final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
+                .methodOn(SolrSearchStudiesController.class).searchStudies(searchStudyDTO, pageable, assembler));
+        return assembler.toResource(studies, studySolrDTOAssembler,
+                new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
+
+    }
+
 
     @GetMapping(value = "/{accessionId}/associations", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)

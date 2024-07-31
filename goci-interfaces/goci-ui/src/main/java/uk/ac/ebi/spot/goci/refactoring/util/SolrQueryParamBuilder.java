@@ -87,4 +87,26 @@ public class SolrQueryParamBuilder {
         final Matcher matcher = cytoPattern.matcher(cytoBand);
         return matcher.find();
     }
+
+    public String buildAllStudiesQuery(Boolean gxe, Boolean seqGwas) {
+        StringBuilder query = new StringBuilder();
+
+        if (Boolean.TRUE.equals(gxe)) {
+            query.append("gxe:true");
+        }
+
+        if (Boolean.TRUE.equals(seqGwas)) {
+            if (query.length() > 0) {
+                query.append(" AND ");
+            }/**/
+            query.append("-genotypingTechnologies:*array* AND genotypingTechnologies:[* TO *]");
+        }
+
+        if (!Boolean.TRUE.equals(seqGwas) && !Boolean.TRUE.equals(gxe)) {
+            query.append("*:*");
+        }
+
+        return query.toString();
+    }
+
 }
