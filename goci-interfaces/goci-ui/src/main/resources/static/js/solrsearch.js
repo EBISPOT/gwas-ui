@@ -24,6 +24,8 @@ $(document).ready(function() {
         $('#query').text('*');
     }
 
+    $('#browse-studies').html('<a href="' + gwasProperties.contextPath + 'studies"> Browser all studies </a>')
+
     loadResults();
 });
 

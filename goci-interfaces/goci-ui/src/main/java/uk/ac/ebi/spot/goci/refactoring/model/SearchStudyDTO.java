@@ -36,5 +36,10 @@ public class SearchStudyDTO {
     @JsonProperty("firstAuthor")
     private String firstAuthor;
 
+    @JsonProperty("gxe")
+    private Boolean gxe;
+
+    @JsonProperty("seqGwas")
+    private Boolean seqGwas;
 
 }
