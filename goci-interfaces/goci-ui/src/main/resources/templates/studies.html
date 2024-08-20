@@ -92,11 +92,12 @@
 </div>
 
 <div class="container-fluid">
+    <h4>Select study type:</h4>
     <div id="gxe-section">
         <input type="checkbox" id="gxe-checkbox" th:checked="false"/>
         <label>GxE
             <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
-                  title="Only retrieve studies having the GxE flag set to true"></span>
+                  title="All studies including genotype-by-environment interaction in the association model"></span>
         </label>
     </div>
 
@@ -105,7 +106,7 @@
             <input type="checkbox" id="seqGwas-checkbox" th:checked="false"/>
             <label>seqGWAS
                 <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
-                      title="Only retrieve seqGWAS studies"></span>
+                      title="All studies based exclusively on whole-genome or whole-exome genotyping"></span>
             </label>
         </div>
     </div>
