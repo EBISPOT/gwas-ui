@@ -28,7 +28,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/v2/downloads/summary-statistics").setViewName("summary-statistics-table-v2");
         //registry.addRedirectViewController("/search/most-recent", "/search?query=*&filter=recent");
         registry.addViewController("/snp").setViewName("snp-page");
-        registry.addViewController("/ancestry").setViewName("ancestry");
+        registry.addViewController("/population-descriptors").setViewName("ancestry");
+        // redirect from /ancestry to /population-descriptors
+        registry.addRedirectViewController("/ancestry", "/population-descriptors");
         registry.addViewController("/anniversary").setViewName("anniversary");
         registry.addViewController("/variants").setViewName("variants");
         registry.addViewController("/publications").setViewName("publications");
@@ -62,7 +64,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/docs/api/summary-statistics").setViewName("docs-template");
         registry.addViewController("/docs/known-issues").setViewName("docs-template");
         registry.addViewController("/docs/mappingfileheaders").setViewName("docs-template");
-        registry.addViewController("/docs/ancestry").setViewName("docs-template");
+        registry.addViewController("/docs/population-descriptors").setViewName("docs-template");
         registry.addViewController("/docs/pilots").setViewName("docs-template");
         registry.addViewController("/docs/ancestry-data").setViewName("docs-template");
         registry.addViewController("/docs/ancestry-recommendation").setViewName("docs-template");
