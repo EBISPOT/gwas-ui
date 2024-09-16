@@ -56,8 +56,18 @@
                     <th>Reported trait</th>
                     <th>Trait(s)</th>
                     <th>Background trait(s)</th>
-                    <th>Discovery sample number</th>
-                    <th>Replication sample number</th>
+                    <th>
+                        <a class="info-link" onclick="event.stopPropagation();" th:href="@{/docs/population-descriptors}" target="_blank">
+                            <span data-toggle="tooltip" data-placement="right" title="What is an ancestry label? Click!" class="glyphicon glyphicon-question-sign"></span>
+                        </a>
+                        Discovery sample number
+                    </th>
+                    <th>
+                        <a class="info-link" onclick="event.stopPropagation();" th:href="@{/docs/population-descriptors}" target="_blank">
+                            <span data-toggle="tooltip" data-placement="right" title="What is an ancestry label? Click!" class="glyphicon glyphicon-question-sign"></span>
+                        </a>
+                        Replication sample number
+                    </th>
                     <th>Discovery sample description</th>
                     <th>Replication sample description</th>
                     <th>Association count</th>
