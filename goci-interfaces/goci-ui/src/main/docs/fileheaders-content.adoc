@@ -162,7 +162,7 @@ STAGE: Stage of the GWAS to which the sample description applies, either initial
 
 NUMBER OF INDIVDUALS: Number of individuals in this sample
 
-BROAD ANCESTRAL CATEGORY: Broad ancestral category to which the individuals in the sample belong
+BROAD ANCESTRAL CATEGORY: Ancestry category group label, assigned to reduce complexity within the data sets and place samples in context. For more information please refer to https://www.ebi.ac.uk/gwas/docs/ancestry[documentation].
 
 COUNTRY OF ORIGIN: Country of origin of the individuals in the sample
 

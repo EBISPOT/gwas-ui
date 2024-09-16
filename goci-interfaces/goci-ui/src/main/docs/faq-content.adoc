@@ -133,17 +133,17 @@
 
 7. <<faq-E7, Why does the risk allele of a variant not match either of the alleles in the reference genome assembly?>> 
 
-=== F. Ancestry
+=== F. Population descriptors and sample metadata
 
-1. <<faq-F1, How is the ancestry data in the GWAS Catalog provided?>>
+1. <<faq-F1, How are the population descriptors in the GWAS Catalog provided?>>
 
-2. <<faq-F2, How do I search for ancestry data in the GWAS Catalog?>>
+2. <<faq-F2, How do I search for population descriptors in the GWAS Catalog?>>
 
-3. <<faq-F3, Can I find all associations for a particular ancestry?>>
+3. <<faq-F3, Can I find all associations with a particular ancestry label>>
 
-4. <<faq-F4, What does the "Pre-2011 ancestry not double-curated" flag next to some of the ancestry data mean?>>
+4. <<faq-F4, What does the "Pre-2011 ancestry not double-curated" flag next to some of the sample metadata mean?>>
 
-5. <<faq-F5, Why is the ancestry information provided in a separate downloadable spreadsheet to the rest of the study-level information?>>
+5. <<faq-F5, Why is the detailed sample metadata provided in a separate downloadable spreadsheet ("Ancestry data") to the rest of the study-level information?>>
 
 6. <<faq-F6, What is included in the COHORT field?>>
 
@@ -491,27 +491,27 @@ The 'CONTEXT/Most severe consequence' column provides information on a variant's
 
 Variants and their risk alleles are extracted exactly as reported in the paper. In a small number of cases, the curated risk allele does not match either of the alleles reported in the reference genome assembly, which are displayed in the Info panel on the variant page. This may be due to strand flipping between genome builds, where the association was originally reported on an older genome build. We are unable to account for this in the curated data as genome build is not consistently reported by authors.  For more detail on this issue, please refer to link:https://pubmed.ncbi.nlm.nih.gov/36465187/[Sheng et al 2022].  
 
-== F. Ancestry
+== F. Population descriptors
 
-==== [[faq-F1]]1. How is the ancestry data in the GWAS Catalog provided?
+==== [[faq-F1]]1. How are the population descriptors in the GWAS Catalog provided?
 
-The GWAS Catalog team has developed and published a link:https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1396-2[framework] to represent, in an accurate and standardized manner, the ancestry of samples. Our framework involves representing the ancestry of samples in two forms: (1) a detailed sample description and (2) an ancestry category from a controlled list. Detailed descriptions aim to capture accurate, informative, and comprehensive information regarding the ancestry or genealogy of each distinct sample. Category assignment reduces complexity within data sets and enables the establishment of hierarchical relationships, placing samples in context with other samples, groups, and populations. For more information please view our link:ancestry[Ancestry Documentation] page
+The GWAS Catalog team has developed and published a link:https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1396-2[framework] to represent sample metadata including population descriptors, in a standarised manner. Our framework involves representing the samples in two forms: (1) a detailed sample description and (2) an ancestry category label from a controlled list. Detailed descriptions aim to capture informative and comprehensive information regarding the population of each distinct sample based on author-provided information. Label assignment reduces complexity within data sets and enables the placement of samples in context with other samples, groups, and populations. For more information please view our https://www.ebi.ac.uk/gwas/docs/ancestry[Documentation] page.
 
-==== [[faq-F2]]2. How do I search for ancestry data in the GWAS Catalog?
+==== [[faq-F2]]2. How do I search for population descriptors in the GWAS Catalog?
 
-Ancestry data can be searched by entering relevant text in the search bar, including ancestry category or country (e.g. “European”, “South Africa”). Any publications containing those ancestries or countries of recruitment will be returned. Ancestry data can then be found in the "Studies" table within the Publication page. Ancestry data can also be found on the “Study” page and in the “Studies” table in the Trait and Variant pages. For more information please view our link:ancestry[Ancestry Documentation] page. 
+Sample metadata can be searched for particular population descriptors in the Studies table on any of the Trait, Publication, Gene or Variant pages, by entering relevant text in the Discovery/Replication Sample Number column (displayed by default) or Discovery/Replication Sample Description columns (enabled via the "Column visibility" button). For more information please view our https://www.ebi.ac.uk/gwas/docs/ancestry[Documentation] page. 
 
-==== [[faq-F3]]3. Can I find all associations for a particular ancestry?
+==== [[faq-F3]]3. Can I find all associations with a particular ancestry label?
 
-The GWAS Catalog website does not currently have a way to view all associations for a particular ancestry. We recommend using our REST API. All Ancestry data, including Country of Recruitment and Additional information, is also available as a download file from our link:http://www.ebi.ac.uk/gwas/docs/file-downloads[download page.] For an overview of the kind of data found in this file, refer to link:http://www.ebi.ac.uk/gwas/docs/fileheaders#_file_headers_for_ancestry_download[the file header descriptions.] 
+The GWAS Catalog website does not currently have a way to view all associations for a particular ancestry label. We recommend using our REST API. All sample metadata, including Country of Recruitment and Additional information, is also available as a download file from our link:http://www.ebi.ac.uk/gwas/docs/file-downloads[download page.] For an overview of the kind of data found in this file, refer to http://www.ebi.ac.uk/gwas/docs/fileheaders#_file_headers_for_ancestry_download[the file header descriptions]. 
 
-==== [[faq-F4]]4. What does the "Pre-2011 ancestry not double-curated" flag next to some of the ancestry data mean?
+==== [[faq-F4]]4. What does the "Pre-2011 ancestry not double-curated" flag next to some of the sample metadata mean?
 
-As of September 2016, we release publicly all ancestry data extracted from the GWAS Catalog. Ancestry data from studies published before 2011 has not been reviewed by a second curator and so may not always conform to the strict standardised way we present more recent ancestry data.
+As of September 2016, we release publicly all population descriptors extracted from the GWAS Catalog. Sample metadata from studies published before 2011 has not been reviewed by a second curator and so may not always conform to the strict standardised way we now present population descriptors.
 
-==== [[faq-F5]]5. Why is the ancestry information provided in a separate downloadable spreadsheet to the rest of the study-level information?
+==== [[faq-F5]]5. Why is the detailed sample metadata provided in a separate downloadable spreadsheet ("Ancestry data") to the rest of the study-level information?
 
-Most GWAS Catalog studies include at least two ancestry entries, one for the initial stage and one for the replication stage, and some studies may have several entries for each stage. As there is no way of usefully representing this multi-dimensional data in a single row in a spreadsheet, this data is instead provided in a separate spreadsheet, with each ancestry entry in its own row.
+Most GWAS Catalog studies include at least two sets of sample metadata, one for the initial stage and one for the replication stage, and some studies may have several entries for each stage. As there is no way of usefully representing this multi-dimensional data in a single row in a spreadsheet, this data is instead provided in a separate spreadsheet, with each ancestry label in its own row.
 
 ==== [[faq-F6]]6. What is included in the COHORT field?
 
