@@ -24,6 +24,8 @@ $(document).ready(function() {
         $('#query').text('*');
     }
 
+    $('#browse-studies').html('<a href="' + gwasProperties.contextPath + 'studies"> Browse all studies </a>')
+
     loadResults();
 });
 
@@ -191,6 +193,9 @@ var drawSnippets = (function () {
                     break;
 
                 case 'publication':
+                    // temporary fix for a DR issue causing empty PMIDs to be indexed (should've been purged)
+                    if (doc.studyCount == 0) continue;
+
                     prototype = publication(prototype, doc);
                     break;
 
@@ -354,9 +359,14 @@ var drawSnippets = (function () {
         if (doc.fullPvalueSet == 1){
             table.find('h3#iconCell').append(linkFullPValue+"&nbsp;&nbsp");
         }
-        if ((doc.genotypingTechnologies.indexOf("Targeted genotyping array") > -1) ||
-            (doc.genotypingTechnologies.indexOf("Exome genotyping array") > -1) ){
-            table.find('h3#iconCell').append(genotypingIcon);
+
+        // the 'if' statement is to prevent the ui from loading forever if the field is absent
+        // can possibly be removed once DR issue causing empty PMID's to be released is fixed, code inside the if statement should remain ofc
+        if (doc.genotypingTechnologies) {
+            if ((doc.genotypingTechnologies.indexOf("Targeted genotyping array") > -1) ||
+                (doc.genotypingTechnologies.indexOf("Exome genotyping array") > -1) ){
+                table.find('h3#iconCell').append(genotypingIcon);
+            }
         }
 
         // Adding stats:

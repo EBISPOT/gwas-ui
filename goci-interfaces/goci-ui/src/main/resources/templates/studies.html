@@ -12,7 +12,7 @@
     <meta name="author" content="Tony Burdett, Emma Hastings, Dani Welter, SPOT, EMBL-EBI, NHGRI"/>
     <link rel="icon" th:href="@{/images/favicon.ico}"/>
 
-    <title>GWAS Catalog</title>
+    <title>GWAS Catalog - Studies</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
@@ -31,6 +31,7 @@
     <link rel="stylesheet"  th:href="@{/css/icons/flaticon.css}"/>
     <link rel="stylesheet"  th:href="@{/css/goci-color-palette-1.css}"/>
     <link  th:href="@{/css/gwas-icons.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/goci-efotrait-page.css}"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -38,7 +39,41 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.4/css/buttons.bootstrap.min.css"/>
     <script  th:src="@{/js/console-plugin.js}"></script>
+    <style>
+        .btn:focus, .btn:active, a:focus {
+            outline: none !important;
+            box-shadow: none;
+        }
+
+        div.dt-buttons {
+            float: right;
+        }
+
+        div.dataTables_info, div.dataTables_length {
+            float: left;
+        }
+
+        thead input {
+            width: 100% !important;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        $(document).ready(() => {
+            $('#gxe-checkbox').on('change', reloadTable);
+            $('#seqGwas-checkbox').on('change', reloadTable);
+        });
+        function reloadTable() {
+            const studyTable = $('#study-table-v2').DataTable();
+            studyTable.ajax.reload();
+        }
+    </script>
 
 </head>
 
@@ -56,28 +91,30 @@
     </ol>
 </div>
 
-<div class="container tight-to-top">
-
-    <div class="row">
-        <h2 style="color: black"><img id="news_image" th:src="@{/icons/GWAS_study_2017.png}" style="vertical-align:middle" th:width="32" th:height="32"/>&nbsp;GWAS Catalog studies</h2>
-        <p>The GWAS Catalog contains separate entries for each individual GWAS analysis, we call these 'studies'. Each study has a study accession ID (GST).
-         If a publication contains more than one analysis it is split into separate study entries.<br/>
-        There are now dedicated pages available for all studies recorded in the GWAS Catalog. You can access a study page by appending the study accession ID (GST) to the studies base link  <a th:href="@{/studies}">www.ebi.ac.uk/gwas/labs/studies/</a>.
-            <br/>
-            <br/>
-        <h3>Examples</h3>
-        <br/>
-        <ul>
-            <li><a th:href="@{/studies/GCST004988}">GCST004988</a></li>
-            <li><a th:href="@{/studies/GCST003782}">GCST003782</a></li>
-            <li><a th:href="@{/studies/GCST001795}">GCST001795</a></li>
-            <li><a th:href="@{/studies/GCST003970}">GCST003970</a></li>
-        </ul>
-        </p>
-
-
+<div class="container-fluid">
+    <h4>Select study type:</h4>
+    <div id="gxe-section">
+        <input type="checkbox" id="gxe-checkbox" th:checked="false"/>
+        <label>GxE
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                  title="All studies including genotype-by-environment interaction in the association model"></span>
+        </label>
     </div>
 
+    <div id="seqGwas-section">
+        <div>
+            <input type="checkbox" id="seqGwas-checkbox" th:checked="false"/>
+            <label>seqGWAS
+                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                      title="All studies based exclusively on whole-genome or whole-exome genotyping"></span>
+            </label>
+        </div>
+    </div>
+    <div class="row search-results-container" >
+        <div class="col-8">
+            <div th:include="fragments/study-datatable-v2 :: studies_datatable(${'/studies'})"></div>
+        </div>
+    </div>
 </div>
 <!-- /container -->
 
@@ -88,7 +125,6 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -96,9 +132,14 @@
 
 <!-- GOCI JavaScript
 ================================================== -->
-<script  th:src="@{/js/goci-ui.js}"></script>
+<script th:src="@{/js/goci-ui.js}"></script>
 <script th:src="@{/js/autocomplete-termselect.js}"></script>
+<script th:src="@{/js/helpers/utils-helper.js}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.min.js"></script>
+
+<!-- loading overlay
+================================================== -->
+    <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
 
 <!-- Google analytics
 ================================================== -->

@@ -27,13 +27,15 @@ public class JsonProcessingService {
     private boolean isSnpInteraction;
     private boolean includeAncestry;
     private boolean includeCohortsAndSs;
+    private boolean includeGxE;
 
-    public JsonProcessingService(String json, boolean includeAnnotations, String type, boolean includeAncestry, boolean includeCohortsAndSs) {
+    public JsonProcessingService(String json, boolean includeAnnotations, String type, boolean includeAncestry, boolean includeCohortsAndSs, boolean includeGxE) {
         this.json = json;
         this.includeAnnotations = includeAnnotations;
         this.type = type;
         this.includeAncestry = includeAncestry;
         this.includeCohortsAndSs = includeCohortsAndSs;
+        this.includeGxE = includeGxE;
         newline = System.getProperty("line.separator");
 
     }
@@ -194,6 +196,9 @@ public class JsonProcessingService {
             line.append("\t").append(getCohort(doc));
             line.append("\t").append(getFullPvalueSet(doc));
             line.append("\t").append(getFtpLink(doc));
+        }
+        if(includeGxE) {
+            line.append("\t").append(getGxE(doc));
         }
         line.append("\r\n");
 
@@ -1065,6 +1070,10 @@ public class JsonProcessingService {
     }
     private String getCohort(JsonNode doc){
         return getNodeValue(doc, "cohort");
+    }
+    private String getGxE(JsonNode doc){
+        String val = getNodeValue(doc, "gxe");
+        return "true".equals(val) ? "yes" : "no";
     }
     private String getFullPvalueSet(JsonNode doc){
         String val = getNodeValue(doc, "fullPvalueSet");

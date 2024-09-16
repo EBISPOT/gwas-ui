@@ -136,7 +136,14 @@
                  th:src="@{/images/GWAS_Catalog_circle_178x178.png}"/>
         </div>
         <div>
-            <a href="https://globalbiodata.org/" target="_blank"><img class="gbc-img" th:src="@{/images/GCBR-Logo-RGB.png}"/></a>
+            <a href="https://globalbiodata.org/" target="_blank" class="resource-img">
+                <img class="gbc-img" th:src="@{/images/GCBR-Logo-RGB.png}"/>
+            </a>
+        </div>
+        <div>
+            <a href="https://elixir-europe.org/platforms/data/core-data-resources" target="_blank" class="resource-img">
+                <img class="elixir-img" th:src="@{/images/elixir-core-data-resources-logo.png}"/>
+            </a>
         </div>
         <div>
 
@@ -161,12 +168,14 @@
             </div>
             <div class="examples">
                 Examples:
-                <a th:href="@{/search(query='breast carcinoma')}">breast carcinoma</a>,
-                <a th:href="@{/search(query=rs7329174)}">rs7329174</a>,
+                <a th:href="@{/search(query='Parkinson disease')}">Parkinson disease</a>,
+                <a th:href="@{/search(query=rs3093017)}">rs3093017</a>,
                 <a th:href="@{/search(query=Yao)}">Yao</a>,
-                <a th:href="@{/search(query=2q37.1)}">2q37.1</a>,
+                <a th:href="@{/search(query=2q37.2)}">2q37.2</a>,
                 <a th:href="@{/search(query=HBS1L)}">HBS1L</a>,
-                <a th:href="@{/search(query='6:16000000-25000000')}">6:16000000-25000000</a>
+                <a th:href="@{/search(query='6:167120000-167130000')}">6:167120000-167130000</a>,
+                <a th:href="@{/search(query=GCST90132222)}">GCST90132222</a>,
+                PMID:<a th:href="@{/search(query='35241825')}">35241825</a>
             </div>
         </div>
     </div>

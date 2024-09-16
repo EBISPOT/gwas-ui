@@ -53,10 +53,10 @@
 
     <!-- This spaces is reserved for banners occasionally displayed on the main website -->
     <div class="row background-color-complementary-accent main-banner" style="text-align: center; margin-top: 5px;">
-        <h2 class="text-muted">
-            New GWAS Catalog search pages with faster page loading and new features to help you find summary statistics, read all about it in our
-            <strong><a target="_blank" href="https://ebispot.github.io/gwas-blog/gwas-ui-production-release-2023">blog</a></strong>.
-        </h2>
+        <h3 class="text-muted">
+            Do you access GWAS Catalog data programmatically via our REST API or a third-party software package?<br/>
+            If so, please give us your feedback via this short <a href="https://forms.gle/oaTWjDuG1k3ojqCTA" target="_blank">survey</a>.<br/>
+        </h3>
     </div>
 
 
@@ -100,9 +100,9 @@
                     (p&le;5 x10<sup>-8</sup>). </p>
             </div>
         </a>
-        <a th:href="@{/ancestry}">
+        <a th:href="@{/population-descriptors}">
             <div class="col-md-4 toplevel-view">
-                <h2 class="flaticon-group12 color-primary-bold">Ancestry</h2>
+                <h2 class="flaticon-group12 color-primary-bold">Population descriptors</h2>
 
                 <p>An introduction to our ancestry curation process.</p>
             </div>
@@ -120,9 +120,12 @@
             If you think you've found a bug, take a look at our <a th:href="@{https://github.com/EBISPOT/gwas-user-requests/issues}" th:target="_blank">known issues page</a>
             <br/>
             Follow us:
-            <a id="follow-button" class="btn-twitter" title="Follow GWAS Catalog on Twitter" href="https://twitter.com/gwascatalog" th:target="_blank">
-                <img
-                        th:src="@{/images/Twitter_Social_Icon_Blue.png}" th:width="20" th:height="20"/></a>
+            <a id="follow-button" class="btn-twitter" title="Follow GWAS Catalog on X" href="https://twitter.com/gwascatalog" th:target="_blank">
+                <img th:src="@{/images/x-logo-black.png}" th:width="16" th:height="16"/>
+            </a>
+            <a class="btn-twitter" title="Follow GWAS Catalog on LinkedIn" href="https://www.linkedin.com/company/gwas-catalog" th:target="_blank">
+                <img th:src="@{/images/social-linkedin.png}" th:width="16" th:height="16"/>
+            </a>
         </p>
     </div>
 

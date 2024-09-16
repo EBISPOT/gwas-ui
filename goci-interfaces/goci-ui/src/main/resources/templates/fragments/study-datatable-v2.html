@@ -56,8 +56,18 @@
                     <th>Reported trait</th>
                     <th>Trait(s)</th>
                     <th>Background trait(s)</th>
-                    <th>Discovery sample number</th>
-                    <th>Replication sample number</th>
+                    <th>
+                        <a class="info-link" onclick="event.stopPropagation();" th:href="@{/docs/population-descriptors}" target="_blank">
+                            <span data-toggle="tooltip" data-placement="right" title="What is an ancestry label? Click!" class="glyphicon glyphicon-question-sign"></span>
+                        </a>
+                        Discovery sample number
+                    </th>
+                    <th>
+                        <a class="info-link" onclick="event.stopPropagation();" th:href="@{/docs/population-descriptors}" target="_blank">
+                            <span data-toggle="tooltip" data-placement="right" title="What is an ancestry label? Click!" class="glyphicon glyphicon-question-sign"></span>
+                        </a>
+                        Replication sample number
+                    </th>
                     <th>Discovery sample description</th>
                     <th>Replication sample description</th>
                     <th>Association count</th>
@@ -107,7 +117,9 @@
         $('#study-table-v2').DataTable({
             serverSide: true,
             ajax: {
-                url: gwasProperties.contextPath + 'api/v2' + [[${url}]] + '/studies',
+                // study api URIs should've all been /studies, e.g. /studies?efo=EFO_1234 not /efotraits/EFO_1234/studies
+                // hence the need for the condition below to deal with retrieving ALL studies in DB
+                url: gwasProperties.contextPath + 'api/v2' + [[${url}]] + ([[${url}]] !== '/studies' ? '/studies' : ''),
                 dataType: 'JSON',
                 dataSrc: function (json) {
                     json.recordsTotal = json.page.totalElements;
@@ -121,6 +133,9 @@
                     // for trait page
                     c.includeChildTraits = $('#toggle-data-display').is(':checked');
                     c.includeBgTraits = $('#include-bg-traits').is(':checked');
+                    // for all studies page
+                    c.gxe = $('#gxe-checkbox').is(':checked');
+                    c.seqGwas = $('#seqGwas-checkbox').is(':checked');
                     d.columns.forEach(e => {
                         if (e.search.value !== '') {
                             c[e.name] = e.search.value;
@@ -161,6 +176,7 @@
                             // const link = 'https://www.ebi.ac.uk/gwas/efotraits/' + trait.key;
                             data[index] = '<a href="' + link + '">' + trait.label + '</a>'
                         });
+                        if (!data) return '';
                         return data.join(', ')
                     }, orderable: false
                 },
