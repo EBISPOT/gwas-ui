@@ -20,6 +20,10 @@ Earlier webinars are also available:
 
 Training materials from workshops held by the GWAS Catalog team are available on link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/training_materials/[our FTP server]. If you would like to make use of these slides, please cite the GWAS Catalog as detailed on the link:about[About] page.
 
+Materials from our community workshop on GWAS summary statistics standards and sharing, held in June 2020 to address the standards, infrastructure and incentives required to promote and enable broader sharing of data, are available https://www.ebi.ac.uk/gwas/docs/sharing-standards-workshop[here] and are published as MacArthur et al, 2021 https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00004-5[Workshop proceedings: GWAS Catalog standards and sharing], Cell Genomics 1(1). 
+
+Videos from our community workshop on standards and infrastructure for predicted effector gene lists, held in September 2024 as a collaboration between the GWAS Catalog, https://kp4cd.org/[HuGEAMP Knowledge Portal Network] and https://www.opentargets.org/[Open Targets], can be found https://www.youtube.com/@hugeampknowledgeportals1943[here]. 
+
 ==== Blog posts
 
 https://ebispot.github.io/gwas-blog/background-trait-update[Trait annotation in the GWAS Catalog] (2021): a discussion of how traits are annotated in the GWAS Catalog, focussing on improved background trait annotation.
@@ -69,9 +73,7 @@ Visscher et al, 2017 link:http://www.sciencedirect.com/science/article/pii/S0002
 
 Manolio, 2010 link:http://www.nejm.org/doi/full/10.1056/NEJMra0905980[Genomewide Association Studies and assessment of the risk of disease] NEJM 363:166-176
 
-=== Sharing and standards workshop
 
-https://www.ebi.ac.uk/gwas/docs/sharing-standards-workshop[Workshop] held in June 2020 to address the standards, infrastructure and incentives required to promote and enable broader sharing of GWAS summary statistics.
 
 === Resources used within the GWAS Catalog
 
