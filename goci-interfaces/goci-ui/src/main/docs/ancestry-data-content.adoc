@@ -1,17 +1,21 @@
-= Ancestry category distribution in the GWAS Catalog.
+= Ancestry category label distribution in the GWAS Catalog.
 :imagesdir: ./images
 :data-uri:
 
-== Ancestry category distribution in the GWAS Catalog.
+== Ancestry category label distribution in the GWAS Catalog.
 
 The https://gwasdiversitymonitor.com[GWAS Diversity Monitor] maintains an up-to-date interactive dashboard monitoring the diversity of participants across all published GWAS, based on data from the GWAS Catalog.
 
-Here we present an earlier analysis of the ancestry data contained in the GWAS Catalog for studies published from 2005 - Dec 2016.
+Here we present an analysis of the ancestry data contained in the GWAS Catalog for studies published from 2005 - 2024.
 
-image::ancestry-data.png[Ancestry data,1000,1000,align="center"]
+image::ancestry-data1.png[Ancestry data,1000,575,align="center"]
 
 {empty} +
 
-This figure summarizes the distribution of ancestry categories in percentages, of individuals (N=110,291,046; panel a), individuals over time (N=110,291,046; panel b), studies (N= 4,655; panel c) and associations (N=60,970; panel d). The largest category in all panels is European (aqua). At the level of individuals (a), the largest non-European category is Asian (bright pink), with East Asian (light pink) accounting for the majority. Non-European, Non-Asian categories together (yellow) comprise 4% of individuals, and there are 6% (white) of samples for which an ancestry category could not be specified. Panel b displays the distribution of individuals in percentages, included in the 915 studies published between 2005 – 2010 compared to the distribution of individuals included in the 2,905 studies published between 2011 – 2016. Panel d demonstrates the disproportionate contribution of associations from African (blue) and Hispanic/Latin American (purple) categories, when compared to the percentage of individuals (a, blue, purple, respectively) and studies (b, blue, purple, respectively). 
+This figure summarizes the distribution of ancestry category labels as percentages up to 1st July 2024 (Data Release 08-07-2024). Panel (a), individuals (N=6,373,952,077); panel (b), publications (N= 6,916); panel (c), studies (N= 108,850); and panel (d) associations (N=624,819). 
+
+The most common ancestry label in all panels is European (blue). Multi-ancestry (when the breakdown of individuals per ancestry label is not provided) is light purple, and for the majority, this includes European individuals (light blue). At the level of individuals (a), the next most common label after European is Asian (bright green), which comprises 4%, with East Asian (dark green) accounting for the majority. Panels (b) and (c) show that there is a greater diversity considering b) each publication and c) each GWAS than considering the individuals in these publications and studies. Panel (d) demonstrates the contribution of curated associations per ancestry label. Note: Not all studies report significant associations, but metadata (and summary statistics where available) are made available in the Catalog for downstream analysis.
+
+For more information on how labels are assigned, please refer to the link:population-descriptors-content[Population descriptors page].
 
 
