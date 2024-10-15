@@ -276,7 +276,7 @@
                             if (e.keyCode === 13) that.draw();
                         });
                     });
-                if (window.location.pathname == '/studies') {
+                if (window.location.href.split('?')[0].endsWith('/studies')) {
                     $('#exportStudiesBtn').hide();
                 }
             },
