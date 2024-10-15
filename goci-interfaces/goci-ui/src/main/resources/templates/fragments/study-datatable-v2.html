@@ -134,8 +134,12 @@
                     c.includeChildTraits = $('#toggle-data-display').is(':checked');
                     c.includeBgTraits = $('#include-bg-traits').is(':checked');
                     // for all studies page
-                    c.gxe = $('#gxe-checkbox').is(':checked');
-                    c.seqGwas = $('#seqGwas-checkbox').is(':checked');
+                    if ($('#gxe-checkbox').is(':checked')) {
+                        c.gxe = true;
+                    }
+                    if ($('#seqGwas-checkbox').is(':checked')) {
+                        c.seqGwas = true
+                    }
                     d.columns.forEach(e => {
                         if (e.search.value !== '') {
                             c[e.name] = e.search.value;
@@ -241,6 +245,9 @@
                     text: 'Export',
                     action: function() {
                         startDownloadExport('studies')
+                    },
+                    attr: {
+                        id: 'exportStudiesBtn'
                     }
                 },
                 {
@@ -269,6 +276,9 @@
                             if (e.keyCode === 13) that.draw();
                         });
                     });
+                if (window.location.pathname == '/studies') {
+                    $('#exportStudiesBtn').hide();
+                }
             },
             language: {
                 paginate: {

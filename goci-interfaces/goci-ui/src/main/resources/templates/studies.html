@@ -66,13 +66,54 @@
     </style>
     <script>
         $(document).ready(() => {
-            $('#gxe-checkbox').on('change', reloadTable);
-            $('#seqGwas-checkbox').on('change', reloadTable);
+            $('#gxe-checkbox, #seqGwas-checkbox').on('change', () => {
+                reloadTable();
+                toggleButtonVisibility();
+            });
         });
-        function reloadTable() {
+        const reloadTable = () => {
             const studyTable = $('#study-table-v2').DataTable();
             studyTable.ajax.reload();
         }
+        const toggleButtonVisibility = () => {
+            const exportBtn = $('#exportStudiesBtn');
+            if ($('#gxe-checkbox').is(':checked') || $('#seqGwas-checkbox').is(':checked')) {
+                exportBtn.show()
+            } else {
+                exportBtn.hide()
+            }
+        }
+    </script>
+
+    <script th:inline="javascript">
+        //<![CDATA[
+
+        function startDownloadExport() {
+            // Get checkbox values
+            const gxeValue = document.querySelector('#gxe-checkbox').checked;
+            const seqGwasValue = document.querySelector('#seqGwas-checkbox').checked;
+
+            // Construct the query parameters
+            const params = new URLSearchParams();
+            if (gxeValue === true) params.set('gxe', 'true')
+            if (seqGwasValue === true) params.set('seqGwas', 'true')
+
+            // Create the full URL with query params
+            const downloadUrl = gwasProperties.contextPath + 'api/v2/studies/download?' + params.toString();
+
+            // Create and trigger the download
+            const a = document.createElement("a");
+            a.href = downloadUrl;
+            console.log('Downloading ' + a.href);
+            a.target = '_blank';  // Open in new tab (if required)
+            document.body.appendChild(a);
+            a.click();
+
+            // Clean up by removing the anchor tag after use
+            document.body.removeChild(a);
+        }
+
+        //]]>
     </script>
 
 </head>

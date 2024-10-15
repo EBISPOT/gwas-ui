@@ -94,6 +94,8 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
         String discoverySample = searchStudyDTO.getDiscoverySampleAncestry();
         String replicationSample = searchStudyDTO.getReplicationSampleAncestry();
         String firstAuthor = searchStudyDTO.getFirstAuthor();
+        Boolean gxe = searchStudyDTO.getGxe();
+        Boolean seqGwas = searchStudyDTO.getSeqGwas();
         filterQueryBuilder.append(filterQuery);
 
         if(accessionId != null) {
@@ -139,6 +141,15 @@ public class SolrSearchStudyServiceImpl implements SolrSearchStudyService {
                 filterQueryBuilder.append(String.format( " AND author:\"*%s*\"", firstAuthor));
             else
                 filterQueryBuilder.append(String.format( " AND author:*%s*", firstAuthor));
+        }
+        if (gxe != null) {
+            if(gxe) {
+                filterQueryBuilder.append(" AND gxe:true");
+            }
+        }
+
+        if (seqGwas != null) {
+            filterQueryBuilder.append(" AND -genotypingTechnologies:*array* AND genotypingTechnologies:[* TO *]");
         }
 
         return filterQueryBuilder.toString();

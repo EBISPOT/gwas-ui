@@ -65,13 +65,24 @@ public class SolrSearchStudiesController {
     public PagedResources<StudySolrDTO> searchStudies(SearchStudyDTO searchStudyDTO,
                                                       @PageableDefault(size = 10, page = 0) Pageable pageable,
                                                       PagedResourcesAssembler assembler) throws IOException {
-        String q = solrQueryParamBuilder.buildAllStudiesQuery(searchStudyDTO.getGxe(), searchStudyDTO.getSeqGwas());
-        Page<StudyDoc> studies = solrSearchStudyService.searchStudies(q, pageable, searchStudyDTO);
+        Page<StudyDoc> studies = solrSearchStudyService.searchStudies("*", pageable, searchStudyDTO);
         final ControllerLinkBuilder lb = ControllerLinkBuilder.linkTo(ControllerLinkBuilder
                 .methodOn(SolrSearchStudiesController.class).searchStudies(searchStudyDTO, pageable, assembler));
         return assembler.toResource(studies, studySolrDTOAssembler,
                 new Link(BackendUtil.underBasePath(lb, searchConfiguration.getProxy_prefix()).toUri().toString()));
+    }
 
+    @GetMapping(value = "/download")
+    public HttpEntity<byte[]> downloadStudies(SearchStudyDTO searchStudyDTO,
+                                              @PageableDefault(size = 10, page = 0) Pageable pageable) throws IOException {
+        String query = "*";
+        List<StudyDoc> studyDocList = solrTableExportService.fetchStudies(query, searchStudyDTO, pageable);
+        byte[] result = fileHandler.serializePojoToTsv(solrTableExportService.readStudyHeaderContent(studyDocList));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "studies_export.tsv");
+        responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        responseHeaders.add(HttpHeaders.CONTENT_LENGTH, Integer.toString(result.length));
+        return new HttpEntity<>(result, responseHeaders);
     }
 
 
