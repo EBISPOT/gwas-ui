@@ -70,6 +70,7 @@
                 reloadTable();
                 toggleButtonVisibility();
             });
+            $('#downloadsPageAnchor').attr('href', gwasProperties.contextPath + 'docs/file-downloads');
         });
         const reloadTable = () => {
             const studyTable = $('#study-table-v2').DataTable();
@@ -150,6 +151,10 @@
                       title="All studies based exclusively on whole-genome or whole-exome genotyping"></span>
             </label>
         </div>
+    </div>
+
+    <div>
+        <span>To enable export from the table, first tick a checkbox. If you want to export all studies, use the <a id="downloadsPageAnchor">All studies download</a></span>
     </div>
     <div class="row search-results-container" >
         <div class="col-8">
