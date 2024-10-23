@@ -10,12 +10,12 @@
     <meta name="description"
           content="The NHGRI-EBI GWAS Catalog: a curated collection of all published genome-wide association studies, produced by a collaboration between EMBL-EBI and NHGRI"/>
     <meta name="keywords" content="GWAS Catalog, GWAS, NHGRI, EBI, EMBL-EBI, SPOT"/>
-    <meta name="author" content="Tony Burdett, Emma Hastings, Dani Welter, SPOT, EMBL-EBI, NHGRI"/>
+    <meta name="author" content="Abayomi Mosaku, SPOT, EMBL-EBI, NHGRI"/>
     <link rel="icon" th:href="@{/images/favicon.ico}"/>
 
     <title>GWAS Catalog</title>
 
-    <!--   JesusIsLord <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>-->
+    <!--  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>-->
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
@@ -23,6 +23,7 @@
           rel="stylesheet"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.5.0/bootstrap-table.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css'>
 
     <!-- Custom styles for this template -->
     <link th:href="@{/css/jumbotron.css}" rel="stylesheet"/>
@@ -45,45 +46,26 @@
 
 
     <style>
-        circle {
-            cursor: pointer;
+        circle {cursor: pointer;}
+        td {
+            font-size:12.5px;
+        }
+        .float{
+            position:fixed;
+            width:50px;
+            height:50px;
+            bottom:40px;
+            left:40px;
+            background-color: #398A96;
+            color:#FFF;
+            border-radius:40px;
+            text-align:center;
+            box-shadow: 2px 2px 3px #999;
+        }
+        .my-float{
+            margin-top:22px;
         }
 
-        /*a {*/
-        /*    font-size: 25px;*/
-        /*    color: #0bd;*/
-        /*    text-decoration: none;*/
-        /*}*/
-
-        .my-tooltip {
-            display: inline;
-            position: relative;
-        }
-
-        .my-tooltip:hover:after {
-            display: -webkit-flex;
-            display: flex;
-            -webkit-justify-content: center;
-            justify-content: center;
-            background: #444;
-            border-radius: 8px;
-            color: #fff;
-            content: attr(title);
-            margin: -82px auto 0;
-            font-size: 16px;
-            padding: 13px;
-            width: 220px;
-        }
-
-        .my-tooltip:hover:before {
-            border: solid;
-            border-color: #444 transparent;
-            border-width: 12px 6px 0 6px;
-            content: "";
-            left: 45%;
-            bottom: 30px;
-            position: absolute;
-        }
     </style>
 </head>
 
@@ -243,17 +225,16 @@
             </div>
         </div>
 
-<!--        <div class="col-16-rest" id="diagram-area">-->
 
-<!--            <div id="icons" class="xyz"></div>-->
 
-<!--        </div>-->
+        <a href="#" class="float" onclick="resetZoom()"> <i class="fa fa-refresh my-float"></i> </a>
 
         <div class="col-16-rest svg-areax" id="diagram-area-content">
 
             <svg xmlns='http://www.w3.org/2000/svg' contentScriptType='text/ecmascript'
                  zoomAndPan='magnify' contentStyleType='text/css' id='main_gwas_svg' viewBox='0 0 7000 7000' height="3000" width="7000" preserveAspectRatio='xMinYMin slice' version='1.0'>
                 <g transform='translate(0,100)' id="chromosome_1_plot" class="xyz">
+                    <text x='750' y='325' text-anchor='end' fill='#398A96' font-family='Verdana' font-size='70'></text>
                     <text x='750' y='325' text-anchor='end' fill='#398A96' font-family='Verdana' font-size='70'></text>
 
                 </g>
@@ -393,9 +374,12 @@
 <script src="https://www.ebi.ac.uk/gwas/js/jquery.event.drag-2.2.js"></script>
 
 <script id="rendered-js" th:src="@{/js/goci-diagram-v2.js}"></script>
+<script th:src="@{/js/goci-diagram-mouse-zoom-reset-and-drag--control.js}"></script>
+
+
+
 <!--<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>-->
 <!--<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>-->
-
 
 
 <!-- Bootstrap core JavaScript
