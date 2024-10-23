@@ -186,7 +186,7 @@ function buildRegionData(data, transformXPos, chromosomeNum) {
 
 
 function getGraphData(chromosomeNum) {
-    let searchTerm = 'Immune system disease';
+    let searchTerm = filterData.innerHTML;
     let check = [null, undefined, ''].includes(searchTerm);
     let url = `${server}/chromosomes/${chromosomeNum}`;
     if (!check) {
@@ -203,6 +203,7 @@ function getGraphData(chromosomeNum) {
             })
         });
 }
+
 
 
 let chromosomeNum = "1";
