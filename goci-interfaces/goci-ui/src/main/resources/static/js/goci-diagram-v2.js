@@ -1,4 +1,4 @@
-let server = "http://localhost:8685";
+let server = "http://gwas-snoopy.ebi.ac.uk:8685";
 
 function sendNow(region, trait) {
     fetch(`${server}/associations?region=${region}&efo=${trait}`)
@@ -42,6 +42,8 @@ function renderIcons(traitData, colorData, regionData, cx, regionLineYStart, reg
         "Body weights and measures": "5BC5FF",
         "cardiovascular measurement": "75A8CD",
         "cancer": "B475B5",
+        "Response to drug": "FCCDE5",
+        "Biological process": "BEBADA",
         "NO_PARENT": "005B8E",
     };
 
@@ -168,6 +170,12 @@ function buildRegionData(data, transformXPos, chromosomeNum) {
         "16": cytogeneticBandsChr_16,
         "17": cytogeneticBandsChr_17,
         "18": cytogeneticBandsChr_18,
+        "19": cytogeneticBandsChr_19,
+        "20": cytogeneticBandsChr_20,
+        "21": cytogeneticBandsChr_21,
+        // "22": cytogeneticBandsChr_22,
+        "X": cytogeneticBandsChr_X,
+        "Y": cytogeneticBandsChr_Y,
     }
 
     let cytoBands = chromosomeCytogeneticBandMap[chromosomeNum]
@@ -297,7 +305,7 @@ getGraphData(chromosomeNum="14").then((data) => {
 });
 
 getGraphData(chromosomeNum="15").then((data) => {
-    chromosome = chromosomeGen15(transformXPos=0, chromosomeNum="15");
+    chromosome = chromosomeGen15(transformXPos=5, chromosomeNum="15");
     regions = buildRegionData(data, transformXPos=0, chromosomeNum="15");
     chromosome_15_plot.innerHTML = ` ${chromosome}  ${regions}`;
 });
@@ -306,6 +314,48 @@ getGraphData(chromosomeNum="16").then((data) => {
     chromosome = chromosomeGen16(transformXPos=0, chromosomeNum="16");
     regions = buildRegionData(data, transformXPos=0, chromosomeNum="16");
     chromosome_16_plot.innerHTML = ` ${chromosome}  ${regions}`;
+});
+
+getGraphData(chromosomeNum="17").then((data) => {
+    chromosome = chromosomeGen17(transformXPos=0, chromosomeNum="17");
+    regions = buildRegionData(data, transformXPos=0, chromosomeNum="17");
+    chromosome_17_plot.innerHTML = ` ${chromosome}  ${regions}`;
+});
+
+getGraphData(chromosomeNum="18").then((data) => {
+    chromosome = chromosomeGen18(transformXPos=0, chromosomeNum="18");
+    regions = buildRegionData(data, transformXPos=0, chromosomeNum="18");
+    chromosome_18_plot.innerHTML = ` ${chromosome}  ${regions}`;
+});
+
+getGraphData(chromosomeNum="19").then((data) => {
+    chromosome = chromosomeGen19(transformXPos=5, chromosomeNum="19");
+    regions = buildRegionData(data, transformXPos=0, chromosomeNum="19");
+    chromosome_19_plot.innerHTML = ` ${chromosome}  ${regions}`;
+});
+
+getGraphData(chromosomeNum="20").then((data) => {
+    chromosome = chromosomeGen20(transformXPos=0, chromosomeNum="20");
+    regions = buildRegionData(data, transformXPos=0, chromosomeNum="20");
+    chromosome_20_plot.innerHTML = ` ${chromosome}  ${regions}`;
+});
+
+getGraphData(chromosomeNum="21").then((data) => {
+    chromosome = chromosomeGen21(transformXPos=0, chromosomeNum="21");
+    regions = buildRegionData(data, transformXPos=0, chromosomeNum="21");
+    chromosome_21_plot.innerHTML = ` ${chromosome}  ${regions}`;
+});
+
+getGraphData(chromosomeNum="X").then((data) => {
+    chromosome = chromosomeGenX(transformXPos=0, chromosomeNum="X");
+    regions = buildRegionData(data, transformXPos=0, chromosomeNum="X");
+    chromosome_X_plot.innerHTML = ` ${chromosome}  ${regions}`;
+});
+
+getGraphData(chromosomeNum="Y").then((data) => {
+    chromosome = chromosomeGenY(transformXPos=5, chromosomeNum="Y");
+    regions = buildRegionData(data, transformXPos=0, chromosomeNum="Y");
+    chromosome_Y_plot.innerHTML = ` ${chromosome}  ${regions}`;
 });
 
 

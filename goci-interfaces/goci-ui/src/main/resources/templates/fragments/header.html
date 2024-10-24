@@ -58,6 +58,12 @@
                     </a>
                 </li>
 
+                <li th:classappend="${#httpServletRequest.getServletPath() == '/diagram' ? 'active':''}">
+                    <a th:href="@{/v2/diagram}">
+                        Diagram-v2
+                    </a>
+                </li>
+
                 <li>
                     <a th:href="@{/deposition}">
                         Submit

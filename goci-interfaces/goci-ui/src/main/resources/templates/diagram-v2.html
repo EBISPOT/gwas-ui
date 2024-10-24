@@ -54,21 +54,38 @@
             font-size: 12.5px;
         }
 
-        .float{
-            position:fixed;
-            width:60px;
-            height:60px;
-            bottom:40px;
-            left:40px;
-            background-color:#0C9;
-            color:#FFF;
-            border-radius:50px;
-            text-align:center;
-            box-shadow: 2px 2px 3px #999;
+        .float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            top: 100px;
+            right: 70px;
+            background-color: #398A96;
+            color: #FFF !important;
+            border-radius: 50px;
+            text-align: center;
         }
 
         .my-float {
             margin-top: 22px;
+            color: #FFF;
+        }
+
+        .card-3 {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+            border-radius: 0;
+            border: 1px solid #398A96;
+        }
+
+        .card-3b {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid #398A96;
+        }
+
+        .card-3:hover {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         }
 
     </style>
@@ -79,270 +96,256 @@
 
 <div th:include="fragments/header :: navbar"></div>
 
-<div class="container-fluid" style="padding-top: 30px">
-    <!--Breadcrumbs-->
-
-    <ol class="breadcrumb background-color-complementary-accent">
-        <li><a href="home">GWAS</a></li>
-        <li><a href="diagram">Diagram</a></li>
-        <span class="pull-right">This diagram shows all SNP-trait associations with p-value &#8804; 5.0 &#215; 10<sup>-8</sup>,
-              published in the GWAS Catalog</span>
-
-        <span id="filterData" th:text="${filter}"> ... </span>
-
-    </ol>
-
-    <div> <span class="pull-right"><a href="../gwas/docs/diagram-downloads" id="diagram-download">Download diagram
-        <span class="glyphicon glyphicon-download-alt"> </span>
-    </a>   </span></div>
-    <div>
-
-        <div class="col-16 tight-to-side" id="legend-bar">
-            <div class="panel panel-default" id="legend-panel">
-                <div class="panel-heading background-color-primary-accent" id="legend-bar-header">
-                    <h3 class="panel-title">Filter the diagram</h3>
-                    <span class="pull-right clickable"
-                          id="legend-toggle"
-                          onclick="toggleLegend('.panel-heading span.clickable')">
-                                    <i class="glyphicon glyphicon-chevron-up"></i>
-                                </span>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 " style="margin-left: -15px;">
+            <div class="card-3b">
+                <div class="header"
+                     style="border-bottom: 1px solid #c0c0c0; padding-top: 7px; padding-bottom: 7px; background: #EDF8F9;">
+                    <h4>
+                        <span style="font-weight: normal; margin-left: 15px;"> Filter the diagram <br/> </span>
+                        <small style="font-weight: 300; font-size: 0.7em; margin-left: 15px;"> By parent trait
+                            category: </small>
+                    </h4>
                 </div>
-                <div class="panel-body" id="legend-bar-body">
 
-                    <div id="filters">
+                <div class="tight-to-side" id="legend-bar">
+                    <div class="panel panel-default" id="legend-panel">
+                        <!--                        <div class="panel-heading background-color-primary-accent" id="legend-bar-header">-->
+                        <!--                            <h3 class="panel-title">Filter the diagram</h3>-->
+                        <!--                            <span class="pull-right clickable" id="legend-toggle"-->
+                        <!--                                  onclick="toggleLegend('.panel-heading span.clickable')">-->
+                        <!--                                    <i class="glyphicon glyphicon-chevron-up"></i>-->
+                        <!--                                </span>-->
+                        <!--                        </div>-->
+                        <div class="panel-body" id="legend-bar-body">
 
-                        <div class="left">
-                            <label>
-                                <input class="filter-value ac_input form-control"
-                                       type="text"
-                                       name="q"
-                                       data-widget="select"
-                                       data-ontology=""
-                                       id="trait-filter"
-                                       placeholder="Filter by trait"
-                                       style="width: 100%">
-                                </input>
-                            </label>
+                            <div id="filters">
 
+                                <div class="left">
+                                    <label>
+                                        <input class="filter-value ac_input form-control"
+                                               type="text"
+                                               name="q"
+                                               data-widget="select"
+                                               data-ontology=""
+                                               id="trait-filter"
+                                               placeholder="Filter by trait"
+                                               style="width: 100%">
+                                        </input>
+                                    </label>
+
+                                </div>
+
+                                <div class="row" style="margin-top: 10px">
+                                    <button type="button"
+                                            class="btn btn-default"
+                                            id="clear-filter-button">Clear
+                                    </button>
+
+                                    <button type="button"
+                                            class="btn btn-default pull-right"
+                                            id="filter-button"
+                                            style="margin-right: 15px;">Apply
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div id="legend" class="row" style="margin-top: 20px">
+                                <b>Show SNPs for</b>
+
+                                <div class="list-group" id="legend-items">
+                                    <!--add an "active" class annotation to each a tag when it's selected-->
+                                    <a href="?filter=Digestive system disease" class="list-group-item legend-item"
+                                       id="Digestive system disease">
+                                        <span class="icon-trait icon-trait-digestive"></span>
+                                        <span class="badge">0</span>Digestive system disease
+                                    </a>
+                                    <a href="?filter=Cardiovascular disease" class="list-group-item legend-item"
+                                       id="Cardiovascular disease">
+                                        <span class="icon-trait icon-trait-cardio"></span>
+                                        <span class="badge">0</span>Cardiovascular disease
+                                    </a>
+                                    <a href="?filter=Metabolic disease" class="list-group-item legend-item"
+                                       id="Metabolic disease">
+                                        <span class="icon-trait icon-trait-metabolic"></span>
+                                        <span class="badge">0</span>Metabolic disease
+                                    </a>
+                                    <a href="?filter=Immune system disease" class="list-group-item legend-item"
+                                       id="Immune system disease">
+                                        <span class="icon-trait icon-trait-immune"></span>
+                                        <span class="badge">0</span>Immune system disease
+                                    </a>
+                                    <a href="?filter=Nervous system disease" class="list-group-item legend-item"
+                                       id="Nervous system disease">
+                                        <span class="icon-trait icon-trait-neuro"></span>
+                                        <span class="badge">0</span>Nervous system disease
+                                    </a>
+                                    <a href="?filter=Liver enzyme measurement" class="list-group-item legend-item"
+                                       id="Liver enzyme measurement">
+                                        <span class="icon-trait icon-trait-liver-measure"></span>
+                                        <span class="badge">0</span>Liver enzyme measurement
+                                    </a>
+                                    <a href="?filter=Lipid or lipoprotein measurement"
+                                       class="list-group-item legend-item"
+                                       id="Lipid or lipoprotein measurement"> <span
+                                            class="icon-trait icon-trait-lipid-measure"></span>
+                                        <span class="badge">0</span>Lipid or lipoprotein measurement
+                                    </a>
+                                    <a href="?filter=Inflammatory marker measurement"
+                                       class="list-group-item legend-item"
+                                       id="Inflammatory marker measurement"> <span
+                                            class="icon-trait icon-trait-inflam-measure"></span>
+                                        <span class="badge">0</span>Inflammatory marker measurement
+                                    </a>
+                                    <a href="?filter=Hematological measurement" class="list-group-item legend-item"
+                                       id="Hematological measurement">
+                                        <span class="icon-trait icon-trait-haemo-measure"></span>
+                                        <span class="badge">0</span>Hematological measurement
+                                    </a>
+                                    <a href="?filter=Body weights and measures" class="list-group-item legend-item"
+                                       id="Body weights and measures">
+                                        <span class="icon-trait icon-trait-body-measure"></span>
+                                        <span class="badge">0</span>Body weights and measures
+                                    </a>
+                                    <a href="?filter=cardiovascular measurement" class="list-group-item legend-item"
+                                       id="Cardiovascular measurement">
+                                        <span class="icon-trait icon-trait-cardio-measure"></span>
+                                        <span class="badge">0</span>Cardiovascular measurement
+                                    </a>
+                                    <a href="?filter=Other measurement" class="list-group-item legend-item disabled"
+                                       id="Other measurement">
+                                        <span class="icon-trait icon-trait-measure"></span>
+                                        <span class="badge">0</span>Other measurement
+                                    </a>
+                                    <a href="?filter=Response to drug" class="list-group-item legend-item"
+                                       id="Response to drug">
+                                        <span class="icon-trait icon-trait-drug"></span>
+                                        <span class="badge">0</span>Response to drug
+                                    </a>
+                                    <a href="?filter=Biological process" class="list-group-item legend-item"
+                                       id="Biological process">
+                                        <span class="icon-trait icon-trait-process"></span>
+                                        <span class="badge">0</span>Biological process
+                                    </a>
+                                    <a href="?filter=cancer" class="list-group-item legend-item" id="Cancer">
+                                        <span class="icon-trait icon-trait-neoplasm"></span>
+                                        <span class="badge">0</span>Cancer
+                                    </a>
+                                    <a href="?filter=Other disease" class="list-group-item legend-item disabled"
+                                       id="Other disease">
+                                        <span class="icon-trait icon-trait-disease"></span>
+                                        <span class="badge">0</span>Other disease
+                                    </a>
+                                    <a href="?filter=Other trait" class="list-group-item legend-item disabled"
+                                       id="Other trait">
+                                        <span class="icon-trait icon-trait-other"></span>
+                                        <span class="badge">0</span>Other trait
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="diagram-stats" style="display: none" class="row">
+                                <h4>Diagram stats</h4>
+                                <ul>
+                                    <li id="releasedate-stat"></li>
+                                    <li id="studies-stat"></li>
+                                    <li id="snps-stat"></li>
+                                    <li id="associations-stat"></li>
+                                    <li id="ss-stat"></li>
+                                    <li id="genomebuild"></li>
+                                    <li id="dbsnpbuild"></li>
+                                </ul>
+                            </div>
                         </div>
-
-                        <div class="row" style="margin-top: 10px">
-                            <button type="button"
-                                    class="btn btn-default"
-                                    id="clear-filter-button">Clear
-                            </button>
-
-                            <button type="button"
-                                    class="btn btn-default pull-right"
-                                    id="filter-button"
-                                    style="margin-right: 15px;">Apply
-                            </button>
-                        </div>
-
-                    </div>
-
-                    <div id="legend" class="row" style="margin-top: 20px">
-                        <b>Show SNPs for</b>
-
-                        <div class="list-group" id="legend-items">
-                            <!--add an "active" class annotation to each a tag when it's selected-->
-                            <a href="?filter=Digestive system disease" class="list-group-item legend-item"
-                               id="Digestive system disease">
-                                <span class="icon-trait icon-trait-digestive"></span>
-                                <span class="badge">0</span>Digestive system disease
-                            </a>
-                            <a href="?filter=Cardiovascular disease" class="list-group-item legend-item"
-                               id="Cardiovascular disease">
-                                <span class="icon-trait icon-trait-cardio"></span>
-                                <span class="badge">0</span>cardiovascular disease
-                            </a>
-                            <a href="?filter=Metabolic disease" class="list-group-item legend-item"
-                               id="Metabolic disease">
-                                <span class="icon-trait icon-trait-metabolic"></span>
-                                <span class="badge">0</span>Metabolic disease
-                            </a>
-                            <a href="?filter=Immune system disease" class="list-group-item legend-item"
-                               id="Immune system disease">
-                                <span class="icon-trait icon-trait-immune"></span>
-                                <span class="badge">0</span>Immune system disease
-                            </a>
-                            <a href="?filter=Nervous system disease" class="list-group-item legend-item"
-                               id="Nervous system disease">
-                                <span class="icon-trait icon-trait-neuro"></span>
-                                <span class="badge">0</span>Nervous system disease
-                            </a>
-                            <a href="?filter=Liver enzyme measurement" class="list-group-item legend-item"
-                               id="Liver enzyme measurement">
-                                <span class="icon-trait icon-trait-liver-measure"></span>
-                                <span class="badge">0</span>Liver enzyme measurement
-                            </a>
-                            <a href="?filter=Lipid or lipoprotein measurement" class="list-group-item legend-item"
-                               id="Lipid or lipoprotein measurement"> <span
-                                    class="icon-trait icon-trait-lipid-measure"></span>
-                                <span class="badge">0</span>Lipid or lipoprotein measurement
-                            </a>
-                            <a href="?filter=Inflammatory marker measurement" class="list-group-item legend-item"
-                               id="Inflammatory marker measurement"> <span
-                                    class="icon-trait icon-trait-inflam-measure"></span>
-                                <span class="badge">0</span>Inflammatory marker measurement
-                            </a>
-                            <a href="?filter=Hematological measurement" class="list-group-item legend-item"
-                               id="Hematological measurement">
-                                <span class="icon-trait icon-trait-haemo-measure"></span>
-                                <span class="badge">0</span>Hematological measurement
-                            </a>
-                            <a href="?filter=Body weights and measures" class="list-group-item legend-item"
-                               id="Body weights and measures">
-                                <span class="icon-trait icon-trait-body-measure"></span>
-                                <span class="badge">0</span>Body weights and measures
-                            </a>
-                            <a href="?filter=Cardiovascular measurement" class="list-group-item legend-item"
-                               id="Cardiovascular measurement">
-                                <span class="icon-trait icon-trait-cardio-measure"></span>
-                                <span class="badge">0</span>Cardiovascular measurement
-                            </a>
-                            <a href="?filter=Other measurement" class="list-group-item legend-item disabled"
-                               id="Other measurement">
-                                <span class="icon-trait icon-trait-measure"></span>
-                                <span class="badge">0</span>Other measurement
-                            </a>
-                            <a href="?filter=Response to drug" class="list-group-item legend-item"
-                               id="Response to drug">
-                                <span class="icon-trait icon-trait-drug"></span>
-                                <span class="badge">0</span>Response to drug
-                            </a>
-                            <a href="?filter=Biological process" class="list-group-item legend-item"
-                               id="Biological process">
-                                <span class="icon-trait icon-trait-process"></span>
-                                <span class="badge">0</span>Biological process
-                            </a>
-                            <a href="?filter=cancer" class="list-group-item legend-item" id="Cancer">
-                                <span class="icon-trait icon-trait-neoplasm"></span>
-                                <span class="badge">0</span>Cancer
-                            </a>
-                            <a href="?filter=Other disease" class="list-group-item legend-item disabled"
-                               id="Other disease">
-                                <span class="icon-trait icon-trait-disease"></span>
-                                <span class="badge">0</span>Other disease
-                            </a>
-                            <a href="?filter=Other trait" class="list-group-item legend-item disabled" id="Other trait">
-                                <span class="icon-trait icon-trait-other"></span>
-                                <span class="badge">0</span>Other trait
-                            </a>
-                        </div>
-                    </div>
-                    <div id="diagram-stats" style="display: none" class="row">
-                        <h4>Diagram stats</h4>
-                        <ul>
-                            <li id="releasedate-stat"></li>
-                            <li id="studies-stat"></li>
-                            <li id="snps-stat"></li>
-                            <li id="associations-stat"></li>
-                            <li id="ss-stat"></li>
-                            <li id="genomebuild"></li>
-                            <li id="dbsnpbuild"></li>
-                        </ul>
                     </div>
                 </div>
+
             </div>
         </div>
 
+        <div class="col-md-10 card-3b">
+            <div style="overflow-x: clip">
 
-        <a href="#" class="float" onclick="resetZoom()"> <i class="fa fa-refresh my-float"></i> </a>
+                <div>
+                    <a href="#" class="float" onclick="resetZoom()"> <i class="fa fa-refresh my-float"></i> </a>
+                    <span id="filter-counter" style="display: none;"></span>
+                </div>
 
-
-        <span id="filter-counter" style="display: none;">
+                <div style="border-bottom: 1px solid #c0c0c0; padding-top: 7px; padding-bottom: 7px; background: #fff;">
+                    <h4>
+                        <span style="font-weight: normal; margin-left: 15px;">
+                            GWAS > <a th:href="@{/v2/diagram}"> Diagram-v2 > </a> <span id="filterData" th:text="${filter}"> ... </span> <br/>
                         </span>
-<!--        <span id="zoom-and-pan" class="zoombar col-16-right">-->
-<!--            <div class="buttons">-->
-<!--                <button class="zoom-out zoom-compontent">-->
-<!--                    <span class="glyphicon glyphicon-zoom-out"></span>-->
-<!--                </button>-->
-<!--                <button class="zoom-in pull-right zoom-compontent">-->
-<!--                    <span class="glyphicon glyphicon-zoom-in"></span>-->
-<!--                </button>-->
-<!--                <input type="range" class="zoom-range zoom-compontent" style="width: 75% !important;"/>-->
-<!--              </div>-->
-<!--        </span>-->
+                        <small style="font-weight: 300; font-size: 0.7em; margin-left: 15px;"> This diagram shows all
+                            SNP-trait associations with p-value ≤ 5.0 × 10-8, published in the GWAS Catalog </small>
+                    </h4>
+                </div>
 
-        <div class="col-16-rest svg-areax" id="diagram-area-content">
+                <div class="animated fadeIn">
+                    <div class="panel-body">
+                        <div class="svg-areax" id="diagram-area-content">
 
-            <svg xmlns='http://www.w3.org/2000/svg' contentScriptType='text/ecmascript'
-                 zoomAndPan='magnify' contentStyleType='text/css' id='main_gwas_svg' viewBox='17 -214 8933 8933'
-                 height="3000" width="7000" preserveAspectRatio='xMinYMin slice' version='1.0'>
-                <g transform='translate(0,100)' id="chromosome_1_plot" class="xyz">
+                            <svg xmlns='http://www.w3.org/2000/svg' contentScriptType='text/ecmascript'
+                                 zoomAndPan='magnify' contentStyleType='text/css' id='main_gwas_svg'
+                                 viewBox='17 -214 8933 8933'
+                                 height="80vh" width="7000" preserveAspectRatio='xMinYMin slice' version='1.0'>
+                                <g transform='translate(0,100)' id="chromosome_1_plot" class="xyz"></g>
 
-                </g>
+                                <g transform='translate(340,100)' id="chromosome_2_plot" class="xyz"></g>
 
-                <g transform='translate(340,100)' id="chromosome_2_plot" class="xyz">
+                                <g transform='translate(680,100)' id="chromosome_3_plot" class="xyz"></g>
 
-                </g>
+                                <g transform='translate(1020,100)' id="chromosome_4_plot" class="xyz"></g>
 
-                <g transform='translate(680,100)' id="chromosome_3_plot" class="xyz">
+                                <g transform='translate(1360,100)' id="chromosome_5_plot" class="xyz"></g>
 
-                </g>
+                                <g transform='translate(1700,100)' id="chromosome_6_plot" class="xyz"></g>
 
-                <g transform='translate(1020,100)' id="chromosome_4_plot" class="xyz">
+                                <g transform='translate(2040,100)' id="chromosome_7_plot" class="xyz"></g>
 
-                </g>
+                                <g transform='translate(2380,100)' id="chromosome_8_plot" class="xyz"></g>
 
-                <g transform='translate(1360,100)' id="chromosome_5_plot" class="xyz">
+                                <g transform='translate(2720,100)' id="chromosome_9_plot" class="xyz"></g>
 
-                </g>
+                                <g transform='translate(3060,100)' id="chromosome_10_plot" class="xyz"></g>
 
-                <g transform='translate(1700,100)' id="chromosome_6_plot" class="xyz">
+                                <g transform='translate(3400,100)' id="chromosome_11_plot" class="xyz"></g>
 
-                </g>
+                                <g transform='translate(3740,100)' id="chromosome_12_plot" class="xyz"></g>
 
-                <g transform='translate(2040,100)' id="chromosome_7_plot" class="xyz">
+                                <g transform='translate(4080,250)' id="chromosome_13_plot" class="xyz"></g>
 
-                </g>
+                                <g transform='translate(4420,250)' id="chromosome_14_plot" class="xyz"></g>
 
-                <g transform='translate(2380,100)' id="chromosome_8_plot" class="xyz">
+                                <g transform='translate(4760,250)' id="chromosome_15_plot" class="xyz"></g>
 
-                </g>
+                                <g transform='translate(5100,270)' id="chromosome_16_plot" class="xyz"></g>
 
-                <g transform='translate(2720,100)' id="chromosome_9_plot" class="xyz">
+                                <g transform='translate(5440,100)' id="chromosome_17_plot" class="xyz"></g>
 
-                </g>
+                                <g transform='translate(5780,100)' id="chromosome_18_plot" class="xyz"></g>
 
-                <g transform='translate(3060,100)' id="chromosome_10_plot" class="xyz">
+                                <g transform='translate(6120,100)' id="chromosome_19_plot" class="xyz"></g>
 
-                </g>
+                                <g transform='translate(6460,100)' id="chromosome_20_plot" class="xyz"></g>
 
-                <g transform='translate(3400,100)' id="chromosome_11_plot" class="xyz">
+                                <g transform='translate(6800,100)' id="chromosome_21_plot" class="xyz"></g>
 
-                </g>
+                                <!--             <g transform='translate(5440,100)' id="chromosome_22_plot" class="xyz"> </g>-->
 
-                <g transform='translate(3740,100)' id="chromosome_12_plot" class="xyz">
+                                <g transform='translate(7140,100)' id="chromosome_X_plot" class="xyz"></g>
 
-                </g>
+                                <g transform='translate(7480,100)' id="chromosome_Y_plot" class="xyz"></g>
+                            </svg>
 
-                <g transform='translate(4080,250)' id="chromosome_13_plot" class="xyz">
+                        </div>
+                    </div>
+                </div>
 
-                </g>
-
-                <g transform='translate(4420,250)' id="chromosome_14_plot" class="xyz">
-
-                </g>
-
-                <g transform='translate(4760,250)' id="chromosome_15_plot" class="xyz">
-
-                </g>
-
-                <g transform='translate(5100,270)' id="chromosome_16_plot" class="xyz">
-
-                </g>
-
-                <g transform='translate(5440,100)' id="chromosome_17_plot" class="xyz">
-
-                </g>
-            </svg>
-
+            </div>
         </div>
-
     </div>
-
 </div>
 
 
@@ -371,7 +374,7 @@
                     </tr>
                     </thead>
                     <tbody id="associationData">
-                    ... Some table rows in the modal.
+
                     </tbody>
                 </table>
 
