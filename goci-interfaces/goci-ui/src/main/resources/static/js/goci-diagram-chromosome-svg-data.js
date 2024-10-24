@@ -441,7 +441,7 @@ function chromosomeGen5(transformXPos, chromosomeNum){
     <path d="m 41.745625,169.89875 c -1.7505000000000002,0.9050000000000001 -2.9395,2.48875 -2.9395,3.4562500000000003 l 0.0,154.655125 c 0.0,1.4175000000000002 2.544,2.5625000000000004 5.681125,2.5625000000000004 3.1372500000000003,0.0 5.682125,-1.145 5.682125,-2.5625000000000004 l 0.0,-154.655125 c 0.0,-0.9650000000000001 -1.1801250000000003,-2.54875 -2.92325,-3.4562500000000003 1.743125,-0.9062500000000001 2.92325,-2.49125 2.92325,-3.455 l 0.0,-45.77375 c 0.0,-1.415 -2.544875,-2.56375 -5.682125,-2.56375 -3.1371250000000006,-0.0 -5.681125,1.1487500000000002 -5.681125,2.56375 l 0.0,45.77375 c 0.0,0.9662500000000002 1.189,2.55 2.9395,3.455 z " id="outline5" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <path d="M 41.347625,169.935 0.0,169.935 " id="centre5" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
     <text>
-      <tspan id="label5" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="41.2915" y="339.22742500000004">5</tspan>
+      <tspan id="label5" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="41.2915" y="339.22742500000004">5</tspan>
     </text>
   </g>
   `;
@@ -518,7 +518,7 @@ function chromosomeGen6(transformXPos, chromosomeNum){
     <path d="m 41.745125,169.9025 c -1.7505000000000002,0.8350000000000001 -2.9395,2.26375 -2.9395,3.1550000000000002 l 0.0,133.761125 c 0.0,1.3012500000000002 2.5415000000000005,2.357375 5.681250000000001,2.357375 3.1381250000000005,0.0 5.682125,-1.056125 5.682125,-2.357375 l 0.0,-133.893625 c 0.0,-0.60625 -1.17775,-2.18625 -2.923375,-3.0225 1.745625,-0.83375 2.923375,-2.29 2.923375,-3.1775 l 0.0,-69.00625 c 0.0,-1.3012500000000002 -2.544,-2.3575 -5.682125,-2.3575 -3.1397500000000003,-0.0 -5.681250000000001,1.05625 -5.681250000000001,2.3575 l 0.0,69.00625 c 0.0,0.8887500000000002 1.189,2.3450000000000006 2.9395,3.1775 z " id="outline6" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <path d="M 41.349625,169.935 0.0,169.935 " id="centre6" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
     <text>
-      <tspan id="label6" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="41.291000000000004" y="317.827425">6</tspan>
+      <tspan id="label6" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="41.291000000000004" y="317.827425">6</tspan>
     </text>
   </g>
   `;
@@ -592,7 +592,7 @@ function chromosomeGen7(transformXPos, chromosomeNum){
     <path d="m 41.748000000000005,169.89999999999998 c -1.7543750000000002,0.9062500000000001 -2.94325,2.46 -2.94325,3.42625 l 0.0,125.90400000000001 c 0.0,1.416 2.5453750000000004,2.5634250000000005 5.6850000000000005,2.5634250000000005 3.13475,0.0 5.67875,-1.147425 5.67875,-2.5634250000000005 l 0.0,-126.0465 c 0.0,-0.66125 -1.17775,-2.3775000000000004 -2.921,-3.2837500000000004 1.7432500000000002,-0.9075 2.921,-2.4925 2.921,-3.4562500000000003 l 0.0,-70.92625 c 0.0,-1.41625 -2.544,-2.56375 -5.67875,-2.56375 -3.1396250000000006,-0.0 -5.6850000000000005,1.1475 -5.6850000000000005,2.56375 l 0.0,70.92625 c 0.0,0.9662500000000002 1.188875,2.55 2.94325,3.4562500000000003 z " id="outline7" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <path d="M 41.349125,169.935 0.0,169.935 " id="centre7" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
     <text>
-      <tspan id="label7" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="41.235375000000005" y="310.35519999999997">7</tspan>
+      <tspan id="label7" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="41.235375000000005" y="310.35519999999997">7</tspan>
     </text>
   </g>
   `;
@@ -659,7 +659,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
     <path d="m 41.744125,169.89875 c -1.7523750000000002,0.90375 -2.939375,2.45875 -2.939375,3.42625 l 0.0,118.654875 c 0.0,1.4175000000000002 2.542875,2.564 5.681625,2.564 3.136625,0.0 5.679625000000001,-1.1465 5.679625000000001,-2.564 l 0.0,-118.796125 c 0.0,-0.6625000000000001 -1.1782500000000002,-2.37875 -2.920875,-3.285 1.742625,-0.9075 2.920875,-2.49125 2.920875,-3.4562500000000003 l 0.0,-47.815000000000005 c 0.0,-1.41375 -2.543,-2.56125 -5.679625000000001,-2.56125 -3.13875,-0.0 -5.681625,1.1475 -5.681625,2.56125 l 0.0,47.815000000000005 c 0.0,0.9650000000000001 1.187,2.55 2.939375,3.4562500000000003 z " id="outline8" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <path d="M 41.34625,169.935 0.0,169.935 " id="centre8" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
     <text>
-      <tspan id="label8" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="41.2915" y="303.19763750000004">8</tspan>
+      <tspan id="label8" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="41.2915" y="303.19763750000004">8</tspan>
     </text>
   </g>
   `;
@@ -732,7 +732,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 41.745625,169.89875 c -1.7538750000000003,0.90375 -2.9395,2.45625 -2.9395,3.4250000000000003 l 0.0,110.497375 c 0.0,1.415 2.5453750000000004,2.564 5.681125,2.564 3.1372500000000003,0.0 5.682125,-1.149 5.682125,-2.564 l 0.0,-110.638625 c 0.0,-0.66125 -1.181625,-2.3775000000000004 -2.92425,-3.2837500000000004 1.742625,-0.90875 2.92425,-2.495 2.92425,-3.455 l 0.0,-52.346250000000005 c 0.0,-1.41625 -2.544875,-2.565 -5.682125,-2.565 -3.13575,-0.0 -5.681125,1.1487500000000002 -5.681125,2.565 l 0.0,52.346250000000005 c 0.0,0.96375 1.185625,2.54875 2.9395,3.455 z " id="outline9" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 41.34625,169.935 0.0,169.935 " id="centre9" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label9" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="41.2915" y="295.0388875">9</tspan>
+        <tspan id="label9" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="41.2915" y="305">9</tspan>
       </text>
     </g>
     `;
@@ -802,7 +802,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 41.744125,169.89875 c -1.7523750000000002,0.9060000000000001 -2.939375,2.4875 -2.939375,3.45475 l 0.0,106.84287500000002 c 0.0,1.415 2.542875,2.5633750000000006 5.681625,2.5633750000000006 3.136625,0.0 5.682125,-1.148375 5.682125,-2.5633750000000006 l 0.0,-106.84287500000002 c 0.0,-0.96475 -1.18075,-2.54875 -2.923375,-3.45475 1.742625,-0.9075 2.923375,-2.4925 2.923375,-3.4562500000000003 l 0.0,-47.815000000000005 c 0.0,-1.41375 -2.5455,-2.56125 -5.682125,-2.56125 -3.13875,-0.0 -5.681625,1.1475 -5.681625,2.56125 l 0.0,47.815000000000005 c 0.0,0.9662500000000002 1.187,2.55 2.939375,3.4562500000000003 z " id="outline10" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 41.34625,169.935 0.0,169.935 " id="centre10" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label10" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.789" y="291.4126375">10</tspan>
+        <tspan id="label10" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.789" y="305">10</tspan>
       </text>
     </g>
     `;
@@ -862,7 +862,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 41.745625,169.89875 c -1.7520000000000002,0.9067500000000001 -2.9395,2.48825 -2.9395,3.4555000000000002 l 0.0,107.06687500000001 c 0.0,1.4165000000000003 2.5453750000000004,2.5665 5.681125,2.5665 3.1397500000000003,0.0 5.682125,-1.15 5.682125,-2.5665 l 0.0,-107.06687500000001 c 0.0,-0.964875 -1.178625,-2.54875 -2.921875,-3.4555000000000002 1.7432500000000002,-0.9062500000000001 2.921875,-2.49125 2.921875,-3.455 l 0.0,-62.99625 c 0.0,-1.415 -2.542375,-2.5625000000000004 -5.682125,-2.5625000000000004 -3.13575,-0.0 -5.681125,1.1475 -5.681125,2.5625000000000004 l 0.0,62.99625 c 0.0,0.9662500000000002 1.1875,2.55 2.9395,3.455 z " id="outline11" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 41.350125000000006,169.935 0.0,169.935 " id="centre11" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label11" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="39.1235" y="291.639925">11</tspan>
+        <tspan id="label11" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="39.1235" y="300">11</tspan>
       </text>
     </g>
     `;
@@ -930,7 +930,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 37.727,169.90324999999999 c -1.585375,0.8183750000000001 -2.660125,2.2515 -2.660125,3.126 l 0.0,101.36575 c 0.0,1.27975 2.3012500000000005,2.31735 5.138250000000001,2.31735 2.838375,0.0 5.139125,-1.0376000000000003 5.139125,-2.31735 l 0.0,-101.36575 c 0.0,-0.8716250000000001 -1.066875,-2.30525 -2.6416250000000003,-3.126 1.5747500000000003,-0.819375 2.6416250000000003,-2.253875 2.6416250000000003,-3.126 l 0.0,-33.6185 c 0.0,-1.28 -2.30075,-2.3175 -5.139125,-2.3175 -2.837,-0.0 -5.138250000000001,1.0375 -5.138250000000001,2.3175 l 0.0,33.6185 c 0.0,0.8755000000000001 1.07475,2.308125 2.660125,3.126 z " id="outline12" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 37.40725,169.935 0.0,169.935 " id="centre12" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label12" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="35.054625" y="284.54145">12</tspan>
+        <tspan id="label12" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="35.054625" y="295">12</tspan>
       </text>
     </g>
     `;
@@ -987,7 +987,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 38.80325,77.99750000000002 0.0,-6.008750000000001 c 0.0,-1.23 1.9262500000000002,-2.26 4.492125,-2.5075 l -0.00725,-7.39 c -1.294,-0.45625 -2.2095,-1.5937500000000002 -2.2095,-2.9325 0.0,-1.735 1.55125,-3.1437500000000003 3.464375,-3.1437500000000003 1.915,0.0 3.4692500000000006,1.40875 3.4692500000000006,3.1437500000000003 0.0,1.33875 -0.918,2.47625 -2.213375,2.9325 l -0.0035000000000000005,7.402500000000001 c 2.504875,0.26875 4.371125,1.28375 4.371125,2.495 l 0.0,6.008750000000001 -11.36325,-0.0 z " id="satellite13-o" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 41.349625,82.055 0.0,82.055 " id="centre13" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label13" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.791000000000004" y="205.80242500000003">13</tspan>
+        <tspan id="label13" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.791000000000004" y="215">13</tspan>
       </text>
     </g>
     `;
@@ -1039,7 +1039,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 38.80175,77.99737499999998 0.0,-10.537375000000003 c 0.0,-1.235 1.9262500000000002,-2.2625 4.494625,-2.51 l -0.007375,-7.39 c -1.294875,-0.45625 -2.211875,-1.5937500000000002 -2.211875,-2.9312500000000004 0.0,-1.73875 1.5527500000000003,-3.145 3.4668750000000004,-3.145 1.9140000000000001,0.0 3.4667500000000007,1.40625 3.4667500000000007,3.145 0.0,1.3375000000000001 -0.918,2.475 -2.211875,2.9312500000000004 l -0.0035000000000000005,7.402500000000001 c 2.505875,0.26625 4.371125,1.2850000000000001 4.371125,2.4975000000000005 l 0.0,10.537375000000003 -11.36475,-0.0 z " id="satellite14-o" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 41.34812500000001,82.055 0.0,82.055 " id="centre14" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label14" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.791000000000004" y="193.338675">14</tspan>
+        <tspan id="label14" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.791000000000004" y="205">14</tspan>
       </text>
     </g>
     `;
@@ -1096,7 +1096,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 34.92975,77.82900000000001 0.0,-7.378 c 0.0,-1.11075 1.7357500000000001,-2.0385 4.05025,-2.26075 l -0.007375,-6.660125 c -1.1655,-0.4126250000000001 -1.993125,-1.4403750000000002 -1.993125,-2.644 0.0,-1.565 1.3975000000000002,-2.8321250000000004 3.126,-2.8321250000000004 1.726,0.0 3.124,1.267125 3.124,2.8321250000000004 0.0,1.203625 -0.8276250000000002,2.231375 -1.993625,2.644 l -0.004875,6.672375000000001 c 2.25825,0.23925000000000002 3.9403750000000004,1.15475 3.9403750000000004,2.2485 l 0.0,7.378 -10.241625,-0.0 z " id="satellite15-o" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 37.266125,82.05499999999999 0.0,82.05499999999999 " id="centre15" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label15" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="34.919875" y="178.2694125">15</tspan>
+        <tspan id="label15" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="34.919875" y="190">15</tspan>
       </text>
     </g>
     `;
@@ -1143,7 +1143,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 41.745625,82.01837499999999 c -1.7530000000000001,0.9057500000000002 -2.9395,2.49025 -2.9395,3.457 l 0.0,65.827125 c 0.0,1.416 2.544,2.564 5.681125,2.564 3.1372500000000003,0.0 5.681250000000001,-1.148 5.681250000000001,-2.564 l 0.0,-65.827125 c 0.0,-0.964875 -1.1792500000000001,-2.549375 -2.9223750000000006,-3.457 1.743125,-0.9057500000000002 2.9223750000000006,-2.49325 2.9223750000000006,-3.454625 l 0.0,-41.921375000000005 c 0.0,-1.41625 -2.544,-2.56375 -5.681250000000001,-2.56375 -3.1371250000000006,-0.0 -5.681125,1.1475 -5.681125,2.56375 l 0.0,41.921375000000005 c 0.0,0.9662500000000002 1.1865,2.55075 2.9395,3.454625 z " id="outline16" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 41.347625,82.055 0.0,82.055 " id="centre16" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label16" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.7915" y="162.51980000000003">16</tspan>
+        <tspan id="label16" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.7915" y="175">16</tspan>
       </text>
     </g>
     `;
@@ -1190,7 +1190,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 41.745125,82.01837499999999 c -1.7543750000000002,0.9057500000000002 -2.9395,2.49025 -2.9395,3.457 l 0.0,69.455625 c 0.0,1.4135 2.544,2.5633750000000006 5.681250000000001,2.5633750000000006 3.1381250000000005,0.0 5.682125,-1.149875 5.682125,-2.5633750000000006 l 0.0,-69.455625 c 0.0,-0.9643750000000001 -1.18025,-2.548875 -2.923375,-3.457 1.743125,-0.9057500000000002 2.923375,-2.49275 2.923375,-3.454625 l 0.0,-32.629375 c 0.0,-1.416 -2.544,-2.566 -5.682125,-2.566 -3.1372500000000003,-0.0 -5.681250000000001,1.15 -5.681250000000001,2.566 l 0.0,32.629375 c 0.0,0.9668750000000002 1.185125,2.55125 2.9395,3.454625 z " id="outline17" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 41.34575000000001,82.055 0.0,82.055 " id="centre17" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label17" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.789500000000004" y="166.146775">17</tspan>
+        <tspan id="label17" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.789500000000004" y="176">17</tspan>
       </text>
     </g>
     `;
@@ -1229,7 +1229,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 41.749,82.01837499999999 c -1.7553750000000001,0.905875 -2.941375,2.49025 -2.941375,3.4571250000000004 l 0.0,60.390625 c 0.0,1.4135 2.543875,2.5635000000000003 5.683625,2.5635000000000003 3.136625,0.0 5.678125,-1.15 5.678125,-2.5635000000000003 l 0.0,-60.390625 c 0.0,-0.9643750000000001 -1.17675,-2.548875 -2.919875,-3.4571250000000004 1.743125,-0.9057500000000002 2.919875,-2.490125 2.919875,-3.4545000000000003 l 0.0,-19.48975 c 0.0,-1.416 -2.5415000000000005,-2.561125 -5.678125,-2.561125 -3.1397500000000003,-0.0 -5.683625,1.145125 -5.683625,2.561125 l 0.0,19.48975 c 0.0,0.9667500000000001 1.186,2.55125 2.941375,3.4545000000000003 z " id="outline18" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 41.349125,82.05499999999998 0.0,82.05499999999998 " id="centre18" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label18" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.793" y="157.0819125">18</tspan>
+        <tspan id="label18" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.793" y="170">18</tspan>
       </text>
     </g>
     `;
@@ -1270,7 +1270,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 37.583,82.02624999999999 c -1.579625,0.813 -2.651375,2.24075 -2.651375,3.1122500000000004 l 0.0,34.4165 c 0.0,1.2745000000000002 2.2925,2.30715 5.121125000000001,2.30715 2.829625,0.0 5.123000000000001,-1.03265 5.123000000000001,-2.30715 l 0.0,-34.4165 c 0.0,-0.869125 -1.064375,-2.294375 -2.6367500000000006,-3.1122500000000004 1.5723750000000003,-0.820875 2.6367500000000006,-2.246625 2.6367500000000006,-3.11825 l 0.0,-31.857375 c 0.0,-1.274375 -2.293375,-2.3125 -5.123000000000001,-2.3125 -2.828625,-0.0 -5.121125000000001,1.038125 -5.121125000000001,2.3125 l 0.0,31.857375 c 0.0,0.8745000000000002 1.07175,2.30225 2.651375,3.11825 z " id="outline19" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 37.267125,82.055 0.0,82.055 " id="centre19" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label19" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="34.919375" y="129.66391249999998">19</tspan>
+        <tspan id="label19" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="34.919375" y="140">19</tspan>
       </text>
     </g>
     `;
@@ -1311,7 +1311,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 41.745625,82.018375 c -1.7505000000000002,0.9057500000000002 -2.9395,2.49025 -2.9395,3.457 l 0.0,42.714875 c 0.0,1.4135 2.5453750000000004,2.5635000000000003 5.68025,2.5635000000000003 3.1381250000000005,0.0 5.683,-1.15 5.683,-2.5635000000000003 l 0.0,-42.714875 c 0.0,-0.9643750000000001 -1.1801250000000003,-2.548875 -2.92425,-3.457 1.744125,-0.90825 2.92425,-2.49275 2.92425,-3.454625 l 0.0,-30.817875000000004 c 0.0,-1.416 -2.544875,-2.5635000000000003 -5.683,-2.5635000000000003 -3.134875,-0.0 -5.68025,1.1475 -5.68025,2.5635000000000003 l 0.0,30.817875000000004 c 0.0,0.9667500000000001 1.189,2.548875 2.9395,3.454625 z " id="outline20" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 41.350125000000006,82.055 0.0,82.055 " id="centre20" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label20" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.79" y="139.4060375">20</tspan>
+        <tspan id="label20" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.79" y="150">20</tspan>
       </text>
     </g>
     `;
@@ -1340,7 +1340,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 38.78812500000001,78.258625 0.0,-4.336 c 0.0,-1.232875 1.9272500000000001,-2.260625 4.491625,-2.50975 l -0.006750000000000001,-7.387625 c -1.293,-0.456625 -2.2125,-1.5991250000000001 -2.2125,-2.9321250000000005 0.0,-1.738375 1.5527500000000003,-3.1446250000000004 3.4673750000000005,-3.1446250000000004 1.9165,0.0 3.4677500000000006,1.40625 3.4677500000000006,3.1446250000000004 0.0,1.333 -0.918,2.4755 -2.211,2.9321250000000005 l -0.005875,7.399875 c 2.507375,0.266125 4.372625,1.2841250000000002 4.372625,2.4975000000000005 l 0.0,4.336 -11.36325,-0.0 z " id="satellite21-o" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 41.350125000000006,82.05499999999998 0.0,82.05499999999998 " id="centre21" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label21" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.7915" y="127.62141249999999">21</tspan>
+        <tspan id="label21" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.7915" y="137">21</tspan>
       </text>
     </g>
     `;
@@ -1373,7 +1373,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 38.806125,78.00037499999999 0.0,-3.6285 c 0.0,-1.23 1.9272500000000001,-2.26025 4.494625,-2.50675 l -0.00725,-7.39025 c -1.2963750000000003,-0.4565 -2.212,-1.5991250000000001 -2.212,-2.9321250000000005 0.0,-1.73825 1.5542500000000001,-3.1420000000000003 3.4658750000000005,-3.1420000000000003 1.9165,0.0 3.46625,1.40375 3.46625,3.1420000000000003 0.0,1.333 -0.9155000000000001,2.475625 -2.211375,2.9321250000000005 l -0.004875,7.400000000000001 c 2.507375,0.268 4.372,1.286625 4.372,2.497 l 0.0,3.6285 -11.36325,-0.0 z " id="satellite22-o" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 41.350125000000006,82.055 0.0,82.055 " id="centre22" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="label22" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.79" y="145.2986625">22</tspan>
+        <tspan id="label22" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="38.79" y="155">22</tspan>
       </text>
     </g>
     `;
@@ -1438,7 +1438,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="m 41.745625,82.01749999999998 c -1.7505000000000002,0.9062500000000001 -2.9395,2.49125 -2.9395,3.4575 l 0.0,125.194875 c 0.0,1.4165000000000003 2.5453750000000004,2.5665 5.681125,2.5665 3.1372500000000003,0.0 5.682125,-1.15 5.682125,-2.5665 l 0.0,-125.194875 c 0.0,-0.9650000000000001 -1.1801250000000003,-2.54875 -2.920875,-3.4575 1.74075,-0.9050000000000001 2.920875,-2.4925 2.920875,-3.45375 l 0.0,-75.68375 c 0.0,-1.41875 -2.544875,-2.5662500000000006 -5.682125,-2.5662500000000006 -3.13575,-0.0 -5.681125,1.1475 -5.681125,2.5662500000000006 l 0.0,75.68375 c 0.0,0.9662500000000002 1.189,2.55 2.9395,3.45375 z " id="outlinex" style="fill:none;stroke:#797677;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path d="M 41.350125000000006,82.055 0.0,82.055 " id="centrex" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
       <text>
-        <tspan id="labelx" style="font-size:7.19543791px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="40.795874999999995" y="221.8901375">X</tspan>
+        <tspan id="labelx" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="40.795874999999995" y="240">X</tspan>
       </text>
     </g>
     `;
@@ -1465,7 +1465,7 @@ function chromosomeGen8(transformXPos, chromosomeNum){
       <path d="M 35.803250000000006,82.055 0.0,82.055 " id="centrey" style="fill:none;stroke:#231f20;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:none" />
 
       <text>
-        <tspan id="labely" style="font-size:6.22403955px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="35.337875" y="116.02470000000001">Y</tspan>
+        <tspan id="labely" style="font-size:15px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#797677;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica" x="35.337875" y="130">Y</tspan>
       </text>
     </g>
     `;
