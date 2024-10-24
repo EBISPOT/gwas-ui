@@ -205,7 +205,6 @@ function getGraphData(chromosomeNum) {
 }
 
 
-
 let chromosomeNum = "1";
 let transformXPos = 0;
 let chromosome = "";
