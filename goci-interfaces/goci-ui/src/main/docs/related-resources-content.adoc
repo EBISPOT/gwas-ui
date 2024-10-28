@@ -1,6 +1,11 @@
 = Training & Related resources
 
-=== GWAS Catalog training materials
+1. <<section-1, GWAS Catalog training materials>>
+2. <<section-2, Publications>>
+3. <<section-3, Useful resources>>
+4. <<section-4, Community workshops>>
+
+=== [[section-1]]GWAS Catalog training materials
 
 ==== EBI Train online
 
@@ -23,7 +28,7 @@ Earlier webinars are also available:
 Training materials from in-person training workshops held by the GWAS Catalog team are available on link:https://github.com/EBISPOT/eshg-2024-workshop[Github] and link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/training_materials[our FTP server]. If you would like to make use of these slides, please cite the GWAS Catalog as detailed on the link:about[About] page.
 
 
-=== Publications
+=== [[section-2]]Publications
 
 ==== GWAS Catalog publications
 **Sollis et al, 2023 https://doi.org/10.1093/nar/gkac1010[The NHGRI-EBI GWAS Catalog: knowledgebase and deposition resource]. Nucleic Acids Research 51(D1):D977-D985**
@@ -72,9 +77,9 @@ http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new
 
 Or see the https://ebispot.github.io/gwas-blog/[full index].
 
-=== Related resources
+=== [[section-3]]Useful resources
 
-==== Useful tools & data services
+==== Tools & data services
 
 // tag::b-col-indv[]
 [cols="1,2"]
@@ -187,10 +192,10 @@ For more information on how we use these resources, see our link:https://www.ebi
 
 Summary statistics are available via the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[GWAS Catalog] where possible. Find additional sources of summary statistics https://www.ebi.ac.uk/gwas/downloads/summary-statistics[here].
 
-=== Community workshops
-
-Materials from our community workshop on GWAS summary statistics standards and sharing, held in June 2020 to address the standards, infrastructure and incentives required to promote and enable broader sharing of data, are available https://www.ebi.ac.uk/gwas/docs/sharing-standards-workshop[here] and are published as MacArthur et al, 2021 https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00004-5[Workshop proceedings: GWAS Catalog standards and sharing], Cell Genomics 1(1). 
+=== [[section-4]]Community workshops
 
 Videos from our community workshop on standards and infrastructure for predicted effector gene lists, held in September 2024 as a collaboration between the GWAS Catalog, https://kp4cd.org/[HuGEAMP Knowledge Portal Network] and https://www.opentargets.org/[Open Targets], can be found https://www.youtube.com/@hugeampknowledgeportals1943[here]. 
+
+Materials from our community workshop on GWAS summary statistics standards and sharing, held in June 2020 to address the standards, infrastructure and incentives required to promote and enable broader sharing of data, are available https://www.ebi.ac.uk/gwas/docs/sharing-standards-workshop[here] and are published as MacArthur et al, 2021 https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00004-5[Workshop proceedings: GWAS Catalog standards and sharing], Cell Genomics 1(1). 
 
 
