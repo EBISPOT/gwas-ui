@@ -31,6 +31,7 @@ Training materials from in-person training workshops held by the GWAS Catalog te
 === [[section-2]]Publications
 
 ==== GWAS Catalog publications
+
 **Sollis et al, 2023 https://doi.org/10.1093/nar/gkac1010[The NHGRI-EBI GWAS Catalog: knowledgebase and deposition resource]. Nucleic Acids Research 51(D1):D977-D985**
 
 Stefancik et al, 2023 https://link.springer.com/article/10.1007/s00335-023-09992-1[The Ontology of Biological Attributes (OBA) - Computational Traits for the Life Sciences]. Mammalian Genome 34, 364–378.
