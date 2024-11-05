@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--move styles to the parent, remove jquery from scripts, replace parent jquery with this one here, remove head tag,-->
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.4/css/buttons.bootstrap.min.css"/>
+    <style>
+        .btn:focus, .btn:active, a:focus {
+            outline: none !important;
+            box-shadow: none;
+        }
+
+        div.dt-buttons {
+            float: right;
+        }
+
+        div.dataTables_info, div.dataTables_length {
+            float: left;
+        }
+
+        thead input {
+            width: 100% !important;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body th:fragment="summary_stats_unpublished_datatable_v2">
+<!-- Unpublished studies table -->
+<div id="unpublished-study-table-loading">
+    <div id="unpublished-study_panel" class="panel panel-default">
+        <div class="panel-heading background-color-primary-accent">
+            <h3 class="panel-title">
+                <span class="unpublished_study_label">Prepublished/unpublished studies</span>
+                <span class="unpublished_study_count badge available-data-btn-badge"></span>
+            </h3>
+            <span class="pull-right clickable"
+                  style="margin-left:25px"
+                  onclick="toggleSidebar('#unpublished-study_panel span.clickable')">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </span>
+        </div>
+
+        <div class="panel-body">
+            <table id="unpublished-study-table-v2" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>First author</th>
+                    <th>Date submitted</th>
+                    <th>Study accession</th>
+                    <th>Title</th>
+                    <th>Reported trait</th>
+                    <th>Ancestry category</th>
+                    <th>No. of individuals</th>
+                    <th>FTP path</th>
+                </tr>
+                <tr>
+                    <th class="searchable">First author</th>
+                    <th>Date submitted</th>
+                    <th class="searchable">Study accession</th>
+                    <th class="searchable">Title</th>
+                    <th class="searchable">Reported trait</th>
+                    <th>Ancestry category</th>
+                    <th>No. of individuals</th>
+                    <th>FTP path</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/common-datatables/datatable-icons.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.13.2/dataRender/ellipsis.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
+<script th:inline="javascript">
+    //<![CDATA[
+    $('#unpublished-study-table-v2 thead tr:eq(1) th').each(function () {
+        if ($(this).hasClass('searchable')) {
+            $(this).html('<input type="text" class="form-control"/>');
+        } else {
+            $(this).html('<input type="text" class="form-control" disabled="disabled"/>');
+        }
+    });
+    $(document).ready(function () {
+        showLoadingOverLay('#unpublished-study-table-loading');
+        $('#unpublished-study-table-v2').DataTable({
+            serverSide: true,
+            ajax: {
+                url: 'http://localhost:8017/api/unpublished-studies/search/filter',
+                dataType: 'JSON',
+                dataSrc: function (json) {
+                    json.recordsTotal = json.page.totalElements;
+                    json.recordsFiltered = json.page.totalElements;
+                    $(".unpublished_study_count").html(json.recordsTotal);
+                    if (!json._embedded) json['_embedded'] = {};
+                    return json._embedded.unpublishedStudies;
+                },
+                data: function (d) {
+                    const c = {};
+                    d.columns.forEach(e => {
+                        if (e.search.value !== '') {
+                            c[e.name] = e.search.value;
+                        }
+                    })
+                    if (d.order.length > 0) {
+                        c.sort = d.columns[d.order[0].column].name + "," + d.order[0].dir;
+                    }
+                    c.size = d.length;
+                    c.page = d.start / d.length;
+                    return c;
+                },
+                error: function () {
+                    hideLoadingOverLay('#unpublished-study-table-loading');
+                    $('#unpublished-study-table-v2_processing').hide();
+                    $("#unpublished-study-table-v2 tbody").empty();
+                    $("#unpublished-study-table-v2 tbody").html('<td colspan="46"><center><h4 class="text-danger">An error occurred, try reloading page or clearing filters.</h4></center></td>');
+                }
+            },
+            orderCellsTop: true,
+            scrollX: true,
+            order: [],
+            columns: [
+                {
+                    data: function(row) {
+                        return row.body_of_work && row.body_of_work[0] ? row.body_of_work[0].first_author : '-';
+                    },
+                    name: 'firstAuthor',
+                    orderable: false
+                },
+                {
+                    data: 'createdDate', name: 'createdDate',
+                    orderable: true,
+                    render(row) {
+                        return row.split('T')[0];
+                    }
+                },
+                {data: 'study_accession', name: 'accession', orderable: false},
+                {
+                    data: function(row) {
+                        return row.body_of_work && row.body_of_work[0] ? row.body_of_work[0].title : '-';
+                    },
+                    name: 'title',
+                    render: $.fn.dataTable.render.ellipsis(60, true),
+                    orderable: false
+                },
+                {data: 'trait', name: 'trait', orderable: false, defaultContent: "-"},
+                {
+                    data: function(row) {
+                        return row.unpublishedAncestries && row.unpublishedAncestries[0]
+                            ? row.unpublishedAncestries[0].ancestry_category : '-';
+                    },
+                    name: 'ancestryCategory', orderable: false, defaultContent: "-",
+                    orderanle: false
+                },
+                {
+                    data: function(row) {
+                        return row.unpublishedAncestries && row.unpublishedAncestries[0]
+                            ? row.unpublishedAncestries[0].sample_size : '-';
+                    },
+                    name: 'noOfIndividuals',
+                    orderable: false
+                },
+                {
+                    data: 'study_accession', name: 'fullPvalueSet', defaultContent: "-", render: function (accession) {
+                        const path = 'http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/'
+                            + getDirectoryBin(accession) + '/' + accession
+                        return '<a href="' + path + '">FTP Download</a>'
+                    },
+                    orderable: false
+                },
+            ],
+            dom: 'lBrtip',
+            buttons: [
+                'colvis',
+                {
+                    text: 'Export',
+                    action: function() {
+                        window.open('https://www.ebi.ac.uk/gwas/docs/file-downloads#_unpublished_gwas', '_blank')
+                    }
+                },
+                {
+                    text: 'Clear search',
+                    action: function (e, dt) {
+                        $("tr input[type='text']").each(function () {
+                            $(this).val('');
+                        })
+                        dt.columns().every(function () {
+                            const column = this;
+                            column.search('');
+                        });
+                        dt.search('').draw();
+                    }
+                }
+            ],
+            retrieve: true,
+            initComplete: function () {
+                hideLoadingOverLay('#unpublished-study-table-loading');
+                this.api()
+                    .columns()
+                    .every(function (index) {
+                        const that = this;
+                        $(this.table().container()).on('keyup', 'thead tr:eq(1) th:eq(' + index + ') input', function (e) {
+                            if (that.search() !== this.value) that.search(this.value);
+                            if (e.keyCode === 13) that.draw();
+                        });
+                    });
+            },
+            language: {
+                paginate: {
+                    next: '<span>&raquo;</span>',
+                    previous: '<span>&laquo;</span>'
+                }
+            },
+            lengthMenu: [
+                [5, 10, 25, 50, 100, 300, 500],
+                [5, 10, 25, 50, 100, 300, 500],
+            ]
+        })
+            .on('processing.dt', function (e, settings, processing) {
+                if (processing) {
+                    showLoadingOverLay('#unpublished-study-table-loading');
+                } else {
+                    hideLoadingOverLay('#unpublished-study-table-loading');
+                }
+            });
+    });
+    //]]>
+</script>
+</body>
+</html>
