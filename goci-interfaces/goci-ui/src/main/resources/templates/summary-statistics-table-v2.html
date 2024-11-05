@@ -120,19 +120,9 @@
             </div>
 
             <h3>List of prepublished/unpublished studies with summary statistics</h3>
-            <div class="row" id="loadingUnpublishedStudies" style="display: none">
-                <div class="col-md-offset-4">
-                    <button class="btn btn-lg">
-                            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"
-                                  style="margin-right: 1em;"></span>
-                        <span style="font-size: 15px;"> Loading Prepublished Studies With Summary Statistics... </span>
-                    </button>
-
-                </div>
-            </div>
             <div class="row">
                 <!-- Unpublished Summary Stats table -->
-                <div th:include="fragments/summary-stats-unpublished-datatable :: summary_stats_unpublished_datatable">
+                <div th:include="fragments/summary-stats-unpublished-datatable-v2 :: summary_stats_unpublished_datatable_v2">
 
                 </div>
             </div>
@@ -208,7 +198,6 @@
 <!-- GOCI JavaScript
 ================================================== -->
 <script th:src="@{/js/goci-ui.js}"></script>
-<script th:src="@{/js/helpers/utils-helper.js}"></script>
 <script th:src="@{/js/helpers/promise-helper.js}"></script>
 <script th:src="@{/js/helpers/utils-helper.js}"></script>
 
