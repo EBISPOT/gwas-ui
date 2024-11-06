@@ -107,6 +107,10 @@ public class StudyDoc extends Doc implements Serializable {
     @JsonProperty("replication-sample-ancestry")
     private List<String> replicationSampleAncestry;
 
+
+    @JsonProperty("gxe")
+    private Boolean gxe;
+
     public StudyDoc(@JsonProperty("traitUri") Set<String> traitUris,
                     @JsonProperty("shortForm") Set<String> shortForms,
                     @JsonProperty("label") List<String> labels,
@@ -158,7 +162,7 @@ public class StudyDoc extends Doc implements Serializable {
                     @JsonProperty("numberOfIndividualsInitial") Integer numberOfIndividualsInitial,
                     @JsonProperty("numberOfIndividualReplication") Integer numberOfIndividualReplication,
                     @JsonProperty("discovery-sample-ancestry") List<String> discoverySampleAncestry,
-                    @JsonProperty("replication-sample-ancestry") List<String> replicationSampleAncestry) {
+                    @JsonProperty("gxe") Boolean gxe) {
         //super();
         super(traitUris, shortForms, labels, synonym, efoLink, parent, descriptions, id, resourcename);
         this.pubmedId = pubmedId;
@@ -204,6 +208,7 @@ public class StudyDoc extends Doc implements Serializable {
         this.numberOfIndividualReplication = numberOfIndividualReplication;
         this.discoverySampleAncestry = discoverySampleAncestry;
         this.replicationSampleAncestry = replicationSampleAncestry;
+        this.gxe = gxe;
     }
 
     public String getPubmedId() {
@@ -549,5 +554,13 @@ public class StudyDoc extends Doc implements Serializable {
 
     public void setReplicationSampleAncestry(List<String> replicationSampleAncestry) {
         this.replicationSampleAncestry = replicationSampleAncestry;
+    }
+
+    public Boolean getGxe() {
+        return gxe;
+    }
+
+    public void setGxe(Boolean gxe) {
+        this.gxe = gxe;
     }
 }

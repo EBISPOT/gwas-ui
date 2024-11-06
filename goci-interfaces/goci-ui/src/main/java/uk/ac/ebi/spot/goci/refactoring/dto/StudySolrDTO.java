@@ -63,6 +63,9 @@ public class StudySolrDTO extends ResourceSupport implements Serializable {
     @JsonProperty("agreedToCc0")
     private Boolean agreedToCc;
 
+    @JsonProperty("gxe")
+    private Boolean gxe;
+
     public StudySolrDTO(@JsonProperty("accessionId") String accessionId,
                         @JsonProperty("pubmedId") String pubmedId,
                         @JsonProperty("reportedTrait") String reportedTrait,
@@ -80,7 +83,8 @@ public class StudySolrDTO extends ResourceSupport implements Serializable {
                         @JsonProperty("associationCount") Integer associationCount,
                         @JsonProperty("summaryStatistics") String summaryStatistics,
                         @JsonProperty("ssApiFlag") Boolean ssApiFlag,
-                        @JsonProperty("agreedToCc0") Boolean agreedToCc) {
+                        @JsonProperty("agreedToCc0") Boolean agreedToCc,
+                        @JsonProperty("gxe") Boolean gxe) {
         this.accessionId = accessionId;
         this.pubmedId = pubmedId;
         this.reportedTrait = reportedTrait;
@@ -99,6 +103,7 @@ public class StudySolrDTO extends ResourceSupport implements Serializable {
         this.summaryStatistics = summaryStatistics;
         this.ssApiFlag = ssApiFlag;
         this.agreedToCc = agreedToCc;
+        this.gxe = gxe;
     }
 
     public String getAccessionId() {
@@ -244,6 +249,14 @@ public class StudySolrDTO extends ResourceSupport implements Serializable {
 
     public void setAgreedToCc(Boolean agreedToCc) {
         this.agreedToCc = agreedToCc;
+    }
+
+    public Boolean getGxe() {
+        return gxe;
+    }
+
+    public void setGxe(Boolean gxe) {
+        this.gxe = gxe;
     }
 }
 
