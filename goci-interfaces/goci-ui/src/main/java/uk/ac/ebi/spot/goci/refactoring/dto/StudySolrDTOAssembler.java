@@ -84,6 +84,7 @@ public class StudySolrDTOAssembler implements ResourceAssembler<StudyDoc, Resour
                 .genotypingTechnologies(studyDoc.getGenotypingTechnologies())
                 .ssApiFlag(getSSApiFlag(studyDoc.getAccessionId()))
                 .agreedToCc(studyDoc.getAgreedToCc())
+                .gxe(studyDoc.getGxe())
                 .build();
     }
 
