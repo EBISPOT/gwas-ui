@@ -54,7 +54,12 @@
                     <th>Study accession</th>
                     <th>Title</th>
                     <th>Reported trait</th>
-                    <th>Ancestry label</th>
+                    <th>
+                        <a class="info-link" onclick="event.stopPropagation();" th:href="@{/docs/population-descriptors}" target="_blank">
+                            <span data-toggle="tooltip" data-placement="right" title="What is an ancestry label? Click!" class="glyphicon glyphicon-question-sign"></span>
+                        </a>
+                        Ancestry label
+                    </th>
                     <th>No. of individuals</th>
                     <th>FTP path</th>
                 </tr>
