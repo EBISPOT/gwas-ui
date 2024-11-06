@@ -253,6 +253,8 @@ Harmonised data files conform to the standard but there are some additional poin
 
 There may be differences between the data available on the FTP site compared to the database where number rounding has taken place. In the database, chromosome values of 'X', 'Y' and 'MT' will appear as 23, 24 and 25, respectively.
 
+More extensive documentation on the harmonisation pipeline can be found https://ebispot.github.io/gwas-sumstats-harmoniser-documentation/[here].
+
 == Accompanying metadata (-meta.yaml)
 Metadata are provided in a computer and human readable YAML file adjacent to the data file, suffixed with -meta.yaml. So where the data file is called GCST123456.tsv.gz, the metadata can be found with the name GCST123456.tsv.gz-meta.yaml. 
 
