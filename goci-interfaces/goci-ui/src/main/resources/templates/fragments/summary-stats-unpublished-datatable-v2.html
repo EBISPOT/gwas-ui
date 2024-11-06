@@ -97,7 +97,7 @@
         $('#unpublished-study-table-v2').DataTable({
             serverSide: true,
             ajax: {
-                url: 'http://localhost:8017/api/unpublished-studies/search/filter',
+                url: gwasProperties.contextPath + 'rest/api/unpublished-studies/search/filter',
                 dataType: 'JSON',
                 dataSrc: function (json) {
                     json.recordsTotal = json.page.totalElements;
