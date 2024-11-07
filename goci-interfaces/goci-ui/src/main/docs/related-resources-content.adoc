@@ -1,12 +1,19 @@
 = Training & Related resources
 
-=== GWAS Catalog training materials
+1. <<section-1, GWAS Catalog training materials>>
+2. <<section-2, Publications>>
+3. <<section-3, Useful resources>>
+4. <<section-4, Community workshops>>
+
+=== [[section-1]]GWAS Catalog training materials
 
 ==== EBI Train online
 
-Check out link:https://www.ebi.ac.uk/training/online/courses/gwas-catalogue-exploring-snp-trait-associations[GWAS Catalog - Exploring SNP-trait associations] for an easily accessible interactive tutorial on the full range of features the GWAS Catalog has to offer.
+New to the Catalog? Start here with link:https://www.ebi.ac.uk/training/online/courses/gwas-catalogue-exploring-snp-trait-associations[GWAS Catalog - Exploring SNP-trait associations], an easily accessible interactive tutorial on the full range of features the GWAS Catalog has to offer.
 
-Or watch our latest training webinars:
+==== Training videos
+
+Recorded webinars are available to guide you through different aspects of the Catalog:
 
 * https://www.ebi.ac.uk/training/events/exploring-genotype-phenotype-data-using-gwas-catalog/[Exploring genotype-phenotype data using the GWAS Catalog] (2022) for an introduction to the GWAS Catalog and a demonstration of our web-based search interface.
 
@@ -16,29 +23,15 @@ Earlier webinars are also available:
 
 * https://www.ebi.ac.uk/training/events/investigating-genotype-phenotype-data-using-gwas-catalog/[Investigating genotype/phenotype data using the GWAS Catalog] (2020).
 
-==== Workshop materials
+==== In-person training materials
 
-Training materials from workshops held by the GWAS Catalog team are available on link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/training_materials/[our FTP server]. If you would like to make use of these slides, please cite the GWAS Catalog as detailed on the link:about[About] page.
+Training materials from in-person training workshops held by the GWAS Catalog team are available on link:https://github.com/EBISPOT/eshg-2024-workshop[Github] and link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/training_materials[our FTP server]. If you would like to make use of these slides, please cite the GWAS Catalog as detailed on the link:about[About] page.
 
-Materials from our community workshop on GWAS summary statistics standards and sharing, held in June 2020 to address the standards, infrastructure and incentives required to promote and enable broader sharing of data, are available https://www.ebi.ac.uk/gwas/docs/sharing-standards-workshop[here] and are published as MacArthur et al, 2021 https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00004-5[Workshop proceedings: GWAS Catalog standards and sharing], Cell Genomics 1(1). 
 
-Videos from our community workshop on standards and infrastructure for predicted effector gene lists, held in September 2024 as a collaboration between the GWAS Catalog, https://kp4cd.org/[HuGEAMP Knowledge Portal Network] and https://www.opentargets.org/[Open Targets], can be found https://www.youtube.com/@hugeampknowledgeportals1943[here]. 
-
-==== Blog posts
-
-https://ebispot.github.io/gwas-blog/background-trait-update[Trait annotation in the GWAS Catalog] (2021): a discussion of how traits are annotated in the GWAS Catalog, focussing on improved background trait annotation.
-
-http://blog.opentargets.org/2021/03/11/open-sharing-of-cancer-summary-statistics/[Sharing is caring: why we need more freely available cancer GWAS summary statistics] (2021): a blog post calling for more freely available cancer GWAS summary statistics.
-
-http://www.ensembl.info/2018/06/28/ten-years-of-the-gwas-catalog-past-present-and-future/[Ten years of the GWAS Catalog – Past, present and future](2018): 10th Anniversary blog post highlighting the links between the GWAS Catalog and Ensembl.
-
-http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new-gwas-catalog/[Everything you need to know about the new GWAS Catalog] (2018): a blog post describing the collaboration between the GWAS Catalog and Open Targets.
-
-Or see the https://ebispot.github.io/gwas-blog/[full index].
-
-=== Publications
+=== [[section-2]]Publications
 
 ==== GWAS Catalog publications
+
 **Sollis et al, 2023 https://doi.org/10.1093/nar/gkac1010[The NHGRI-EBI GWAS Catalog: knowledgebase and deposition resource]. Nucleic Acids Research 51(D1):D977-D985**
 
 Stefancik et al, 2023 https://link.springer.com/article/10.1007/s00335-023-09992-1[The Ontology of Biological Attributes (OBA) - Computational Traits for the Life Sciences]. Mammalian Genome 34, 364–378.
@@ -73,68 +66,21 @@ Visscher et al, 2017 link:http://www.sciencedirect.com/science/article/pii/S0002
 
 Manolio, 2010 link:http://www.nejm.org/doi/full/10.1056/NEJMra0905980[Genomewide Association Studies and assessment of the risk of disease] NEJM 363:166-176
 
+==== Blog posts
 
+https://ebispot.github.io/gwas-blog/background-trait-update[Trait annotation in the GWAS Catalog] (2021): a discussion of how traits are annotated in the GWAS Catalog, focussing on improved background trait annotation.
 
-=== Resources used within the GWAS Catalog
+http://blog.opentargets.org/2021/03/11/open-sharing-of-cancer-summary-statistics/[Sharing is caring: why we need more freely available cancer GWAS summary statistics] (2021): a blog post calling for more freely available cancer GWAS summary statistics.
 
-For more information on how we use these resources, see our link:https://www.ebi.ac.uk/gwas/docs/methods[Methods page].
+http://www.ensembl.info/2018/06/28/ten-years-of-the-gwas-catalog-past-present-and-future/[Ten years of the GWAS Catalog – Past, present and future](2018): 10th Anniversary blog post highlighting the links between the GWAS Catalog and Ensembl.
 
-// tag::b-col-indv[]
-[cols="1,2"]
-|===
+http://blog.opentargets.org/2018/06/13/everything-you-need-to-know-about-the-new-gwas-catalog/[Everything you need to know about the new GWAS Catalog] (2018): a blog post describing the collaboration between the GWAS Catalog and Open Targets.
 
-|link:https://www.ebi.ac.uk/efo/[Experimental Factor Ontology] (EFO)
-|The ontology used for trait mapping in the GWAS Catalog
+Or see the https://ebispot.github.io/gwas-blog/[full index].
 
-|link:http://www.ensembl.org/[Ensembl Genome Browser]
-|Genome browser and data for vertebrate genomes, used in our variant mapping pipeline. Ensembl annotates genes, computes multiple alignments, predicts regulatory function and collects disease data
+=== [[section-3]]Useful resources
 
-|link:https://www.ncbi.nlm.nih.gov/pubmed[PubMed]
-|Literature search and citation annotation
-
-|link:http://europepmc.org/[EuropePMC]
-|Literature search and citation annotation
-
-|link:https://www.cia.gov/library/publications/the-world-factbook/geos/lg.html[CIA Factbook]
-|A rich source of population demographic data, used by curators
-
-|link:https://www.ncbi.nlm.nih.gov/[NCBI]
-|Data used for variant mapping in older versions of the Catalog
-
-|===
-// end::b-col-indv[]
-
-
-=== Genome and phenome resources
-
-// tag::b-col-indv[]
-[cols="1,2"]
-|===
-
-|link:http://www.internationalgenome.org/[1000 Genomes]
-|The largest public reference catalogue of worldwide human variation and genotype data
-
-|http://www.hapmap.org/[International HapMap Project]
-|The first public catalogue of human variation data, now superseded by 1000Genomes
-
-|http://genome.ucsc.edu/cgi-bin/hgGateway[UCSC Genome Browser]
-|Genome browser to interactively visualize genomic data
-
-|link:http://www.phenxtoolkit.org/[PhenX toolkit]
-|Consensus measures of Phenotypes and eXposures
-
-|http://www.ncbi.nlm.nih.gov/projects/SNP/[dbSNP]
-|Database of human single nucleotide polymorphisms
-
-|https://www.ncbi.nlm.nih.gov/[National Centre for Biotechnology Information]
-|Provides wide range of resources including Entrez gene, GenBank, PubMed and ClinVar
-
-|===
-// end::b-col-indv[]
-
-
-=== Useful tools & data services
-
+==== Tools & data services
 
 // tag::b-col-indv[]
 [cols="1,2"]
@@ -185,10 +131,72 @@ For more information on how we use these resources, see our link:https://www.ebi
 |===
 // end::b-col-indv[]
 
-=== Sources of summary statistics
+==== Resources used within the GWAS Catalog
+
+For more information on how we use these resources, see our link:https://www.ebi.ac.uk/gwas/docs/methods[Methods page].
+
+// tag::b-col-indv[]
+[cols="1,2"]
+|===
+
+|link:https://www.ebi.ac.uk/efo/[Experimental Factor Ontology] (EFO)
+|The ontology used for trait mapping in the GWAS Catalog
+
+|link:http://www.ensembl.org/[Ensembl Genome Browser]
+|Genome browser and data for vertebrate genomes, used in our variant mapping pipeline. Ensembl annotates genes, computes multiple alignments, predicts regulatory function and collects disease data
+
+|link:https://www.ncbi.nlm.nih.gov/pubmed[PubMed]
+|Literature search and citation annotation
+
+|link:http://europepmc.org/[EuropePMC]
+|Literature search and citation annotation
+
+|link:https://www.cia.gov/library/publications/the-world-factbook/geos/lg.html[CIA Factbook]
+|A rich source of population demographic data, used by curators
+
+|link:https://www.ncbi.nlm.nih.gov/[NCBI]
+|Data used for variant mapping in older versions of the Catalog
+
+|===
+// end::b-col-indv[]
+
+
+==== Genome and phenome resources
+
+// tag::b-col-indv[]
+[cols="1,2"]
+|===
+
+|link:http://www.internationalgenome.org/[1000 Genomes]
+|The largest public reference catalogue of worldwide human variation and genotype data
+
+|http://www.hapmap.org/[International HapMap Project]
+|The first public catalogue of human variation data, now superseded by 1000Genomes
+
+|http://genome.ucsc.edu/cgi-bin/hgGateway[UCSC Genome Browser]
+|Genome browser to interactively visualize genomic data
+
+|link:http://www.phenxtoolkit.org/[PhenX toolkit]
+|Consensus measures of Phenotypes and eXposures
+
+|http://www.ncbi.nlm.nih.gov/projects/SNP/[dbSNP]
+|Database of human single nucleotide polymorphisms
+
+|https://www.ncbi.nlm.nih.gov/[National Centre for Biotechnology Information]
+|Provides wide range of resources including Entrez gene, GenBank, PubMed and ClinVar
+
+|===
+// end::b-col-indv[]
+
+
+==== Sources of summary statistics
 
 Summary statistics are available via the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[GWAS Catalog] where possible. Find additional sources of summary statistics https://www.ebi.ac.uk/gwas/downloads/summary-statistics[here].
 
-=== Related projects
+=== [[section-4]]Community workshops
 
-link:http://www.bristol.ac.uk/integrative-epidemiology/news/2016/data-mine.html[DATA MINE public art project]
+Videos from our community workshop on **standards and infrastructure for predicted effector gene lists**, held in September 2024 as a collaboration between the GWAS Catalog, https://kp4cd.org/[HuGEAMP Knowledge Portal Network] and https://www.opentargets.org/[Open Targets], can be found https://www.youtube.com/@hugeampknowledgeportals1943[here]. 
+
+Materials from our community workshop on **GWAS summary statistics standards and sharing**, held in June 2020 to address the standards, infrastructure and incentives required to promote and enable broader sharing of data, are available https://www.ebi.ac.uk/gwas/docs/sharing-standards-workshop[here] and are published as MacArthur et al, 2021 https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00004-5[Workshop proceedings: GWAS Catalog standards and sharing], Cell Genomics 1(1). 
+
+
