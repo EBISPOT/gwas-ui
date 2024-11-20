@@ -150,7 +150,14 @@
                         return row.split('T')[0];
                     }
                 },
-                {data: 'study_accession', name: 'accession', orderable: false},
+                {
+                    data: 'study_accession', name: 'accession',
+                    orderable: false,
+                    render: function (data) {
+                        const link = gwasProperties.contextPath + 'studies/' + data;
+                        return !data ? null : '<a href="' + link + '">' + data + '</a>'
+                    }
+                },
                 {
                     data: function(row) {
                         return row.body_of_work && row.body_of_work[0] ? row.body_of_work[0].title : '-';
