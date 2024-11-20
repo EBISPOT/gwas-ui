@@ -145,6 +145,7 @@ function displayUnpublishedStudySummary(accession) {
     const ftpdir = getDirectoryBin(accession);
     httpRequest = HttpRequestEngine.requestWithoutBody(URI, 'GET');
     HttpRequestEngine.fetchRequest(httpRequest).then((data) => {
+        data = data._embedded.unpublishedStudies[0];
         let ancestryCategory = data.unpublishedAncestries[0].ancestry_category;
         let sampleSize = data.unpublishedAncestries[0].sample_size;
 
@@ -168,6 +169,7 @@ function displayUnpublishedStudySummary(accession) {
         else $("#license").html(`<a href="https://www.ebi.ac.uk/about/terms-of-use/" target="_blank"> Terms of use </a>`)
         hideLoadingOverLay('#unpublished-summary-panel-loading');
     }).catch(error => {
+        console.log(error)
         $('#unpublished-container').html("<h2>The study accession <em>" + accession + "</em> cannot be found in the GWAS Catalog database</h2>");
     });
 
