@@ -141,7 +141,7 @@ function processSolrData(data, initLoad = false) {
 
 function displayUnpublishedStudySummary(accession) {
     let baseUrl = gwasProperties.GWAS_REST_API //'http://localhost:8080/api/';
-    let URI = `${baseUrl}/unpublished-studies/search/query?accession=${accession}`;
+    let URI = `${baseUrl}/unpublished-studies/search/filter?accession=${accession}`;
     const ftpdir = getDirectoryBin(accession);
     httpRequest = HttpRequestEngine.requestWithoutBody(URI, 'GET');
     HttpRequestEngine.fetchRequest(httpRequest).then((data) => {
