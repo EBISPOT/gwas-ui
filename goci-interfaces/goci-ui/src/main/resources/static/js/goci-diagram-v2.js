@@ -27,6 +27,7 @@ let traitRadius = 4;
 let displayGap = (traitRadius * 2); // Explain Rule
 let maxOnARow = 30; // You can also determine Rule of margin through maxOnARow & traitRadius & traitCount
 
+
 function renderIcons(traitData, colorData, regionData, cx, regionLineYStart, regionLineYEnd, transformXPos, transformYPos) {
 
     const colorHolder = {
@@ -51,10 +52,12 @@ function renderIcons(traitData, colorData, regionData, cx, regionLineYStart, reg
     let circleConstruct = "";
 
     let cy = regionLineYStart + regionLineYEnd;
+    let rowItemCounter = 0;
 
     for (let counter = 0; counter < traitData.length; counter++) {
+        rowItemCounter++
         //let randomColor = colors[(Math.floor(Math.random() * colors.length))];
-        if (counter == 0) {
+        if (counter === 0) {
             regionLine = `
                       <g id='17942' transform='translate(${transformXPos}, ${transformYPos})' class='gwas-trait'>
                           <path d='m 50,${regionLineYStart} 11,0.0 23,${regionLineYEnd}' style='fill:none;stroke:#AEB1B4;stroke-width:1.1' />
@@ -65,7 +68,6 @@ function renderIcons(traitData, colorData, regionData, cx, regionLineYStart, reg
         let traitName = traitData[counter]
         let parentCategory = colorData[`${traitName}`];
         let dColor = colorHolder[`${parentCategory}`];
-        //let cleanTraitName = traitName.replace(/'/g, "")
 
         circleConstruct += `
                 <circle
@@ -91,16 +93,17 @@ function renderIcons(traitData, colorData, regionData, cx, regionLineYStart, reg
 
 
         cx += displayGap;
-        if (counter % maxOnARow == 0 && counter != 0) {
+        // if (counter % maxOnARow == 0 && counter != 0) {
+        //     cy += displayGap;
+        //     cx = 85;
+        // }
+
+        if (rowItemCounter === maxOnARow) {
             cy += displayGap;
             cx = 85;
+            rowItemCounter = 0;
         }
     }
-
-    regionLine = `
-            <g id='17942' transform='translate(${transformXPos}, ${transformYPos})' class='gwas-trait'>
-                <path d='m 50,${regionLineYStart} 11,0.0 23,${regionLineYEnd}' style='fill:none;stroke:#AEB1B4;stroke-width:1.1' />
-            </g>`;
 
     return regionLine + circleConstruct;
 }
@@ -184,7 +187,7 @@ function buildRegionData(data, transformXPos, chromosomeNum) {
         if (traitMap[region]) {
             regions += renderIcons(traitMap[region], categoryMap[region], region, cx, cytoBands[region], regionLineYEnd, transformXPos, 0);
             regionLineYStart += 5;
-            regionLineYEnd += (traitCountMap[region] / maxOnARow) * 8;
+            regionLineYEnd += ((traitCountMap[region] / maxOnARow) * 8) + 5;
             //if (i === 50) break;
         }
     })
