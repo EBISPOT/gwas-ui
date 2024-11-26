@@ -41,7 +41,7 @@ public class SearchUIConstants {
             + "accessionId";
 
     public static final String SUMSTATS_SOLR_FIELDS = "accessionId,author_s,authorAscii_s,pubmedId,title,publication,"
-            + "publicationDate,mappedLabel,mappedUri,traitName_s,associationCount,agreedToCc0,fullPvalueSet";
+            + "publicationDate,mappedLabel,mappedUri,traitName_s,associationCount,agreedToCc0,fullPvalueSet, gxe";
 
     public static final String LOCUS_ZOOM_SOLR_FIELDS = "chromLocation, pValueExponent, pValueMantissa, strongestAllele," +
             "ensemblMappedGenes,traitName,mappedLabel,accessionId,pubmedId,author_s,publicationDate,efoLink,mappedUri";

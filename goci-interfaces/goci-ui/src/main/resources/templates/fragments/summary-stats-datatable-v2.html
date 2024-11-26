@@ -57,6 +57,8 @@
                     <th>Reported trait</th>
                     <th>Trait(s)</th>
                     <th>Data access</th>
+                    <th>GxE</th>
+                    <th>License</th>
                 </tr>
                 <tr>
                     <th class="searchable">First author</th>
@@ -68,6 +70,8 @@
                     <th class="searchable">Reported trait</th>
                     <th class="searchable">Trait(s)</th>
                     <th>Data access</th>
+                    <th>GxE</th>
+                    <th>License</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
@@ -160,6 +164,17 @@
                         return data === 'NA' ? null : '<a href="' + data + '">FTP Download</a>'
                     }
                 },
+                {
+                    data: 'gxe', name: 'gxe', visible: false, orderable: false, render(data) {
+                        return data ? '<span class="glyphicon glyphicon-ok"></span>' : '<span class="glyphicon glyphicon-remove"></span>'
+                    }
+                },
+                {
+                    data: 'agreedToCc0', name: 'agreedToCc0', visible: false, orderable: false, render(data) {
+                        if (data) return '<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank"> CC0 </a>'
+                        return '<a href="https://www.ebi.ac.uk/about/terms-of-use/" target="_blank"> Terms of use </a>'
+                    }
+                }
             ],
             dom: 'lBrtip',
             buttons: [
