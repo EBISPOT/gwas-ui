@@ -56,12 +56,23 @@
                     <th>Reported trait</th>
                     <th>Trait(s)</th>
                     <th>Background trait(s)</th>
-                    <th>Discovery sample number</th>
-                    <th>Replication sample number</th>
+                    <th>
+                        <a class="info-link" onclick="event.stopPropagation();" th:href="@{/docs/population-descriptors}" target="_blank">
+                            <span data-toggle="tooltip" data-placement="right" title="What is an ancestry label? Click!" class="glyphicon glyphicon-question-sign"></span>
+                        </a>
+                        Discovery sample number
+                    </th>
+                    <th>
+                        <a class="info-link" onclick="event.stopPropagation();" th:href="@{/docs/population-descriptors}" target="_blank">
+                            <span data-toggle="tooltip" data-placement="right" title="What is an ancestry label? Click!" class="glyphicon glyphicon-question-sign"></span>
+                        </a>
+                        Replication sample number
+                    </th>
                     <th>Discovery sample description</th>
                     <th>Replication sample description</th>
                     <th>Association count</th>
                     <th>Summary statistics</th>
+                    <th>GxE</th>
                     <th>License</th>
                 </tr>
                 <tr>
@@ -79,6 +90,7 @@
                     <th>Replication sample description</th>
                     <th>Association count</th>
                     <th>Summary statistics</th>
+                    <th>GxE</th>
                     <th>License</th>
                 </tr>
                 </thead>
@@ -220,8 +232,14 @@
                     }
                 },
                 {
-                    data: 'agreedToCc0', name: 'agreedToCc0', defaultContent: "No", visible: false, render: function(data) {
-                        return data === true ? 'CC0' : '-'
+                    data: 'gxe', name: 'gxe', visible: false, orderable: false, render(data) {
+                        return data ? '<span class="glyphicon glyphicon-ok"></span>' : '<span class="glyphicon glyphicon-remove"></span>'
+                    }
+                },
+                {
+                    data: 'agreedToCc0', name: 'agreedToCc0', visible: false, orderable: true, render(data) {
+                        if (data) return '<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank"> CC0 </a>'
+                        return '<a href="https://www.ebi.ac.uk/about/terms-of-use/" target="_blank"> Terms of use </a>'
                     }
                 }
             ],
