@@ -31,6 +31,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/population-descriptors").setViewName("ancestry");
         // redirect from /ancestry to /population-descriptors
         registry.addRedirectViewController("/ancestry", "/population-descriptors");
+        // redirect from /populationdescriptors (written in GWAS paper) to /population-descriptors
+        registry.addRedirectViewController("/populationdescriptors", "/population-descriptors");
         registry.addViewController("/anniversary").setViewName("anniversary");
         registry.addViewController("/variants").setViewName("variants");
         registry.addViewController("/publications").setViewName("publications");
@@ -64,6 +66,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/docs/api/summary-statistics").setViewName("docs-template");
         registry.addViewController("/docs/known-issues").setViewName("docs-template");
         registry.addViewController("/docs/mappingfileheaders").setViewName("docs-template");
+        // redirect from /docs/ancestry (written in GWAS paper) to /docs/population-descriptors
+        registry.addRedirectViewController("/docs/ancestry", "/docs/population-descriptors");
         registry.addViewController("/docs/population-descriptors").setViewName("docs-template");
         registry.addViewController("/docs/pilots").setViewName("docs-template");
         registry.addViewController("/docs/ancestry-data").setViewName("docs-template");
