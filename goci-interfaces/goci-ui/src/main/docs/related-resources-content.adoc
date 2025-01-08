@@ -34,6 +34,8 @@ Training materials from in-person training workshops held by the GWAS Catalog te
 
 **Cerezo et al, 2025 https://doi.org/10.1093/nar/gkae1070[The NHGRI-EBI GWAS Catalog: standards for reusability, sustainability and diversity] Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D998–D1005**
 
+Harris et al, 2024 https://doi.org/10.1038/s41576-024-00778-y[Genome-wide association testing beyond SNPs]. Nature Reviews Genetics. 2024 Oct 7. Epub ahead of print.
+
 Sollis et al, 2023 https://doi.org/10.1093/nar/gkac1010[The NHGRI-EBI GWAS Catalog: knowledgebase and deposition resource]. Nucleic Acids Research 51(D1):D977-D985
 
 Stefancik et al, 2023 https://link.springer.com/article/10.1007/s00335-023-09992-1[The Ontology of Biological Attributes (OBA) - Computational Traits for the Life Sciences]. Mammalian Genome 34, 364–378.
