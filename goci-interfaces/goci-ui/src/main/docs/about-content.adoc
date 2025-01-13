@@ -29,7 +29,7 @@ We announce new releases and other developments on our announcement list, \gwas-
 
 To interact with other GWAS Catalog users, join our user community mailing list, \gwas-users@ebi.ac.uk. link:++mailto:gwas-users-join@ebi.ac.uk?subject=subscribe&body=Please subscribe me to the GWAS users list++[Send us a quick email] to subscribe to this list.
 
-You can also follow us on Twitter https://twitter.com/GWASCatalog[@GWASCatalog].
+You can also follow us on https://www.linkedin.com/company/gwas-catalog/[LinkedIn], BlueSky https://bsky.app/profile/gwascatalog.bsky.social[@gwascatalog.bsky.social] and X https://twitter.com/GWASCatalog[@GWASCatalog].
 
 
 == Funding acknowledgements
@@ -42,11 +42,11 @@ The NHGRI-EBI GWAS Catalog is funded by NHGRI Grant Number 1U24HG012542-01, and 
 
 === How to cite the NHGRI-EBI GWAS Catalog, data therein or diagram:
 
-_Sollis E, Mosaku A, Abid A, Buniello A, Cerezo M, Gil L, Groza T, Güneş O, Hall P, Hayhurst J, Ibrahim A, Ji Y, John S, Lewis E, MacArthur JAL, McMahon A, Osumi-Sutherland D, Panoutsopoulou K, Pendlington Z, Ramachandran S, Stefancsik R, Stewart J, Whetzel P, Wilson R, Hindorff L, Cunningham F, Lambert SA, Inouye M, Parkinson H, Harris LW._ +
-The NHGRI-EBI GWAS Catalog: knowledgebase and deposition resource. +
-Nucleic Acids Res. 2022 Nov 9:gkac1010. doi: 10.1093/nar/gkac1010. Epub ahead of print. PMID: 36350656. +
+_Cerezo M, Sollis E, Ji Y, Lewis E, Abid A, Bircan KO, Hall P, Hayhurst J, John S, Mosaku A, Ramachandran S, Foreman A, Ibrahim A, McLaughlin J, Pendlington Z, Stefancsik R, Lambert SA, McMahon A, Morales J, Keane T, Inouye M, Parkinson H, Harris LW._ +
+https://doi.org/10.1093/nar/gkae1070[The NHGRI-EBI GWAS Catalog: standards for reusability, sustainability and diversity] +
+Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D998–D1005, https://doi.org/10.1093/nar/gkae1070 +
 
-Users of summary statistics are requested to cite the data as follows: accession ID of the GWAS Catalog study e.g. “GCST007240”, the GWAS Catalog, and the date the summary statistics were downloaded. If the summary statistics originated from a published GWAS, please also cite the original publication. For example, “Summary statistics were downloaded from the NHGRI-EBI GWAS Catalog (Sollis et al., 2022) on 01/11/2020 for study GCST007240 (Riveros-McKay et al., 2019).
+Users of summary statistics are requested to cite the data as follows: accession ID of the GWAS Catalog study e.g. “GCST007240”, the GWAS Catalog, and the date the summary statistics were downloaded. If the summary statistics originated from a published GWAS, please also cite the original publication. For example, “Summary statistics were downloaded from the NHGRI-EBI GWAS Catalog (Cerezo et al., 2025) on 01/02/2025 for study GCST007240 (Riveros-McKay et al., 2019).
 
 For a full list of publications by the GWAS Catalog team, and other useful background reading, please visit our link:related-resources[Resources page]
 

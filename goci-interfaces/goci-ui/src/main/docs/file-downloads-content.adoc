@@ -2,6 +2,10 @@
 
 Version numbers refer to the <<file-names,file format version>>. Data is released biweekly and release version is indicated by r-DATE in the downloaded file name.   
 
+====
++++<div style="background-color: #ffcccc; color: #990000; padding: 10px;">[Warning] 13 Jan 2025: Due to an issue in our most recent data release, we have been unable to release complete data for the associations download file, and the latest file available is from 20 Nov 2024. We are working on a fix as high priority. Other files and all data displayed in the website is unaffected.</div>+++
+====
+
 [width="80%",options="header",cols="4,2,2,2", halign = "center", role="table table-hover"]
 |===
 |Description | Download Link |Format  | Column header descriptions
