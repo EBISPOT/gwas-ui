@@ -1235,7 +1235,7 @@ public class SolrSearchController {
                     new JsonStreamingProcessorService(br, efo, facet, ancestry, includeCohortsAndSs, includeGxE, new BufferedWriter(outputWriter));
             try {
                 jsonProcessor.processJson();
-            }catch(Exception  ex){
+            } catch(Exception  ex) {
                 log.error("Exception in download parsing "+ex.getMessage(),ex);
             }
             outputWriter.flush();
