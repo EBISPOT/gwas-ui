@@ -5,11 +5,13 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 
+@Slf4j
 public class JsonStreamingProcessorService {
 
     private BufferedReader input;
@@ -81,10 +83,13 @@ public class JsonStreamingProcessorService {
         JsonProcessingService processor = new JsonProcessingService("", includeAnnotations, type, includeAncestry, includeCohortsAndSs, includeGxE);
         ObjectMapper mapper = new ObjectMapper();
         JsonParser parser = mapper.getFactory().createParser(input);
+        int count = 0;
         while(parser.nextToken() != JsonToken.START_ARRAY) {
         }
         while(parser.nextToken() == JsonToken.START_OBJECT) {
             StringBuilder line = new StringBuilder();
+            count++;
+            //log.info("Line number is {}", count);
             // read everything from this START_OBJECT to the matching END_OBJECT
             // and return it as a tree model ObjectNode
             ObjectNode doc = mapper.readTree(parser);
@@ -110,6 +115,7 @@ public class JsonStreamingProcessorService {
             else {
                 processor.processAssociationJson(line, doc);
             }
+            //log.info("Line is {}", line.toString());
             output.write(line.toString());
             output.flush();
         }

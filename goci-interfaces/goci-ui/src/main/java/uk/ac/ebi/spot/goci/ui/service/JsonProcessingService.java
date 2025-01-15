@@ -691,7 +691,9 @@ public class JsonProcessingService {
                         if(chromName.equals("")){
                             chromName = locs[0];
                             chromPos = locs[1];
-                            region = doc.get("region").get(0).asText().trim();
+                            if(doc.get("region") != null) {
+                                region = doc.get("region").get(0).asText().trim();
+                            }
                         }
                         else if (isMultiSnpHaplotype){
                             chromName = chromName.concat(";").concat(locs[0]);
