@@ -88,8 +88,6 @@ public class JsonStreamingProcessorService {
         }
         while(parser.nextToken() == JsonToken.START_OBJECT) {
             StringBuilder line = new StringBuilder();
-            count++;
-            //log.info("Line number is {}", count);
             // read everything from this START_OBJECT to the matching END_OBJECT
             // and return it as a tree model ObjectNode
             ObjectNode doc = mapper.readTree(parser);
@@ -115,7 +113,6 @@ public class JsonStreamingProcessorService {
             else {
                 processor.processAssociationJson(line, doc);
             }
-            //log.info("Line is {}", line.toString());
             output.write(line.toString());
             output.flush();
         }
