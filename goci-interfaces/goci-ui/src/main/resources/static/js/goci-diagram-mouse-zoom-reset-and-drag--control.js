@@ -1,3 +1,24 @@
+$(document).ready(function() {
+    $(".zoom-range").attr("value", currentScale);
+    $(".zoom-range").attr("max", maxScale);
+    $(".zoom-range").attr("min", 0);
+    $(".zoom-range").attr("step", 1);
+    $('.zoom-range').change(function() {
+        console.log("Somebody clicked the slider. New value is " + $(this).val());
+        slideZoom($(this).val());
+    });
+    $(".zoom-in").click(function() {
+        currentScale++;
+        $(".zoom-range").val(currentScale).trigger('change');
+        zoomIn();
+    });
+    $(".zoom-out").click(function() {
+        currentScale--;
+        $(".zoom-range").val(currentScale).trigger('change');
+        zoomOut();
+    });
+})
+
 function resetZoom() {
     shape = document.getElementsByTagName("svg")[0];
     shape.setAttribute("viewBox", '17 -214 8933 8933');
@@ -135,4 +156,46 @@ function updateOffset() {
     var elements = viewBox.split(' ');
     dragOffsetX = elements[0];
     dragOffsetY = elements[1];
+}
+
+
+function slideZoom(newScale) {
+    if (currentScale < 0) {
+        // try and recover from excessive zooming out!
+        console.log("Attempting to recover from zooming waaaay out - current scale is " + currentScale);
+        currentScale++;
+        zoomIn();
+        slideZoom(newScale);
+    }
+    else if (currentScale > maxScale) {
+        // try and recover from excessive zooming in!
+        console.log("Attempting to recover from zooming waaaay in - current scale is " + currentScale);
+        currentScale--;
+        zoomOut();
+        slideZoom(newScale);
+    }
+    else {
+        // zooming inside normal ranges, so adjust
+        var times;
+        var i;
+        if (newScale > currentScale) {
+            times = newScale - currentScale;
+            console.log("Zooming in - zoom operations required = " + times);
+            currentScale = newScale;
+            for (i = 0; i < times; i++) {
+                zoomIn();
+            }
+        }
+        else if (newScale < currentScale) {
+            times = currentScale - newScale;
+            console.log("Zooming out - zoom operations required = " + times);
+            currentScale = newScale;
+            for (i = 0; i < times; i++) {
+                zoomOut();
+            }
+        }
+        else {
+            console.log("Detected sidebar zoom event, current scale matches required scale");
+        }
+    }
 }
