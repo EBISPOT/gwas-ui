@@ -55,11 +55,12 @@
         }
 
         .float {
-            position: fixed;
+            /*position: fixed;*/
             width: 60px;
             height: 60px;
-            top: 100px;
-            right: 70px;
+            float: right;
+            /*top: 100px;*/
+            /*right: 70px;*/
             background-color: #398A96;
             color: #FFF !important;
             border-radius: 50px;
@@ -251,6 +252,15 @@
 
                 <div>
                     <a href="#" class="float" onclick="resetZoom()"> <i class="fa fa-refresh my-float"></i> </a>
+                    <span id="zoom-and-pan" class="zoombar" >
+                        <div class="zoom-inline">
+                            <button class="zoom-out"> <span class="glyphicon glyphicon-zoom-out"></span></button>
+                            <input type="range"
+                                   class="zoom-range "
+                                   style="width: 75% !important;"/>
+                            <button class="zoom-in pull-right "> <span class="glyphicon glyphicon-zoom-in"></span></button>
+                        </div>
+                    </span>
                     <span id="filter-counter" style="display: none;"></span>
                 </div>
 
