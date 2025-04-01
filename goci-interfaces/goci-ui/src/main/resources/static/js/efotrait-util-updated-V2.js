@@ -40,21 +40,7 @@ var pageRowLimit=5;
 
 var childEfos = [];
 
-/**
- * Linkout to OLS page for the main EFO term
- */
-$('#ols-link').click(() => {
-    // Single encode EFO term URI for use with OLS Web site
-    let efoTermUri;
-    if (getMainEFO().startsWith('MONDO')) {
-        efoTermUri = 'http://purl.obolibrary.org/obo/'
-    }
-    else {
-        efoTermUri = 'http://www.ebi.ac.uk/efo/';
-    }
-    let olsWebEfoTermUri = encodeURIComponent(efoTermUri);
-    window.open(`${global_ols_efo_term}${olsWebEfoTermUri}`+ getMainEFO(), '_blank');
-});
+let efoUri;
 
 /**
  * Linkout to OXO page for the main EFO term
@@ -200,9 +186,14 @@ displayEFOInfo = function(initCBState) {
     // Get data from GWAS REST API for term fields
     getEFOInfo(efoId)
         .then((efoInfo) => {
-        $('#top-panel-trait-label').html(efoInfo.trait);
-        $("#efotrait-label").html(efoInfo.trait);
-        $("#efotrait-id").html(efoInfo.shortForm);
+            this.efoInfo = efoUri;
+            $('#ols-link').click(() => {
+                let olsWebEfoTermUri = encodeURIComponent(efoInfo.uri);
+                window.open(`${global_ols_efo_term}${olsWebEfoTermUri}`, '_blank');
+            });
+            $('#top-panel-trait-label').html(efoInfo.trait);
+            $("#efotrait-label").html(efoInfo.trait);
+            $("#efotrait-id").html(efoInfo.shortForm);
     });
 
     // Get reported traits data from Solr slim for term fields
@@ -465,17 +456,9 @@ processSolrSlimData = function(data) {
  * @param efoId
  */
 getEFOAttributesFromOLS = function(efoId) {
-    // Double encode EFO term URI for use with OLS API
-    let efoTermUri;
-    if (efoId.startsWith('MONDO')) {
-        efoTermUri = 'http://purl.obolibrary.org/obo/'
-    }
-    else {
-        efoTermUri = 'http://www.ebi.ac.uk/efo/';
-    }
-    let olsEfoTermUri = encodeURIComponent(encodeURIComponent(efoTermUri))
+    let olsEfoTermUri = encodeURIComponent(encodeURIComponent(efoUri))
 
-    var url = `${global_ols_api_efo_terms}${olsEfoTermUri}${efoId}`;
+    var url = `${global_ols_api_efo_terms}${olsEfoTermUri}`;
     return promiseGet(url).then(JSON.parse).then(function(response) {
         var efoSynonyms = response["synonyms"];
         var description = response["description"];
