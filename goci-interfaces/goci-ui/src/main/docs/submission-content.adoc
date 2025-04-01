@@ -34,7 +34,7 @@ Read on for general submission instructions.
 2. <<link-12, Download submission form>>
 3. <<link-13, Fill in submission form>>
 4. <<link-14, Submit submission form>>
-5. <<link-15, After submission>>
+5. <<link-15, After submission - release of data in the Catalog & how to find your accession IDs>>
 
 <<D, Additional information>>
 
@@ -238,16 +238,17 @@ If validation fails, you will receive an email listing the errors detected and a
 
 image::review_reset.png[Review or reset,width=300,align="center"]
 
-=== [[link-15]]5. After submission
+=== [[link-15]]5. After submission - release of data in the Catalog & how to find your accession ID
 
-Once your submission is complete, it will have the status SUBMITTED, and will be visible on the My Submissions page (see below). Each study will be assigned an accession number beginning with GCST. You can download a list of study accessions for your completed submission from the submission page: https://www.ebi.ac.uk/gwas/deposition/submission/ <your submission id>.
+Once your submission is complete, it will show as SUBMITTED and be listed on the "My Submissions" page.  Each GWAS is given an accession number starting with “GCST”. Please use the GCST accessions to cite in a manuscript - do not use the GCP ID for your submission as it won’t be findable on our website. To find these, click through to your submission page or follow the direct link from the confirmation email. There, you can download the list of accessions by clicking the “Download Accessions” button.
 
-For submissions associated with a published manuscript, a curator will then review your submission and make the summary statistics available to the public as soon as possible through the GWAS Catalog website. We will let you know when these are available.
+*- If you submitted after journal publication:* A curator will review your submission and make the summary statistics publicly available on the GWAS Catalog website as soon as possible. We’ll notify you when this happens.
 
-For unpublished data submissions, or those associated with a preprint, each summary statistics file will be made available on our ftp server within 48 hours, or at the end of your embargo period if you have requested one. You can find the summary statistics at ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/, where studies are are grouped by Study Accession in sets of 1000. For example, to find the summary statistics for GCST90011111, go to ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90011001-GCST90012000/GCST90011111/. Following our biweekly data release, studies not under embargo will also be listed in the summary statistics download area https://www.ebi.ac.uk/gwas/downloads/summary-statistics and associated metadata will be available to download via https://www.ebi.ac.uk/gwas/docs/file-downloads. A study landing page will also be available by searching for the accession number from our homepage: https://www.ebi.ac.uk/gwas.
+*- For unpublished data or data linked to a preprint:* Your summary statistics will be available on our FTP server within 48 hours, or after your embargo period ends (if you’ve requested one). You can find the data here: GWAS FTP Server. The studies are grouped by accession number in sets of 1000. For example, for GCST90011111, you’ll find it at: http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90011001-GCST90012000/GCST90011111/.
 
-When the manuscript associated with your pre-publication submission is published, we will update the study metadata to include the PubMed citation, top associations and ontology mapping added by our curators. Our literature search runs every week and we monitor the results for any matches to pre-published submissions, so that no further action is needed by submitters to get from pre-published to
-published status. However, the literature search does occasionally miss papers, so it is helpful if you can let us know when your paper is published, ideally with the PubMed ID.
+Our data release runs bi-weekly, so it may take a few days for your studies to appear on the GWAS Catalog website. Non-embargoed studies will be added to the summary statistics download area here: https://www.ebi.ac.uk/gwas/downloads/summary-statistics[Summary Statistics Downloads]. You can search for a study’s accession number on our homepage to find its landing page and metadata: https://www.ebi.ac.uk/gwas[GWAS Homepage]. Additional metadata will be available in the downloadbale files here: https://www.ebi.ac.uk/gwas/docs/file-downloads[File Downloads]. If more than 2 weeks has passed and you have concerns, please contact us. 
+
+*- When your pre-publication study is published:* We’ll update the metadata to include the PubMed citation, top associations, and ontology mappings. We check the literature weekly for matches to pre-published studies, so you don’t need to take further action. However, if you inform us when your paper is published, together with the PubMed ID, this can help to speed up the process.
 
 == [[D]] Additional Information
 
