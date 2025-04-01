@@ -40,7 +40,7 @@ var pageRowLimit=5;
 
 var childEfos = [];
 
-let efoUri;
+let efoUri = 'https://www.ebi.ac.uk/ols4/';
 
 /**
  * Linkout to OXO page for the main EFO term
@@ -186,11 +186,6 @@ displayEFOInfo = function(initCBState) {
     // Get data from GWAS REST API for term fields
     getEFOInfo(efoId)
         .then((efoInfo) => {
-            this.efoInfo = efoUri;
-            $('#ols-link').click(() => {
-                let olsWebEfoTermUri = encodeURIComponent(efoInfo.uri);
-                window.open(`${global_ols_efo_term}${olsWebEfoTermUri}`, '_blank');
-            });
             $('#top-panel-trait-label').html(efoInfo.trait);
             $("#efotrait-label").html(efoInfo.trait);
             $("#efotrait-id").html(efoInfo.shortForm);
@@ -421,6 +416,11 @@ getTraitDataSolrSlim = function (efoId) {
             'dataType': 'jsonp',
         }, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
         processSolrSlimData(data);
+        efoUri = data.response.docs[0].mappedUri;
+        $('#ols-link').click(() => {
+            let olsWebEfoTermUri = encodeURIComponent(efoUri);
+            window.open(`${global_ols_efo_term}${olsWebEfoTermUri}`, '_blank');
+        });
         return data;
     }).catch(function (err) {
         console.error('Error when searching Solr Slim for: ' + searchQuery + '. ' + err);
