@@ -40,8 +40,6 @@ var pageRowLimit=5;
 
 var childEfos = [];
 
-let efoUri = 'https://www.ebi.ac.uk/ols4/';
-
 /**
  * Linkout to OXO page for the main EFO term
  */
@@ -193,9 +191,6 @@ displayEFOInfo = function(initCBState) {
 
     // Get reported traits data from Solr slim for term fields
     getTraitDataSolrSlim(efoId);
-
-    // Get synonyms data from OLS for term fields
-    getEFOAttributesFromOLS(efoId);
 
     // Get EFO term mappings from OXO
     getTermMappings(efoId);
@@ -416,11 +411,13 @@ getTraitDataSolrSlim = function (efoId) {
             'dataType': 'jsonp',
         }, 'application/x-www-form-urlencoded').then(JSON.parse).then(function (data) {
         processSolrSlimData(data);
-        efoUri = data.response.docs[0].mappedUri;
+        let efoUrl = data.response.docs[0].mappedUri;
         $('#ols-link').click(() => {
-            let olsWebEfoTermUri = encodeURIComponent(efoUri);
+            let olsWebEfoTermUri = encodeURIComponent(efoUrl);
             window.open(`${global_ols_efo_term}${olsWebEfoTermUri}`, '_blank');
         });
+        // Get synonyms data from OLS for term fields
+        getEFOAttributesFromOLS(efoUrl);
         return data;
     }).catch(function (err) {
         console.error('Error when searching Solr Slim for: ' + searchQuery + '. ' + err);
@@ -453,10 +450,10 @@ processSolrSlimData = function(data) {
  * other term attributes (e.g. description, synonyms) since
  * these are not stored in the GWAS (SPOTPRO) database and therefore
  * not returned from the GWAS REST API.
- * @param efoId
+ * @param efoUrl
  */
-getEFOAttributesFromOLS = function(efoId) {
-    let olsEfoTermUri = encodeURIComponent(encodeURIComponent(efoUri))
+getEFOAttributesFromOLS = function(efoUrl) {
+    let olsEfoTermUri = encodeURIComponent(encodeURIComponent(efoUrl))
 
     var url = `${global_ols_api_efo_terms}${olsEfoTermUri}`;
     return promiseGet(url).then(JSON.parse).then(function(response) {
