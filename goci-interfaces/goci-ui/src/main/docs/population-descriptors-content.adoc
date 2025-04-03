@@ -98,27 +98,27 @@ All sample metadata, including Country of Recruitment and Additional information
 The following publications include analysis of the GWAS Catalog ancestry data:
 
 _Step K et al._ +
-link:https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2024.1380860/full[Exploring the role of underrepresented populations in polygenic risk scores for neurodegenerative disease risk prediction]
+https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2024.1380860/full[https://doi.org/10.3389/fnins.2024.1380860] +
 Frontiers in Neuroscience 2024, vol 18 +
 
 _Fatumo S et al._ +
-link:https://www.nature.com/articles/s41591-021-01672-4[A roadmap to increase diversity in genomic studies]
+https://www.nature.com/articles/s41591-021-01672-4[https://doi.org/10.1038/s41591-021-01672-4] +
 Nature Medicine 2022 28, 243–250 + 
 
 _Mills MC and Rahal C._ +
-https://www.nature.com/articles/s41588-020-0580-y[The GWAS Diversity Monitor tracks diversity by disease in real time] +
+https://www.nature.com/articles/s41588-020-0580-y[https://doi.org/10.1038/s41588-020-0580-y] +
 Nature Genetics. 2020, 52, 242-243. + 
 
 _Morales J et al._ +
-http://rdcu.be/G6Fv[A standardized framework for representation of ancestry data in genomics studies, with application to the NHGRI-EBI GWAS Catalog] +
+http://rdcu.be/G6Fv[https://doi.org/10.1186/s13059-018-1396-2] +
 Genome Biology (2018) 19:21 +
 
 _Popejoy AB and Fullerton SM._ +
-http://www.nature.com/news/genomics-is-failing-on-diversity-1.20759[Genomics is failing on diversity] +
+http://www.nature.com/news/genomics-is-failing-on-diversity-1.20759[https://doi.org/10.1038/538161a] +
 Nature. 2016, 538 (7624), 161-164. +
 
 _Need, AC and Goldstein, DB._ +
-http://europepmc.org/abstract/MED/19836853[Next generation disparities in human genomics: concerns and remedies] +
+http://europepmc.org/abstract/MED/19836853[https://doi.org/10.1016/j.tig.2009.09.012] +
 Trends Genet. 2009, 25, 489–494. +
 
 == Other Resources 
@@ -126,8 +126,6 @@ Trends Genet. 2009, 25, 489–494. +
 link:https://unstats.un.org/unsd/methodology/m49/[The United Nations M49 Standard of Geographic Regions]
 
 link:https://www.cia.gov/library/publications/resources/the-world-factbook/index.html[The World Factbook] 
-
-link:https://gwasdiversitymonitor.com[The GWAS Diversity Monitor]
 
 link:https://nap.nationalacademies.org/catalog/26902/using-population-descriptors-in-genetics-and-genomics-research-a-new[Using Population Descriptors in Genetics and Genomics Research]
 
