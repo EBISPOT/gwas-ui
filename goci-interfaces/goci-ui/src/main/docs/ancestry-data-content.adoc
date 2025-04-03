@@ -6,7 +6,7 @@
 
 Here we present an analysis of the ancestry data contained in the GWAS Catalog for studies published from 2005 - 2024.
 
-An https://gwasdiversitymonitor.com[interactive dashboard] monitoring the heterogeneity of participants across all GWAS available in the Catalog, is available externally.
+An https://gwasdiversitymonitor.com[interactive dashboard] monitoring the heterogeneity of participants across all GWAS available in the Catalog in real time, is available externally.
 
 image::ancestry-data1.png[Ancestry data,1000,575,align="center"]
 
