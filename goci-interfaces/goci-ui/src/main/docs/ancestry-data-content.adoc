@@ -4,9 +4,9 @@
 
 == Ancestry category label distribution in the GWAS Catalog.
 
-The https://gwasdiversitymonitor.com[GWAS Diversity Monitor] is an externally hosted tool which maintains an up-to-date interactive dashboard monitoring the heterogeneity of participants across all published GWAS, based on data from the GWAS Catalog.
-
 Here we present an analysis of the ancestry data contained in the GWAS Catalog for studies published from 2005 - 2024.
+
+An https://gwasdiversitymonitor.com[interactive dashboard] monitoring the heterogeneity of participants across all GWAS available in the Catalog in real time, is available externally.
 
 image::ancestry-data1.png[Ancestry data,1000,575,align="center"]
 
