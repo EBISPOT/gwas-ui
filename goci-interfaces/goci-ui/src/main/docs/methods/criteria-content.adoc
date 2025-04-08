@@ -1,6 +1,6 @@
 = Inclusion criteria
 
-GWAS Catalog data indexed in the website is extracted from the scientific literature (PubMed indexed publications).
+Association data indexed in the website is extracted from the scientific literature (PubMed indexed publications).
 
 A weekly literature search against https://pubmed.ncbi.nlm.nih.gov/[PubMed] identifies peer-reviewed journal publications that meet the GWAS Catalog eligibility criteria, detailed below. Literature search and triage is performed using a machine-learning assisted triage system https://doi.org/10.1093/nar/gkab326[LitSuggest], developed at NCBI. Studies, samples, traits and signficiant associations, are extracted from PubMed-indexed journal publications. Additional data, such as genomic mapping, is supplied from external sources. The GWAS Catalog does not generate any of its own data. 
 
