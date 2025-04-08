@@ -1,20 +1,32 @@
 = Inclusion criteria
 
+Association data indexed in the website is extracted from the scientific literature (PubMed indexed publications).
+
+A weekly literature search against https://pubmed.ncbi.nlm.nih.gov/[PubMed] identifies peer-reviewed journal publications that meet the GWAS Catalog eligibility criteria, detailed below. Literature search and triage is performed using a machine-learning assisted triage system https://doi.org/10.1093/nar/gkab326[LitSuggest], developed at NCBI. Studies, samples, traits and signficiant associations, are extracted from PubMed-indexed journal publications. Additional data, such as genomic mapping, is supplied from external sources. The GWAS Catalog does not generate any of its own data. 
+
+From 2020, the GWAS Catalog started accepting submissions of full genomewide summary statistics and associated metadata for GWAS not published in a journal (either in pre-print, under submission to a journal or standalone). This pre-published data is made available exactly as submitted by authors and has not been reviewed by our curators. It is clearly flagged in the database, either by inclusion in a https://www.ebi.ac.uk/gwas/downloads/summary-statistics[separate table] or on the study page itself e.g. https://www.ebi.ac.uk/gwas/studies/GCST90002219[GCST90002219]. Upon publication in a journal it is curated, annotated, extended to include top associations and incorporated into our main database.
+
 == Genome-wide association studies
+
+The GWAS Catalog aims to provide a comprehensive survey of human GWAS analyses performed by researchers worldwide, and does not exclude papers based on any other criteria than the technical definition of a new GWAS, described below. 
 
 Studies are eligible for inclusion in the GWAS Catalog if they meet the following criteria:
 
+* Analyse the human genome
 * Include a primary GWAS analysis, defined as array-based genotyping and analysis of 100,000+ pre-QC SNPs selected to tag variation across the genome and without regard to gene content.
 * GWAS data from published studies which are incorporated into new GWAS analyses are eligible, provided they meet the other criteria.
 * Studies imputing sequencing data to genotyping arrays are eligible as long as the arrays include sufficient genome-wide coverage so that the post-imputation analysis meets the definition of a GWAS analysis, as described above.
+* Large-scale targeted/non-genome-wide arrays, including the Metabochip, Immunochip and Exome arrays, are eligible and flagged in the "genotyping technology field"
 
 Studies are excluded if:
 
 * The study was published in a language other than English.
+* The study was performed in species other than human.
 * SNPs assayed or analysed were limited to those in candidate genes.
-* The study uses customized gene-based arrays without a clearly described GWAS backbone, including those selected to replicate published GWAS findings (e.g., Metabochip, Immunochip, etc.).
+* The study uses customized gene-based arrays without a clearly described GWAS backbone,.
 * Samples were assayed to measure somatic variation (e.g., in tumor samples).
-* The study does not include any new GWAS data. Studies with available summary statistics, however, are an exception to this rule and automatically fulfil our eligibility criteria. 
+* The study does not include any new GWAS data but report data from publicly available summary statistics  
+
 
 === Summary statistics
 
@@ -32,17 +44,11 @@ We also report individual SNP-trait associations identified in eligible studies 
 
 == Sequencing-based association studies
 
-The GWAS Catalog now includes sequencing-based association studies. You can read the results of our https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00005-7[review of the sequencing-based association literature here]. 
-
-We welcome https://www.ebi.ac.uk/gwas/docs/submission[submissions of summary statistics] for sequencing-based association studies, although we are not routinely curating full metadata and top associations as yet.
-
-From 2022, sequencing-based association studies will be fully integrated into the Catalog.
+The GWAS Catalog now includes sequencing-based association studies (seqGWAS). You can read the results of our https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00005-7[review of the sequencing-based association literature here]. We welcome https://www.ebi.ac.uk/gwas/docs/submission[submissions of summary statistics] for seqGWAS including aggregate analyses such as gene-burden tests, as long as these were performed genome-wide. Top associations from aggregate analyses are not currently available for search in the GWAS Catalog, but we hope to implement this in the future.  
 
 == Targeted and Exome array studies
 
-We are working on expanding the scope of the GWAS Catalog to include studies using large-scale targeted/non-genome-wide arrays, including the Metabochip, Immunochip and Exome arrays. This is currently in a pilot phase where prioritisation of targeted and exome array studies for inclusion in the Catalog is by 1) relevance of the trait analysed 2) user request.
-
-Publications containing targeted array studies are indicated in the search results using  a small “target” icon. This icon also appears in the "Studies" table on specific pages, next to the study accession number.
+Large-scale targeted/non-genome-wide arrays, including the Metabochip and Immunochip are eligible for the GWAS Catalog. Publications containing targeted array studies are indicated in the search results using  a small “target” icon. This icon also appears in the "Studies" table on specific pages, next to the study accession number.
 
 We welcome https://www.ebi.ac.uk/gwas/docs/submission[submissions of summary statistics] for targeted and exome array studies with >100,000 variants.
 
