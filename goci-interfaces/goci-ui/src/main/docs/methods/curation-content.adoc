@@ -21,11 +21,10 @@ The current extraction methods are described below. Pilots to investigate extend
 === Data extraction
 
 GWAS Catalog data are manually extracted from the literature (either the main text or supporting information) by expert scientists.
-Following initial extraction all data is double-checked for accuracy and consistency by an independent curator.
 
-In general the GWAS Catalog contains one entry for each publication.
-However when a publication includes multiple GWAS analyses, for example on different traits or distinct sample cohorts, these may be split into multiple entries.
-In cases where studies containing multiple GWAS analyses are not split, generally because <5 associations are identified for each analysis, individual SNP associations are annotated with the specific trait, sample population or analysis method.
+The GWAS Catalog contains at least one entry for each publication.
+However when a publication includes multiple GWAS analyses, for example on different traits or distinct sample cohorts, these are split into multiple entries (studies).
+In cases where publications containing multiple GWAS analyses are not split (typically for older publications), individual SNP associations are annotated with the specific trait, sample population or analysis method as "p-value text".
 
 Information on the following study-level fields is extracted. Capitalised titles correspond to column headings in tab delimited file:
 
