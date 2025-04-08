@@ -2,7 +2,9 @@
 
 == Curation process
 
-The GWAS Catalog data is extracted from the literature. Extracted information includes publication information, study cohort information such as cohort size, country of recruitment and subject ancestry, and SNP-disease association information including SNP identifier (i.e. RSID), p-value, gene and risk allele.
+GWAS Catalog data indexed in the website is extracted from the scientific literature (PubMed indexed publications). Detailed eligibility criteria can be found on the https://www.ebi.ac.uk/gwas/docs/methods/criteria[accompanying page]. Full genomewide summary statistics & accompanying metadata may also be submitted directly by authors (see https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics[Summary statistics methods]), either before or after journal publication. This page focuses on the literature-extracted data. The GWAS Catalog does not generate any of its own data. 
+
+Extracted information includes publication information, study cohort information such as cohort size, country of recruitment and subject ancestry, and SNP-disease association information including SNP identifier (i.e. RSID), p-value, gene and risk allele.
 Each study is also assigned a trait that best represents the phenotype under investigation.
 When multiple traits are analysed in the same study either multiple entries are created, or individual SNPs are annotated with their specific traits.
 Traits are used both to query and visualise the data in the Catalog's web form and diagram-based query interfaces.
@@ -15,9 +17,6 @@ A second curator then performs an additional round of curation to double-check t
 
 The current extraction methods are described below. Pilots to investigate extending Catalog scope and alternative methods of data acquisition are described on our https://www.ebi.ac.uk/gwas/docs/pilots[pilot projects page]. For a full list of publications by the GWAS Catalog team, and other useful background reading, please visit our https://www.ebi.ac.uk/gwas/docs/related-resources[Resources page]
 
-=== Identification of studies
-
-Published GWA studies are identified through a weekly PubMed search.  Since 2018 we have employed a machine learning assisted triage system, whereby studies are identified by a convolutional neural network based classifier.  Subsequently studies are assessed for eligibility by human curators using a bespoke Pubtator triage interface.  The development of this method is described in link:https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006390[Lee et. al., 2018].  Prior to 2018 we used a query based method (searching the terms "genome-wide" OR "genome wide" OR "genome-wide" OR "GWAS" in Pubmed).
 
 === Data extraction
 
