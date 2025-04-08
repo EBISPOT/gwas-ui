@@ -47,9 +47,9 @@
 }
 
 .funding-banner {
-    border-top: #398A96 solid 5px;
-    border-bottom: #398A96 solid 5px;
-    padding: 10px;
+    border: #e5d4d4 solid 1px;
+    margin-top: 40px;
+    padding: 4px;
     justify-content: center;
     align-items: center;
     text-align: center;
