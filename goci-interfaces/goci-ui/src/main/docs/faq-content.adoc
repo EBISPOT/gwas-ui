@@ -194,7 +194,7 @@ From September 2010 to the present, delivery and development of the Catalog has 
 
 A weekly literature search against https://pubmed.ncbi.nlm.nih.gov/[PubMed] identifies journal publications that meet the GWAS Catalog https://www.ebi.ac.uk/gwas/docs/methods/criteria[eligibility criteria]. Literature search and triage is performed using https://doi.org/10.1093/nar/gkab326[LitSuggest], developed at NCBI. Studies, samples, traits and signficiant associations, are extracted from PubMed-indexed journal publications. For more details see our https://www.ebi.ac.uk/gwas/docs/methods[Methods page]. Additional data, such as ontology annotation and genomic mapping, is supplied from external sources. 
 
-From 2020, the GWAS Catalog started accepting submissions for full genomewide summary statistics and associated metadata for GWAS not published in a journal (either in pre-print, under submission to to journal or never intended to be publsihed in a journal). For more information, see <<faq-A21,Does the GWAS Catalog include data that isn't associated with a journal publication?>>.
+From 2020, the GWAS Catalog started accepting submissions for full genomewide summary statistics and associated metadata for GWAS not published in a journal (either in pre-print, under submission to to journal, or standalone). For more information, see <<faq-A21,Does the GWAS Catalog include data that isn't associated with a journal publication?>>.
 
 ==== [[faq-A4]]4. How can I learn more about using the GWAS Catalog and stay informed about new features and developments?
 
