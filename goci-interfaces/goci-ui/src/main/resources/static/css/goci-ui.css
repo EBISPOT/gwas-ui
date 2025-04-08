@@ -46,6 +46,17 @@
     margin-right: auto;
 }
 
+.funding-banner {
+    border-top: #398A96 solid 5px;
+    border-bottom: #398A96 solid 5px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+
 .filter-element {
     padding: 5px 2px;
     /*display: inline-block;*/
