@@ -8,7 +8,7 @@ Within the Catalog, all link:methods[eligible published] GWA studies are identif
 
 Published Catalog data is available through our https://www.ebi.ac.uk/gwas/search?query=[search interface], https://www.ebi.ac.uk/gwas/downloads[downloads], https://www.ebi.ac.uk/gwas/docs/api[API] and iconic https://www.ebi.ac.uk/gwas/diagram[GWAS diagram] of SNP-trait associations, mapped onto the human genome by chromosomal location and displayed on the human karyotype. Summary statistics files are available to download from our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] via links from the study in the https://www.ebi.ac.uk/gwas/search?query=[search interface] or our designated https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page]. Harmonised summary statistics are also available from our summary statistics database via https://www.ebi.ac.uk/gwas/summary-statistics/docs/[API]. Unpublished GWAS data is available through a separate https://www.ebi.ac.uk/gwas/downloads[download].
 
-Since 2010, delivery and development of the Catalog has been a collaborative project between the EMBL-EBI and NHGRI. The Catalog website and infrastructure is now hosted by EMBL-EBI. A team of curators, all of whom are experienced geneticists or molecular biologists, curate the data, and provide user support. The curation team is supported by dedicated software developers, and is led by Helen Parkinson and Fiona Cunningham at EMBL-EBI, Mike Inouye at the University of Cambridge, and Lucia Hindorff at the NHGRI. We work closely with the https://www.ebi.ac.uk/about/people/helen-parkinson[SPOT] and http://www.ensembl.org/info/about/index.html[Ensembl] teams at the EBI, and receive input from an independent Scientific Advisory Board.
+Since 2010, delivery and development of the Catalog has been a collaborative project between the EMBL-EBI and NHGRI. The Catalog website and infrastructure is now hosted by EMBL-EBI. A team of curators, all of whom are experienced geneticists or molecular biologists, curate the data, and provide user support. The curation team is supported by dedicated software developers, and is led by Helen Parkinson at EMBL-EBI and Mike Inouye at the University of Cambridge, and supported by NHGRI staff. We work closely with the https://www.ebi.ac.uk/about/people/helen-parkinson[SPOT] and http://www.ensembl.org/info/about/index.html[Ensembl] teams at the EBI, and receive input from an independent Scientific Advisory Board.
 
 For more details about the Catalog curation process and data extraction procedures, please refer to the link:methods[Methods page].
 
@@ -43,8 +43,8 @@ The NHGRI-EBI GWAS Catalog is funded by NHGRI Grant Number 1U24HG012542-01, and 
 === How to cite the NHGRI-EBI GWAS Catalog, data therein or diagram:
 
 _Cerezo M, Sollis E, Ji Y, Lewis E, Abid A, Bircan KO, Hall P, Hayhurst J, John S, Mosaku A, Ramachandran S, Foreman A, Ibrahim A, McLaughlin J, Pendlington Z, Stefancsik R, Lambert SA, McMahon A, Morales J, Keane T, Inouye M, Parkinson H, Harris LW._ +
-https://doi.org/10.1093/nar/gkae1070[The NHGRI-EBI GWAS Catalog: standards for reusability, sustainability and diversity] +
-Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D998–D1005, https://doi.org/10.1093/nar/gkae1070 +
+https://doi.org/10.1093/nar/gkae1070[doi.org/10.1093/nar/gkae1070] +
+Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D998–D1005 +
 
 Users of summary statistics are requested to cite the data as follows: accession ID of the GWAS Catalog study e.g. “GCST007240”, the GWAS Catalog, and the date the summary statistics were downloaded. If the summary statistics originated from a published GWAS, please also cite the original publication. For example, “Summary statistics were downloaded from the NHGRI-EBI GWAS Catalog (Cerezo et al., 2025) on 01/02/2025 for study GCST007240 (Riveros-McKay et al., 2019).
 
@@ -63,15 +63,13 @@ The GWAS Catalog adheres to the FAIR indicators of Findability, Accessibility, I
 
 == Privacy policy
 
-The General Data Protection Regulation (GDPR) will apply in the UK from 25 May 2018. It will replace the 1998 Data Protection Act and introduce new rules on privacy notices, as well as processing and safeguarding personal data.
-
 More details about our privacy policy can be found by following the links below.
 
-https://www.ebi.ac.uk/data-protection/privacy-notice/gwas-catalog-submissions[GWAS Catalog Submissions] applies to the data submitted to the GWAS Catalog (eg. Summary statistics files) or the data pulled out from the publications.
+https://drive.google.com/file/d/1tqBxiyo6llXgGtED7jiup-PNh50ZvQv3/view?usp=sharing[GWAS Catalog Submissions] applies to the data submitted to the GWAS Catalog (eg. Summary statistics files).
 
-https://www.ebi.ac.uk/data-protection/privacy-notice/gwas-catalog-mail-services[GWAS Catalog Mail Services] applies to our public e-mail lists such as gwas-info@ebi.ac.uk, gwas-announce@ebi.ac.uk and gwas-users@ebi.ac.uk.
+https://drive.google.com/file/d/1TOCBrJnhrRAJ62Rmx3KtqxNbviUm1g9w/view?usp=sharing[GWAS Catalog Mail Services] applies to our public e-mail lists such as gwas-info@ebi.ac.uk, gwas-announce@ebi.ac.uk and gwas-users@ebi.ac.uk.
 
-https://www.ebi.ac.uk/data-protection/privacy-notice/gwas-catalog-confluence[GWAS Catalog Curation Tracking] applies to any personal data acquired from publications, or from communication with authors (including author names, e-mails and addresses), that we retain in order to track GWAS publications through our curation processes as part of making those publications available as part of the GWAS Catalog.
+https://drive.google.com/file/d/18banglYT7UwOJaoIKl9qimobwPysX-MJ/view?usp=sharing[GWAS Catalog Curation Tracking] applies to any personal data acquired from publications, or from communication with authors (including author names, e-mails and addresses), that we retain in order to track GWAS publications through our curation processes as part of making those publications available as part of the GWAS Catalog.
 
 
 == Credits &amp; acknowledgements
