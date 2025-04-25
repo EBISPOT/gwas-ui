@@ -83,7 +83,8 @@ public class JsonStreamingProcessorService {
         JsonProcessingService processor = new JsonProcessingService("", includeAnnotations, type, includeAncestry, includeCohortsAndSs, includeGxE);
         ObjectMapper mapper = new ObjectMapper();
         JsonParser parser = mapper.getFactory().createParser(input);
-        while(parser.nextToken() != JsonToken.START_ARRAY) {
+        JsonToken token;
+        while ((token = parser.nextToken()) != null && token != JsonToken.START_ARRAY) {
         }
         while(parser.nextToken() == JsonToken.START_OBJECT) {
             StringBuilder line = new StringBuilder();

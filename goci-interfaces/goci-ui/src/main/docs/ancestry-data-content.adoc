@@ -16,6 +16,6 @@ This figure summarizes the distribution of ancestry category labels as percentag
 
 The most common ancestry label in all panels is European (blue). Multi-ancestry (when the breakdown of individuals per ancestry label is not provided) is light purple, and for the majority, this includes European individuals (light blue). At the level of individuals (a), the next most common label after European is Asian (bright green), which comprises 4%, with East Asian (dark green) accounting for the majority. Panels (b) and (c) show that there is a greater heterogeneity considering b) publications and c) GWA studies than considering the individuals in these publications and studies. Panel (d) demonstrates the contribution of curated associations per ancestry label. Note: Not all studies report significant associations, but metadata (and summary statistics where available) are made available in the Catalog for downstream analysis.
 
-For more information on how labels are assigned, please refer to the link:population-descriptors-content[Population descriptors page].
+For more information on how labels are assigned, please refer to the https://www.ebi.ac.uk/gwas/docs/population-descriptors[Population descriptors page].
 
 
