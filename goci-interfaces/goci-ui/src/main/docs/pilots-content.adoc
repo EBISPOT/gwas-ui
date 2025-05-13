@@ -7,6 +7,13 @@
 We have carried out several pilots to investigate extending Catalog scope and alternative methods of data acquisition with a view to incorporating these into future Catalog improvements. Each of these pilots has been designed to allow us to estimate the feasibility of the approach, resources needed to implement and support this, and obtain feedback from users.
 
 
+=== Gene x environment interaction studies
+
+We are investigating how we can improve the ontology representation of gene x environment interaction studies in the GWAS Catalog. In particular, we want to make it clearer to users when a particular EFO term refers to a human phenotype, and when it refers to an environmental exposure (such as a drug, allergen, toxin, social factor or physiological measurement) that may interact with genetic variants to influence a phenotype. We propose adding an additional field to the GWAS Catalog to annotate the exposure terms for these studies, while leaving the phenotype in the existing EFO traits field.
+
+We have prepared a link:https://docs.google.com/spreadsheets/d/1VTTF7wFPBcmtzSy1ul2S5dnLvJ0Js8nKNDLWckMPVQI/edit?usp=sharing[GxE interaction studies reannotation proposal] using data in the Catalog up to November 2024. The linked spreadsheet shows the existing Reported trait, main EFO and background trait annotations for 882 studies, followed by our proposed reannotations, with EFO terms for the phenotype (*efo-phenotype-term*) and exposure (*efo-exposure-term*) split into separate columns. Available annotations related to degrees of freedom for these studies, as well as comments on the annotations are also shown where applicable.
+
+
 === Sequencing-based association studies
 
 We are investigating expanding the scope of the Catalog to include sequencing-based association studies. Currently the Catalog only includes studies which use array-based genotyping technologies.
