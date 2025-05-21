@@ -1,5 +1,19 @@
-let server = "http://gwas-snoopy.ebi.ac.uk:8685";
-//let server = "http://localhost:8685";
+var host = window.location.host;
+let server = "http://localhost:8685";
+
+if (host.includes("gwas-snoopy") || host.includes("localhost")) {
+    server = "http://gwas-snoopy.ebi.ac.uk:8685";
+}
+else if (host.includes("gwas-garfield")) {
+    server = "http://gwas-garfield.ebi.ac.uk:8989";
+}
+else if (host.includes("ves-hx-7f") || host.includes("wwwdev.ebi.ac.uk")) {
+    server = "http://ves-hx-7f.ebi.ac.uk:8989";
+}
+else if (host.includes("www.ebi.ac.uk")) {
+    server = "http://ves-pg-7f.ebi.ac.uk:8989";
+}
+
 
 let searchTerm = filterData.innerHTML;
 let check = [null, undefined, ''].includes(searchTerm);
@@ -32,27 +46,56 @@ let displayGap = (traitRadius * 2); // Explain Rule
 let maxOnARow = 30; // You can also determine Rule of margin through maxOnARow & traitRadius & traitCount
 
 
-function renderIcons(traitData, colorData, regionData, cx, regionLineYStart, regionLineYEnd, transformXPos, transformYPos) {
+const colorHolder = {
+    "Digestive system disease": "AE6543",
+    "Cardiovascular disease": "AA2C2C",
+    "Metabolic disease": "FDAB57",
+    "Immune system disease": "FFEA64",
+    "Nervous system disease": "FF2D8E",
+    "Liver enzyme measurement": "5B8E00",
+    "Lipid or lipoprotein measurement": "AAD95D",
+    "Inflammatory marker measurement": "C5E7BD",
+    "Hematological measurement": "82CDC0",
+    "Body weights and measures": "5BC5FF",
+    "cardiovascular measurement": "75A8CD",
+    "cancer": "B475B5",
+    "Response to drug": "FCCDE5",
+    "Biological process": "BEBADA",
+    "Other measurement": "006699",
+    "Other trait": "8E44AD",
+    "Other disease": "FF3399",
+    "Age-related macular degeneration": "999",
+};
 
-    const colorHolder = {
-        "Digestive system disease": "AE6543",
-        "Cardiovascular disease": "AA2C2C",
-        "Metabolic disease": "FDAB57",
-        "Immune system disease": "FFEA64",
-        "Nervous system disease": "FF2D8E",
-        "Liver enzyme measurement": "5B8E00",
-        "Lipid or lipoprotein measurement": "AAD95D",
-        "Inflammatory marker measurement": "C5E7BD",
-        "Hematological measurement": "82CDC0",
-        "Body weights and measures": "5BC5FF",
-        "cardiovascular measurement": "75A8CD",
-        "cancer": "B475B5",
-        "Response to drug": "FCCDE5",
-        "Biological process": "BEBADA",
-        "Other measurement": "006699",
-        "Other trait": "8E44AD",
-        "Other disease": "FF3399",
-    };
+const chromosomeCytogeneticBandMap = {
+    "1": cytogeneticBandsChr_1,
+    "2": cytogeneticBandsChr_2,
+    "3": cytogeneticBandsChr_3,
+    "4": cytogeneticBandsChr_4,
+    "5": cytogeneticBandsChr_5,
+    "6": cytogeneticBandsChr_6,
+    "7": cytogeneticBandsChr_7,
+    "8": cytogeneticBandsChr_8,
+    "9": cytogeneticBandsChr_9,
+    "10": cytogeneticBandsChr_10,
+    "11": cytogeneticBandsChr_11,
+    "12": cytogeneticBandsChr_12,
+    "13": cytogeneticBandsChr_13,
+    "14": cytogeneticBandsChr_14,
+    "15": cytogeneticBandsChr_15,
+    "16": cytogeneticBandsChr_16,
+    "17": cytogeneticBandsChr_17,
+    "18": cytogeneticBandsChr_18,
+    "19": cytogeneticBandsChr_19,
+    "20": cytogeneticBandsChr_20,
+    "21": cytogeneticBandsChr_21,
+    "22": cytogeneticBandsChr_22,
+    "X": cytogeneticBandsChr_X,
+    "Y": cytogeneticBandsChr_Y,
+}
+
+
+function renderIcons(traitData, colorData, regionData, cx, regionLineYStart, regionLineYEnd, transformXPos, transformYPos) {
 
     let regionLine = "";
     let circleConstruct = "";
@@ -161,34 +204,6 @@ function buildRegionData(data, transformXPos, chromosomeNum) {
     regionLineYEnd = (regionCount * avRegionLineYEnd) / -2 //-450; //(regionCount * regionLineYEndInc) / -2
     regionLineYEndInc = 30; //(traitCount / 25) * 8;
 
-
-    const chromosomeCytogeneticBandMap = {
-        "1": cytogeneticBandsChr_1,
-        "2": cytogeneticBandsChr_2,
-        "3": cytogeneticBandsChr_3,
-        "4": cytogeneticBandsChr_4,
-        "5": cytogeneticBandsChr_5,
-        "6": cytogeneticBandsChr_6,
-        "7": cytogeneticBandsChr_7,
-        "8": cytogeneticBandsChr_8,
-        "9": cytogeneticBandsChr_9,
-        "10": cytogeneticBandsChr_10,
-        "11": cytogeneticBandsChr_11,
-        "12": cytogeneticBandsChr_12,
-        "13": cytogeneticBandsChr_13,
-        "14": cytogeneticBandsChr_14,
-        "15": cytogeneticBandsChr_15,
-        "16": cytogeneticBandsChr_16,
-        "17": cytogeneticBandsChr_17,
-        "18": cytogeneticBandsChr_18,
-        "19": cytogeneticBandsChr_19,
-        "20": cytogeneticBandsChr_20,
-        "21": cytogeneticBandsChr_21,
-        //"22": cytogeneticBandsChr_22,
-        "X": cytogeneticBandsChr_X,
-        "Y": cytogeneticBandsChr_Y,
-    }
-
     let cytoBands = chromosomeCytogeneticBandMap[chromosomeNum]
 
     Object.keys(cytoBands).forEach((region, i) => {
@@ -248,7 +263,7 @@ let dX = 0; let dY=3500;
 if (!check) {
     dY=900;
 }
-for (let counter = 13; counter <= 21; counter++) {
+for (let counter = 13; counter <= 22; counter++) {
     document.getElementById(`chromosome_${counter}_plot`).setAttribute('transform', `translate(${dX}, ${dY})`);
     dX += 300;
 }
@@ -256,10 +271,10 @@ document.getElementById(`chromosome_X_plot`).setAttribute('transform', `translat
 dX += 300
 document.getElementById(`chromosome_Y_plot`).setAttribute('transform', `translate(${dX}, ${dY})`);
 
-
-
 getParentTraitStatistics().then((data) => {
+    console.log(data)
     Object.keys(data).forEach((stat) => {
+        console.log(stat)
        document.getElementById(stat).innerHTML = data[stat];
     })
 });
@@ -391,11 +406,11 @@ getGraphData(chromosomeNum = "21").then((data) => {
     chromosome_21_plot.innerHTML = ` ${chromosome}  ${regions}`;
 });
 
-// getGraphData(chromosomeNum = "22").then((data) => {
-//     chromosome = chromosomeGen22(transformXPos = 0, chromosomeNum = "22");
-//     regions = buildRegionData(data, transformXPos = 0, chromosomeNum = "22");
-//     chromosome_22_plot.innerHTML = ` ${chromosome}  ${regions}`;
-// });
+getGraphData(chromosomeNum = "22").then((data) => {
+    chromosome = chromosomeGen22(transformXPos = 0, chromosomeNum = "22");
+    regions = buildRegionData(data, transformXPos = 0, chromosomeNum = "22");
+    chromosome_22_plot.innerHTML = ` ${chromosome}  ${regions}`;
+});
 
 getGraphData(chromosomeNum = "X").then((data) => {
     chromosome = chromosomeGenX(transformXPos = 0, chromosomeNum = "X");
