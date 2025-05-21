@@ -84,8 +84,16 @@
 }
 
 .zoombar {
-    position: absolute;
+    /*position: absolute;*/
+    float: right;
     background-color: transparent;
+}
+
+.zoom-inline {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .zoom-compontent {
