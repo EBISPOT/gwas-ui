@@ -1,17 +1,17 @@
 var host = window.location.host;
-let server = "http://localhost:8685";
+let server = "http://localhost:8989";
 
 if (host.includes("gwas-snoopy") || host.includes("localhost")) {
-    server = "http://gwas-snoopy.ebi.ac.uk:8685";
+    server = "http://gwas-snoopy.ebi.ac.uk:8989";
 }
 else if (host.includes("gwas-garfield")) {
-    server = "http://gwas-garfield.ebi.ac.uk:8989";
+    server = "http://gwas-garfield.ebi.ac.uk:8989/gwas/diagram-api";
 }
 else if (host.includes("ves-hx-7f") || host.includes("wwwdev.ebi.ac.uk")) {
-    server = "http://ves-hx-7f.ebi.ac.uk:8989";
+    server = "https://wwwdev.ebi.ac.uk/gwas/diagram-api";
 }
 else if (host.includes("www.ebi.ac.uk")) {
-    server = "http://ves-pg-7f.ebi.ac.uk:8989";
+    server = "https://www.ebi.ac.uk/gwas/diagram-api";
 }
 
 
