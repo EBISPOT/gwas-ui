@@ -55,7 +55,7 @@ For a full list of publications by the GWAS Catalog team, and other useful backg
 
 The NHGRI-EBI GWAS Catalog and all its contents are available under the general http://www.ebi.ac.uk/about/terms-of-use[Terms of Use for EMBL-EBI Services]. Summary statistics are made available under https://creativecommons.org/publicdomain/zero/1.0/[CC0] unless https://www.ebi.ac.uk/gwas/docs/faq#faq-H7[otherwise stated]. We advise consumers of data hosted by the GWAS Catalog to note the license terms of individual datasets, if applicable to their specific use case. 
 
-GWAS Catalog logos and data visualisations such as the GWAS Diagram and LD plots are available for re-use under https://creativecommons.org/licenses/by/4.0/[CC-BY-4.0]. 
+GWAS Catalog logos, and data visualisations such as the GWAS Diagram and LD plots, are available for re-use under https://creativecommons.org/licenses/by/4.0/[CC-BY-4.0]. 
 
 All code for the GWAS Catalog infrastructure can be found in https://github.com/EBISPOT/goci[our Github repository]. The code is freely available under http://www.apache.org/licenses/LICENSE-2.0[the Apache version 2.0 license]
 
