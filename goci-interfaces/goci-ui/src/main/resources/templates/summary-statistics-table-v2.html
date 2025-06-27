@@ -98,18 +98,18 @@
             <div class="row">
                 <h2 style="color: black">Studies with available summary statistics</h2>
                 <p>
-                    Users can access all summary statistics from the Catalog <a href="ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/">FTP site</a>,
-                    which is updated nightly following submission. They can also be accessed in the tables below (separate tables for the published and
-                    unpublished summary statistics). Metadata associated with summary statistics can be downloaded from <a href="https://www.ebi.ac.uk/gwas/docs/file-downloads">Downloads</a>.
+                    Users can access all summary statistics from the Catalog FTP site, which is updated nightly following submission. They can also be accessed in the tables below (separate tables for data associated with a
+                    journal publication "Published studies with summary statistics" and data shared before or without journal publication "Pre-published studies with summary statistics"). Metadata associated with summary
+                    statistics is available in the ftp folder for each study and can also be downloaded in bulk from <a href="https://www.ebi.ac.uk/gwas/docs/file-downloads">Downloads</a>.
 
                 </p>
                 <p>
                     If you are an author and have summary statistics you would like to submit to the GWAS Catalog please visit our <a href="https://www.ebi.ac.uk/gwas/deposition">submission page</a>.
-                    These data are made available either through <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a> or <a href="https://www.ebi.ac.uk/about/terms-of-use" target="_blank">
-                    EMBL-EBI’s standard terms of use</a>, more details can be found <a th:href="@{/docs/faq#faq-H7}">here</a> . For licensing information of individual studies, please reveal "Usage License" column.
+                    The majority of data are made available either through <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a> or <a href="https://www.ebi.ac.uk/about/terms-of-use" target="_blank">
+                    EMBL-EBI’s standard terms of use</a> with a small number of exceptions, more details can be found <a th:href="@{/docs/faq#faq-H7}">here</a>. For licensing information of individual studies, please reveal "Usage License" column.
                 </p>
                 <p>
-                    For information on summary statistics and the summary statistics REST API please read the <a href="https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics">documentation</a>.
+                    For more information on summary statistics file format, content, and the summary statistics REST API please read the <a href="https://www.ebi.ac.uk/gwas/docs/methods/summary-statistics">documentation</a>.
                 </p>
             </div>
 
@@ -119,7 +119,7 @@
                 <div th:include="fragments/summary-stats-datatable-v2 :: summary_stats_datatable"></div>
             </div>
 
-            <h3>List of prepublished/unpublished studies with summary statistics</h3>
+            <h3>List of pre-published studies with summary statistics</h3>
             <div class="row">
                 <!-- Unpublished Summary Stats table -->
                 <div th:include="fragments/summary-stats-unpublished-datatable-v2 :: summary_stats_unpublished_datatable_v2">
