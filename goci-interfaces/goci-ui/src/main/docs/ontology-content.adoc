@@ -1,14 +1,20 @@
 = Ontology
 
+== Trait annotation in the GWAS Catalog
+
+Each GWAS included in the Catalog is annotated with a free text field ("Reported trait") summarising the trait under study. The reported trait takes the study design into account and is useful for understanding the specific details of the phenotype, especially in complex studies that include SNP-by-environment interactions, pleiotropy etc, or studies with a https://www.ebi.ac.uk/gwas/docs/faq#faq-A13[background trait] (a characteristic that is shared by all participants in a study, but is not directly tested in the association analysis)
+
+Each Reported trait is annotated with one or more ontology terms, reflecting the main trait(s), background trait and any interaction terms.     
+
 == Ontologies in the GWAS Catalog
 
-All curated trait descriptions (reported traits) are mapped to terms from the http://www.ebi.ac.uk/efo/[Experimental Factor Ontology] (EFO).
+All curated trait descriptions (Reported Traits) are mapped to terms from the http://www.ebi.ac.uk/efo/[Experimental Factor Ontology] (EFO).
 Traits in the GWAS Catalog are highly diverse and include diseases, e.g. Type II diabetes, disease markers, e.g. measurements of blood glucose concentration, and non-clinical phenotypes, e.g. hair color.
 EFO was chosen as the ontology to represent GWAS Catalog traits as it is highly adaptable and extensible, combining parts of several biological domain-specific ontologies and allowing modelling of tests, diseases, anatomy and anthropometry.
 Accurate mapping of reported traits to EFO terms facilitates searching, visualisation and integration of GWAS Catalog data with other resources.
 
 EFO is freely available in OWL format from http://www.ebi.ac.uk/efo[the EFO website] and can be browsed in http://www.ebi.ac.uk/ols/ontologies/efo[the Ontology Lookup Service].
-Mappings of all GWAS Catalog reported traits to EFO terms are now available through link:../docs/file-downloads[our downloads page], along with the GWAS Catalog ontology schema and data knowledgebase.
+Mappings of all GWAS Catalog reported traits to EFO terms are available through link:../docs/file-downloads[our downloads page], along with the GWAS Catalog ontology schema and data knowledgebase.
 
 Interoperability with other ontologies can be achieved using the https://www.ebi.ac.uk/spot/oxo[Ontology Cross Reference Service]. Use the service to upload ontology IDs from the GWAS Catalog's https://www.ebi.ac.uk/gwas/docs/file-downloads[download files].
 
