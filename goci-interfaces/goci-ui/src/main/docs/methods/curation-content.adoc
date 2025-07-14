@@ -6,23 +6,21 @@ Association data indexed in the website is extracted from the scientific literat
 
 Extracted information includes publication information, study cohort information such as cohort size, country of recruitment and subject ancestry, and SNP-disease association information including SNP identifier (i.e. RSID), p-value, gene and risk allele.
 Each study is also assigned a trait that best represents the phenotype under investigation.
-When multiple traits are analysed in the same study either multiple entries are created, or individual SNPs are annotated with their specific traits.
-Traits are used both to query and visualise the data in the Catalog's web form and diagram-based query interfaces.
+When multiple traits are analysed in the same publication multiple entries are created, or (for older publications) individual SNPs are annotated with their specific traits. Each trait is annotated with one or more https://www.ebi.ac.uk/gwas/docs/ontology[ontology terms] which are used to summarise, query and visualise the data in the Catalog's interfaces.
 
 Data extraction and curation for the GWAS Catalog is an expert activity; each step is performed by scientists supported by a web-based tracking and data entry system which allows multiple curators to search, annotate, verify and publish the Catalog data.
 Papers that qualify for inclusion in the Catalog are identified through a weekly literature search.
-They then undergo two levels of curation.
-First all data, including association information for SNPs, traits and general information about the study, are extracted by one curator.
-A second curator then performs an additional round of curation to double-check the accuracy and consistency of all the information. Finally, an automated pipeline performs validation of the extracted data, see the <<mapping, Quality control and SNP mapping section>> below for more details. This information is then used for queries and in the production of the diagram.
+
+First all data, including association information for SNPs, traits, and study and sample metadata, are extracted by a curator. In the case of author submissions, the curator performs QC of study and sample metadata with respect to the published manuscript, trait annotation, and extraction of any lead associations reported in the paper. Once data extraction is complete, an automated pipeline performs validation and mapping of the extracted data (see the <<mapping, Quality control and SNP mapping section>> below for more details), before release of the data for inclusion in the Catalog. 
 
 The current extraction methods are described below. Pilots to investigate extending Catalog scope and alternative methods of data acquisition are described on our https://www.ebi.ac.uk/gwas/docs/pilots[pilot projects page]. For a full list of publications by the GWAS Catalog team, and other useful background reading, please visit our https://www.ebi.ac.uk/gwas/docs/related-resources[Resources page]
 
 
 === Data extraction
 
-GWAS Catalog data are manually extracted from the literature (either the main text or supporting information) by expert scientists.
+GWAS Catalog data are manually extracted from the literature (either the main text or supporting information) by expert scientists, or submitted directly by authors and QC'd against the published manuscript.
 
-The GWAS Catalog contains at least one entry for each publication.
+The GWAS Catalog contains at least one entry (study) for each publication.
 However when a publication includes multiple GWAS analyses, for example on different traits or distinct sample cohorts, these are split into multiple entries (studies).
 In cases where publications containing multiple GWAS analyses are not split (typically for older publications), individual SNP associations are annotated with the specific trait, sample population or analysis method as "p-value text".
 
@@ -56,11 +54,9 @@ Appropriate unit and increase/decrease are included for beta coefficients.
 
 ==== Ancestry data extraction
 
-Sample ancestry information is available in two distinct forms; a free text sample description and structured ancestry and recruitment information. The free text descriptions of the initial and replication stages of the GWAS provide summary ancestry descriptions of the samples analysed in each stage, based on the language used in the paper. The structured information is designed to represent data using controlled terms, enabling searching, visualisation and integration. It includes ancestry, chosen from a list of ancestral categories, and country of recruitment.
+Sample ancestry information is available in two distinct forms; a free text sample description and structured ancestry and recruitment information. The free text descriptions of the initial and replication stages of the GWAS provide summary descriptions of the samples analysed in each stage, based on the language used in the paper and including population descriptors used by the authors. The structured information, including an "ancestry label", is designed to represent data using controlled terms, enabling searching, visualisation and integration. 
 
-The ancestry is derived from the ancestry descriptors used in the publication. Country of recruitment is extracted if an author states the country of recruitment of the samples. It is not assumed from an ancestry identifier or from a cohort name. Where a country of recruitment but no ancestry is provided, published population demographic information, such as the https://www.cia.gov/library/publications/the-world-factbook/[CIA World Factbook] is consulted.
-
-Full details of the framework used to represent ancestry data in the GWAS Catalog can be found in our publication by link:http://rdcu.be/G6Fv[Morales et al.] and on our link:ancestry[Ancestry Documentation] page.
+Full details of the methods and rationale used to represent population data in the GWAS Catalog can be found in our publication by link:http://rdcu.be/G6Fv[Morales et al.] and on our https://www.ebi.ac.uk/gwas/docs/population-descriptors[Population Descriptors] page.
 
 === [[mapping]]Quality control and SNP mapping
 
