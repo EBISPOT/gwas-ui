@@ -1,4 +1,4 @@
-= Ontology
+= Trait mapping and ontology in the GWAS Catalog
 
 == Trait annotation in the GWAS Catalog
 
