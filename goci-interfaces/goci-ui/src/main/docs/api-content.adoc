@@ -1,17 +1,19 @@
-= API
+== V2 documentation
 
-=== API documentation
+=== https://wwwdev.ebi.ac.uk/gwas/beta/rest/api/docs/index[API introduction]
+A general overview of the features available in GWAS Catalog RESTful API, together with usage examples.
 
-Documentation for developers on how to use the GWAS Catalog REST API can be found here: https://www.ebi.ac.uk/gwas/rest/docs/api
+=== https://wwwdev.ebi.ac.uk/gwas/beta/rest/api/docs/reference[API reference]
+A detailed reference manual containing endpoints, schemas, parameters, syntax, definitions, and response codes, including a visual, interactive interface for exploring and testing the endpoints.
 
-=== API Endpoints
 
-To access study, variant, association and trait data, see the list of endpoints here: https://www.ebi.ac.uk/gwas/rest/api
+== V1 documentation (deprecated)
 
-=== API usage examples
+=== https://www.ebi.ac.uk/gwas/rest/docs/api[API documentation]
+Documentation for developers on how to use the V1 GWAS Catalog REST API.
 
-Sample scripts for users and developers for common use cases for the GWAS Catalog REST API can be found here: https://www.ebi.ac.uk/gwas/rest/docs/sample-scripts
+=== https://www.ebi.ac.uk/gwas/rest/api[API Endpoints]
+The list of V1 endpoints used to access study, variant, association and trait data.
 
-=== Summary statistics API
-
-The REST API for the summary statistics database is now available at https://www.ebi.ac.uk/gwas/summary-statistics/docs/
+=== https://www.ebi.ac.uk/gwas/rest/docs/sample-scripts[API usage examples]
+Sample scripts for users and developers for common use cases for the V1 GWAS Catalog REST API.
