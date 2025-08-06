@@ -1,3 +1,9 @@
+= GWAS Catalog RESTful API
+
+The GWAS RESTful API provides programmatic access to the GWAS Catalog, enables integration of the GWAS Catalog data into custom applications and services, allows bioinformatics developers to leverage the curated GWAS datasets, and create more extended solutions for the scientific community.
+
+GWAS RESTful API V2 has been released with various enhancements & improvements over V1. V1 will be retired no later than May 2026.
+
 == V2 documentation
 
 === https://wwwdev.ebi.ac.uk/gwas/beta/rest/api/docs/index[API introduction]
@@ -18,5 +24,5 @@ The list of V1 endpoints used to access study, variant, association and trait da
 === https://www.ebi.ac.uk/gwas/rest/docs/sample-scripts[API usage examples]
 Sample scripts for users and developers for common use cases for the V1 GWAS Catalog REST API.
 
-== https://www.ebi.ac.uk/gwas/summary-statistics/docs/[Summary statistics API (deprecated)]
-REST API access to a database containing a small subset of the GWAS Catalog’s full-genomewide summary statistics collection is available. The database was last updated in 2021. A new version is under development.
+== Summary statistics API (deprecated)
+REST API access to a database containing a small subset of the GWAS Catalog’s full-genomewide summary statistics collection is https://www.ebi.ac.uk/gwas/summary-statistics/docs/[available with documentation]. The database was last updated in 2021. A new version is under development.
