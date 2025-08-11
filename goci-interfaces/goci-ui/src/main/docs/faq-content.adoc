@@ -176,31 +176,63 @@
 '''
 == A. General
 
-==== [[faq-A1]]1. How can I access GWAS Catalog data?
+==== [[faqA1AccessData]] How can I access GWAS Catalog data?
 
-GWAS Catalog data from published studies is available through our https://www.ebi.ac.uk/gwas/search?query=[search interface]. Separate pages are available for each *publication*, *study*, *trait*, *variant* and *gene* in the Catalog so that each of these can be explored individually. To get started, search for any text you wish in the search bar, then select a specific page for more information. See <<B,Searching in the GWAS Catalog below>> for further tips on how to find specific types of information, or see the https://youtu.be/4FplAQzRfh8[introductory video]. GWAS Catalog data can also be downloaded in spreadsheet form. To download full association and study data, see our link:file-downloads[file downloads] page. You can also download specific association data sets from each “Publication”, “Study”, “Trait”, “Variant” and "Gene" page using the “Download Associations” button.
+The GWAS Catalog contains data from published and unpublished genome-wide association studies (GWAS).  
+You can access GWAS Catalog data in the following ways:
 
-Full genomewide summary statistics files are available to download from our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] via links from the study in the https://www.ebi.ac.uk/gwas/search?query=[search interface] or our designated https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page]. A subset of summary statistics are also available from our summary statistics database via https://www.ebi.ac.uk/gwas/summary-statistics/docs/[API]. 
+* *Web search interface:* https://www.ebi.ac.uk/gwas/search?query=[Search interface] — search by publication, study, trait, variant, or gene.
+* *Specific entity pages:* Each publication, study, trait, variant, or gene has its own page. Use the search bar to find an entity and then explore its page.
+* *Downloadable spreadsheets:* Full association and study data are on the https://www.ebi.ac.uk/gwas/docs/file-downloads[file downloads page]. You can also download associations directly from any entity page via the “Download Associations” button.
+* *Full genome-wide summary statistics:* Download from our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] or from the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page].
+* *Programmatic access:* The REST API documentation is here: https://www.ebi.ac.uk/gwas/rest/docs/api.
+* *Visualisation:* The GWAS Catalog diagram provides a graphical view of the data (see Section D).
 
-The GWAS Catalog <<D,diagram>> presents a graphical view of the GWAS Catalog data.
+_Related search terms:_ data download, association table, study table, summary statistics, API, FTP.
 
-We also provide REST API access to the GWAS Catalog data. See <<G,Programmatic access below>> for more information.
+----
 
-==== [[faq-A2]]2. Who maintains the GWAS Catalog?
+==== [[faqA2Maintainers]] Who maintains and funds the NHGRI-EBI GWAS Catalog?
 
-From September 2010 to the present, delivery and development of the Catalog has been a collaborative project between EMBL-EBI and NHGRI. The project was founded by NHGRI, and in March 2015 the Catalog infrastructure moved to EMBL-EBI to enable delivery of improved software including ontology driven search, and new curatorial infrastructure supporting automated QC, and continues to recieve support from NHGRI. Content available from the http://www.genome.gov/gwastudies/[NHGRI site] was last updated 20 February 2015 and is now frozen. Updated content is available from http://www.ebi.ac.uk/gwas/[here]. The latest updated download file is now available from link:file-downloads[here].
+From September 2010 onward, the GWAS Catalog is jointly developed and delivered by *EMBL-EBI* and *NHGRI*.
 
-==== [[faq-A3]]3. Where does the GWAS Catalog's data come from? 
+* Founded by NHGRI.
+* Infrastructure moved to EMBL-EBI in March 2015 to support ontology-driven search, automated quality control, and improved curation tools.
+* The NHGRI site (content frozen as of 20 February 2015): http://www.genome.gov/gwastudies/
+* Updated content is at: https://www.ebi.ac.uk/gwas/
+* Latest downloadable data: https://www.ebi.ac.uk/gwas/docs/file-downloads[file downloads page]
 
-A weekly literature search against https://pubmed.ncbi.nlm.nih.gov/[PubMed] identifies journal publications that meet the GWAS Catalog https://www.ebi.ac.uk/gwas/docs/methods/criteria[eligibility criteria]. Literature search and triage is performed using https://doi.org/10.1093/nar/gkab326[LitSuggest], developed at NCBI. Studies, samples, traits and signficiant associations, are extracted from PubMed-indexed journal publications. For more details see our https://www.ebi.ac.uk/gwas/docs/methods[Methods page]. Additional data, such as ontology annotation and genomic mapping, is supplied from external sources. 
+_Related search terms:_ maintainers, funding, EMBL-EBI, NHGRI, project history, infrastructure.
 
-From 2020, the GWAS Catalog started accepting submissions for full genomewide summary statistics and associated metadata for GWAS not published in a journal (either in pre-print, under submission to to journal, or standalone). For more information, see <<faq-A21,Does the GWAS Catalog include data that isn't associated with a journal publication?>>.
+----
 
-==== [[faq-A4]]4. How can I learn more about using the GWAS Catalog and stay informed about new features and developments?
+==== [[faqA3DataSource]] Where does the GWAS Catalog's data come from?
 
-Have a look at our link:related-resources[Related Resources] page for training materials, or see the <<B,FAQ sections below>> for some hints and tips. You can also read a description of our link:methods[curation methodology], and find a link:related-resources[list of publications by the GWAS Catalog].
+The GWAS Catalog sources data from:
 
-You can subscribe to our announcement list by sending an e-mail to gwas-announce-join@ebi.ac.uk with subject heading "subscribe". Traffic on this list will be limited to important announcements only so you don't need to worry about getting bombarded with loads of emails. For queries and user discussion, we have separate mailing lists, gwas-info@ebi.ac.uk to contact the Catalog team and gwas-users@ebi.ac.uk for user discussion (subscribe by emailing gwas-users-join@ebi.ac.uk with subject heading "subscribe"). You can also follow us on Twitter https://twitter.com/GWASCatalog[@GWASCatalog].
+* *Weekly PubMed literature search* using https://doi.org/10.1093/nar/gkab326[LitSuggest] to identify publications that meet our https://www.ebi.ac.uk/gwas/docs/methods/criteria[eligibility criteria].
+* *Manual curation* — extraction of studies, samples, traits, and significant associations from PubMed-indexed publications.
+* *External data integration* — ontology annotation, genomic mapping, and other metadata from external sources.
+* *Unpublished study submissions* (since 2020) — pre-prints, in-press, or standalone GWAS with full summary statistics and metadata (see <<faqA22, FAQ A22>>).
+
+_Related search terms:_ literature search, PubMed, curation, LitSuggest, unpublished GWAS, submission.
+
+----
+
+==== [[faqA4LearningResources]] How can I learn more about using the GWAS Catalog and stay informed?
+
+Training and updates are available through:
+
+* https://www.ebi.ac.uk/gwas/docs/related-resources[Related resources page] — training materials, publications list.
+* https://www.ebi.ac.uk/gwas/docs/methods[Curation methods] — detailed methodology.
+* *Mailing lists:*
+** Announcements: email gwas-announce-join@ebi.ac.uk (subject: "subscribe")
+** Contact the team: gwas-info@ebi.ac.uk
+** User discussion: gwas-users@ebi.ac.uk (subscribe via email)
+* Twitter: https://twitter.com/GWASCatalog[@GWASCatalog]
+
+_Related search terms:_ training, mailing list, Twitter, help, resources.
+
 
 ==== [[faq-A5]]5. How should I cite the GWAS Catalog?
 
