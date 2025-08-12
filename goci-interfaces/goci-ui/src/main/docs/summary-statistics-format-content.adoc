@@ -39,8 +39,10 @@ Both tools can be run locally via the command line or through the https://ebispo
 * All mandatory fields must be present, in the defined order (0-7) (Table 1).
 * Table 1 shows some non-mandatory (encouraged) fields that may be present (*). You are encouraged to include these additional fields in the standard format, where possible.
 * You may include any number of additional columns beyond the set of mandatory fields. 
-* We recommend that analyses are performed with effect allele and other allele fixed to ALT and REF where possible, which provides optimal identification of indels. However, other allele orders can be submitted. The optional column ref_allele should be used to indicate which allele is REF (see Table 1). 
 * If the output software or analysis method precludes submission of beta/OR/HR and/or standard error, please get in touch to discuss alternative submission arrangements
+* We recommend that analyses are performed with effect allele and other allele fixed to ALT and REF where possible, which provides optimal identification of indels. However, other allele orders can be submitted. The optional column ref_allele should be used to indicate which allele is REF (see Table 1).
+* We request you submit files that correspond to the final QC’d version of your dataset, including only data which is usable in downstream analyses (e.g. applying filters for MAF, imputation quality, variant present in n cohorts, as you would do in your own research). We do not apply any of these filters post-submission.
+
 
 
 *Table 1. Required content and format*.
