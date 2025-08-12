@@ -1,8 +1,8 @@
 var host = window.location.host;
-let server = "http://localhost:8989";
+let server = "http://localhost:8989/gwas/diagram-api";
 
-if (host.includes("gwas-snoopy") || host.includes("localhost")) {
-    server = "http://gwas-snoopy.ebi.ac.uk:8989";
+if (host.includes("gwas-snoopy")) {
+    server = "http://gwas-snoopy.ebi.ac.uk:8989/gwas/diagram-api";
 }
 else if (host.includes("gwas-garfield")) {
     server = "http://gwas-garfield.ebi.ac.uk:8989/gwas/diagram-api";
@@ -10,10 +10,14 @@ else if (host.includes("gwas-garfield")) {
 else if (host.includes("ves-hx-7f") || host.includes("wwwdev.ebi.ac.uk")) {
     server = "https://wwwdev.ebi.ac.uk/gwas/diagram-api";
 }
-else if (host.includes("www.ebi.ac.uk")) {
+else if (host.includes("ves-") || host.includes("www.ebi.ac.uk")) {
     server = "https://www.ebi.ac.uk/gwas/diagram-api";
 }
 
+let prodServer = "https://www.ebi.ac.uk/gwas";
+let ensemblVariationServer = "http://www.ensembl.org/Homo_sapiens/Variation/Summary";
+let efoServer = "http://www.ebi.ac.uk/efo";
+let publicationServer = "https://europepmc.org/article/MED";
 
 let searchTerm = filterData.innerHTML;
 let check = [null, undefined, ''].includes(searchTerm);
@@ -27,11 +31,22 @@ function sendNow(region, trait) {
                 let rowData = "";
                 data.forEach(function (association) {
                     rowData += `<tr>
-                                    <td>${association.snp}</td>
-                                    <td>${association.pvalueMantissa} x ${association.pvalueMantissa} <sup>${association.pvalueExponent}</sup></td>
-                                    <td>${association.efoMapping}</td>
-                                    <td>${association.gwasTraits}</td>
-                                    <td>${association.study}</td>
+                                    <td>    
+                                        <a href='${prodServer}/search?query=${association.snp}' target="_blank"> ${association.snp}  </a>
+                                        <a href='${ensemblVariationServer}/?v=${association.snp}' target="_blank"> <img alt="external link" class="link-icon" src="/icons/external1.png"> </a>
+                                    </td>
+                                    <td>${association.pvalueMantissa} x 10 <sup>${association.pvalueExponent}</sup></td>
+                                    <td>
+                                        <a href='${prodServer}/search?query=${association.efoMapping}' target="_blank"> ${association.efoMapping} </a>
+                                        <a href='${efoServer}/${association.efoId}' target="_blank"> <img alt="external link" class="link-icon" src="/icons/external1.png"> </a>
+                                    </td>
+                                    <td>
+                                         <a href='${prodServer}/search?query=${association.gwasTraits}' target="_blank"> ${association.gwasTraits} </a>
+                                      </td> 
+                                    <td>
+                                     <a href='${prodServer}/search?query=${association.pubmedId}' target="_blank"> ${association.author} et al </a>
+                                        <a href='${publicationServer}/${association.pubmedId}' target="_blank"> <img alt="external link" class="link-icon" src="/icons/external1.png"> </a>
+                                     </td>
                                 </tr>`;
                 })
                 associationData.innerHTML = rowData;
@@ -47,24 +62,24 @@ let maxOnARow = 30; // You can also determine Rule of margin through maxOnARow &
 
 
 const colorHolder = {
-    "Digestive system disease": "AE6543",
-    "Cardiovascular disease": "AA2C2C",
-    "Metabolic disease": "FDAB57",
-    "Immune system disease": "FFEA64",
-    "Nervous system disease": "FF2D8E",
-    "Liver enzyme measurement": "5B8E00",
-    "Lipid or lipoprotein measurement": "AAD95D",
-    "Inflammatory marker measurement": "C5E7BD",
-    "Hematological measurement": "82CDC0",
-    "Body weights and measures": "5BC5FF",
+    "digestive system disease": "AE6543",
+    "cardiovascular disease": "AA2C2C",
+    "metabolic disease": "FDAB57",
+    "immune system disease": "FFEA64",
+    "nervous system disease": "FF2D8E",
+    "liver enzyme measurement": "5B8E00",
+    "lipid or lipoprotein measurement": "AAD95D",
+    "inflammatory marker measurement": "C5E7BD",
+    "hematological measurement": "82CDC0",
+    "body weights and measures": "5BC5FF",
     "cardiovascular measurement": "75A8CD",
     "cancer": "B475B5",
-    "Response to drug": "FCCDE5",
-    "Biological process": "BEBADA",
+    "response to drug": "FCCDE5",
+    "biological process": "BEBADA",
     "Other measurement": "006699",
     "Other trait": "8E44AD",
     "Other disease": "FF3399",
-    "Age-related macular degeneration": "999",
+    "age-related macular degeneration": "999",
 };
 
 const chromosomeCytogeneticBandMap = {
