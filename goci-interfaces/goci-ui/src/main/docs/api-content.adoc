@@ -6,10 +6,10 @@ GWAS RESTful API V2 has been released with various enhancements & improvements o
 
 == V2 documentation
 
-=== https://wwwdev.ebi.ac.uk/gwas/beta/rest/api/docs/index[API introduction]
+=== https://www.ebi.ac.uk/gwas/rest/api/v2/docs[API introduction]
 A general overview of the features available in GWAS Catalog RESTful API, together with usage examples.
 
-=== https://wwwdev.ebi.ac.uk/gwas/beta/rest/api/docs/reference[API reference]
+=== https://www.ebi.ac.uk/gwas/rest/api/v2/docs/reference[API reference]
 A detailed reference manual containing endpoints, schemas, parameters, syntax, definitions, and response codes, including a visual, interactive interface for exploring and testing the endpoints.
 
 
