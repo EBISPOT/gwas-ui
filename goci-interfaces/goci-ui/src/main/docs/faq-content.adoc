@@ -185,8 +185,8 @@ You can access GWAS Catalog data in the following ways:
 * *Specific entity pages:* Each publication, study, trait, variant, or gene has its own page. Use the search bar to find an entity and then explore its page.
 * *Downloadable spreadsheets:* Full association and study data are on the https://www.ebi.ac.uk/gwas/docs/file-downloads[file downloads page]. You can also download associations directly from any entity page via the “Download Associations” button.
 * *Full genome-wide summary statistics:* Download from our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] or from the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page].
-* *Programmatic access:* The REST API documentation is here: https://www.ebi.ac.uk/gwas/rest/docs/api.
-* *Visualisation:* The GWAS Catalog diagram provides a graphical view of the data (see Section D).
+* *Programmatic access:* The REST API documentation is here: https://www.ebi.ac.uk/gwas/docs/api.
+* *Visualisation:* The GWAS Catalog diagram provides a graphical view of the data: https://www.ebi.ac.uk/gwas/diagram.
 
 _Related search terms:_ data download, association table, study table, summary statistics, API, FTP.
 
@@ -213,7 +213,8 @@ The GWAS Catalog sources data from:
 * *Weekly PubMed literature search* using https://doi.org/10.1093/nar/gkab326[LitSuggest] to identify publications that meet our https://www.ebi.ac.uk/gwas/docs/methods/criteria[eligibility criteria].
 * *Manual curation* — extraction of studies, samples, traits, and significant associations from PubMed-indexed publications.
 * *External data integration* — ontology annotation, genomic mapping, and other metadata from external sources.
-* *Unpublished study submissions* (since 2020) — pre-prints, in-press, or standalone GWAS with full summary statistics and metadata (see <<faqA22, FAQ A22>>).
+* *Unpublished study submissions* (since 2020) — pre-prints, in-press, or standalone GWAS with full summary statistics and metadata.
+* *For more detail, see our https://www.ebi.ac.uk/gwas/docs/methods[Methods] section. 
 
 _Related search terms:_ literature search, PubMed, curation, LitSuggest, unpublished GWAS, submission.
 
@@ -226,25 +227,52 @@ Training and updates are available through:
 * https://www.ebi.ac.uk/gwas/docs/related-resources[Related resources page] — training materials, publications list.
 * https://www.ebi.ac.uk/gwas/docs/methods[Curation methods] — detailed methodology.
 * *Mailing lists:*
-** Announcements: email gwas-announce-join@ebi.ac.uk (subject: "subscribe")
-** Contact the team: gwas-info@ebi.ac.uk
-** User discussion: gwas-users@ebi.ac.uk (subscribe via email)
+** Announcements: email gwas-announce-join@ebi.ac.uk with subject: "subscribe"
+** User discussion: email gwas-users-join@ebi.ac.uk with subject: "subscribe"
+* Contact the team: gwas-info@ebi.ac.uk
 * Twitter: https://twitter.com/GWASCatalog[@GWASCatalog]
+* BlueSky: @gwascatalog.bsky.social‬
+* LinkedIn: GWAS Catalog
 
 _Related search terms:_ training, mailing list, Twitter, help, resources.
 
+==== [[faqA5Citation]] How should I cite the GWAS Catalog?
 
-==== [[faq-A5]]5. How should I cite the GWAS Catalog?
+When citing the GWAS Catalog in a publication, use the most recent official GWAS Catalog publication and include the date you accessed the data.  
 
-Please see the link:about[About] page for citation guidance.
+Example citation format:  
+Sollis E, Mosaku A, Abid A, Buniello A, Cerezo M, Gil L, Groza T, Güneş O, Hall P, Hayhurst J, Ibrahim A, Ji Y, John S, Lewis E, MacArthur JAL, McMahon A, Osumi-Sutherland D, Panoutsopoulou K, Pendlington Z, Ramachandran S, Stefancsik  R, Stewart J, Whetzel P, Wilson R, Hindorff L, Cunningham F, Lambert SA, Inouye M, Parkinson H, Harris LW.
+https://doi.org/10.1093/nar/gkac1010. 
+Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023, Pages D977–D985
 
-==== [[faq-A6]]6. What are the terms and conditions for accessing the GWAS Catalog data and code?
+If you are citing specific studies or summary statistics from the GWAS Catalog, include:  
+* The study accession ID (e.g., GCST000123).  
+* The GWAS Catalog name.  
+* The date downloaded.  
+* The original publication if available.  
 
-Summary statistics are available under https://creativecommons.org/publicdomain/zero/1.0/[CC0] terms unless otherwise indicated - see <<faq-H7, below>> for more details. Other GWAS Catalog data can be used under the standard Terms of Use for EBI services which can be found at http://www.ebi.ac.uk/about/terms-of-use. Our code is available under the http://www.apache.org/licenses/LICENSE-2.0[Apache version 2.0 license].
+Full citation guidance is also available on the https://www.ebi.ac.uk/gwas/docs/about[About page].
 
-==== [[faq-A7]]7. How often are the GWAS Catalog updated?
+// Related search terms: cite, reference, publication, GWAS Catalog paper, Sollis, Nucleic Acids Research, GCST accession
 
-New data is added to the GWAS Catalog every two weeks. Data releases include all downloadable spreadsheets.  You can find the date of the most recent data release at the bottom of the Catalog home page.  Summary statistics files are made available as soon as possible, even before the study is included in our data release.  Therefore, if a manuscript states that summary statistics are available from the Catalog and you cannot find them in the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[list of studies with summary statistics files] or on our ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] please contact us at gwas-info@ebi.ac.uk and we can give you direct access to the files.
+==== [[faqA6TermsAndConditions]] What are the terms and conditions for accessing the GWAS Catalog data and code?
+
+*Summary statistics:* GWAS Catalog summary statistics are released under the https://creativecommons.org/publicdomain/zero/1.0/[Creative Commons CC0 1.0 Public Domain Dedication], unless otherwise specified on the individual study page and summary statistics download page. 
+
+*Other GWAS Catalog data:* Other data in the GWAS Catalog can be used under the https://www.ebi.ac.uk/about/terms-of-use[EBI Services Terms of Use].
+
+*Code:* Our code is available under the https://www.apache.org/licenses/LICENSE-2.0[Apache License 2.0].
+
+// Related search terms: terms of use, CC0, license, licensing, Apache 2.0, public domain, data sharing, usage restrictions
+
+==== [[faqA7UpdateFrequency]] How often is the GWAS Catalog updated?
+
+*Data release schedule:* The GWAS Catalog adds new curated data approximately every two weeks. Each data release includes updates to all downloadable spreadsheets available on the https://www.ebi.ac.uk/gwas/docs/file-downloads[file downloads page]. The date of the most recent release is shown at the bottom of the GWAS Catalog home page.
+
+*Summary statistics availability:* Summary statistics files are made available as soon as possible, even before the related study appears in a scheduled data release.  
+If a manuscript states that summary statistics are available from the GWAS Catalog, but you cannot find them in the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[list of studies with summary statistics files] or on the ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], contact gwas-info@ebi.ac.uk to request direct access.
+
+// Related search terms: update schedule, release frequency, data refresh, biweekly updates, summary statistics availability, missing files
 
 ==== [[faq-A8]]8. A new GWAS paper has just been published. Why is it not in the GWAS Catalog?
 
