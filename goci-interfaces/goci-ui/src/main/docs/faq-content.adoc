@@ -214,7 +214,7 @@ The GWAS Catalog sources data from:
 * *Manual curation* — extraction of studies, samples, traits, and significant associations from PubMed-indexed publications.
 * *External data integration* — ontology annotation, genomic mapping, and other metadata from external sources.
 * *Unpublished study submissions* (since 2020) — pre-prints, in-press, or standalone GWAS with full summary statistics and metadata.
-* *For more detail, see our https://www.ebi.ac.uk/gwas/docs/methods[Methods] section. 
+* *For more detail:* see our https://www.ebi.ac.uk/gwas/docs/methods[Methods] section. 
 
 _Related search terms:_ literature search, PubMed, curation, LitSuggest, unpublished GWAS, submission.
 
