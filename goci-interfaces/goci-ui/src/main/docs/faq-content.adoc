@@ -190,9 +190,7 @@ You can access GWAS Catalog data in the following ways:
 
 _Related search terms:_ data download, association table, study table, summary statistics, API, FTP.
 
-////
-spacer
-////
+''' 
 
 ==== [[faqA2Maintainers]] Who maintains and funds the NHGRI-EBI GWAS Catalog?
 
@@ -206,10 +204,7 @@ From September 2010 onward, the GWAS Catalog is jointly developed and delivered 
 
 _Related search terms:_ maintainers, funding, EMBL-EBI, NHGRI, project history, infrastructure.
 
-////
-spacer
-////
-
+''' 
 ==== [[faqA3DataSource]] Where does the GWAS Catalog's data come from?
 
 The GWAS Catalog sources data from:
@@ -222,9 +217,7 @@ The GWAS Catalog sources data from:
 
 _Related search terms:_ literature search, PubMed, curation, LitSuggest, unpublished GWAS, submission.
 
-////
-spacer
-////
+''' 
 
 ==== [[faqA4LearningResources]] How can I learn more about using the GWAS Catalog and stay informed?
 
@@ -242,7 +235,7 @@ Training and updates are available through:
 
 _Related search terms:_ training, mailing list, Twitter, help, resources.
 
-----
+''' 
 
 ==== [[faqA5Citation]] How should I cite the GWAS Catalog?
 
