@@ -166,7 +166,7 @@ Training and updates are available through:
 ** User discussion: email gwas-users-join@ebi.ac.uk with subject: "subscribe"
 * Contact the team: gwas-info@ebi.ac.uk
 * Twitter: https://twitter.com/GWASCatalog[@GWASCatalog]
-* Bluesky: @gwascatalog.bsky.social‬
+* Bluesky: @gwascatalog.bsky.social
 * LinkedIn: GWAS Catalog
 
 _Related search terms:_ training, mailing list, Twitter, help, resources.
@@ -548,6 +548,7 @@ Both methods return a list of genes and variants located within the specified re
 _Related search terms:_ region search, chromosomal coordinates, cytogenetic band, SNP location, genomic interval
 
 '''
+
 === B(iii). Searching by trait
 ==== [[faqB8SearchTrait]] How do I search by trait?
 
@@ -574,6 +575,7 @@ No. A publication will only appear in search results if the title, author list, 
 To see all studies linked to a trait, go to the trait’s dedicated page and view the **Studies** table. This table lists every study associated with that trait, even if the publication title does not mention it.  
 
 _Related search terms:_ trait search, publication results, study table, PubMed ID, trait page
+
 '''
 
 ==== [[faqB10OtherTraitsReturned]] Why do other traits appear in my search results?
@@ -587,6 +589,7 @@ Search results can include more than just exact matches to your term. They may a
 These connections come from the Experimental Factor Ontology (EFO), which defines synonyms, hierarchical relationships, and trait combinations. This allows the Catalog to support more comprehensive searches, even when studies describe traits in different ways.  
 
 _Related search terms:_ trait search, child trait, ontology, synonyms, compound trait, EFO
+
 '''
 
 ==== [[faqB11CompoundTraits]] How are multiple or compound traits represented in the Catalog?
@@ -605,6 +608,7 @@ Some studies are mapped to more than one trait when the phenotype definition is 
   Reported traits that include phrases like “UKB data field” or ICD codes may appear exactly as written in the publication. These cases may not follow standard naming conventions. Users should consult the source (e.g., https://biobank.ndph.ox.ac.uk/ukb/index.cgi) for details.  
 
 _Related search terms:_ compound trait, multiple traits, reported trait, ontology, UK Biobank, ICD codes
+
 '''
 
 ==== [[faqB12BackgroundTraits]] How are background traits represented in the Catalog?
@@ -625,6 +629,7 @@ Example: In a study of “Allergic rhinitis in asthma,” the main trait is alle
 * The REST API currently only returns main traits, but background trait access may be added in the future.  
 
 _Related search terms:_ background trait, main trait, study context, spreadsheet, API, asthma, allergic rhinitis
+
 '''
 
 ==== [[faqB13NoResults]] Why did my search return no results even though I expected a match?
@@ -641,6 +646,7 @@ Tips if your search fails:
 * Check the Experimental Factor Ontology (EFO) at http://www.ebi.ac.uk/efo to see if your trait is stored under a different name.  
 
 _Related search terms:_ no results, spelling error, synonyms, auto-complete, EFO
+
 '''
 
 === B(iv). Searching by study
@@ -651,6 +657,7 @@ Studies are not returned directly in search results. To find a study:
 * If you already know the accession number (e.g. GCST000123), you can enter it in the search bar on the homepage. This will return the publication that contains the study, with a link to the study page.  
 
 _Related search terms:_ study search, GCST, accession number, study table
+
 '''
 
 ==== [[faqB15SearchTargetedExome]] How can I search for targeted and exome array studies and associations?
@@ -667,6 +674,7 @@ Targeted and exome array studies are flagged with a small **target icon** in sea
 The downloadable studies file includes a column called **Genotyping technology (additional array information)**, which records whether a study used a targeted genotyping array, exome array, or similar technology.  
 
 _Related search terms:_ targeted array, exome array, genotyping technology, icon, study accession, download file
+
 '''
 
 == C. Exploring specific pages
@@ -682,6 +690,7 @@ Click the **Download Associations** button to download a `.tsv` file containing 
 The **Studies** and **Associations** tables show a simplified view of the data. Use the **Export** button in the top right corner to download a `.csv` version of the table. You can add or remove columns using **Column visibility** (only selected columns will appear in the exported file).  
 
 _Related search terms:_ download associations, studies table, TSV, CSV, export, file downloads
+
 '''
 
 ==== [[faqC2AssociationPlot]] How do I use the association plot on a Trait page?
@@ -696,6 +705,7 @@ The association plot shows all associations for the selected trait as circles on
 The association plot is powered by the https://statgen.github.io/locuszoom[LocusZoom plugin].  
 
 _Related search terms:_ association plot, trait page, visualisation, LocusZoom, genome-wide view, download plot
+
 '''
 
 ==== [[faqC3LDPlot]] How do I use the linkage disequilibrium (LD) plot on a Variant page?
@@ -714,6 +724,7 @@ LD data can also be retrieved via the Ensembl REST API: http://rest.ensembl.org/
 Specify the variant ID, window size, population, and threshold. For multiple variants, make separate API calls.  
 
 _Related search terms:_ LD plot, linkage disequilibrium, r2, D’, Ensembl, variant page, REST API, download LD data
+
 '''
 
 ==== [[faqC4Tables]] How do I view, search, and download data from the Associations and Studies tables?
@@ -727,6 +738,7 @@ The Associations and Studies tables appear on every Trait, Variant, Gene, Public
 * *Download:* Use the “Export data” button to download the current view as a CSV file. Your search, filters, and selected columns are preserved in the export.  
 
 _Related search terms:_ studies table, associations table, filter, column visibility, sort, export csv, download
+
 '''
 
 == [[D]]D. Diagram
@@ -746,6 +758,7 @@ All fields in the pop-up are clickable and link to the corresponding page in the
 Close the pop-up by clicking outside it, the “×” in the corner, or the “Close” button.  
 
 _Related search terms:_ diagram, SNP info, interactive pop-up, variant details, EFO term, study link
+
 '''
 
 ==== [[faqD2FilterDiagram]] How do I filter the diagram?
@@ -759,6 +772,7 @@ When filtered, only dots for the selected trait remain highlighted. Other traits
 Note: The filter uses EFO trait names and synonyms, which may differ slightly from author-reported trait names in publications.  
 
 _Related search terms:_ diagram filter, trait search, EFO suggestions, highlight associations
+
 '''
 
 ==== [[faqD3DiagramLegend]] How do I display and use the legend?
@@ -776,6 +790,7 @@ You can:
 Note: Some traits belong to multiple categories (for example, Crohn’s disease is classified as both a digestive system and immune system disease). Each association is assigned a single colour based on the most specific EFO ancestor term, so you may see different colours for traits with overlapping categories.  
 
 _Related search terms:_ diagram legend, colour categories, category filter, trait classification
+
 '''
 
 ==== [[faqD4DiagramLabels]] How do I display labels?
@@ -788,6 +803,7 @@ Labels appear when you hover your mouse over elements in the diagram:
 These labels help you identify which trait or region each point represents without leaving the diagram.  
 
 _Related search terms:_ diagram labels, hover, chromosome label, trait label, EFO term
+
 '''
 
 ==== [[faqD5DiagramZoomMove]] How do I zoom and move the diagram?
@@ -803,6 +819,7 @@ The GWAS Catalog diagram supports Google Maps–style navigation:
   * This is especially useful for centring on a specific region at higher zoom levels.  
 
 _Related search terms:_ diagram zoom, pan, scroll, drag, navigation, move view
+
 '''
 
 ==== [[faqD6DiagramCitation]] How should I cite the diagram?
@@ -811,6 +828,7 @@ Cite the diagram using the same format as for the GWAS Catalog itself.
 Full citation guidance is available on the https://www.ebi.ac.uk/gwas/docs/about[About page].
 
 _Related search terms:_ diagram citation, figure reference, GWAS Catalog diagram, how to cite
+
 '''
 
 ==== [[faqD7DiagramDownload]] How do I download the diagram?
@@ -819,6 +837,7 @@ High-resolution images of the GWAS Catalog diagram can be downloaded in several 
 Download options are listed on the https://www.ebi.ac.uk/gwas/docs/diagram-downloads[diagram downloads page].
 
 _Related search terms:_ diagram download, high-resolution image, PNG, SVG, PDF, save diagram
+
 '''
 
 ==== [[faqD8FilteredDiagramDownload]] Can I download a filtered version of the diagram?
@@ -836,6 +855,7 @@ Take a screenshot of the filtered diagram if a high-resolution image is not requ
 5. Open the file in a vector graphics program (e.g. Inkscape, Illustrator) and export to your preferred format.  
 
 _Related search terms:_ filtered diagram download, SVG export, high resolution, screenshot, Firefox inspector
+
 '''
 
 == [[E]]E. Genomic mappings
@@ -851,6 +871,7 @@ Mapping information is refreshed with every Ensembl release (roughly every 2–3
 For more detail, you can use the GWAS Catalog REST API to retrieve all Ensembl and RefSeq genes within 50 kb of a SNP.
 
 _Related search terms:_ SNP mapping, genomic annotation, Ensembl pipeline, gene mapping, intergenic SNP, upstream gene, downstream gene, genome build
+
 '''
 
 ==== [[faqE2GenomeBuild]] Which genome build is used in the GWAS Catalog?
@@ -862,6 +883,7 @@ Data in the GWAS Catalog is currently mapped to genome assembly <span id="genome
 This information is updated on release and displayed at the bottom of the GWAS Catalog's home page.
 
 _Related search terms:_ genome build, GRCh38, dbSNP build 156, reference genome, assembly version
+
 '''
 
 ==== [[faqE3AlternativeGenomeBuilds]] How can I access GWAS Catalog data on alternative genome builds?
@@ -873,6 +895,7 @@ The GWAS Catalog itself uses GRCh38, but you can remap SNPs to older builds such
 * **NCBI Remap Tool:** Use [NCBI’s Remap](https://www.ncbi.nlm.nih.gov/genome/tools/remap) to convert genomic coordinates between assemblies.  
 
 _Related search terms:_ alternative genome builds, GRCh37, liftover, Ensembl REST API, NCBI Remap, assembly mapping, rsID conversion
+
 '''
 
 ==== [[faqE4MissingSnpMapping]] Why do some SNPs have no mapping information?
@@ -884,6 +907,7 @@ Some SNPs in the GWAS Catalog do not have genomic coordinates or gene mappings.
 * **Retired SNPs:** Some SNPs no longer exist in the latest genome build used by the Catalog. These SNP IDs are still displayed for completeness, but mapping data is not available.  
 
 _Related search terms:_ missing SNP mapping, unplaced SNP, dbSNP retired, unmapped variant, genome build issues, SNP identifier error
+
 '''
 
 ==== [[faqE5SnpInteractionsHaplotypes]] How are SNP-SNP interactions and multi-SNP haplotypes shown?
@@ -904,6 +928,7 @@ Mapped gene and position info are included, but complex data such as upstream/do
 
 
 _Related search terms:_ SNP interaction display, haplotype format, rsID separator, multi-SNP annotation, x separator, semicolon separator, mapped gene alignment
+
 '''
 
 ==== [[faqE6MostSevereConsequence]] What does the "Most severe consequence" or "CONTEXT" field mean?
@@ -916,6 +941,7 @@ You can find definitions of each consequence term and their severity ranking in 
 https://www.ensembl.org/info/genome/variation/prediction/predicted_data.html#consequences  
 
 _Related search terms:_ most severe consequence, variant effect, VEP, Ensembl consequence ranking, transcript annotation, functional effect
+
 '''
 
 ==== [[faqE7RiskAlleleMismatch]] Why does the risk allele sometimes not match the reference genome?
@@ -930,6 +956,7 @@ For a detailed discussion of this issue, see:
 https://pubmed.ncbi.nlm.nih.gov/36465187/[Sheng et al. 2022]  
 
 _Related search terms:_ risk allele mismatch, strand flipping, genome build differences, allele orientation, reference genome discrepancy
+
 '''
 
 == F. Population descriptors
@@ -946,6 +973,7 @@ This two-level approach allows both detailed interpretation and high-level filte
 For more information, see the GWAS Catalog’s https://www.ebi.ac.uk/gwas/docs/ancestry[Ancestry Documentation].  
 
 _Related search terms:_ population descriptors, ancestry category, sample metadata, population standardisation, controlled vocabulary
+
 '''
 
 ==== [[faqF2SearchPopulationDescriptors]] How do I search for population descriptors in the GWAS Catalog?
@@ -955,6 +983,7 @@ You can search for specific population descriptors using the **Studies table** o
 For more details, see the GWAS Catalog’s https://www.ebi.ac.uk/gwas/docs/ancestry[Ancestry Documentation].  
 
 _Related search terms:_ population search, ancestry search, discovery sample, replication sample, column visibility, sample metadata
+
 '''
 
 ==== [[faqF3FindAssociationsByAncestry]] Can I find all associations with a particular ancestry label?
@@ -967,6 +996,7 @@ You can:
 * See the http://www.ebi.ac.uk/gwas/docs/fileheaders#_file_headers_for_ancestry_download[file header descriptions] for details about the fields.  
 
 _Related search terms:_ ancestry label search, population filter, ancestry download file, REST API ancestry, sample metadata
+
 '''
 
 ==== [[faqF4Pre2011AncestryFlag]] What does the "Pre-2011 ancestry not double-curated" flag mean?
@@ -976,6 +1006,7 @@ This flag indicates that the ancestry metadata for that study was curated before
 Because it was single-curated, the information may not fully follow the strict, standardised approach used for more recent studies. The data is still publicly available but should be interpreted with this limitation in mind.  
 
 _Related search terms:_ pre-2011 ancestry, double-curation, population descriptors, curation quality, metadata review
+
 '''
 
 ==== [[faqF5AncestrySeparateFile]] Why is detailed sample metadata in a separate "Ancestry data" spreadsheet?
@@ -985,6 +1016,7 @@ Each GWAS study usually has multiple sets of sample metadata — for example, on
 Because this information is multi-dimensional, it cannot be easily represented in a single row of the main studies file. To keep the data clear and usable, each ancestry label is listed on its own row in a separate spreadsheet called the "Ancestry data" file.  
 
 _Related search terms:_ ancestry spreadsheet, sample metadata, discovery stage, replication stage, ancestry file format, multi-dimensional data
+
 '''
 
 ==== [[faqF6CohortField]] What is included in the COHORT field?
@@ -1003,6 +1035,7 @@ Cohort names are extracted from the literature and matched to a predefined list 
 *Note:* Cohorts listed in unpublished download files have not yet undergone curation and may not exactly match the predefined list.  
 
 _Related search terms:_ cohort field, GWAS cohorts, discovery stage, PGS Catalog, cohort abbreviations, NR, other, missing cohort info
+
 '''
 
 == [[G]]G. Programmatic access
@@ -1017,6 +1050,7 @@ The **GWAS Catalog REST API** allows programmatic access to all Catalog data, in
 The API supports queries by study accession (GCST), PubMed ID, trait, variant (rsID), and more. Results are returned in JSON format, making them easy to integrate into pipelines or analyses.  
 
 _Related search terms:_ GWAS API, REST API, programmatic access, JSON output, query by trait, query by variant, GCST lookup
+
 '''
 
 == [[H]]H. Summary statistics
@@ -1029,6 +1063,7 @@ They include every variant tested in the study, along with effect sizes, p-value
 The GWAS Catalog curates the most significant associations (p < 1×10⁻⁵) for display in the website tables, but we also make available the full summary statistics files where possible. These provide a comprehensive view of the study and are essential for downstream analyses such as meta-analysis, fine-mapping, and polygenic score development.  
 
 _Related search terms:_ summary statistics, full GWAS results, complete dataset, effect sizes, p-values, meta-analysis, polygenic risk score, GWAS download
+
 '''
 
 ==== [[faqH2FindSummaryStats]] How do I find out which publications have full summary statistics available?
@@ -1043,6 +1078,7 @@ If a publication states that summary statistics are available but you cannot fin
 http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], contact gwas-info@ebi.ac.uk to request access.  
 
 _Related search terms:_ summary statistics availability, studies with summary stats, FTP site, early release, unpublished data, association count icon
+
 '''
 
 ==== [[faqH3AccessSummaryStats]] How do I access summary statistics?
@@ -1060,6 +1096,7 @@ You can also find links to these files from the search interface and the
 https://www.ebi.ac.uk/gwas/downloads/summary-statistics[list of studies with summary statistics files].  
 
 _Related search terms:_ summary statistics access, REST API, FTP download, harmonised data, programmatic access, search interface links
+
 '''
 
 ==== [[faqH4CiteSummaryStats]] How should I cite summary statistics downloaded from the GWAS Catalog?
@@ -1074,6 +1111,7 @@ Example citation:
 “Summary statistics were downloaded from the NHGRI-EBI GWAS Catalog (Sollis et al., 2022) on 01/11/2020 for study GCST007240 (Riveros-McKay et al., 2019).”  
 
 _Related search terms:_ summary statistics citation, GCST accession, download date, publication reference, citing GWAS data
+
 '''
 
 ==== [[faqH5HarmonisedSummaryStats]] What are standardised or harmonised summary statistics?
@@ -1088,6 +1126,7 @@ Harmonisation ensures that:
 These harmonised files are available through the GWAS Catalog FTP site and summary statistics REST API when processing is complete.  
 
 _Related search terms:_ standardised summary stats, harmonised data, file format, meta-analysis, consistent columns, data cleaning
+
 '''
 
 ==== [[faqH6PrivacyRisksSummaryStats]] What are the privacy risks of sharing summary statistics?
@@ -1105,6 +1144,7 @@ The NIH supports open sharing of summary statistics, including allele frequencie
 * https://grants.nih.gov/grants/guide/notice-files/NOT-OD-19-023.html  
 
 _Related search terms:_ privacy risk, participant re-identification, Homer et al. 2008, allele frequency privacy, NIH guidance, open data sharing
+
 '''
 
 ==== [[faqH7CC0License]] Why do some datasets have a CC0 license mark?
@@ -1122,6 +1162,7 @@ CC0 dedicates the data to the public domain, allowing unrestricted reuse and rem
 For questions about licensing, email **gwas-info@ebi.ac.uk**.  
 
 _Related search terms:_ CC0, data license, public domain, summary statistics license, EBI terms of use, data sharing policy
+
 '''
 
 == [[I]]I. Submitting summary statistics
@@ -1138,6 +1179,7 @@ Detailed instructions and formatting requirements are available in our http://ww
 All submitted studies must meet the Catalog’s eligibility criteria before summary statistics can be released.  
 
 _Related search terms:_ summary statistics submission, unpublished GWAS, deposition page, file format requirements, eligibility criteria
+
 '''
 
 ==== [[faqI2SummaryStatsFormat]] How should summary statistics be formatted for submission?
@@ -1151,6 +1193,7 @@ The validator will check your file structure, required fields, and formatting be
 
 _Related search terms:_ summary statistics format, file specification, validation tool, submission requirements, data standardisation
 
+'''
 
 ==== Got a question that isn't answered here?
 Email us at gwas-info@ebi.ac.uk.
