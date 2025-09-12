@@ -732,64 +732,160 @@ The downloadable studies file includes a column called **Genotyping technology (
 '''
 == C. Exploring specific pages
 
-==== [[faq-C1]]1. How do I download a list of associations for a given trait, publication, study or variant?
+==== [[faqC1DownloadAssociations]] How do I download associations for a trait, publication, study, or variant?
 
-There are two ways to download association data on the specific “Trait”, “Publication”, “Study”, “Variant” or "Gene" pages. The “Download Associations” button downloads a spreadsheet (.tsv) of the full data for every association displayed on the current page. This data is formatted in the same way as the full Catalog spreadsheets available from our link:file-downloads[file downloads] page and includes study information for each association.
+You can download association data from any Trait, Publication, Study, Variant, or Gene page in two ways:  
 
-The specific pages also contain “Studies” and “Associations” tables, which display a condensed view of the data with fewer columns. These can be downloaded in .csv format using the “export” button in the top righthand corner of each table. Columns can be added or removed from this table using the “Add/Remove Columns” button – only the selected columns will be included in the exported table.  
+*Full data download:*  
+Click the **Download Associations** button to download a `.tsv` file containing all associations displayed on that page. This file uses the same format as the full GWAS Catalog spreadsheets from the https://www.ebi.ac.uk/gwas/docs/file-downloads[file downloads page] and includes study information for each association.  
 
-==== [[faq-C2]]2. How do I use the association plot on the “Trait” page?
+*Customisable table download:*  
+The **Studies** and **Associations** tables show a simplified view of the data. Use the **Export** button in the top right corner to download a `.csv` version of the table. You can add or remove columns using **Column visibility** (only selected columns will appear in the exported file).  
 
-The association plot displays all associations in the Catalog for the selected trait. Individual associations are plotted as circles and are coloured according to the same broad trait categories that are used in the GWAS Catalog <<D,Diagram>> (see the legend in the top left of the plot). You can mouse over or click on one of the circles for more information about a particular variant. You can also download an image of the plot. The plot is constructed using the LocusZoom link:http://statgen.github.io/locuszoom[plugin].
+// Related search terms: download associations, studies table, TSV, CSV, export, file downloads
 
-==== [[faq-C3]]3. How do I use the linkage disequilibrium (LD) plot on the “Variant” page?
+==== [[faqC2AssociationPlot]] How do I use the association plot on a Trait page?
 
-The LD plot integrates data from Ensembl with GWAS Catalog data. It shows the degree of linkage disequilibrium between the selected variant and other variants within a 50kb window. You can select the population of interest and LD measurement (r2 or D’) using the drop-down menus and set your own LD threshold. You can also download the data shown in the plot as a .tsv file.
+The association plot shows all associations for the selected trait as circles on a genome-wide view.  
 
-LD information between a variant of interest and the surrounding variants can be accessed programmatically using the Ensembl REST API (http://rest.ensembl.org/documentation/info/ld_pairwise_get) where you can specify a variant ID, a window size of the region surrounding the variant, a population and a cut-off for the calculation results.
-In case of a dataset with more than 1 variant of interest, several independant calls to the Ensembl REST API (http://rest.ensembl.org/documentation/info/ld_pairwise_get) can be made.
+*Circles:* Each circle represents a variant–trait association.  
+*Colour coding:* Circles are coloured by broad trait category (see the legend in the top-left corner of the plot).  
+*Interaction:* Hover or click on a circle to view detailed information about that variant (e.g., p-value, mapped gene, study).  
+*Download:* Use the download button to save an image of the plot.  
 
-==== [[faq-C4]]4. How do I view, search and download information from the "Associations" and "Studies" tables?
+The association plot is powered by the https://statgen.github.io/locuszoom[LocusZoom plugin].  
 
-These tables can be found on the each of the specific "Trait", "Variant", "Gene", "Publication" and "Study" pages. The data displayed is highly customisable. You can refine the results by typing into a) the search box above the table, to search all columns, or b) the filter boxes at the top of each column, to search only within a specific column. You can customise the columns displayed using the "Add/Remove Columns" button. You can sort by clicking on the column header. Finally, you can use the "Export data" button to download the table as a csv file. Note that the csv file will contain the data displayed in the table, taking into account any changes you have made to the rows, columns displayed or sorting.
+// Related search terms: association plot, trait page, visualisation, LocusZoom, genome-wide view, download plot
+
+==== [[faqC3LDPlot]] How do I use the linkage disequilibrium (LD) plot on a Variant page?
+
+The LD plot shows the strength of linkage disequilibrium between the selected variant and nearby variants within a 50 kb region, using data from Ensembl.  
+
+*Controls:*  
+* Choose a population and LD metric (r² or D′) from the dropdown menus.  
+* Adjust the LD threshold to focus on stronger or weaker correlations.  
+
+*Download:*  
+You can download the LD data as a .tsv file directly from the plot interface.  
+
+*Programmatic access:*  
+LD data can also be retrieved via the Ensembl REST API: http://rest.ensembl.org/documentation/info/ld_pairwise_get.  
+Specify the variant ID, window size, population, and threshold. For multiple variants, make separate API calls.  
+
+// Related search terms: LD plot, linkage disequilibrium, r2, D’, Ensembl, variant page, REST API, download LD data
+
+==== [[faqC4Tables]] How do I view, search, and download data from the Associations and Studies tables?
+
+The Associations and Studies tables appear on every Trait, Variant, Gene, Publication, and Study page. These tables are fully interactive:
+
+* *Search:* Use the global search box above the table to search all columns at once.  
+* *Filter:* Use the filter fields at the top of individual columns to narrow results to specific values.  
+* *Customise columns:* Use the “Column visibility” (or “Add/Remove Columns”) menu to show or hide columns.  
+* *Sort:* Click any column header to sort by that column.  
+* *Download:* Use the “Export data” button to download the current view as a CSV file. Your search, filters, and selected columns are preserved in the export.  
+
+// Related search terms: studies table, associations table, filter, column visibility, sort, export csv, download
 
 == [[D]]D. Diagram
- 
-==== [[faq-D1]]1. How do I display SNP information for a given dot?
 
-To view all the SNPs associated with any trait in a given location, simply click on the trait (coloured circle) you are interested in. An interactive pop-up will display the SNPs for that trait, the p-value for each SNP-trait association, the study in which the association was identified, the trait assigned by the GWAS Catalog curators and the EFO term the SNP-trait association is mapped to. The SNP, disease trait, EFO term and study fields are interactive, linking to a search of the full Catalog for that particular field. SNP, EFO term and study also link out via the external link icon to Ensembl, EFO and UKPMC, respectively. Clicking outside the pop-up automatically closes the current pop-up. Alternatively, close the pop-up by clicking on the cross in its top right corner or on the "Close" button.
+==== [[faqD1SnpInfo]] How do I display SNP details for a dot in the diagram?
 
-==== [[faq-D2]]2. How do I filter the diagram?
+Click any dot (coloured circle) in the diagram to view all SNPs associated with that location and trait.  
 
-The full diagram can be filtered by typing a trait into the search box to the left the diagram and hitting "Enter" or clicking the "Apply" button. Once you have typed 3 to 4 characters, the text box will offer auto-completed suggestions for your search based on EFO traits. You can navigate the suggestion list using your mouse or the up and down keys. 
+The pop-up shows:  
+* SNP IDs  
+* p-values  
+* Study information  
+* Trait names (curated EFO terms)  
 
-Once you have filtered the diagram by a selected trait, all other traits will be faded to a lower visibility to highlight the desired trait. A counter in the top left corner of the diagram will indicate how many dots on the diagram correspond to your search term. Searchable traits are based on EFO categories and may not coincide with GWAS Catalog reported traits, e.g. a search for "hair color" will highlight SNP-trait associations labelled hair color as well as "black vs blond hair" and "red vs non-red hair".
+All fields in the pop-up are clickable and link to the corresponding page in the Catalog. Icons provide external links to Ensembl, EFO, or Europe PMC for more details.  
 
-==== [[faq-D3]]3. How do I display the legend?
+Close the pop-up by clicking outside it, the “×” in the corner, or the “Close” button.  
 
-A legend of the colour scheme is available to the left of the diagram. The legend includes a count of the number of dots of each colour in the diagram. You can hide the sidebar of increase the amount of screen space for the diagram by clicking on the little chevron icon at the top of the sidebar. Click on any item in the legend to filter the diagram by that category. This does not work for any of the "other"-type categories (other measurement, other disease and other trait). Please note that some traits, in particular some diseases, belong to multiple categories, eg Crohn's disease is both a digestive system disease and an immune system disease. Each dot on the diagram can only be assigned one colour and colour assignment is determined by a term's most specific ancestor (ancestor that has itself the most number of ancestors) in EFO so it is possible to find dots of a different colour when searching for example for "digestive system disease".
+// Related search terms: diagram, SNP info, interactive pop-up, variant details, EFO term, study link
 
-==== [[faq-D4]]4. How do I display labels?
+==== [[faqD2FilterDiagram]] How do I filter the diagram?
 
-Chromosomes and traits (coloured circles) have labels that display when hovering the mouse pointer over a given element. The displayed labels correspond to the EFO term mapped this SNP.
+Use the search box next to the diagram to filter by trait:  
+* Start typing a trait name — after 3–4 characters, auto-complete suggestions from EFO will appear.  
+* Select a suggestion and click *Apply* or press Enter.  
 
-==== [[faq-D5]]5. How do I zoom and move the diagram?
+When filtered, only dots for the selected trait remain highlighted. Other traits are faded, and a counter shows how many associations match your search.  
 
-The diagram was designed to have GoogleMaps-style interactivity. There are two ways to zoom in and out. The easiest option is to use the scroll wheel on the mouse or touch pad on a laptop. Scrolling up zooms in and scrolling down zooms out. This feature may not work with all touch pads. Alternatively, the top right-hand corner of the diagram features a zoom bar which can be used to generate exactly the same effect, by dragging the little square left or right along the bar with the mouse pointer or clicking the plus and minus buttons.
-The diagram can be moved around the viewing area by clicking on any part of the diagram with the left mouse button and, holding the mouse button down, dragging the diagram around the screen until the desired part is visible. This feature is particularly useful for centring the diagram on a specific location at higher zoom levels.
+Note: The filter uses EFO trait names and synonyms, which may differ slightly from author-reported trait names in publications.  
 
-==== [[faq-D6]]6. How should I cite the diagram?
+// Related search terms: diagram filter, trait search, EFO suggestions, highlight associations
 
-Please see the link:about[About] page for citation guidance.
+==== [[faqD3DiagramLegend]] How do I display and use the legend?
 
-==== [[faq-D7]]7. How do I download the diagram?
-Download options are listed https://www.ebi.ac.uk/gwas/docs/diagram-downloads[here].
+The legend is displayed in the left-hand sidebar of the diagram. It shows:
 
-==== [[faq-D8]]8. Can I download a filtered version of the diagram?
+* The colour scheme used for trait categories.
+* A count of the number of associations (dots) in each category.
 
-The diagram can be filtered by trait to present only a subset of specific associations.  At present we don't have a native function for downloading diagrams filtered by trait.  We suggest taking a screenshot if a high resolution image is not required.
+You can:
 
-As a workaround a high resolution image can be created by saving the web-displayed image as an .svg (scalable vector graphics format). These instructions are for Firefox, it's slightly different in other browsers. Right click on the filtered diagram, click 'inspect element', in the inspector window hover over the svg element (this starts <svg), right click and 'copy - outer html'.  Paste this text into a text editor and save.  Change the file extension from .txt to .svg.  You will then be able to open the image as an .svg in an image processing program (e.g. Inkscape or Illustrator).  From there you can convert to your preferred format.
+* Click the chevron icon at the top of the sidebar to hide the legend and maximise space for the diagram.
+* Click a category in the legend to filter the diagram by that category (not available for "other" categories like *other disease* or *other trait*).
+
+Note: Some traits belong to multiple categories (for example, Crohn’s disease is classified as both a digestive system and immune system disease). Each association is assigned a single colour based on the most specific EFO ancestor term, so you may see different colours for traits with overlapping categories.  
+
+// Related search terms: diagram legend, colour categories, category filter, trait classification
+
+==== [[faqD4DiagramLabels]] How do I display labels?
+
+Labels appear when you hover your mouse over elements in the diagram:
+
+* **Chromosome labels:** Display the chromosome number or region.
+* **Trait labels (coloured circles):** Show the trait name (EFO term) and its position.
+
+These labels help you identify which trait or region each point represents without leaving the diagram.  
+
+// Related search terms: diagram labels, hover, chromosome label, trait label, EFO term
+
+==== [[faqD5DiagramZoomMove]] How do I zoom and move the diagram?
+
+The GWAS Catalog diagram supports Google Maps–style navigation:
+
+* **Zoom:**  
+  * Scroll up to zoom in, scroll down to zoom out.  
+  * Alternatively, use the zoom bar in the top-right corner — drag the slider or click the + and − buttons.  
+
+* **Pan (move):**  
+  * Click and hold the left mouse button, then drag the diagram to reposition the view.  
+  * This is especially useful for centring on a specific region at higher zoom levels.  
+
+// Related search terms: diagram zoom, pan, scroll, drag, navigation, move view
+
+==== [[faqD6DiagramCitation]] How should I cite the diagram?
+
+Cite the diagram using the same format as for the GWAS Catalog itself.  
+Full citation guidance is available on the https://www.ebi.ac.uk/gwas/docs/about[About page].
+
+// Related search terms: diagram citation, figure reference, GWAS Catalog diagram, how to cite
+
+==== [[faqD7DiagramDownload]] How do I download the diagram?
+
+High-resolution images of the GWAS Catalog diagram can be downloaded in several formats (e.g. PNG, SVG, PDF).  
+Download options are listed on the https://www.ebi.ac.uk/gwas/docs/diagram-downloads[diagram downloads page].
+
+// Related search terms: diagram download, high-resolution image, PNG, SVG, PDF, save diagram
+
+==== [[faqD8FilteredDiagramDownload]] Can I download a filtered version of the diagram?
+
+Currently, the GWAS Catalog does not provide a built-in option to download a diagram that is filtered by trait.  
+
+*Quick option:*  
+Take a screenshot of the filtered diagram if a high-resolution image is not required.
+
+*Advanced workaround (for high-resolution SVG):*  
+1. Open the diagram in Firefox (similar steps work in other browsers).  
+2. Right-click on the filtered diagram and select **Inspect element**.  
+3. In the Inspector, hover over the `<svg>` element, right-click, and choose **Copy → Outer HTML**.  
+4. Paste into a text editor and save the file with a `.svg` extension.  
+5. Open the file in a vector graphics program (e.g. Inkscape, Illustrator) and export to your preferred format.  
+
+// Related search terms: filtered diagram download, SVG export, high resolution, screenshot, Firefox inspector
 
 == [[E]]E. Genomic mappings
 
