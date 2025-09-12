@@ -183,6 +183,7 @@ https://doi.org/10.1093/nar/gkac1010.
 Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023, Pages D977–D985
 
 If you are citing specific studies or summary statistics from the GWAS Catalog, include:  
+
 * The study accession ID (e.g., GCST000123).  
 * The GWAS Catalog name.  
 * The date downloaded.  
@@ -258,6 +259,7 @@ _Related search terms:_ publication, study, PubMed ID, GCST accession, multiple 
 Each study in the GWAS Catalog has a unique accession number beginning with “GCST” (for example, GCST000123).  
 
 You can find study accession numbers in several places:  
+
 * At the top of each “Study” page.  
 * In the “Studies” and “Associations” data tables on Publication, Trait, Variant, and Gene pages.  
 * In the downloadable spreadsheets (associations, studies, and ancestry files) from version v1.0.2 onwards.  
@@ -285,6 +287,7 @@ _Related search terms:_ trait, reported trait, phenotype, EFO, ontology, study d
 A *background trait* is a characteristic shared by all participants in a study, but not directly tested in the association analysis.
 
 For example:  
+
 In a study of “Allergic rhinitis in asthma,” the comparison is cases (individuals with allergic rhinitis) vs. controls (individuals without allergic rhinitis). All participants have asthma.  
 * The *main trait* under investigation is allergic rhinitis.  
 * The *background trait* is asthma.  
@@ -302,15 +305,18 @@ _Related search terms:_ background trait, main trait, study context, phenotype d
 The GWAS Catalog includes *SNP-by-SNP* and *SNP-by-environment* interaction studies, provided the SNPs meet genome-wide significance criteria.
 
 *Identification in the UI and download files:*
+
 * On the https://www.ebi.ac.uk/gwas/studies[Studies page], tick the **GxE** checkbox under "Select study type:" to filter the table to only Gene-by-Environment interaction studies. 
 * The **GxE** column in any studies table indicates whether a GxE interaction study design (tick or “x”). This column can also be exported via the file or enabled/hidden using *Column visibility*. 
 * The downloadable studies file includes the **GxE** field so you can filter programmatically. 
 
 *Identification via reported trait:*
+
 * SNP-by-SNP interactions include “SNP × SNP interaction” in parentheses.
 * SNP-by-environment interactions include the environment in the description. As of July 2018, you’ll also see notation for test types: “(1df test)” or “(2df test)”, such as “Lung cancer × smoking interaction (1df test)”. Earlier studies may only say “(smoking interaction)”.
 
 *Alternate navigation:*
+
 * On any “Trait” page, search “interaction” in the “Associations” or “Studies” tables.
 * In downloadable spreadsheets, filter the reported trait column for "interaction".
 
@@ -323,10 +329,12 @@ _Related search terms:_ GxE checkbox, interaction studies, filter, SNP-by-enviro
 Targeted and exome array studies are flagged in several ways:
 
 *In the user interface:*  
+
 * A small “target” icon appears in search results next to any publication that includes a targeted or exome array study.  
 * The same icon is shown in the “Study accession” column of the Studies table on Publication, Trait, Variant, or Gene pages.  
 
 *In downloads:*  
+
 * In the downloadable studies file, these studies include an additional column called **Genotyping technology (additional array information)**.  
 * This field records whether the study used a targeted genotyping array, exome array, or similar technology.  
 
@@ -341,6 +349,7 @@ _Related search terms:_ targeted array, exome array, genotyping technology, icon
 The GWAS Catalog is gradually expanding to include large-scale targeted and non–genome-wide arrays such as the Metabochip, Immunochip, and Exome array.  
 
 This expansion is currently in a pilot phase. During this phase, targeted and exome array studies are prioritised for inclusion based on:  
+
 1. The scientific relevance of the trait analysed.  
 2. Requests and feedback from users of the Catalog.  
 
@@ -375,6 +384,7 @@ _Related search terms:_ odds ratio, beta, association file, download, effect siz
 Each association in the Catalog comes from a distinct analysis.  
 
 However, some associations may appear more than once because:  
+
 * The same cohorts can be analysed in different ways across studies.  
 * Component groups of a meta-analysis may be represented individually, in addition to the overall meta-analysis results.  
 
@@ -405,6 +415,7 @@ _Related search terms:_ p-value, extremely small p-value, zero p-value, threshol
 ==== [[faqA22UnpublishedData]] Does the GWAS Catalog include data that is not linked to a PubMed-indexed publication?
 
 Yes. Since 2020, the GWAS Catalog has accepted submissions of unpublished GWAS. This includes:  
+
 * Preprints.  
 * Articles in press.  
 * Standalone datasets not yet published in a journal.  
@@ -412,6 +423,7 @@ Yes. Since 2020, the GWAS Catalog has accepted submissions of unpublished GWAS. 
 Unpublished data is made publicly available as submitted by authors. It is not manually reviewed by curators until the study is published in a journal.  
 
 *Where to find unpublished data:*  
+
 * Study pages for each accession number (GCST).  
 * The https://www.ebi.ac.uk/gwas/downloads[unpublished download files].  
 * The ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] and https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page].  
@@ -441,6 +453,7 @@ _Related search terms:_ mouse ortholog, IMPC, HCOP, MGI, gene mapping, orthology
 *Top associations* are the curated set of associations displayed in the Catalog’s Associations tables. They are manually extracted from published articles and filtered using the GWAS Catalog curation process.  
 
 To be included as a top association, a result must:  
+
 * Be significant at p < 1 × 10⁻⁵ in all stages of the analysis.  
 * Be described as independent by the authors, or represent the peak association within a 100 kb region.  
 
@@ -457,6 +470,7 @@ _Related search terms:_ top associations, significant SNPs, independent signals,
 Enter your query (e.g. “breast carcinoma”) into the search box and press return or click the search icon.  
 
 The search will return results across multiple entity types:  
+
 * **Publications** (marked with “P”)  
 * **Variants** (marked with “V”)  
 * **Traits** (marked with “T”)  
@@ -472,6 +486,7 @@ _Related search terms:_ search, query, publication search, trait search, variant
 ==== [[faqB2SearchPublication]] How do I search by publication?
 
 You can search for a publication using:  
+
 * The PubMed ID.  
 * Any author name.  
 * Words from the publication title.  
@@ -489,6 +504,7 @@ _Related search terms:_ publication search, PubMed ID, author search, title sear
 The search function matches your text across all fields in the Catalog.  
 
 For example, a search for “Parkinson” will return:  
+
 * Publications with an author named Parkinson.  
 * Publications with “Parkinson” in the title.  
 * Traits related to Parkinson’s disease.  
@@ -504,6 +520,7 @@ _Related search terms:_ author search, trait overlap, publication search, text m
 ==== [[faqB4SearchVariant]] How do I search by variant?
 
 You can search for a variant (single nucleotide polymorphism, SNP) in several ways:  
+
 * By rsID (e.g., rs12345).  
 * By genomic region (e.g., 6:16000000-25000000 or 2q37.1).  
 * By a gene that is mapped to the variant.  
@@ -519,6 +536,7 @@ _Related search terms:_ variant search, SNP, rsID, genomic region, gene mapping,
 ==== [[faqB5SearchGene]] How do I search by gene?
 
 Enter a gene symbol (e.g., STAT4) into the main search bar. The search will return:  
+
 * The gene itself.  
 * Variants annotated with that gene by the Catalog’s mapping pipeline.  
 * Publications that include the gene name in the title.  
@@ -528,6 +546,7 @@ The “Gene” page lists all associations mapped to that gene and provides rela
 Note: the mapped gene may not always match the gene reported by authors. Different criteria can be used for reporting, so author-reported genes may differ.  
 
 Author-reported genes were curated until 2021. They can still be found in the https://www.ebi.ac.uk/gwas/docs/file-downloads[full data download]. To view them:  
+
 * Open the file in Excel.  
 * Filter the **REPORTED GENE(S)** column for your gene of interest.  
 
@@ -540,6 +559,7 @@ _Related search terms:_ gene search, gene page, reported gene, mapped gene, REPO
 ==== [[faqB6SearchRegion]] How do I search by genomic region?
 
 You can search by genomic region using either:  
+
 * Chromosome coordinates in the format `chromosome:start-end` (e.g., `6:16000000-25000000`).  
 * Cytogenetic band notation (e.g., `2q37.1`).  
 
@@ -555,6 +575,7 @@ _Related search terms:_ region search, chromosomal coordinates, cytogenetic band
 Type the name of a disease, phenotype, measurement, or drug response into the search bar.  
 
 The search will return:  
+
 * Traits that exactly match your term.  
 * Synonyms of matching traits.  
 * Child traits (e.g., searching “cancer” also returns cancer subtypes).  
