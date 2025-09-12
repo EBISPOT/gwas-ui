@@ -682,6 +682,7 @@ Click the **Download Associations** button to download a `.tsv` file containing 
 The **Studies** and **Associations** tables show a simplified view of the data. Use the **Export** button in the top right corner to download a `.csv` version of the table. You can add or remove columns using **Column visibility** (only selected columns will appear in the exported file).  
 
 _Related search terms:_ download associations, studies table, TSV, CSV, export, file downloads
+'''
 
 ==== [[faqC2AssociationPlot]] How do I use the association plot on a Trait page?
 
@@ -695,6 +696,7 @@ The association plot shows all associations for the selected trait as circles on
 The association plot is powered by the https://statgen.github.io/locuszoom[LocusZoom plugin].  
 
 _Related search terms:_ association plot, trait page, visualisation, LocusZoom, genome-wide view, download plot
+'''
 
 ==== [[faqC3LDPlot]] How do I use the linkage disequilibrium (LD) plot on a Variant page?
 
@@ -712,6 +714,7 @@ LD data can also be retrieved via the Ensembl REST API: http://rest.ensembl.org/
 Specify the variant ID, window size, population, and threshold. For multiple variants, make separate API calls.  
 
 _Related search terms:_ LD plot, linkage disequilibrium, r2, D’, Ensembl, variant page, REST API, download LD data
+'''
 
 ==== [[faqC4Tables]] How do I view, search, and download data from the Associations and Studies tables?
 
@@ -724,6 +727,7 @@ The Associations and Studies tables appear on every Trait, Variant, Gene, Public
 * *Download:* Use the “Export data” button to download the current view as a CSV file. Your search, filters, and selected columns are preserved in the export.  
 
 _Related search terms:_ studies table, associations table, filter, column visibility, sort, export csv, download
+'''
 
 == [[D]]D. Diagram
 
@@ -742,6 +746,7 @@ All fields in the pop-up are clickable and link to the corresponding page in the
 Close the pop-up by clicking outside it, the “×” in the corner, or the “Close” button.  
 
 _Related search terms:_ diagram, SNP info, interactive pop-up, variant details, EFO term, study link
+'''
 
 ==== [[faqD2FilterDiagram]] How do I filter the diagram?
 
@@ -754,6 +759,7 @@ When filtered, only dots for the selected trait remain highlighted. Other traits
 Note: The filter uses EFO trait names and synonyms, which may differ slightly from author-reported trait names in publications.  
 
 _Related search terms:_ diagram filter, trait search, EFO suggestions, highlight associations
+'''
 
 ==== [[faqD3DiagramLegend]] How do I display and use the legend?
 
@@ -770,6 +776,7 @@ You can:
 Note: Some traits belong to multiple categories (for example, Crohn’s disease is classified as both a digestive system and immune system disease). Each association is assigned a single colour based on the most specific EFO ancestor term, so you may see different colours for traits with overlapping categories.  
 
 _Related search terms:_ diagram legend, colour categories, category filter, trait classification
+'''
 
 ==== [[faqD4DiagramLabels]] How do I display labels?
 
@@ -781,6 +788,7 @@ Labels appear when you hover your mouse over elements in the diagram:
 These labels help you identify which trait or region each point represents without leaving the diagram.  
 
 _Related search terms:_ diagram labels, hover, chromosome label, trait label, EFO term
+'''
 
 ==== [[faqD5DiagramZoomMove]] How do I zoom and move the diagram?
 
@@ -795,6 +803,7 @@ The GWAS Catalog diagram supports Google Maps–style navigation:
   * This is especially useful for centring on a specific region at higher zoom levels.  
 
 _Related search terms:_ diagram zoom, pan, scroll, drag, navigation, move view
+'''
 
 ==== [[faqD6DiagramCitation]] How should I cite the diagram?
 
@@ -802,6 +811,7 @@ Cite the diagram using the same format as for the GWAS Catalog itself.
 Full citation guidance is available on the https://www.ebi.ac.uk/gwas/docs/about[About page].
 
 _Related search terms:_ diagram citation, figure reference, GWAS Catalog diagram, how to cite
+'''
 
 ==== [[faqD7DiagramDownload]] How do I download the diagram?
 
@@ -809,6 +819,7 @@ High-resolution images of the GWAS Catalog diagram can be downloaded in several 
 Download options are listed on the https://www.ebi.ac.uk/gwas/docs/diagram-downloads[diagram downloads page].
 
 _Related search terms:_ diagram download, high-resolution image, PNG, SVG, PDF, save diagram
+'''
 
 ==== [[faqD8FilteredDiagramDownload]] Can I download a filtered version of the diagram?
 
