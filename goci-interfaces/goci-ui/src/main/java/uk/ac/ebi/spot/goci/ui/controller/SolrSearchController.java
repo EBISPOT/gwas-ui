@@ -1032,7 +1032,7 @@ public class SolrSearchController {
 
         StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
-        int maxResults = 1000000;
+        int maxResults = 2000000;
         int page = 1;
 
         if(facet.contains("_new_format")){
@@ -1157,7 +1157,7 @@ public class SolrSearchController {
 
         StringBuilder solrSearchBuilder = buildFatSearchRequest();
 
-        int maxResults = 1000000;
+        int maxResults = 2000000;
         int page = 1;
 
         addFilterQuery(solrSearchBuilder, "resourcename", facet);
