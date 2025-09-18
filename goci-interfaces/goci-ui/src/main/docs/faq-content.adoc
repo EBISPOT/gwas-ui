@@ -393,10 +393,20 @@ Users can check sample size and ancestry information as clues when apparent dupl
 _Related search terms:_ association uniqueness, duplicate associations, meta-analysis, cohort reuse, repeated analysis
 
 ''' 
-
 ==== [[faqA20SequencingScope]] Are results from sequencing-based association analyses included in the GWAS Catalog?
 
-We welcome user submissions of summary statistics for sequencing-based association analyses, so some sequencing-based associations will appear in the Catalog. However, our full manual curation process is only routinely applied to array-based association analyses at the current time. We are investigating expanding the scope to include more sequencing-based association studies.  You can read the results of our review of the sequencing-based association literature in https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00005-7[McMahon et al, Sequencing-based genome-wide association studies reporting standards, Cell Genomics (2021)], and see our list of studies and curated metadata or give us your input on https://www.ebi.ac.uk/gwas/docs/pilots[our pilots page].
+Yes — sequencing-based association analyses are now routinely curated and included in the GWAS Catalog, alongside array-based analyses.  
+
+We curate significant associations from sequencing-based studies using the same manual process as for array-based GWAS, ensuring consistent quality and annotation.  
+
+You can read more about the standards for reporting sequencing-based GWAS in  
+https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00005-7[McMahon et al., Sequencing-based genome-wide association studies reporting standards, Cell Genomics (2021)].  
+
+You can identify sequencing-based studies by downloading the studies file from the  
+https://www.ebi.ac.uk/gwas/docs/file-downloads[file downloads page]  
+and filtering the **Genotyping technology (additional array information)** column for sequencing-based technologies (e.g., whole-genome sequencing, exome sequencing).  
+
+_Related search terms:_ sequencing-based GWAS, whole-genome sequencing, WGS, exome sequencing, curated studies, reporting standards, genotyping technology filter
 
 ''' 
 
@@ -1106,17 +1116,17 @@ _Related search terms:_ summary statistics availability, studies with summary st
 
 You can access GWAS summary statistics in two ways:  
 
-* **Programmatic access:**  
-Use the dedicated summary statistics REST API for searchable, filterable, and harmonised data:  
-http://www.ebi.ac.uk/gwas/summary-statistics/docs/  
+* **FTP site (primary source):**  
+All summary statistics files are stored on our http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], which is updated nightly with any newly ingested data.  
+Direct links to FTP files also appear on individual study pages when available.  
 
-* **Direct download:**  
-Access the original, standardised, and harmonised files via the FTP site:  
-http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/  
-You can also find links to these files from the search interface and the  
-https://www.ebi.ac.uk/gwas/downloads/summary-statistics[list of studies with summary statistics files].  
+* **Database (REST API):**  
+A subset of harmonised files is available via the http://www.ebi.ac.uk/gwas/summary-statistics/docs/[summary statistics REST API], which allows searching, filtering, and programmatic access to the data.  
 
-_Related search terms:_ summary statistics access, REST API, FTP download, harmonised data, programmatic access, search interface links
+For more details, visit our https://www.ebi.ac.uk/gwas/summary-statistics[Summary Statistics pages].  
+
+_Related search terms:_ summary statistics access, FTP site, nightly update, harmonised data, REST API, programmatic access, study page links
+
 
 '''
 
