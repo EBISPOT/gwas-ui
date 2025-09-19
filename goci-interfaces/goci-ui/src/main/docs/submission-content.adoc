@@ -15,40 +15,40 @@ Read on for general submission instructions.
 
 <<A, A. Preparing for submission>>
 
-1. <<link-1, Submission homepage>>
-2. <<link-2, Format and validate summary statistics>>
-3. <<link-3, Publication/project metadata>>
+1. <<Submitting, Submission homepage>>
+2. <<FormatAndValidate, Format and validate summary statistics>>
+3. <<Metadata, Publication/project metadata>>
 
 <<B, B. Creating a submission>>
 
-1. <<link-5, Create Elixir ID>>
-2. <<link-6, Install Globus Connect Personal>>
-3. <<link-7, Enter registered Globus email>>
-4. <<link-8, Format and validate summary statistics>>
-5. <<link-9, License agreement>>
-6. <<link-10, Create submission>>
+1. <<LoginID, Create Elixir ID>>
+2. <<InstallingGlobus, Install Globus Connect Personal>>
+3. <<GlobusEmail, Enter registered Globus email>>
+4. <<ValidateSumStats, Format and validate summary statistics>>
+5. <<License, License agreement>>
+6. <<CreateSubmission, Create submission>>
 
 <<C, C. Uploading data>>
 
-1. <<link-11, Upload summary statistics>>
-2. <<link-12, Download submission form>>
-3. <<link-13, Fill in submission form>>
-4. <<link-14, Submit submission form>>
-5. <<link-15, After submission - release of data in the Catalog & how to find your accession IDs>>
+1. <<Upload, Upload summary statistics>>
+2. <<SubmissionForm, Download submission form>>
+3. <<Metadata, Fill in submission form>>
+4. <<Submit, Submit submission form>>
+5. <<DataRelease, After submission - release of data in the Catalog & how to find your accession IDs>>
 
 <<D, Additional information>>
 
 == [[A]]A. Preparing for submission
 
-=== [[link-1]]Submission homepage
+=== [[Submitting]]Submission homepage
 
 Start by going to the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submission homepage^].
 
-=== [[link-2]]Format and validate summary statistics
+=== [[FormatAndValidate]]Format and validate summary statistics
 
 Before submitting, you must ensure that your summary statistics files conform to our standard format, which makes your summary statistics interoperable with other datasets and helps others to make use of them. Click https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[here for full documentation] on the requirements and instructions on using our formatter and validator tools, which can be run in the command line or via a web interface. We strongly recommend running the validator offline prior to upload, especially for large datasets.
 
-=== [[link-3]]Submission questionnaire
+=== [[Metadata]]Submission questionnaire
 
 Next, please provide some metadata about the broader body of work to which your summary statistics submission relates. For example, your submission might be linked to a publication or to an unpublished manuscript, or you may wish to submit summary statistics for GWAS experiments that are not currently written up in a manuscript format.
 
@@ -101,7 +101,7 @@ The Details page gives a brief summary of the publication (or other body of work
 
 image::pre_sub_checklist.png[Pre-submission checklist,width=800,align="center"]
 
-=== [[link-5]]1. Create Elixir ID
+=== [[LoginID]]1. Create Elixir ID
 
 In order to create a submission, you will need to create an account and log in. User accounts are managed using the ELIXIR Authentication and Authorisation Infrastructure, which is shared across multiple life science services. You can find https://elixir-europe.org/services/compute/aai[more information about ELIXIR here]. 
 
@@ -109,7 +109,7 @@ First, create an ELIXIR identity if you do not already have one: follow the http
 
 Second, using your ELIXIR identity, click on "ELIXIR LOGIN" on the GWAS Catalog Submission page to continue.
 
-=== [[link-6]]2. Install Globus Connect Personal
+=== [[InstallingGlobus]]2. Install Globus Connect Personal
 
 We use Globus to enable the transfer of summary statistics files to the GWAS Catalog.
 
@@ -127,7 +127,7 @@ image::globus_email.png[Publication search results,width=800,align="center"]
 
 {empty}
 
-=== [[link-7]]3. Enter registered Globus email
+=== [[GlobusEmail]]3. Enter registered Globus email
 
 Enter the email address associated with your Globus account. It should be filled automatically, but you can change it if needed.
 
@@ -135,16 +135,16 @@ image::enter_email2.png[Enter Globus email,width=800,align="center"]
 
 {empty}
 
-=== [[link-8]]4. Format and validate summary statistics
+=== [[ValidateSumStats]]4. Format and validate summary statistics
 
 Please confirm that your summary statistics files conform to our standard format and content, otherwise your submission will fail validation. If you haven’t already done so, follow the https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[Format and validate link^] for formatting instructions and to access our summary statistics formatting and validation tools.
 
-=== [[link-9]]5. License agreement
+=== [[License]]5. License agreement
 
 Since March 2021, we have asked all submitters to agree to share their data under the terms of https://creativecommons.org/publicdomain/zero/1.0[CC0]. This dedicates your data to the public domain, allowing downstream users to consume the data without restriction. This unambiguous declaration of free and open access is required for some downstream uses, e.g. to meet the data sharing requirements of certain journals, and maximise the utility of your data to the research community. Data submitted prior to March 2021 is made available under the EBI standard https://www.ebi.ac.uk/about/terms-of-use[terms of use]. Whilst these terms do not themselves impose any restrictions on downstream use, the application of CC0 license removes any ambiguity. We advise consumers of data hosted by the GWAS Catalog to note the license terms of individual datasets, if applicable to their specific use case. Please ensure that the original data are cited whenever they are used in a publication.
 If you have any questions or concerns about licensing, please contact us via gwas-info@ebi.ac.uk.
 
-=== [[link-10]]6. Create submission
+=== [[CreateSubmission]]6. Create submission
 
 Please tick each box in the checklist to confirm that the prerequisites have been completed.
 
@@ -158,7 +158,7 @@ image::create_sub.png[Create Submission,width=800,align="center"]
 
 After you have created a submission, you will be able to upload your summary statistics and supporting information. 
 
-=== [[link-11]]1. Upload summary statistics
+=== [[Upload]]1. Upload summary statistics
 
 The first step is to upload your summary statistics files. When you create a submission, a folder is created for you. You can transfer your summary statistics to this location using Globus.
 
@@ -194,7 +194,7 @@ image::drag_and_drop.png[Drag and drop summary statistics,width=800,align="cente
 
 A message will appear when the transfer request has successfully started. Large files may take some time to transfer, but you do not need to wait until this is finished - the transfer will continue in the background while you proceed with the next step. You do however need to wait for confirmation of file transfer before clicking "Submit submission form" (step 3).
 
-=== [[link-12]]2. Download submission form
+=== [[SubmissionForm]]2. Download submission form
 
 You will now need to provide some additional information to support the summary statistics files.
 
@@ -206,7 +206,7 @@ image::download_form.png[Download submission form,width=300,align="center"]
 
 Please download a new form each time you create a new submission for a publication, to make sure you have the most correct and up-to-date form for your specific submission.
 
-=== [[link-13]]3. Fill in submission form
+=== [[Metadata]]3. Fill in submission form
 
 For help filling in the submission form, follow the link from the submission interface, or select the relevant link below:
 
@@ -214,7 +214,7 @@ For help filling in the submission form, follow the link from the submission int
 
 2. Instructions for https://www.ebi.ac.uk/gwas/docs/submission-summary-statistics-plus-metadata[summary statistics plus study metadata^]
 
-=== [[link-14]]4. Submit submission form
+=== [[Submit]]4. Submit submission form
 
 Once you have completed the submission form, save it and click "Submit submission form".
 
@@ -238,7 +238,7 @@ If validation fails, you will receive an email listing the errors detected and a
 
 image::review_reset.png[Review or reset,width=300,align="center"]
 
-=== [[link-15]]5. After submission - release of data in the Catalog & how to find your accession ID
+=== [[DataRelease]]5. After submission - release of data in the Catalog & how to find your accession ID
 
 Once your submission is complete, it will show as SUBMITTED and be listed on the "My Submissions" page.  Each GWAS is given an accession number starting with “GCST”. Please use the GCST accessions to cite in a manuscript - do not use the GCP ID for your submission as it won’t be findable on our website. To find these, click through to your submission page or follow the direct link from the confirmation email. There, you can download the list of accessions by clicking the “Download Accessions” button.
 
