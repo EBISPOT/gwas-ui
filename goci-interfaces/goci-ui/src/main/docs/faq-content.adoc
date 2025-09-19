@@ -700,11 +700,13 @@ _Related search terms:_ background trait, main trait, study context, spreadsheet
 The GWAS Catalog search looks for exact text string matches. Small differences in wording or spelling can affect results.  
 
 Examples:  
+
 * Typing “beast cancer” instead of “breast cancer” will return nothing.  
 
 * Searching “metabolic disorder” gives no matches, while “metabolic disease” returns many.  
 
-Tips if your search fails:  
+Tips if your search fails: 
+
 * Use the auto-complete suggestions offered in the search bar.  
 
 * Try alternative terms or synonyms.  
@@ -719,6 +721,7 @@ _Related search terms:_ no results, spelling error, synonyms, auto-complete, EFO
 ==== [[faqB14SearchStudy]] Can I search for a study?
 
 Studies are not returned directly in search results. To find a study:  
+
 * Search for a related publication, trait, or variant, then open the **Studies** table to see linked studies.  
 
 * If you already know the accession number (e.g. GCST000123), you can enter it in the search bar on the homepage. This will return the publication that contains the study, with a link to the study page.  
