@@ -1186,8 +1186,11 @@ https://creativecommons.org/publicdomain/zero/1.0/[CC0 license].
 CC0 dedicates the data to the public domain, allowing unrestricted reuse and removing any ambiguity about downstream use.  
 
 *Key points:*  
+
 * Data submitted before March 2021 remains under the https://www.ebi.ac.uk/about/terms-of-use/[EBI Terms of Use], which already allow open reuse but are less explicit.  
+
 * A small number of datasets may have other license terms — check the license listed on the study page or the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[Summary Statistics page].  
+
 * Always cite the original data source when using summary statistics in a publication.  
 
 For questions about licensing, email **gwas-info@ebi.ac.uk**.  
@@ -1203,7 +1206,9 @@ _Related search terms:_ CC0, data license, public domain, summary statistics lic
 The GWAS Catalog accepts summary statistics for both published and unpublished GWAS.  
 
 *Summary statistics may be:*  
+
 * Extracted by our team if they are freely available as supplementary files or via a public link.  
+
 * Submitted directly by authors through the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog submission page].  
 
 Detailed instructions and formatting requirements are available in our http://www.ebi.ac.uk/gwas/docs/submission[submission documentation].  
