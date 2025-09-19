@@ -289,7 +289,9 @@ A *background trait* is a characteristic shared by all participants in a study, 
 For example:  
 
 In a study of “Allergic rhinitis in asthma,” the comparison is cases (individuals with allergic rhinitis) vs. controls (individuals without allergic rhinitis). All participants have asthma.  
+
 * The *main trait* under investigation is allergic rhinitis.  
+
 * The *background trait* is asthma.  
 
 The study cannot identify variants associated with asthma itself, but the fact that all participants have asthma provides important context for interpreting the allergic rhinitis associations.
@@ -313,6 +315,7 @@ The GWAS Catalog includes *SNP-by-SNP* and *SNP-by-environment* interaction stud
 *Identification via reported trait:*
 
 * SNP-by-SNP interactions include “SNP × SNP interaction” in parentheses.
+
 * SNP-by-environment interactions include the environment in the description. As of July 2018, you’ll also see notation for test types: “(1df test)” or “(2df test)”, such as “Lung cancer × smoking interaction (1df test)”. Earlier studies may only say “(smoking interaction)”.
 
 *Alternate navigation:*
@@ -826,7 +829,8 @@ _Related search terms:_ studies table, associations table, filter, column visibi
 
 Click any dot (coloured circle) in the diagram to view all SNPs associated with that location and trait.  
 
-The pop-up shows:  
+The pop-up shows:
+
 * SNP IDs  
 
 * p-values  
@@ -846,6 +850,7 @@ _Related search terms:_ diagram, SNP info, interactive pop-up, variant details, 
 ==== [[faqD2FilterDiagram]] How do I filter the diagram?
 
 Use the search box next to the diagram to filter by trait:  
+
 * Start typing a trait name — after 3–4 characters, auto-complete suggestions from EFO will appear.  
 
 * Select a suggestion and click *Apply* or press Enter.  
@@ -995,6 +1000,7 @@ _Related search terms:_ alternative genome builds, GRCh37, liftover, Ensembl RES
 Some SNPs in the GWAS Catalog do not have genomic coordinates or gene mappings.  
 
 *Possible reasons:*  
+
 * **Typos or unusual identifiers:** If a publication contains a typographical error or reports a non-standard SNP ID, the mapping pipeline may fail to find a match.  
 * **Retired SNPs:** Some SNPs no longer exist in the latest genome build used by the Catalog. These SNP IDs are still displayed for completeness, but mapping data is not available.  
 
