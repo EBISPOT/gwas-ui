@@ -33,19 +33,19 @@ function sendNow(region, trait) {
                     rowData += `<tr>
                                     <td>    
                                         <a href='${prodServer}/search?query=${association.snp}' target="_blank"> ${association.snp}  </a>
-                                        <a href='${ensemblVariationServer}/?v=${association.snp}' target="_blank"> <img alt="external link" class="link-icon" src="/icons/external1.png"> </a>
+                                        <a href='${ensemblVariationServer}/?v=${association.snp}' target="_blank"> <img alt="external link" class="link-icon" src='https://www.ebi.ac.uk/gwas/icons/external1.png'> </a>
                                     </td>
                                     <td>${association.pvalueMantissa} x 10 <sup>${association.pvalueExponent}</sup></td>
                                     <td>
                                         <a href='${prodServer}/search?query=${association.efoMapping}' target="_blank"> ${association.efoMapping} </a>
-                                        <a href='${efoServer}/${association.efoId}' target="_blank"> <img alt="external link" class="link-icon" src="/icons/external1.png"> </a>
+                                        <a href='${efoServer}/${association.efoId}' target="_blank"> <img alt="external link" class="link-icon" src='https://www.ebi.ac.uk/gwas/icons/external1.png'> </a>
                                     </td>
                                     <td>
                                          <a href='${prodServer}/search?query=${association.gwasTraits}' target="_blank"> ${association.gwasTraits} </a>
                                       </td> 
                                     <td>
                                      <a href='${prodServer}/search?query=${association.pubmedId}' target="_blank"> ${association.author} et al </a>
-                                        <a href='${publicationServer}/${association.pubmedId}' target="_blank"> <img alt="external link" class="link-icon" src="/icons/external1.png"> </a>
+                                        <a href='${publicationServer}/${association.pubmedId}' target="_blank"> <img alt="external link" class="link-icon" src='https://www.ebi.ac.uk/gwas/icons/external1.png'> </a>
                                      </td>
                                 </tr>`;
                 })
@@ -58,7 +58,7 @@ function sendNow(region, trait) {
 
 let traitRadius = 4;
 let displayGap = (traitRadius * 2); // Explain Rule
-let maxOnARow = 30; // You can also determine Rule of margin through maxOnARow & traitRadius & traitCount
+let maxOnARow = 35; // You can also determine Rule of margin through maxOnARow & traitRadius & traitCount
 
 
 const colorHolder = {
@@ -76,9 +76,9 @@ const colorHolder = {
     "cancer": "B475B5",
     "response to drug": "FCCDE5",
     "biological process": "BEBADA",
-    "Other measurement": "006699",
-    "Other trait": "8E44AD",
-    "Other disease": "FF3399",
+    "other measurement": "006699",
+    "other trait": "FB8072",
+    "other disease": "FF3399",
     "age-related macular degeneration": "999",
 };
 
@@ -274,7 +274,7 @@ let regions = "";
 
 
 
-let dX = 0; let dY=3500;
+let dX = 0; let dY=3000;
 if (!check) {
     dY=900;
 }
