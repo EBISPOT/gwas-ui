@@ -16,12 +16,12 @@ public class EFOTraitMapperCache {
     @Autowired
     EFOTraitIdentifierMap efoTraitIdentifierMap;
 
-    //@Scheduled(cron = "0 00 05 * * *")
+    @Scheduled(cron = "0 00 05 * * *")
     public void populateEFOTraitIdentifierMap() {
         efoTraitIdentifierMap.populateEFOMap();
     }
 
-    //@PostConstruct
+    @PostConstruct
     public void init() {
         try {
             efoTraitIdentifierMap.populateEFOMap();
