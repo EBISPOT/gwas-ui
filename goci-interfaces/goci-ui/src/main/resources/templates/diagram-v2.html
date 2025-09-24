@@ -204,7 +204,7 @@
                                     </a>
                                     <a href="?filter=Other measurement" class="list-group-item legend-item">
                                         <span class="icon-trait icon-trait-measure"></span>
-                                        <span class="badge" id="Other measurement">0</span>Other measurement
+                                        <span class="badge" id="other measurement">0</span>Other measurement
                                     </a>
                                     <a href="?filter=response to drug" class="list-group-item legend-item">
                                         <span class="icon-trait icon-trait-drug"></span>
@@ -220,11 +220,11 @@
                                     </a>
                                     <a href="?filter=Other disease" class="list-group-item legend-item">
                                         <span class="icon-trait icon-trait-disease"></span>
-                                        <span class="badge" id="Other disease">0</span>Other disease
+                                        <span class="badge" id="other disease">0</span>Other disease
                                     </a>
                                     <a href="?filter=Other trait" class="list-group-item legend-item">
                                         <span class="icon-trait icon-trait-other"></span>
-                                        <span class="badge" id="Other trait">0</span>Other trait
+                                        <span class="badge" id="other trait">0</span>Other trait
                                     </a>
                                     <a style="display: none;" href="?filter=Age-related macular degeneration" class="list-group-item legend-item">
                                         <span class="icon-trait icon-trait-other"></span>
@@ -271,10 +271,10 @@
                 <div style="border-bottom: 1px solid #c0c0c0; padding-top: 7px; padding-bottom: 7px; background: #fff;">
                     <h4>
                         <span style="font-weight: normal; margin-left: 15px;">
-                            GWAS > <a th:href="@{/v2/diagram}"> Diagram-v2 > </a> <span id="filterData" th:text="${filter}"> ... </span> <br/>
+                            GWAS > <a th:href="@{/diagram}"> Diagram > </a> <span id="filterData" th:text="${filter}"> ... </span> <br/>
                         </span>
                         <small style="font-weight: 300; font-size: 0.7em; margin-left: 15px;"> This diagram shows all
-                            SNP-trait associations with p-value ≤ 5.0 × 10-8, published in the GWAS Catalog </small>
+                            SNP-trait associations with p-value ≤ 5.0 × 10-8, published in the GWAS Catalog <span style="font-style: italic">(Data refreshed on 24th September 2025)</span> </small>
                     </h4>
                 </div>
 
@@ -288,51 +288,51 @@
                                  height="80vh" width="7000" preserveAspectRatio='xMinYMin slice' version='1.0'>
                                 <g transform='translate(0,100)' id="chromosome_1_plot" class="xyz"></g>
 
-                                <g transform='translate(340,100)' id="chromosome_2_plot" class="xyz"></g>
+                                <g transform='translate(350,100)' id="chromosome_2_plot" class="xyz"></g>
 
-                                <g transform='translate(680,100)' id="chromosome_3_plot" class="xyz"></g>
+                                <g transform='translate(700,100)' id="chromosome_3_plot" class="xyz"></g>
 
-                                <g transform='translate(1020,100)' id="chromosome_4_plot" class="xyz"></g>
+                                <g transform='translate(1050,100)' id="chromosome_4_plot" class="xyz"></g>
 
-                                <g transform='translate(1360,100)' id="chromosome_5_plot" class="xyz"></g>
+                                <g transform='translate(1400,100)' id="chromosome_5_plot" class="xyz"></g>
 
-                                <g transform='translate(1700,100)' id="chromosome_6_plot" class="xyz"></g>
+                                <g transform='translate(1750,100)' id="chromosome_6_plot" class="xyz"></g>
 
-                                <g transform='translate(2040,100)' id="chromosome_7_plot" class="xyz"></g>
+                                <g transform='translate(2100,100)' id="chromosome_7_plot" class="xyz"></g>
 
-                                <g transform='translate(2380,100)' id="chromosome_8_plot" class="xyz"></g>
+                                <g transform='translate(2450,100)' id="chromosome_8_plot" class="xyz"></g>
 
-                                <g transform='translate(2720,100)' id="chromosome_9_plot" class="xyz"></g>
+                                <g transform='translate(2800,100)' id="chromosome_9_plot" class="xyz"></g>
 
-                                <g transform='translate(3060,100)' id="chromosome_10_plot" class="xyz"></g>
+                                <g transform='translate(3150,100)' id="chromosome_10_plot" class="xyz"></g>
 
-                                <g transform='translate(3400,100)' id="chromosome_11_plot" class="xyz"></g>
+                                <g transform='translate(3500,100)' id="chromosome_11_plot" class="xyz"></g>
 
-                                <g transform='translate(3740,100)' id="chromosome_12_plot" class="xyz"></g>
+                                <g transform='translate(3850,100)' id="chromosome_12_plot" class="xyz"></g>
 
-                                <g transform='translate(4080,250)' id="chromosome_13_plot" class="xyz"></g>
+                                <g transform='translate(4200,250)' id="chromosome_13_plot" class="xyz"></g>
 
-                                <g transform='translate(4420,250)' id="chromosome_14_plot" class="xyz"></g>
+                                <g transform='translate(4550,250)' id="chromosome_14_plot" class="xyz"></g>
 
-                                <g transform='translate(4760,250)' id="chromosome_15_plot" class="xyz"></g>
+                                <g transform='translate(4900,250)' id="chromosome_15_plot" class="xyz"></g>
 
-                                <g transform='translate(5100,270)' id="chromosome_16_plot" class="xyz"></g>
+                                <g transform='translate(5250,270)' id="chromosome_16_plot" class="xyz"></g>
 
-                                <g transform='translate(5440,100)' id="chromosome_17_plot" class="xyz"></g>
+                                <g transform='translate(5700,100)' id="chromosome_17_plot" class="xyz"></g>
 
-                                <g transform='translate(5780,100)' id="chromosome_18_plot" class="xyz"></g>
+                                <g transform='translate(6050,100)' id="chromosome_18_plot" class="xyz"></g>
 
-                                <g transform='translate(6120,100)' id="chromosome_19_plot" class="xyz"></g>
+                                <g transform='translate(6400,100)' id="chromosome_19_plot" class="xyz"></g>
 
-                                <g transform='translate(6460,100)' id="chromosome_20_plot" class="xyz"></g>
+                                <g transform='translate(6750,100)' id="chromosome_20_plot" class="xyz"></g>
 
-                                <g transform='translate(6800,100)' id="chromosome_21_plot" class="xyz"></g>
+                                <g transform='translate(7100,100)' id="chromosome_21_plot" class="xyz"></g>
 
-                                <g transform='translate(7140,100)' id="chromosome_22_plot" class="xyz"> </g>
+                                <g transform='translate(7450,100)' id="chromosome_22_plot" class="xyz"> </g>
 
-                                <g transform='translate(7480,100)' id="chromosome_X_plot" class="xyz"></g>
+                                <g transform='translate(7800,100)' id="chromosome_X_plot" class="xyz"></g>
 
-                                <g transform='translate(7820,100)' id="chromosome_Y_plot" class="xyz"></g>
+                                <g transform='translate(8150,100)' id="chromosome_Y_plot" class="xyz"></g>
                             </svg>
 
                         </div>
