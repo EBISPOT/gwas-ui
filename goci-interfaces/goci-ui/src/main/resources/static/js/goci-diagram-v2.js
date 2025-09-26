@@ -66,7 +66,7 @@ const colorHolder = {
     "cardiovascular disease": "AA2C2C",
     "metabolic disease": "FDAB57",
     "immune system disease": "FFEA64",
-    "nervous system disease": "FF2D8E",
+    "nervous system disease": "FFFFB3",
     "liver enzyme measurement": "5B8E00",
     "lipid or lipoprotein measurement": "AAD95D",
     "inflammatory marker measurement": "C5E7BD",
