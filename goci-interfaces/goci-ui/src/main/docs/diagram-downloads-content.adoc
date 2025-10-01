@@ -4,7 +4,7 @@
 
 To obtain an image of the GWAS Diagram, you are recommended to navigate to your view of interest and take a screenshot. 
 
-Diagrams representing earlier stages of the Catalog are available from our FTP site in link:http://ftp.ebi.ac.uk/pub/databases/gwas/timeseries/png[png], link:http://ftp.ebi.ac.uk/pub/databases/gwas/timeseries/svg[svg] and link:http://ftp.ebi.ac.uk/pub/databases/gwas/timeseries/pdf[pdf] formats! 
+Diagrams representing earlier stages of the Catalog are available from our FTP site in link:http://ftp.ebi.ac.uk/pub/databases/gwas/timeseries/png[png], link:http://ftp.ebi.ac.uk/pub/databases/gwas/timeseries/svg[svg] and link:http://ftp.ebi.ac.uk/pub/databases/gwas/timeseries/pdf[pdf] formats. 
 
 In the Diagram associations with p-values less than 5x10^-8^ are shown, and colored according to trait categories. See link:http://ftp.ebi.ac.uk/pub/databases/gwas/timeseries/diagram_legend.png[legend] for details. An link:http://ftp.ebi.ac.uk/pub/databases/gwas/timeseries/current/GWAS_Catalog_annotated_diagram_2025.pdf[annotated version of the diagram] is also available, containing the legend and additional details.
 
