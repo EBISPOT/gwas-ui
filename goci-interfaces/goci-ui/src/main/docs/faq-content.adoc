@@ -105,17 +105,15 @@
 
 2. <<faq-D2, How do I filter the diagram?>>
 
-3. <<faq-D3, How do I display the legend?>>
+3. <<faq-D3, What are the trait categories shown on the Diagram?>>
 
 4. <<faq-D4, How do I display labels?>>
 
-5. <<faq-D5, How do I zoom and move the diagram?>>
+5. <<faq-D5, How should I cite the diagram?>>
 
-6. <<faq-D6, How should I cite the diagram?>>
+6. <<faq-D6, How do I download the diagram?>>
 
-7. <<faq-D7, How do I download the diagram?>>
-
-8. <<faq-D8, Can I download a filtered version of the diagram?>>
+7. <<faq-D7, Can I download a filtered version of the diagram?>>
 
 === E. Genomic mappings
 
@@ -424,39 +422,31 @@ These tables can be found on the each of the specific "Trait", "Variant", "Gene"
  
 ==== [[faq-D1]]1. How do I display SNP information for a given dot?
 
-To view all the SNPs associated with any trait in a given location, simply click on the trait (coloured circle) you are interested in. An interactive pop-up will display the SNPs for that trait, the p-value for each SNP-trait association, the study in which the association was identified, the trait assigned by the GWAS Catalog curators and the EFO term the SNP-trait association is mapped to. The SNP, disease trait, EFO term and study fields are interactive, linking to a search of the full Catalog for that particular field. SNP, EFO term and study also link out via the external link icon to Ensembl, EFO and UKPMC, respectively. Clicking outside the pop-up automatically closes the current pop-up. Alternatively, close the pop-up by clicking on the cross in its top right corner or on the "Close" button.
+To view all the SNPs associated with any trait in a given location, simply click on the trait (coloured circle) you are interested in. An interactive pop-up will display the SNPs for that trait, the p-value for each SNP-trait association, the study in which the association was identified, the trait assigned by the GWAS Catalog curators and the EFO term the SNP-trait association is mapped to. The SNP, disease trait, EFO term and study fields are interactive, linking to a search of the full Catalog for that particular field. SNP, EFO term and study also link out via the external link icon to Ensembl, EFO and EuropePMC, respectively. Clicking outside the pop-up automatically closes the current pop-up. Alternatively, close the pop-up by clicking on the cross in its top right corner or on the "Close" button.
 
 ==== [[faq-D2]]2. How do I filter the diagram?
 
-The full diagram can be filtered by typing a trait into the search box to the left the diagram and hitting "Enter" or clicking the "Apply" button. Once you have typed 3 to 4 characters, the text box will offer auto-completed suggestions for your search based on EFO traits. You can navigate the suggestion list using your mouse or the up and down keys. 
+The full diagram can be filtered by clicking on the trait categories on the lefthand side. It is not currently possible to filter the Diagram by specific traits. Please contact us via gwas-info@ebi.ac.uk for further assistance. 
 
-Once you have filtered the diagram by a selected trait, all other traits will be faded to a lower visibility to highlight the desired trait. A counter in the top left corner of the diagram will indicate how many dots on the diagram correspond to your search term. Searchable traits are based on EFO categories and may not coincide with GWAS Catalog reported traits, e.g. a search for "hair color" will highlight SNP-trait associations labelled hair color as well as "black vs blond hair" and "red vs non-red hair".
+==== [[faq-D3]]3. What are the trait categories shown on the Diagram?
 
-==== [[faq-D3]]3. How do I display the legend?
-
-A legend of the colour scheme is available to the left of the diagram. The legend includes a count of the number of dots of each colour in the diagram. You can hide the sidebar of increase the amount of screen space for the diagram by clicking on the little chevron icon at the top of the sidebar. Click on any item in the legend to filter the diagram by that category. This does not work for any of the "other"-type categories (other measurement, other disease and other trait). Please note that some traits, in particular some diseases, belong to multiple categories, eg Crohn's disease is both a digestive system disease and an immune system disease. Each dot on the diagram can only be assigned one colour and colour assignment is determined by a term's most specific ancestor (ancestor that has itself the most number of ancestors) in EFO so it is possible to find dots of a different colour when searching for example for "digestive system disease".
+A legend of the colour scheme is available to the left of the diagram, which includes a count of the number of dots of each colour in the diagram. Click on any item in the legend to filter the diagram by that category. Please note that some traits, in particular some diseases, belong to multiple categories, eg Crohn's disease is both a digestive system disease and an immune system disease. Each dot on the diagram can only be assigned one colour and colour assignment is determined by a term's most specific ancestor (ancestor that has itself the most number of ancestors) in EFO.
 
 ==== [[faq-D4]]4. How do I display labels?
 
 Chromosomes and traits (coloured circles) have labels that display when hovering the mouse pointer over a given element. The displayed labels correspond to the EFO term mapped this SNP.
 
-==== [[faq-D5]]5. How do I zoom and move the diagram?
-
-The diagram was designed to have GoogleMaps-style interactivity. There are two ways to zoom in and out. The easiest option is to use the scroll wheel on the mouse or touch pad on a laptop. Scrolling up zooms in and scrolling down zooms out. This feature may not work with all touch pads. Alternatively, the top right-hand corner of the diagram features a zoom bar which can be used to generate exactly the same effect, by dragging the little square left or right along the bar with the mouse pointer or clicking the plus and minus buttons.
-The diagram can be moved around the viewing area by clicking on any part of the diagram with the left mouse button and, holding the mouse button down, dragging the diagram around the screen until the desired part is visible. This feature is particularly useful for centring the diagram on a specific location at higher zoom levels.
-
-==== [[faq-D6]]6. How should I cite the diagram?
+==== [[faq-D5]]5. How should I cite the diagram?
 
 Please see the link:about[About] page for citation guidance.
 
-==== [[faq-D7]]7. How do I download the diagram?
+==== [[faq-D6]]6. How do I download the diagram?
 Download options are listed https://www.ebi.ac.uk/gwas/docs/diagram-downloads[here].
 
-==== [[faq-D8]]8. Can I download a filtered version of the diagram?
+==== [[faq-D7]]7. Can I download a filtered version of the diagram?
 
-The diagram can be filtered by trait to present only a subset of specific associations.  At present we don't have a native function for downloading diagrams filtered by trait.  We suggest taking a screenshot if a high resolution image is not required.
+The diagram can be filtered by trait category to present only a subset of specific associations.  At present we don't have a native function for downloading diagrams filtered by trait.  We suggest taking a screenshot.
 
-As a workaround a high resolution image can be created by saving the web-displayed image as an .svg (scalable vector graphics format). These instructions are for Firefox, it's slightly different in other browsers. Right click on the filtered diagram, click 'inspect element', in the inspector window hover over the svg element (this starts <svg), right click and 'copy - outer html'.  Paste this text into a text editor and save.  Change the file extension from .txt to .svg.  You will then be able to open the image as an .svg in an image processing program (e.g. Inkscape or Illustrator).  From there you can convert to your preferred format.
 
 == [[E]]E. Genomic mappings
 
