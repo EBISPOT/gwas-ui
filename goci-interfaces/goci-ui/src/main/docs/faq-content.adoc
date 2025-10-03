@@ -825,131 +825,71 @@ _Related search terms:_ studies table, associations table, filter, column visibi
 
 == [[D]]D. Diagram
 
-==== [[faqD1SnpInfo]] How do I display SNP details for a dot in the diagram?
+==== [[faqD1SnpInfo]] How do I display SNP information for a given dot?
+Click on any trait (a coloured circle) in the diagram to open a pop-up. The pop-up shows:  
+- all SNPs linked to that trait  
+- the p-value for each SNP–trait association  
+- the study where the association was reported  
+- the trait as curated in the GWAS Catalog  
+- the mapped Experimental Factor Ontology (EFO) term  
 
-Click any dot (coloured circle) in the diagram to view all SNPs associated with that location and trait.  
+Each field in the pop-up is interactive. SNPs, traits, EFO terms and studies link to Catalog searches, and external icons provide links to Ensembl, EFO, and EuropePMC. Close the pop-up by clicking outside it, or by using the cross or "Close" button inside.  
 
-The pop-up shows:
+_Related search terms:_ SNP pop-up, interactive diagram, SNP details, p-value, study info  
 
-* SNP IDs  
-
-* p-values  
-
-* Study information  
-
-* Trait names (curated EFO terms)  
-
-All fields in the pop-up are clickable and link to the corresponding page in the Catalog. Icons provide external links to Ensembl, EFO, or Europe PMC for more details.  
-
-Close the pop-up by clicking outside it, the “×” in the corner, or the “Close” button.  
-
-_Related search terms:_ diagram, SNP info, interactive pop-up, variant details, EFO term, study link
 
 '''
 
 ==== [[faqD2FilterDiagram]] How do I filter the diagram?
+You can filter the diagram by clicking trait categories in the sidebar on the left. At this time, filtering by individual traits is not supported. If you need more specific trait filtering, contact us at gwas-info@ebi.ac.uk.  
 
-Use the search box next to the diagram to filter by trait:  
+_Related search terms:_ diagram filter, trait category, sidebar filter, specific trait filter  
 
-* Start typing a trait name — after 3–4 characters, auto-complete suggestions from EFO will appear.  
-
-* Select a suggestion and click *Apply* or press Enter.  
-
-When filtered, only dots for the selected trait remain highlighted. Other traits are faded, and a counter shows how many associations match your search.  
-
-Note: The filter uses EFO trait names and synonyms, which may differ slightly from author-reported trait names in publications.  
-
-_Related search terms:_ diagram filter, trait search, EFO suggestions, highlight associations
 
 '''
 
-==== [[faqD3DiagramLegend]] How do I display and use the legend?
+==== [[faqD3DiagramLegend]] What are the trait categories shown on the diagram?
+The sidebar also includes a colour legend with a count of dots in each category. Clicking a category highlights only those associations.  
 
-The legend is displayed in the left-hand sidebar of the diagram. It shows:
+Some traits belong to multiple categories (e.g. Crohn’s disease is both a digestive system and immune system disease). Each dot is assigned a single colour, based on its “most specific ancestor” in EFO.  
 
-* The colour scheme used for trait categories.
+_Related search terms:_ trait categories, colour legend, EFO ancestor, disease categories  
 
-* A count of the number of associations (dots) in each category.
-
-You can:
-
-* Click the chevron icon at the top of the sidebar to hide the legend and maximise space for the diagram.
-
-* Click a category in the legend to filter the diagram by that category (not available for "other" categories like *other disease* or *other trait*).
-
-Note: Some traits belong to multiple categories (for example, Crohn’s disease is classified as both a digestive system and immune system disease). Each association is assigned a single colour based on the most specific EFO ancestor term, so you may see different colours for traits with overlapping categories.  
-
-_Related search terms:_ diagram legend, colour categories, category filter, trait classification
 
 '''
 
 ==== [[faqD4DiagramLabels]] How do I display labels?
+Hover over chromosomes or coloured circles to see labels. Labels show the EFO term mapped to the SNP.  
 
-Labels appear when you hover your mouse over elements in the diagram:
+_Related search terms:_ diagram labels, hover labels, EFO label display  
 
-* **Chromosome labels:** Display the chromosome number or region.
-
-* **Trait labels (coloured circles):** Show the trait name (EFO term) and its position.
-
-These labels help you identify which trait or region each point represents without leaving the diagram.  
-
-_Related search terms:_ diagram labels, hover, chromosome label, trait label, EFO term
 
 '''
 
-==== [[faqD5DiagramZoomMove]] How do I zoom and move the diagram?
+==== [[faqD5DiagramCitation]] How should I cite the diagram?
+Please see the GWAS Catalog link:about[About] page for citation guidance.  
 
-The GWAS Catalog diagram supports Google Maps–style navigation:
+_Related search terms:_ diagram citation, how to cite, GWAS Catalog reference  
 
-* **Zoom:**  
-
-  * Scroll up to zoom in, scroll down to zoom out.  
-  
-  * Alternatively, use the zoom bar in the top-right corner — drag the slider or click the + and − buttons.  
-
-* **Pan (move):**  
-
-  * Click and hold the left mouse button, then drag the diagram to reposition the view.  
-  
-  * This is especially useful for centring on a specific region at higher zoom levels.  
-
-_Related search terms:_ diagram zoom, pan, scroll, drag, navigation, move view
 
 '''
 
-==== [[faqD6DiagramCitation]] How should I cite the diagram?
+==== [[faqD6DiagramDownload]] How do I download the diagram?
+Download options are available on the GWAS Catalog website at: https://www.ebi.ac.uk/gwas/docs/diagram-downloads.  
 
-Cite the diagram using the same format as for the GWAS Catalog itself.  
-Full citation guidance is available on the https://www.ebi.ac.uk/gwas/docs/about[About page].
+_Related search terms:_ diagram download, image export, diagram formats  
 
-_Related search terms:_ diagram citation, figure reference, GWAS Catalog diagram, how to cite
-
-'''
-
-==== [[faqD7DiagramDownload]] How do I download the diagram?
-
-High-resolution images of the GWAS Catalog diagram can be downloaded in several formats (e.g. PNG, SVG, PDF).  
-Download options are listed on the https://www.ebi.ac.uk/gwas/docs/diagram-downloads[diagram downloads page].
-
-_Related search terms:_ diagram download, high-resolution image, PNG, SVG, PDF, save diagram
 
 '''
 
-==== [[faqD8FilteredDiagramDownload]] Can I download a filtered version of the diagram?
+==== [[faqD7FilteredDiagramDownload]] Can I download a filtered version of the diagram?
+Currently, the Catalog does not provide a way to directly download trait-filtered diagrams.  
 
-Currently, the GWAS Catalog does not provide a built-in option to download a diagram that is filtered by trait.  
+*Quick option:* take a screenshot.  
 
-*Quick option:*  
-Take a screenshot of the filtered diagram if a high-resolution image is not required.
+*High-resolution workaround:* save the diagram as an SVG using your browser’s developer tools, then edit it in a program like Inkscape or Illustrator.  
 
-*Advanced workaround (for high-resolution SVG):*  
-1. Open the diagram in Firefox (similar steps work in other browsers).  
-2. Right-click on the filtered diagram and select **Inspect element**.  
-3. In the Inspector, hover over the `<svg>` element, right-click, and choose **Copy → Outer HTML**.  
-4. Paste into a text editor and save the file with a `.svg` extension.  
-5. Open the file in a vector graphics program (e.g. Inkscape, Illustrator) and export to your preferred format.  
-
-_Related search terms:_ filtered diagram download, SVG export, high resolution, screenshot, Firefox inspector
+_Related search terms:_ filtered diagram download, trait subset diagram, SVG export, screenshot
 
 '''
 
