@@ -34,7 +34,7 @@ You can also follow us on https://www.linkedin.com/company/gwas-catalog/[LinkedI
 
 == Funding acknowledgements
 
-The NHGRI-EBI GWAS Catalog is funded by NHGRI Grant Number 1U24HG012542-01, and delivered by collaboration between the NHGRI, EMBL-EBI, University of Cambridge and NCBI.
+The NHGRI-EBI GWAS Catalog is funded by NHGRI Grant Number 1U24HG012542-01, and delivered by collaboration between the NHGRI, EMBL-EBI, University of Cambridge and NCBI. We recieve additional funding from Open Targets. 
 
 
 == Citing the GWAS Catalog
@@ -77,3 +77,4 @@ https://drive.google.com/file/d/18banglYT7UwOJaoIKl9qimobwPysX-MJ/view?usp=shari
 The authors are http://picol.org[Picol].
 
 * http://www.jetbrains.com/idea/index.html[IntelliJ IDEA]: Full-featured commercial IDE with a complete set of tools and integrations with the most important modern technologies and frameworks, such as Spring and Hibernate — a must-have for effective Web and Java EE development.
+
