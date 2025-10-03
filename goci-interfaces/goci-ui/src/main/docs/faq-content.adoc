@@ -826,8 +826,8 @@ _Related search terms:_ studies table, associations table, filter, column visibi
 == [[D]]D. Diagram
 
 ==== [[faqD1SnpInfo]] How do I display SNP information for a given dot?
-Click on any trait (a coloured circle) in the diagram to open a pop-up. The pop-up shows:  
-- all SNPs linked to that trait  
+Click on any trait (a coloured circle) on the diagram to open a pop-up. The pop-up shows:  
+- all SNPs linked to that trait in that location 
 - the p-value for each SNP–trait association  
 - the study where the association was reported  
 - the trait as curated in the GWAS Catalog  
@@ -849,9 +849,9 @@ _Related search terms:_ diagram filter, trait category, sidebar filter, specific
 '''
 
 ==== [[faqD3DiagramLegend]] What are the trait categories shown on the diagram?
-The sidebar also includes a colour legend with a count of dots in each category. Clicking a category highlights only those associations.  
+The sidebar includes a colour legend with a count of dots in each category. Clicking a category highlights only those associations.  
 
-Some traits belong to multiple categories (e.g. Crohn’s disease is both a digestive system and immune system disease). Each dot is assigned a single colour, based on its “most specific ancestor” in EFO.  
+Some traits belong to multiple categories (e.g. Crohn’s disease is both a digestive system and immune system disease). Each dot is assigned a single colour, based on its most specific ancestor in EFO (ancestor that has itself the most number of ancestors).  
 
 _Related search terms:_ trait categories, colour legend, EFO ancestor, disease categories  
 
@@ -883,13 +883,10 @@ _Related search terms:_ diagram download, image export, diagram formats
 '''
 
 ==== [[faqD7FilteredDiagramDownload]] Can I download a filtered version of the diagram?
-Currently, the Catalog does not provide a way to directly download trait-filtered diagrams.  
+Currently, the GWAS Catalog does not provide a way to directly download trait-filtered diagrams.  
+The easiest option is to take a screenshot.  
 
-*Quick option:* take a screenshot.  
-
-*High-resolution workaround:* save the diagram as an SVG using your browser’s developer tools, then edit it in a program like Inkscape or Illustrator.  
-
-_Related search terms:_ filtered diagram download, trait subset diagram, SVG export, screenshot
+_Related search terms:_ filtered diagram download, trait subset diagram, screenshot
 
 '''
 
