@@ -827,6 +827,7 @@ _Related search terms:_ studies table, associations table, filter, column visibi
 
 ==== [[faqD1SnpInfo]] How do I display SNP information for a given dot?
 Click on any trait (a coloured circle) on the diagram to open a pop-up. The pop-up shows:  
+
 - all SNPs linked to that trait in that location 
 - the p-value for each SNP–trait association  
 - the study where the association was reported  
