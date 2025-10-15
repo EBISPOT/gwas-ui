@@ -84,7 +84,13 @@ public class JsonStreamingProcessorService {
         ObjectMapper mapper = new ObjectMapper();
         JsonParser parser = mapper.getFactory().createParser(input);
         JsonToken token;
-        while ((token = parser.nextToken()) != null && token != JsonToken.START_ARRAY) {
+        while ((token = parser.nextToken()) != null) {
+            if (token == JsonToken.FIELD_NAME && "docs".equals(parser.getCurrentName())) {
+                token = parser.nextToken();
+                if (token == JsonToken.START_ARRAY) {
+                    break;
+                }
+            }
         }
         while(parser.nextToken() == JsonToken.START_OBJECT) {
             StringBuilder line = new StringBuilder();
