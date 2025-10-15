@@ -19,7 +19,7 @@ public class SearchController {
         return "search";
     }
 
-    @RequestMapping(value = "/v2/diagram", produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/diagram", produces = MediaType.TEXT_HTML_VALUE)
     public String diagramV2(Model model, @RequestParam(required = false) String filter) {
         model.addAttribute("filter", filter);
         return "diagram-v2";
