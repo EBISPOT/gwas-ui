@@ -897,8 +897,19 @@ public class JsonProcessingService {
                         geneId = data[1];
                         geneDist = data[2];
 
-
-                        int dist = Integer.parseInt(geneDist);
+                        int dist;
+                        try {
+                            dist = Integer.parseInt(geneDist);
+                        } catch (NumberFormatException e) {
+                            // handle a bug where DISTANCE value starts with -- in Solr, should be fixed in the indexer
+                            if (geneDist.startsWith("--")) {
+                                geneDist = geneDist.replaceFirst("--", "-");
+                                dist = Integer.parseInt(geneDist);
+                            }
+                            else {
+                                throw new NumberFormatException("Invalid distance: " + geneDist + " for id: " + doc.get("id"));
+                            }
+                        }
 
                         if (dist == 0) {
                             ingene.setOrAppendId(geneId);
