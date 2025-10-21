@@ -3,18 +3,18 @@
 Version numbers refer to the <<file-names,file format version>>. Data is released biweekly and release version is indicated by r-DATE in the downloaded file name.   
 
 
-[width="80%",options="header",cols="4,2,2,2", halign = "center", role="table table-hover"]
+[width="80%",options="header",cols="4,4,2,2", halign = "center", role="table table-hover"]
 |===
 |Description | Download Link |Format  | Column header descriptions
 
 |All associations *v1.0*
-|link:../api/search/downloads/full[ Click to download]
-|tab separated file
+|link:../api/search/downloads/associations/v1.0?split=false[Download (full list)] +
+ link:../api/search/downloads/associations/v1.0[Download (split by pub. year)]|tab separated file (zipped)
 |link:fileheaders[ Click to view]
 
 |All associations *v1.0.2 - with added ontology annotations, GWAS Catalog study accession numbers and genotyping technology*
-|link:../api/search/downloads/alternative[ Click to download]
-|tab separated file
+|link:../api/search/downloads/associations/v1.0.2?split=false[Download (full list)] +
+ link:../api/search/downloads/associations/v1.0.2[Download (split by pub. year)]|tab separated file (zipped)
 |link:fileheaders#_file_headers_for_catalog_version_1_0_1[ Click to view]
 
 |All studies  *v1.0*
