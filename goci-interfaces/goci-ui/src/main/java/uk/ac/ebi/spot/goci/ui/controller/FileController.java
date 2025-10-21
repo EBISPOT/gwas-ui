@@ -7,11 +7,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -34,11 +30,17 @@ import java.util.Properties;
 public class FileController {
 
     // These parameters are read from application.properties file
-    @Value("${download.full}")
-    private Resource fullFileDownload;
+    @Value("${download.associations.v1.full}")
+    private Resource fullAssociationFileDownload;
 
-    @Value("${download.alternative}")
-    private Resource alternativeFileDownload;
+    @Value("${download.associations.v1.split}")
+    private Resource splitAssociationFileDownload;
+
+    @Value("${download.associations.alternative.full}")
+    private Resource fullAltAssociationFileDownload;
+
+    @Value("${download.associations.alternative.split}")
+    private Resource splitAltAssociationFileDownload;
 
     @Value("${download.studies}")
     private Resource studiesFileDownload;
@@ -110,23 +112,63 @@ public class FileController {
         }
         return null;
     }
-    @RequestMapping(value = "api/search/downloads/full",
+    @RequestMapping(value = "api/search/downloads/associations/v1.0",
                     method = RequestMethod.GET)
-    public void getFullDownload(HttpServletResponse response) throws IOException {
-        if (fullFileDownload.exists() && catalogStatsFile.exists()) {
-
-            Properties properties = new Properties();
-            properties.load(catalogStatsFile.getInputStream());
-            String releasedate = properties.getProperty("releasedate");
-            String ensemblbuild = properties.getProperty("ensemblbuild");
-
-
-            String fileName = "gwas_catalog_v1.0-associations_e".concat(ensemblbuild).concat("_r").concat(releasedate).concat(".tsv");
-            buildDownload(fileName, fullFileDownload, response);
+    public void getAssociationDownload(HttpServletResponse response,
+                                @RequestParam(name = "split", defaultValue = "true") boolean split) throws IOException {
+        final String FILE_NAME_PREFIX = "gwas_catalog_v1.0-associations_e";
+        boolean filesAvailable = splitAssociationFileDownload.exists() && fullAssociationFileDownload.exists() && catalogStatsFile.exists();
+        if (!filesAvailable) {
+            throw new FileNotFoundException("Required download files are not available");
         }
-        else {
-            throw new FileNotFoundException();
+
+        Properties properties = new Properties();
+        try (InputStream statsIn = catalogStatsFile.getInputStream()) {
+            properties.load(statsIn);
         }
+
+        String releaseDate = properties.getProperty("releasedate");
+        String ensemblBuild = properties.getProperty("ensemblbuild");
+
+        String fileName = new StringBuilder(FILE_NAME_PREFIX)
+                .append(ensemblBuild)
+                .append("_r")
+                .append(releaseDate)
+                .append(split ? "_split.zip" : "_full.zip")
+                .toString();
+        Resource sourceStream = split ? splitAssociationFileDownload : fullAssociationFileDownload;
+
+        buildDownload(fileName, sourceStream, response);
+    }
+
+    @RequestMapping(value = "api/search/downloads/associations/v1.0.2 ",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_PLAIN_VALUE)
+    public void getAlternativeDownload(HttpServletResponse response,
+                                       @RequestParam(name = "split", defaultValue = "true") boolean split) throws IOException {
+        final String FILE_NAME_PREFIX = "gwas_catalog_v1.0.2-associations_e";
+        boolean filesAvailable = splitAltAssociationFileDownload.exists() && fullAltAssociationFileDownload.exists() && catalogStatsFile.exists();
+        if (!filesAvailable) {
+            throw new FileNotFoundException("Required download files are not available");
+        }
+
+        Properties properties = new Properties();
+        try (InputStream statsIn = catalogStatsFile.getInputStream()) {
+            properties.load(statsIn);
+        }
+
+        String releaseDate = properties.getProperty("releasedate");
+        String ensemblBuild = properties.getProperty("ensemblbuild");
+
+        String fileName = new StringBuilder(FILE_NAME_PREFIX)
+                .append(ensemblBuild)
+                .append("_r")
+                .append(releaseDate)
+                .append(split ? "_split.zip" : "_full.zip")
+                .toString();
+        Resource sourceStream = split ? splitAltAssociationFileDownload : fullAltAssociationFileDownload;
+
+        buildDownload(fileName, sourceStream, response);
     }
 
 //    @RequestMapping(value = "api/downloads/fullpvalue",
@@ -265,26 +307,6 @@ public class FileController {
             String releasedate = getProperty(PropertyTypes.RELEASE_DATE);
             String fileName = "gwas_catalog_v1.0-studies_r".concat(releasedate).concat(".tsv");
             buildDownload(fileName, studiesFileDownload, response);
-        }
-        else {
-            throw new FileNotFoundException();
-        }
-    }
-
-
-    @RequestMapping(value = "api/search/downloads/alternative",
-                    method = RequestMethod.GET,
-                    produces = MediaType.TEXT_PLAIN_VALUE)
-    public void getAlternativeDownload(HttpServletResponse response) throws IOException {
-        if (alternativeFileDownload.exists() && catalogStatsFile.exists()) {
-
-            Properties properties = new Properties();
-            properties.load(catalogStatsFile.getInputStream());
-            String releasedate = properties.getProperty("releasedate");
-            String ensemblbuild = properties.getProperty("ensemblbuild");
-
-            String fileName = "gwas_catalog_v1.0.2-associations_e".concat(ensemblbuild).concat("_r").concat(releasedate).concat(".tsv");
-            buildDownload(fileName, alternativeFileDownload, response);
         }
         else {
             throw new FileNotFoundException();
