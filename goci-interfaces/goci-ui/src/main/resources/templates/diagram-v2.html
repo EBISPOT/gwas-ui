@@ -104,7 +104,7 @@
                 <div class="header"
                      style="border-bottom: 1px solid #c0c0c0; padding-top: 7px; padding-bottom: 7px; background: #EDF8F9;">
                     <h4>
-                        <span style="font-weight: normal; margin-left: 15px;"> Filter the diagram <br/> </span>
+                        <span style="font-weight: normal; margin-left: 15px;" onclick="executeDownload();"> Filter the diagram <br/> </span>
                         <small style="font-weight: 300; font-size: 0.7em; margin-left: 15px;"> By parent trait
                             category: </small>
                     </h4>
@@ -310,29 +310,31 @@
 
                                 <g transform='translate(3850,100)' id="chromosome_12_plot" class="xyz"></g>
 
-                                <g transform='translate(4200,250)' id="chromosome_13_plot" class="xyz"></g>
 
-                                <g transform='translate(4550,250)' id="chromosome_14_plot" class="xyz"></g>
 
-                                <g transform='translate(4900,250)' id="chromosome_15_plot" class="xyz"></g>
+                                <g transform='translate(0,3000)' id="chromosome_13_plot" class="xyz"></g>
 
-                                <g transform='translate(5250,270)' id="chromosome_16_plot" class="xyz"></g>
+                                <g transform='translate(350,3000)' id="chromosome_14_plot" class="xyz"></g>
 
-                                <g transform='translate(5700,100)' id="chromosome_17_plot" class="xyz"></g>
+                                <g transform='translate(700,3000)' id="chromosome_15_plot" class="xyz"></g>
 
-                                <g transform='translate(6050,100)' id="chromosome_18_plot" class="xyz"></g>
+                                <g transform='translate(1050,3000)' id="chromosome_16_plot" class="xyz"></g>
 
-                                <g transform='translate(6400,100)' id="chromosome_19_plot" class="xyz"></g>
+                                <g transform='translate(1400,3000)' id="chromosome_17_plot" class="xyz"></g>
 
-                                <g transform='translate(6750,100)' id="chromosome_20_plot" class="xyz"></g>
+                                <g transform='translate(1750,3000)' id="chromosome_18_plot" class="xyz"></g>
 
-                                <g transform='translate(7100,100)' id="chromosome_21_plot" class="xyz"></g>
+                                <g transform='translate(2100,3000)' id="chromosome_19_plot" class="xyz"></g>
 
-                                <g transform='translate(7450,100)' id="chromosome_22_plot" class="xyz"> </g>
+                                <g transform='translate(2450,3000)' id="chromosome_20_plot" class="xyz"></g>
 
-                                <g transform='translate(7800,100)' id="chromosome_X_plot" class="xyz"></g>
+                                <g transform='translate(2800,3000)' id="chromosome_21_plot" class="xyz"></g>
 
-                                <g transform='translate(8150,100)' id="chromosome_Y_plot" class="xyz"></g>
+                                <g transform='translate(3150,3000)' id="chromosome_22_plot" class="xyz"> </g>
+
+                                <g transform='translate(3500,3000)' id="chromosome_X_plot" class="xyz"></g>
+
+                                <g transform='translate(3850,3000)' id="chromosome_Y_plot" class="xyz"></g>
                             </svg>
 
                         </div>
@@ -397,7 +399,6 @@
 
 <script id="rendered-js" th:src="@{/js/goci-diagram-v2.js}"></script>
 <script th:src="@{/js/goci-diagram-mouse-zoom-reset-and-drag--control.js}"></script>
-
 
 
 </html>
