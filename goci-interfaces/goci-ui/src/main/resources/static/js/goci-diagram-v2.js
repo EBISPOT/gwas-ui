@@ -20,7 +20,7 @@ let efoServer = "http://www.ebi.ac.uk/efo";
 let publicationServer = "https://europepmc.org/article/MED";
 
 let searchTerm = filterData.innerHTML;
-let check = [null, undefined, ''].includes(searchTerm);
+let fullDiagramView = [null, undefined, ''].includes(searchTerm);
 
 function sendNow(region, trait) {
     fetch(`${server}/associations?region=${region}&efo=${trait}`)
@@ -250,7 +250,7 @@ function getParentTraitStatistics() {
 
 function getGraphData(chromosomeNum) {
     let url = `${server}/chromosomes/${chromosomeNum}`;
-    if (!check) {
+    if (!fullDiagramView) {
         url += `?parent=${searchTerm}`;
     }
     return fetch(url)
@@ -271,20 +271,53 @@ let data = "";
 let regions = "";
 
 
-
-
-
-let dX = 0; let dY=3000;
-if (!check) {
-    dY=900;
+// START ---------------------- CUSTOMIZE SPACING OF THE UPPER & LOWER CHROMOSOMES IN THE FILTERED VIEW ----------------------
+function shiftTranslateXY(el, deltaX, deltaY) {
+    const transform = el.transform.baseVal.consolidate();
+    if (transform) {
+        const matrix = transform.matrix;
+        const newX = matrix.e + deltaX; // matrix.e = translateX
+        const newY = matrix.f + deltaY;      // matrix.f = translateY
+        el.setAttribute("transform", `translate(${newX}, ${newY})`);
+    }
 }
-for (let counter = 13; counter <= 22; counter++) {
-    document.getElementById(`chromosome_${counter}_plot`).setAttribute('transform', `translate(${dX}, ${dY})`);
-    dX += 300;
+
+if (!fullDiagramView) {
+
+    let upperChrAdjust = -200
+    let lowerChrAdjust = -2400
+
+    if (searchTerm === 'Other measurement'){
+        lowerChrAdjust = -1000;
+    }
+    if (searchTerm === 'Lipid or lipoprotein measurement' || searchTerm === 'Other trait'){
+        lowerChrAdjust = -2250;
+    }
+
+    for (let counter = 1; counter <= 22; counter++) {
+        let element = document.getElementById(`chromosome_${counter}_plot`);
+        if (counter <= 12){
+            shiftTranslateXY(element,0, upperChrAdjust);
+        }
+        else {
+            shiftTranslateXY(element,0, lowerChrAdjust);
+        }
+        element = document.getElementById(`chromosome_X_plot`);
+        shiftTranslateXY(element,0, lowerChrAdjust);
+
+        element = document.getElementById(`chromosome_Y_plot`);
+        shiftTranslateXY(element,0, lowerChrAdjust);
+
+
+    }
 }
-document.getElementById(`chromosome_X_plot`).setAttribute('transform', `translate(${dX}, ${dY})`);
-dX += 300
-document.getElementById(`chromosome_Y_plot`).setAttribute('transform', `translate(${dX}, ${dY})`);
+
+// END ---------------------- CUSTOMIZE SPACING OF THE UPPER & LOWER CHROMOSOMES IN THE FILTERED VIEW ----------------------
+
+
+
+
+
 
 getParentTraitStatistics().then((data) => {
     console.log(data)
@@ -438,4 +471,3 @@ getGraphData(chromosomeNum = "Y").then((data) => {
     regions = buildRegionData(data, transformXPos = 0, chromosomeNum = "Y");
     chromosome_Y_plot.innerHTML = ` ${chromosome}  ${regions}`;
 });
-
