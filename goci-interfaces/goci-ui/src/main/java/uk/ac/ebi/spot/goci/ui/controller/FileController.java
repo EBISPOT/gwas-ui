@@ -141,7 +141,7 @@ public class FileController {
         buildDownload(fileName, sourceStream, response);
     }
 
-    @RequestMapping(value = "api/search/downloads/associations/v1.0.2 ",
+    @RequestMapping(value = "api/search/downloads/associations/v1.0.2",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_PLAIN_VALUE)
     public void getAlternativeDownload(HttpServletResponse response,
