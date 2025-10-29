@@ -21,7 +21,7 @@ Read on for general submission instructions.
 
 <<B, B. Creating a submission>>
 
-1. <<CreateAccount, Create Elixir ID>>
+1. <<CreateAccount, Log in through CILogon>>
 2. <<InstallGlobus, Install Globus Connect Personal>>
 3. <<LinkGlobusAccount, Enter registered Globus email>>
 4. <<ValidateSumstats, Format and validate summary statistics>>
@@ -101,13 +101,11 @@ The Details page gives a brief summary of the publication (or other body of work
 
 image::pre_sub_checklist.png[Pre-submission checklist,width=800,align="center"]
 
-=== [[CreateAccount]]1. Create Elixir ID
+=== [[CreateAccount]]1. Log in through CILogon
 
-In order to create a submission, you will need to create an account and log in. User accounts are managed using the ELIXIR Authentication and Authorisation Infrastructure, which is shared across multiple life science services. You can find https://elixir-europe.org/services/compute/aai[more information about ELIXIR here]. 
+In order to create a submission, you will need to create an account and log in. User accounts are managed CILogon, which is shared across multiple life science services. You can find https://www.cilogon.org/faq[more information about CILogon here]. 
 
-First, create an ELIXIR identity if you do not already have one: follow the https://elixir-europe.org/register[Elixir ID link^] and click Register. You can create an ELIXIR identity using an existing account, including Google, LinkedIn, ORCID and most academic institutions.
-
-Second, using your ELIXIR identity, click on "ELIXIR LOGIN" on the GWAS Catalog Submission page to continue.
+Follow the https://www.ebi.ac.uk/gwas/deposition/login[CILogon link^] and select an identity provider you have an existing account with - including Google, LinkedIn, ORCID and most academic institutions. Once linked, you should be directed back to our Submission App where you can create and view ongoing or past submissions.  
 
 === [[InstallGlobus]]2. Install Globus Connect Personal
 
