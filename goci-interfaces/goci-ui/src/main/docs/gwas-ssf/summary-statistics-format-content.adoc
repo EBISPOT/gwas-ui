@@ -7,23 +7,27 @@ Summary statistics are defined as the aggregate p-values and association data fo
 The GWAS Catalog maintains a standard format for summary statistics, to ensure that datasets from a wide range of sources are as interoperable as possible. This standard format has been developed in consultation with the GWAS research community, and may be updated in future as the needs of the community change.
 
 
-The current version of the standard format is *GWAS-SSF* (see https://github.com/EBISPOT/gwas-summary-statistics-standard[detailed specifications and citation information]).
+The current version of the standard format is *GWAS-SSF* (see https://github.com/EBISPOT/gwas-summary-statistics-standard[detailed specifications and citation information^]).
 
 
 All submitted summary statistics are required to conform to the standard format. If you have difficulty meeting the requirements, please contact gwas-subs@ebi.ac.uk. This page outlines how to prepare and validate summary statistics files, including:
 
 
-* <<validator, Summary statistics validator>>
+* <<validator, GWAS SumStats Tools (formatter and validator)>>
 * <<format, Summary statistics file format and content>>
 * <<readme, README content>>
 * <<checksums, Summary statistics checksums>>
 
 
-== [[validator]]Summary statistics validator
+== [[validator]]GWAS SumStats Tools (formatter and validator)
 
+GWAS SumStats Tools is a versatile toolkit created to simplify the processing, validation, and formatting of GWAS summary statistics files intended for submission to the GWAS Catalog: 
 
-To validate your files prior to upload, we provide a validator that can be run locally. Using the validator ensures that you have prepared your files in the standard format. For more information on the summary statistics file validator, and how to run it locally, please see:  https://github.com/EBISPOT/gwas-sumstats-tools and use the "gwas-ssf validate" command.
+* The formatter tool provides a number of useful functions to edit a summary statistics file, such as splitting, renaming and reordering columns; and finding, replacing and extracting specific patterns across all values in a column.
 
+* The validator tool can be run prior to submission, to ensure that you have prepared your files in the standard format.
+
+Both tools can be run locally via the command line or through the https://ebispot.github.io/gwas-sumstats-tools-ssf-morph/[SSF-morph^] web interface. For set-up instructions and further details, please see https://ebispot.github.io/gwas-sumstats-tools-documentation/#/README[the GWAS SumStats Tools documentation^].
 
 == [[format]]Summary statistics file format and content
 
@@ -35,7 +39,10 @@ To validate your files prior to upload, we provide a validator that can be run l
 * All mandatory fields must be present, in the defined order (0-7) (Table 1).
 * Table 1 shows some non-mandatory (encouraged) fields that may be present (*). You are encouraged to include these additional fields in the standard format, where possible.
 * You may include any number of additional columns beyond the set of mandatory fields. 
-* We recommend that analyses are performed with effect allele and other allele fixed to ALT and REF where possible, which provides optimal identification of indels. However, other allele orders can be submitted. The optional column ref_allele should be used to indicate which allele is REF (see Table 1). 
+* If the output software or analysis method precludes submission of beta/OR/HR and/or standard error, please get in touch to discuss alternative submission arrangements
+* We recommend that analyses are performed with effect allele and other allele fixed to ALT and REF where possible, which provides optimal identification of indels. However, other allele orders can be submitted. The optional column ref_allele should be used to indicate which allele is REF (see Table 1).
+* We request you submit files that correspond to the final QC’d version of your dataset, including only data which is usable in downstream analyses (e.g. applying filters for MAF, imputation quality, variant present in n cohorts, as you would do in your own research). We do not apply any of these filters post-submission.
+
 
 
 *Table 1. Required content and format*.
@@ -60,7 +67,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 
 |1
 |base_pair_location
-|The first position of the variant in the reference, counting on the bases, from 1
+|Base pair location on the chromosome. Must match the coordinate system specified in metadata (1-based or 0-based)
 |Mandatory
 |Integer > 0
 |`40983974`
@@ -81,7 +88,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 
 |4
 |(see below)
-|Column 4 must contain the primary effect size measurement (i.e. beta, odds ratio _or_ hazard ratio). If you have calculated more than one effect size statistic (e.g. beta as well as odds ratio), the other can be entered as an additional column at the end of the file.
+|Field 4 must contain the primary effect size measurement (i.e. beta, odds ratio _or_ hazard ratio). If you have calculated more than one effect size statistic (e.g. beta as well as odds ratio), the other can be entered as an additional column at the end of the file.
 |Mandatory to include beta _or_ odds_ratio _or_ hazard_ratio
 |-
 |-
@@ -123,14 +130,26 @@ Mandatory and encouraged fields are shown, with standard headers.
 |Number between 0 and 1. If required, effect allele frequency may be rounded to a threshold value defined in the metadata
 |`0.22`
 
+|7
+|(see below)
+|Column 7 must contain the significance value (i.e. p_value _or_ neg_log_10_p_value). If you provide the p_value as a negative log10 value, please make sure to change the column header to match.
+|Mandatory to include p_value _or_ neg_log_10_p_value
+|-
+|-
 
 |7
 |p_value
 |P-value of the association statistic
-|Mandatory
-|Number between 0 and 1 (standard p-value) _or_ Number ≥ 0 (-log10 p-value). If any p-value is equal to 0, the precision of the p-value must be given in the accompanying metadata
+|(see above)
+|Number between 0 and 1 (standard p-value). If any p-value is equal to 0, the precision of the p-value must be given in the accompanying metadata
 |`1E-08`
 
+|7
+|neg_log_10_p_value
+|Negative log10 p-value of the association statistic
+|(see above)
+|Number ≥ 0 (-log10 p-value).
+|`8.00`
 
 |*
 |variant_id
@@ -161,7 +180,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 
 |*
 |ci_lower
-|Lower confidence interval for the effect
+|Lower confidence interval for the odds ratio
 |Encouraged
 |Number
 |`1.36`
@@ -169,7 +188,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 
 |*
 |ci_upper
-|Upper confidence interval for the effect
+|Upper confidence interval for the odds ratio
 |Encouraged
 |Number
 |`1.64`
@@ -267,3 +286,5 @@ The output should look something like this:
 
 
 The md5 checksum is the 32-digit hexadecimal number in the output, after the file name. Copy this number into the corresponding column of the study sheet.
+
+

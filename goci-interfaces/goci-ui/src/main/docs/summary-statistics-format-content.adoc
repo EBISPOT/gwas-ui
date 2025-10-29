@@ -67,7 +67,7 @@ Mandatory and encouraged fields are shown, with standard headers.
 
 |1
 |base_pair_location
-|The first position of the variant in the reference, counting on the bases, from 1
+|Base pair location on the chromosome. Must match the coordinate system specified in metadata (1-based or 0-based)
 |Mandatory
 |Integer > 0
 |`40983974`
@@ -286,3 +286,4 @@ The output should look something like this:
 
 
 The md5 checksum is the 32-digit hexadecimal number in the output, after the file name. Copy this number into the corresponding column of the study sheet.
+
