@@ -103,7 +103,7 @@ image::pre_sub_checklist.png[Pre-submission checklist,width=800,align="center"]
 
 === [[CreateAccount]]1. Log in through CILogon
 
-In order to create a submission, you will need to create an account and log in. User accounts are managed CILogon, which is shared across multiple life science services. You can find https://www.cilogon.org/faq[more information about CILogon here]. 
+In order to create a submission, you will need to create an account and log in. User accounts are managed by CILogon, which is shared across multiple life science services. You can find https://www.cilogon.org/faq[more information about CILogon here]. 
 
 Follow the https://www.ebi.ac.uk/gwas/deposition/login[CILogon link^] and select an identity provider you have an existing account with - including Google, LinkedIn, ORCID and most academic institutions. Once linked, you should be directed back to our Submission App where you can create and view ongoing or past submissions.  
 
