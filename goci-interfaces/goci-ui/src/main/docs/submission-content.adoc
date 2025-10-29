@@ -15,32 +15,32 @@ Read on for general submission instructions.
 
 <<A, A. Preparing for submission>>
 
-1. <<Submitting, Submission homepage>>
+1. <<SubmissionHomepage, Submission homepage>>
 2. <<FormatAndValidate, Format and validate summary statistics>>
 3. <<Metadata, Publication/project metadata>>
 
 <<B, B. Creating a submission>>
 
-1. <<LoginID, Create Elixir ID>>
-2. <<InstallingGlobus, Install Globus Connect Personal>>
-3. <<GlobusEmail, Enter registered Globus email>>
-4. <<ValidateSumStats, Format and validate summary statistics>>
-5. <<License, License agreement>>
+1. <<CreateAccount, Create Elixir ID>>
+2. <<InstallGlobus, Install Globus Connect Personal>>
+3. <<LinkGlobusAccount, Enter registered Globus email>>
+4. <<ValidateSumstats, Format and validate summary statistics>>
+5. <<LicenseTerms, License agreement>>
 6. <<CreateSubmission, Create submission>>
 
 <<C, C. Uploading data>>
 
 1. <<Upload, Upload summary statistics>>
-2. <<SubmissionForm, Download submission form>>
-3. <<Metadata, Fill in submission form>>
+2. <<DownloadSubmissionForm, Download submission form>>
+3. <<FillSubmissionForm, Fill in submission form>>
 4. <<Submit, Submit submission form>>
-5. <<DataRelease, After submission - release of data in the Catalog & how to find your accession IDs>>
+5. <<ReleaseProcess, After submission - release of data in the Catalog & how to find your accession IDs>>
 
 <<D, Additional information>>
 
 == [[A]]A. Preparing for submission
 
-=== [[Submitting]]Submission homepage
+=== [[SubmissionHomepage]]Submission homepage
 
 Start by going to the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submission homepage^].
 
@@ -101,7 +101,7 @@ The Details page gives a brief summary of the publication (or other body of work
 
 image::pre_sub_checklist.png[Pre-submission checklist,width=800,align="center"]
 
-=== [[LoginID]]1. Create Elixir ID
+=== [[CreateAccount]]1. Create Elixir ID
 
 In order to create a submission, you will need to create an account and log in. User accounts are managed using the ELIXIR Authentication and Authorisation Infrastructure, which is shared across multiple life science services. You can find https://elixir-europe.org/services/compute/aai[more information about ELIXIR here]. 
 
@@ -109,7 +109,7 @@ First, create an ELIXIR identity if you do not already have one: follow the http
 
 Second, using your ELIXIR identity, click on "ELIXIR LOGIN" on the GWAS Catalog Submission page to continue.
 
-=== [[InstallingGlobus]]2. Install Globus Connect Personal
+=== [[InstallGlobus]]2. Install Globus Connect Personal
 
 We use Globus to enable the transfer of summary statistics files to the GWAS Catalog.
 
@@ -127,7 +127,7 @@ image::globus_email.png[Publication search results,width=800,align="center"]
 
 {empty}
 
-=== [[GlobusEmail]]3. Enter registered Globus email
+=== [[LinkGlobusAccount]]3. Enter registered Globus email
 
 Enter the email address associated with your Globus account. It should be filled automatically, but you can change it if needed.
 
@@ -135,11 +135,11 @@ image::enter_email2.png[Enter Globus email,width=800,align="center"]
 
 {empty}
 
-=== [[ValidateSumStats]]4. Format and validate summary statistics
+=== [[ValidateSumstats]]4. Format and validate summary statistics
 
 Please confirm that your summary statistics files conform to our standard format and content, otherwise your submission will fail validation. If you haven’t already done so, follow the https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[Format and validate link^] for formatting instructions and to access our summary statistics formatting and validation tools.
 
-=== [[License]]5. License agreement
+=== [[LicenseTerms]]5. License agreement
 
 Since March 2021, we have asked all submitters to agree to share their data under the terms of https://creativecommons.org/publicdomain/zero/1.0[CC0]. This dedicates your data to the public domain, allowing downstream users to consume the data without restriction. This unambiguous declaration of free and open access is required for some downstream uses, e.g. to meet the data sharing requirements of certain journals, and maximise the utility of your data to the research community. Data submitted prior to March 2021 is made available under the EBI standard https://www.ebi.ac.uk/about/terms-of-use[terms of use]. Whilst these terms do not themselves impose any restrictions on downstream use, the application of CC0 license removes any ambiguity. We advise consumers of data hosted by the GWAS Catalog to note the license terms of individual datasets, if applicable to their specific use case. Please ensure that the original data are cited whenever they are used in a publication.
 If you have any questions or concerns about licensing, please contact us via gwas-info@ebi.ac.uk.
@@ -168,13 +168,13 @@ image::upload_sum_stats.png[Upload summary statistics,width=300,align="center"]
 
 {empty}
 
-In the Globus File Manager, the GWAS Catalog submission folder will appear in the left-hand panel. It will have a Collection name beginning *ebi#gwas#*, followed by the creation date and some additional characters.
+In the Globus File Manager, the GWAS Catalog submission folder will appear in the left-hand panel. It will have a Collection name beginning with the date, followed by some additional characters.
 
 image::file_manager.png[Globus File Manager,width=800,align="center"]
 
 {empty}
 
-In the right-hand panel, click on the Search box and then select your Globus Connect Personal endpoint from the *Your Collections* tab.  This should have the name that you entered when installing Globus Connect Personal in <<link-6, step B2>>.
+In the right-hand panel, click on the Search box and then select your Globus Connect Personal endpoint from the *Your Collections* tab.  This should have the name that you entered when installing Globus Connect Personal in <LinkGlobusAccount, step B2>>.
 
 image::search_collection.png[Search for your collection,width=800,align="center"]
 
@@ -194,7 +194,7 @@ image::drag_and_drop.png[Drag and drop summary statistics,width=800,align="cente
 
 A message will appear when the transfer request has successfully started. Large files may take some time to transfer, but you do not need to wait until this is finished - the transfer will continue in the background while you proceed with the next step. You do however need to wait for confirmation of file transfer before clicking "Submit submission form" (step 3).
 
-=== [[SubmissionForm]]2. Download submission form
+=== [[DownloadSubmissionForm]]2. Download submission form
 
 You will now need to provide some additional information to support the summary statistics files.
 
@@ -206,7 +206,7 @@ image::download_form.png[Download submission form,width=300,align="center"]
 
 Please download a new form each time you create a new submission for a publication, to make sure you have the most correct and up-to-date form for your specific submission.
 
-=== [[Metadata]]3. Fill in submission form
+=== [[FillSubmissionForm]]3. Fill in submission form
 
 For help filling in the submission form, follow the link from the submission interface, or select the relevant link below:
 
@@ -238,7 +238,7 @@ If validation fails, you will receive an email listing the errors detected and a
 
 image::review_reset.png[Review or reset,width=300,align="center"]
 
-=== [[DataRelease]]5. After submission - release of data in the Catalog & how to find your accession ID
+=== [[ReleaseProcess]]5. After submission - release of data in the Catalog & how to find your accession ID
 
 Once your submission is complete, it will show as SUBMITTED and be listed on the "My Submissions" page.  Each GWAS is given an accession number starting with “GCST”. Please use the GCST accessions to cite in a manuscript - do not use the GCP ID for your submission as it won’t be findable on our website. To find these, click through to your submission page or follow the direct link from the confirmation email. There, you can download the list of accessions by clicking the “Download Accessions” button.
 
