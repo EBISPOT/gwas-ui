@@ -57,9 +57,11 @@ Hindorff LA, et al 2009 link:http://www.genome.gov/Pages/About/OD/NewsAndFeature
 
 ===== Papers with GWAS Catalog contribution:
 
+Costanzo et al, 2025 https://www.nature.com/articles/s41588-025-02210-5[Realizing the promise of genome-wide association studies for effector gene prediction], Nature Genetics, Volume 57:1578–1587, May 2025.
+
 Matentzoglu et al, 2025 https://doi.org/10.1093/genetics/iyaf027[The Unified Phenotype Ontology : a framework for cross-species integrative phenomics], Genetics, Volume 229, Issue 3, March 2025 
 
-Lambert, Wingfield et al, 2024. https://doi.org/10.1038/s41588-024-01937-x[Enhancing the Polygenic Score Catalog with tools for score calculation and ancestry normalization]. Nature Genetics. 2024 Oct;56(10):1989-1994.
+Lambert, Wingfield et al, 2024. https://doi.org/10.1038/s41588-024-01937-x[Enhancing the Polygenic Score Catalog with tools for score calculation and ancestry normalization]. Nature Genetics. 56(10):1989-1994, Oct 2024.
 
 Stefancik et al, 2023 https://link.springer.com/article/10.1007/s00335-023-09992-1[The Ontology of Biological Attributes (OBA) - Computational Traits for the Life Sciences]. Mammalian Genome 34, 364–378.
 
@@ -210,8 +212,9 @@ Summary statistics are available via the https://www.ebi.ac.uk/gwas/downloads/su
 
 === [[section-4]]Community workshops
 
-Videos from our community workshop on **standards and infrastructure for predicted effector gene lists**, held in September 2024 as a collaboration between the GWAS Catalog, https://kp4cd.org/[HuGEAMP Knowledge Portal Network] and https://www.opentargets.org/[Open Targets], can be found https://www.youtube.com/@hugeampknowledgeportals1943[here]. 
+Materials from our community workshop on **standards and infrastructure for predicted effector gene lists**, a collaboration between the GWAS Catalog, https://kp4cd.org/[HuGEAMP Knowledge Portal Network] and https://www.opentargets.org/[Open Targets], are available https://kp4cd.org/2024_PEG_workshop[online]. 
 
 Materials from our community workshop on **GWAS summary statistics standards and sharing**, held in June 2020 to address the standards, infrastructure and incentives required to promote and enable broader sharing of data, are available https://www.ebi.ac.uk/gwas/docs/sharing-standards-workshop[here] and are published as MacArthur et al, 2021 https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00004-5[Workshop proceedings: GWAS Catalog standards and sharing], Cell Genomics 1(1). 
+
 
 
