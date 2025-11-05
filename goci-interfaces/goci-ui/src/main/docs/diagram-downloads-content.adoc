@@ -4,7 +4,7 @@
 
 To obtain an image of the GWAS Diagram, you are recommended to navigate to your view of interest and take a screenshot. 
 
-In the Diagram associations with p-values less than 5x10^-8^ are shown, and colored according to trait categories. 
+In the Diagram associations with p-values less than 5x10^-8^ are shown, and colored according to trait categories. See link:http://ftp.ebi.ac.uk/pub/databases/gwas/timeseries/diagram_legend.png[legend] for details.
 
 The GWAS Diagram, logos and other data visualisations are available for re-use under CC-BY-4.0. Please cite our https://www.ebi.ac.uk/gwas/docs/about[latest resource update paper]. 
 
