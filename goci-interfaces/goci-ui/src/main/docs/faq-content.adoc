@@ -9,8 +9,8 @@
 * <<faqA5Citation, How should I cite the GWAS Catalog?>>
 * <<faqA6TermsAndConditions, What are the terms and conditions for accessing the GWAS Catalog data and code?>>
 * <<faqA7UpdateFrequency, How often is the GWAS Catalog updated?>>
-* <<faqA9InfrastructureCode, Where can I find the GWAS Catalog infrastructure code?>>
-* <<faqA22UnpublishedData, Does the GWAS Catalog include data that is not linked to a PubMed-indexed publication?>>
+* <<faqA8InfrastructureCode, Where can I find the GWAS Catalog infrastructure code?>>
+* <<faqA9UnpublishedData, Does the GWAS Catalog include data that is not linked to a PubMed-indexed publication?>>
 
 === B. Searching the GWAS Catalog
 
@@ -213,19 +213,7 @@ _Related search terms:_ update schedule, release frequency, data refresh, biweek
 
 ''' 
 
-==== [[faqB5PublicationDelay]] Why is a newly published GWAS paper not yet in the GWAS Catalog?
-
-Every publication added to the GWAS Catalog goes through detailed manual curation. This process takes time, so there is usually a delay between when a paper is first indexed in PubMed and when it appears in the Catalog.
-
-The curation team works as quickly as possible while maintaining high accuracy standards. In most cases, new publications take several weeks to a few months before being included.
-
-If a paper of interest is more than two months old and not visible in the Catalog, please contact gwas-info@ebi.ac.uk to confirm it has been identified and is in the curation queue. Publications of particular scientific or community interest may be prioritised.
-
-_Related search terms:_ delay, missing study, new publication, curation backlog, PubMed indexing, processing time
-
-''' 
-
-==== [[faqA9InfrastructureCode]] Where can I find the GWAS Catalog infrastructure code?
+==== [[faqA8InfrastructureCode]] Where can I find the GWAS Catalog infrastructure code?
 
 The full GWAS Catalog infrastructure code is open source and freely available on GitHub: https://github.com/EBISPOT/goci  
 
@@ -235,179 +223,7 @@ _Related search terms:_ source code, GitHub, infrastructure, backend, goci, open
 
 ''' 
 
-==== [[faqB4PublicationVsStudy]] What is the difference between a publication and a study in the GWAS Catalog?
-
-In the GWAS Catalog, a *publication* is an article published in a scientific journal. Each publication is tracked in the GWAS Catalog using its unique PubMed ID.
-
-A *study* refers to a specific genome-wide association analysis within a publication. One publication may include several studies if it reports distinct analyses (for example, different traits, sample cohorts, or statistical designs).  
-
-Each study in the Catalog is assigned a stable accession number beginning with “GCST” (e.g., GCST000123). This accession uniquely identifies the analysis regardless of the publication it came from.
-
-For more details on how we handle publications containing multiple analyses, see our https://www.ebi.ac.uk/gwas/docs/methods/curation[Curation methods] section.
-
-_Related search terms:_ publication, study, PubMed ID, GCST accession, multiple analyses, difference
-
-''' 
-
-==== [[faqB24StudyAccession]] How do I find the accession number for a study?
-
-Each study in the GWAS Catalog has a unique accession number beginning with “GCST” (for example, GCST000123).  
-
-You can find study accession numbers in several places:  
-
-* At the top of each “Study” page.  
-* In the “Studies” and “Associations” data tables on Publication, Trait, Variant, and Gene pages.  
-* In the downloadable spreadsheets (associations, studies, and ancestry files) from version v1.0.2 onwards.  
-
-Note: Accession numbers are not included in the older v1.0 spreadsheets, which were only retained for backwards compatibility with the original NHGRI spreadsheet format.
-
-_Related search terms:_ accession number, GCST, study ID, identifier, download file, legacy format
-
-''' 
-
-==== [[faqB21TraitVsReportedTrait]] What is the difference between a trait and a reported trait?
-
-A **trait** in the GWAS Catalog is a standardised term from the http://www.ebi.ac.uk/efo[Experimental Factor Ontology (EFO)]. Traits represent the disease, phenotype, measurement, or drug response being investigated. Each trait has its own page in the Catalog, showing all relevant studies and associated variants. For more about how ontologies are used, see our https://www.ebi.ac.uk/gwas/docs/ontology[ontology documentation].
-
-A **reported trait** is taken directly from the authors’ description of the phenotype analysed in the study, and is provided in addition to the EFO trait. Reported traits are free text descriptions reflecting the study design and context, and may include additional details such as environmental interactions or compound phenotypes.
-
-Together, the standardised trait terms support consistent searching and comparison across studies, while the reported traits preserve the exact wording and design used by study authors.
-
-_Related search terms:_ trait, reported trait, phenotype, EFO, ontology, study design, author description
-
-''' 
-
-==== [[faqB18BackgroundTrait]] What is a background trait?
-
-A *background trait* is a characteristic shared by all participants in a study, but not directly tested in the association analysis.
-
-For example:  
-
-In a study of “Allergic rhinitis in asthma,” the comparison is cases (individuals with allergic rhinitis) vs. controls (individuals without allergic rhinitis). All participants have asthma.  
-
-* The *main trait* under investigation is allergic rhinitis.  
-
-* The *background trait* is asthma.  
-
-The study cannot identify variants associated with asthma itself, but the fact that all participants have asthma provides important context for interpreting the allergic rhinitis associations.
-
-The GWAS Catalog displays both main and background traits, clearly labelled, on study and association records. Background traits are also included in the most recent spreadsheet downloads (v1.0.3).
-
-_Related search terms:_ background trait, main trait, study context, phenotype definition
-
-''' 
-
-==== [[faqB25InteractionStudies]] How do I identify interaction studies in the GWAS Catalog?
-
-The GWAS Catalog includes *SNP-by-environment* interaction studies provided the SNPs meet genome-wide significance criteria. SNP-by-SNP studies were included up to 2023.
-
-*Identification in the UI and download files:*
-
-* On the https://www.ebi.ac.uk/gwas/studies[Studies page], tick the **GxE** checkbox under "Select study type:" to filter the table to only Gene-by-Environment interaction studies. 
-* The **GxE** column in any studies table indicates whether a GxE interaction study design (tick or “x”). This column can also be exported via the file or enabled/hidden using *Column visibility*. 
-* The downloadable studies file includes the **GxE** field so you can filter programmatically. 
-
-*Identification via reported trait:*
-
-* SNP-by-environment interactions include the environment in the description. As of July 2018, you’ll also see notation for test types: “(1df test)” or “(2df test)”, such as “Lung cancer × smoking interaction (1df test)”. Earlier studies may only say “(smoking interaction)”.
-
-* SNP-by-SNP interactions include “SNP × SNP interaction” in parentheses.
-
-*Alternate navigation:*
-
-* On any “Trait” page, search “interaction” in the “Associations” or “Studies” tables.
-
-* In downloadable spreadsheets, filter the reported trait column for "interaction".
-
-_Related search terms:_ GxE checkbox, interaction studies, filter, SNP-by-environment, SNP-by-SNP, 1df, 2df, trait search
-
-''' 
-
-==== [[faqB26TargetedExome]] How do I identify targeted and exome array studies in the GWAS Catalog?
-
-Targeted and exome array studies are flagged in several ways:
-
-*In the user interface:*  
-
-* A small “target” icon appears in search results next to any publication that includes a targeted or exome array study.  
-
-* The same icon is shown in the “Study accession” column of the Studies table on Publication, Trait, Variant, or Gene pages.  
-
-*In downloads:*  
-
-* In the downloadable studies file, these studies include an additional column called **Genotyping technology (additional array information)**.  
-
-* This field records whether the study used a targeted genotyping array, exome array, or similar technology.  
-
-For details on available download fields, see the https://www.ebi.ac.uk/gwas/docs/file-downloads[file downloads documentation].
-
-_Related search terms:_ targeted array, exome array, genotyping technology, icon, study accession, download file
-
-''' 
-
-==== [[faqB27CNVStudies]] Does the GWAS Catalog include CNV studies?
-
-We are working on expanding the scope of the GWAS Catalog to include genome-wide copy number variant (CNV) studies.
-
-Researchers may submit CNV study summary statistics directly to the Catalog. Submitted files and metadata are made publicly available, even though CNV associations are not yet curated in the same way as SNP-based GWAS.  
-
-_Related search terms:_ CNV, copy number variation, structural variation, submission, summary statistics, study scope
-
-''' 
-
-==== [[faqB11ORvsBeta]] How can I separate odds ratios (OR) from beta values in the associations download?
-
-In the full Catalog download, odds ratios (OR) and beta values share the same column. They can be distinguished because beta values always include a unit and direction (e.g. “unit increase,” “cm decrease”), which is recorded in the *95% CI (TEXT)* column.  
-
-If you need OR and beta values in separate columns, use the download option from the Associations table on the web interface. The exported file mirrors the table view, where OR and beta appear in different columns.  
-
-_Related search terms:_ odds ratio, beta, association file, download, effect size, confidence interval
-
-''' 
-
-==== [[faqB12AssociationUniqueness]] Is each association in the GWAS Catalog unique?
-
-Each association in the Catalog comes from a distinct analysis.  
-
-However, some associations may appear more than once because:  
-
-* The same cohorts can be analysed in different ways across studies.  
-
-* Component groups of a meta-analysis may be represented individually, in addition to the overall meta-analysis results.  
-
-Users can check sample size and ancestry information as clues when apparent duplicates occur. For confirmation, always refer back to the source publication.  
-
-_Related search terms:_ association uniqueness, duplicate associations, meta-analysis, cohort reuse, repeated analysis
-
-''' 
-==== [[faqB28SequencingScope]] Are results from sequencing-based association analyses included in the GWAS Catalog?
-
-Yes — sequencing-based association analyses are now routinely curated, submitted and included in the GWAS Catalog, alongside array-based analyses.  
-
-We curate significant associations from sequencing-based studies using the same manual process as for array-based GWAS, ensuring consistent quality and annotation.  
-
-You can read more about the standards for reporting sequencing-based GWAS in  
-https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00005-7[McMahon et al., Sequencing-based genome-wide association studies reporting standards, Cell Genomics (2021)].  
-
-You can identify sequencing-based studies by downloading the studies file from the  
-https://www.ebi.ac.uk/gwas/docs/file-downloads[file downloads page]  
-and filtering the **Genotyping technology (additional array information)** column for sequencing-based technologies (e.g., whole-genome sequencing, exome sequencing).  
-
-_Related search terms:_ sequencing-based GWAS, whole-genome sequencing, WGS, exome sequencing, curated studies, reporting standards, genotyping technology filter
-
-''' 
-
-==== [[faqB13SmallPvalues]] How does the GWAS Catalog represent extremely small p-values?
-
-Some publications report association p-values as 0. This usually happens when the analysis software cannot represent extremely small numbers.  
-
-When authors cannot provide the exact value, the GWAS Catalog records the threshold instead. For example, if the publication reports *p < 1e-300*, the Catalog records it as *1e-300*, but the true p-value may be much smaller than the recorded threshold.  
-
-_Related search terms:_ p-value, extremely small p-value, zero p-value, threshold, statistical precision, significance
-
-''' 
-
-==== [[faqA22UnpublishedData]] Does the GWAS Catalog include data that is not linked to a PubMed-indexed publication?
+==== [[faqA9UnpublishedData]] Does the GWAS Catalog include data that is not linked to a PubMed-indexed publication?
 
 Yes. Since 2020, the GWAS Catalog has accepted submissions of unpublished GWAS. This includes:  
 
@@ -430,36 +246,6 @@ Unpublished data is made publicly available as submitted by authors. It is not m
 Once a study is published, it is curated, annotated, and extended with top associations before being fully incorporated into the main database.  
 
 _Related search terms:_ unpublished GWAS, preprint, in press, standalone dataset, submission, summary statistics, curation status
-
-''' 
-
-==== [[faqB10MouseOrthologs]] How can I find mouse orthologs for GWAS Catalog genes in IMPC?
-
-Each gene in the GWAS Catalog that has a known mouse ortholog in the https://www.mousephenotype.org/[International Mouse Phenotyping Consortium (IMPC)] is linked via a button on the gene page.  
-
-Orthology predictions come from IMPC’s reference database, which is updated weekly to include the latest HCOP ortholog relationships and data from MGI.  
-
-If no ortholog has been established for a gene, the IMPC button will not appear.  
-
-For details on ortholog mapping, see the IMPC https://www.mousephenotype.org/help/data-integration/how-to-use-the-essential-genes-data-portal/0[documentation] and the publication https://www.nature.com/articles/s41467-020-14284-2[Cacheiro et al., Nature Communications (2020)].  
-
-_Related search terms:_ mouse ortholog, IMPC, HCOP, MGI, gene mapping, orthology
-
-''' 
-
-==== [[faqB9TopAssociations]] What are "top associations"?
-
-*Top associations* are the curated set of associations displayed in the Catalog’s Associations tables. They are manually extracted from published articles and filtered using the GWAS Catalog curation process.  
-
-To be included as a top association, a result must:  
-
-* Be significant at p < 1 × 10⁻⁵ in all stages of the analysis.  
-
-* Be described as independent by the authors, or represent the peak association within a 100 kb region.  
-
-Top associations differ from full summary statistics. Summary statistics include all associations discovered in a GWAS, regardless of independence or significance, while top associations provide a focused list of the most relevant results.  
-
-_Related search terms:_ top associations, significant SNPs, independent signals, peak SNP, summary statistics, curation criteria
 
 ''' 
 
@@ -527,9 +313,32 @@ If you only want a specific publication, use its PubMed ID for the most accurate
 _Related search terms:_ author search, trait overlap, publication search, text match, PubMed ID
 
 '''
+==== [[faqB4PublicationVsStudy]] What is the difference between a publication and a study in the GWAS Catalog?
+
+In the GWAS Catalog, a *publication* is an article published in a scientific journal. Each publication is tracked in the GWAS Catalog using its unique PubMed ID.
+
+A *study* refers to a specific genome-wide association analysis within a publication. One publication may include several studies if it reports distinct analyses (for example, different traits, sample cohorts, or statistical designs).  
+
+Each study in the Catalog is assigned a stable accession number beginning with “GCST” (e.g., GCST000123). This accession uniquely identifies the analysis regardless of the publication it came from.
+
+For more details on how we handle publications containing multiple analyses, see our https://www.ebi.ac.uk/gwas/docs/methods/curation[Curation methods] section.
+
+_Related search terms:_ publication, study, PubMed ID, GCST accession, multiple analyses, difference
+
+''' 
+==== [[faqB5PublicationDelay]] Why is a newly published GWAS paper not yet in the GWAS Catalog?
+
+Every publication added to the GWAS Catalog goes through detailed manual curation. This process takes time, so there is usually a delay between when a paper is first indexed in PubMed and when it appears in the Catalog.
+
+The curation team works as quickly as possible while maintaining high accuracy standards. In most cases, new publications take several weeks to a few months before being included.
+
+If a paper of interest is more than two months old and not visible in the Catalog, please contact gwas-info@ebi.ac.uk to confirm it has been identified and is in the curation queue. Publications of particular scientific or community interest may be prioritised.
+
+_Related search terms:_ delay, missing study, new publication, curation backlog, PubMed indexing, processing time
+
+''' 
 
 === B(ii). Searching by variant or gene
-
 ==== [[faqB6SearchVariant]] How do I search by variant?
 
 You can search for a variant (single nucleotide polymorphism, SNP) in several ways:  
@@ -587,6 +396,71 @@ Both methods return a list of genes and variants located within the specified re
 _Related search terms:_ region search, chromosomal coordinates, cytogenetic band, SNP location, genomic interval
 
 '''
+==== [[faqB9TopAssociations]] What are "top associations"?
+
+*Top associations* are the curated set of associations displayed in the Catalog’s Associations tables. They are manually extracted from published articles and filtered using the GWAS Catalog curation process.  
+
+To be included as a top association, a result must:  
+
+* Be significant at p < 1 × 10⁻⁵ in all stages of the analysis.  
+
+* Be described as independent by the authors, or represent the peak association within a 100 kb region.  
+
+Top associations differ from full summary statistics. Summary statistics include all associations discovered in a GWAS, regardless of independence or significance, while top associations provide a focused list of the most relevant results.  
+
+_Related search terms:_ top associations, significant SNPs, independent signals, peak SNP, summary statistics, curation criteria
+
+''' 
+
+==== [[faqB10MouseOrthologs]] How can I find mouse orthologs for GWAS Catalog genes in IMPC?
+
+Each gene in the GWAS Catalog that has a known mouse ortholog in the https://www.mousephenotype.org/[International Mouse Phenotyping Consortium (IMPC)] is linked via a button on the gene page.  
+
+Orthology predictions come from IMPC’s reference database, which is updated weekly to include the latest HCOP ortholog relationships and data from MGI.  
+
+If no ortholog has been established for a gene, the IMPC button will not appear.  
+
+For details on ortholog mapping, see the IMPC https://www.mousephenotype.org/help/data-integration/how-to-use-the-essential-genes-data-portal/0[documentation] and the publication https://www.nature.com/articles/s41467-020-14284-2[Cacheiro et al., Nature Communications (2020)].  
+
+_Related search terms:_ mouse ortholog, IMPC, HCOP, MGI, gene mapping, orthology
+
+''' 
+
+==== [[faqB11ORvsBeta]] How can I separate odds ratios (OR) from beta values in the associations download?
+
+In the full Catalog download, odds ratios (OR) and beta values share the same column. They can be distinguished because beta values always include a unit and direction (e.g. “unit increase,” “cm decrease”), which is recorded in the *95% CI (TEXT)* column.  
+
+If you need OR and beta values in separate columns, use the download option from the Associations table on the web interface. The exported file mirrors the table view, where OR and beta appear in different columns.  
+
+_Related search terms:_ odds ratio, beta, association file, download, effect size, confidence interval
+
+''' 
+
+==== [[faqB12AssociationUniqueness]] Is each association in the GWAS Catalog unique?
+
+Each association in the Catalog comes from a distinct analysis.  
+
+However, some associations may appear more than once because:  
+
+* The same cohorts can be analysed in different ways across studies.  
+
+* Component groups of a meta-analysis may be represented individually, in addition to the overall meta-analysis results.  
+
+Users can check sample size and ancestry information as clues when apparent duplicates occur. For confirmation, always refer back to the source publication.  
+
+_Related search terms:_ association uniqueness, duplicate associations, meta-analysis, cohort reuse, repeated analysis
+
+''' 
+
+==== [[faqB13SmallPvalues]] How does the GWAS Catalog represent extremely small p-values?
+
+Some publications report association p-values as 0. This usually happens when the analysis software cannot represent extremely small numbers.  
+
+When authors cannot provide the exact value, the GWAS Catalog records the threshold instead. For example, if the publication reports *p < 1e-300*, the Catalog records it as *1e-300*, but the true p-value may be much smaller than the recorded threshold.  
+
+_Related search terms:_ p-value, extremely small p-value, zero p-value, threshold, statistical precision, significance
+
+''' 
 
 === B(iii). Searching by trait
 ==== [[faqB14SearchTrait]] How do I search by trait?
@@ -656,6 +530,26 @@ _Related search terms:_ compound trait, multiple traits, reported trait, ontolog
 
 '''
 
+==== [[faqB18BackgroundTrait]] What is a background trait?
+
+A *background trait* is a characteristic shared by all participants in a study, but not directly tested in the association analysis.
+
+For example:  
+
+In a study of “Allergic rhinitis in asthma,” the comparison is cases (individuals with allergic rhinitis) vs. controls (individuals without allergic rhinitis). All participants have asthma.  
+
+* The *main trait* under investigation is allergic rhinitis.  
+
+* The *background trait* is asthma.  
+
+The study cannot identify variants associated with asthma itself, but the fact that all participants have asthma provides important context for interpreting the allergic rhinitis associations.
+
+The GWAS Catalog displays both main and background traits, clearly labelled, on study and association records. Background traits are also included in the most recent spreadsheet downloads (v1.0.3).
+
+_Related search terms:_ background trait, main trait, study context, phenotype definition
+
+''' 
+
 ==== [[faqB19BackgroundTraits]] How are background traits represented in the Catalog?
 
 A *background trait* is a characteristic shared by all participants in a study, but not directly tested in the association analysis.  
@@ -705,6 +599,18 @@ _Related search terms:_ no results, spelling error, synonyms, auto-complete, EFO
 
 '''
 
+==== [[faqB21TraitVsReportedTrait]] What is the difference between a trait and a reported trait?
+
+A **trait** in the GWAS Catalog is a standardised term from the http://www.ebi.ac.uk/efo[Experimental Factor Ontology (EFO)]. Traits represent the disease, phenotype, measurement, or drug response being investigated. Each trait has its own page in the Catalog, showing all relevant studies and associated variants. For more about how ontologies are used, see our https://www.ebi.ac.uk/gwas/docs/ontology[ontology documentation].
+
+A **reported trait** is taken directly from the authors’ description of the phenotype analysed in the study, and is provided in addition to the EFO trait. Reported traits are free text descriptions reflecting the study design and context, and may include additional details such as environmental interactions or compound phenotypes.
+
+Together, the standardised trait terms support consistent searching and comparison across studies, while the reported traits preserve the exact wording and design used by study authors.
+
+_Related search terms:_ trait, reported trait, phenotype, EFO, ontology, study design, author description
+
+''' 
+
 === B(iv). Searching by study
 ==== [[faqB22SearchStudy]] Can I search for a study?
 
@@ -734,6 +640,96 @@ The downloadable studies file includes a column called **Genotyping technology (
 _Related search terms:_ targeted array, exome array, genotyping technology, icon, study accession, download file
 
 '''
+
+==== [[faqB24StudyAccession]] How do I find the accession number for a study?
+
+Each study in the GWAS Catalog has a unique accession number beginning with “GCST” (for example, GCST000123).  
+
+You can find study accession numbers in several places:  
+
+* At the top of each “Study” page.  
+* In the “Studies” and “Associations” data tables on Publication, Trait, Variant, and Gene pages.  
+* In the downloadable spreadsheets (associations, studies, and ancestry files) from version v1.0.2 onwards.  
+
+Note: Accession numbers are not included in the older v1.0 spreadsheets, which were only retained for backwards compatibility with the original NHGRI spreadsheet format.
+
+_Related search terms:_ accession number, GCST, study ID, identifier, download file, legacy format
+
+''' 
+
+==== [[faqB25InteractionStudies]] How do I identify interaction studies in the GWAS Catalog?
+
+The GWAS Catalog includes *SNP-by-environment* interaction studies provided the SNPs meet genome-wide significance criteria. SNP-by-SNP studies were included up to 2023.
+
+*Identification in the UI and download files:*
+
+* On the https://www.ebi.ac.uk/gwas/studies[Studies page], tick the **GxE** checkbox under "Select study type:" to filter the table to only Gene-by-Environment interaction studies. 
+* The **GxE** column in any studies table indicates whether a GxE interaction study design (tick or “x”). This column can also be exported via the file or enabled/hidden using *Column visibility*. 
+* The downloadable studies file includes the **GxE** field so you can filter programmatically. 
+
+*Identification via reported trait:*
+
+* SNP-by-environment interactions include the environment in the description. As of July 2018, you’ll also see notation for test types: “(1df test)” or “(2df test)”, such as “Lung cancer × smoking interaction (1df test)”. Earlier studies may only say “(smoking interaction)”.
+
+* SNP-by-SNP interactions include “SNP × SNP interaction” in parentheses.
+
+*Alternate navigation:*
+
+* On any “Trait” page, search “interaction” in the “Associations” or “Studies” tables.
+
+* In downloadable spreadsheets, filter the reported trait column for "interaction".
+
+_Related search terms:_ GxE checkbox, interaction studies, filter, SNP-by-environment, SNP-by-SNP, 1df, 2df, trait search
+
+''' 
+
+==== [[faqB26TargetedExome]] How do I identify targeted and exome array studies in the GWAS Catalog?
+
+Targeted and exome array studies are flagged in several ways:
+
+*In the user interface:*  
+
+* A small “target” icon appears in search results next to any publication that includes a targeted or exome array study.  
+
+* The same icon is shown in the “Study accession” column of the Studies table on Publication, Trait, Variant, or Gene pages.  
+
+*In downloads:*  
+
+* In the downloadable studies file, these studies include an additional column called **Genotyping technology (additional array information)**.  
+
+* This field records whether the study used a targeted genotyping array, exome array, or similar technology.  
+
+For details on available download fields, see the https://www.ebi.ac.uk/gwas/docs/file-downloads[file downloads documentation].
+
+_Related search terms:_ targeted array, exome array, genotyping technology, icon, study accession, download file
+
+''' 
+
+==== [[faqB27CNVStudies]] Does the GWAS Catalog include CNV studies?
+
+We are working on expanding the scope of the GWAS Catalog to include genome-wide copy number variant (CNV) studies.
+
+Researchers may submit CNV study summary statistics directly to the Catalog. Submitted files and metadata are made publicly available, even though CNV associations are not yet curated in the same way as SNP-based GWAS.  
+
+_Related search terms:_ CNV, copy number variation, structural variation, submission, summary statistics, study scope
+
+''' 
+==== [[faqB28SequencingScope]] Are results from sequencing-based association analyses included in the GWAS Catalog?
+
+Yes — sequencing-based association analyses are now routinely curated, submitted and included in the GWAS Catalog, alongside array-based analyses.  
+
+We curate significant associations from sequencing-based studies using the same manual process as for array-based GWAS, ensuring consistent quality and annotation.  
+
+You can read more about the standards for reporting sequencing-based GWAS in  
+https://www.cell.com/cell-genomics/fulltext/S2666-979X(21)00005-7[McMahon et al., Sequencing-based genome-wide association studies reporting standards, Cell Genomics (2021)].  
+
+You can identify sequencing-based studies by downloading the studies file from the  
+https://www.ebi.ac.uk/gwas/docs/file-downloads[file downloads page]  
+and filtering the **Genotyping technology (additional array information)** column for sequencing-based technologies (e.g., whole-genome sequencing, exome sequencing).  
+
+_Related search terms:_ sequencing-based GWAS, whole-genome sequencing, WGS, exome sequencing, curated studies, reporting standards, genotyping technology filter
+
+''' 
 
 == C. Exploring specific pages
 
