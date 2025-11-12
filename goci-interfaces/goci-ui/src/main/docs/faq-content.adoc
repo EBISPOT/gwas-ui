@@ -10,7 +10,7 @@
 * <<faqA6TermsAndConditions, What are the terms and conditions for accessing the GWAS Catalog data and code?>>
 * <<faqA7UpdateFrequency, How often is the GWAS Catalog updated?>>
 * <<faqA8InfrastructureCode, Where can I find the GWAS Catalog infrastructure code?>>
-* <<faqA9UnpublishedData, Does the GWAS Catalog include data that is not linked to a PubMed-indexed publication?>>
+* <<faqA9PrepublishedData, Does the GWAS Catalog include data that is not linked to a PubMed-indexed publication?>>
 
 === B. Searching the GWAS Catalog
 
@@ -223,9 +223,9 @@ _Related search terms:_ source code, GitHub, infrastructure, backend, goci, open
 
 ''' 
 
-==== [[faqA9UnpublishedData]] Does the GWAS Catalog include data that is not linked to a PubMed-indexed publication?
+==== [[faqA9PrepublishedData]] Does the GWAS Catalog include data that is not linked to a PubMed-indexed publication?
 
-Yes. Since 2020, the GWAS Catalog has accepted submissions of unpublished GWAS. This includes:  
+Yes. Since 2020, the GWAS Catalog has accepted submissions of pre-published GWAS. This includes:  
 
 * Preprints.  
 
@@ -233,19 +233,19 @@ Yes. Since 2020, the GWAS Catalog has accepted submissions of unpublished GWAS. 
 
 * Standalone datasets not yet published in a journal.  
 
-Unpublished data is made publicly available as submitted by authors. It is not manually reviewed by curators until the study is published in a journal.  
+Pre-published data is made publicly available as submitted by authors. It is not manually reviewed by curators until the study is published in a journal.  
 
-*Where to find unpublished data:*  
+*Where to find pre-published data:*  
 
 * Study pages for each accession number (GCST).  
 
-* The https://www.ebi.ac.uk/gwas/downloads[unpublished download files].  
+* The https://www.ebi.ac.uk/gwas/downloads[prepublished download files].  
 
 * The ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] and https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page].  
 
 Once a study is published, it is curated, annotated, and extended with top associations before being fully incorporated into the main database.  
 
-_Related search terms:_ unpublished GWAS, preprint, in press, standalone dataset, submission, summary statistics, curation status
+_Related search terms:_ pre-published GWAS, preprint, in press, standalone dataset, submission, summary statistics, curation status
 
 ''' 
 
@@ -406,7 +406,7 @@ To be included as a top association, a result must:
 
 * Be described as independent by the authors, or represent the peak association within a 100 kb region.  
 
-Top associations differ from full summary statistics. Summary statistics include all associations discovered in a GWAS, regardless of independence or significance, while top associations provide a focused list of the most relevant results.  
+Top associations differ from full summary statistics. Summary statistics include all variants tested in a discovery GWAS, regardless of independence or significance, while top associations provide a focused list of the most relevant results.  
 
 _Related search terms:_ top associations, significant SNPs, independent signals, peak SNP, summary statistics, curation criteria
 
