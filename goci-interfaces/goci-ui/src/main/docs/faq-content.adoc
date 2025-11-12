@@ -436,17 +436,21 @@ _Related search terms:_ odds ratio, beta, association file, download, effect siz
 
 ''' 
 
-==== [[faqB12AssociationUniqueness]] Is each association in the GWAS Catalog unique?
+==== [[faqB12AssociationUniqueness]] Is each association in the GWAS Catalog unique, and what is p-value annotation?
 
 Each association in the Catalog comes from a distinct analysis.  
 
-However, some associations may appear more than once because:  
-
-* The same cohorts can be analysed in different ways across studies.  
+However, in older publications associations for the same variant may appear more than once within a study because:
 
 * Component groups of a meta-analysis may be represented individually, in addition to the overall meta-analysis results.  
+* Where multiple populations (e.g. men/women, adults/children, ancestry groups) were analysed for the same trait, they were included in a single study
+* Where multiple related traits were analysed, they were sometimes included in a single study
 
-Users can check sample size and ancestry information as clues when apparent duplicates occur. For confirmation, always refer back to the source publication.  
+In these cases, the associations were labelled with “p-value annotation”. 
+
+Since 2020, all GWAS on a distinct trait/population combination have been represented as separate studies in the Catalog (this represents the vast majority of data in the Catalog).  
+
+For confirmation, always refer back to the source publication.  
 
 _Related search terms:_ association uniqueness, duplicate associations, meta-analysis, cohort reuse, repeated analysis
 
