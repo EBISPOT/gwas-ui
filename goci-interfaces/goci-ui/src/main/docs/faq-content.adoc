@@ -29,7 +29,7 @@
 * <<faqB9TopAssociations, What are "top associations"?>>
 * <<faqB10MouseOrthologs, How can I find mouse orthologs for GWAS Catalog genes in IMPC?>>
 * <<faqB11ORvsBeta, How can I separate odds ratios (OR) from beta values in the associations download?>>
-* <<faqB12AssociationUniqueness, Is each association in the GWAS Catalog unique?>>
+* <<faqB12AssociationUniqueness, Is each association in the GWAS Catalog unique, and what is p-value annotation?>>
 * <<faqB13SmallPvalues, How does the GWAS Catalog represent extremely small p-values?>>
 
 ==== B(iii). Searching by trait
