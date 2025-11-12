@@ -19,38 +19,37 @@
 ==== B(i). Searching by publication
 * <<faqB2SearchPublication, How do I search by publication?>>
 * <<faqB3AuthorSearchResults, Why do author searches also return traits?>>
-* <<faqA10PublicationVsStudy, What is the difference between a publication and a study?>>
-* <<faqA8PublicationDelay, Why is a newly published GWAS paper not yet in the GWAS Catalog?>>
+* <<faqB4PublicationVsStudy, What is the difference between a publication and a study?>>
+* <<faqB5PublicationDelay, Why is a newly published GWAS paper not yet in the GWAS Catalog?>>
 
 ==== B(ii). Searching by variant or gene
-* <<faqB4SearchVariant, How do I search by variant?>>
-* <<faqB5SearchGene, How do I search by gene?>>
-* <<faqB6SearchRegion, How do I search by genomic region?>>
-* <<faqA24TopAssociations, What are "top associations"?>>
-* <<faqA23MouseOrthologs, How can I find mouse orthologs for GWAS Catalog genes in IMPC?>>
-* <<faqA18ORvsBeta, How can I separate odds ratios (OR) from beta values in the associations download?>>
-* <<faqA19AssociationUniqueness, Is each association in the GWAS Catalog unique?>>
-* <<faqA21SmallPvalues, How does the GWAS Catalog represent extremely small p-values?>>
+* <<faqB6SearchVariant, How do I search by variant?>>
+* <<faqB7SearchGene, How do I search by gene?>>
+* <<faqB8SearchRegion, How do I search by genomic region?>>
+* <<faqB9TopAssociations, What are "top associations"?>>
+* <<faqB10MouseOrthologs, How can I find mouse orthologs for GWAS Catalog genes in IMPC?>>
+* <<faqB11ORvsBeta, How can I separate odds ratios (OR) from beta values in the associations download?>>
+* <<faqB12AssociationUniqueness, Is each association in the GWAS Catalog unique?>>
+* <<faqB13SmallPvalues, How does the GWAS Catalog represent extremely small p-values?>>
 
 ==== B(iii). Searching by trait
-* <<faqB8SearchTrait, How do I search by trait?>>
-* <<faqB9TraitPublications, When I search for a trait, do the results include all publications for that trait?>>
-* <<faqB10OtherTraitsReturned, Why do other traits appear in my search results?>>
-* <<faqB11CompoundTraits, How are multiple or compound traits represented in the Catalog?>>
-* <<faqB12BackgroundTraits, How are background traits represented in the Catalog?>>
-* <<faqB13NoResults, Why did my search return no results even though I expected a match?>>
-* <<faqA12TraitVsReportedTrait, What is the difference between a trait and a reported trait?>>
-* <<faqA13BackgroundTrait, What is a background trait?>>
+* <<faqB14SearchTrait, How do I search by trait?>>
+* <<faqB15TraitPublications, When I search for a trait, do the results include all publications for that trait?>>
+* <<faqB16OtherTraitsReturned, Why do other traits appear in my search results?>>
+* <<faqB17CompoundTraits, How are multiple or compound traits represented in the Catalog?>>
+* <<faqB18BackgroundTrait, What is a background trait?>>
+* <<faqB19BackgroundTraits, How are background traits represented in the Catalog?>>
+* <<faqB20NoResults, Why did my search return no results even though I expected a match?>>
+* <<faqB21TraitVsReportedTrait, What is the difference between a trait and a reported trait?>>
 
 ==== B(iv). Searching by study / study design
-* <<faqB14SearchStudy, Can I search for a study?>>
-* <<faqB15SearchTargetedExome, How can I search for targeted and exome array studies and associations?>>
-* <<faqA11StudyAccession, How do I find the accession number for a study?>>
-* <<faqA14InteractionStudies, How do I identify interaction studies in the GWAS Catalog?>>
-* <<faqA15TargetedExome, How do I identify targeted and exome array studies in the GWAS Catalog?>>
-* <<faqA16TargetedExomeScope, Why are only certain targeted or exome array studies available in the GWAS Catalog?>>
-* <<faqA17CNVStudies, Does the GWAS Catalog include CNV studies?>>
-* <<faqA20SequencingScope, Are results from sequencing-based association analyses included in the GWAS Catalog?>>
+* <<faqB22SearchStudy, Can I search for a study?>>
+* <<faqB23SearchTargetedExome, How can I search for targeted and exome array studies and associations?>>
+* <<faqB24StudyAccession, How do I find the accession number for a study?>>
+* <<faqB25InteractionStudies, How do I identify interaction studies in the GWAS Catalog?>>
+* <<faqB26TargetedExome, How do I identify targeted and exome array studies in the GWAS Catalog?>>
+* <<faqB27CNVStudies, Does the GWAS Catalog include CNV studies?>>
+* <<faqB28SequencingScope, Are results from sequencing-based association analyses included in the GWAS Catalog?>>
 
 === C. Exploring specific pages
 
@@ -214,7 +213,7 @@ _Related search terms:_ update schedule, release frequency, data refresh, biweek
 
 ''' 
 
-==== [[faqA8PublicationDelay]] Why is a newly published GWAS paper not yet in the GWAS Catalog?
+==== [[faqB5PublicationDelay]] Why is a newly published GWAS paper not yet in the GWAS Catalog?
 
 Every publication added to the GWAS Catalog goes through detailed manual curation. This process takes time, so there is usually a delay between when a paper is first indexed in PubMed and when it appears in the Catalog.
 
@@ -236,7 +235,7 @@ _Related search terms:_ source code, GitHub, infrastructure, backend, goci, open
 
 ''' 
 
-==== [[faqA10PublicationVsStudy]] What is the difference between a publication and a study in the GWAS Catalog?
+==== [[faqB4PublicationVsStudy]] What is the difference between a publication and a study in the GWAS Catalog?
 
 In the GWAS Catalog, a *publication* is an article published in a scientific journal. Each publication is tracked in the GWAS Catalog using its unique PubMed ID.
 
@@ -250,7 +249,7 @@ _Related search terms:_ publication, study, PubMed ID, GCST accession, multiple 
 
 ''' 
 
-==== [[faqA11StudyAccession]] How do I find the accession number for a study?
+==== [[faqB24StudyAccession]] How do I find the accession number for a study?
 
 Each study in the GWAS Catalog has a unique accession number beginning with “GCST” (for example, GCST000123).  
 
@@ -266,7 +265,7 @@ _Related search terms:_ accession number, GCST, study ID, identifier, download f
 
 ''' 
 
-==== [[faqA12TraitVsReportedTrait]] What is the difference between a trait and a reported trait?
+==== [[faqB21TraitVsReportedTrait]] What is the difference between a trait and a reported trait?
 
 A **trait** in the GWAS Catalog is a standardised term from the http://www.ebi.ac.uk/efo[Experimental Factor Ontology (EFO)]. Traits represent the disease, phenotype, measurement, or drug response being investigated. Each trait has its own page in the Catalog, showing all relevant studies and associated variants. For more about how ontologies are used, see our https://www.ebi.ac.uk/gwas/docs/ontology[ontology documentation].
 
@@ -278,7 +277,7 @@ _Related search terms:_ trait, reported trait, phenotype, EFO, ontology, study d
 
 ''' 
 
-==== [[faqA13BackgroundTrait]] What is a background trait?
+==== [[faqB18BackgroundTrait]] What is a background trait?
 
 A *background trait* is a characteristic shared by all participants in a study, but not directly tested in the association analysis.
 
@@ -298,7 +297,7 @@ _Related search terms:_ background trait, main trait, study context, phenotype d
 
 ''' 
 
-==== [[faqA14InteractionStudies]] How do I identify interaction studies in the GWAS Catalog?
+==== [[faqB25InteractionStudies]] How do I identify interaction studies in the GWAS Catalog?
 
 The GWAS Catalog includes *SNP-by-environment* interaction studies provided the SNPs meet genome-wide significance criteria. SNP-by-SNP studies were included up to 2023.
 
@@ -324,7 +323,7 @@ _Related search terms:_ GxE checkbox, interaction studies, filter, SNP-by-enviro
 
 ''' 
 
-==== [[faqA15TargetedExome]] How do I identify targeted and exome array studies in the GWAS Catalog?
+==== [[faqB26TargetedExome]] How do I identify targeted and exome array studies in the GWAS Catalog?
 
 Targeted and exome array studies are flagged in several ways:
 
@@ -346,7 +345,7 @@ _Related search terms:_ targeted array, exome array, genotyping technology, icon
 
 ''' 
 
-==== [[faqA17CNVStudies]] Does the GWAS Catalog include CNV studies?
+==== [[faqB27CNVStudies]] Does the GWAS Catalog include CNV studies?
 
 We are working on expanding the scope of the GWAS Catalog to include genome-wide copy number variant (CNV) studies.
 
@@ -356,7 +355,7 @@ _Related search terms:_ CNV, copy number variation, structural variation, submis
 
 ''' 
 
-==== [[faqA18ORvsBeta]] How can I separate odds ratios (OR) from beta values in the associations download?
+==== [[faqB11ORvsBeta]] How can I separate odds ratios (OR) from beta values in the associations download?
 
 In the full Catalog download, odds ratios (OR) and beta values share the same column. They can be distinguished because beta values always include a unit and direction (e.g. “unit increase,” “cm decrease”), which is recorded in the *95% CI (TEXT)* column.  
 
@@ -366,7 +365,7 @@ _Related search terms:_ odds ratio, beta, association file, download, effect siz
 
 ''' 
 
-==== [[faqA19AssociationUniqueness]] Is each association in the GWAS Catalog unique?
+==== [[faqB12AssociationUniqueness]] Is each association in the GWAS Catalog unique?
 
 Each association in the Catalog comes from a distinct analysis.  
 
@@ -381,7 +380,7 @@ Users can check sample size and ancestry information as clues when apparent dupl
 _Related search terms:_ association uniqueness, duplicate associations, meta-analysis, cohort reuse, repeated analysis
 
 ''' 
-==== [[faqA20SequencingScope]] Are results from sequencing-based association analyses included in the GWAS Catalog?
+==== [[faqB28SequencingScope]] Are results from sequencing-based association analyses included in the GWAS Catalog?
 
 Yes — sequencing-based association analyses are now routinely curated, submitted and included in the GWAS Catalog, alongside array-based analyses.  
 
@@ -398,7 +397,7 @@ _Related search terms:_ sequencing-based GWAS, whole-genome sequencing, WGS, exo
 
 ''' 
 
-==== [[faqA21SmallPvalues]] How does the GWAS Catalog represent extremely small p-values?
+==== [[faqB13SmallPvalues]] How does the GWAS Catalog represent extremely small p-values?
 
 Some publications report association p-values as 0. This usually happens when the analysis software cannot represent extremely small numbers.  
 
@@ -434,7 +433,7 @@ _Related search terms:_ unpublished GWAS, preprint, in press, standalone dataset
 
 ''' 
 
-==== [[faqA23MouseOrthologs]] How can I find mouse orthologs for GWAS Catalog genes in IMPC?
+==== [[faqB10MouseOrthologs]] How can I find mouse orthologs for GWAS Catalog genes in IMPC?
 
 Each gene in the GWAS Catalog that has a known mouse ortholog in the https://www.mousephenotype.org/[International Mouse Phenotyping Consortium (IMPC)] is linked via a button on the gene page.  
 
@@ -448,7 +447,7 @@ _Related search terms:_ mouse ortholog, IMPC, HCOP, MGI, gene mapping, orthology
 
 ''' 
 
-==== [[faqA24TopAssociations]] What are "top associations"?
+==== [[faqB9TopAssociations]] What are "top associations"?
 
 *Top associations* are the curated set of associations displayed in the Catalog’s Associations tables. They are manually extracted from published articles and filtered using the GWAS Catalog curation process.  
 
@@ -531,7 +530,7 @@ _Related search terms:_ author search, trait overlap, publication search, text m
 
 === B(ii). Searching by variant or gene
 
-==== [[faqB4SearchVariant]] How do I search by variant?
+==== [[faqB6SearchVariant]] How do I search by variant?
 
 You can search for a variant (single nucleotide polymorphism, SNP) in several ways:  
 
@@ -549,7 +548,7 @@ _Related search terms:_ variant search, SNP, rsID, genomic region, gene mapping,
 
 '''
 
-==== [[faqB5SearchGene]] How do I search by gene?
+==== [[faqB7SearchGene]] How do I search by gene?
 
 Enter a gene symbol (e.g., STAT4) into the main search bar. The search will return:  
 
@@ -575,7 +574,7 @@ _Related search terms:_ gene search, gene page, reported gene, mapped gene, REPO
 
 '''
 
-==== [[faqB6SearchRegion]] How do I search by genomic region?
+==== [[faqB8SearchRegion]] How do I search by genomic region?
 
 You can search by genomic region using either:  
 
@@ -590,7 +589,7 @@ _Related search terms:_ region search, chromosomal coordinates, cytogenetic band
 '''
 
 === B(iii). Searching by trait
-==== [[faqB8SearchTrait]] How do I search by trait?
+==== [[faqB14SearchTrait]] How do I search by trait?
 
 Type the name of a disease, phenotype, measurement, or drug response into the search bar.  
 
@@ -612,7 +611,7 @@ _Related search terms:_ trait search, phenotype, synonym, child term, ontology, 
 
 '''
 
-==== [[faqB9TraitPublications]] When I search for a trait, do the results include all publications for that trait?
+==== [[faqB15TraitPublications]] When I search for a trait, do the results include all publications for that trait?
 
 No. A publication will only appear in search results if the title, author list, or PubMed ID contains your search term.  
 
@@ -622,7 +621,7 @@ _Related search terms:_ trait search, publication results, study table, PubMed I
 
 '''
 
-==== [[faqB10OtherTraitsReturned]] Why do other traits appear in my search results?
+==== [[faqB16OtherTraitsReturned]] Why do other traits appear in my search results?
 
 Search results can include more than just exact matches to your term. They may also include:  
 
@@ -638,7 +637,7 @@ _Related search terms:_ trait search, child trait, ontology, synonyms, compound 
 
 '''
 
-==== [[faqB11CompoundTraits]] How are multiple or compound traits represented in the Catalog?
+==== [[faqB17CompoundTraits]] How are multiple or compound traits represented in the Catalog?
 
 Some studies are mapped to more than one trait when the phenotype definition is complex. The Catalog records both standardised ontology traits and the *reported trait* taken directly from the publication.  
 
@@ -657,7 +656,7 @@ _Related search terms:_ compound trait, multiple traits, reported trait, ontolog
 
 '''
 
-==== [[faqB12BackgroundTraits]] How are background traits represented in the Catalog?
+==== [[faqB19BackgroundTraits]] How are background traits represented in the Catalog?
 
 A *background trait* is a characteristic shared by all participants in a study, but not directly tested in the association analysis.  
 Example: In a study of “Allergic rhinitis in asthma,” the main trait is allergic rhinitis, while asthma is the background trait.  
@@ -684,7 +683,7 @@ _Related search terms:_ background trait, main trait, study context, spreadsheet
 
 '''
 
-==== [[faqB13NoResults]] Why did my search return no results even though I expected a match?
+==== [[faqB20NoResults]] Why did my search return no results even though I expected a match?
 
 The GWAS Catalog search looks for exact text string matches. Small differences in wording or spelling can affect results.  
 
@@ -707,7 +706,7 @@ _Related search terms:_ no results, spelling error, synonyms, auto-complete, EFO
 '''
 
 === B(iv). Searching by study
-==== [[faqB14SearchStudy]] Can I search for a study?
+==== [[faqB22SearchStudy]] Can I search for a study?
 
 To find a study:  
 
@@ -719,7 +718,7 @@ _Related search terms:_ study search, GCST, accession number, study table
 
 '''
 
-==== [[faqB15SearchTargetedExome]] How can I search for targeted and exome array studies and associations?
+==== [[faqB23SearchTargetedExome]] How can I search for targeted and exome array studies and associations?
 
 To find targeted or exome array studies:  
 
