@@ -159,7 +159,7 @@ Training is available through:
 * https://www.ebi.ac.uk/gwas/docs[Documentation and Resources] — other training materials, publications list, and external resources.
 * https://www.ebi.ac.uk/gwas/docs/methods[Curation methods page] — detailed methodology about data extraction from publications.
 * https://www.ebi.ac.uk/gwas/population-descriptors[Population descriptors page] - detailed methodology about how we use population descriptors in the GWAS Catalog
-* https://www.ebi.ac.uk/gwas/docs/ontology[Ontology] - details on ontology representation of GWAS traits
+* https://www.ebi.ac.uk/gwas//docs[Documentation] - all our documentation can be found here
 
 * *Mailing lists:*
 ** Announcements: email gwas-announce-join@ebi.ac.uk with subject: "subscribe"
@@ -175,7 +175,7 @@ _Related search terms:_ training, mailing list, social media, help, resources.
 
 ==== [[faqA5Citation]] How should I cite the GWAS Catalog?
 
-When citing the GWAS Catalog in a publication, use the most recent official GWAS Catalog publication and include the date you accessed the data.  The latest publication should be listed on our https://www.ebi.ac.uk/gwas/docs/about[About page].
+When citing the GWAS Catalog in a publication, use the most recent official GWAS Catalog publication and include the date you accessed the data.  The latest publication is listed on our https://www.ebi.ac.uk/gwas/docs/about[About page].
 
 If you are citing specific studies or summary statistics from the GWAS Catalog, include:  
 
