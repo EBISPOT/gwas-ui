@@ -156,7 +156,7 @@ _Related search terms:_ literature search, PubMed, curation, LitSuggest, unpubli
 Training is available through:
 
 * https://www.ebi.ac.uk/training/online/courses/gwas-catalogue-exploring-snp-trait-associations[On-demand interactive training course]
-* https://www.ebi.ac.uk/gwas/docs[Documentation and Resources] — other training materials, publications list, and external resources.
+* https://www.ebi.ac.uk/gwas/docs/related-resources[Resources page] — other training materials, publications list, and external resources.
 * https://www.ebi.ac.uk/gwas/docs/methods[Curation methods page] — detailed methodology about data extraction from publications.
 * https://www.ebi.ac.uk/gwas/population-descriptors[Population descriptors page] - detailed methodology about how we use population descriptors in the GWAS Catalog
 * https://www.ebi.ac.uk/gwas//docs[Documentation] - all our documentation can be found here
