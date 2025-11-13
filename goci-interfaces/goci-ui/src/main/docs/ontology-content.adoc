@@ -2,7 +2,7 @@
 
 == Trait annotation in the GWAS Catalog
 
-Each GWAS included in the Catalog is annotated with a free text field ("Reported trait") summarising the trait under study. The reported trait takes the study design into account and is useful for understanding the specific details of the phenotype, especially in complex studies that include SNP-by-environment interactions, pleiotropy etc, or studies with a https://www.ebi.ac.uk/gwas/docs/faq#faq-A13[background trait] (a characteristic that is shared by all participants in a study, but is not directly tested in the association analysis).
+Each GWAS included in the Catalog is annotated with a free text field ("Reported trait") summarising the trait under study. The reported trait takes the study design into account and is useful for understanding the specific details of the phenotype, especially in complex studies that include SNP-by-environment interactions, pleiotropy etc, or studies with a https://www.ebi.ac.uk/gwas/docs/faq#faqB18BackgroundTrait[background trait] (a characteristic that is shared by all participants in a study, but is not directly tested in the association analysis).
 
 Each Reported trait is annotated with one or more ontology terms, reflecting the main trait(s), background trait and any interaction terms.     
 
