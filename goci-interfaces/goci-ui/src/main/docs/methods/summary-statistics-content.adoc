@@ -50,7 +50,7 @@ This page includes general documentation about the summary statistics we host in
 == What are summary statistics?
 
 While associations included within the Catalog are the curated, significant (p<1e-5) and independent loci reported within a paper, summary statistics (sumstats) are the full, aggregate p-values and association data for every variant analysed in a study. These are hosted on our servers when available and can be downloaded via links on study and publication pages.
-For more summary statistics FAQ, please see https://www.ebi.ac.uk/gwas/docs/faq#faq-H1[here].
+For more summary statistics FAQ, please see https://www.ebi.ac.uk/gwas/docs/faq#faqH1SummaryStats[here].
 
 == Sources
 
