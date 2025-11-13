@@ -32,12 +32,12 @@ Version numbers refer to the <<file-names,file format version>>. Data is release
 |tab separated file
 |link:fileheaders#_file_headers_for_unpublished_studies[ Click to view]
 
-|All ancestry data *v1.0* _(link:faq#faq-F1[see FAQ F1 for more details])_
+|All ancestry data *v1.0* _(link:faq#faqF1PopulationDescriptors[see FAQ F for more details])_
 |link:../api/search/downloads/ancestry[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_ancestry_download[ Click to view]
 
-|All ancestry data *v1.0.3.1 - with added fields to match unpublished downloads (see below)* _(link:faq#faq-F2[see FAQ F2 for more details])_
+|All ancestry data *v1.0.3.1 - with added fields to match unpublished downloads (see below)* _(link:faq#faqF2SearchPopulationDescriptors[see FAQ F for more details])_
 |link:../api/search/downloads/ancestries/v1.0.3.1[ Click to download]
 |tab separated file
 |link:fileheaders#_file_headers_for_unpublished_ancestries[ Click to view]
