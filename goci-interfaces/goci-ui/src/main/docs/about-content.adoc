@@ -53,7 +53,7 @@ For a full list of publications by the GWAS Catalog team, and other useful backg
 
 == Licensing information
 
-The NHGRI-EBI GWAS Catalog and all its contents are available under the general http://www.ebi.ac.uk/about/terms-of-use[Terms of Use for EMBL-EBI Services]. Summary statistics are made available under https://creativecommons.org/publicdomain/zero/1.0/[CC0] unless https://www.ebi.ac.uk/gwas/docs/faq#faq-H7[otherwise stated]. We advise consumers of data hosted by the GWAS Catalog to note the license terms of individual datasets, if applicable to their specific use case. 
+The NHGRI-EBI GWAS Catalog and all its contents are available under the general http://www.ebi.ac.uk/about/terms-of-use[Terms of Use for EMBL-EBI Services]. Summary statistics are made available under https://creativecommons.org/publicdomain/zero/1.0/[CC0] unless https://www.ebi.ac.uk/gwas/docs/faq#faqH7CC0License[otherwise stated]. We advise consumers of data hosted by the GWAS Catalog to note the license terms of individual datasets, if applicable to their specific use case. 
 
 GWAS Catalog logos, and data visualisations such as the GWAS Diagram and LD plots, are available for re-use under https://creativecommons.org/licenses/by/4.0/[CC-BY-4.0]. 
 
@@ -77,4 +77,5 @@ https://drive.google.com/file/d/18banglYT7UwOJaoIKl9qimobwPysX-MJ/view?usp=shari
 The authors are http://picol.org[Picol].
 
 * http://www.jetbrains.com/idea/index.html[IntelliJ IDEA]: Full-featured commercial IDE with a complete set of tools and integrations with the most important modern technologies and frameworks, such as Spring and Hibernate — a must-have for effective Web and Java EE development.
+
 
