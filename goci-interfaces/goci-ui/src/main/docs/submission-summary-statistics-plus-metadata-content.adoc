@@ -9,6 +9,14 @@ For publications that are not yet included in the GWAS Catalog, or for pre-publi
 
 Instructions are provided below. When you have completed the submission form, return to the https://www.ebi.ac.uk/gwas/docs/submission[main submission instructions^].
 
+[WARNING]
+====
+When filling in the metadata submission template, **do not change the structure of the file**.  
+Do not rename or delete sheets, and do not alter hidden properties. Only enter your study details in the provided fields.  
+Any structural edits may cause the submission to fail validation.
+====
+
+
 === Data for you to enter
 
 There are 2 tabs in the submission form for you to complete:
