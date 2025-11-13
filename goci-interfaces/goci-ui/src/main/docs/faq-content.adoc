@@ -162,8 +162,8 @@ Training is available through:
 * https://www.ebi.ac.uk/gwas//docs[Documentation] - all our documentation can be found here
 
 * *Mailing lists:*
-** Announcements: email gwas-announce-join@ebi.ac.uk with subject: "subscribe"
-** User discussion: email gwas-users-join@ebi.ac.uk with subject: "subscribe". This is the best method to ensure you receive important announcements. 
+** Announcements: email gwas-announce-join@ebi.ac.uk with subject: "subscribe". This is the best method to ensure you receive important announcements. 
+** User discussion: email gwas-users-join@ebi.ac.uk with subject: "subscribe"
 * Contact the team: gwas-info@ebi.ac.uk
 * X: https://twitter.com/GWASCatalog[@GWASCatalog]
 * Bluesky: https://bsky.app/profile/gwascatalog.bsky.social[@gwascatalog.bsky.social]
