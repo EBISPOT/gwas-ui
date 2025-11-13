@@ -115,7 +115,7 @@
 The GWAS Catalog contains data from published and unpublished human genome-wide association studies (GWAS).  
 You can access GWAS Catalog data in the following ways:
 
-* *Web search interface:* https://www.ebi.ac.uk/gwas/search?query=[Search interface] — search by publication, study, trait, variant, or gene.
+* *Web search interface:* https://www.ebi.ac.uk/gwas/search?query=[Search] by publication, study, trait, variant, or gene.
 * *Specific entity pages:* Each publication, study, trait, variant, or gene has its own page. Use the search bar to find an entity and then explore its page.
 * *Downloadable spreadsheets:* Full association and study data are on the https://www.ebi.ac.uk/gwas/docs/file-downloads[file downloads page]. You can also download associations directly from any entity page via the “Download Associations” button.
 * *Full genome-wide summary statistics:* Download from our http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] or from the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page].
