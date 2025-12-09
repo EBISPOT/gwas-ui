@@ -209,7 +209,9 @@ _Related search terms:_ terms of use, CC0, license, licensing, Apache 2.0, publi
 *Summary statistics availability:* Summary statistics files are made available as soon as possible, even before the related study appears in a scheduled data release.  
 If a manuscript states that summary statistics are available from the GWAS Catalog, but you cannot find them in the https://www.ebi.ac.uk/gwas/downloads/summary-statistics[list of studies with summary statistics files] or on the http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], please contact gwas-info@ebi.ac.uk for further assistance.
 
-_Related search terms:_ update schedule, release frequency, data refresh, biweekly updates, summary statistics availability, missing files
+*Diagram* The Diagram is updated quarterly. The data refresh date is shown in the Diagram page header. 
+
+_Related search terms:_ update schedule, release frequency, data refresh, biweekly updates, summary statistics availability, missing files, diagram
 
 ''' 
 
