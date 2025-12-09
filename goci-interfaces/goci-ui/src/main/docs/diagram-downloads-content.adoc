@@ -10,7 +10,7 @@ The GWAS Diagram, logos and other data visualisations are available for re-use u
 
 == Slideshow
 
-Diagrams from from each quarter since 2005 have been compiled into a visually striking time lapse:
+Diagrams from from each quarter since 2005 up to July 2025 have been compiled into a visually striking time lapse:
 
 video::/gwas/video/GWAS_Catalog_slideshow.mp4[width=800, height=460 ]
 
