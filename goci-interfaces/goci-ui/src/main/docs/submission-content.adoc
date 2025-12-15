@@ -7,9 +7,7 @@
 
 The GWAS Catalog accepts summary statistics for both published and unpublished human genome-wide association studies. To submit summary statistics to the Catalog, please follow the steps below. EMBL-EBI's Data Preservation Statement can be found https://www.ebi.ac.uk/long-term-data-preservation[here].
 
-You may also like to watch our webinar, https://www.ebi.ac.uk/training/events/data-submission-genome-wide-association-studies-gwas-catalog/[_Data submission for genome-wide association studies at the GWAS Catalog_], which walks through the main steps for submission.
-
-*IMPORTANT: The submission requirements changed in 2023. Please read the following announcement: https://ebispot.github.io/gwas-blog/gwas-ssf-release*
+You may also like to watch our webinar, https://www.ebi.ac.uk/training/events/data-submission-genome-wide-association-studies-gwas-catalog/[_Data submission for genome-wide association studies at the GWAS Catalog_], which walks through the main steps for submission. If you encounter technical difficulties at any point during submission and are unable to resolve these by reviewing the documentation, please reach out to our helpdesk via gwas-subs@ebi.ac.uk. 
 
 Read on for general submission instructions. 
 
