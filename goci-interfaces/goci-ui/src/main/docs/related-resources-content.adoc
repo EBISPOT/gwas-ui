@@ -25,7 +25,7 @@ Earlier webinars are also available:
 
 ==== In-person training materials
 
-Training materials from in-person training workshops held by the GWAS Catalog team are available on link:https://github.com/EBISPOT/eshg-2024-workshop[Github] and link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/training_materials[our FTP server]. If you would like to make use of these slides, please cite the GWAS Catalog as detailed on the link:about[About] page.
+Training materials from in-person training workshops held by the GWAS Catalog team are available on link:https://github.com/EBISPOT/eshg-2024-workshop[Github] and link:https://ftp.ebi.ac.uk/pub/databases/gwas/training_materials[our FTP server]. If you would like to make use of these slides, please cite the GWAS Catalog as detailed on the link:about[About] page.
 
 
 === [[section-2]]Publications

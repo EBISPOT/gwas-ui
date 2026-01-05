@@ -82,7 +82,7 @@ We do not currently annotate the method used to define the curated ancestry cate
 
 == Full Methods details
 
-For additional detail please review our link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/ancestry[GWAS Catalog Ancestry Extraction Guidelines] and our paper, Morales et al., 2018, link:https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1396-2[A standardized framework for representation of ancestry data in genomics studies, with application to the NHGRI-EBI GWAS Catalog]. 
+For additional detail please review our link:https://ftp.ebi.ac.uk/pub/databases/gwas/ancestry[GWAS Catalog Ancestry Extraction Guidelines] and our paper, Morales et al., 2018, link:https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1396-2[A standardized framework for representation of ancestry data in genomics studies, with application to the NHGRI-EBI GWAS Catalog].
 
 
 == Finding curated sample metadata

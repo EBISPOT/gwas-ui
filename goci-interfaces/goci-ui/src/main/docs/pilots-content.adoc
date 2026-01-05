@@ -84,7 +84,7 @@ A pilot study was performed to assess the feasibility of including sequencing-ba
 
 Ten studies which include sequencing-based association analyses were curated as part of the pilot. Study level and association data are provided in the standard GWAS Catalog download format with additional columns for sequencing specific data.  
 
-These data are available link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/pilot_data/sequencing_pilot_201710/[on our FTP server].  Study level and association data are provided in the standard GWAS Catalog download format, with additional fields specific to sequencing studies provided as additional columns (see the README file for further detail).
+These data are available link:https://ftp.ebi.ac.uk/pub/databases/gwas/pilot_data/sequencing_pilot_201710/[on our FTP server].  Study level and association data are provided in the standard GWAS Catalog download format, with additional fields specific to sequencing studies provided as additional columns (see the README file for further detail).
 
 Additional study level data fields are: Genotyping technology (discovery/initial), Sequencing platform, Array platform, Sequencing coverage, Number of variants analysed, Genome build, Analysis level, For multiple variants - number of variants per test, Statistical tests used to generate reported p-values, Statistical test used for extracted p-values, Why this test was chosen for extraction, Types of variant included in analysis, P-value threshold stated by author.  Single variant/multi-variant analysis is indicated after the author name.  The absence of either indicates that entry is currently eligible and published in the standard GWAS Catalog.
 
@@ -105,7 +105,7 @@ In 2016 we carried out a pilot on the inclusion of targeted array based GWAS in 
 * This identified approximately 150 targeted array studies that have been published up to June 2016 (including 62 Immunochip, 40 Metabochip and 36 exome arrays)
 * Curation of a representative set of these studies indicated that inclusion would require minimal changes to Catalog infrastructure and has enabled us to estimate the additional curation resources required to include these in the future.
 
-Data from the studies curated as part of the targeted array can be found link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/pilot_data/targeted_array_201607/[on our FTP server].
+Data from the studies curated as part of the targeted array can be found link:https://ftp.ebi.ac.uk/pub/databases/gwas/pilot_data/targeted_array_201607/[on our FTP server].
 
 Following on from this, we are currently piloting the inclusion of targeted array studies in the Catalog. Prioritisation of targeted and exome array studies for inclusion in the Catalog is now performed by 1) relevance of the trait analysed 2) user request, with Open Targets being the main user in this phase of the pilot.
 In September 2017, Open Targets (www.opentargets.org) requested curation of fifty-five currently out-of-scope GWAS publications for inclusion in the GWAS Catalog.  Moreover, the GWAS Catalog team have preliminarily identified over 150 publications based on targeted or exome array analysis from 2012 to 2017. These will also be curated as part of the inclusion pilot.
@@ -142,7 +142,7 @@ image::author_sub_associations.png[Associations,400,400,align="center"]
 {empty} +
 
 
-Data submitted as part of the author deposition pilot can be found link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/pilot_data/author_submission_201608/[on our FTP server].
+Data submitted as part of the author deposition pilot can be found link:https://ftp.ebi.ac.uk/pub/databases/gwas/pilot_data/author_submission_201608/[on our FTP server].
 
 
 
