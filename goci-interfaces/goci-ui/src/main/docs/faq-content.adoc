@@ -241,7 +241,7 @@ Pre-published data is made publicly available as submitted by authors. It is not
 
 * The https://www.ebi.ac.uk/gwas/docs/file-downloads#UnpublishedGWAS[prepublished download files].  
 
-* The ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] and https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page].  
+* The https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] and https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page].
 
 Once a study is published, it is curated, annotated, and extended with top associations before being fully incorporated into the main database.  
 

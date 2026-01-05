@@ -102,7 +102,7 @@ function processStudy(study, table) {
         var a = (study.authorAscii_s).replace(/\s/g,"");
         var dir = a.concat("_").concat(study.pubmedId).concat("_").concat(study.accessionId);
 
-        var ftplink = "<a href='ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
+        var ftplink = "<a href='https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/"
             .concat(dir).concat("' target='_blank'</a>");
 
         pvalueflag = ftplink.concat("<span class='glyphicon glyphicon-signal clickable context-help'" +

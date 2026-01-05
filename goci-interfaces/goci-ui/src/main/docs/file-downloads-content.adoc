@@ -76,14 +76,14 @@ Version numbers refer to the <<file-names,file format version>>. Data is release
 * eXX indicates the Ensembl release version that the data is mapped to
 * rYYYY-MM-DD indicates the date on which the GWAS Catalog was released
 
-Older versions of the GWAS Catalog, with or without ontology annotations, can be found on link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/releases[ our FTP server].
+Older versions of the GWAS Catalog, with or without ontology annotations, can be found on link:https://ftp.ebi.ac.uk/pub/databases/gwas/releases[ our FTP server].
 
 To obtain custom downloads of study and association data for a specific trait, gene, variant, genomic region or publication please access the relevant search pages and use the export option on the data tables.
 
 
 == GWAS to EFO mappings
 
-A file showing all GWAS Catalog reported trait to EFO mappings, including the parent category each trait is mapped to on the diagram can be found link:../api/search/downloads/trait_mappings[ here] and on link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/releases/latest[ our FTP server]. Note that mappings are not one-to-one, i.e. one EFO term may be mapped to several different GWAS Catalog reported traits and vice versa.
+A file showing all GWAS Catalog reported trait to EFO mappings, including the parent category each trait is mapped to on the diagram can be found link:../api/search/downloads/trait_mappings[ here] and on link:https://ftp.ebi.ac.uk/pub/databases/gwas/releases/latest[ our FTP server]. Note that mappings are not one-to-one, i.e. one EFO term may be mapped to several different GWAS Catalog reported traits and vice versa.
 
 
 == Downloading the GWAS Catalog as RDF/OWL
