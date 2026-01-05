@@ -88,9 +88,9 @@ A file showing all GWAS Catalog reported trait to EFO mappings, including the pa
 
 == Downloading the GWAS Catalog as RDF/OWL
 
-The GWAS Catalog is also available as an link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/releases/latest/gwas-kb.owl[OWL knowledge base] that can be loaded into an RDF triple store. *Updates of this knowledge base were frozen on 2025-1-30*. For further information, please contact gwas-info@ebi.ac.uk.  
+The GWAS Catalog is also available as an link:https://ftp.ebi.ac.uk/pub/databases/gwas/releases/2025/01/31/gwas-kb.owl[OWL knowledge base] that can be loaded into an RDF triple store. *Updates of this knowledge base were frozen on 2025-1-30*. For further information, please contact gwas-info@ebi.ac.uk.
 
-In order to work with the knowledge base, a copy of the link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/releases/latest/gwas-diagram.owl[schema ontology] and of the link:http://www.ebi.ac.uk/efo/efo.owl[Experimental Factor Ontology (EFO)] are required. For more information on our use of ontologies, see our link:ontology[ontology] page.
+In order to work with the knowledge base, a copy of the link:https://ftp.ebi.ac.uk/pub/databases/gwas/releases/2025/01/31/gwas-diagram.owl[schema ontology] and of the link:http://www.ebi.ac.uk/efo/efo.owl[Experimental Factor Ontology (EFO)] are required. For more information on our use of ontologies, see our link:ontology[ontology] page.
 
 *CAUTION*: Some of these files may be very large - attempting to open them in your browser may take a very long time. It is usually safest to right-click and choose "save as..." to download these files.
 

@@ -24,7 +24,8 @@ You can find more information on our work so far in our recent http://nar.oxford
 
 
 == GWAS Catalog in RDF
+*Updates of this knowledge base were frozen on 2025-1-30*
 
-Each GWAS Catalog data release is also available in OWL/RDF format from link:ftp://ftp.ebi.ac.uk/pub/databases/gwas/releases/latest/[ our FTP server]. The Catalog data can be found in the gwas-kb.owl file while gwas-diagram.owl contains the schema ontology defining the relationships between different Catalog concepts. Please note that the knowledge base file is very large. For this reason, it excludes some Catalog data, such as sample descriptions and ancestry information.
+Each GWAS Catalog data release is also available in OWL/RDF format from link:https://ftp.ebi.ac.uk/pub/databases/gwas/releases/2025/01/31/[ our FTP server]. The Catalog data can be found in the gwas-kb.owl file while gwas-diagram.owl contains the schema ontology defining the relationships between different Catalog concepts. Please note that the knowledge base file is very large. For this reason, it excludes some Catalog data, such as sample descriptions and ancestry information.
 
 The GWAS Catalog knowledge base is used to generate the http://www.ebi.ac.uk/gwas/diagram[GWAS diagram] via a Virtuoso triple store. The triple store is currently only available inside EMBL-EBI but will be available publicly in the near future.
