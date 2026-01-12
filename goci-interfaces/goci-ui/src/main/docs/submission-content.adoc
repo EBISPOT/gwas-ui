@@ -56,6 +56,10 @@ Next, please provide some metadata about the broader body of work to which your 
 
 Click the "Get started" button from the Submission homepage and then follow the questionnaire to find the appropriate scenario.
 
+*The flowchart below illustrates how to submit published and pre-published studies. The text below explains each step in more detail.*
+
+image::Submission_questionnaire.png[Published and pre-published submission,width=800,align="center"]
+
 ==== Publications indexed in PubMed
 
 GWAS publications that are indexed in PubMed should have already been identified by curators as eligible for inclusion in the GWAS Catalog. In this case, simply search for your publication by *PMID* (PubMed identifier) or *first author*. Publications matching your search are displayed in the table. 
@@ -96,10 +100,6 @@ If you think that we are missing an eligible publication, please contact us at g
 ==== Other scenarios
 
 For all other scenarios, please complete the form to provide metadata about your manuscript or other body of work. Click "Submit" to continue to the Details page.
-
-*The flowchart below illustrates how to submit published and pre-published studies.*
-
-image::Creating_submission.png[Published and pre-published submission,width=800,align="center"]
 
 == [[B]]B. Creating a submission
 
@@ -161,6 +161,10 @@ image::create_sub.png[Create Submission,width=800,align="center"]
 == [[C]]C. Uploading data
 
 After you have created a submission, you will be able to upload your summary statistics and supporting information.
+
+*The flowchart below illustrates the steps for uploading your data during the submission process. The text below explains each step in more detail.*
+
+image::Uploading_submission.png[Uploading process,width=1000,align="center"]
 
 === [[Upload]]1. Upload summary statistics
 
@@ -242,10 +246,6 @@ If validation fails, you will receive an email listing the errors detected and a
 
 image::review_reset.png[Review or reset,width=300,align="center"]
 
-
-*The flowchart below illustrates the steps for uploading your data during the submission process.*
-
-image::Uploading_submission.png[Uploading process,width=1000,align="center"]
 
 === [[ReleaseProcess]]5. After submission - release of data in the Catalog & how to find your accession ID
 
