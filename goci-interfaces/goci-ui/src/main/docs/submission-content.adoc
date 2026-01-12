@@ -46,6 +46,10 @@ Start by going to the https://www.ebi.ac.uk/gwas/deposition[GWAS Catalog Submiss
 
 Before submitting, you must ensure that your summary statistics files conform to our standard format, which makes your summary statistics interoperable with other datasets and helps others to make use of them. Click https://www.ebi.ac.uk/gwas/docs/summary-statistics-format[here for full documentation] on the requirements and instructions on using our formatter and validator tools, which can be run in the command line or via a web interface. We strongly recommend running the validator offline prior to upload, especially for large datasets.
 
+*The flowchart below illustrates the steps for formatting and validating summary statistics before submission.*
+
+image::Format_validate_sumstats.png[Formatting and validation steps,width=800,align="center"]
+
 === [[Metadata]]Submission questionnaire
 
 Next, please provide some metadata about the broader body of work to which your summary statistics submission relates. For example, your submission might be linked to a publication or to an unpublished manuscript, or you may wish to submit summary statistics for GWAS experiments that are not currently written up in a manuscript format.
@@ -92,6 +96,10 @@ If you think that we are missing an eligible publication, please contact us at g
 ==== Other scenarios
 
 For all other scenarios, please complete the form to provide metadata about your manuscript or other body of work. Click "Submit" to continue to the Details page.
+
+*The flowchart below illustrates how to submit published and pre-published studies.*
+
+image::Creating_submission.png[Published and pre-published submission,width=800,align="center"]
 
 == [[B]]B. Creating a submission
 
@@ -152,7 +160,7 @@ image::create_sub.png[Create Submission,width=800,align="center"]
 
 == [[C]]C. Uploading data
 
-After you have created a submission, you will be able to upload your summary statistics and supporting information. 
+After you have created a submission, you will be able to upload your summary statistics and supporting information.
 
 === [[Upload]]1. Upload summary statistics
 
@@ -234,6 +242,11 @@ If validation fails, you will receive an email listing the errors detected and a
 
 image::review_reset.png[Review or reset,width=300,align="center"]
 
+
+*The flowchart below illustrates the steps for uploading your data during the submission process.*
+
+image::Uploading_submission.png[Uploading process,width=1000,align="center"]
+
 === [[ReleaseProcess]]5. After submission - release of data in the Catalog & how to find your accession ID
 
 Once your submission is complete, it will show as SUBMITTED and be listed on the "My Submissions" page.  Each GWAS is given an accession number starting with “GCST”. Please use the GCST accessions to cite in a manuscript - do not use the GCP ID for your submission as it won’t be findable on our website. To find these, click through to your submission page or follow the direct link from the confirmation email. There, you can download the list of accessions by clicking the “Download Accessions” button.
@@ -245,6 +258,10 @@ Once your submission is complete, it will show as SUBMITTED and be listed on the
 Our data release runs bi-weekly, so it may take a few days for your studies to appear on the GWAS Catalog website. Non-embargoed studies will be added to the summary statistics download area here: https://www.ebi.ac.uk/gwas/downloads/summary-statistics[Summary Statistics Downloads]. You can search for a study’s accession number on our homepage to find its landing page and metadata: https://www.ebi.ac.uk/gwas[GWAS Homepage]. Additional metadata will be available in the downloadbale files here: https://www.ebi.ac.uk/gwas/docs/file-downloads[File Downloads]. If more than 2 weeks has passed and you have concerns, please contact us. 
 
 *- When your pre-publication study is published:* We’ll update the metadata to include the PubMed citation, top associations, and ontology mappings. We check the literature weekly for matches to pre-published studies, so you don’t need to take further action. However, if you inform us when your paper is published, together with the PubMed ID, this can help to speed up the process.
+
+*The flowchart below illustrates what happens after submission, including data release timelines and how your study becomes publicly available in the GWAS Catalog.*
+
+image::After_submission.png[After submission process,width=800,align="center"]
 
 == [[D]] Additional Information
 
