@@ -67,9 +67,9 @@ DOWNSTREAM_GENE_ID^*^: Entrez Gene ID for nearest downstream gene to rs number, 
 
 SNP_GENE_IDS^*^: Entrez Gene ID, if rs number within gene; multiple genes denotes overlapping transcripts
 
-UPSTREAM_GENE_DISTANCE^*^: distance in kb for nearest upstream gene to rs number, if not within gene
+UPSTREAM_GENE_DISTANCE^*^: distance in bp for nearest upstream gene to rs number, if not within gene
 
-DOWNSTREAM_GENE_DISTANCE^*^: distance in kb for nearest downstream gene to rs number, if not within gene
+DOWNSTREAM_GENE_DISTANCE^*^: distance in bp for nearest downstream gene to rs number, if not within gene
 
 STRONGEST SNP-RISK ALLELE^*^: SNP(s) most strongly associated with trait + risk allele (? for unknown risk allele). May also refer to a haplotype.
 
