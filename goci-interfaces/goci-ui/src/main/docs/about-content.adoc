@@ -65,13 +65,13 @@ The GWAS Catalog adheres to the FAIR indicators of Findability, Accessibility, I
 
 More details about our privacy policies can be found by following the links below.
 
-link:images/Privacy_Notice_GWAS_&_PGS_Catalogs_deposition_services.pdf[GWAS & PGS Catalog Deposition Services] applies to the data submitted to the GWAS Catalog (eg. Summary statistics files).
+link:images/Privacy_Notice_GWAS_PGS_Catalogs_deposition_services.pdf[GWAS & PGS Catalog Deposition Services] applies to the data submitted to the GWAS Catalog (eg. Summary statistics files).
 
 link:images/Privacy_Notice_mailing_lists_to_support_delivery_of_the_GWAS_Catalog.pdf[GWAS Catalog Mailing Lists] applies to our public e-mail lists such as gwas-info@ebi.ac.uk, gwas-subs@ebi.ac.uk, gwas-announce@ebi.ac.uk and gwas-users@ebi.ac.uk.
 
 link:images/Privacy_Notice_GWAS_Catalog_literature_curation.pdf[GWAS Catalog Literature Curation] applies to any personal data acquired from publications, or from communication with authors (including author names, e-mails and addresses), that we retain in order to track GWAS publications through our curation processes as part of making those publications available as part of the GWAS Catalog.
 
-link:images/Privacy_Notice_GWAS_&_PGS_Catalog_public_websites.pdf[GWAS & PGS Catalog Public Websites] applies to cookies and limited processing of personal data required for the website to function.  
+link:images/Privacy_Notice_GWAS_PGS_Catalog_public_websites.pdf[GWAS & PGS Catalog Public Websites] applies to cookies and limited processing of personal data required for the website to function.  
 
 == Credits &amp; acknowledgements
 
@@ -79,6 +79,7 @@ link:images/Privacy_Notice_GWAS_&_PGS_Catalog_public_websites.pdf[GWAS & PGS Cat
 The authors are http://picol.org[Picol].
 
 * http://www.jetbrains.com/idea/index.html[IntelliJ IDEA]: Full-featured commercial IDE with a complete set of tools and integrations with the most important modern technologies and frameworks, such as Spring and Hibernate — a must-have for effective Web and Java EE development.
+
 
 
 
