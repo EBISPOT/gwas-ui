@@ -4,7 +4,7 @@
 
 The Catalog was founded by the https://www.genome.gov[NHGRI] in 2008, in response to the rapid increase in the number of published genome-wide association studies (GWAS). These studies provide an unprecedented opportunity to investigate the impact of common variants on complex disease; however identifying published GWAS can be challenging, and the vast wealth of data contained within these publications is effectively inaccessible to researchers without systematic cataloguing and summarization of the observed associations. The GWAS Catalog provides a consistent, searchable, visualisable and freely available database of SNP-trait associations, which can be easily integrated with other resources, and is accessed by scientists, clinicians and other users worldwide. It is also one of the largest repositories of full genome-wide summary statistics, which can be submitted directly by researchers. 
 
-Within the Catalog, all link:methods[eligible published] GWA studies are identified by literature search and assessed by our curators, who then extract the reported trait, significant SNP-trait associations, and sample metadata. We aim to curate eligible studies within 1-2 months of publication, dependent on the availability of literature, and the data is released on a bi-weekly cycle. We have also accepted submissions of unpublished GWAS data since 2020.
+Within the Catalog, all link:methods[eligible published] GWA studies are identified by literature search and assessed by our curators, who then extract the reported trait, significant SNP-trait associations, and sample metadata. We aim to curate eligible studies as soon as possible after publication, dependent on staffing and the volume of new studies, and the data is released on a bi-weekly cycle. We have also accepted submissions of unpublished GWAS data since 2020.
 
 Published Catalog data is available through our https://www.ebi.ac.uk/gwas/search?query=[search interface], https://www.ebi.ac.uk/gwas/downloads[downloads], https://www.ebi.ac.uk/gwas/docs/api[API] and iconic https://www.ebi.ac.uk/gwas/diagram[GWAS diagram] of SNP-trait associations, mapped onto the human genome by chromosomal location and displayed on the human karyotype. Summary statistics files are available to download from our https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site] via links from the study in the https://www.ebi.ac.uk/gwas/search?query=[search interface] or our designated https://www.ebi.ac.uk/gwas/downloads/summary-statistics[summary statistics page]. Harmonised summary statistics are also available from our summary statistics database via https://www.ebi.ac.uk/gwas/summary-statistics/docs/[API]. Unpublished GWAS data is available through a separate https://www.ebi.ac.uk/gwas/downloads[download].
 
@@ -79,6 +79,7 @@ link:images/Privacy_Notice_GWAS_&_PGS_Catalog_public_websites.pdf[GWAS & PGS Cat
 The authors are http://picol.org[Picol].
 
 * http://www.jetbrains.com/idea/index.html[IntelliJ IDEA]: Full-featured commercial IDE with a complete set of tools and integrations with the most important modern technologies and frameworks, such as Spring and Hibernate — a must-have for effective Web and Java EE development.
+
 
 
 
