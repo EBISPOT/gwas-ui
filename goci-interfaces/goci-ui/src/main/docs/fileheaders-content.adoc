@@ -140,6 +140,9 @@ FULL SUMMARY STATISTICS+: Availability of full genome-wide summary statistics fi
 
 SUMMARY STATS LOCATION+: The location of the summary statistics file
 
+GxE+: Study design is genome-wide genotype-by-environment interaction
+
+
 _Added: October 2023_
 
 '''
