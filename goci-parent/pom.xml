@@ -6,7 +6,7 @@
 
     <groupId>uk.ac.ebi.spot</groupId>
     <artifactId>goci-parent</artifactId>
-    <version>4.2.13</version>
+    <version>4.2.14</version>
     <packaging>pom</packaging>
 
     <parent>
