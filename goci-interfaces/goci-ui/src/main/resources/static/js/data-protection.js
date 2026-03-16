@@ -180,7 +180,7 @@ function ebiFrameworkRunDataProtectionBanner(targetedFrameworkVersion) {
 
         // Default global values
         var contextPath = (typeof gwasProperties !== 'undefined' && gwasProperties.contextPath) ? gwasProperties.contextPath : '/gwas/';
-        dataProtectionSettings.message = 'This website requires cookies, and the limited processing of your personal data in order to function. By using the site you are agreeing to this as outlined in our <a target="_blank" href="' + contextPath + 'docs/Privacy_Notice_GWAS_PGS_Catalog_public_websites.pdf">Privacy Notice</a> and <a target="_blank" href="https://www.ebi.ac.uk/about/terms-of-use">Terms of Use</a>.';
+        dataProtectionSettings.message = 'This website requires cookies, and the limited processing of your personal data in order to function. By using the site you are agreeing to this as outlined in our <a target="_blank" href="' + contextPath + 'documents/Privacy_Notice_GWAS_PGS_Catalog_public_websites.pdf">Privacy Notice</a> and <a target="_blank" href="https://www.ebi.ac.uk/about/terms-of-use">Terms of Use</a>.';
         dataProtectionSettings.serviceId = 'embl-ebi-public-website'; // use the URL stub from your DP record at http://content.ebi.ac.uk/list-data-protection-records
         dataProtectionSettings.dataProtectionVersion = '1.0';
 
