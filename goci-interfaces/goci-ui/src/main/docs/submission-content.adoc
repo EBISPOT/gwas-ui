@@ -17,6 +17,8 @@ This page explains how to submit summary statistics for *SNP-based GWAS*.
 
 To submit *gene-based or CNV GWAS* data please see the instructions at https://ebi.ac.uk/gwas/apps/beyond-snps/how-to-submit[GWAS Catalog: Beyond SNPs].
 
+If you would like to submit *both* SNP-based and gene-based/CNV GWAS data, please contact us at gwas-subs@ebi.ac.uk for further guidance.
+
 == How to submit summary statistics
 
 To submit SNP-based summary statistics to the GWAS Catalog, please follow the steps below. 
