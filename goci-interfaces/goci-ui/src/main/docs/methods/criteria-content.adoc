@@ -13,9 +13,8 @@ The GWAS Catalog aims to provide a comprehensive survey of human GWAS analyses p
 Studies are eligible for inclusion in the GWAS Catalog if they meet the following criteria:
 
 * Analyse the human genome
-* Include a primary GWAS analysis, defined as array-based genotyping and analysis of 100,000+ pre-QC SNPs selected to tag variation across the genome and without regard to gene content.
+* Include a primary GWAS analysis, defined as array- or sequencing-based genotyping and analysis of 100,000+ pre-QC SNPs selected to tag variation across the genome and without regard to gene content.
 * GWAS data from published studies which are incorporated into new GWAS analyses are eligible, provided they meet the other criteria.
-* Studies imputing sequencing data to genotyping arrays are eligible as long as the arrays include sufficient genome-wide coverage so that the post-imputation analysis meets the definition of a GWAS analysis, as described above.
 * Large-scale targeted/non-genome-wide arrays, including the Metabochip, Immunochip and Exome arrays, are eligible and flagged in the "genotyping technology field"
 
 Studies are excluded if:
@@ -23,10 +22,9 @@ Studies are excluded if:
 * The study was published in a language other than English.
 * The study was performed in species other than human.
 * SNPs assayed or analysed were limited to those in candidate genes.
-* The study uses customized gene-based arrays without a clearly described GWAS backbone,.
+* The study uses customized gene-based arrays without a clearly described GWAS backbone.
 * Samples were assayed to measure somatic variation (e.g., in tumor samples).
-* The study does not include any new GWAS data but report data from publicly available summary statistics  
-
+* The study does not include any new GWAS data but report data from publicly available summary statistics .
 
 === Summary statistics
 

@@ -29,6 +29,8 @@ In the Study tab, please add one row for each separate GWAS analysis (study) in 
 
 If you performed multiple GWA studies but are only sharing summary statistics for a subset of the studies, you can enter metadata rows without summary statistics. However you must submit summary statistics for at least one study (including filename, md5sum, genome assembly).
 
+Most studies submitted to the GWAS Catalog are for SNP-based analyses. If your submission also includes gene-based or CNV-based studies, please represent these as additional rows in the Study tab. Do not include multiple variant types (i.e. SNPs, genes, CNVs) in the same summary statistics file. For further assistance with complex submissions, please contact gwas-subs@ebi.ac.uk.
+
 ==== Column instructions
 
 There are 24 columns for you to fill in:

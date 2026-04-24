@@ -6,6 +6,8 @@ For publications that are already included in the GWAS Catalog, we provide a par
 
 Please note, the pre-filled form should contain one row for each GWAS analysis in your publication, including one row for each set of summary statistics (i.e. each full set of p-values) that you have uploaded. For example, if you performed GWAS analyses for 100 different metabolite measurements, there should be 100 rows - one for each metabolite. If there are not enough rows to represent all of the GWAS analyses in your publication and/or the number of uploaded summary statistics, please contact gwas-subs@ebi.ac.uk for assistance.
 
+Most studies submitted to the GWAS Catalog are for SNP-based analyses. If you would also like to submit *gene-based or CNV-based summary statistics*, please contact gwas-subs@ebi.ac.uk for assistance.
+
 Instructions are provided below. When you have completed the submission form, return to the https://www.ebi.ac.uk/gwas/docs/submission#link-13[main submission instructions^].
 
 === Pre-filled data
