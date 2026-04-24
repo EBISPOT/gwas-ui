@@ -81,6 +81,10 @@ Standardised data files are additionally provided in a <<What are harmonised fil
 
 We also host a small number of non-standard files with eg. fewer than 100,000 SNPs or  non-standard study design (eg. CNV or gene-based). These will be flagged as ‘Non-GWAS-SSF’ in the .yaml.
 
+=== Moving beyond SNPs
+
+Since April 2026, copy number variant (CNV) and gene-based GWAS data should follow the standards described in the https://www.ebi.ac.uk/gwas/apps/beyond-snps[beyond SNPs documentation]. Previously, these data were submitted to the Catalog without a standard schema, which limited downstream reuse.
+
 == Access
 
 We store summary statistics files in two different places, on our https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/[FTP site], and a subset of files in our database (see <<REST API,REST API>>). The FTP is updated nightly with any newly ingested data.
