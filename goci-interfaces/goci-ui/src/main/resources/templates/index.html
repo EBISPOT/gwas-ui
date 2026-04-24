@@ -39,6 +39,10 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- DocBot widget -->
+    <link rel="stylesheet" href="https://docbot-64c680.gitdocs.ebi.ac.uk/dist/Chatbot-Modal.css"/>
+    <script src="https://docbot-64c680.gitdocs.ebi.ac.uk/Chatbot-Modal.web.js" type="module"></script>
+
     <script th:src="@{/js/console-plugin.js}"></script>
 </head>
 
@@ -188,6 +192,12 @@
 </script>-->
 
 <div th:remove="tag" th:replace="fragments/google-analytics :: analytics"></div>
+
+<!-- DocBot widget -->
+<docbot-modal
+  selectedteam="gwas"
+  backendurl="https://wwwdev.ebi.ac.uk/docbot/api"
+></docbot-modal>
 
 </body>
 </html>
